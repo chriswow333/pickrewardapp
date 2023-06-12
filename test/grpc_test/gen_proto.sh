@@ -1,0 +1,1 @@
+protoc --dart_out=grpc:../generated -I=. helloworld.proto
