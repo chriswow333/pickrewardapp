@@ -1,10 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/reward/component/channel.items.component.dart';
-import 'package:pickrewardapp/reward/component/channel.progress.component.dart';
-import 'package:pickrewardapp/reward/component/channel.searchbar.component.dart';
-import 'package:pickrewardapp/reward/component/channel.shopstore.component.dart';
-import 'package:pickrewardapp/reward/component/toggleswitch.component.dart';
+import 'package:pickrewardapp/reward/component/channel.component.dart';
 
 
 class RewardPage extends StatelessWidget {
@@ -16,24 +12,15 @@ class RewardPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         Banner(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children:[
-            ToggleSwitch(),
-          ]
-        ),
-        SizedBox(height:50), 
-        RewardProgressBar(),
-        SizedBox(height:20), 
-        SearchChannelBar(),
-        SizedBox(height:20), 
-        ChannelItems(),
-        SizedBox(height:20), 
-        ShopStores(),
+        ChannelComponent(),
       ]
     );
   }
 }
+
+
+
+
 
 
 class Banner extends StatelessWidget {
