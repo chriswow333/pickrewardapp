@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.channel.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.dart';
+import 'package:pickrewardapp/reward/component/channel.progress.result.dart';
 
 class ChannelComponent extends StatelessWidget {
   const ChannelComponent({super.key});
@@ -18,13 +19,12 @@ class ChannelComponent extends StatelessWidget {
           RewardProgressBar(),
           SizedBox(height:20), 
           // Channel(),
-          FindCard(),
+          // FindCard(),
+          CardResults(),
         ]
       ),
     );
   }
 }
-
-
 
 

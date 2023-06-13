@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/reward/component/channel.component.dart';
+import 'package:pickrewardapp/reward/component/channel.dart';
 import 'package:pickrewardapp/reward/component/toggleswitch.component.dart';
 
 
