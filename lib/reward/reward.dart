@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/channel.component.dart';
+import 'package:pickrewardapp/reward/component/toggleswitch.component.dart';
 
 
 class RewardPage extends StatelessWidget {
@@ -12,6 +13,13 @@ class RewardPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         Banner(),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children:[
+              ToggleSwitch(),
+            ]
+          ),
+          SizedBox(height:50), 
         ChannelComponent(),
       ]
     );

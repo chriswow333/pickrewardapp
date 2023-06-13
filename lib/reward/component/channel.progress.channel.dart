@@ -1,6 +1,28 @@
 
 
+
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/component/channel.progress.channel.items.dart';
+
+class Channel extends StatelessWidget {
+  const Channel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children:[
+        SearchChannelBar(),
+        SizedBox(height:20), 
+        ChannelItems(),
+        SizedBox(height:20), 
+        ShopStores(),
+      ]
+    );
+  }
+}
+
+
 
 class SearchChannelBar extends StatefulWidget {
   const SearchChannelBar({ Key? key }) : super(key: key);
@@ -51,5 +73,9 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
     );
   }
 }
+
+
+
+
 
 
