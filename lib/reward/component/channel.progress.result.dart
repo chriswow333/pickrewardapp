@@ -8,18 +8,27 @@ class CardResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        SizedBox(height:20),
-        CardResult(),
-        SizedBox(height:15),
-        CardResult(),
-        SizedBox(height:15),
-        CardResult(),
-        SizedBox(height:15),
-        CardResult(),
-      ],
+    return Container(
+      height:500 ,
+      child:SingleChildScrollView(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            SizedBox(height:20),
+            CardResult(),
+            SizedBox(height:15),
+            CardResult(),
+            SizedBox(height:15),
+            CardResult(),
+            SizedBox(height:15),
+            CardResult(),
+            SizedBox(height:15),
+            CardResult(),        
+            SizedBox(height:15),
+            CardResult(),        
+          ],
+        )
+      ),
     );
   }
 }

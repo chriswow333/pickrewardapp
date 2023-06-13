@@ -31,12 +31,10 @@ class CardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:SingleChildScrollView(
-        child:Container(
-          // alignment: Alignment.topCenter,
-          padding: const EdgeInsets.only(top:50),
-          child: RewardPage(),
-        ),
+      body:Container(
+        // alignment: Alignment.topCenter,
+        padding: const EdgeInsets.only(top:50),
+        child: RewardPage(),
       ),
     );
   }
