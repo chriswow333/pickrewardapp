@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/card.dart';
-import 'package:pickrewardapp/reward/component/channel.dart';
-import 'package:pickrewardapp/reward/component/toggleswitch.component.dart';
+import 'package:pickrewardapp/reward/component/toggleswitch.dart';
+import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
+import 'package:provider/provider.dart';
 
 
 class RewardPage extends StatelessWidget {
@@ -10,23 +11,25 @@ class RewardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        Banner(),
-        Row(
+    return  MultiProvider(
+      providers:[
+        ChangeNotifierProvider<ToggleSwitchViewModel>(create:(_)=>ToggleSwitchViewModel()),
+      ],
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Banner(),
+          Row(
             children:[
               Expanded(child:Container()),
               ToggleSwitch(),
             ]
           ),
           SizedBox(height:50), 
-        
-        // ChannelComponent(),
-
-        CardComponent(),
-        
-      ]
+          // ChannelComponent(),
+          CardComponent(),
+        ]
+      )
     );
   }
 }

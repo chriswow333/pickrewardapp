@@ -2,28 +2,26 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
+import 'package:provider/provider.dart';
 
-class ToggleSwitch extends StatefulWidget {
+
+
+
+class ToggleSwitch extends StatelessWidget {
   const ToggleSwitch({super.key});
 
   @override
-  State<ToggleSwitch> createState() => _ToggleSwitchState();
-}
-
-class _ToggleSwitchState extends State<ToggleSwitch> {
-
-  bool isChannel = true;
-
-  @override
   Widget build(BuildContext context) {
+
+    ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
+
     return TextButton(
       style:ButtonStyle(
         splashFactory:NoSplash.splashFactory,
       ),
       onPressed: (){
-        setState((){
-          isChannel = !isChannel;
-        });
+        toggleSwitchViewModel.toggle();
       },
       child:Container(
       decoration: BoxDecoration(
@@ -35,7 +33,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
         children:[
             Container(
               padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),
-              decoration: isChannel ? BoxDecoration(
+              decoration: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Channel ? BoxDecoration(
                 color:Colors.cyan[900],
                 borderRadius: BorderRadius.circular(20),
               ) : 
@@ -44,13 +42,13 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                 '通路',
                 style: TextStyle(
                   fontSize: 20,
-                  color: isChannel? Colors.cyan[50]:Colors.cyan[900],
+                  color: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Channel? Colors.cyan[50]:Colors.cyan[900],
                 ),  
               )  
             ),
             Container(
               padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),            
-              decoration: !isChannel ? BoxDecoration(
+              decoration: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Card ? BoxDecoration(
               color:Colors.cyan[900],
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(width:1.0),
@@ -60,7 +58,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
               '卡片',
               style: TextStyle(
                 fontSize: 20,
-                color: !isChannel? Colors.cyan[50]:Colors.cyan[900],
+                color: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Card ? Colors.cyan[50]:Colors.cyan[900],
               ),  
             ),
           ),
@@ -68,5 +66,6 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
       ),
     ),
   );
+  }
 }
-}
+
