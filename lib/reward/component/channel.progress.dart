@@ -3,6 +3,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/channel.progress.dart';
+import 'package:provider/provider.dart';
 
 class RewardProgressBar extends StatelessWidget {
   const RewardProgressBar({super.key});
@@ -28,11 +30,23 @@ class FindResultProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color:Colors.cyan[50],
+    return TextButton(
+      onPressed: (){
+        
+      },
+      style:ButtonStyle(
+        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        elevation:MaterialStatePropertyAll(1.0),
+        backgroundColor: MaterialStatePropertyAll(Colors.cyan[50]),
+        shape:MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            side:BorderSide(
+              width:0.5,
+              color:Colors.black12,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
       child:Text(
         '搜尋結果',
@@ -50,11 +64,21 @@ class FindCardProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color:Colors.cyan[50],
+    return TextButton(
+      onPressed: (){},
+      style:ButtonStyle(
+        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        elevation:MaterialStatePropertyAll(1.0),
+        backgroundColor: MaterialStatePropertyAll(Colors.cyan[50]),
+        shape:MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            side:BorderSide(
+              width:0.5,
+              color:Colors.black12,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
       child:Text(
         '找卡片',
@@ -82,11 +106,21 @@ class ChannelProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color:Colors.cyan[50],
+    return TextButton(
+      onPressed: (){},
+      style:ButtonStyle(
+        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        elevation:MaterialStatePropertyAll(1.0),
+        backgroundColor: MaterialStatePropertyAll(Colors.cyan[50]),
+        shape:MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            side:BorderSide(
+              width:0.5,
+              color:Colors.black12,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
       child:Text(
         '消費通路',

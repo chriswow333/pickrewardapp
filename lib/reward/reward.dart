@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/card.dart';
+import 'package:pickrewardapp/reward/component/channel.dart';
 import 'package:pickrewardapp/reward/component/toggleswitch.dart';
+import 'package:pickrewardapp/reward/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +16,23 @@ class RewardPage extends StatelessWidget {
     return  MultiProvider(
       providers:[
         ChangeNotifierProvider<ToggleSwitchViewModel>(create:(_)=>ToggleSwitchViewModel()),
+        ChangeNotifierProvider<ChannelProgressViewModel>(create:(_)=>ChannelProgressViewModel()),
+        
       ],
-      child:Column(
+      child:RewardContent(),
+    );
+  }
+}
+
+
+class RewardContent extends StatelessWidget {
+  const RewardContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           Banner(),
@@ -26,14 +43,14 @@ class RewardPage extends StatelessWidget {
             ]
           ),
           SizedBox(height:50), 
-          // ChannelComponent(),
-          CardComponent(),
+          if (toggleSwitchViewModel.type == ToggleTypeEnum.Channel)
+            ChannelComponent(),
+          if (toggleSwitchViewModel.type == ToggleTypeEnum.Card)
+            CardComponent(),
         ]
-      )
-    );
+      );
   }
 }
-
 
 
 

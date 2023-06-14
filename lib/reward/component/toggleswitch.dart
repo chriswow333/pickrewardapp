@@ -33,7 +33,7 @@ class ToggleSwitch extends StatelessWidget {
         children:[
             Container(
               padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),
-              decoration: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Channel ? BoxDecoration(
+              decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? BoxDecoration(
                 color:Colors.cyan[900],
                 borderRadius: BorderRadius.circular(20),
               ) : 
@@ -42,13 +42,13 @@ class ToggleSwitch extends StatelessWidget {
                 '通路',
                 style: TextStyle(
                   fontSize: 20,
-                  color: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Channel? Colors.cyan[50]:Colors.cyan[900],
+                  color: toggleSwitchViewModel.type == ToggleTypeEnum.Channel? Colors.cyan[50]:Colors.cyan[900],
                 ),  
               )  
             ),
             Container(
               padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),            
-              decoration: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Card ? BoxDecoration(
+              decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Card ? BoxDecoration(
               color:Colors.cyan[900],
               borderRadius: BorderRadius.circular(20),
               // border: Border.all(width:1.0),
@@ -58,7 +58,7 @@ class ToggleSwitch extends StatelessWidget {
               '卡片',
               style: TextStyle(
                 fontSize: 20,
-                color: toggleSwitchViewModel.getToggleType() == ToggleTypeEnum.Card ? Colors.cyan[50]:Colors.cyan[900],
+                color: toggleSwitchViewModel.type == ToggleTypeEnum.Card ? Colors.cyan[50]:Colors.cyan[900],
               ),  
             ),
           ),

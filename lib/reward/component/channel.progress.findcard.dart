@@ -6,8 +6,8 @@ import 'package:pickrewardapp/reward/component/channel.progress.findcard.cost.da
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.pay.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.rewardway.dart';
 
-class FindCard extends StatelessWidget {
-  const FindCard({super.key});
+class FindCardProgress extends StatelessWidget {
+  const FindCardProgress({super.key});
 
   @override
   Widget build(BuildContext context) {

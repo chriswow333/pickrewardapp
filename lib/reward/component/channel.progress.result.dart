@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 
-class CardResults extends StatelessWidget {
-  const CardResults({super.key});
+class CardResultsProgress extends StatelessWidget {
+  const CardResultsProgress({super.key});
 
   @override
   Widget build(BuildContext context) {

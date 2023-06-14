@@ -5,8 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.channel.items.dart';
 
-class Channel extends StatelessWidget {
-  const Channel({super.key});
+class ChannelProgress extends StatelessWidget {
+  const ChannelProgress({super.key});
 
   @override
   Widget build(BuildContext context) {

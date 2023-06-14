@@ -16,7 +16,7 @@ class ToggleSwitchViewModel with ChangeNotifier{
     notifyListeners();
   }
 
-  ToggleTypeEnum getToggleType(){
+  ToggleTypeEnum get type{
     return _type;
   }
 }
