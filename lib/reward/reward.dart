@@ -14,8 +14,8 @@ class RewardPage extends StatelessWidget {
       children:[
         Banner(),
         Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children:[
+              Expanded(child:Container()),
               ToggleSwitch(),
             ]
           ),

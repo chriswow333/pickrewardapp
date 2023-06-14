@@ -10,14 +10,18 @@ class Channel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        SearchChannelBar(),
-        SizedBox(height:20), 
-        ChannelItems(),
-        SizedBox(height:20), 
-        ShopStores(),
-      ]
+    return 
+    
+    Container(
+      child:Column(
+        children:[
+          SearchChannelBar(),
+          SizedBox(height:20), 
+          ChannelItems(),
+          SizedBox(height:20), 
+          ShopStores(),
+        ]
+      )
     );
   }
 }

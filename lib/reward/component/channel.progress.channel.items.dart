@@ -34,7 +34,6 @@ class ChannelItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-    
       onPressed: (){},
       child:Column(
         children:[
@@ -90,7 +89,7 @@ class ShopStores extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:500,
+      height:400,
       child:GridView.count(  
         crossAxisCount: 4,  
         crossAxisSpacing: 4.0,  
@@ -115,7 +114,7 @@ class ShopStores extends StatelessWidget {
             ShopStoreItem(),
             ShopStoreItem(),
         ],
-      )
+      ),
     );
   }
 }

@@ -18,9 +18,9 @@ class ChannelComponent extends StatelessWidget {
           
           RewardProgressBar(),
           SizedBox(height:20), 
-          // Channel(),
+          Channel(),
           // FindCard(),
-          CardResults(),
+          // CardResults(),
         ]
       ),
     );
