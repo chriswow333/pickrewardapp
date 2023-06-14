@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/component/card.dart';
 import 'package:pickrewardapp/reward/component/channel.dart';
 import 'package:pickrewardapp/reward/component/toggleswitch.component.dart';
 
@@ -20,7 +21,11 @@ class RewardPage extends StatelessWidget {
             ]
           ),
           SizedBox(height:50), 
-        ChannelComponent(),
+        
+        // ChannelComponent(),
+
+        CardComponent(),
+        
       ]
     );
   }

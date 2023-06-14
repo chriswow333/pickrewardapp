@@ -4,9 +4,6 @@
 
 import 'package:flutter/material.dart';
 
-
-
-
 class RewardProgressBar extends StatelessWidget {
   const RewardProgressBar({super.key});
 

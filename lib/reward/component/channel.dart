@@ -15,16 +15,15 @@ class ChannelComponent extends StatelessWidget {
     return Container(
       child:Column(
         children:[
-          
           RewardProgressBar(),
           SizedBox(height:20), 
-          Channel(),
+          // Channel(),
           // FindCard(),
           // CardResults(),
+
         ]
       ),
     );
   }
 }
-
 
