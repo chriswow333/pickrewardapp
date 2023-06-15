@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/viewmodel/channel.progress.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +26,12 @@ class FindResultProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
+
     return TextButton(
       onPressed: (){
-        
+        channelProgressViewModel.progress = ChannelProgressEnum.FindResult;
       },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
@@ -64,8 +63,13 @@ class FindCardProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
+    
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        channelProgressViewModel.progress = ChannelProgressEnum.FindCard;
+      },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         elevation:MaterialStatePropertyAll(1.0),
@@ -106,8 +110,12 @@ class ChannelProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        channelProgressViewModel.progress = ChannelProgressEnum.Channel; 
+      },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         elevation:MaterialStatePropertyAll(1.0),

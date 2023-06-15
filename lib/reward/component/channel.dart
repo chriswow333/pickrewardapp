@@ -26,7 +26,7 @@ class ChannelComponent extends StatelessWidget {
             ChannelProgress(),
           if (channelProgressViewModel.progress == ChannelProgressEnum.FindCard)
             FindCardProgress(),
-          if (channelProgressViewModel.progress == ChannelProgressEnum.Result)
+          if (channelProgressViewModel.progress == ChannelProgressEnum.FindResult)
             CardResultsProgress(),
 
         ]

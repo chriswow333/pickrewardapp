@@ -16,28 +16,47 @@ class ToggleSwitch extends StatelessWidget {
 
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
 
-    return TextButton(
-      style:ButtonStyle(
-        splashFactory:NoSplash.splashFactory,
-      ),
-      onPressed: (){
-        toggleSwitchViewModel.toggle();
-      },
+    return Container(
+      // style:ButtonStyle(
+      //   splashFactory:NoSplash.splashFactory,
+      // ),
+      // onPressed: (){
+      //   toggleSwitchViewModel.toggle();
+      // },
       child:Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
         color:Colors.cyan[50],
       ),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-            Container(
-              padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),
-              decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? BoxDecoration(
-                color:Colors.cyan[900],
-                borderRadius: BorderRadius.circular(20),
-              ) : 
-              const BoxDecoration(),
+            TextButton(
+              onPressed: (){
+                toggleSwitchViewModel.toggle = ToggleTypeEnum.Channel;
+              },
+              style:ButtonStyle(
+                padding:MaterialStatePropertyAll(EdgeInsets.fromLTRB(10, 5, 10, 5)),
+                backgroundColor:MaterialStatePropertyAll(
+                  toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? Colors.cyan[900]!:Colors.cyan[50]!,
+                ),
+                shape:MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    side:BorderSide(
+                      width:0.5,
+                      color:toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? Colors.cyan[900]!:Colors.cyan[50]!,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              // padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),
+              // decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? BoxDecoration(
+                // color:Colors.cyan[900],
+                // borderRadius: BorderRadius.circular(20),
+              // ) 
+              // : 
+              // const BoxDecoration(),
               child:Text(
                 '通路',
                 style: TextStyle(
@@ -46,14 +65,35 @@ class ToggleSwitch extends StatelessWidget {
                 ),  
               )  
             ),
-            Container(
-              padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),            
-              decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Card ? BoxDecoration(
-              color:Colors.cyan[900],
-              borderRadius: BorderRadius.circular(20),
+            
+            TextButton(
+              onPressed: (){
+                toggleSwitchViewModel.toggle = ToggleTypeEnum.Card;
+
+              },
+              style:ButtonStyle(
+                padding:MaterialStatePropertyAll(EdgeInsets.fromLTRB(10, 5, 10, 5)),
+                backgroundColor:MaterialStatePropertyAll(
+                  toggleSwitchViewModel.type == ToggleTypeEnum.Card ? Colors.cyan[900]!:Colors.cyan[50]!,
+                ),
+                shape:MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    side:BorderSide(
+                      width:0.5,
+                      color:toggleSwitchViewModel.type == ToggleTypeEnum.Card ? Colors.cyan[900]!:Colors.cyan[50]!,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              // padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),            
+              // decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Card ? BoxDecoration(
+              // color:Colors.cyan[900],
+              // borderRadius: BorderRadius.circular(20),
               // border: Border.all(width:1.0),
-            ) : 
-            const BoxDecoration(),
+            // )
+            //  : 
+            // const BoxDecoration(),
             child:Text(
               '卡片',
               style: TextStyle(

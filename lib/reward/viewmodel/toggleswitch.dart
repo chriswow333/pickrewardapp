@@ -11,8 +11,8 @@ class ToggleSwitchViewModel with ChangeNotifier{
   
   ToggleTypeEnum _type = ToggleTypeEnum.Channel;
   
-  void toggle(){
-    _type = _type == ToggleTypeEnum.Channel ? ToggleTypeEnum.Card : ToggleTypeEnum.Channel;
+  set toggle(ToggleTypeEnum toggleTypeEnum) {
+    _type = toggleTypeEnum;
     notifyListeners();
   }
 

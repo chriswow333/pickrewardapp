@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-enum ChannelProgressEnum {Channel, FindCard, Result}
+enum ChannelProgressEnum {Channel, FindCard, FindResult}
 
 
 
