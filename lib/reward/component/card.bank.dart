@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/bank.dart';
+import 'package:provider/provider.dart';
 
 
 class BankItems extends StatelessWidget {
@@ -6,20 +11,15 @@ class BankItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BankViewModel bankViewModel = Provider.of<BankViewModel>(context);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          BankItem(),
-          
+          for(BankModel bankModel in bankViewModel.banks)
+            BankItem(bankModel:bankModel),
         ]
       )
     );
@@ -30,7 +30,10 @@ class BankItems extends StatelessWidget {
 
 
 class BankItem extends StatelessWidget {
-  const BankItem({super.key});
+  
+  const BankItem({super.key, required this.bankModel});
+
+  final BankModel bankModel;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +44,8 @@ class BankItem extends StatelessWidget {
       ),
       child:Column(
         children:[
-          BankIcon(),
-          BankName(),
+          BankIcon(image:bankModel.image),
+          BankName(name:bankModel.name),
         ]
       ),
     );
@@ -50,25 +53,26 @@ class BankItem extends StatelessWidget {
 }
 
 class BankIcon extends StatelessWidget {
-  const BankIcon({super.key});
-
+  const BankIcon({super.key, required this.image});
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Icon(Icons.access_alarm_outlined,
-        size: 30,
-        color:Colors.cyan[900],
+      child:Image.memory(
+        base64Decode(image), 
+        width:70,
+        height:70,
       ),
     );
   }
 }
 
 class BankName extends StatelessWidget {
-  const BankName({super.key});
-
+  const BankName({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
-    return Text('國泰世華銀行',
+    return Text(name,
       style:TextStyle(
         fontSize: 12,
         color:Colors.cyan[900],

@@ -16,30 +16,30 @@
 /// Dart implementation of the gRPC helloworld.Greeter client.
 import 'package:grpc/grpc.dart';
 
-import 'generated/helloworld.pbgrpc.dart';
+import 'generated/card.pbgrpc.dart';
 
 Future<void> main(List<String> args) async {
   final channel = ClientChannel(
     'localhost',
-    port: 4040,
+    port: 50055,
     options: ChannelOptions(
       credentials: const ChannelCredentials.insecure(),
       codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
     ),
   );
 
-  final stub = GreeterClient(channel);
+  final stub = CardClient(channel);
 
   final name = args.isNotEmpty ? args[0] : 'world';
 
   try {
-    final response = await stub.sayHello(
-      HelloRequest()..name = name,
-      options: CallOptions(compression: const GzipCodec()),
+    final response = await stub.getAllBanks(
+      EmptyRequest(),
+      // options: CallOptions(compression: const GzipCodec()),
     );
-    print('Greeter client received: ${response.message}');
+    print('Greeter client received: ${response}');
   } catch (e) {
     print('Caught error: $e');
   }
-  await channel.shutdown();
+  // await channel.shutdown();
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/card.dart';
 import 'package:pickrewardapp/reward/component/channel.dart';
 import 'package:pickrewardapp/reward/component/toggleswitch.dart';
+import 'package:pickrewardapp/reward/viewmodel/bank.dart';
 import 'package:pickrewardapp/reward/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,9 @@ class RewardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MultiProvider(
       providers:[
+        ChangeNotifierProvider<BankViewModel>(create:(_)=>BankViewModel()),
         ChangeNotifierProvider<ToggleSwitchViewModel>(create:(_)=>ToggleSwitchViewModel()),
         ChangeNotifierProvider<ChannelProgressViewModel>(create:(_)=>ChannelProgressViewModel()),
-        
       ],
       child:RewardContent(),
     );
@@ -30,13 +31,12 @@ class RewardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           Banner(),
-          Row(
+          Row( 
             children:[
               Expanded(child:Container()),
               ToggleSwitch(),
