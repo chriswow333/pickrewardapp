@@ -17,12 +17,6 @@ class ToggleSwitch extends StatelessWidget {
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
 
     return Container(
-      // style:ButtonStyle(
-      //   splashFactory:NoSplash.splashFactory,
-      // ),
-      // onPressed: (){
-      //   toggleSwitchViewModel.toggle();
-      // },
       child:Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
@@ -50,13 +44,6 @@ class ToggleSwitch extends StatelessWidget {
                   ),
                 ),
               ),
-              // padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),
-              // decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Channel ? BoxDecoration(
-                // color:Colors.cyan[900],
-                // borderRadius: BorderRadius.circular(20),
-              // ) 
-              // : 
-              // const BoxDecoration(),
               child:Text(
                 '通路',
                 style: TextStyle(
@@ -65,7 +52,6 @@ class ToggleSwitch extends StatelessWidget {
                 ),  
               )  
             ),
-            
             TextButton(
               onPressed: (){
                 toggleSwitchViewModel.toggle = ToggleTypeEnum.Card;
@@ -86,14 +72,6 @@ class ToggleSwitch extends StatelessWidget {
                   ),
                 ),
               ),
-              // padding:const EdgeInsets.fromLTRB(10, 5, 10, 5.0),            
-              // decoration: toggleSwitchViewModel.type == ToggleTypeEnum.Card ? BoxDecoration(
-              // color:Colors.cyan[900],
-              // borderRadius: BorderRadius.circular(20),
-              // border: Border.all(width:1.0),
-            // )
-            //  : 
-            // const BoxDecoration(),
             child:Text(
               '卡片',
               style: TextStyle(
