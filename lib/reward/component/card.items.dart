@@ -1,29 +1,33 @@
 
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/card.item.dart';
+import 'package:provider/provider.dart';
+
 
 class CardItems extends StatelessWidget {
   const CardItems({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+    
+    final bankID = cardItemViewModel.bankID;
+
+    List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
+
     return Container(
       height:400,
       child:SingleChildScrollView(
         child:Column(
           children:[
-            CardItem(),
-            SizedBox(height:10),
-            CardItem(),
-            SizedBox(height:10),
-            CardItem(),
-            SizedBox(height:10),
-            CardItem(),
-            SizedBox(height:10),
-            CardItem(),
-            SizedBox(height:10),
-            CardItem(),
+            for(CardItemModel cardItemModel in cardItemModels)
+              CardItem(cardItemModel:cardItemModel)
           ],
         ),
       ),
@@ -34,34 +38,45 @@ class CardItems extends StatelessWidget {
 }
 
 class CardItem extends StatelessWidget {
-  const CardItem({super.key});
+
+  const CardItem({super.key, required this.cardItemModel});
+  
+  final CardItemModel cardItemModel;
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: (){},
-      style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.white),
-        elevation:MaterialStatePropertyAll(2),
-      ),
-      child:Container(
-        padding:const EdgeInsets.all(10),
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children:[
-            // CardUpdateDate(),
-            Row(
+
+    return Column(
+      children:[
+        TextButton(
+          onPressed: (){},
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.white),
+            elevation:MaterialStatePropertyAll(2),
+          ),
+          child:Container(
+            padding:const EdgeInsets.all(10),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children:[
-                CardTitle(),
-                SizedBox(width:20),
-                CardDescs(),
-              ],
-            ),
-          ]
-        )
-        
-      ),
+                // CardUpdateDate(),
+                Row(
+                  children:[
+                    CardTitle(name:cardItemModel.name, image:cardItemModel.image),
+                    SizedBox(width:20),
+                    CardDescs(descs:cardItemModel.descriptions),
+                  ],
+                ),
+              ]
+            )
+            
+          ),
+        ),
+        SizedBox(height:10,),
+      ],
     );
+    
+    ;
   }
 }
 
@@ -81,31 +96,23 @@ class CardUpdateDate extends StatelessWidget {
 }
 
 class CardDescs extends StatelessWidget {
-  const CardDescs({super.key});
+  const CardDescs({super.key, required this.descs});
 
+  final List<String> descs;
+  
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
-        Text('1. 滿優惠滿優惠滿優惠滿優惠滿優惠',
-          style:TextStyle(
-            fontSize: 12,
-            color:Colors.cyan[900],
+        for(String desc in descs) 
+          Text(desc,
+            style:TextStyle(
+              fontSize: 12,
+              color:Colors.cyan[900],
+            ),
           ),
-        ),
-        Text('2. 滿優惠滿優惠滿優惠滿優惠滿優惠',
-          style:TextStyle(
-            fontSize: 12,
-            color:Colors.cyan[900],
-          ),
-        ),
-        Text('3. 滿優惠滿優惠滿優惠滿優惠滿優惠滿',
-          style:TextStyle(
-            fontSize: 12,
-            color:Colors.cyan[900],
-          ),
-        ),
       ]
     );
   }
@@ -114,18 +121,22 @@ class CardDescs extends StatelessWidget {
 
 
 class CardTitle extends StatelessWidget {
-  const CardTitle({super.key});
+  const CardTitle({super.key, required this.name, required this.image});
+  
+  final String name;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child:Column(
         children:[
-          Icon(Icons.card_membership_outlined,
-            size:30,
-            color:Colors.cyan[900],
+          Image.memory(
+              base64Decode(image), 
+              width:70,
+              height:70,
           ),
-          CardName(),
+          CardName(name:name),
         ],
       ),
     );
@@ -133,12 +144,13 @@ class CardTitle extends StatelessWidget {
 }
 
 class CardName extends StatelessWidget {
-  const CardName({super.key});
+  const CardName({super.key, required this.name});
 
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('CUBE卡',
+      child:Text(name,
         style:TextStyle(
           fontSize: 20,
           color:Colors.cyan[900],
@@ -149,15 +161,3 @@ class CardName extends StatelessWidget {
 }
 
 
-
-class CardIcon extends StatelessWidget {
-  const CardIcon({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(Icons.card_membership_outlined,
-      size:30,
-      color:Colors.cyan[900],
-    );
-  }
-}

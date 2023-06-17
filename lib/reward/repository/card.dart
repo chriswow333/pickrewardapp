@@ -8,6 +8,7 @@ class CardService {
   String baseUrl = "localhost";
 
   CardService._internal();
+  
   static final CardService _instance = CardService._internal();
 
   factory CardService() => _instance;

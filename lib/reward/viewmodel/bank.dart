@@ -7,6 +7,7 @@ import 'package:pickrewardapp/reward/repository/proto/generated/card.pb.dart';
 
 
 class BankViewModel with ChangeNotifier{
+
   BankViewModel(){
     CardService().init();
     _fetchBanks(); 
@@ -17,6 +18,7 @@ class BankViewModel with ChangeNotifier{
   get banks => _bankModels;
 
   Future<void> _fetchBanks() async{ 
+    
     if (_bankModels.isNotEmpty) return;
 
     try {
@@ -24,8 +26,7 @@ class BankViewModel with ChangeNotifier{
       for (final b in bankReply.banks){
         _bankModels.add(BankModel(b.name, b.id, b.image));
       }
-
-        notifyListeners();
+      notifyListeners();
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
@@ -35,8 +36,6 @@ class BankViewModel with ChangeNotifier{
       print(e);
     }
   }
-
-
 
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/card.bank.dart';
 import 'package:pickrewardapp/reward/component/card.items.dart';
 
+
 class CardComponent extends StatelessWidget {
   const CardComponent({super.key});
 

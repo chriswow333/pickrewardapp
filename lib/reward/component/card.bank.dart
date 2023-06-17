@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/viewmodel/bank.dart';
+import 'package:pickrewardapp/reward/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 
@@ -37,8 +38,13 @@ class BankItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        cardItemViewModel.fetchCardsByBankID(bankModel.id);
+      },
       style: ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 0, 5, 0),),
       ),

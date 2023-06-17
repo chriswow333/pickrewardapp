@@ -29,7 +29,7 @@ message CardProto {
   repeated string descriptions = 3;
   string image = 4;
   int64 createDate = 5;
-  int64 UpdateDate = 6;
+  int64 updateDate = 6;
   string linkURL = 7;
   string bankID = 8;
   int32 order = 9;
