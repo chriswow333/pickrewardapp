@@ -3,6 +3,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/reward.selected.dart';
+import 'package:provider/provider.dart';
 
 class CostName extends StatelessWidget {
   const CostName({super.key});
@@ -24,6 +26,8 @@ class CostButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
@@ -39,12 +43,23 @@ class CostButtons extends StatelessWidget {
 class Lessthan1000Btn extends StatelessWidget {
   const Lessthan1000Btn({super.key});
 
+
+  final int _cost = 1000;
+
+
   @override
   Widget build(BuildContext context) {
+    
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    int selectedCost = rewardSelectedViewModel.cost;
+
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        if(_cost == selectedCost)return;
+        rewardSelectedViewModel.cost = _cost;
+      },
       style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.white),
+        backgroundColor: MaterialStatePropertyAll(_cost == selectedCost ? Colors.cyan[900]:Colors.teal[50]),
         // fixedSize: MaterialStatePropertyAll(Size(70,50)),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
       ),
@@ -54,7 +69,7 @@ class Lessthan1000Btn extends StatelessWidget {
             children:[
               Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
             ],
           ),
@@ -62,7 +77,7 @@ class Lessthan1000Btn extends StatelessWidget {
           Text('~1000',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.cyan[900],
+              color: _cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
             ),
           ),
         ],
@@ -77,12 +92,21 @@ class Lessthan1000Btn extends StatelessWidget {
 class From1000To5000Btn extends StatelessWidget {
   const From1000To5000Btn({super.key});
 
+  final int _cost = 5000;
+
   @override
   Widget build(BuildContext context) {
+       
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    int selectedCost = rewardSelectedViewModel.cost;
+
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        if(_cost == selectedCost)return;
+        rewardSelectedViewModel.cost = _cost;
+      },
       style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.white),
+        backgroundColor: MaterialStatePropertyAll(_cost == selectedCost ? Colors.cyan[900]:Colors.teal[50]),
         // fixedSize: MaterialStatePropertyAll(Size(70,50)),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
       ),
@@ -92,18 +116,18 @@ class From1000To5000Btn extends StatelessWidget {
             children:[
               Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
               Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
             ],
           ),
           Text('1000~5000',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.cyan[900],
+              color: _cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
             ),
           ),
         ],
@@ -118,12 +142,23 @@ class From1000To5000Btn extends StatelessWidget {
 class MoreThan5000Btn extends StatelessWidget {
   const MoreThan5000Btn({super.key});
 
+  final int _cost = 8000;
+
+
   @override
   Widget build(BuildContext context) {
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    int selectedCost = rewardSelectedViewModel.cost;
+
+
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        if(_cost == selectedCost)return;
+        rewardSelectedViewModel.cost = _cost;
+
+      },
       style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.white),
+        backgroundColor: MaterialStatePropertyAll(_cost == selectedCost ? Colors.cyan[900]:Colors.teal[50]),
         // fixedSize: MaterialStatePropertyAll(Size(70,50)),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
       ),
@@ -133,22 +168,22 @@ class MoreThan5000Btn extends StatelessWidget {
             children:[
               Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
               Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
                Icon(
                 Icons.monetization_on_rounded,
-                color:Colors.cyan[900],
+                color:_cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
               ),
             ],
           ),
           Text('5000~',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.cyan[900],
+              color: _cost == selectedCost ? Colors.cyan[50]:Colors.teal[900],
             ),
           ),
         ],

@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.channel.categorytype.dart';
+import 'package:pickrewardapp/reward/component/channel.progress.channel.item.dart';
 
 class ChannelProgress extends StatelessWidget {
   const ChannelProgress({super.key});

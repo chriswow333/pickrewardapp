@@ -47,7 +47,7 @@ dependencies:
   freezed: ^1.1.1
   json_annotation: ^4.4.0
   localstorage: ^4.0.0+1
-
+  # auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

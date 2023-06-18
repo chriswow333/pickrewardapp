@@ -13,7 +13,7 @@ class ToggleSwitchViewModel with ChangeNotifier{
   
   set toggle(ToggleTypeEnum toggleTypeEnum) {
     if (_type == toggleTypeEnum) return;
-    
+
     _type = toggleTypeEnum;
     notifyListeners();
   }

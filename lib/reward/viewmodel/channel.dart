@@ -16,6 +16,7 @@ class ChannelViewModel with ChangeNotifier {
   int _channelCategoryType = 0;
   int get channelCategoryType => _channelCategoryType;
   set channelCategoryType(int type) {
+    if (type == _channelCategoryType)return;
     _channelCategoryType = type;
     notifyListeners();
   }
@@ -23,9 +24,7 @@ class ChannelViewModel with ChangeNotifier {
 
 
   final List<ChannelCategoryTypeModel> _channelCategoryTypeModels = [];
-
   get channelCategoryTypeModels => _channelCategoryTypeModels;
-
   Future<void> fetchChannelCategoryTypeModels() async {
     
     if (_channelCategoryTypeModels.isNotEmpty) return;
@@ -46,7 +45,6 @@ class ChannelViewModel with ChangeNotifier {
           )
         );
       }
-      print(_channelCategoryTypeModels);
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
@@ -62,34 +60,23 @@ class ChannelViewModel with ChangeNotifier {
 
 
   final Map<int, List<ChannelItemModel>> _channelModels = {};
-
-
   List<ChannelItemModel> getChannelsByChannelCategoryType(int channelCategoryType) {
     return _channelModels[channelCategoryType] ?? [];
   }
 
-
-
-
   Future<void> fetchChannelsByChannelCategoryType(int channelCategoryType) async{ 
-    
-
     if (_channelModels.containsKey(channelCategoryType)) return;
 
-
     try {
-     final channelCategoryTypeRequest = ChannelCategoryTypeRequest();
 
+      final channelCategoryTypeRequest = ChannelCategoryTypeRequest();
       channelCategoryTypeRequest.channelCategoryType = channelCategoryType;
       ChannelProtoReply channelProtoReply  = await ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
-
-
       List<ChannelItemModel> channelItemModels = [];
+
       for (ChannelProto channelProto in channelProtoReply.channelProto){
         
-
         List<ChannelLabelModel> channelLabelModels = [];
-
         for (ChannelLabelProto channelLabelProto in channelProto.channelLabelProtos){
           channelLabelModels.add(
             ChannelLabelModel(
@@ -108,10 +95,6 @@ class ChannelViewModel with ChangeNotifier {
           channelLabels: channelLabelModels,
         ));
       }
-    
-
-      print(channelItemModels);
-
       _channelModels[channelCategoryType] = channelItemModels;
 
     } on GrpcError catch (e) {
@@ -124,9 +107,7 @@ class ChannelViewModel with ChangeNotifier {
     }
     
     notifyListeners();
-
   }
-
 
 }
 

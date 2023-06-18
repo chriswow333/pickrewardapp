@@ -7,6 +7,7 @@ import 'package:pickrewardapp/reward/viewmodel/bank.dart';
 import 'package:pickrewardapp/reward/viewmodel/card.item.dart';
 import 'package:pickrewardapp/reward/viewmodel/channel.dart';
 import 'package:pickrewardapp/reward/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/reward/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class RewardPage extends StatelessWidget {
 
         ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
-
+        ChangeNotifierProvider<RewardSelectedViewModel>(create:(_)=>RewardSelectedViewModel()),
       ],
       child:RewardContent(),
     );

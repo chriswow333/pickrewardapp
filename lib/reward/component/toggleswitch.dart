@@ -17,8 +17,6 @@ class ToggleSwitch extends StatelessWidget {
 
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
 
-
-
     return Container(
       child:Container(
       decoration: BoxDecoration(
