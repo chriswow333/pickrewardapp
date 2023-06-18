@@ -3,7 +3,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/reward/component/channel.progress.channel.items.dart';
+import 'package:pickrewardapp/reward/component/channel.progress.channel.categorytype.dart';
 
 class ChannelProgress extends StatelessWidget {
   const ChannelProgress({super.key});
@@ -15,9 +15,9 @@ class ChannelProgress extends StatelessWidget {
         children:[
           SearchChannelBar(),
           SizedBox(height:20), 
-          ChannelItems(),
+          ChannelCategoryTypes(),
           SizedBox(height:20), 
-          ShopStores(),
+          ChannelItems(),
         ]
       )
     );

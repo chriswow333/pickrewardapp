@@ -4,33 +4,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/reward/repository/card.dart';
-import 'package:pickrewardapp/reward/repository/proto/generated/card.pbgrpc.dart';
-
+import 'package:pickrewardapp/reward/repository/card/card.dart';
+import 'package:pickrewardapp/reward/repository/card/proto/generated/card.pbgrpc.dart';
 
 
 class CardItemViewModel with ChangeNotifier {
   
   CardItemViewModel() {
     CardService().init();
-    
   }
 
   final Map<String, List<CardItemModel>> _cardItemModels = {};
 
   List<CardItemModel> getCardsByBankID(String bankID){
-
     return _cardItemModels[bankID] ?? [];
   }
-
 
   String _bankID = "";
 
   get bankID => _bankID;
-  
 
   Future<void> fetchCardsByBankID(String bankID) async{ 
     
+
+    if (bankID == _bankID)return;
+
     if(_cardItemModels[bankID] == null){
 
       try {
@@ -64,11 +62,9 @@ class CardItemViewModel with ChangeNotifier {
         ///handle all generic errors here
         print(e);
       }
-        
     }
 
     _bankID = bankID;
-
     notifyListeners();
   }
 }

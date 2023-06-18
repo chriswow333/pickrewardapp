@@ -18,7 +18,6 @@ import 'card.pb.dart' as $0;
 
 export 'card.pb.dart';
 
-// @$pb.GrpcServiceName('card.Card')
 class CardClient extends $grpc.Client {
   static final _$createBank = $grpc.ClientMethod<$0.BankProto, $0.Reply>(
       '/card.Card/CreateBank',
@@ -60,7 +59,6 @@ class CardClient extends $grpc.Client {
   }
 }
 
-// @$pb.GrpcServiceName('card.Card')
 abstract class CardServiceBase extends $grpc.Service {
   $core.String get $name => 'card.Card';
 

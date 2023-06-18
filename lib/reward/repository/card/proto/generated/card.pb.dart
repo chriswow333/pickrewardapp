@@ -100,7 +100,7 @@ class CardProto extends $pb.GeneratedMessage {
     ..pPS(3, _omitFieldNames ? '' : 'descriptions')
     ..aOS(4, _omitFieldNames ? '' : 'image')
     ..aInt64(5, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
-    ..aInt64(6, _omitFieldNames ? '' : 'UpdateDate', protoName: 'UpdateDate')
+    ..aInt64(6, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..aOS(7, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
     ..aOS(8, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
     ..a<$core.int>(9, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)

@@ -43,7 +43,7 @@ const CardProto$json = {
     {'1': 'descriptions', '3': 3, '4': 3, '5': 9, '10': 'descriptions'},
     {'1': 'image', '3': 4, '4': 1, '5': 9, '10': 'image'},
     {'1': 'createDate', '3': 5, '4': 1, '5': 3, '10': 'createDate'},
-    {'1': 'UpdateDate', '3': 6, '4': 1, '5': 3, '10': 'UpdateDate'},
+    {'1': 'updateDate', '3': 6, '4': 1, '5': 3, '10': 'updateDate'},
     {'1': 'linkURL', '3': 7, '4': 1, '5': 9, '10': 'linkURL'},
     {'1': 'bankID', '3': 8, '4': 1, '5': 9, '10': 'bankID'},
     {'1': 'order', '3': 9, '4': 1, '5': 5, '10': 'order'},
@@ -55,7 +55,7 @@ const CardProto$json = {
 final $typed_data.Uint8List cardProtoDescriptor = $convert.base64Decode(
     'CglDYXJkUHJvdG8SDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIgoMZGVzY3'
     'JpcHRpb25zGAMgAygJUgxkZXNjcmlwdGlvbnMSFAoFaW1hZ2UYBCABKAlSBWltYWdlEh4KCmNy'
-    'ZWF0ZURhdGUYBSABKANSCmNyZWF0ZURhdGUSHgoKVXBkYXRlRGF0ZRgGIAEoA1IKVXBkYXRlRG'
+    'ZWF0ZURhdGUYBSABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgGIAEoA1IKdXBkYXRlRG'
     'F0ZRIYCgdsaW5rVVJMGAcgASgJUgdsaW5rVVJMEhYKBmJhbmtJRBgIIAEoCVIGYmFua0lEEhQK'
     'BW9yZGVyGAkgASgFUgVvcmRlchIeCgpjYXJkU3RhdHVzGAogASgFUgpjYXJkU3RhdHVz');
 

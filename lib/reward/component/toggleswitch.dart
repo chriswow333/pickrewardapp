@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/channel.dart';
 import 'package:pickrewardapp/reward/viewmodel/toggleswitch.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class ToggleSwitch extends StatelessWidget {
 
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
 
+
+
     return Container(
       child:Container(
       decoration: BoxDecoration(
@@ -28,6 +31,7 @@ class ToggleSwitch extends StatelessWidget {
             TextButton(
               onPressed: (){
                 toggleSwitchViewModel.toggle = ToggleTypeEnum.Channel;
+
               },
               style:ButtonStyle(
                 padding:MaterialStatePropertyAll(EdgeInsets.fromLTRB(10, 5, 10, 5)),

@@ -1,23 +1,24 @@
 
 
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/reward/repository/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/reward/repository/channel/proto/generated/channel.pbgrpc.dart';
 
-class CardService {
+class ChannelService {
+  
 ///here enter your host without the http part (e.g enter google.com now http://google.com)
   String baseUrl = "localhost";
 
-  CardService._internal();
+  ChannelService._internal();
   
-  static final CardService _instance = CardService._internal();
+  static final ChannelService _instance = ChannelService._internal();
 
-  factory CardService() => _instance;
+  factory ChannelService() => _instance;
 
   ///static HelloService instance that we will call when we want to make requests
-  static CardService get instance => _instance;
+  static ChannelService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late CardClient _cardClient;
+  late ChannelClient _channelClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -26,8 +27,8 @@ class CardService {
   }
 
   ///provide public access to the HelloClient instance
-  CardClient get cardClient {
-    return _cardClient;
+  ChannelClient get channelClient {
+    return _channelClient;
   }
 
   ///here we create a channel and use it to initialize the HelloClientthat was generated
@@ -36,7 +37,6 @@ class CardService {
     final channel = ClientChannel(
       baseUrl,
 
-      ///port: 9043,
       port: 50055,
 
       ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
@@ -49,7 +49,9 @@ class CardService {
       codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
     ),
     );
-    _cardClient = CardClient(channel);
+    _channelClient = ChannelClient(channel);
 
   }
+
+
 }

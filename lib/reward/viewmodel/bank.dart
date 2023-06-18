@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/reward/repository/card.dart';
-import 'package:pickrewardapp/reward/repository/proto/generated/card.pb.dart';
+import 'package:pickrewardapp/reward/repository/card/card.dart';
+import 'package:pickrewardapp/reward/repository/card/proto/generated/card.pb.dart';
 
 
 class BankViewModel with ChangeNotifier{
