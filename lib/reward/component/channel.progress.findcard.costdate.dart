@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/reward/viewmodel/reward.selected.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
@@ -39,18 +41,28 @@ class CostDate extends StatelessWidget {
 }
 
 
+
+final DateFormat formatter = DateFormat('yyyy-MM-dd');
+
 class CostDateValue extends StatelessWidget {
-  CostDateValue({super.key});
+  const CostDateValue({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     return TextButton(
       onPressed: (){
-        Future<String?> future = showDialog<String>(
+        Future<DateTime?> future = showDialog<DateTime>(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-            title: Text('消費日期'),
+            title: Text('消費日期',
+              style:TextStyle(
+                fontSize: 20,
+                color:Colors.cyan[900],
+              ),
+            ),
             content:Container(
                 height: 350,
                 width:100,
@@ -59,12 +71,12 @@ class CostDateValue extends StatelessWidget {
                   selectionMode: DateRangePickerSelectionMode.single,
                   showNavigationArrow:true,
                   showActionButtons:true,
+                  initialSelectedDate:rewardSelectedViewModel.eventDate,
                   onSubmit:(Object? obj){
-                    Navigator.pop(context, obj.toString());
+                    Navigator.pop(context, obj);
                   },
                   onCancel:() {
                     Navigator.pop(context);
-
                   }
                 )
               ),
@@ -73,12 +85,16 @@ class CostDateValue extends StatelessWidget {
         );
 
         future.then((data){
-          print(data);
+          rewardSelectedViewModel.eventDate = data as DateTime;
         });
 
-
       },
-      child:Text(DateTime.now().toString()),
+      child:Text(formatter.format(rewardSelectedViewModel.eventDate),
+        style:TextStyle(
+          fontSize: 20,
+          color:Colors.cyan[900],
+        ),
+      )
     );
   }
 

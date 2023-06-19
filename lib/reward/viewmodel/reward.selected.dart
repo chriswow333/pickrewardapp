@@ -64,12 +64,12 @@ class RewardSelectedViewModel with ChangeNotifier{
   int get rewardType => _rewardType;
 
 
-  int _eventDate = DateTime.now().millisecondsSinceEpoch;
-  set eventDate(int eventDate) {
+  DateTime _eventDate = DateTime.now();
+  set eventDate(DateTime eventDate) {
     _eventDate = eventDate;
     notifyListeners();
   }
-  int get eventDate => _eventDate;
+  DateTime get eventDate => _eventDate;
   
 }
 
