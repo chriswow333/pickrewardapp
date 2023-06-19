@@ -13,7 +13,7 @@ class PickRewardApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme:ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.teal,
       ),
       initialRoute:'/card',
       routes:{

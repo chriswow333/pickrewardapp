@@ -12,6 +12,8 @@ class RewardSelectedViewModel with ChangeNotifier{
   
   factory RewardSelectedViewModel() => _instance;
 
+
+
   final Set<String> _channelIDs = {};
   set channelID(String channelID) {
 
@@ -27,6 +29,7 @@ class RewardSelectedViewModel with ChangeNotifier{
   }
 
   final Set<String> _payIDs = {};
+
   set payID(String payID) {
     if(_payIDs.contains(payID)) {
       _payIDs.remove(payID); 
@@ -34,7 +37,7 @@ class RewardSelectedViewModel with ChangeNotifier{
       _payIDs.add(payID);
     } 
 
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool existSelectedPayID(String payID) {
@@ -50,11 +53,6 @@ class RewardSelectedViewModel with ChangeNotifier{
   } 
   
   int get cost => _selectedCost;
-
-  
-  
-
-
 
 
   int _rewardType = 0;

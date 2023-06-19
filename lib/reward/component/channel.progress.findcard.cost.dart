@@ -88,7 +88,6 @@ class Lessthan1000Btn extends StatelessWidget {
 
 
 
-
 class From1000To5000Btn extends StatelessWidget {
   const From1000To5000Btn({super.key});
 
@@ -197,46 +196,4 @@ class MoreThan5000Btn extends StatelessWidget {
 
 
 
-class CostDate extends StatelessWidget {
-  const CostDate({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children:[
-        CostDateName(),
-        SizedBox(width:20),
-        CostDateValue(),
-      ]
-    );
-  }
-}
-
-
-class CostDateName extends StatelessWidget {
-  const CostDateName({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('消費日期',
-      style:TextStyle(
-        fontSize: 20,
-        color:Colors.cyan[900],
-      ),
-    );
-  }
-}
-
-class CostDateValue extends StatelessWidget {
-  const CostDateValue({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('2023/01/01',
-      style:TextStyle(
-        fontSize: 20,
-        color:Colors.cyan[900],
-      ),
-    );
-  }
-}

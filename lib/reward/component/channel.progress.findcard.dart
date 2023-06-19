@@ -3,14 +3,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.cost.dart';
+import 'package:pickrewardapp/reward/component/channel.progress.findcard.costdate.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.pay.dart';
 import 'package:pickrewardapp/reward/component/channel.progress.findcard.rewardway.dart';
+import 'package:pickrewardapp/reward/viewmodel/pay.item.dart';
+import 'package:provider/provider.dart';
 
 class FindCardProgress extends StatelessWidget {
   const FindCardProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
+    payItemViewModel.fetchPays();
+
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
@@ -21,7 +29,7 @@ class FindCardProgress extends StatelessWidget {
         SizedBox(height:20),
 
         PayName(),
-        PayStores(),
+        PayItems(),
 
         SizedBox(height:20),
 

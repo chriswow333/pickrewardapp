@@ -2,7 +2,12 @@
 
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/pay.item.dart';
+import 'package:pickrewardapp/reward/viewmodel/reward.selected.dart';
+import 'package:provider/provider.dart';
 
 class PayName extends StatelessWidget {
   const PayName({super.key});
@@ -18,41 +23,85 @@ class PayName extends StatelessWidget {
   }
 }
 
-
-class PayStores extends StatelessWidget {
-  const PayStores({super.key});
+class PayItems extends StatelessWidget {
+  const PayItems({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
+
+    List<PayItemModel> payItemModels = payItemViewModel.pays;
+
     return SingleChildScrollView(
       scrollDirection:Axis.horizontal,
       child:Row(
         children:[
-          PayStore(),
-          PayStore(),
-          PayStore(),
-          PayStore(),
-          PayStore(), 
-          PayStore(), 
-          PayStore(),
+          for(PayItemModel payItemModel in payItemModels)
+            Container(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child:PayItem(payItemModel:payItemModel),  
+            ),
+            
         ]
       ),
     );
   }
 }
 
-class PayStore extends StatelessWidget {
-  const PayStore({super.key});
+class PayItem extends StatefulWidget {
+  const PayItem({super.key, required this.payItemModel});
 
+   final PayItemModel payItemModel;
+  @override
+  State<PayItem> createState() => _PayItemState();
+}
+
+class _PayItemState extends State<PayItem> {
+
+  bool _selected = false;
+  
   @override
   Widget build(BuildContext context) {
+  
+    String id = widget.payItemModel.id;
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    _selected = rewardSelectedViewModel.existSelectedPayID(id);
+
     return TextButton(
-    
-      onPressed: (){},
+      style:ButtonStyle(
+        alignment: Alignment.center,
+        splashFactory:NoSplash.splashFactory,
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        side:MaterialStatePropertyAll(
+          _selected ? 
+          BorderSide(
+            color:Colors.teal[900]!,
+            width: 1,
+          )
+          :null
+        ),
+        padding:const MaterialStatePropertyAll(
+          EdgeInsets.fromLTRB(5, 12, 5, 0),
+        ),
+      ),
+      onPressed: (){
+        
+        setState((){
+          _selected = !_selected;
+        });
+
+        rewardSelectedViewModel.payID = id;
+
+      },
       child:Column(
         children:[
-          PayStoreIcon(),
-          PayStoreName(),
+          PayItemIcon(image:widget.payItemModel.image),
+          PayItemName(name:widget.payItemModel.name),
         ],
       ),
     );
@@ -61,35 +110,41 @@ class PayStore extends StatelessWidget {
 
 
 
-class PayStoreIcon extends StatelessWidget {
-  const PayStoreIcon({super.key});
 
+class PayItemIcon extends StatelessWidget {
+  const PayItemIcon({super.key, required this.image});
+  
+  final String image;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Icon(
-        color:Colors.teal[700],
-        Icons.shopping_bag_sharp,
-      )
+      child:Image.memory(
+        gaplessPlayback: true,
+        base64Decode(image), 
+        width:70,
+        height:50,
+      ),
     );
   }
 }
 
-class PayStoreName extends StatelessWidget {
-  const PayStoreName({super.key});
+class PayItemName extends StatelessWidget {
+  const PayItemName({super.key, required this.name});
 
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding:const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color:Colors.teal[900],
-        borderRadius: BorderRadius.circular(10),
+        // color:Colors.teal[900],
+        // borderRadius: BorderRadius.circular(10),
       ),
-      child:Text('LINEPAY',
+      child:Text(name,
         style: 
         TextStyle(
-          color: Colors.teal[50],
+          color: Colors.teal[900],
         ),
       )
     );

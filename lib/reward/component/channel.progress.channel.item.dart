@@ -115,6 +115,7 @@ class ChannelItemIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Image.memory(
+        gaplessPlayback: true,
         base64Decode(image), 
         width:70,
         height:50,
