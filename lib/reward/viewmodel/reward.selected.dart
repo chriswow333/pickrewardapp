@@ -4,6 +4,10 @@
 
 import 'package:flutter/material.dart';
 
+
+enum RewardWayEnum { CASH, POINT }
+
+
 class RewardSelectedViewModel with ChangeNotifier{
 
   RewardSelectedViewModel._internal();
@@ -71,6 +75,16 @@ class RewardSelectedViewModel with ChangeNotifier{
   }
   DateTime get eventDate => _eventDate;
   
+
+
+  RewardWayEnum _rewardWay = RewardWayEnum.CASH;
+  set rewardWay(RewardWayEnum rewardWay) {
+    _rewardWay = rewardWay;
+    notifyListeners();
+  }
+
+  RewardWayEnum get rewardWay => _rewardWay;
+
 }
 
 

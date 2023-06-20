@@ -4,6 +4,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/reward/viewmodel/reward.selected.dart';
+import 'package:provider/provider.dart';
 
 class RewardWayName extends StatelessWidget {
   const RewardWayName({super.key});
@@ -27,6 +29,7 @@ class RewardWayItems extends StatelessWidget {
     return Row(
       children:[
         CashWay(),
+        SizedBox(width:20),
         PointWay(),
       ]
     );
@@ -41,24 +44,24 @@ class CashWay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-      SingingCharacter? _character = SingingCharacter.lafayette;
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        rewardSelectedViewModel.rewardWay = RewardWayEnum.CASH;
+      },
       style:ButtonStyle(
         splashFactory:NoSplash.splashFactory,
+        padding:MaterialStatePropertyAll(EdgeInsets.all(0)),
       ),
       child:Row(
         children:[
-          
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: true,
+            value: rewardSelectedViewModel.rewardWay == RewardWayEnum.CASH,
             onChanged: (bool? value) {
-              // setState(() {
-              //   isChecked = value!;
-              // });
+              rewardSelectedViewModel.rewardWay = RewardWayEnum.CASH;
             },
           ),
           Text('現金回饋',
@@ -80,25 +83,23 @@ class PointWay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-      SingingCharacter? _character = SingingCharacter.lafayette;
-
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     return TextButton(
-      onPressed: (){},
-      style:ButtonStyle(
+      onPressed: (){
+        rewardSelectedViewModel.rewardWay = RewardWayEnum.POINT;
+      },
+      style:const ButtonStyle(
         splashFactory:NoSplash.splashFactory,
+        padding:MaterialStatePropertyAll(EdgeInsets.all(0)),
       ),
       child:Row(
         children:[
-          
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: true,
+            value: rewardSelectedViewModel.rewardWay == RewardWayEnum.POINT,
             onChanged: (bool? value) {
-              // setState(() {
-              //   isChecked = value!;
-              // });
+              rewardSelectedViewModel.rewardWay = RewardWayEnum.POINT;
             },
           ),
           Text('點數回饋',
