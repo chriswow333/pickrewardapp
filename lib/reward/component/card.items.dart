@@ -64,7 +64,10 @@ class CardItem extends StatelessWidget {
                   children:[
                     CardTitle(name:cardItemModel.name, image:cardItemModel.image),
                     SizedBox(width:20),
-                    CardDescs(descs:cardItemModel.descriptions),
+                    Expanded(
+                      child:CardDescs(descs:cardItemModel.descriptions),
+                    ),
+                    
                   ],
                 ),
               ]
