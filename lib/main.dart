@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/reward/reward.dart';
+import 'package:pickrewardapp/card/card.dart';
+import 'package:pickrewardapp/cardcontent/card.content.dart';
 
 void main() {
   runApp(const PickRewardApp());
@@ -34,7 +35,7 @@ class CardScreen extends StatelessWidget {
       body:Container(
         // alignment: Alignment.topCenter,
         padding: const EdgeInsets.only(top:50),
-        child: RewardPage(),
+        child: CardPage(),
       ),
     );
   }

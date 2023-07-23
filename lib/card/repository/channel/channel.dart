@@ -1,27 +1,24 @@
 
 
-
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/reward/repository/pay/proto/generated/pay.pbgrpc.dart';
+import 'package:pickrewardapp/card/repository/channel/proto/generated/channel.pbgrpc.dart';
 
-class PayService {
-
-
+class ChannelService {
+  
 ///here enter your host without the http part (e.g enter google.com now http://google.com)
   String baseUrl = "192.168.20.112";
 
-  PayService._internal();
+  ChannelService._internal();
   
-  static final PayService _instance = PayService._internal();
+  static final ChannelService _instance = ChannelService._internal();
 
-  factory PayService() => _instance;
+  factory ChannelService() => _instance;
 
   ///static HelloService instance that we will call when we want to make requests
-  static PayService get instance => _instance;
+  static ChannelService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late PayClient _payClient;
+  late ChannelClient _channelClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -30,8 +27,8 @@ class PayService {
   }
 
   ///provide public access to the HelloClient instance
-  PayClient get payClient {
-    return _payClient;
+  ChannelClient get channelClient {
+    return _channelClient;
   }
 
   ///here we create a channel and use it to initialize the HelloClientthat was generated
@@ -52,9 +49,9 @@ class PayService {
         codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
       ),
     );
-    
-    _payClient = PayClient(channel);
+    _channelClient = ChannelClient(channel);
 
   }
+
 
 }

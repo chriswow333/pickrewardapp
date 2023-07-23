@@ -3,7 +3,7 @@
 
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/reward/repository/pay/proto/generated/pay.pbgrpc.dart';
+import 'package:pickrewardapp/card/repository/pay/proto/generated/pay.pbgrpc.dart';
 
 class PayService {
 

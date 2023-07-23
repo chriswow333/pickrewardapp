@@ -5,7 +5,7 @@ import 'package:pickrewardapp/reward/repository/card/proto/generated/card.pbgrpc
 
 class CardService {
 ///here enter your host without the http part (e.g enter google.com now http://google.com)
-  String baseUrl = "localhost";
+  String baseUrl = "192.168.20.112";
 
   CardService._internal();
   
