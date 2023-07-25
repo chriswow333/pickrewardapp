@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/card.dart';
-import 'package:pickrewardapp/cardcontent/card.content.dart';
+import 'package:pickrewardapp/cardcontent/cardcontent.dart';
 
 void main() {
   runApp(const PickRewardApp());
