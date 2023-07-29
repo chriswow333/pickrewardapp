@@ -11,15 +11,13 @@ class CardReward extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:SingleChildScrollView(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            CardRewardHeader(),
-            CardRewardDetails(),
-            CardRewardEvaluation(),
-          ],
-        )
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          CardRewardHeader(),
+          CardRewardDetails(),
+          CardRewardEvaluation(),
+        ],
       )
     );
   }

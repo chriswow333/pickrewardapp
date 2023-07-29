@@ -71,8 +71,6 @@ class CardRewardDetailName extends StatelessWidget {
   }
 }
 
-
-
 class CardRewardDetailDescs extends StatelessWidget {
   const CardRewardDetailDescs({super.key});
 

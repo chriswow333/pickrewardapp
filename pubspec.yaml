@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.4.0
   localstorage: ^4.0.0+1
   syncfusion_flutter_datepicker: ^21.2.10
+  flutter_form_builder: ^9.1.0
 
 dev_dependencies:
   flutter_test:

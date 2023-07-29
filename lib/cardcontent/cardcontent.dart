@@ -38,14 +38,32 @@ class CardContentPage extends StatelessWidget {
           CardContentHeader(),
           Divider(),
           CarContentTab(),
-          // CardContentItems(),
-          // CardActivity(),
-          CardReward(),
+          CardContentScroll(),
         ]
       );
   }
 }
 
+
+class CardContentScroll extends StatelessWidget {
+  const CardContentScroll({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      // height:MediaQuery.of(context).size.height,
+      child:SingleChildScrollView(
+        child:Column(
+          children:[
+            CardContentItems(),
+            CardActivity(),
+            CardReward(),
+          ]
+        ),
+      ),
+    );
+  }
+}
 
 
 class Banner extends StatelessWidget {

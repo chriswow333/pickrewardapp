@@ -9,15 +9,12 @@ class CardContentItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:300,
-      child:SingleChildScrollView(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            CardRewardItem(),
-            CardActivityItem(),
-          ]
-        ),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          CardRewardItem(),
+          CardActivityItem(),
+        ]
       ),
     );
   }

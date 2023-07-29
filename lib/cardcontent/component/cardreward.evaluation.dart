@@ -1,7 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardcontent/component/cardreward.evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardcontent/component/cardreward.evaluation.progress.dart';
+import 'package:pickrewardapp/cardcontent/component/cardreward.evaluation.progress.evaluate.dart';
+import 'package:pickrewardapp/cardcontent/component/cardreward.evaluation.progress.evaluate.pay.dart';
+import 'package:pickrewardapp/cardcontent/component/cardreward.evaluation.progress.task.dart';
 
 class CardRewardEvaluation extends StatelessWidget {
   const CardRewardEvaluation({super.key});
@@ -15,8 +19,9 @@ class CardRewardEvaluation extends StatelessWidget {
         children:[
           CardRewardEvaluationTitle(),
           CardRewardEvaluationProgressBar(),
-
-          
+          CardRewardEvaluationProgressChannel(),
+          CardRewardEvaluationProgressTask(),
+          CardRewardEvaluationProgressEvaluate(),
         ],
       ),
     );

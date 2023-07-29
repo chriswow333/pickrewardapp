@@ -3,8 +3,6 @@
 
 import 'package:flutter/material.dart';
 
-
-
 class CardRewardEvaluationProgressBar extends StatelessWidget {
   const CardRewardEvaluationProgressBar({super.key});
 
@@ -18,13 +16,10 @@ class CardRewardEvaluationProgressBar extends StatelessWidget {
         TaskProgressItem(),
         ProgressArrow(),
         EvaluateProgressItem()
-
       ]
     );
   }
 }
-
-
 
 class EvaluateProgressItem extends StatelessWidget {
   const EvaluateProgressItem({super.key});
