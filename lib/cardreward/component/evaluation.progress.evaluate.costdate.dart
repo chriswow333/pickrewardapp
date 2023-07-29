@@ -1,8 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
 class CardRewardEvaluationProgressCostDate extends StatelessWidget {
@@ -71,9 +69,7 @@ class _CostDateFieldState extends State<CostDateField> {
     DateTime? date = await _showDatePicker(context, currentValue);
     if (date == null) return currentValue;
     final time = await _showTimePicker(context, currentValue);
-    if (date != null) {
-      newValue = combine(date, time);
-    }
+    newValue = combine(date, time);
   
     final finalValue = newValue ?? currentValue;
     return finalValue;

@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-class CardRewardDetails extends StatelessWidget {
-  const CardRewardDetails({super.key});
+class EvaluationDetails extends StatelessWidget {
+  const EvaluationDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CardRewardDetails extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          CardRewardDetail(),
+          EvaluationDetail(),
         ],
       )
     );
@@ -21,8 +21,8 @@ class CardRewardDetails extends StatelessWidget {
 }
 
 
-class CardRewardDetail extends StatelessWidget {
-  const CardRewardDetail({super.key});
+class EvaluationDetail extends StatelessWidget {
+  const EvaluationDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +31,17 @@ class CardRewardDetail extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          CardRewardDetailTitle(),
-          CardRewardDetailName(),
-          CardRewardDetailDescs(),
+          EvaluationDetailTitle(),
+          EvaluationDetailName(),
+          EvaluationDetailDescs(),
         ],
       ),
     );
   }
 }
 
-class CardRewardDetailTitle extends StatelessWidget {
-  const CardRewardDetailTitle({super.key});
+class EvaluationDetailTitle extends StatelessWidget {
+  const EvaluationDetailTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,8 @@ class CardRewardDetailTitle extends StatelessWidget {
   }
 }
 
-class CardRewardDetailName extends StatelessWidget {
-  const CardRewardDetailName({super.key});
+class EvaluationDetailName extends StatelessWidget {
+  const EvaluationDetailName({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +71,8 @@ class CardRewardDetailName extends StatelessWidget {
   }
 }
 
-class CardRewardDetailDescs extends StatelessWidget {
-  const CardRewardDetailDescs({super.key});
+class EvaluationDetailDescs extends StatelessWidget {
+  const EvaluationDetailDescs({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class CardRewardDetailDescs extends StatelessWidget {
       padding:const EdgeInsets.only(left:10),
       child:Column(
         children:[
-          CardRewardDetailDesc(),
+          EvaluationDetailDesc(),
         ]
       ),
     );
@@ -88,8 +88,8 @@ class CardRewardDetailDescs extends StatelessWidget {
 }
 
 
-class CardRewardDetailDesc extends StatelessWidget {
-  const CardRewardDetailDesc({super.key});
+class EvaluationDetailDesc extends StatelessWidget {
+  const EvaluationDetailDesc({super.key});
 
   @override
   Widget build(BuildContext context) {

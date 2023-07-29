@@ -2,9 +2,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
+import 'package:provider/provider.dart';
 
-class CardRewardEvaluationProgressBar extends StatelessWidget {
-  const CardRewardEvaluationProgressBar({super.key});
+class EvaluationProgressBar extends StatelessWidget {
+  const EvaluationProgressBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,10 @@ class EvaluateProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
     return TextButton(
       onPressed: (){
+        progressViewModel.set(EvaluationProgressEnum.Evaluate);
       },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
@@ -62,8 +66,11 @@ class TaskProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
+
     return TextButton(
       onPressed: (){
+        progressViewModel.set(EvaluationProgressEnum.Task);
       },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
@@ -109,8 +116,10 @@ class ChannelProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
     return TextButton(
       onPressed: (){
+        progressViewModel.set(EvaluationProgressEnum.Channel);
       },
       style:ButtonStyle(
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),

@@ -1,10 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class CardRewardEvaluationProgressTask extends StatelessWidget {
-  const CardRewardEvaluationProgressTask({super.key});
+class EvaluationProgressTask extends StatelessWidget {
+  const EvaluationProgressTask({super.key});
 
   @override
   Widget build(BuildContext context) {

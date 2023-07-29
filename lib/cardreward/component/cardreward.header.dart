@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 
-class CardContentHeader extends StatelessWidget {
-  const CardContentHeader({super.key});
+class CardHeader extends StatelessWidget {
+  const CardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +12,15 @@ class CardContentHeader extends StatelessWidget {
       children:[
         CardImage(),
         Expanded(
-          child:CardDescriptions(),
+          child:CardRewardDescriptions(),
         ),
-        
       ]
     );
   }
 }
 
-class CardDescriptions extends StatelessWidget {
-  const CardDescriptions({super.key});
+class CardRewardDescriptions extends StatelessWidget {
+  const CardRewardDescriptions({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -81,11 +81,9 @@ class CostDateValue extends StatelessWidget {
             );
           }
         );
-
         future.then((data){
           rewardSelectedViewModel.eventDate = data as DateTime;
         });
-
       },
       child:Text(formatter.format(rewardSelectedViewModel.eventDate),
         style:TextStyle(
@@ -95,7 +93,4 @@ class CostDateValue extends StatelessWidget {
       )
     );
   }
-
-
-
 }

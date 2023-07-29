@@ -2,10 +2,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardcontent/component/cardactivity.detail.dart';
+import 'package:pickrewardapp/cardreward/component/activity.detail.dart';
 
-class CardActivity extends StatelessWidget {
-  const CardActivity({super.key});
+class Activity extends StatelessWidget {
+  const Activity({super.key});
 
   @override
   Widget build(BuildContext context) {

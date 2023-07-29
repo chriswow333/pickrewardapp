@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
-import 'package:pickrewardapp/cardcontent/cardcontent.dart';
+import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:provider/provider.dart';
 
 

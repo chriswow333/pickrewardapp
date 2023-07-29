@@ -3,17 +3,23 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:provider/provider.dart';
 
-class CarContentTab extends StatelessWidget {
-  const CarContentTab({super.key});
+class CarTab extends StatelessWidget {
+  const CarTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    CardRewardToggleViewModel cardRewardInnerViewModel = Provider.of<CardRewardToggleViewModel>(context);
+
     return Container(
       child:Row(
         children:[
           TextButton(
-            onPressed: (){},
+            onPressed: (){
+              cardRewardInnerViewModel.backToItems();
+            },
             child:Text('卡片回饋',
               style:TextStyle(
                 color:Colors.cyan[900],

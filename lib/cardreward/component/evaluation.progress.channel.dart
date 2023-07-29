@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 
 
-class CardRewardEvaluationProgressChannel extends StatelessWidget {
-  const CardRewardEvaluationProgressChannel({super.key});
+class EvaluationProgressChannel extends StatelessWidget {
+  const EvaluationProgressChannel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,26 +103,6 @@ class ChannelItems extends StatelessWidget {
         mainAxisSpacing: 8.0,
         padding: EdgeInsets.zero,  
         children:[
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
           ChannelItem(),
           ChannelItem(),
           ChannelItem(),
