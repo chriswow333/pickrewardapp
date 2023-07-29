@@ -6,14 +6,18 @@ import 'package:pickrewardapp/cardreward/component/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.dart';
 import 'package:pickrewardapp/cardreward/component/activity.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 
 class CardContentScreen extends StatelessWidget {
-  const CardContentScreen({super.key});
+  const CardContentScreen({super.key, required this.cardItemModel});
 
+  final CardItemModel cardItemModel;
+  
   @override
   Widget build(BuildContext context) {
      return Scaffold(
@@ -24,7 +28,7 @@ class CardContentScreen extends StatelessWidget {
           providers: [
             ChangeNotifierProvider<CardRewardToggleViewModel>(create:(_)=>CardRewardToggleViewModel()),
             ChangeNotifierProvider<EvaluationProgressViewModel>(create:(_)=>EvaluationProgressViewModel()),
-            
+            ChangeNotifierProvider<CardViewModel>(create:(_)=>CardViewModel(cardItemModel)),
           ],
           child:CardContentPage(),
         )
@@ -35,7 +39,8 @@ class CardContentScreen extends StatelessWidget {
 
 
 class CardContentPage extends StatelessWidget {
-  const CardContentPage({super.key});
+  const CardContentPage({super.key,});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,7 @@ class CardContentPage extends StatelessWidget {
           CardHeader(),
           Divider(),
           CarTab(),
-          CardRewardInner(),
+          CardRewardComponent(),
         ]
       );
   }
@@ -55,8 +60,8 @@ class CardContentPage extends StatelessWidget {
 
 
 
-class CardRewardInner extends StatelessWidget {
-  const CardRewardInner({super.key});
+class CardRewardComponent extends StatelessWidget {
+  const CardRewardComponent({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
+import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +54,7 @@ class CardItem extends StatelessWidget {
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CardContentScreen()),
+              MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
             );
           },
           style: ButtonStyle(

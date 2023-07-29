@@ -6,7 +6,7 @@ import 'package:pickrewardapp/card/component/card.dart';
 import 'package:pickrewardapp/card/component/channel.dart';
 import 'package:pickrewardapp/card/component/toggleswitch.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
+import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:pickrewardapp/card/viewmodel/channel.dart';
 import 'package:pickrewardapp/card/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/card/viewmodel/pay.item.dart';

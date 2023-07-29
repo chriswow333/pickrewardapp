@@ -100,6 +100,7 @@ class EvaluationContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           EvaluationTitle(),
+          SizedBox(height:20),
           EvaluationProgressBar(),
           SizedBox(height:20),
           if (progressViewModel.get() == EvaluationProgressEnum.Channel)

@@ -37,7 +37,7 @@ class EvaluateProgressItem extends StatelessWidget {
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-           Colors.cyan[900]
+           progressViewModel.get() == EvaluationProgressEnum.Evaluate ?  Colors.cyan[900] : Colors.white,
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class EvaluateProgressItem extends StatelessWidget {
         '消費方式',
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[50],
+          color: progressViewModel.get() == EvaluationProgressEnum.Evaluate ? Colors.cyan[50]:Colors.cyan[900],
         ),  
       )
     );
@@ -76,7 +76,7 @@ class TaskProgressItem extends StatelessWidget {
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-           Colors.cyan[900]
+           progressViewModel.get() == EvaluationProgressEnum.Task ?  Colors.cyan[900] : Colors.white,
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -92,7 +92,7 @@ class TaskProgressItem extends StatelessWidget {
         '任務活動',
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[50],
+          color: progressViewModel.get() == EvaluationProgressEnum.Task ? Colors.cyan[50]:Colors.cyan[900],
         ),  
       )
     );
@@ -116,7 +116,9 @@ class ChannelProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
+    
     return TextButton(
       onPressed: (){
         progressViewModel.set(EvaluationProgressEnum.Channel);
@@ -125,7 +127,7 @@ class ChannelProgressItem extends StatelessWidget {
         padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-           Colors.cyan[900]
+          progressViewModel.get() == EvaluationProgressEnum.Channel ?  Colors.cyan[900] : Colors.white,
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -141,7 +143,7 @@ class ChannelProgressItem extends StatelessWidget {
         '消費通路',
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[50],
+          color: progressViewModel.get() == EvaluationProgressEnum.Channel ? Colors.cyan[50]:Colors.cyan[900],
         ),  
       )
     );
