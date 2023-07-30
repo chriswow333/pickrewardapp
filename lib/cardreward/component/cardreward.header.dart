@@ -17,8 +17,6 @@ class CardHeader extends StatelessWidget {
     CardViewModel cardViewModel = Provider.of<CardViewModel>(context);
     CardItemModel cardItemModel = cardViewModel.get();
     
-    
-    
     return Row(
       children:[
         CardTitle(name:cardItemModel.name, image:cardItemModel.image),

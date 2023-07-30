@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +35,6 @@ class RewardItem extends StatelessWidget {
     }else {
       return Container();
     }
-    
   }
 }
 
