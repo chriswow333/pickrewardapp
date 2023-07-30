@@ -3,11 +3,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.detail.dart';
-import 'package:pickrewardapp/cardreward/component/evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.dart';
-import 'package:pickrewardapp/cardreward/component/evaluation.progress.evaluate.dart';
-import 'package:pickrewardapp/cardreward/component/evaluation.progress.task.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/viewmodel/reward.type.dart';
 import 'package:provider/provider.dart';
 
 class Evaluation extends StatelessWidget {
@@ -15,13 +14,22 @@ class Evaluation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    CardRewardSelectedViewModel cardRewardSelelctedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
+    
+    CardRewardModel? cardRewardModel = cardRewardSelelctedViewModel.getSelectedCardRewardModel();
+
+    if (cardRewardModel == null) {
+      return Container();
+    }
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          EvaluationHeader(),
-          EvaluationDetails(),
-          EvaluationContent(),
+          EvaluationHeader(cardRewardModel: cardRewardModel,),
+          CardEvaluationDetails(cardRewardModel: cardRewardModel,),
+          EvaluationProgressContent(),
         ],
       )
     );
@@ -33,16 +41,23 @@ class Evaluation extends StatelessWidget {
 
 
 class EvaluationHeader extends StatelessWidget {
-  const EvaluationHeader({super.key});
+  const EvaluationHeader({super.key, required this.cardRewardModel});
+
+  final CardRewardModel cardRewardModel;
 
   @override
   Widget build(BuildContext context) {
+
+    int rewardType = cardRewardModel.rewardType;
+    String name = cardRewardModel.name;
+
+
     return Container(
       child:Row(
         children:[
-          EvaluationTypeName(),
+          EvaluationRewardTypeName(rewardType: rewardType,),
           Flexible(
-            child: EvaluationName(),
+            child: EvaluationName(name:name),
           ),
         ]
       )
@@ -52,84 +67,41 @@ class EvaluationHeader extends StatelessWidget {
 }
 
 class EvaluationName extends StatelessWidget {
-  const EvaluationName({super.key});
-
+  const EvaluationName({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding:const EdgeInsets.only(left:20),
-      child:Text('國內節/假日&國外最高3%回饋國內節/假日&國外最高3%回饋國內節/假日&國外最高3%回饋國內節/假日&國外最高3%回饋',
-        style:TextStyle(
-          color:Colors.cyan[900],
-        ),
-      )
-    );
-  }
-}
-
-
-class EvaluationTypeName extends StatelessWidget {
-  const EvaluationTypeName({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text('現金回饋',
-        style:TextStyle(
-          color:Colors.cyan[900],
-        ),
-      )
-    );
-  }
-}
-
-
-
-
-class EvaluationContent extends StatelessWidget {
-  const EvaluationContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    
-    EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
-
-    return Container(
-      padding: const EdgeInsets.only(top:20),
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          EvaluationTitle(),
-          SizedBox(height:20),
-          EvaluationProgressBar(),
-          SizedBox(height:20),
-          if (progressViewModel.get() == EvaluationProgressEnum.Channel)
-            EvaluationProgressChannel(),
-          if (progressViewModel.get() == EvaluationProgressEnum.Task)            
-            EvaluationProgressTask(),
-          if (progressViewModel.get() == EvaluationProgressEnum.Evaluate)            
-            EvaluationProgressEvaluate(),
-        ],
-      ),
-    );
-  }
-}
-
-
-class EvaluationTitle extends StatelessWidget {
-  const EvaluationTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text('試算回饋',
+      child:Text(name,
         style:TextStyle(
           color:Colors.cyan[900],
           fontSize: 18,
         ),
-      ),
+      )
     );
   }
 }
+
+
+class EvaluationRewardTypeName extends StatelessWidget {
+  const EvaluationRewardTypeName({super.key, required this.rewardType});
+  final int rewardType;
+  @override
+  Widget build(BuildContext context) {
+
+    String rewardTypeName = RewardTypeName.get(rewardType);
+
+    return Container(
+      child:Text(rewardTypeName,
+        style:TextStyle(
+          color:Colors.cyan[900],
+          fontSize: 18,
+        ),
+      )
+    );
+  }
+}
+
 
 

@@ -2,6 +2,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/component/evaluation.progress.channel.dart';
+import 'package:pickrewardapp/cardreward/component/evaluation.progress.evaluate.dart';
+import 'package:pickrewardapp/cardreward/component/evaluation.progress.task.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:provider/provider.dart';
 
@@ -149,3 +152,54 @@ class ChannelProgressItem extends StatelessWidget {
     );
   }
 }
+
+
+
+
+class EvaluationProgressContent extends StatelessWidget {
+  const EvaluationProgressContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
+
+    return Container(
+      padding: const EdgeInsets.only(top:20),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          EvaluationProgressTitle(),
+          SizedBox(height:20),
+          EvaluationProgressBar(),
+          SizedBox(height:20),
+          if (progressViewModel.get() == EvaluationProgressEnum.Channel)
+            EvaluationProgressChannel(),
+          if (progressViewModel.get() == EvaluationProgressEnum.Task)            
+            EvaluationProgressTask(),
+          if (progressViewModel.get() == EvaluationProgressEnum.Evaluate)            
+            EvaluationProgressEvaluate(),
+        ],
+      ),
+    );
+  }
+}
+
+
+class EvaluationProgressTitle extends StatelessWidget {
+  const EvaluationProgressTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text('試算回饋',
+        style:TextStyle(
+          color:Colors.cyan[900],
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+}
+
+

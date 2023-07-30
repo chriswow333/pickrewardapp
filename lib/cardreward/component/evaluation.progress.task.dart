@@ -19,7 +19,6 @@ class EvaluationProgressTask extends StatelessWidget {
 }
 
 
-
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
 
