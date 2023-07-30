@@ -1,27 +1,26 @@
 
 
-
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/reward/repository/pay/proto/generated/pay.pbgrpc.dart';
 
-class PayService {
+import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/card.pbgrpc.dart';
 
 
-///here enter your host without the http part (e.g enter google.com now http://google.com)
+
+class CardRewardService {
+
   String baseUrl = "192.168.20.112";
+  CardRewardService._internal();
 
-  PayService._internal();
-  
-  static final PayService _instance = PayService._internal();
 
-  factory PayService() => _instance;
+  static final CardRewardService _instance = CardRewardService._internal();
+
+  factory CardRewardService() => _instance;
 
   ///static HelloService instance that we will call when we want to make requests
-  static PayService get instance => _instance;
+  static CardRewardService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late PayClient _payClient;
+  late CardClient _cardClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -30,8 +29,8 @@ class PayService {
   }
 
   ///provide public access to the HelloClient instance
-  PayClient get payClient {
-    return _payClient;
+  CardClient get cardClient {
+    return _cardClient;
   }
 
   ///here we create a channel and use it to initialize the HelloClientthat was generated
@@ -40,6 +39,7 @@ class PayService {
     final channel = ClientChannel(
       baseUrl,
 
+      ///port: 9043,
       port: 50055,
 
       ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
@@ -47,14 +47,14 @@ class PayService {
 
       ///use this if you are connecting with Tls
       // options: const ChannelOptions(),
-      options: ChannelOptions(
-        credentials: const ChannelCredentials.insecure(),
-        codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-      ),
+    options: ChannelOptions(
+      credentials: const ChannelCredentials.insecure(),
+      codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
+    ),
     );
-    
-    _payClient = PayClient(channel);
+    _cardClient = CardClient(channel);
 
   }
+
 
 }

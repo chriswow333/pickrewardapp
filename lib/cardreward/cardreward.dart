@@ -29,6 +29,7 @@ class CardContentScreen extends StatelessWidget {
             ChangeNotifierProvider<CardRewardToggleViewModel>(create:(_)=>CardRewardToggleViewModel()),
             ChangeNotifierProvider<EvaluationProgressViewModel>(create:(_)=>EvaluationProgressViewModel()),
             ChangeNotifierProvider<CardViewModel>(create:(_)=>CardViewModel(cardItemModel)),
+            ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardItemModel.id)),
           ],
           child:CardContentPage(),
         )
@@ -40,7 +41,6 @@ class CardContentScreen extends StatelessWidget {
 
 class CardContentPage extends StatelessWidget {
   const CardContentPage({super.key,});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +74,13 @@ class CardRewardComponent extends StatelessWidget {
           children:[
             if(cardRewardInnerViewModel.isShowItemList())
               RewardItems(),
-            if(!cardRewardInnerViewModel.isShowItemList() 
-                && cardRewardInnerViewModel.rewardType() == 0)
-              Evaluation(),
-            if(!cardRewardInnerViewModel.isShowItemList() 
-                && cardRewardInnerViewModel.rewardType() == 1)
+             if(!cardRewardInnerViewModel.isShowItemList() 
+                && cardRewardInnerViewModel.cardRewardType() == 0)
               Activity(),
+            if(!cardRewardInnerViewModel.isShowItemList() 
+                && cardRewardInnerViewModel.cardRewardType() == 1)
+              Evaluation(),
+           
           ]
         ),
       ),

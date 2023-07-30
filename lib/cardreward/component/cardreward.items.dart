@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/viewmodel/reward.type.dart';
 import 'package:provider/provider.dart';
 
 class RewardItems extends StatelessWidget {
@@ -7,13 +9,16 @@ class RewardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+              
+    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
+    List<CardRewardModel> cardRewardModels = cardRewardViewModel.get();
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          RewardItem(rewardID: '', rewardType: 0,),
-          RewardItem(rewardID: '', rewardType: 1,),
+          for(final c in cardRewardModels)
+            RewardItem(cardRewardModel: c,),
         ]
       ),
     );
@@ -21,17 +26,18 @@ class RewardItems extends StatelessWidget {
 }
 
 class RewardItem extends StatelessWidget {
-  const RewardItem({super.key, required this.rewardID, required this.rewardType});
+  const RewardItem({super.key, required this.cardRewardModel, });
   
-  final String rewardID;
-  final int rewardType;
+  final CardRewardModel cardRewardModel;
+
+
   @override
   Widget build(BuildContext context) {
 
-    if (rewardType == 0) {
-      return EvaluationItem();
-    }else if (rewardType == 1){
-      return ActivityItem();
+    if (cardRewardModel.cardRewardType == 0) {
+      return ActivityItem(cardRewardModel: cardRewardModel,);
+    }else if (cardRewardModel.cardRewardType == 1){
+      return EvaluationItem(cardRewardModel: cardRewardModel,);
     }else {
       return Container();
     }
@@ -40,14 +46,14 @@ class RewardItem extends StatelessWidget {
 
 
 class ActivityItem extends StatelessWidget {
-  const ActivityItem({super.key});
+  const ActivityItem({super.key, required this.cardRewardModel});
+
+    final CardRewardModel cardRewardModel;
+
 
   @override
   Widget build(BuildContext context) {
 
-    final String rewardID = "";
-    final int rewardType = 1; 
-    
     CardRewardToggleViewModel toggleViewModel = Provider.of<CardRewardToggleViewModel>(context);
 
     return ConstrainedBox(
@@ -57,13 +63,13 @@ class ActivityItem extends StatelessWidget {
         padding:const EdgeInsets.only(bottom: 20),
         child:TextButton(
           onPressed: (){  
-            toggleViewModel.goToItem(rewardType, rewardID);
+            toggleViewModel.goToItem(cardRewardModel.rewardType, cardRewardModel.id);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.white),
             elevation:MaterialStatePropertyAll(2),
           ),
-          child:ActivityName(),
+          child:ActivityName(name:cardRewardModel.name),
         )
       )
     );    
@@ -71,13 +77,15 @@ class ActivityItem extends StatelessWidget {
 }
 
 class ActivityName extends StatelessWidget {
-  const ActivityName({super.key});
+  const ActivityName({super.key, required this.name});
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      child:Text('全球購物保障, 最高享50萬',
+      child:Text(name,
         style:TextStyle(
           color:Colors.cyan[900],
           fontSize: 20,
@@ -89,13 +97,13 @@ class ActivityName extends StatelessWidget {
 
 
 class EvaluationItem extends StatelessWidget {
-  const EvaluationItem({super.key});
+  const EvaluationItem({super.key, required this.cardRewardModel});
+
+
+  final CardRewardModel cardRewardModel;
 
   @override
   Widget build(BuildContext context) {
-
-    final String rewardID = "";
-    final int rewardType = 0;
 
     CardRewardToggleViewModel innverViewModel = Provider.of<CardRewardToggleViewModel>(context);
     return Container(
@@ -103,7 +111,7 @@ class EvaluationItem extends StatelessWidget {
       padding:const EdgeInsets.only(bottom: 20),
       child:TextButton(
         onPressed: (){
-          innverViewModel.goToItem(rewardType, rewardID);
+          innverViewModel.goToItem(cardRewardModel.rewardType, cardRewardModel.id);
         },
         style: ButtonStyle( 
           backgroundColor: MaterialStatePropertyAll(Colors.white),
@@ -112,8 +120,8 @@ class EvaluationItem extends StatelessWidget {
         child:Container(
           child:Row(
             children:[
-              EvaluationType(),
-              EvaluationName(),
+              EvaluationRewardType(rewardType: cardRewardModel.rewardType,),
+              EvaluationName(name: cardRewardModel.name,),
             ]
           )
         )
@@ -122,12 +130,18 @@ class EvaluationItem extends StatelessWidget {
   }
 }
 
-class EvaluationType extends StatelessWidget {
-  const EvaluationType({super.key});
-
+class EvaluationRewardType extends StatelessWidget {
+  const EvaluationRewardType({super.key, required this.rewardType});
+  
+  final int rewardType;
+  
   @override
   Widget build(BuildContext context) {
-    return Text('現金回饋',
+    
+    print(rewardType);
+    String rewardTypeName = RewardTypeName.get(rewardType);
+
+    return Text(rewardTypeName,
       style:TextStyle(
         color:Colors.cyan[900],
         fontSize: 20,
@@ -137,7 +151,9 @@ class EvaluationType extends StatelessWidget {
 }
 
 class EvaluationName extends StatelessWidget {
-  const EvaluationName({super.key});
+  const EvaluationName({super.key, required this.name});
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +161,7 @@ class EvaluationName extends StatelessWidget {
       width:270,
       padding: const EdgeInsets.only(left:20),
       child:
-        Text('優惠大比優惠大比優惠大比優惠大比優惠大比優惠大比優惠大比優惠大比優惠大比',
+        Text(name,
           style:TextStyle(
             color:Colors.cyan[900],
             fontSize: 18,

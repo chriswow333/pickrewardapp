@@ -10,12 +10,12 @@ class CardRewardToggleViewModel with ChangeNotifier {
 
   bool _showItemList = true;
 
-  int _rewardType = 0;
+  int _cardRewardType = 0;
   String _rewardID = "";
 
-  goToItem(int rewardType, String rewardID){
+  goToItem(int cardRewardType, String rewardID){
     _showItemList = false;
-    _rewardType = rewardType;
+    _cardRewardType = cardRewardType;
     _rewardID = rewardID;
     notifyListeners();
   }
@@ -28,6 +28,6 @@ class CardRewardToggleViewModel with ChangeNotifier {
   bool isShowItemList () => _showItemList;
 
   String rewardID() => _rewardID;
-  int rewardType() => _rewardType;
+  int cardRewardType() => _cardRewardType;
 
 }
