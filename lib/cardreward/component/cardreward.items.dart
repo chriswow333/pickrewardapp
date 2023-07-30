@@ -54,7 +54,7 @@ class ActivityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    CardRewardToggleViewModel toggleViewModel = Provider.of<CardRewardToggleViewModel>(context);
+    CardRewardSelectedViewModel selectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
 
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: double.infinity),
@@ -63,7 +63,7 @@ class ActivityItem extends StatelessWidget {
         padding:const EdgeInsets.only(bottom: 20),
         child:TextButton(
           onPressed: (){  
-            toggleViewModel.goToItem(cardRewardModel.rewardType, cardRewardModel.id);
+            selectedViewModel.goToCardRewardItem(cardRewardModel);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.white),
@@ -105,13 +105,13 @@ class EvaluationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    CardRewardToggleViewModel innverViewModel = Provider.of<CardRewardToggleViewModel>(context);
+    CardRewardSelectedViewModel cardRewardselectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
     return Container(
       height:100,
       padding:const EdgeInsets.only(bottom: 20),
       child:TextButton(
         onPressed: (){
-          innverViewModel.goToItem(cardRewardModel.rewardType, cardRewardModel.id);
+          cardRewardselectedViewModel.goToCardRewardItem(cardRewardModel);
         },
         style: ButtonStyle( 
           backgroundColor: MaterialStatePropertyAll(Colors.white),
@@ -137,10 +137,7 @@ class EvaluationRewardType extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    
-    print(rewardType);
     String rewardTypeName = RewardTypeName.get(rewardType);
-
     return Text(rewardTypeName,
       style:TextStyle(
         color:Colors.cyan[900],

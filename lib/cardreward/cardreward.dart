@@ -26,7 +26,7 @@ class CardContentScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top:50),
         child: MultiProvider(
           providers: [
-            ChangeNotifierProvider<CardRewardToggleViewModel>(create:(_)=>CardRewardToggleViewModel()),
+            ChangeNotifierProvider<CardRewardSelectedViewModel>(create:(_)=>CardRewardSelectedViewModel()),
             ChangeNotifierProvider<EvaluationProgressViewModel>(create:(_)=>EvaluationProgressViewModel()),
             ChangeNotifierProvider<CardViewModel>(create:(_)=>CardViewModel(cardItemModel)),
             ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardItemModel.id)),
@@ -66,19 +66,19 @@ class CardRewardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-    CardRewardToggleViewModel cardRewardInnerViewModel = Provider.of<CardRewardToggleViewModel>(context);
+    CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
 
     return Expanded(
       child:SingleChildScrollView(
         child:Column(
           children:[
-            if(cardRewardInnerViewModel.isShowItemList())
+            if(cardRewardSelectedViewModel.isShowItemList())
               RewardItems(),
-             if(!cardRewardInnerViewModel.isShowItemList() 
-                && cardRewardInnerViewModel.cardRewardType() == 0)
+             if(!cardRewardSelectedViewModel.isShowItemList() 
+                && cardRewardSelectedViewModel.cardRewardType() == 0)
               Activity(),
-            if(!cardRewardInnerViewModel.isShowItemList() 
-                && cardRewardInnerViewModel.cardRewardType() == 1)
+            if(!cardRewardSelectedViewModel.isShowItemList() 
+                && cardRewardSelectedViewModel.cardRewardType() == 1)
               Evaluation(),
            
           ]

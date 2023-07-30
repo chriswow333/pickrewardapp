@@ -2,23 +2,25 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 
 // enum CardContentEnum {ItemList, Item}
 
 
-class CardRewardToggleViewModel with ChangeNotifier {
+class CardRewardSelectedViewModel with ChangeNotifier {
 
   bool _showItemList = true;
 
-  int _cardRewardType = 0;
-  String _rewardID = "";
 
-  goToItem(int cardRewardType, String rewardID){
+  CardRewardModel? _selectedCardRewardModel;
+
+  goToCardRewardItem(CardRewardModel cardRewardModel){
+    _selectedCardRewardModel = cardRewardModel;
     _showItemList = false;
-    _cardRewardType = cardRewardType;
-    _rewardID = rewardID;
     notifyListeners();
   }
+
+  CardRewardModel? getSelectedCardRewardModel() => _selectedCardRewardModel;
 
   backToItems(){
     _showItemList = true;
@@ -26,8 +28,16 @@ class CardRewardToggleViewModel with ChangeNotifier {
   }
 
   bool isShowItemList () => _showItemList;
+  
+  String rewardID() {
+    if (_selectedCardRewardModel == null )return "";
+    return _selectedCardRewardModel!.id;
 
-  String rewardID() => _rewardID;
-  int cardRewardType() => _cardRewardType;
+  }
+
+  int cardRewardType(){
+    if (_selectedCardRewardModel == null) return 0;
+    return _selectedCardRewardModel!.cardRewardType;
+  }
 
 }

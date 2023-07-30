@@ -11,14 +11,14 @@ class CarTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardRewardToggleViewModel cardRewardInnerViewModel = Provider.of<CardRewardToggleViewModel>(context);
+    CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
 
     return Container(
       child:Row(
         children:[
           TextButton(
             onPressed: (){
-              cardRewardInnerViewModel.backToItems();
+              cardRewardSelectedViewModel.backToItems();
             },
             child:Text('卡片回饋',
               style:TextStyle(
