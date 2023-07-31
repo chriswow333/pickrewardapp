@@ -53,9 +53,9 @@ class CardRewardViewModel with ChangeNotifier {
           startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()),
           endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()), 
         ));
-        notifyListeners();
       }
-
+      
+      notifyListeners();
 
      } on GrpcError catch (e) {
       ///handle all grpc errors here

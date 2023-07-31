@@ -1,6 +1,12 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:provider/provider.dart';
 
 
 class EvaluationProgressChannel extends StatelessWidget {
@@ -8,6 +14,7 @@ class EvaluationProgressChannel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children:[
         ChannelCategoryTypes(),
@@ -21,17 +28,26 @@ class EvaluationProgressChannel extends StatelessWidget {
 class ChannelCategoryTypes extends StatelessWidget {
   const ChannelCategoryTypes({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    EvaluationRespProto? resp = evaluationViewModel.get();
+
+    if (resp == null) return Container();
+  
+    List<ChannelCategoryTypeProto> channelCategoryTypes = resp.channelCategoryTypes;
+    
+
     return Container(
       alignment: Alignment.centerLeft,
       child:SingleChildScrollView(
         scrollDirection:Axis.horizontal,
         child:Row(
           children:[
-            ChannelCategoryType(),
-            ChannelCategoryType(),
-            ChannelCategoryType(),
+            for(ChannelCategoryTypeProto c in channelCategoryTypes)
+              ChannelCategoryType(channelCategoryType: c),
             
           ]
         ),
@@ -41,16 +57,22 @@ class ChannelCategoryTypes extends StatelessWidget {
 }
 
 class ChannelCategoryType extends StatelessWidget {
-  const ChannelCategoryType({super.key});
-
+  const ChannelCategoryType({super.key, required this.channelCategoryType});
+  final ChannelCategoryTypeProto channelCategoryType;
+  
   @override
   Widget build(BuildContext context) {
+    
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        categoryViewModel.toggle(channelCategoryType.id);
+      },
       child:Column(
         children:[
-          ChannelCategoryTypeIcon(),
-          ChannelCategoryName(),
+          ChannelCategoryTypeIcon(id:channelCategoryType.id),
+          ChannelCategoryName(name:channelCategoryType.name),
         ]
       )
     );
@@ -59,8 +81,9 @@ class ChannelCategoryType extends StatelessWidget {
 
 
 class ChannelCategoryTypeIcon extends StatelessWidget {
-  const ChannelCategoryTypeIcon({super.key});
-
+  const ChannelCategoryTypeIcon({super.key, required this.id});
+  final int id;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,13 +97,13 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
 
 
 class ChannelCategoryName extends StatelessWidget {
-  const ChannelCategoryName({super.key});
-
+  const ChannelCategoryName({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
       child:Text(
-        '網路購物',
+        name,
         style: TextStyle(
           fontSize: 15,
           color: Colors.cyan[900],
@@ -95,6 +118,25 @@ class ChannelItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    EvaluationChannelCategoryViewModel categoryVideModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+    
+    int? selectedId = categoryVideModel.get();
+    if (selectedId == null )return Container();
+    
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    EvaluationRespProto? resp = evaluationViewModel.get();
+    if(resp == null)return Container();
+
+    List<ChannelProto> channelProtos = [];
+    for (ChannelEvaluationRespProto c in resp.channelEvaluationResps){
+      if (c.channelCategoryType == selectedId){
+        channelProtos = c.matches;
+        break;
+      }
+    }
+
     return Container(
       height:400,
       child:GridView.count(  
@@ -103,9 +145,8 @@ class ChannelItems extends StatelessWidget {
         mainAxisSpacing: 8.0,
         padding: EdgeInsets.zero,  
         children:[
-          ChannelItem(),
-          ChannelItem(),
-          ChannelItem(),
+          for (ChannelProto c in channelProtos) 
+            ChannelItem(channelProto: c,),
         ],
       ),
     );
@@ -114,7 +155,9 @@ class ChannelItems extends StatelessWidget {
 
 
 class ChannelItem extends StatelessWidget {
-  const ChannelItem({super.key});
+  const ChannelItem({super.key, required this.channelProto});
+  
+  final ChannelProto channelProto;
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +188,8 @@ class ChannelItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         child:Column(
           children:[
-            ChannelItemIcon(),
-            ChannelItemName(),
+            ChannelItemIcon(image: channelProto.image,),
+            ChannelItemName(name:channelProto.name),
           ],
         ),
       ),
@@ -157,16 +200,18 @@ class ChannelItem extends StatelessWidget {
 
 
 class ChannelItemIcon extends StatelessWidget {
-  const ChannelItemIcon({super.key});
+  const ChannelItemIcon({super.key, required this.image});
   
-  // final String image;
+  final String image;
   
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Icon(
-        Icons.ac_unit_rounded,
-        size: 40,
+     child:Image.memory(
+        gaplessPlayback: true,
+        base64Decode(image), 
+        width:70,
+        height:50,
       ),
       
     );
@@ -175,15 +220,15 @@ class ChannelItemIcon extends StatelessWidget {
 
 
 class ChannelItemName extends StatelessWidget {
-  const ChannelItemName({super.key});
-  // final String name;
+  const ChannelItemName({super.key, required this.name});
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.fitWidth, 
       child:Text(
-        'hello',
+        name,
         style: 
         TextStyle(
           color: Colors.teal[900],

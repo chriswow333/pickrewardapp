@@ -1,27 +1,21 @@
-
-
-
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/card/repository/pay/proto/generated/pay.pbgrpc.dart';
+import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pbgrpc.dart';
 
-class PayService {
+class EvaluationService {
 
-
-///here enter your host without the http part (e.g enter google.com now http://google.com)
+  ///here enter your host without the http part (e.g enter google.com now http://google.com)
   String baseUrl = "localhost";
-
-  PayService._internal();
+  EvaluationService._internal();
   
-  static final PayService _instance = PayService._internal();
+  static final EvaluationService _instance = EvaluationService._internal();
 
-  factory PayService() => _instance;
+  factory EvaluationService() => _instance;
 
   ///static HelloService instance that we will call when we want to make requests
-  static PayService get instance => _instance;
+  static EvaluationService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late PayClient _payClient;
+  late EvaluationClient _evaluationClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -30,8 +24,8 @@ class PayService {
   }
 
   ///provide public access to the HelloClient instance
-  PayClient get payClient {
-    return _payClient;
+  EvaluationClient get evaluationClient {
+    return _evaluationClient;
   }
 
   ///here we create a channel and use it to initialize the HelloClientthat was generated
@@ -40,6 +34,7 @@ class PayService {
     final channel = ClientChannel(
       baseUrl,
 
+      ///port: 9043,
       port: 50055,
 
       ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
@@ -52,9 +47,7 @@ class PayService {
         codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
       ),
     );
-    
-    _payClient = PayClient(channel);
+    _evaluationClient = EvaluationClient(channel);
 
   }
-
 }

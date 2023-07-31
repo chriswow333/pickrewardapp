@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.evaluate.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.task.dart';
+import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +15,24 @@ class EvaluationProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+
+    EvaluationRespProto? resp =  evaluationViewModel.get();
+    if (resp == null) return Container();
+    
+    bool hasTask = resp.taskEvaluationResp.matches.length != 0 
+      || resp.taskEvaluationResp.misMatches.length != 0;
+
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
         ChannelProgressItem(),
-        ProgressArrow(),
-        TaskProgressItem(),
+        if(hasTask)
+          ProgressArrow(),
+        if(hasTask)
+          TaskProgressItem(),
         ProgressArrow(),
         EvaluateProgressItem()
       ]
@@ -157,12 +171,17 @@ class ChannelProgressItem extends StatelessWidget {
 
 
 class EvaluationProgressContent extends StatelessWidget {
-  const EvaluationProgressContent({super.key});
+  const EvaluationProgressContent({super.key, required this.rewardID});
 
+  final String rewardID;
   @override
   Widget build(BuildContext context) {
     
     EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
+
+
+
+
 
     return Container(
       padding: const EdgeInsets.only(top:20),

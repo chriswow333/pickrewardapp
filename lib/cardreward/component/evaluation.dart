@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
 import 'package:pickrewardapp/shared/viewmodel/reward.type.dart';
 import 'package:provider/provider.dart';
+
 
 class Evaluation extends StatelessWidget {
   const Evaluation({super.key});
@@ -22,16 +25,24 @@ class Evaluation extends StatelessWidget {
     if (cardRewardModel == null) {
       return Container();
     }
-
+ 
     return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          EvaluationHeader(cardRewardModel: cardRewardModel,),
-          CardEvaluationDetails(cardRewardModel: cardRewardModel,),
-          EvaluationProgressContent(),
+      child:MultiProvider(
+        providers: [
+          ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel(cardRewardModel.id)),
+          ChangeNotifierProvider<EvaluationChannelCategoryViewModel>(create:(_)=>EvaluationChannelCategoryViewModel()),
+          ChangeNotifierProvider<ChannelSelectedViewModel>(create:(_)=>ChannelSelectedViewModel()),
         ],
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            EvaluationHeader(cardRewardModel: cardRewardModel,),
+            CardEvaluationDetails(cardRewardModel: cardRewardModel,),
+            EvaluationProgressContent(rewardID: cardRewardModel.id,),
+          ],
+        )
       )
+      
     );
   }
 }

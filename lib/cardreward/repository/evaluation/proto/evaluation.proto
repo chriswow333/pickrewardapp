@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+
+// option go_package = "pickrewardapi/api/evaluation/proto";
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.helloworld";
+// option java_outer_classname = "HelloWorldProto";
+
+package evaluation;
+
+// The greeting service definition.
+service Evaluation {
+
+  rpc ModifiedEvaluation(EvaluationProto) returns (Reply){}
+  rpc GetAllEvaluations(EmptyRequest) returns (EvaluationsReply){}
+  rpc GetEvaluationByID(EvaluationIDProto) returns (EvaluationReply){}
+  rpc GetEvaluationRespByOwnerID(EvaluationIDProto) returns (EvaluationRespReply){}
+}
+
+
+message EvaluationsReply{
+  Reply reply = 1;
+  repeated EvaluationProto evaluation = 2;
+}
+
+
+message EvaluationReply{
+  Reply reply = 1;
+  EvaluationProto evaluation = 2;
+}
+
+
+
+message EvaluationProto {
+  string id = 1;
+  int64 createDate = 2;
+  int64 updateDate = 3;
+  int64 startDate = 4;
+  int64 endDate = 5;
+  int32 currency = 6;
+  int32 rewardType = 7;
+  string ownerID = 8;
+  PayloadProto payload = 9;
+}
+
+message PayloadProto {
+  string id = 1;
+  int32 payloadOperator = 2;
+  int32 payloadType = 3;
+  FeedbackProto feedback = 4;
+  repeated PayloadProto payloads = 5;
+  ContainerProto container = 6;
+}
+
+
+message FeedbackProto {
+  int32 feedbackType = 1;
+  int32 calculateType = 2;
+  int32 minCost = 3;
+  int32 fixed = 4;
+  float percentage = 5;
+  float returnMax = 6;
+}
+
+message ContainerProto {
+  string id = 1;
+  int32 containerOperator = 2;
+  int32 containerType = 3;
+  ConstraintProto constraint = 4;
+  repeated ContainerProto containers = 5;
+  repeated string taskIDs = 6;
+  repeated string channelIDs = 7;
+  repeated string payIDs = 8;
+  repeated int32 labels = 9;
+}
+
+
+message ConstraintProto {
+  int32 constraintType = 1;
+  repeated int32 weekDays = 2;
+}
+
+message EvaluationIDProto {
+  string id = 1;
+}
+
+message EmptyRequest{}
+
+
+
+message EvaluationRespReply {
+  Reply reply = 1;
+  EvaluationRespProto evaluationResp = 2;
+}
+
+
+message EvaluationRespProto {
+  repeated ChannelCategoryTypeProto channelCategoryTypes = 1;
+  repeated ChannelEvaluationRespProto channelEvaluationResps = 2;
+  PayEvaluationRespProto payEvaluationResp = 3;
+  TaskEvaluationRespProto taskEvaluationResp = 4;
+  ConstraintsEvaluationRespProto constraintsEvaluationResp = 5;
+  LabelEvaluationRespProto labelEvaluationResp = 6;
+}
+
+message ChannelCategoryTypeProto {
+  int32 id = 1;
+  string name = 2;
+  int32 order = 3;
+}
+
+
+message ChannelEvaluationRespProto {
+  int32 channelCategoryType = 1;
+  repeated ChannelProto matches = 2;
+  repeated ChannelProto misMatches = 3;
+}
+
+message ChannelProto {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string linkURL = 4;
+  repeated string descriptions = 5;
+  int32 channelCategoryType = 6;
+  int64 createDate = 7;
+  int64 updateDate = 8;
+  repeated ChannelLabelProto channelLabels = 9;
+  int32 order = 10;
+  int32  channelStatus = 11;
+}
+
+message ChannelLabelProto {
+  int32 id = 1;
+  string name = 2;
+  int32 order = 3;
+}
+
+message PayEvaluationRespProto {
+  repeated PayProto matches = 1; 
+  repeated PayProto misMatches = 2;
+}
+
+
+message PayProto {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  repeated string descriptions = 4;
+  string linkURL = 5;
+  int64 createDate = 6;
+  int64 updateDate = 7;
+  int32 order = 8;
+  int32 payStatus = 9;
+}
+
+message TaskEvaluationRespProto {
+  repeated TaskProto matches = 1;
+  repeated TaskProto misMatches = 2;
+}
+
+message TaskProto {
+  string id = 1;
+  string name =2;
+  repeated TaskDescriptionProto descriptions = 3;
+  int32 taskOwner = 4;
+  string taskOwnerID = 5;
+  int64 createDate = 6;
+  int64 updateDate = 7;
+}
+
+message TaskDescriptionProto {
+  string name = 1;
+  repeated string desc = 2;
+  int32 order = 3;
+}
+
+
+message ConstraintsEvaluationRespProto {
+  repeated ConstraintEvaluationRespProto constraintEvaluationResps = 1;
+}
+
+message ConstraintEvaluationRespProto {
+  int32 constraintType = 1;
+  ConstraintProto contraint = 2;
+}
+
+message LabelEvaluationRespProto {
+  repeated LabelProto matches = 1;
+  repeated LabelProto misMatches = 2;
+}
+
+message LabelProto {
+  int32 id = 1;
+  string name = 2;
+}
+
+
+message Reply {
+  int32 status = 1;
+  Error error = 2;
+}
+
+
+message Error {
+  int32 errorCode = 1;
+  string errorMessage = 2;
+}
