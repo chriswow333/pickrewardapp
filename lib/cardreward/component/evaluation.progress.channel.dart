@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:provider/provider.dart';
 
 
@@ -25,8 +26,6 @@ class EvaluationProgressChannel extends StatelessWidget {
           LabelItems(),
         if(!categoryViewModel.isSelectedLabel())
           ChannelItems(),
-
-
       ]
     );
   }
@@ -207,7 +206,7 @@ class ChannelItems extends StatelessWidget {
     }
 
     return Container(
-      height:400,
+      height:350,
       child:GridView.count(  
         crossAxisCount: 4,  
         crossAxisSpacing: 8.0,  
@@ -254,10 +253,14 @@ class LabelItems extends StatelessWidget {
 
 class LabelItem extends StatelessWidget {
   const LabelItem({super.key, required this.label});
+  
   final LabelProto label;
 
   @override
   Widget build(BuildContext context) {
+
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+
     return TextButton(
       style:ButtonStyle(
         alignment: Alignment.center,
@@ -267,17 +270,19 @@ class LabelItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        side:MaterialStatePropertyAll(
+        side:evaluationSelectedViewModel.hasLabel(label.id)?
+        MaterialStatePropertyAll(
           BorderSide(
             color:Colors.teal[900]!,
             width: 1,
           )
-        ),
+        ):null,
         padding:const MaterialStatePropertyAll(
-          EdgeInsets.fromLTRB(0, 12, 0, 0),
+          EdgeInsets.fromLTRB(0, 15, 0, 0),
         ),
       ),
       onPressed:(){
+        evaluationSelectedViewModel.setLabel(label.id);
       },
       child:Container(
         alignment: Alignment.center,
@@ -322,6 +327,7 @@ class LabelItemIcon extends StatelessWidget {
     return Container(
       child:Icon(
         color:Colors.teal[700],
+        size:40,
         Icons.shopping_bag_sharp,
       )
     );
@@ -337,6 +343,8 @@ class ChannelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
     return TextButton(
       style:ButtonStyle(
         alignment: Alignment.center,
@@ -346,18 +354,19 @@ class ChannelItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        side:MaterialStatePropertyAll(
-          
-          BorderSide(
-            color:Colors.teal[900]!,
-            width: 1,
-          )
-        ),
+        side:evaluationSelectedViewModel.hasChannlID(channelProto.id)?
+          MaterialStatePropertyAll(
+            BorderSide(
+              color:Colors.teal[900]!,
+              width: 1,
+            )
+          ):null,
         padding:const MaterialStatePropertyAll(
           EdgeInsets.fromLTRB(0, 12, 0, 0),
         ),
       ),
       onPressed:(){
+        evaluationSelectedViewModel.setChannelID(channelProto.id);
       },
       child:Container(
         alignment: Alignment.center,

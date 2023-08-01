@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:provider/provider.dart';
 
 class EvaluationProgressTask extends StatelessWidget {
@@ -20,12 +21,15 @@ class EvaluationProgressTask extends StatelessWidget {
     List<TaskProto> matches = taskResp.matches;
 
     return Container(
-      child:Column(
-        children:[
-          for(TaskProto t in matches)
+      height:350,
+      child:SingleChildScrollView(
+        child:Column(
+          children:[
+            for(TaskProto t in matches)
             TaskItem(task:t),
-        ]
-      )
+          ]  
+        )
+      ),
     );
   }
 }
@@ -44,7 +48,7 @@ class TaskItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          TaskItemTitle(name:task.name),
+          TaskItemTitle(name:task.name, id:task.id),
           TaskItemDescs(descItems: descItems,),
         ]
       )
@@ -53,20 +57,25 @@ class TaskItem extends StatelessWidget {
 }
 
 class TaskItemTitle extends StatelessWidget {
-  const TaskItemTitle({super.key, required this.name,});
+  const TaskItemTitle({super.key, required this.name, required this.id});
 
   final String name;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
+
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+
     return Container(
       child:Row(
         children:[
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: true,
+            value: evaluationSelectedViewModel.hasTaskID(id),
             onChanged: (bool? value) {
+              evaluationSelectedViewModel.setTaskID(id);
             },
           ),
           Text(
