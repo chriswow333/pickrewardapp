@@ -178,11 +178,6 @@ class EvaluationProgressContent extends StatelessWidget {
   Widget build(BuildContext context) {
     
     EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
-
-
-
-
-
     return Container(
       padding: const EdgeInsets.only(top:20),
       child:Column(

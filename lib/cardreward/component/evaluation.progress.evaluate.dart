@@ -10,7 +10,9 @@ class EvaluationProgressEvaluate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         CardRewardEvaluationProgressPay(),
         CardRewardEvaluationProgressCost(),
@@ -27,19 +29,24 @@ class CardRewardEvaluationBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
-        shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
-        backgroundColor: MaterialStatePropertyAll(Colors.cyan[900]),
-      ),
-      onPressed: (){},
-      child:Text('試算回饋',
-        style: TextStyle(
-          fontSize: 25,
-          color:Colors.cyan[50],
-        ),
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:[
+        TextButton(
+          style: ButtonStyle(
+            padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
+            shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
+            backgroundColor: MaterialStatePropertyAll(Colors.cyan[900]),
+          ),
+          onPressed: (){},
+          child:Text('試算回饋',
+            style: TextStyle(
+              fontSize: 25,
+              color:Colors.cyan[50],
+            ),
+          ),
+        )
+      ]
     );
   }
 }

@@ -2,7 +2,12 @@
 
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:provider/provider.dart';
 
 class CardRewardEvaluationProgressPay extends StatelessWidget {
   const CardRewardEvaluationProgressPay({super.key});
@@ -19,8 +24,6 @@ class CardRewardEvaluationProgressPay extends StatelessWidget {
   }
 }
 
-
-
 class PayName extends StatelessWidget {
   const PayName({super.key});
 
@@ -35,25 +38,29 @@ class PayName extends StatelessWidget {
   }
 }
 
-
 class PayItems extends StatelessWidget {
   const PayItems({super.key});
 
   @override
   Widget build(BuildContext context) {
+        
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    EvaluationRespProto? resp = evaluationViewModel.get();
+
+    if (resp == null) return Container();
     
+    PayEvaluationRespProto payResp = resp.payEvaluationResp;
+    
+    List<PayProto> pays = payResp.matches;
 
     return SingleChildScrollView(
       scrollDirection:Axis.horizontal,
       child:Row(
-        children:[
-          PayItem(),
-          PayItem(),
-          PayItem(),
-          PayItem(),
-          PayItem(),
-          PayItem(),
-          PayItem(),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[ 
+          for(PayProto p in pays)
+            PayItem(pay:p),
 
         ]
       ),
@@ -61,11 +68,10 @@ class PayItems extends StatelessWidget {
   }
 }
 
-
-
-
 class PayItem extends StatelessWidget {
-  const PayItem({super.key});
+  const PayItem({super.key, required this.pay});
+  
+  final PayProto pay;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +88,7 @@ class PayItem extends StatelessWidget {
           BorderSide(
             color:Colors.teal[900]!,
             width: 1,
-          )
-          
+          ),
         ),
         padding:const MaterialStatePropertyAll(
           EdgeInsets.fromLTRB(5, 12, 5, 0),
@@ -92,35 +97,37 @@ class PayItem extends StatelessWidget {
       onPressed: () {  },
       child:Column(
         children:[
-          PayItemIcon(),
-          PayItemName(),
+          PayItemIcon(image:pay.image),
+          PayItemName(name:pay.name),
         ]
       )
     );
   }
 }
 
-
 class PayItemIcon extends StatelessWidget {
-  const PayItemIcon({super.key});
-
+  const PayItemIcon({super.key, required this.image});
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:70,
+     child:Image.memory(
+        gaplessPlayback: true,
+        base64Decode(image), 
+        width:70,
         height:50,
-      child:Icon(Icons.ac_unit_sharp),
+      ),
     );
   }
 }
 
 class PayItemName extends StatelessWidget {
-  const PayItemName({super.key});
-
+  const PayItemName({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('LINE PAY',
+      child:Text(name,
         style: 
         TextStyle(
           color: Colors.teal[900],

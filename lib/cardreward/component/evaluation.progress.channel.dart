@@ -15,10 +15,18 @@ class EvaluationProgressChannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+
     return Column(
       children:[
         ChannelCategoryTypes(),
-        ChannelItems(),
+        if(categoryViewModel.isSelectedLabel())
+          LabelItems(),
+        if(!categoryViewModel.isSelectedLabel())
+          ChannelItems(),
+
+
       ]
     );
   }
@@ -27,7 +35,6 @@ class EvaluationProgressChannel extends StatelessWidget {
 
 class ChannelCategoryTypes extends StatelessWidget {
   const ChannelCategoryTypes({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,9 @@ class ChannelCategoryTypes extends StatelessWidget {
     if (resp == null) return Container();
   
     List<ChannelCategoryTypeProto> channelCategoryTypes = resp.channelCategoryTypes;
-    
+        
+    LabelEvaluationRespProto labelResp = resp.labelEvaluationResp;
+    List<LabelProto> labels = labelResp.matches;
 
     return Container(
       alignment: Alignment.centerLeft,
@@ -46,6 +55,9 @@ class ChannelCategoryTypes extends StatelessWidget {
         scrollDirection:Axis.horizontal,
         child:Row(
           children:[
+            if (labels.isNotEmpty)
+              LabelCategoryType(),
+
             for(ChannelCategoryTypeProto c in channelCategoryTypes)
               ChannelCategoryType(channelCategoryType: c),
             
@@ -55,6 +67,63 @@ class ChannelCategoryTypes extends StatelessWidget {
     );
   }
 }
+
+class LabelCategoryType extends StatelessWidget {
+  const LabelCategoryType({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+
+    return TextButton(
+      onPressed: (){
+        categoryViewModel.selectedLabel();
+      },
+      child:Column(
+        children:[
+          LabelCategoryTypeIcon(),
+          LabelCategoryName(),
+        ]
+      )
+    );
+  }
+}
+
+
+class LabelCategoryTypeIcon extends StatelessWidget {
+  const LabelCategoryTypeIcon({super.key,});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Icon(
+        color:Colors.teal[700],
+        Icons.shopping_bag_sharp,
+      )
+    );
+  }
+}
+
+
+class LabelCategoryName extends StatelessWidget {
+  const LabelCategoryName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text(
+        '通路總覽',
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.cyan[900],
+        ),  
+      )
+    );
+  }
+}
+
+
+
 
 class ChannelCategoryType extends StatelessWidget {
   const ChannelCategoryType({super.key, required this.channelCategoryType});
@@ -153,6 +222,113 @@ class ChannelItems extends StatelessWidget {
   }
 }
 
+class LabelItems extends StatelessWidget {
+  const LabelItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    EvaluationRespProto? resp = evaluationViewModel.get();
+    if(resp == null)return Container();
+
+    LabelEvaluationRespProto labelResp = resp.labelEvaluationResp;
+    List<LabelProto> labels = labelResp.matches;
+
+    return Container(
+      height:400,
+      child:GridView.count(  
+        crossAxisCount: 4,  
+        crossAxisSpacing: 8.0,  
+        mainAxisSpacing: 8.0,
+        padding: EdgeInsets.zero,  
+        children:[
+          for (LabelProto l in labels) 
+          LabelItem(label: l,)
+        ],
+      ),
+    );
+  }
+}
+
+
+class LabelItem extends StatelessWidget {
+  const LabelItem({super.key, required this.label});
+  final LabelProto label;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style:ButtonStyle(
+        alignment: Alignment.center,
+        splashFactory:NoSplash.splashFactory,
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        side:MaterialStatePropertyAll(
+          BorderSide(
+            color:Colors.teal[900]!,
+            width: 1,
+          )
+        ),
+        padding:const MaterialStatePropertyAll(
+          EdgeInsets.fromLTRB(0, 12, 0, 0),
+        ),
+      ),
+      onPressed:(){
+      },
+      child:Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        child:Column(
+          children:[
+            LabelItemIcon(),
+            LabelItemName(name:label.name),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class LabelItemName extends StatelessWidget {
+  const LabelItemName({super.key, required this.name,});
+  final String name;
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.fitWidth, 
+      child:Text(
+        name,
+        style: 
+        TextStyle(
+          color: Colors.teal[900],
+        ),
+      )
+    );
+  }
+}
+
+
+class LabelItemIcon extends StatelessWidget {
+  const LabelItemIcon({super.key});
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Icon(
+        color:Colors.teal[700],
+        Icons.shopping_bag_sharp,
+      )
+    );
+  }
+}
+
+
 
 class ChannelItem extends StatelessWidget {
   const ChannelItem({super.key, required this.channelProto});
@@ -213,11 +389,9 @@ class ChannelItemIcon extends StatelessWidget {
         width:70,
         height:50,
       ),
-      
     );
   }
 }
-
 
 class ChannelItemName extends StatelessWidget {
   const ChannelItemName({super.key, required this.name});
