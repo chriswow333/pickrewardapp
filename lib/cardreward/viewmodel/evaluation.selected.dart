@@ -12,6 +12,8 @@ class EvaluationSelectedViewModel with ChangeNotifier {
   DateTime _costDate = DateTime.now();
   int _cost = 1000;
 
+
+
   setChannelID(String channelID) {
     if(_channelIDs.contains(channelID)){
       _channelIDs.remove(channelID);
@@ -80,6 +82,7 @@ class EvaluationSelectedViewModel with ChangeNotifier {
 
 
   setCost(int cost){
+    print(cost);
     _cost = cost;
     notifyListeners();
   }

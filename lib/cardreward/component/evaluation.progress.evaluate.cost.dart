@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:provider/provider.dart';
 
 class CardRewardEvaluationProgressCost extends StatelessWidget {
   const CardRewardEvaluationProgressCost({super.key});
@@ -7,13 +10,14 @@ class CardRewardEvaluationProgressCost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return Container(
-      padding:const EdgeInsets.only(top:20),
+      padding:const EdgeInsets.only(top:10),
       child:Row(
         children:[
           CostName(),
           SizedBox(width:20),
-          CostField(),
+          Cost(),
         ]
       )
     );
@@ -36,17 +40,35 @@ class CostName extends StatelessWidget {
 }
 
 
+class Cost extends StatefulWidget {
+  const Cost({super.key});
 
-class CostField extends StatelessWidget {
-  const CostField({super.key});
+  @override
+  State<Cost> createState() => _CostState();
+}
+
+class _CostState extends State<Cost> {
+
+  TextEditingController _controller= new TextEditingController(text: '1000');
+  
 
   @override
   Widget build(BuildContext context) {
+    
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+    
     return SizedBox(
-      width:250,
+      width:150,
       child:TextField(
-        controller: TextEditingController(),
-        // obscureText: true,
+        controller: _controller,
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ], //
+        onChanged: (text){
+          int intVal = int.parse(text);
+          evaluationSelectedViewModel.setCost(intVal);
+        },
         decoration:InputDecoration(
           // border: OutlineInputBorder(),
           // labelText:dsd 'Password',

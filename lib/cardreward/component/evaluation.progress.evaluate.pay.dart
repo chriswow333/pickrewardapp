@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:provider/provider.dart';
 
 class CardRewardEvaluationProgressPay extends StatelessWidget {
@@ -75,6 +76,9 @@ class PayItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+
     return TextButton(
       style:ButtonStyle(
         alignment: Alignment.center,
@@ -84,30 +88,39 @@ class PayItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        side:MaterialStatePropertyAll(
+        side:evaluationSelectedViewModel.hasPayID(pay.id) ?
+        MaterialStatePropertyAll(
           BorderSide(
             color:Colors.teal[900]!,
             width: 1,
           ),
-        ),
+        ) :null,
         padding:const MaterialStatePropertyAll(
-          EdgeInsets.fromLTRB(5, 12, 5, 0),
+          EdgeInsets.fromLTRB(12, 12, 12, 12),
         ),
       ),
-      onPressed: () {  },
-      child:Column(
-        children:[
-          PayItemIcon(image:pay.image),
-          PayItemName(name:pay.name),
-        ]
-      )
+      onPressed: () {  
+        evaluationSelectedViewModel.setPayID(pay.id);
+      },
+      child:Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        child:Column(
+          children:[
+            PayItemIcon(image:pay.image),
+            PayItemName(name:pay.name),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class PayItemIcon extends StatelessWidget {
   const PayItemIcon({super.key, required this.image});
+  
   final String image;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -126,10 +139,11 @@ class PayItemName extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Text(name,
-        style: 
-        TextStyle(
+    return FittedBox(
+      fit: BoxFit.fitWidth, 
+      child:Text(
+        name,
+        style:TextStyle(
           color: Colors.teal[900],
         ),
       )

@@ -49,6 +49,10 @@ dependencies:
   localstorage: ^4.0.0+1
   syncfusion_flutter_datepicker: ^21.2.10
   flutter_form_builder: ^9.1.0
+  flutter_localizations:
+    sdk: flutter  
+  intl: any
+
 
 dev_dependencies:
   flutter_test:

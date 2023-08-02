@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/card.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() {
   runApp(const PickRewardApp());
 }
@@ -16,6 +18,15 @@ class PickRewardApp extends StatelessWidget {
       theme:ThemeData(
         primarySwatch: Colors.teal,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        // Locale('en'), // English
+        Locale('zh')
+      ],
       initialRoute:'/card',
       routes:{
         '/': (context)=> const HomePage(),

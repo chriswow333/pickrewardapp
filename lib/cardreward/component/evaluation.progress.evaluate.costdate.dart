@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:provider/provider.dart';
+
+
 
 class CardRewardEvaluationProgressCostDate extends StatelessWidget {
   const CardRewardEvaluationProgressCostDate({super.key});
@@ -9,11 +13,11 @@ class CardRewardEvaluationProgressCostDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(top:20),
+      padding:const EdgeInsets.only(top:10),
       child:Row(
         children:[
           CostDateName(),
-          CostDateField(),
+          CostDate(),
         ]
       ),
     );
@@ -36,27 +40,31 @@ class CostDateName extends StatelessWidget {
 }
 
 
-final DateFormat formatter = DateFormat('yyyy-MM-dd');
+final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
 
 
-class CostDateField extends StatefulWidget {
-  const CostDateField({super.key});
 
-  @override
-  State<CostDateField> createState() => _CostDateFieldState();
-}
+class CostDate extends StatelessWidget {
+  const CostDate({super.key});
 
-class _CostDateFieldState extends State<CostDateField> {
   @override
   Widget build(BuildContext context) {
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+    
+    DateTime costDate = evaluationSelectedViewModel.getCostDate();
+
     return TextButton(
       onPressed: (){
         Future<DateTime?> value = onShowPicker(context, DateTime.now());
         value.then((value) => 
-          print(value!)
+          evaluationSelectedViewModel.setCostDate(value!)
         );
       },
-      child:Text('click')
+      child:Text(formatter.format(costDate),
+        style:TextStyle(
+          color: Colors.teal[900],
+        ),
+      )
     );
   }
 
@@ -92,14 +100,16 @@ class _CostDateFieldState extends State<CostDateField> {
       // textDirection: widget.textDirection,
       // useRootNavigator: widget.useRootNavigator,
       // builder: widget.transitionBuilder,
-      // cancelText: widget.cancelText,
-      // confirmText: widget.confirmText,
-      // errorFormatText: widget.errorFormatText,
-      // errorInvalidText: widget.errorInvalidText,
-      // fieldHintText: widget.fieldHintText,
-      // fieldLabelText: widget.fieldLabelText,
-      // helpText: widget.helpText,
-      // initialEntryMode: widget.initialEntryMode,
+      cancelText: '取消',
+      confirmText: '確認',
+      locale:const Locale('zh'),
+      errorFormatText: '格式有誤',
+      errorInvalidText: '請輸入正確格式',
+      fieldHintText: 'widget.fieldHintText',
+      fieldLabelText: '消費日期',
+      helpText: '請輸入消費日期',
+      initialEntryMode: DatePickerEntryMode.input,
+      keyboardType:TextInputType.number,
       // routeSettings: widget.routeSettings,
       // currentDate: widget.currentDate,
       // anchorPoint: widget.anchorPoint,
@@ -129,10 +139,12 @@ class _CostDateFieldState extends State<CostDateField> {
       // builder: builder,
       // useRootNavigator: widget.useRootNavigator,
       // routeSettings: widget.routeSettings,
-      // initialEntryMode: widget.timePickerInitialEntryMode,
-      // helpText: widget.helpText,
-      // confirmText: widget.confirmText,
-      // cancelText: widget.cancelText,
+      initialEntryMode: TimePickerEntryMode.input,
+      helpText: '請輸入時間',
+      confirmText: '確認',
+      cancelText: '取消',
+      hourLabelText:'小時',
+      minuteLabelText:'分鐘',
       // anchorPoint: widget.anchorPoint,
       // errorInvalidText: widget.errorInvalidText,
       // onEntryModeChanged: widget.onEntryModeChanged,
@@ -148,4 +160,45 @@ class _CostDateFieldState extends State<CostDateField> {
   DateTime? convert(TimeOfDay? time) =>
       time == null ? null : DateTime(1, 1, 1, time.hour, time.minute);
 
+
+
+
+
+
+
 }
+
+// class CostDateField extends StatefulWidget {
+//   const CostDateField({super.key});
+
+//   @override
+//   State<CostDateField> createState() => _CostDateFieldState();
+// }
+
+// class _CostDateFieldState extends State<CostDateField> {
+
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+    
+//     DateTime costDate = evaluationSelectedViewModel.getCostDate();
+
+//     return TextButton(
+//       onPressed: (){
+//         Future<DateTime?> value = onShowPicker(context, DateTime.now());
+//         value.then((value) => 
+//           evaluationSelectedViewModel.setCostDate(value!)
+//         );
+//       },
+//       child:Text(formatter.format(costDate),
+//         style:TextStyle(
+//           color: Colors.teal[900],
+//         ),
+//       )
+//     );
+//   }
+
+
+// }
