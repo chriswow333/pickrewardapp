@@ -48,10 +48,41 @@ message CardRewardProto {
   int64 updateDate = 6;
   int64 startDate = 7;
   int64 endDate = 8;
-  int32 currency = 9;
-  int32 rewardType = 10;
-  int32 cardRewardType = 11;
+  int32 cardRewardType = 9;
+  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 10;
+  CardRewardTypeEvaluationProto cardRewardTypeEvaluation = 11;
   int32 order = 12;
+}
+
+message CardRewardTypeEvaluationRespProto{
+  RewardProto reward = 1;
+  CurrencyProto currency = 2;
+  PointProto point = 3;
+}
+
+
+message RewardProto {
+  int32 rewardType = 1;
+  string rewardName = 2;
+
+}
+
+message CurrencyProto {
+  int32 currencyType = 1;
+  string currencyName = 2;
+}
+
+
+message PointProto {
+  int32 pointType = 1;
+  string pointName = 2;
+
+}
+
+message CardRewardTypeEvaluationProto {
+  int32 rewardType = 1;
+  int32 currencyType = 2;
+  int32 pointType = 3;
 }
 
 message CardRewardDescriptionProto {

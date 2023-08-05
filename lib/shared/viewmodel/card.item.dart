@@ -30,7 +30,7 @@ class CardItemViewModel with ChangeNotifier {
 
       try {
 
-        final bankIDProto = BandIDProto();
+        final bankIDProto = BankIDProto();
 
         bankIDProto.id = bankID;
 
@@ -50,7 +50,6 @@ class CardItemViewModel with ChangeNotifier {
           _cardItemModels[bankID] = cardItemModels;
 
         }     
-
       } on GrpcError catch (e) {
         ///handle all grpc errors here
         ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...

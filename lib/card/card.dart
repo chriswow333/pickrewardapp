@@ -25,7 +25,6 @@ class CardPage extends StatelessWidget {
         ChangeNotifierProvider<BankViewModel>(create:(_)=>BankViewModel()),
         ChangeNotifierProvider<ToggleSwitchViewModel>(create:(_)=>ToggleSwitchViewModel()),
         ChangeNotifierProvider<ChannelProgressViewModel>(create:(_)=>ChannelProgressViewModel()),
-
         ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
         ChangeNotifierProvider<RewardSelectedViewModel>(create:(_)=>RewardSelectedViewModel()),
@@ -47,8 +46,6 @@ class CardReward extends StatelessWidget {
     ToggleSwitchViewModel toggleSwitchViewModel = Provider.of<ToggleSwitchViewModel>(context);
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
     channelViewModel.fetchChannelCategoryTypeModels();
-
-
 
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -42,19 +42,27 @@ class CardRewardViewModel with ChangeNotifier {
           ));
         }
 
+        CardRewardTypeEvaluationResp cardRewardTypeEvaluationResp = CardRewardTypeEvaluationResp(
+          reward: toReward(c.cardRewardTypeEvaluationResp.reward),
+          currency: toCurrency(c.cardRewardTypeEvaluationResp.currency),
+          point: toPoint(c.cardRewardTypeEvaluationResp.point),
+        );
+
+
         _cardRewardModels.add(CardRewardModel(
           id: c.id,
           cardID: c.cardID,
           name:c.name,
           cardRewardDesc:descModels,
-          currency:c.currency,
           cardRewardType: c.cardRewardType,
-          rewardType:c.rewardType,
+          cardRewardTypeEvaluationResp: cardRewardTypeEvaluationResp,
           startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()),
           endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()), 
         ));
+
       }
-      
+
+          
       notifyListeners();
 
      } on GrpcError catch (e) {
@@ -67,6 +75,19 @@ class CardRewardViewModel with ChangeNotifier {
     }
 
   }
+
+  Reward toReward(RewardProto reward){
+    return Reward(rewardType: reward.rewardType, rewardName: reward.rewardName);
+  }
+  
+  Currency toCurrency(CurrencyProto currency){
+    return Currency(currencyType: currency.currencyType, currencyName: currency.currencyName);
+  }
+
+  Point toPoint(PointProto point){
+    return Point(pointType: point.pointType, pointName: point.pointName);
+  }
+
 }
 
 
@@ -83,9 +104,8 @@ class CardRewardModel {
   final String cardID;
   final String name;
   final List<CardRewardDescModel> cardRewardDesc;
-  final int currency;
   final int cardRewardType;
-  final int rewardType;
+  final CardRewardTypeEvaluationResp cardRewardTypeEvaluationResp;
   final int order;
   final DateTime createDate;
   final DateTime updateDate;
@@ -97,15 +117,43 @@ class CardRewardModel {
     required this.cardID,
     required this.name,
     required this.cardRewardDesc,
-    required this.currency,
     required this.cardRewardType,
-    required this.rewardType,
+    required this.cardRewardTypeEvaluationResp,
     required this.startDate,
     required this.endDate,
   }):createDate=DateTime.now(), updateDate=DateTime.now(), order = 0;
 
 }
 
+
+class CardRewardTypeEvaluationResp {
+  final Reward reward;
+  final Currency currency;
+  final Point point;
+
+  CardRewardTypeEvaluationResp({required this.reward,required  this.currency,required  this.point});
+}
+
+class Reward {
+  
+  final int rewardType;
+  final String rewardName;
+
+  Reward({required this.rewardType, required this.rewardName});
+}
+
+class Currency {
+
+  final int currencyType;
+  final String currencyName;
+  Currency({required this.currencyType, required this.currencyName});
+}
+
+class Point {
+  final int pointType;
+  final String pointName;
+  Point({required this.pointType, required this.pointName});
+}
 
 class CardRewardDescModel {
   

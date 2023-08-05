@@ -26,7 +26,7 @@ class EvaluationProgressTask extends StatelessWidget {
         child:Column(
           children:[
             for(TaskProto t in matches)
-            TaskItem(task:t),
+              TaskItem(task:t),
           ]  
         )
       ),
@@ -68,26 +68,32 @@ class TaskItemTitle extends StatelessWidget {
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
 
     return Container(
-      child:Row(
-        children:[
-          Checkbox(
-            checkColor: Colors.white,
-            fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: evaluationSelectedViewModel.hasTaskID(id),
-            onChanged: (bool? value) {
-              evaluationSelectedViewModel.setTaskID(id);
-            },
-          ),
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.cyan[900],
-              fontWeight: FontWeight.bold,
-            ),  
-          )
-        ]
-      )
+      child:TextButton(
+        style:const ButtonStyle(
+         splashFactory:NoSplash.splashFactory,
+        ),
+        onPressed: (){
+          evaluationSelectedViewModel.setTaskID(id);
+        },
+        child:Row(
+          children:[
+            Checkbox(
+              checkColor: Colors.white,
+              fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
+              value: evaluationSelectedViewModel.hasTaskID(id),
+              onChanged: (bool? value) {},
+            ),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.cyan[900],
+                fontWeight: FontWeight.bold,
+              ),  
+            )
+          ]
+        )
+      ),
     ); 
   }
 }
@@ -103,11 +109,9 @@ class TaskItemDescs extends StatelessWidget {
     return Container(
       padding:const EdgeInsets.only(left:40),
       child:Column(
-        
         children:[
           for(TaskDescriptionProto d in descItems)
             TaskItemDesc(desc:d),
-
         ]
       )
     );
