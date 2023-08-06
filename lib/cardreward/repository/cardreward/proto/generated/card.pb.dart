@@ -663,9 +663,7 @@ class CardEventProto extends $pb.GeneratedMessage {
   factory CardEventProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardEventProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
-    ..aOS(2, _omitFieldNames ? '' : 'rewardID', protoName: 'rewardID')
-    ..aOM<EventProto>(3, _omitFieldNames ? '' : 'event', subBuilder: EventProto.create)
+    ..aOM<EventProto>(1, _omitFieldNames ? '' : 'event', subBuilder: EventProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -691,33 +689,15 @@ class CardEventProto extends $pb.GeneratedMessage {
   static CardEventProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get cardID => $_getSZ(0);
+  EventProto get event => $_getN(0);
   @$pb.TagNumber(1)
-  set cardID($core.String v) { $_setString(0, v); }
+  set event(EventProto v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCardID() => $_has(0);
+  $core.bool hasEvent() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCardID() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get rewardID => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set rewardID($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasRewardID() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearRewardID() => clearField(2);
-
-  @$pb.TagNumber(3)
-  EventProto get event => $_getN(2);
-  @$pb.TagNumber(3)
-  set event(EventProto v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasEvent() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearEvent() => clearField(3);
-  @$pb.TagNumber(3)
-  EventProto ensureEvent() => $_ensure(2);
+  void clearEvent() => clearField(1);
+  @$pb.TagNumber(1)
+  EventProto ensureEvent() => $_ensure(0);
 }
 
 class EventProto extends $pb.GeneratedMessage {
@@ -727,13 +707,16 @@ class EventProto extends $pb.GeneratedMessage {
   factory EventProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'currency', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
-    ..pPS(5, _omitFieldNames ? '' : 'channels')
-    ..pPS(6, _omitFieldNames ? '' : 'tasks')
-    ..pPS(7, _omitFieldNames ? '' : 'pays')
+    ..aOS(1, _omitFieldNames ? '' : 'evaluationID', protoName: 'evaluationID')
+    ..pPS(2, _omitFieldNames ? '' : 'taskIDs', protoName: 'taskIDs')
+    ..pPS(3, _omitFieldNames ? '' : 'payIDs', protoName: 'payIDs')
+    ..pPS(4, _omitFieldNames ? '' : 'channelIDs', protoName: 'channelIDs')
+    ..p<$core.int>(5, _omitFieldNames ? '' : 'labels', $pb.PbFieldType.K3)
+    ..aInt64(6, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate')
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'currencyType', $pb.PbFieldType.O3, protoName: 'currencyType')
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'pointType', $pb.PbFieldType.O3, protoName: 'pointType')
     ..hasRequiredFields = false
   ;
 
@@ -759,60 +742,81 @@ class EventProto extends $pb.GeneratedMessage {
   static EventProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get eventDate => $_getI64(0);
+  $core.String get evaluationID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set eventDate($fixnum.Int64 v) { $_setInt64(0, v); }
+  set evaluationID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasEventDate() => $_has(0);
+  $core.bool hasEvaluationID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearEventDate() => clearField(1);
+  void clearEvaluationID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get cost => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set cost($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCost() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCost() => clearField(2);
+  $core.List<$core.String> get taskIDs => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.int get currency => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set currency($core.int v) { $_setSignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasCurrency() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearCurrency() => clearField(3);
+  $core.List<$core.String> get payIDs => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.int get rewardType => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set rewardType($core.int v) { $_setSignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasRewardType() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearRewardType() => clearField(4);
+  $core.List<$core.String> get channelIDs => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.List<$core.String> get channels => $_getList(4);
+  $core.List<$core.int> get labels => $_getList(4);
 
   @$pb.TagNumber(6)
-  $core.List<$core.String> get tasks => $_getList(5);
+  $fixnum.Int64 get eventDate => $_getI64(5);
+  @$pb.TagNumber(6)
+  set eventDate($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEventDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEventDate() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.List<$core.String> get pays => $_getList(6);
+  $core.int get cost => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set cost($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCost() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCost() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.int get currencyType => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set currencyType($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCurrencyType() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCurrencyType() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.int get rewardType => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set rewardType($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasRewardType() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearRewardType() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.int get pointType => $_getIZ(9);
+  @$pb.TagNumber(10)
+  set pointType($core.int v) { $_setSignedInt32(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasPointType() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearPointType() => clearField(10);
 }
 
-class EvaluateProtoReply extends $pb.GeneratedMessage {
-  factory EvaluateProtoReply() => create();
-  EvaluateProtoReply._() : super();
-  factory EvaluateProtoReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EvaluateProtoReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class EvaluateCardRewardsProtoReply extends $pb.GeneratedMessage {
+  factory EvaluateCardRewardsProtoReply() => create();
+  EvaluateCardRewardsProtoReply._() : super();
+  factory EvaluateCardRewardsProtoReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EvaluateCardRewardsProtoReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateProtoReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateCardRewardsProtoReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
-    ..pc<CardEventResultProto>(2, _omitFieldNames ? '' : 'cardEventResults', $pb.PbFieldType.PM, protoName: 'cardEventResults', subBuilder: CardEventResultProto.create)
+    ..pc<CardRewardEventResultProto>(2, _omitFieldNames ? '' : 'cardRewardEventResults', $pb.PbFieldType.PM, protoName: 'cardRewardEventResults', subBuilder: CardRewardEventResultProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -820,22 +824,22 @@ class EvaluateProtoReply extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EvaluateProtoReply clone() => EvaluateProtoReply()..mergeFromMessage(this);
+  EvaluateCardRewardsProtoReply clone() => EvaluateCardRewardsProtoReply()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EvaluateProtoReply copyWith(void Function(EvaluateProtoReply) updates) => super.copyWith((message) => updates(message as EvaluateProtoReply)) as EvaluateProtoReply;
+  EvaluateCardRewardsProtoReply copyWith(void Function(EvaluateCardRewardsProtoReply) updates) => super.copyWith((message) => updates(message as EvaluateCardRewardsProtoReply)) as EvaluateCardRewardsProtoReply;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EvaluateProtoReply create() => EvaluateProtoReply._();
-  EvaluateProtoReply createEmptyInstance() => create();
-  static $pb.PbList<EvaluateProtoReply> createRepeated() => $pb.PbList<EvaluateProtoReply>();
+  static EvaluateCardRewardsProtoReply create() => EvaluateCardRewardsProtoReply._();
+  EvaluateCardRewardsProtoReply createEmptyInstance() => create();
+  static $pb.PbList<EvaluateCardRewardsProtoReply> createRepeated() => $pb.PbList<EvaluateCardRewardsProtoReply>();
   @$core.pragma('dart2js:noInline')
-  static EvaluateProtoReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EvaluateProtoReply>(create);
-  static EvaluateProtoReply? _defaultInstance;
+  static EvaluateCardRewardsProtoReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EvaluateCardRewardsProtoReply>(create);
+  static EvaluateCardRewardsProtoReply? _defaultInstance;
 
   @$pb.TagNumber(1)
   Reply get reply => $_getN(0);
@@ -849,18 +853,19 @@ class EvaluateProtoReply extends $pb.GeneratedMessage {
   Reply ensureReply() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<CardEventResultProto> get cardEventResults => $_getList(1);
+  $core.List<CardRewardEventResultProto> get cardRewardEventResults => $_getList(1);
 }
 
-class CardEventResultProto extends $pb.GeneratedMessage {
-  factory CardEventResultProto() => create();
-  CardEventResultProto._() : super();
-  factory CardEventResultProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CardEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class CardRewardEventResultProto extends $pb.GeneratedMessage {
+  factory CardRewardEventResultProto() => create();
+  CardRewardEventResultProto._() : super();
+  factory CardRewardEventResultProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardRewardEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
-    ..aOM<RewardEventResultProto>(2, _omitFieldNames ? '' : 'rewardEventResult', protoName: 'rewardEventResult', subBuilder: RewardEventResultProto.create)
+    ..aOM<CardRewardEvaluationEventResultProto>(2, _omitFieldNames ? '' : 'cardRewardEvaluationEventResult', protoName: 'cardRewardEvaluationEventResult', subBuilder: CardRewardEvaluationEventResultProto.create)
+    ..aOM<EvaluationEventResultRespProto>(3, _omitFieldNames ? '' : 'rewardEventResult', protoName: 'rewardEventResult', subBuilder: EvaluationEventResultRespProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -868,22 +873,22 @@ class CardEventResultProto extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  CardEventResultProto clone() => CardEventResultProto()..mergeFromMessage(this);
+  CardRewardEventResultProto clone() => CardRewardEventResultProto()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  CardEventResultProto copyWith(void Function(CardEventResultProto) updates) => super.copyWith((message) => updates(message as CardEventResultProto)) as CardEventResultProto;
+  CardRewardEventResultProto copyWith(void Function(CardRewardEventResultProto) updates) => super.copyWith((message) => updates(message as CardRewardEventResultProto)) as CardRewardEventResultProto;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static CardEventResultProto create() => CardEventResultProto._();
-  CardEventResultProto createEmptyInstance() => create();
-  static $pb.PbList<CardEventResultProto> createRepeated() => $pb.PbList<CardEventResultProto>();
+  static CardRewardEventResultProto create() => CardRewardEventResultProto._();
+  CardRewardEventResultProto createEmptyInstance() => create();
+  static $pb.PbList<CardRewardEventResultProto> createRepeated() => $pb.PbList<CardRewardEventResultProto>();
   @$core.pragma('dart2js:noInline')
-  static CardEventResultProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardEventResultProto>(create);
-  static CardEventResultProto? _defaultInstance;
+  static CardRewardEventResultProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardRewardEventResultProto>(create);
+  static CardRewardEventResultProto? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -895,15 +900,276 @@ class CardEventResultProto extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  RewardEventResultProto get rewardEventResult => $_getN(1);
+  CardRewardEvaluationEventResultProto get cardRewardEvaluationEventResult => $_getN(1);
   @$pb.TagNumber(2)
-  set rewardEventResult(RewardEventResultProto v) { setField(2, v); }
+  set cardRewardEvaluationEventResult(CardRewardEvaluationEventResultProto v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasRewardEventResult() => $_has(1);
+  $core.bool hasCardRewardEvaluationEventResult() => $_has(1);
   @$pb.TagNumber(2)
-  void clearRewardEventResult() => clearField(2);
+  void clearCardRewardEvaluationEventResult() => clearField(2);
   @$pb.TagNumber(2)
-  RewardEventResultProto ensureRewardEventResult() => $_ensure(1);
+  CardRewardEvaluationEventResultProto ensureCardRewardEvaluationEventResult() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  EvaluationEventResultRespProto get rewardEventResult => $_getN(2);
+  @$pb.TagNumber(3)
+  set rewardEventResult(EvaluationEventResultRespProto v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRewardEventResult() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRewardEventResult() => clearField(3);
+  @$pb.TagNumber(3)
+  EvaluationEventResultRespProto ensureRewardEventResult() => $_ensure(2);
+}
+
+class CardRewardEvaluationEventResultProto extends $pb.GeneratedMessage {
+  factory CardRewardEvaluationEventResultProto() => create();
+  CardRewardEvaluationEventResultProto._() : super();
+  factory CardRewardEvaluationEventResultProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardRewardEvaluationEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
+    ..aOS(2, _omitFieldNames ? '' : 'cardName', protoName: 'cardName')
+    ..aOS(3, _omitFieldNames ? '' : 'cardImage', protoName: 'cardImage')
+    ..aOS(4, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
+    ..aOS(5, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
+    ..aInt64(6, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
+    ..aInt64(7, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
+    ..aOM<CardRewardTypeEvaluationRespProto>(8, _omitFieldNames ? '' : 'cardRewardTypeEvaluationResp', protoName: 'cardRewardTypeEvaluationResp', subBuilder: CardRewardTypeEvaluationRespProto.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardRewardEvaluationEventResultProto clone() => CardRewardEvaluationEventResultProto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardRewardEvaluationEventResultProto copyWith(void Function(CardRewardEvaluationEventResultProto) updates) => super.copyWith((message) => updates(message as CardRewardEvaluationEventResultProto)) as CardRewardEvaluationEventResultProto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardRewardEvaluationEventResultProto create() => CardRewardEvaluationEventResultProto._();
+  CardRewardEvaluationEventResultProto createEmptyInstance() => create();
+  static $pb.PbList<CardRewardEvaluationEventResultProto> createRepeated() => $pb.PbList<CardRewardEvaluationEventResultProto>();
+  @$core.pragma('dart2js:noInline')
+  static CardRewardEvaluationEventResultProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardRewardEvaluationEventResultProto>(create);
+  static CardRewardEvaluationEventResultProto? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get cardID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set cardID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCardID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCardID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get cardName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set cardName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCardName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCardName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get cardImage => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set cardImage($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCardImage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCardImage() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get bankID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set bankID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasBankID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBankID() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get bankName => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set bankName($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBankName() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBankName() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get cardRewardStartDate => $_getI64(5);
+  @$pb.TagNumber(6)
+  set cardRewardStartDate($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasCardRewardStartDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCardRewardStartDate() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get cardRewardEndDate => $_getI64(6);
+  @$pb.TagNumber(7)
+  set cardRewardEndDate($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCardRewardEndDate() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCardRewardEndDate() => clearField(7);
+
+  @$pb.TagNumber(8)
+  CardRewardTypeEvaluationRespProto get cardRewardTypeEvaluationResp => $_getN(7);
+  @$pb.TagNumber(8)
+  set cardRewardTypeEvaluationResp(CardRewardTypeEvaluationRespProto v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCardRewardTypeEvaluationResp() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCardRewardTypeEvaluationResp() => clearField(8);
+  @$pb.TagNumber(8)
+  CardRewardTypeEvaluationRespProto ensureCardRewardTypeEvaluationResp() => $_ensure(7);
+}
+
+class EvaluationEventResultRespProto extends $pb.GeneratedMessage {
+  factory EvaluationEventResultRespProto() => create();
+  EvaluationEventResultRespProto._() : super();
+  factory EvaluationEventResultRespProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EvaluationEventResultRespProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultRespProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOM<FeedbackEventResultProto>(2, _omitFieldNames ? '' : 'feedbackEventResultResp', protoName: 'feedbackEventResultResp', subBuilder: FeedbackEventResultProto.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EvaluationEventResultRespProto clone() => EvaluationEventResultRespProto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EvaluationEventResultRespProto copyWith(void Function(EvaluationEventResultRespProto) updates) => super.copyWith((message) => updates(message as EvaluationEventResultRespProto)) as EvaluationEventResultRespProto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EvaluationEventResultRespProto create() => EvaluationEventResultRespProto._();
+  EvaluationEventResultRespProto createEmptyInstance() => create();
+  static $pb.PbList<EvaluationEventResultRespProto> createRepeated() => $pb.PbList<EvaluationEventResultRespProto>();
+  @$core.pragma('dart2js:noInline')
+  static EvaluationEventResultRespProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EvaluationEventResultRespProto>(create);
+  static EvaluationEventResultRespProto? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  FeedbackEventResultProto get feedbackEventResultResp => $_getN(1);
+  @$pb.TagNumber(2)
+  set feedbackEventResultResp(FeedbackEventResultProto v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFeedbackEventResultResp() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFeedbackEventResultResp() => clearField(2);
+  @$pb.TagNumber(2)
+  FeedbackEventResultProto ensureFeedbackEventResultResp() => $_ensure(1);
+}
+
+class FeedbackEventResultProto extends $pb.GeneratedMessage {
+  factory FeedbackEventResultProto() => create();
+  FeedbackEventResultProto._() : super();
+  factory FeedbackEventResultProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FeedbackEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FeedbackEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'feedbackType', $pb.PbFieldType.O3, protoName: 'feedbackType')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OD, protoName: 'getReturn')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'getPercentage', $pb.PbFieldType.OD, protoName: 'getPercentage')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'feedbackEventResultStatus', $pb.PbFieldType.O3, protoName: 'feedbackEventResultStatus')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FeedbackEventResultProto clone() => FeedbackEventResultProto()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FeedbackEventResultProto copyWith(void Function(FeedbackEventResultProto) updates) => super.copyWith((message) => updates(message as FeedbackEventResultProto)) as FeedbackEventResultProto;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FeedbackEventResultProto create() => FeedbackEventResultProto._();
+  FeedbackEventResultProto createEmptyInstance() => create();
+  static $pb.PbList<FeedbackEventResultProto> createRepeated() => $pb.PbList<FeedbackEventResultProto>();
+  @$core.pragma('dart2js:noInline')
+  static FeedbackEventResultProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FeedbackEventResultProto>(create);
+  static FeedbackEventResultProto? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get feedbackType => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set feedbackType($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFeedbackType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFeedbackType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get cost => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set cost($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCost() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCost() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get getReturn => $_getN(2);
+  @$pb.TagNumber(3)
+  set getReturn($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasGetReturn() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGetReturn() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get getPercentage => $_getN(3);
+  @$pb.TagNumber(4)
+  set getPercentage($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasGetPercentage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearGetPercentage() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get feedbackEventResultStatus => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set feedbackEventResultStatus($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasFeedbackEventResultStatus() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFeedbackEventResultStatus() => clearField(5);
 }
 
 class RewardEventResultProto extends $pb.GeneratedMessage {

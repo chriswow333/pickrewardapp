@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 
-// option go_package = "pickrewardapi/api/evaluation/proto";
+option go_package = "pickrewardapi/api/evaluation/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
@@ -15,8 +15,94 @@ service Evaluation {
   rpc GetAllEvaluations(EmptyRequest) returns (EvaluationsReply){}
   rpc GetEvaluationByID(EvaluationIDProto) returns (EvaluationReply){}
   rpc GetEvaluationRespByOwnerID(EvaluationIDProto) returns (EvaluationRespReply){}
+  rpc Evaluate(EventProto) returns(EvaluationEventResultReply){}
+  rpc EvaluateResp(EventProto) returns (EvaluationEventResultRespReply){}
+  rpc EvaluateRespByOwnerID(EventProto) returns (EvaluationEventResultRespReply){}
+  
 }
 
+
+message EvaluationEventResultRespReply {
+  Reply reply = 1;
+  EvaluationEventResultRespProto evaluationEventResultResp = 2;
+}
+
+
+message EvaluationEventResultRespProto{
+  string id = 1;
+  FeedbackEventResultProto feedbackEventResultResp = 2;
+
+}
+
+message EvaluationEventResultReply {
+  Reply reply = 1;
+  EvaluationEventResultProto evaluationEventResult = 2;
+}
+
+
+message EvaluationEventResultProto{
+
+  string id = 1;
+  int32 evaluationEventStatus = 2;
+  PayloadEventResultProto payloadEventResult = 3;
+
+
+}
+
+message PayloadEventResultProto {
+  string id = 1;
+  bool pass = 2;
+  FeedbackEventResultProto feedbackEventResult = 3;
+  repeated PayloadEventResultProto payloadEventResults = 4;
+  ContainerEventResultProto containerEventResult = 5;
+  
+}
+
+message ContainerEventResultProto {
+  string id = 1;
+  bool pass = 2;
+  repeated string matches = 3;
+  repeated string misMatches = 4;
+  repeated ContainerEventResultProto containerEventResults = 5;
+  ConstraintEventResultProto constraintEventResult = 6;
+}
+
+
+message ConstraintEventResultProto {
+  bool pass = 1;
+  int32 constraintType = 2;
+  repeated string matches = 3;
+  repeated string misMatches = 4;
+}
+
+message FeedbackEventResultProto {
+  int32 feedbackType = 1;
+  int32 cost = 2;
+  float getReturn = 3;
+  float getPercentage = 4;
+  int32 feedbackEventResultStatus = 5; 
+}
+
+
+
+
+
+message EventProto {
+
+  string evaluationID = 1;
+  string ownerID = 2;
+
+  repeated string taskIDs = 3;
+  repeated string payIDs = 4;
+  repeated string channelIDs = 5;
+  repeated int32 labels = 6;
+  int64 eventDate = 7;
+  int32 cost = 8;
+  int32 currencyType = 9;
+  int32 rewardType = 10;
+  int32 pointType = 11;
+
+}
 
 message EvaluationsReply{
   Reply reply = 1;
@@ -37,10 +123,15 @@ message EvaluationProto {
   int64 updateDate = 3;
   int64 startDate = 4;
   int64 endDate = 5;
-  int32 currency = 6;
-  int32 rewardType = 7;
-  string ownerID = 8;
-  PayloadProto payload = 9;
+  EvaluationRewardTypeProto evaluationRewardType = 6;
+  string ownerID = 7;
+  PayloadProto payload = 8;
+}
+
+message EvaluationRewardTypeProto {
+  int32 rewardType = 1;
+  int32 currencyType = 2;
+  int32 pointType = 3;
 }
 
 message PayloadProto {
@@ -131,8 +222,8 @@ message ChannelProto {
 }
 
 message ChannelLabelProto {
-  int32 id = 1;
-  string name = 2;
+  int32 labelType = 1;
+  string labelName = 2;
   int32 order = 3;
 }
 
@@ -191,8 +282,8 @@ message LabelEvaluationRespProto {
 }
 
 message LabelProto {
-  int32 id = 1;
-  string name = 2;
+  int32 labelType = 1;
+  string labelName = 2;
 }
 
 

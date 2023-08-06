@@ -270,7 +270,7 @@ class LabelItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        side:evaluationSelectedViewModel.hasLabel(label.id)?
+        side:evaluationSelectedViewModel.hasLabel(label.labelType)?
         MaterialStatePropertyAll(
           BorderSide(
             color:Colors.teal[900]!,
@@ -282,7 +282,7 @@ class LabelItem extends StatelessWidget {
         ),
       ),
       onPressed:(){
-        evaluationSelectedViewModel.setLabel(label.id);
+        evaluationSelectedViewModel.setLabel(label.labelType);
       },
       child:Container(
         alignment: Alignment.center,
@@ -290,7 +290,7 @@ class LabelItem extends StatelessWidget {
         child:Column(
           children:[
             LabelItemIcon(),
-            LabelItemName(name:label.name),
+            LabelItemName(name:label.labelName),
           ],
         ),
       ),

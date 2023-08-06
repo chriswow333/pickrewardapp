@@ -7,6 +7,7 @@ import 'package:pickrewardapp/cardreward/component/evaluation.progress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,8 @@ class Evaluation extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel(cardRewardModel.id)),
           ChangeNotifierProvider<EvaluationChannelCategoryViewModel>(create:(_)=>EvaluationChannelCategoryViewModel()),
-          ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel()),
+          ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel(cardRewardModel:cardRewardModel)),
+          ChangeNotifierProvider<EvaluationEventResultRespViewModel>(create:(_)=>EvaluationEventResultRespViewModel()),
         ],
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,

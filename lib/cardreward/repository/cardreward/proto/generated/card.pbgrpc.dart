@@ -44,10 +44,10 @@ class CardClient extends $grpc.Client {
       '/card.Card/GetCardRewardsByCardID',
       ($0.CardIDProto value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CardRewardsReply.fromBuffer(value));
-  static final _$evaluateCards = $grpc.ClientMethod<$0.CardEventProto, $0.EvaluateProtoReply>(
+  static final _$evaluateCards = $grpc.ClientMethod<$0.CardEventProto, $0.EvaluateCardRewardsProtoReply>(
       '/card.Card/EvaluateCards',
       ($0.CardEventProto value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.EvaluateProtoReply.fromBuffer(value));
+      ($core.List<$core.int> value) => $0.EvaluateCardRewardsProtoReply.fromBuffer(value));
 
   CardClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -79,7 +79,7 @@ class CardClient extends $grpc.Client {
     return $createUnaryCall(_$getCardRewardsByCardID, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.EvaluateProtoReply> evaluateCards($0.CardEventProto request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$0.EvaluateCardRewardsProtoReply> evaluateCards($0.CardEventProto request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$evaluateCards, request, options: options);
   }
 }
@@ -131,13 +131,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CardIDProto.fromBuffer(value),
         ($0.CardRewardsReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CardEventProto, $0.EvaluateProtoReply>(
+    $addMethod($grpc.ServiceMethod<$0.CardEventProto, $0.EvaluateCardRewardsProtoReply>(
         'EvaluateCards',
         evaluateCards_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.CardEventProto.fromBuffer(value),
-        ($0.EvaluateProtoReply value) => value.writeToBuffer()));
+        ($0.EvaluateCardRewardsProtoReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Reply> createBank_Pre($grpc.ServiceCall call, $async.Future<$0.BankProto> request) async {
@@ -164,7 +164,7 @@ abstract class CardServiceBase extends $grpc.Service {
     return getCardRewardsByCardID(call, await request);
   }
 
-  $async.Future<$0.EvaluateProtoReply> evaluateCards_Pre($grpc.ServiceCall call, $async.Future<$0.CardEventProto> request) async {
+  $async.Future<$0.EvaluateCardRewardsProtoReply> evaluateCards_Pre($grpc.ServiceCall call, $async.Future<$0.CardEventProto> request) async {
     return evaluateCards(call, await request);
   }
 
@@ -174,5 +174,5 @@ abstract class CardServiceBase extends $grpc.Service {
   $async.Future<$0.CardsProtoReply> getCardsByBankID($grpc.ServiceCall call, $0.BankIDProto request);
   $async.Future<$0.Reply> modifiedCardReward($grpc.ServiceCall call, $0.CardRewardProto request);
   $async.Future<$0.CardRewardsReply> getCardRewardsByCardID($grpc.ServiceCall call, $0.CardIDProto request);
-  $async.Future<$0.EvaluateProtoReply> evaluateCards($grpc.ServiceCall call, $0.CardEventProto request);
+  $async.Future<$0.EvaluateCardRewardsProtoReply> evaluateCards($grpc.ServiceCall call, $0.CardEventProto request);
 }

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 
-// option go_package = "pickrewardapi/api/card/proto";
+option go_package = "pickrewardapi/api/card/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
@@ -19,7 +19,7 @@ service Card {
   rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
   rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}
   // rpc GetCardContentByCardID(CardIDProto) returns (CardContentReply) {}
-  rpc EvaluateCards(CardEventProto) returns (EvaluateProtoReply){}
+  rpc EvaluateCards(CardEventProto) returns (EvaluateCardRewardsProtoReply){}
 }
 
 message CardIDProto {
@@ -93,33 +93,63 @@ message CardRewardDescriptionProto {
 
 
 message CardEventProto {
-  string cardID = 1;
-  string rewardID = 2;
-  EventProto event = 3;
+  EventProto event = 1;
 }
 
 message EventProto {
-  int64 eventDate = 1;
-  int32 cost = 2;
-  int32 currency = 3;
-  int32 rewardType = 4;
-  repeated string channels = 5;
-  repeated string tasks = 6;
-  repeated string pays = 7;
+  string evaluationID = 1;
+
+  repeated string taskIDs = 2;
+  repeated string payIDs = 3;
+  repeated string channelIDs = 4;
+  repeated int32 labels = 5;
+  int64 eventDate = 6;
+  int32 cost = 7;
+  int32 currencyType = 8;
+  int32 rewardType = 9;
+  int32 pointType = 10;
 
 }
 
 
-message EvaluateProtoReply {
+message EvaluateCardRewardsProtoReply {
   Reply reply = 1;
-  repeated CardEventResultProto cardEventResults = 2;
+  repeated CardRewardEventResultProto cardRewardEventResults = 2;
 }
 
 
-message CardEventResultProto {
+message CardRewardEventResultProto {
   string id = 1;
-  RewardEventResultProto rewardEventResult = 2;
+  CardRewardEvaluationEventResultProto cardRewardEvaluationEventResult = 2;
+  EvaluationEventResultRespProto rewardEventResult = 3; 
 } 
+
+
+message CardRewardEvaluationEventResultProto {
+  string cardID = 1;
+  string cardName = 2;
+  string cardImage = 3;
+  string bankID = 4;
+  string bankName = 5;
+
+  int64 cardRewardStartDate = 6;
+  int64 cardRewardEndDate = 7;
+  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 8;
+}
+
+message EvaluationEventResultRespProto{
+  string id = 1;
+  FeedbackEventResultProto feedbackEventResultResp = 2;
+}
+
+message FeedbackEventResultProto {
+  int32 feedbackType = 1;
+  int32 cost = 2;
+  double getReturn = 3;
+  double getPercentage = 4;
+  int32 feedbackEventResultStatus = 5; 
+}
+
 
 
 message RewardEventResultProto{

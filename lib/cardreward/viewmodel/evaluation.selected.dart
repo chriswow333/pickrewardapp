@@ -2,19 +2,35 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 
 class EvaluationSelectedViewModel with ChangeNotifier {
+
+
+  EvaluationSelectedViewModel({required this.cardRewardModel});
+
+  final CardRewardModel cardRewardModel;
 
   Set<String> _channelIDs = {};
   Set<String> _taskIDs = {};
   Set<String> _payIDs = {};
   Set<int> _labels = {};
+  bool _evaluated = false;
+
+  set evaluated(bool action) { 
+    _evaluated = action;
+    notifyListeners();
+  }
+
+  bool get evaluated => _evaluated;
+  
+
   DateTime _costDate = DateTime.now();
   int _cost = 1000;
 
 
-
   setChannelID(String channelID) {
+    _evaluated = false;
     if(_channelIDs.contains(channelID)){
       _channelIDs.remove(channelID);
     }else {
@@ -32,6 +48,8 @@ class EvaluationSelectedViewModel with ChangeNotifier {
 
 
   setTaskID(String taskID) {
+    _evaluated = false;
+
     if(_taskIDs.contains(taskID)) {
       _taskIDs.remove(taskID);
     }else {
@@ -48,6 +66,8 @@ class EvaluationSelectedViewModel with ChangeNotifier {
   }
 
   setPayID(String payID) {
+    _evaluated = false;
+
     if(_payIDs.contains(payID)) {
       _payIDs.remove(payID);
     }else {
@@ -65,6 +85,8 @@ class EvaluationSelectedViewModel with ChangeNotifier {
 
 
   setLabel(int label) {
+    _evaluated = false;
+
     if(_labels.contains(label)) {
       _labels.remove(label);
     }else {
@@ -82,7 +104,7 @@ class EvaluationSelectedViewModel with ChangeNotifier {
 
 
   setCost(int cost){
-    print(cost);
+    _evaluated = false;
     _cost = cost;
     notifyListeners();
   }
@@ -90,6 +112,7 @@ class EvaluationSelectedViewModel with ChangeNotifier {
   int getCost() => _cost;
 
   setCostDate(DateTime costDate){
+    _evaluated = false;
     _costDate = costDate;
     notifyListeners();
   }

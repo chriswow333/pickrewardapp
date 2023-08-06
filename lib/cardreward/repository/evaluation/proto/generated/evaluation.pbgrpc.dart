@@ -36,6 +36,18 @@ class EvaluationClient extends $grpc.Client {
       '/evaluation.Evaluation/GetEvaluationRespByOwnerID',
       ($0.EvaluationIDProto value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.EvaluationRespReply.fromBuffer(value));
+  static final _$evaluate = $grpc.ClientMethod<$0.EventProto, $0.EvaluationEventResultReply>(
+      '/evaluation.Evaluation/Evaluate',
+      ($0.EventProto value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.EvaluationEventResultReply.fromBuffer(value));
+  static final _$evaluateResp = $grpc.ClientMethod<$0.EventProto, $0.EvaluationEventResultRespReply>(
+      '/evaluation.Evaluation/EvaluateResp',
+      ($0.EventProto value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.EvaluationEventResultRespReply.fromBuffer(value));
+  static final _$evaluateRespByOwnerID = $grpc.ClientMethod<$0.EventProto, $0.EvaluationEventResultRespReply>(
+      '/evaluation.Evaluation/EvaluateRespByOwnerID',
+      ($0.EventProto value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.EvaluationEventResultRespReply.fromBuffer(value));
 
   EvaluationClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -57,6 +69,18 @@ class EvaluationClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.EvaluationRespReply> getEvaluationRespByOwnerID($0.EvaluationIDProto request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getEvaluationRespByOwnerID, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.EvaluationEventResultReply> evaluate($0.EventProto request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$evaluate, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.EvaluationEventResultRespReply> evaluateResp($0.EventProto request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$evaluateResp, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.EvaluationEventResultRespReply> evaluateRespByOwnerID($0.EventProto request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$evaluateRespByOwnerID, request, options: options);
   }
 }
 
@@ -93,6 +117,27 @@ abstract class EvaluationServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.EvaluationIDProto.fromBuffer(value),
         ($0.EvaluationRespReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EventProto, $0.EvaluationEventResultReply>(
+        'Evaluate',
+        evaluate_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.EventProto.fromBuffer(value),
+        ($0.EvaluationEventResultReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EventProto, $0.EvaluationEventResultRespReply>(
+        'EvaluateResp',
+        evaluateResp_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.EventProto.fromBuffer(value),
+        ($0.EvaluationEventResultRespReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EventProto, $0.EvaluationEventResultRespReply>(
+        'EvaluateRespByOwnerID',
+        evaluateRespByOwnerID_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.EventProto.fromBuffer(value),
+        ($0.EvaluationEventResultRespReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Reply> modifiedEvaluation_Pre($grpc.ServiceCall call, $async.Future<$0.EvaluationProto> request) async {
@@ -111,8 +156,23 @@ abstract class EvaluationServiceBase extends $grpc.Service {
     return getEvaluationRespByOwnerID(call, await request);
   }
 
+  $async.Future<$0.EvaluationEventResultReply> evaluate_Pre($grpc.ServiceCall call, $async.Future<$0.EventProto> request) async {
+    return evaluate(call, await request);
+  }
+
+  $async.Future<$0.EvaluationEventResultRespReply> evaluateResp_Pre($grpc.ServiceCall call, $async.Future<$0.EventProto> request) async {
+    return evaluateResp(call, await request);
+  }
+
+  $async.Future<$0.EvaluationEventResultRespReply> evaluateRespByOwnerID_Pre($grpc.ServiceCall call, $async.Future<$0.EventProto> request) async {
+    return evaluateRespByOwnerID(call, await request);
+  }
+
   $async.Future<$0.Reply> modifiedEvaluation($grpc.ServiceCall call, $0.EvaluationProto request);
   $async.Future<$0.EvaluationsReply> getAllEvaluations($grpc.ServiceCall call, $0.EmptyRequest request);
   $async.Future<$0.EvaluationReply> getEvaluationByID($grpc.ServiceCall call, $0.EvaluationIDProto request);
   $async.Future<$0.EvaluationRespReply> getEvaluationRespByOwnerID($grpc.ServiceCall call, $0.EvaluationIDProto request);
+  $async.Future<$0.EvaluationEventResultReply> evaluate($grpc.ServiceCall call, $0.EventProto request);
+  $async.Future<$0.EvaluationEventResultRespReply> evaluateResp($grpc.ServiceCall call, $0.EventProto request);
+  $async.Future<$0.EvaluationEventResultRespReply> evaluateRespByOwnerID($grpc.ServiceCall call, $0.EventProto request);
 }
