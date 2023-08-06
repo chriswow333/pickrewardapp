@@ -9,7 +9,6 @@ import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
-import 'package:pickrewardapp/shared/viewmodel/reward.type.dart';
 import 'package:provider/provider.dart';
 
 
@@ -107,8 +106,7 @@ class EvaluationRewardTypeName extends StatelessWidget {
     } else if (cardRewardTypeEvaluationResp.reward.rewardType == 2) {
       name = cardRewardTypeEvaluationResp.point.pointName;
     }
-
-
+    
     return Container(
       child:Text(name,
         style:TextStyle(
