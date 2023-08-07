@@ -186,12 +186,13 @@ message EvaluationRespReply {
 
 
 message EvaluationRespProto {
-  repeated ChannelCategoryTypeProto channelCategoryTypes = 1;
-  repeated ChannelEvaluationRespProto channelEvaluationResps = 2;
-  PayEvaluationRespProto payEvaluationResp = 3;
-  TaskEvaluationRespProto taskEvaluationResp = 4;
-  ConstraintsEvaluationRespProto constraintsEvaluationResp = 5;
-  LabelEvaluationRespProto labelEvaluationResp = 6;
+  string id = 1;
+  repeated ChannelCategoryTypeProto channelCategoryTypes = 2;
+  repeated ChannelEvaluationRespProto channelEvaluationResps = 3;
+  PayEvaluationRespProto payEvaluationResp = 4;
+  TaskEvaluationRespProto taskEvaluationResp = 5;
+  ConstraintsEvaluationRespProto constraintsEvaluationResp = 6;
+  LabelEvaluationRespProto labelEvaluationResp = 7;
 }
 
 message ChannelCategoryTypeProto {

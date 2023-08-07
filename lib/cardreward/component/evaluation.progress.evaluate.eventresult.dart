@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:provider/provider.dart';
 
 class CardRewardEvaluationEventResult extends StatelessWidget {
@@ -54,7 +55,7 @@ class GetPercentageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('回饋率',
+    return Text('回饋利率',
       style: TextStyle(
         fontSize: 15,
         color: Colors.cyan[900],
@@ -68,7 +69,11 @@ class GetReturnTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('現金回饋',
+    
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+    String name = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.reward.rewardName;
+    
+    return Text(name,
       style: TextStyle(
         fontSize: 15,
         color: Colors.cyan[900],
@@ -118,10 +123,23 @@ class EventResultGetReturn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+    int rewardType = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.reward.rewardType;
+    
+
+    String unit = "";
+    if(rewardType == 1) {
+      unit = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.currency.currencyName;
+    } else if (rewardType == 2) {
+      unit = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.point.pointName;
+    }
+
+
     EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);
     double getReturn = evaluationEventResultRespViewModel.feedbackEventResult.getReturn;
-    
-    return Text(getReturn.toString() + "元",
+
+
+    return Text(getReturn.toString() +" "+unit,
       style: TextStyle(
         fontSize: 20,
         color: Colors.cyan[900],
