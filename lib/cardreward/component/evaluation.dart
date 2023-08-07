@@ -51,8 +51,6 @@ class Evaluation extends StatelessWidget {
 
 
 
-
-
 class EvaluationHeader extends StatelessWidget {
   const EvaluationHeader({super.key, required this.cardRewardModel});
 

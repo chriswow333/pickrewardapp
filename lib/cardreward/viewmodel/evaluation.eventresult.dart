@@ -20,7 +20,7 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  FeedbackEventResultProto? get feedbackEventResult => _feedbackEventResult;
+  FeedbackEventResultProto get feedbackEventResult => _feedbackEventResult ?? FeedbackEventResultProto();
 
 
 

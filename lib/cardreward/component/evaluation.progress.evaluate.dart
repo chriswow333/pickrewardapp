@@ -24,11 +24,11 @@ class EvaluationProgressEvaluate extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
+         
         CardRewardEvaluationProgressPay(),
         CardRewardEvaluationProgressCost(),
         CardRewardEvaluationProgressCostDate(),
-        if (feedbackEventResult != null)
-          CardRewardEvaluationEventResult(),
+       
         if(!evaluationSelectedViewModel.evaluated)
           CardRewardEvaluationBtn(),
       ]

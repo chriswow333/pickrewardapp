@@ -4,11 +4,16 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.evaluate.dart';
+import 'package:pickrewardapp/cardreward/component/evaluation.progress.evaluate.eventresult.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.task.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:provider/provider.dart';
+
+
+
+
 
 class EvaluationProgressBar extends StatelessWidget {
   const EvaluationProgressBar({super.key});
@@ -178,15 +183,19 @@ class EvaluationProgressContent extends StatelessWidget {
   Widget build(BuildContext context) {
     
     EvaluationProgressViewModel progressViewModel = Provider.of<EvaluationProgressViewModel>(context);
+    
+    
     return Container(
       padding: const EdgeInsets.only(top:20),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           EvaluationProgressTitle(),
-          SizedBox(height:20),
+          SizedBox(height:10),
+          CardRewardEvaluationEventResult(),
+          SizedBox(height:10),
           EvaluationProgressBar(),
-          SizedBox(height:20),
+          SizedBox(height:10),
           if (progressViewModel.get() == EvaluationProgressEnum.Channel)
             EvaluationProgressChannel(),
           if (progressViewModel.get() == EvaluationProgressEnum.Task)            
