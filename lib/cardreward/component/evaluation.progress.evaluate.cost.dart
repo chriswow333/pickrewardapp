@@ -49,14 +49,16 @@ class Cost extends StatefulWidget {
 
 class _CostState extends State<Cost> {
 
-  TextEditingController _controller= new TextEditingController(text: '1000');
-  
+  // TextEditingController _controller = new TextEditingController(text: '1000');
+    TextEditingController _controller = new TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    
+    _controller.text = evaluationSelectedViewModel.getCost().toString();
+
     return SizedBox(
       width:150,
       child:TextField(

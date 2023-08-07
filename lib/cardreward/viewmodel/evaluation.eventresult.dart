@@ -41,7 +41,7 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
       eventProto.cost = selectedViewModel.getCost();
 
       DateTime eventDate = selectedViewModel.getCostDate();
-      eventProto.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch/1000).toInt().toString());
+      eventProto.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
       eventProto.labels.addAll(selectedViewModel.getLabels().toList());
       eventProto.payIDs.addAll(selectedViewModel.getPayIDs().toList());
       eventProto.taskIDs.addAll(selectedViewModel.getTaskIDs().toList());

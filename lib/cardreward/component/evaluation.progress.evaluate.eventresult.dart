@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:provider/provider.dart';
 
-
-
 class CardRewardEvaluationEventResult extends StatelessWidget {
   const CardRewardEvaluationEventResult({super.key});
 
@@ -50,8 +48,6 @@ class EvaluationEventResultTitle extends StatelessWidget {
     );
   }
 }
-
-
 
 class GetPercentageTitle extends StatelessWidget {
   const GetPercentageTitle({super.key});
