@@ -83,14 +83,18 @@ class TaskItemTitle extends StatelessWidget {
               value: evaluationSelectedViewModel.hasTaskID(id),
               onChanged: (bool? value) {},
             ),
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.cyan[900],
-                fontWeight: FontWeight.bold,
-              ),  
-            )
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.fitWidth, 
+                child:Text(name,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.cyan[900],
+                    fontWeight: FontWeight.bold,
+                  ),  
+                ),
+              ),
+            ),
           ]
         )
       ),
@@ -144,8 +148,8 @@ class TaskItemDescName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text(
-        name,
+      child:
+      Text(name,
         style: TextStyle(
           fontSize: 15,
           color: Colors.cyan[900],

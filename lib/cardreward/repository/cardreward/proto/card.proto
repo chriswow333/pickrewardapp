@@ -128,13 +128,15 @@ message CardRewardEventResultProto {
 message CardRewardEvaluationEventResultProto {
   string cardID = 1;
   string cardName = 2;
-  string cardImage = 3;
-  string bankID = 4;
-  string bankName = 5;
+  repeated string cardDesc = 3;
+  string cardImage = 4;
+  string bankID = 5;
+  string bankName = 6;
 
-  int64 cardRewardStartDate = 6;
-  int64 cardRewardEndDate = 7;
-  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 8;
+  int64 cardRewardStartDate = 7;
+  int64 cardRewardEndDate = 8;
+  string cardRewardName = 9;
+  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 10;
 }
 
 message EvaluationEventResultRespProto{
@@ -144,10 +146,11 @@ message EvaluationEventResultRespProto{
 
 message FeedbackEventResultProto {
   int32 feedbackType = 1;
-  int32 cost = 2;
-  double getReturn = 3;
-  double getPercentage = 4;
-  int32 feedbackEventResultStatus = 5; 
+  int32 calculateType = 2;
+  int32 cost = 3;
+  double getReturn = 4;
+  double getPercentage = 5;
+  int32 feedbackEventResultStatus = 6; 
 }
 
 

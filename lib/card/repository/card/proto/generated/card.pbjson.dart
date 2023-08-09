@@ -255,24 +255,28 @@ const CardRewardEvaluationEventResultProto$json = {
   '2': [
     {'1': 'cardID', '3': 1, '4': 1, '5': 9, '10': 'cardID'},
     {'1': 'cardName', '3': 2, '4': 1, '5': 9, '10': 'cardName'},
-    {'1': 'cardImage', '3': 3, '4': 1, '5': 9, '10': 'cardImage'},
-    {'1': 'bankID', '3': 4, '4': 1, '5': 9, '10': 'bankID'},
-    {'1': 'bankName', '3': 5, '4': 1, '5': 9, '10': 'bankName'},
-    {'1': 'cardRewardStartDate', '3': 6, '4': 1, '5': 3, '10': 'cardRewardStartDate'},
-    {'1': 'cardRewardEndDate', '3': 7, '4': 1, '5': 3, '10': 'cardRewardEndDate'},
-    {'1': 'cardRewardTypeEvaluationResp', '3': 8, '4': 1, '5': 11, '6': '.card.CardRewardTypeEvaluationRespProto', '10': 'cardRewardTypeEvaluationResp'},
+    {'1': 'cardDesc', '3': 3, '4': 3, '5': 9, '10': 'cardDesc'},
+    {'1': 'cardImage', '3': 4, '4': 1, '5': 9, '10': 'cardImage'},
+    {'1': 'bankID', '3': 5, '4': 1, '5': 9, '10': 'bankID'},
+    {'1': 'bankName', '3': 6, '4': 1, '5': 9, '10': 'bankName'},
+    {'1': 'cardRewardStartDate', '3': 7, '4': 1, '5': 3, '10': 'cardRewardStartDate'},
+    {'1': 'cardRewardEndDate', '3': 8, '4': 1, '5': 3, '10': 'cardRewardEndDate'},
+    {'1': 'cardRewardName', '3': 9, '4': 1, '5': 9, '10': 'cardRewardName'},
+    {'1': 'cardRewardTypeEvaluationResp', '3': 10, '4': 1, '5': 11, '6': '.card.CardRewardTypeEvaluationRespProto', '10': 'cardRewardTypeEvaluationResp'},
   ],
 };
 
 /// Descriptor for `CardRewardEvaluationEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardRewardEvaluationEventResultProtoDescriptor = $convert.base64Decode(
     'CiRDYXJkUmV3YXJkRXZhbHVhdGlvbkV2ZW50UmVzdWx0UHJvdG8SFgoGY2FyZElEGAEgASgJUg'
-    'ZjYXJkSUQSGgoIY2FyZE5hbWUYAiABKAlSCGNhcmROYW1lEhwKCWNhcmRJbWFnZRgDIAEoCVIJ'
-    'Y2FyZEltYWdlEhYKBmJhbmtJRBgEIAEoCVIGYmFua0lEEhoKCGJhbmtOYW1lGAUgASgJUghiYW'
-    '5rTmFtZRIwChNjYXJkUmV3YXJkU3RhcnREYXRlGAYgASgDUhNjYXJkUmV3YXJkU3RhcnREYXRl'
-    'EiwKEWNhcmRSZXdhcmRFbmREYXRlGAcgASgDUhFjYXJkUmV3YXJkRW5kRGF0ZRJrChxjYXJkUm'
-    'V3YXJkVHlwZUV2YWx1YXRpb25SZXNwGAggASgLMicuY2FyZC5DYXJkUmV3YXJkVHlwZUV2YWx1'
-    'YXRpb25SZXNwUHJvdG9SHGNhcmRSZXdhcmRUeXBlRXZhbHVhdGlvblJlc3A=');
+    'ZjYXJkSUQSGgoIY2FyZE5hbWUYAiABKAlSCGNhcmROYW1lEhoKCGNhcmREZXNjGAMgAygJUghj'
+    'YXJkRGVzYxIcCgljYXJkSW1hZ2UYBCABKAlSCWNhcmRJbWFnZRIWCgZiYW5rSUQYBSABKAlSBm'
+    'JhbmtJRBIaCghiYW5rTmFtZRgGIAEoCVIIYmFua05hbWUSMAoTY2FyZFJld2FyZFN0YXJ0RGF0'
+    'ZRgHIAEoA1ITY2FyZFJld2FyZFN0YXJ0RGF0ZRIsChFjYXJkUmV3YXJkRW5kRGF0ZRgIIAEoA1'
+    'IRY2FyZFJld2FyZEVuZERhdGUSJgoOY2FyZFJld2FyZE5hbWUYCSABKAlSDmNhcmRSZXdhcmRO'
+    'YW1lEmsKHGNhcmRSZXdhcmRUeXBlRXZhbHVhdGlvblJlc3AYCiABKAsyJy5jYXJkLkNhcmRSZX'
+    'dhcmRUeXBlRXZhbHVhdGlvblJlc3BQcm90b1IcY2FyZFJld2FyZFR5cGVFdmFsdWF0aW9uUmVz'
+    'cA==');
 
 @$core.Deprecated('Use evaluationEventResultRespProtoDescriptor instead')
 const EvaluationEventResultRespProto$json = {
@@ -294,19 +298,21 @@ const FeedbackEventResultProto$json = {
   '1': 'FeedbackEventResultProto',
   '2': [
     {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
-    {'1': 'cost', '3': 2, '4': 1, '5': 5, '10': 'cost'},
-    {'1': 'getReturn', '3': 3, '4': 1, '5': 1, '10': 'getReturn'},
-    {'1': 'getPercentage', '3': 4, '4': 1, '5': 1, '10': 'getPercentage'},
-    {'1': 'feedbackEventResultStatus', '3': 5, '4': 1, '5': 5, '10': 'feedbackEventResultStatus'},
+    {'1': 'calculateType', '3': 2, '4': 1, '5': 5, '10': 'calculateType'},
+    {'1': 'cost', '3': 3, '4': 1, '5': 5, '10': 'cost'},
+    {'1': 'getReturn', '3': 4, '4': 1, '5': 1, '10': 'getReturn'},
+    {'1': 'getPercentage', '3': 5, '4': 1, '5': 1, '10': 'getPercentage'},
+    {'1': 'feedbackEventResultStatus', '3': 6, '4': 1, '5': 5, '10': 'feedbackEventResultStatus'},
   ],
 };
 
 /// Descriptor for `FeedbackEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackEventResultProtoDescriptor = $convert.base64Decode(
     'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SIgoMZmVlZGJhY2tUeXBlGAEgASgFUgxmZWVkYm'
-    'Fja1R5cGUSEgoEY29zdBgCIAEoBVIEY29zdBIcCglnZXRSZXR1cm4YAyABKAFSCWdldFJldHVy'
-    'bhIkCg1nZXRQZXJjZW50YWdlGAQgASgBUg1nZXRQZXJjZW50YWdlEjwKGWZlZWRiYWNrRXZlbn'
-    'RSZXN1bHRTdGF0dXMYBSABKAVSGWZlZWRiYWNrRXZlbnRSZXN1bHRTdGF0dXM=');
+    'Fja1R5cGUSJAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRISCgRjb3N0GAMg'
+    'ASgFUgRjb3N0EhwKCWdldFJldHVybhgEIAEoAVIJZ2V0UmV0dXJuEiQKDWdldFBlcmNlbnRhZ2'
+    'UYBSABKAFSDWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEo'
+    'BVIZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cw==');
 
 @$core.Deprecated('Use rewardEventResultProtoDescriptor instead')
 const RewardEventResultProto$json = {

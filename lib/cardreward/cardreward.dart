@@ -15,6 +15,8 @@ import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 
+
+
 class CardContentScreen extends StatelessWidget {
   const CardContentScreen({super.key, required this.cardItemModel});
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/card/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/card/viewmodel/reward.eventresult.dart';
+import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pickrewardapp/card/component/channel.progress.findcard.cost.dart';
 import 'package:pickrewardapp/card/component/channel.progress.findcard.costdate.dart';
 import 'package:pickrewardapp/card/component/channel.progress.findcard.pay.dart';
-import 'package:pickrewardapp/card/component/channel.progress.findcard.rewardway.dart';
+import 'package:pickrewardapp/card/component/channel.progress.findcard.rewardtype.dart';
 import 'package:pickrewardapp/card/viewmodel/pay.item.dart';
 
 class FindCardProgress extends StatelessWidget {
@@ -35,8 +38,8 @@ class FindCardProgress extends StatelessWidget {
 
         SizedBox(height:20),
         
-        RewardWayName(),
-        RewardWayItems(),
+        RewardTypeName(),
+        RewardTypeItems(),
 
         SizedBox(height:40),
         
@@ -53,6 +56,11 @@ class SubmitEvaluateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context);
+    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
+
     return Row(
       // decoration: BoxDecoration(
       //   border:Border.all(),
@@ -65,7 +73,12 @@ class SubmitEvaluateCard extends StatelessWidget {
             shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
             backgroundColor: MaterialStatePropertyAll(Colors.cyan[900]),
           ),
-          onPressed: (){},
+          onPressed: (){
+            channelProgressViewModel.progress = ChannelProgressEnum.FindResult;
+
+            cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
+
+          },
           child:Text('送出選卡',
             style: TextStyle(
               fontSize: 25,
@@ -77,3 +90,4 @@ class SubmitEvaluateCard extends StatelessWidget {
     );
   }
 }
+

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/card/viewmodel/reward.eventresult.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pickrewardapp/card/component/card.dart';
@@ -29,7 +30,7 @@ class CardPage extends StatelessWidget {
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
         ChangeNotifierProvider<RewardSelectedViewModel>(create:(_)=>RewardSelectedViewModel()),
         ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
-
+        ChangeNotifierProvider<CardRewardEventResultsViewModel>(create:(_)=>CardRewardEventResultsViewModel()),
       ],
       child:CardReward(),
     );

@@ -141,19 +141,21 @@ const FeedbackEventResultProto$json = {
   '1': 'FeedbackEventResultProto',
   '2': [
     {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
-    {'1': 'cost', '3': 2, '4': 1, '5': 5, '10': 'cost'},
-    {'1': 'getReturn', '3': 3, '4': 1, '5': 2, '10': 'getReturn'},
-    {'1': 'getPercentage', '3': 4, '4': 1, '5': 2, '10': 'getPercentage'},
-    {'1': 'feedbackEventResultStatus', '3': 5, '4': 1, '5': 5, '10': 'feedbackEventResultStatus'},
+    {'1': 'calculateType', '3': 2, '4': 1, '5': 5, '10': 'calculateType'},
+    {'1': 'cost', '3': 3, '4': 1, '5': 5, '10': 'cost'},
+    {'1': 'getReturn', '3': 4, '4': 1, '5': 2, '10': 'getReturn'},
+    {'1': 'getPercentage', '3': 5, '4': 1, '5': 2, '10': 'getPercentage'},
+    {'1': 'feedbackEventResultStatus', '3': 6, '4': 1, '5': 5, '10': 'feedbackEventResultStatus'},
   ],
 };
 
 /// Descriptor for `FeedbackEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackEventResultProtoDescriptor = $convert.base64Decode(
     'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SIgoMZmVlZGJhY2tUeXBlGAEgASgFUgxmZWVkYm'
-    'Fja1R5cGUSEgoEY29zdBgCIAEoBVIEY29zdBIcCglnZXRSZXR1cm4YAyABKAJSCWdldFJldHVy'
-    'bhIkCg1nZXRQZXJjZW50YWdlGAQgASgCUg1nZXRQZXJjZW50YWdlEjwKGWZlZWRiYWNrRXZlbn'
-    'RSZXN1bHRTdGF0dXMYBSABKAVSGWZlZWRiYWNrRXZlbnRSZXN1bHRTdGF0dXM=');
+    'Fja1R5cGUSJAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRISCgRjb3N0GAMg'
+    'ASgFUgRjb3N0EhwKCWdldFJldHVybhgEIAEoAlIJZ2V0UmV0dXJuEiQKDWdldFBlcmNlbnRhZ2'
+    'UYBSABKAJSDWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEo'
+    'BVIZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cw==');
 
 @$core.Deprecated('Use eventProtoDescriptor instead')
 const EventProto$json = {

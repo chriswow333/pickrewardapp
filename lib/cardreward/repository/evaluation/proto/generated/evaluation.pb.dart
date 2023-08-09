@@ -468,10 +468,11 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FeedbackEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'feedbackType', $pb.PbFieldType.O3, protoName: 'feedbackType')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OF, protoName: 'getReturn')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'getPercentage', $pb.PbFieldType.OF, protoName: 'getPercentage')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'feedbackEventResultStatus', $pb.PbFieldType.O3, protoName: 'feedbackEventResultStatus')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'calculateType', $pb.PbFieldType.O3, protoName: 'calculateType')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OF, protoName: 'getReturn')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'getPercentage', $pb.PbFieldType.OF, protoName: 'getPercentage')
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'feedbackEventResultStatus', $pb.PbFieldType.O3, protoName: 'feedbackEventResultStatus')
     ..hasRequiredFields = false
   ;
 
@@ -506,40 +507,49 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
   void clearFeedbackType() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get cost => $_getIZ(1);
+  $core.int get calculateType => $_getIZ(1);
   @$pb.TagNumber(2)
-  set cost($core.int v) { $_setSignedInt32(1, v); }
+  set calculateType($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCost() => $_has(1);
+  $core.bool hasCalculateType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCost() => clearField(2);
+  void clearCalculateType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.double get getReturn => $_getN(2);
+  $core.int get cost => $_getIZ(2);
   @$pb.TagNumber(3)
-  set getReturn($core.double v) { $_setFloat(2, v); }
+  set cost($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGetReturn() => $_has(2);
+  $core.bool hasCost() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGetReturn() => clearField(3);
+  void clearCost() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get getPercentage => $_getN(3);
+  $core.double get getReturn => $_getN(3);
   @$pb.TagNumber(4)
-  set getPercentage($core.double v) { $_setFloat(3, v); }
+  set getReturn($core.double v) { $_setFloat(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGetPercentage() => $_has(3);
+  $core.bool hasGetReturn() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGetPercentage() => clearField(4);
+  void clearGetReturn() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get feedbackEventResultStatus => $_getIZ(4);
+  $core.double get getPercentage => $_getN(4);
   @$pb.TagNumber(5)
-  set feedbackEventResultStatus($core.int v) { $_setSignedInt32(4, v); }
+  set getPercentage($core.double v) { $_setFloat(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasFeedbackEventResultStatus() => $_has(4);
+  $core.bool hasGetPercentage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearFeedbackEventResultStatus() => clearField(5);
+  void clearGetPercentage() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get feedbackEventResultStatus => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set feedbackEventResultStatus($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasFeedbackEventResultStatus() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFeedbackEventResultStatus() => clearField(6);
 }
 
 class EventProto extends $pb.GeneratedMessage {

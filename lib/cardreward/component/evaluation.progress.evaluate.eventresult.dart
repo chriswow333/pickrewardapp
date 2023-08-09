@@ -139,7 +139,7 @@ class EventResultGetReturn extends StatelessWidget {
     double getReturn = evaluationEventResultRespViewModel.feedbackEventResult.getReturn;
 
 
-    return Text(getReturn.toString() +" "+unit,
+    return Text(getReturn.toString() + " " + unit,
       style: TextStyle(
         fontSize: 20,
         color: Colors.cyan[900],

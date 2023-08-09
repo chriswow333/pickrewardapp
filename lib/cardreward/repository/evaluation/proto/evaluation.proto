@@ -77,10 +77,11 @@ message ConstraintEventResultProto {
 
 message FeedbackEventResultProto {
   int32 feedbackType = 1;
-  int32 cost = 2;
-  float getReturn = 3;
-  float getPercentage = 4;
-  int32 feedbackEventResultStatus = 5; 
+  int32 calculateType = 2;
+  int32 cost = 3;
+  float getReturn = 4;
+  float getPercentage = 5;
+  int32 feedbackEventResultStatus = 6; 
 }
 
 

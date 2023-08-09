@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
 
 
-class RewardWayName extends StatelessWidget {
-  const RewardWayName({super.key});
+class RewardTypeName extends StatelessWidget {
+  const RewardTypeName({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +18,24 @@ class RewardWayName extends StatelessWidget {
   }
 }
 
-class RewardWayItems extends StatelessWidget {
-  const RewardWayItems({super.key});
+class RewardTypeItems extends StatelessWidget {
+  const RewardTypeItems({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children:[
-        CashWay(),
+        CashType(),
         SizedBox(width:20),
-        PointWay(),
+        PointType(),
       ]
     );
   }
 }
 
-enum SingingCharacter { lafayette, jefferson }
 
-class CashWay extends StatelessWidget {
-  const CashWay({super.key});
+class CashType extends StatelessWidget {
+  const CashType({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class CashWay extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
-        rewardSelectedViewModel.rewardWay = RewardWayEnum.CASH;
+        rewardSelectedViewModel.rewardType = RewardTypeEnum.CASH;
       },
       style:ButtonStyle(
         splashFactory:NoSplash.splashFactory,
@@ -56,9 +55,9 @@ class CashWay extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: rewardSelectedViewModel.rewardWay == RewardWayEnum.CASH,
+            value: rewardSelectedViewModel.isSelectedRewardType(RewardTypeEnum.CASH) ,
             onChanged: (bool? value) {
-              rewardSelectedViewModel.rewardWay = RewardWayEnum.CASH;
+              rewardSelectedViewModel.rewardType = RewardTypeEnum.CASH;
             },
           ),
           Text('現金回饋',
@@ -75,15 +74,16 @@ class CashWay extends StatelessWidget {
 
 
 
-class PointWay extends StatelessWidget {
-  const PointWay({super.key});
+class PointType extends StatelessWidget {
+  const PointType({super.key});
 
   @override
   Widget build(BuildContext context) {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     return TextButton(
+
       onPressed: (){
-        rewardSelectedViewModel.rewardWay = RewardWayEnum.POINT;
+        rewardSelectedViewModel.rewardType = RewardTypeEnum.POINT;
       },
       style:const ButtonStyle(
         splashFactory:NoSplash.splashFactory,
@@ -94,9 +94,9 @@ class PointWay extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: rewardSelectedViewModel.rewardWay == RewardWayEnum.POINT,
+            value: rewardSelectedViewModel.isSelectedRewardType(RewardTypeEnum.POINT) ,
             onChanged: (bool? value) {
-              rewardSelectedViewModel.rewardWay = RewardWayEnum.POINT;
+              rewardSelectedViewModel.rewardType = RewardTypeEnum.POINT;
             },
           ),
           Text('點數回饋',

@@ -2,7 +2,12 @@
 import 'package:flutter/material.dart';
 
 
-enum RewardWayEnum { CASH, POINT }
+enum RewardTypeEnum { 
+  CASH,
+  POINT;
+
+}
+
 
 
 class RewardSelectedViewModel with ChangeNotifier{
@@ -29,6 +34,10 @@ class RewardSelectedViewModel with ChangeNotifier{
     return _channelIDs.contains(channelID);
   }
 
+  List<String> getChannelIDs(){
+    return _channelIDs.toList();
+  }
+
   final Set<String> _payIDs = {};
 
   set payID(String payID) {
@@ -44,6 +53,11 @@ class RewardSelectedViewModel with ChangeNotifier{
   bool existSelectedPayID(String payID) {
     return _payIDs.contains(payID);
   }
+  List<String> getPayIDs(){
+    return _payIDs.toList();
+  }
+
+
 
   int _selectedCost = 1000;
 
@@ -56,13 +70,20 @@ class RewardSelectedViewModel with ChangeNotifier{
   int get cost => _selectedCost;
 
 
-  int _rewardType = 0;
-  set rewardType(int rewardType) {
+  RewardTypeEnum _rewardType = RewardTypeEnum.CASH;
+
+  set rewardType(RewardTypeEnum rewardType) {
     _rewardType = rewardType;
     notifyListeners();
   }
   
-  int get rewardType => _rewardType;
+  bool isSelectedRewardType(RewardTypeEnum rewardType){
+    return _rewardType == rewardType;
+  }
+
+  RewardTypeEnum get rewardType => _rewardType;
+
+
 
 
   DateTime _eventDate = DateTime.now();
@@ -74,13 +95,13 @@ class RewardSelectedViewModel with ChangeNotifier{
   
 
 
-  RewardWayEnum _rewardWay = RewardWayEnum.CASH;
-  set rewardWay(RewardWayEnum rewardWay) {
-    _rewardWay = rewardWay;
-    notifyListeners();
-  }
+  // RewardWayEnum _rewardWay = RewardWayEnum.CASH;
+  // set rewardWay(RewardWayEnum rewardWay) {
+  //   _rewardWay = rewardWay;
+  //   notifyListeners();
+  // }
 
-  RewardWayEnum get rewardWay => _rewardWay;
+  // RewardWayEnum get rewardWay => _rewardWay;
 
 }
 

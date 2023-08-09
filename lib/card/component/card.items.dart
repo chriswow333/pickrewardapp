@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 class CardItems extends StatelessWidget {
   const CardItems({super.key});
 
-
   @override
   Widget build(BuildContext context) {
 

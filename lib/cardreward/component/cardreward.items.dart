@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
-import 'package:pickrewardapp/shared/viewmodel/reward.type.dart';
 import 'package:provider/provider.dart';
 
 class RewardItems extends StatelessWidget {

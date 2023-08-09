@@ -931,12 +931,14 @@ class CardRewardEvaluationEventResultProto extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
     ..aOS(2, _omitFieldNames ? '' : 'cardName', protoName: 'cardName')
-    ..aOS(3, _omitFieldNames ? '' : 'cardImage', protoName: 'cardImage')
-    ..aOS(4, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..aOS(5, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
-    ..aInt64(6, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
-    ..aInt64(7, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
-    ..aOM<CardRewardTypeEvaluationRespProto>(8, _omitFieldNames ? '' : 'cardRewardTypeEvaluationResp', protoName: 'cardRewardTypeEvaluationResp', subBuilder: CardRewardTypeEvaluationRespProto.create)
+    ..pPS(3, _omitFieldNames ? '' : 'cardDesc', protoName: 'cardDesc')
+    ..aOS(4, _omitFieldNames ? '' : 'cardImage', protoName: 'cardImage')
+    ..aOS(5, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
+    ..aOS(6, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
+    ..aInt64(7, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
+    ..aInt64(8, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
+    ..aOS(9, _omitFieldNames ? '' : 'cardRewardName', protoName: 'cardRewardName')
+    ..aOM<CardRewardTypeEvaluationRespProto>(10, _omitFieldNames ? '' : 'cardRewardTypeEvaluationResp', protoName: 'cardRewardTypeEvaluationResp', subBuilder: CardRewardTypeEvaluationRespProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -980,60 +982,72 @@ class CardRewardEvaluationEventResultProto extends $pb.GeneratedMessage {
   void clearCardName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get cardImage => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set cardImage($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasCardImage() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearCardImage() => clearField(3);
+  $core.List<$core.String> get cardDesc => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.String get bankID => $_getSZ(3);
+  $core.String get cardImage => $_getSZ(3);
   @$pb.TagNumber(4)
-  set bankID($core.String v) { $_setString(3, v); }
+  set cardImage($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasBankID() => $_has(3);
+  $core.bool hasCardImage() => $_has(3);
   @$pb.TagNumber(4)
-  void clearBankID() => clearField(4);
+  void clearCardImage() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get bankName => $_getSZ(4);
+  $core.String get bankID => $_getSZ(4);
   @$pb.TagNumber(5)
-  set bankName($core.String v) { $_setString(4, v); }
+  set bankID($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasBankName() => $_has(4);
+  $core.bool hasBankID() => $_has(4);
   @$pb.TagNumber(5)
-  void clearBankName() => clearField(5);
+  void clearBankID() => clearField(5);
 
   @$pb.TagNumber(6)
-  $fixnum.Int64 get cardRewardStartDate => $_getI64(5);
+  $core.String get bankName => $_getSZ(5);
   @$pb.TagNumber(6)
-  set cardRewardStartDate($fixnum.Int64 v) { $_setInt64(5, v); }
+  set bankName($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasCardRewardStartDate() => $_has(5);
+  $core.bool hasBankName() => $_has(5);
   @$pb.TagNumber(6)
-  void clearCardRewardStartDate() => clearField(6);
+  void clearBankName() => clearField(6);
 
   @$pb.TagNumber(7)
-  $fixnum.Int64 get cardRewardEndDate => $_getI64(6);
+  $fixnum.Int64 get cardRewardStartDate => $_getI64(6);
   @$pb.TagNumber(7)
-  set cardRewardEndDate($fixnum.Int64 v) { $_setInt64(6, v); }
+  set cardRewardStartDate($fixnum.Int64 v) { $_setInt64(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCardRewardEndDate() => $_has(6);
+  $core.bool hasCardRewardStartDate() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCardRewardEndDate() => clearField(7);
+  void clearCardRewardStartDate() => clearField(7);
 
   @$pb.TagNumber(8)
-  CardRewardTypeEvaluationRespProto get cardRewardTypeEvaluationResp => $_getN(7);
+  $fixnum.Int64 get cardRewardEndDate => $_getI64(7);
   @$pb.TagNumber(8)
-  set cardRewardTypeEvaluationResp(CardRewardTypeEvaluationRespProto v) { setField(8, v); }
+  set cardRewardEndDate($fixnum.Int64 v) { $_setInt64(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasCardRewardTypeEvaluationResp() => $_has(7);
+  $core.bool hasCardRewardEndDate() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCardRewardTypeEvaluationResp() => clearField(8);
-  @$pb.TagNumber(8)
-  CardRewardTypeEvaluationRespProto ensureCardRewardTypeEvaluationResp() => $_ensure(7);
+  void clearCardRewardEndDate() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get cardRewardName => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set cardRewardName($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCardRewardName() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCardRewardName() => clearField(9);
+
+  @$pb.TagNumber(10)
+  CardRewardTypeEvaluationRespProto get cardRewardTypeEvaluationResp => $_getN(9);
+  @$pb.TagNumber(10)
+  set cardRewardTypeEvaluationResp(CardRewardTypeEvaluationRespProto v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasCardRewardTypeEvaluationResp() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearCardRewardTypeEvaluationResp() => clearField(10);
+  @$pb.TagNumber(10)
+  CardRewardTypeEvaluationRespProto ensureCardRewardTypeEvaluationResp() => $_ensure(9);
 }
 
 class EvaluationEventResultRespProto extends $pb.GeneratedMessage {
@@ -1098,10 +1112,11 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FeedbackEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'feedbackType', $pb.PbFieldType.O3, protoName: 'feedbackType')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OD, protoName: 'getReturn')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'getPercentage', $pb.PbFieldType.OD, protoName: 'getPercentage')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'feedbackEventResultStatus', $pb.PbFieldType.O3, protoName: 'feedbackEventResultStatus')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'calculateType', $pb.PbFieldType.O3, protoName: 'calculateType')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OD, protoName: 'getReturn')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'getPercentage', $pb.PbFieldType.OD, protoName: 'getPercentage')
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'feedbackEventResultStatus', $pb.PbFieldType.O3, protoName: 'feedbackEventResultStatus')
     ..hasRequiredFields = false
   ;
 
@@ -1136,40 +1151,49 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
   void clearFeedbackType() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get cost => $_getIZ(1);
+  $core.int get calculateType => $_getIZ(1);
   @$pb.TagNumber(2)
-  set cost($core.int v) { $_setSignedInt32(1, v); }
+  set calculateType($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCost() => $_has(1);
+  $core.bool hasCalculateType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCost() => clearField(2);
+  void clearCalculateType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.double get getReturn => $_getN(2);
+  $core.int get cost => $_getIZ(2);
   @$pb.TagNumber(3)
-  set getReturn($core.double v) { $_setDouble(2, v); }
+  set cost($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGetReturn() => $_has(2);
+  $core.bool hasCost() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGetReturn() => clearField(3);
+  void clearCost() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get getPercentage => $_getN(3);
+  $core.double get getReturn => $_getN(3);
   @$pb.TagNumber(4)
-  set getPercentage($core.double v) { $_setDouble(3, v); }
+  set getReturn($core.double v) { $_setDouble(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGetPercentage() => $_has(3);
+  $core.bool hasGetReturn() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGetPercentage() => clearField(4);
+  void clearGetReturn() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get feedbackEventResultStatus => $_getIZ(4);
+  $core.double get getPercentage => $_getN(4);
   @$pb.TagNumber(5)
-  set feedbackEventResultStatus($core.int v) { $_setSignedInt32(4, v); }
+  set getPercentage($core.double v) { $_setDouble(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasFeedbackEventResultStatus() => $_has(4);
+  $core.bool hasGetPercentage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearFeedbackEventResultStatus() => clearField(5);
+  void clearGetPercentage() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get feedbackEventResultStatus => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set feedbackEventResultStatus($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasFeedbackEventResultStatus() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFeedbackEventResultStatus() => clearField(6);
 }
 
 class RewardEventResultProto extends $pb.GeneratedMessage {
