@@ -64,7 +64,6 @@ class ChannelCategoryType extends StatelessWidget {
     
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
 
-
     return Container(
       child:TextButton(
         onPressed: (){

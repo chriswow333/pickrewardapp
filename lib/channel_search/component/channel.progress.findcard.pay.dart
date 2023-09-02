@@ -1,10 +1,53 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+
+
+class PayWidget extends StatelessWidget {
+  const PayWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 0,
+            blurRadius: 1,
+            offset: Offset(0, 0.5)
+          ),
+        ],
+      ),
+      child:Row(
+        children:[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              PayName(),
+              SizedBox(height:10,),
+              PayItems(),
+            ]
+          )
+        ]
+      )
+      
+    );
+  }
+}
 
 class PayName extends StatelessWidget {
   const PayName({super.key});
@@ -14,7 +57,7 @@ class PayName extends StatelessWidget {
     return Text('行動支付',
       style: TextStyle(
         fontSize: 20,
-        color: Colors.cyan[900],
+        color: Palette.kToBlack[400],
       ),  
     );
   }
@@ -30,19 +73,23 @@ class PayItems extends StatelessWidget {
 
     List<PayItemModel> payItemModels = payItemViewModel.pays;
 
-    return SingleChildScrollView(
-      scrollDirection:Axis.horizontal,
-      child:Row(
-        children:[
-          for(PayItemModel payItemModel in payItemModels)
-            Container(
-              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-              child:PayItem(payItemModel:payItemModel),  
-            ),
-            
-        ]
-      ),
+    return Container(
+      width:MediaQuery.of(context).size.width - 30,
+      child:SingleChildScrollView(
+        scrollDirection:Axis.horizontal,
+        
+        child:Row(
+          children:[
+            for(PayItemModel payItemModel in payItemModels)
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child:PayItem(payItemModel:payItemModel),  
+              ),
+          ]
+        ),
+      )
     );
+    ;
   }
 }
 
@@ -65,42 +112,51 @@ class _PayItemState extends State<PayItem> {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     _selected = rewardSelectedViewModel.existSelectedPayID(id);
 
-    return TextButton(
-      style:ButtonStyle(
-        alignment: Alignment.center,
-        splashFactory:NoSplash.splashFactory,
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    return Container(
+      decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(0, 1)
           ),
-        ),
-        side:MaterialStatePropertyAll(
-          _selected ? 
-          BorderSide(
-            color:Colors.teal[900]!,
-            width: 1,
-          )
-          :null
-        ),
-        padding:const MaterialStatePropertyAll(
-          EdgeInsets.fromLTRB(5, 12, 5, 0),
-        ),
-      ),
-      onPressed: (){
-        
-        setState((){
-          _selected = !_selected;
-        });
-
-        rewardSelectedViewModel.payID = id;
-
-      },
-      child:Column(
-        children:[
-          PayItemIcon(image:widget.payItemModel.image),
-          PayItemName(name:widget.payItemModel.name),
         ],
       ),
+      child:TextButton(
+        style:ButtonStyle(
+          alignment: Alignment.center,
+          splashFactory:NoSplash.splashFactory,
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          side:_selected ? MaterialStatePropertyAll(BorderSide(width:1.0)):null,
+          padding:const MaterialStatePropertyAll(
+            EdgeInsets.fromLTRB(10, 15, 10, 5),
+          ),
+        ),
+        onPressed: (){
+          setState((){
+            _selected = !_selected;
+          });
+          rewardSelectedViewModel.payID = id;
+        },
+        child:Column(
+          children:[
+            PayItemIcon(image:widget.payItemModel.image),
+            PayItemName(name:widget.payItemModel.name),
+          ],
+        ),
+      )
     );
   }
 }
@@ -119,8 +175,8 @@ class PayItemIcon extends StatelessWidget {
       child:Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
-        width:70,
-        height:50,
+        width:60,
+        height:40,
       ),
     );
   }
@@ -134,14 +190,11 @@ class PayItemName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding:const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        // color:Colors.teal[900],
-        // borderRadius: BorderRadius.circular(10),
-      ),
       child:Text(name,
         style: 
         TextStyle(
-          color: Colors.teal[900],
+          fontSize: 15,
+          color: Palette.kToBlack[600],
         ),
       )
     );

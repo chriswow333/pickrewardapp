@@ -1,11 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
+
+
+
+class CostDate extends StatelessWidget {
+  const CostDate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 0,
+            blurRadius: 1,
+            offset: Offset(0, 0.5)
+          ),
+        ],
+      ),
+      child:Row(
+        children:[
+          CostDateName(),
+          SizedBox(width:20),
+          CostDateValue(),
+        ]
+      )
+    );
+  }
+}
 
 
 class CostDateName extends StatelessWidget {
@@ -16,27 +54,12 @@ class CostDateName extends StatelessWidget {
     return Text('消費日期',
       style:TextStyle(
         fontSize: 20,
-        color:Colors.cyan[900],
+        color:Palette.kToBlack[400],
       ),
     );
   }
 }
 
-
-class CostDate extends StatelessWidget {
-  const CostDate({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children:[
-        CostDateName(),
-        SizedBox(width:20),
-        CostDateValue(),
-      ]
-    );
-  }
-}
 
 
 
@@ -58,7 +81,7 @@ class CostDateValue extends StatelessWidget {
             title: Text('消費日期',
               style:TextStyle(
                 fontSize: 20,
-                color:Colors.cyan[900],
+                color:Palette.kToBlack[400],
               ),
             ),
             content:Container(
@@ -88,7 +111,7 @@ class CostDateValue extends StatelessWidget {
       child:Text(formatter.format(rewardSelectedViewModel.eventDate),
         style:TextStyle(
           fontSize: 20,
-          color:Colors.cyan[900],
+          color:Palette.kToBlack[400],
         ),
       )
     );
