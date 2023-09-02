@@ -76,7 +76,7 @@ class CardResult extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:[
                 CardTitle(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,cardImage: cardEvaluation.cardImage,),
-                CardRewardType(cardRewardTypeEvaluationResp: cardEvaluation.cardRewardTypeEvaluationResp,),
+                RewardItem(reward: cardEvaluation.reward,),
                 CardRewardEventResult(feedbackEventResult: feedbackEventResult,),
                 CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
               ],
@@ -166,20 +166,16 @@ class CardRewardEventResult extends StatelessWidget {
   }
 }
 
-class CardRewardType extends StatelessWidget {
-  const CardRewardType({super.key, required this.cardRewardTypeEvaluationResp});
+class RewardItem extends StatelessWidget {
+  const RewardItem({super.key, required this.reward});
 
-  final CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp;
+  final RewardProto reward;
   
 
   @override
   Widget build(BuildContext context) {
-    String rewardName = cardRewardTypeEvaluationResp.reward.rewardName;
-    if (cardRewardTypeEvaluationResp.reward.rewardType == 2) {
-      rewardName = cardRewardTypeEvaluationResp.point.pointName;
-    }
 
-    return Text(rewardName,
+    return Text(reward.name,
       style:TextStyle(
         fontSize: 15,
         color:Colors.cyan[900],

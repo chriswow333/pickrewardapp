@@ -17,8 +17,6 @@ class CardEvaluationDetails extends StatelessWidget {
 
     List<CardRewardDescModel> cardRewardDesc = cardRewardModel.cardRewardDesc;
 
-    
-
     EvaluationDetailToggleViewModel evaluationDetailToggleViewModel = Provider.of<EvaluationDetailToggleViewModel>(context);
     return Container(
       padding:const EdgeInsets.only(top:20),

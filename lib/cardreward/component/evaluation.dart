@@ -63,7 +63,7 @@ class EvaluationHeader extends StatelessWidget {
     return Container(
       child:Row(
         children:[
-          EvaluationRewardTypeName(cardRewardTypeEvaluationResp: cardRewardModel.cardRewardTypeEvaluationResp,),
+          EvaluationRewardTypeName(reward: cardRewardModel.reward,),
           Flexible(
             child: EvaluationName(name:name),
           ),
@@ -92,23 +92,17 @@ class EvaluationName extends StatelessWidget {
 
 
 class EvaluationRewardTypeName extends StatelessWidget {
-  const EvaluationRewardTypeName({super.key, required this.cardRewardTypeEvaluationResp});
+  const EvaluationRewardTypeName({super.key, required this.reward});
   
   
-    final CardRewardTypeEvaluationResp cardRewardTypeEvaluationResp;
+    final RewardModel reward;
 
   @override
   Widget build(BuildContext context) {
 
-    String name = "";
-    if (cardRewardTypeEvaluationResp.reward.rewardType == 1) {
-      name = cardRewardTypeEvaluationResp.reward.rewardName;
-    } else if (cardRewardTypeEvaluationResp.reward.rewardType == 2) {
-      name = cardRewardTypeEvaluationResp.point.pointName;
-    }
     
     return Container(
-      child:Text(name,
+      child:Text(reward.name,
         style:TextStyle(
           color:Colors.cyan[900],
           fontSize: 18,

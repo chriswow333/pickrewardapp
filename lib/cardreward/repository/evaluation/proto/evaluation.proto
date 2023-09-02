@@ -41,12 +41,9 @@ message EvaluationEventResultReply {
 
 
 message EvaluationEventResultProto{
-
   string id = 1;
   int32 evaluationEventStatus = 2;
   PayloadEventResultProto payloadEventResult = 3;
-
-
 }
 
 message PayloadEventResultProto {
@@ -55,7 +52,6 @@ message PayloadEventResultProto {
   FeedbackEventResultProto feedbackEventResult = 3;
   repeated PayloadEventResultProto payloadEventResults = 4;
   ContainerEventResultProto containerEventResult = 5;
-  
 }
 
 message ContainerEventResultProto {
@@ -76,7 +72,7 @@ message ConstraintEventResultProto {
 }
 
 message FeedbackEventResultProto {
-  int32 feedbackType = 1;
+  int32 rewardType = 1;
   int32 calculateType = 2;
   int32 cost = 3;
   float getReturn = 4;
@@ -89,20 +85,15 @@ message FeedbackEventResultProto {
 
 
 message EventProto {
-
   string evaluationID = 1;
   string ownerID = 2;
-
   repeated string taskIDs = 3;
   repeated string payIDs = 4;
   repeated string channelIDs = 5;
   repeated int32 labels = 6;
   int64 eventDate = 7;
   int32 cost = 8;
-  int32 currencyType = 9;
-  int32 rewardType = 10;
-  int32 pointType = 11;
-
+  int32 rewardType = 9;
 }
 
 message EvaluationsReply{
@@ -124,15 +115,18 @@ message EvaluationProto {
   int64 updateDate = 3;
   int64 startDate = 4;
   int64 endDate = 5;
-  EvaluationRewardTypeProto evaluationRewardType = 6;
+  RewardProto reward = 6;
   string ownerID = 7;
   PayloadProto payload = 8;
 }
 
-message EvaluationRewardTypeProto {
-  int32 rewardType = 1;
-  int32 currencyType = 2;
-  int32 pointType = 3;
+
+message RewardProto {
+  string id = 1;
+  string name = 2;
+  int32 rewardType = 3;
+  int64 createDate = 4;
+  int64 updateDate = 5;
 }
 
 message PayloadProto {
@@ -146,7 +140,7 @@ message PayloadProto {
 
 
 message FeedbackProto {
-  int32 feedbackType = 1;
+  int32 rewardType = 1;
   int32 calculateType = 2;
   int32 minCost = 3;
   int32 fixed = 4;
@@ -275,7 +269,7 @@ message ConstraintsEvaluationRespProto {
 
 message ConstraintEvaluationRespProto {
   int32 constraintType = 1;
-  ConstraintProto contraint = 2;
+  ConstraintProto constraint = 2;
 }
 
 message LabelEvaluationRespProto {

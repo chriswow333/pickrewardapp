@@ -71,7 +71,7 @@ class GetReturnTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    String name = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.reward.rewardName;
+    String name = evaluationSelectedViewModel.cardRewardModel.reward.name;
     
     return Text(name,
       style: TextStyle(
@@ -124,15 +124,8 @@ class EventResultGetReturn extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    int rewardType = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.reward.rewardType;
-    
 
-    String unit = "";
-    if(rewardType == 1) {
-      unit = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.currency.currencyName;
-    } else if (rewardType == 2) {
-      unit = evaluationSelectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.point.pointName;
-    }
+    String unit = evaluationSelectedViewModel.cardRewardModel.reward.name;
 
 
     EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);

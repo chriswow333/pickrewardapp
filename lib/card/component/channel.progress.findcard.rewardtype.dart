@@ -37,14 +37,16 @@ class RewardTypeItems extends StatelessWidget {
 class CashType extends StatelessWidget {
   const CashType({super.key});
 
+  final int rewardCashType = 0;
+
   @override
   Widget build(BuildContext context) {
-
+    
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
     return TextButton(
       onPressed: (){
-        rewardSelectedViewModel.rewardType = RewardTypeEnum.CASH;
+        rewardSelectedViewModel.rewardType = rewardCashType;
       },
       style:ButtonStyle(
         splashFactory:NoSplash.splashFactory,
@@ -55,9 +57,9 @@ class CashType extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: rewardSelectedViewModel.isSelectedRewardType(RewardTypeEnum.CASH) ,
+            value: rewardSelectedViewModel.rewardType == rewardCashType ,
             onChanged: (bool? value) {
-              rewardSelectedViewModel.rewardType = RewardTypeEnum.CASH;
+              rewardSelectedViewModel.rewardType = rewardCashType;
             },
           ),
           Text('現金回饋',
@@ -77,13 +79,15 @@ class CashType extends StatelessWidget {
 class PointType extends StatelessWidget {
   const PointType({super.key});
 
+    final int rewardPointType = 1;
+
+
   @override
   Widget build(BuildContext context) {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     return TextButton(
-
       onPressed: (){
-        rewardSelectedViewModel.rewardType = RewardTypeEnum.POINT;
+        rewardSelectedViewModel.rewardType = rewardPointType;
       },
       style:const ButtonStyle(
         splashFactory:NoSplash.splashFactory,
@@ -94,9 +98,9 @@ class PointType extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
-            value: rewardSelectedViewModel.isSelectedRewardType(RewardTypeEnum.POINT) ,
+            value: rewardSelectedViewModel.rewardType == rewardPointType ,
             onChanged: (bool? value) {
-              rewardSelectedViewModel.rewardType = RewardTypeEnum.POINT;
+              rewardSelectedViewModel.rewardType = rewardPointType;
             },
           ),
           Text('點數回饋',

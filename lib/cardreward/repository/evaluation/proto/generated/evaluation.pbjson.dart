@@ -140,7 +140,7 @@ final $typed_data.Uint8List constraintEventResultProtoDescriptor = $convert.base
 const FeedbackEventResultProto$json = {
   '1': 'FeedbackEventResultProto',
   '2': [
-    {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
+    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
     {'1': 'calculateType', '3': 2, '4': 1, '5': 5, '10': 'calculateType'},
     {'1': 'cost', '3': 3, '4': 1, '5': 5, '10': 'cost'},
     {'1': 'getReturn', '3': 4, '4': 1, '5': 2, '10': 'getReturn'},
@@ -151,11 +151,11 @@ const FeedbackEventResultProto$json = {
 
 /// Descriptor for `FeedbackEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackEventResultProtoDescriptor = $convert.base64Decode(
-    'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SIgoMZmVlZGJhY2tUeXBlGAEgASgFUgxmZWVkYm'
-    'Fja1R5cGUSJAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRISCgRjb3N0GAMg'
-    'ASgFUgRjb3N0EhwKCWdldFJldHVybhgEIAEoAlIJZ2V0UmV0dXJuEiQKDWdldFBlcmNlbnRhZ2'
-    'UYBSABKAJSDWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEo'
-    'BVIZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cw==');
+    'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SHgoKcmV3YXJkVHlwZRgBIAEoBVIKcmV3YXJkVH'
+    'lwZRIkCg1jYWxjdWxhdGVUeXBlGAIgASgFUg1jYWxjdWxhdGVUeXBlEhIKBGNvc3QYAyABKAVS'
+    'BGNvc3QSHAoJZ2V0UmV0dXJuGAQgASgCUglnZXRSZXR1cm4SJAoNZ2V0UGVyY2VudGFnZRgFIA'
+    'EoAlINZ2V0UGVyY2VudGFnZRI8ChlmZWVkYmFja0V2ZW50UmVzdWx0U3RhdHVzGAYgASgFUhlm'
+    'ZWVkYmFja0V2ZW50UmVzdWx0U3RhdHVz');
 
 @$core.Deprecated('Use eventProtoDescriptor instead')
 const EventProto$json = {
@@ -169,9 +169,7 @@ const EventProto$json = {
     {'1': 'labels', '3': 6, '4': 3, '5': 5, '10': 'labels'},
     {'1': 'eventDate', '3': 7, '4': 1, '5': 3, '10': 'eventDate'},
     {'1': 'cost', '3': 8, '4': 1, '5': 5, '10': 'cost'},
-    {'1': 'currencyType', '3': 9, '4': 1, '5': 5, '10': 'currencyType'},
-    {'1': 'rewardType', '3': 10, '4': 1, '5': 5, '10': 'rewardType'},
-    {'1': 'pointType', '3': 11, '4': 1, '5': 5, '10': 'pointType'},
+    {'1': 'rewardType', '3': 9, '4': 1, '5': 5, '10': 'rewardType'},
   ],
 };
 
@@ -181,8 +179,7 @@ final $typed_data.Uint8List eventProtoDescriptor = $convert.base64Decode(
     'VySUQYAiABKAlSB293bmVySUQSGAoHdGFza0lEcxgDIAMoCVIHdGFza0lEcxIWCgZwYXlJRHMY'
     'BCADKAlSBnBheUlEcxIeCgpjaGFubmVsSURzGAUgAygJUgpjaGFubmVsSURzEhYKBmxhYmVscx'
     'gGIAMoBVIGbGFiZWxzEhwKCWV2ZW50RGF0ZRgHIAEoA1IJZXZlbnREYXRlEhIKBGNvc3QYCCAB'
-    'KAVSBGNvc3QSIgoMY3VycmVuY3lUeXBlGAkgASgFUgxjdXJyZW5jeVR5cGUSHgoKcmV3YXJkVH'
-    'lwZRgKIAEoBVIKcmV3YXJkVHlwZRIcCglwb2ludFR5cGUYCyABKAVSCXBvaW50VHlwZQ==');
+    'KAVSBGNvc3QSHgoKcmV3YXJkVHlwZRgJIAEoBVIKcmV3YXJkVHlwZQ==');
 
 @$core.Deprecated('Use evaluationsReplyDescriptor instead')
 const EvaluationsReply$json = {
@@ -223,7 +220,7 @@ const EvaluationProto$json = {
     {'1': 'updateDate', '3': 3, '4': 1, '5': 3, '10': 'updateDate'},
     {'1': 'startDate', '3': 4, '4': 1, '5': 3, '10': 'startDate'},
     {'1': 'endDate', '3': 5, '4': 1, '5': 3, '10': 'endDate'},
-    {'1': 'evaluationRewardType', '3': 6, '4': 1, '5': 11, '6': '.evaluation.EvaluationRewardTypeProto', '10': 'evaluationRewardType'},
+    {'1': 'reward', '3': 6, '4': 1, '5': 11, '6': '.evaluation.RewardProto', '10': 'reward'},
     {'1': 'ownerID', '3': 7, '4': 1, '5': 9, '10': 'ownerID'},
     {'1': 'payload', '3': 8, '4': 1, '5': 11, '6': '.evaluation.PayloadProto', '10': 'payload'},
   ],
@@ -233,26 +230,28 @@ const EvaluationProto$json = {
 final $typed_data.Uint8List evaluationProtoDescriptor = $convert.base64Decode(
     'Cg9FdmFsdWF0aW9uUHJvdG8SDgoCaWQYASABKAlSAmlkEh4KCmNyZWF0ZURhdGUYAiABKANSCm'
     'NyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgDIAEoA1IKdXBkYXRlRGF0ZRIcCglzdGFydERhdGUY'
-    'BCABKANSCXN0YXJ0RGF0ZRIYCgdlbmREYXRlGAUgASgDUgdlbmREYXRlElkKFGV2YWx1YXRpb2'
-    '5SZXdhcmRUeXBlGAYgASgLMiUuZXZhbHVhdGlvbi5FdmFsdWF0aW9uUmV3YXJkVHlwZVByb3Rv'
-    'UhRldmFsdWF0aW9uUmV3YXJkVHlwZRIYCgdvd25lcklEGAcgASgJUgdvd25lcklEEjIKB3BheW'
-    'xvYWQYCCABKAsyGC5ldmFsdWF0aW9uLlBheWxvYWRQcm90b1IHcGF5bG9hZA==');
+    'BCABKANSCXN0YXJ0RGF0ZRIYCgdlbmREYXRlGAUgASgDUgdlbmREYXRlEi8KBnJld2FyZBgGIA'
+    'EoCzIXLmV2YWx1YXRpb24uUmV3YXJkUHJvdG9SBnJld2FyZBIYCgdvd25lcklEGAcgASgJUgdv'
+    'd25lcklEEjIKB3BheWxvYWQYCCABKAsyGC5ldmFsdWF0aW9uLlBheWxvYWRQcm90b1IHcGF5bG'
+    '9hZA==');
 
-@$core.Deprecated('Use evaluationRewardTypeProtoDescriptor instead')
-const EvaluationRewardTypeProto$json = {
-  '1': 'EvaluationRewardTypeProto',
+@$core.Deprecated('Use rewardProtoDescriptor instead')
+const RewardProto$json = {
+  '1': 'RewardProto',
   '2': [
-    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
-    {'1': 'currencyType', '3': 2, '4': 1, '5': 5, '10': 'currencyType'},
-    {'1': 'pointType', '3': 3, '4': 1, '5': 5, '10': 'pointType'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'rewardType', '3': 3, '4': 1, '5': 5, '10': 'rewardType'},
+    {'1': 'createDate', '3': 4, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 5, '4': 1, '5': 3, '10': 'updateDate'},
   ],
 };
 
-/// Descriptor for `EvaluationRewardTypeProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List evaluationRewardTypeProtoDescriptor = $convert.base64Decode(
-    'ChlFdmFsdWF0aW9uUmV3YXJkVHlwZVByb3RvEh4KCnJld2FyZFR5cGUYASABKAVSCnJld2FyZF'
-    'R5cGUSIgoMY3VycmVuY3lUeXBlGAIgASgFUgxjdXJyZW5jeVR5cGUSHAoJcG9pbnRUeXBlGAMg'
-    'ASgFUglwb2ludFR5cGU=');
+/// Descriptor for `RewardProto`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List rewardProtoDescriptor = $convert.base64Decode(
+    'CgtSZXdhcmRQcm90bxIOCgJpZBgBIAEoCVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZRIeCgpyZX'
+    'dhcmRUeXBlGAMgASgFUgpyZXdhcmRUeXBlEh4KCmNyZWF0ZURhdGUYBCABKANSCmNyZWF0ZURh'
+    'dGUSHgoKdXBkYXRlRGF0ZRgFIAEoA1IKdXBkYXRlRGF0ZQ==');
 
 @$core.Deprecated('Use payloadProtoDescriptor instead')
 const PayloadProto$json = {
@@ -279,7 +278,7 @@ final $typed_data.Uint8List payloadProtoDescriptor = $convert.base64Decode(
 const FeedbackProto$json = {
   '1': 'FeedbackProto',
   '2': [
-    {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
+    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
     {'1': 'calculateType', '3': 2, '4': 1, '5': 5, '10': 'calculateType'},
     {'1': 'minCost', '3': 3, '4': 1, '5': 5, '10': 'minCost'},
     {'1': 'fixed', '3': 4, '4': 1, '5': 5, '10': 'fixed'},
@@ -290,10 +289,10 @@ const FeedbackProto$json = {
 
 /// Descriptor for `FeedbackProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackProtoDescriptor = $convert.base64Decode(
-    'Cg1GZWVkYmFja1Byb3RvEiIKDGZlZWRiYWNrVHlwZRgBIAEoBVIMZmVlZGJhY2tUeXBlEiQKDW'
-    'NhbGN1bGF0ZVR5cGUYAiABKAVSDWNhbGN1bGF0ZVR5cGUSGAoHbWluQ29zdBgDIAEoBVIHbWlu'
-    'Q29zdBIUCgVmaXhlZBgEIAEoBVIFZml4ZWQSHgoKcGVyY2VudGFnZRgFIAEoAlIKcGVyY2VudG'
-    'FnZRIcCglyZXR1cm5NYXgYBiABKAJSCXJldHVybk1heA==');
+    'Cg1GZWVkYmFja1Byb3RvEh4KCnJld2FyZFR5cGUYASABKAVSCnJld2FyZFR5cGUSJAoNY2FsY3'
+    'VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRIYCgdtaW5Db3N0GAMgASgFUgdtaW5Db3N0'
+    'EhQKBWZpeGVkGAQgASgFUgVmaXhlZBIeCgpwZXJjZW50YWdlGAUgASgCUgpwZXJjZW50YWdlEh'
+    'wKCXJldHVybk1heBgGIAEoAlIJcmV0dXJuTWF4');
 
 @$core.Deprecated('Use containerProtoDescriptor instead')
 const ContainerProto$json = {
@@ -584,15 +583,15 @@ const ConstraintEvaluationRespProto$json = {
   '1': 'ConstraintEvaluationRespProto',
   '2': [
     {'1': 'constraintType', '3': 1, '4': 1, '5': 5, '10': 'constraintType'},
-    {'1': 'contraint', '3': 2, '4': 1, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'contraint'},
+    {'1': 'constraint', '3': 2, '4': 1, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'constraint'},
   ],
 };
 
 /// Descriptor for `ConstraintEvaluationRespProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List constraintEvaluationRespProtoDescriptor = $convert.base64Decode(
     'Ch1Db25zdHJhaW50RXZhbHVhdGlvblJlc3BQcm90bxImCg5jb25zdHJhaW50VHlwZRgBIAEoBV'
-    'IOY29uc3RyYWludFR5cGUSOQoJY29udHJhaW50GAIgASgLMhsuZXZhbHVhdGlvbi5Db25zdHJh'
-    'aW50UHJvdG9SCWNvbnRyYWludA==');
+    'IOY29uc3RyYWludFR5cGUSOwoKY29uc3RyYWludBgCIAEoCzIbLmV2YWx1YXRpb24uQ29uc3Ry'
+    'YWludFByb3RvUgpjb25zdHJhaW50');
 
 @$core.Deprecated('Use labelEvaluationRespProtoDescriptor instead')
 const LabelEvaluationRespProto$json = {

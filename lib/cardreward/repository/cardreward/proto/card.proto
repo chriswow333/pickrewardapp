@@ -1,24 +1,21 @@
 syntax = "proto3";
 
 
-option go_package = "pickrewardapi/api/card/proto";
+// option go_package = "pickrewardapi/api/card/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
 package card;
 
-// The greeting service definition.
 service Card {
   rpc CreateBank (BankProto) returns (Reply) {}
   rpc CreateCard (CardProto) returns (Reply) {}
   rpc GetAllBanks (EmptyRequest) returns (BanksProtoReply) {}
   rpc GetCardsByBankID (BankIDProto) returns (CardsProtoReply) {}
-  // rpc GetCardRewardFlattenByRewardID(RewardIDProto) returns (CardRewardFlattenReply){}
 
   rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
   rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}
-  // rpc GetCardContentByCardID(CardIDProto) returns (CardContentReply) {}
   rpc EvaluateCards(CardEventProto) returns (EvaluateCardRewardsProtoReply){}
 }
 
@@ -30,7 +27,6 @@ message CardContentReply{
   Reply reply = 1;
   CardProto card = 2;
   repeated CardRewardProto cardRewards = 3;
-
 }
 
 
@@ -49,41 +45,21 @@ message CardRewardProto {
   int64 startDate = 7;
   int64 endDate = 8;
   int32 cardRewardType = 9;
-  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 10;
-  CardRewardTypeEvaluationProto cardRewardTypeEvaluation = 11;
+  string rewardID = 10;
+  RewardProto reward = 11;
   int32 order = 12;
-}
-
-message CardRewardTypeEvaluationRespProto{
-  RewardProto reward = 1;
-  CurrencyProto currency = 2;
-  PointProto point = 3;
 }
 
 
 message RewardProto {
-  int32 rewardType = 1;
-  string rewardName = 2;
-
-}
-
-message CurrencyProto {
-  int32 currencyType = 1;
-  string currencyName = 2;
+  string id = 1;
+  string name = 2;
+  int32 rewardType = 3;
+  int64 createDate = 4;
+  int64 updateDate = 5;
 }
 
 
-message PointProto {
-  int32 pointType = 1;
-  string pointName = 2;
-
-}
-
-message CardRewardTypeEvaluationProto {
-  int32 rewardType = 1;
-  int32 currencyType = 2;
-  int32 pointType = 3;
-}
 
 message CardRewardDescriptionProto {
  string name = 1;
@@ -98,17 +74,13 @@ message CardEventProto {
 
 message EventProto {
   string evaluationID = 1;
-
   repeated string taskIDs = 2;
   repeated string payIDs = 3;
   repeated string channelIDs = 4;
   repeated int32 labels = 5;
   int64 eventDate = 6;
   int32 cost = 7;
-  int32 currencyType = 8;
-  int32 rewardType = 9;
-  int32 pointType = 10;
-
+  int32 rewardType = 8;
 }
 
 
@@ -132,11 +104,10 @@ message CardRewardEvaluationEventResultProto {
   string cardImage = 4;
   string bankID = 5;
   string bankName = 6;
-
   int64 cardRewardStartDate = 7;
   int64 cardRewardEndDate = 8;
   string cardRewardName = 9;
-  CardRewardTypeEvaluationRespProto cardRewardTypeEvaluationResp = 10;
+  RewardProto reward = 10;
 }
 
 message EvaluationEventResultRespProto{
@@ -145,15 +116,13 @@ message EvaluationEventResultRespProto{
 }
 
 message FeedbackEventResultProto {
-  int32 feedbackType = 1;
+  int32 rewardType = 1;
   int32 calculateType = 2;
   int32 cost = 3;
   double getReturn = 4;
   double getPercentage = 5;
   int32 feedbackEventResultStatus = 6; 
 }
-
-
 
 message RewardEventResultProto{
   string id  = 1;
@@ -170,7 +139,7 @@ message PayloadEventProto {
 }
 
 message FeedbackEventProto {
-  int32 feedbackType = 1;
+  int32 rewardType = 1;
   int32 cost = 2;
   double getReturn = 3;
   double getPercentage = 4;
@@ -193,51 +162,10 @@ message ConstraintEventReplyProto {
   repeated string misMatches = 4;
 }
 
-
-message RewardIDProto{
-  string id = 1;
-}
-
-
-message CardRewardFlattenReply {
-  Reply reply = 1;
-  CardRewardFlatten cardRewardFlatten = 2;
-}
-
-
-message CardRewardFlatten{
-  string id = 1;
-  repeated CardRewardChannelFlatten channels =2;
-  CardRewardPayFlatten pays = 3;
-  CardRewardTasksFlatten tasks = 4;
-  repeated CardRewardConstraintFlatten constraints = 5;
-  CardRewardLabelFlatten labels = 6;
-}
-
-
-message CardRewardLabelFlatten{
-  repeated LabelProto matches = 1;
-  repeated LabelProto misMatches = 2;
-}
-
 message LabelProto {
   int32 type = 1;
   string name = 2;
 }
-
-
-message CardRewardConstraintFlatten {
-  int32 constraintType = 1;
-  repeated int32 weekDays = 2;
-}
-
-
-
-message CardRewardTasksFlatten{
-  repeated TaskProto matches = 2;
-  repeated TaskProto misMatches = 3;
-}
-
 
 message TaskProto {
   string id = 1;
@@ -255,55 +183,29 @@ message DescriptionProto {
   int32 order = 3;
 }
 
-
-message CardRewardPayFlatten {
-  repeated PayProto matches = 1;
-  repeated PayProto misMatches = 2;
-}
-
-
 message PayProto{
-
   string id = 1;
   string name = 2;
   string image = 3;
   string linkURL = 4;
   repeated string descriptions = 5;
-
   int64 createDate = 6;
   int64 updateDate = 7;
-
-
   int32 order = 8;
-
   int32 payStatus = 9;
 }
 
-
-message CardRewardChannelFlatten {
-  int32 ChannelCategoryType = 1;
-  repeated ChannelProto matches = 2;
-  repeated ChannelProto misMatches = 3;
-}
-
-
-
 message ChannelProto{
-
   string id = 1;
   string name = 2;
   string image = 3;
   string linkURL = 4;
   repeated string descriptions = 5;
   int32 channelCategoryType = 6;
-
   int64 createDate = 7;
   int64 updateDate = 8;
-
   repeated ChannelLabelProto channelLabels = 9;
-
   int32 order = 10;
-
   int32 channelStatus = 11;
 }
 
@@ -313,8 +215,6 @@ message ChannelLabelProto {
   string name = 2;
   int32 order = 3;
 }
-
-
 
 message EmptyRequest{}
 

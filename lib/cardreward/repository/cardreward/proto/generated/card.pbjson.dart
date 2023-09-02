@@ -68,8 +68,8 @@ const CardRewardProto$json = {
     {'1': 'startDate', '3': 7, '4': 1, '5': 3, '10': 'startDate'},
     {'1': 'endDate', '3': 8, '4': 1, '5': 3, '10': 'endDate'},
     {'1': 'cardRewardType', '3': 9, '4': 1, '5': 5, '10': 'cardRewardType'},
-    {'1': 'cardRewardTypeEvaluationResp', '3': 10, '4': 1, '5': 11, '6': '.card.CardRewardTypeEvaluationRespProto', '10': 'cardRewardTypeEvaluationResp'},
-    {'1': 'cardRewardTypeEvaluation', '3': 11, '4': 1, '5': 11, '6': '.card.CardRewardTypeEvaluationProto', '10': 'cardRewardTypeEvaluation'},
+    {'1': 'rewardID', '3': 10, '4': 1, '5': 9, '10': 'rewardID'},
+    {'1': 'reward', '3': 11, '4': 1, '5': 11, '6': '.card.RewardProto', '10': 'reward'},
     {'1': 'order', '3': 12, '4': 1, '5': 5, '10': 'order'},
   ],
 };
@@ -81,86 +81,27 @@ final $typed_data.Uint8List cardRewardProtoDescriptor = $convert.base64Decode(
     'LmNhcmQuQ2FyZFJld2FyZERlc2NyaXB0aW9uUHJvdG9SFmNhcmRSZXdhcmREZXNjcmlwdGlvbn'
     'MSHgoKY3JlYXRlRGF0ZRgFIAEoA1IKY3JlYXRlRGF0ZRIeCgp1cGRhdGVEYXRlGAYgASgDUgp1'
     'cGRhdGVEYXRlEhwKCXN0YXJ0RGF0ZRgHIAEoA1IJc3RhcnREYXRlEhgKB2VuZERhdGUYCCABKA'
-    'NSB2VuZERhdGUSJgoOY2FyZFJld2FyZFR5cGUYCSABKAVSDmNhcmRSZXdhcmRUeXBlEmsKHGNh'
-    'cmRSZXdhcmRUeXBlRXZhbHVhdGlvblJlc3AYCiABKAsyJy5jYXJkLkNhcmRSZXdhcmRUeXBlRX'
-    'ZhbHVhdGlvblJlc3BQcm90b1IcY2FyZFJld2FyZFR5cGVFdmFsdWF0aW9uUmVzcBJfChhjYXJk'
-    'UmV3YXJkVHlwZUV2YWx1YXRpb24YCyABKAsyIy5jYXJkLkNhcmRSZXdhcmRUeXBlRXZhbHVhdG'
-    'lvblByb3RvUhhjYXJkUmV3YXJkVHlwZUV2YWx1YXRpb24SFAoFb3JkZXIYDCABKAVSBW9yZGVy');
-
-@$core.Deprecated('Use cardRewardTypeEvaluationRespProtoDescriptor instead')
-const CardRewardTypeEvaluationRespProto$json = {
-  '1': 'CardRewardTypeEvaluationRespProto',
-  '2': [
-    {'1': 'reward', '3': 1, '4': 1, '5': 11, '6': '.card.RewardProto', '10': 'reward'},
-    {'1': 'currency', '3': 2, '4': 1, '5': 11, '6': '.card.CurrencyProto', '10': 'currency'},
-    {'1': 'point', '3': 3, '4': 1, '5': 11, '6': '.card.PointProto', '10': 'point'},
-  ],
-};
-
-/// Descriptor for `CardRewardTypeEvaluationRespProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardTypeEvaluationRespProtoDescriptor = $convert.base64Decode(
-    'CiFDYXJkUmV3YXJkVHlwZUV2YWx1YXRpb25SZXNwUHJvdG8SKQoGcmV3YXJkGAEgASgLMhEuY2'
-    'FyZC5SZXdhcmRQcm90b1IGcmV3YXJkEi8KCGN1cnJlbmN5GAIgASgLMhMuY2FyZC5DdXJyZW5j'
-    'eVByb3RvUghjdXJyZW5jeRImCgVwb2ludBgDIAEoCzIQLmNhcmQuUG9pbnRQcm90b1IFcG9pbn'
-    'Q=');
+    'NSB2VuZERhdGUSJgoOY2FyZFJld2FyZFR5cGUYCSABKAVSDmNhcmRSZXdhcmRUeXBlEhoKCHJl'
+    'd2FyZElEGAogASgJUghyZXdhcmRJRBIpCgZyZXdhcmQYCyABKAsyES5jYXJkLlJld2FyZFByb3'
+    'RvUgZyZXdhcmQSFAoFb3JkZXIYDCABKAVSBW9yZGVy');
 
 @$core.Deprecated('Use rewardProtoDescriptor instead')
 const RewardProto$json = {
   '1': 'RewardProto',
   '2': [
-    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
-    {'1': 'rewardName', '3': 2, '4': 1, '5': 9, '10': 'rewardName'},
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'rewardType', '3': 3, '4': 1, '5': 5, '10': 'rewardType'},
+    {'1': 'createDate', '3': 4, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 5, '4': 1, '5': 3, '10': 'updateDate'},
   ],
 };
 
 /// Descriptor for `RewardProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List rewardProtoDescriptor = $convert.base64Decode(
-    'CgtSZXdhcmRQcm90bxIeCgpyZXdhcmRUeXBlGAEgASgFUgpyZXdhcmRUeXBlEh4KCnJld2FyZE'
-    '5hbWUYAiABKAlSCnJld2FyZE5hbWU=');
-
-@$core.Deprecated('Use currencyProtoDescriptor instead')
-const CurrencyProto$json = {
-  '1': 'CurrencyProto',
-  '2': [
-    {'1': 'currencyType', '3': 1, '4': 1, '5': 5, '10': 'currencyType'},
-    {'1': 'currencyName', '3': 2, '4': 1, '5': 9, '10': 'currencyName'},
-  ],
-};
-
-/// Descriptor for `CurrencyProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List currencyProtoDescriptor = $convert.base64Decode(
-    'Cg1DdXJyZW5jeVByb3RvEiIKDGN1cnJlbmN5VHlwZRgBIAEoBVIMY3VycmVuY3lUeXBlEiIKDG'
-    'N1cnJlbmN5TmFtZRgCIAEoCVIMY3VycmVuY3lOYW1l');
-
-@$core.Deprecated('Use pointProtoDescriptor instead')
-const PointProto$json = {
-  '1': 'PointProto',
-  '2': [
-    {'1': 'pointType', '3': 1, '4': 1, '5': 5, '10': 'pointType'},
-    {'1': 'pointName', '3': 2, '4': 1, '5': 9, '10': 'pointName'},
-  ],
-};
-
-/// Descriptor for `PointProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pointProtoDescriptor = $convert.base64Decode(
-    'CgpQb2ludFByb3RvEhwKCXBvaW50VHlwZRgBIAEoBVIJcG9pbnRUeXBlEhwKCXBvaW50TmFtZR'
-    'gCIAEoCVIJcG9pbnROYW1l');
-
-@$core.Deprecated('Use cardRewardTypeEvaluationProtoDescriptor instead')
-const CardRewardTypeEvaluationProto$json = {
-  '1': 'CardRewardTypeEvaluationProto',
-  '2': [
-    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
-    {'1': 'currencyType', '3': 2, '4': 1, '5': 5, '10': 'currencyType'},
-    {'1': 'pointType', '3': 3, '4': 1, '5': 5, '10': 'pointType'},
-  ],
-};
-
-/// Descriptor for `CardRewardTypeEvaluationProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardTypeEvaluationProtoDescriptor = $convert.base64Decode(
-    'Ch1DYXJkUmV3YXJkVHlwZUV2YWx1YXRpb25Qcm90bxIeCgpyZXdhcmRUeXBlGAEgASgFUgpyZX'
-    'dhcmRUeXBlEiIKDGN1cnJlbmN5VHlwZRgCIAEoBVIMY3VycmVuY3lUeXBlEhwKCXBvaW50VHlw'
-    'ZRgDIAEoBVIJcG9pbnRUeXBl');
+    'CgtSZXdhcmRQcm90bxIOCgJpZBgBIAEoCVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZRIeCgpyZX'
+    'dhcmRUeXBlGAMgASgFUgpyZXdhcmRUeXBlEh4KCmNyZWF0ZURhdGUYBCABKANSCmNyZWF0ZURh'
+    'dGUSHgoKdXBkYXRlRGF0ZRgFIAEoA1IKdXBkYXRlRGF0ZQ==');
 
 @$core.Deprecated('Use cardRewardDescriptionProtoDescriptor instead')
 const CardRewardDescriptionProto$json = {
@@ -201,9 +142,7 @@ const EventProto$json = {
     {'1': 'labels', '3': 5, '4': 3, '5': 5, '10': 'labels'},
     {'1': 'eventDate', '3': 6, '4': 1, '5': 3, '10': 'eventDate'},
     {'1': 'cost', '3': 7, '4': 1, '5': 5, '10': 'cost'},
-    {'1': 'currencyType', '3': 8, '4': 1, '5': 5, '10': 'currencyType'},
-    {'1': 'rewardType', '3': 9, '4': 1, '5': 5, '10': 'rewardType'},
-    {'1': 'pointType', '3': 10, '4': 1, '5': 5, '10': 'pointType'},
+    {'1': 'rewardType', '3': 8, '4': 1, '5': 5, '10': 'rewardType'},
   ],
 };
 
@@ -212,9 +151,8 @@ final $typed_data.Uint8List eventProtoDescriptor = $convert.base64Decode(
     'CgpFdmVudFByb3RvEiIKDGV2YWx1YXRpb25JRBgBIAEoCVIMZXZhbHVhdGlvbklEEhgKB3Rhc2'
     'tJRHMYAiADKAlSB3Rhc2tJRHMSFgoGcGF5SURzGAMgAygJUgZwYXlJRHMSHgoKY2hhbm5lbElE'
     'cxgEIAMoCVIKY2hhbm5lbElEcxIWCgZsYWJlbHMYBSADKAVSBmxhYmVscxIcCglldmVudERhdG'
-    'UYBiABKANSCWV2ZW50RGF0ZRISCgRjb3N0GAcgASgFUgRjb3N0EiIKDGN1cnJlbmN5VHlwZRgI'
-    'IAEoBVIMY3VycmVuY3lUeXBlEh4KCnJld2FyZFR5cGUYCSABKAVSCnJld2FyZFR5cGUSHAoJcG'
-    '9pbnRUeXBlGAogASgFUglwb2ludFR5cGU=');
+    'UYBiABKANSCWV2ZW50RGF0ZRISCgRjb3N0GAcgASgFUgRjb3N0Eh4KCnJld2FyZFR5cGUYCCAB'
+    'KAVSCnJld2FyZFR5cGU=');
 
 @$core.Deprecated('Use evaluateCardRewardsProtoReplyDescriptor instead')
 const EvaluateCardRewardsProtoReply$json = {
@@ -262,7 +200,7 @@ const CardRewardEvaluationEventResultProto$json = {
     {'1': 'cardRewardStartDate', '3': 7, '4': 1, '5': 3, '10': 'cardRewardStartDate'},
     {'1': 'cardRewardEndDate', '3': 8, '4': 1, '5': 3, '10': 'cardRewardEndDate'},
     {'1': 'cardRewardName', '3': 9, '4': 1, '5': 9, '10': 'cardRewardName'},
-    {'1': 'cardRewardTypeEvaluationResp', '3': 10, '4': 1, '5': 11, '6': '.card.CardRewardTypeEvaluationRespProto', '10': 'cardRewardTypeEvaluationResp'},
+    {'1': 'reward', '3': 10, '4': 1, '5': 11, '6': '.card.RewardProto', '10': 'reward'},
   ],
 };
 
@@ -274,9 +212,7 @@ final $typed_data.Uint8List cardRewardEvaluationEventResultProtoDescriptor = $co
     'JhbmtJRBIaCghiYW5rTmFtZRgGIAEoCVIIYmFua05hbWUSMAoTY2FyZFJld2FyZFN0YXJ0RGF0'
     'ZRgHIAEoA1ITY2FyZFJld2FyZFN0YXJ0RGF0ZRIsChFjYXJkUmV3YXJkRW5kRGF0ZRgIIAEoA1'
     'IRY2FyZFJld2FyZEVuZERhdGUSJgoOY2FyZFJld2FyZE5hbWUYCSABKAlSDmNhcmRSZXdhcmRO'
-    'YW1lEmsKHGNhcmRSZXdhcmRUeXBlRXZhbHVhdGlvblJlc3AYCiABKAsyJy5jYXJkLkNhcmRSZX'
-    'dhcmRUeXBlRXZhbHVhdGlvblJlc3BQcm90b1IcY2FyZFJld2FyZFR5cGVFdmFsdWF0aW9uUmVz'
-    'cA==');
+    'YW1lEikKBnJld2FyZBgKIAEoCzIRLmNhcmQuUmV3YXJkUHJvdG9SBnJld2FyZA==');
 
 @$core.Deprecated('Use evaluationEventResultRespProtoDescriptor instead')
 const EvaluationEventResultRespProto$json = {
@@ -297,7 +233,7 @@ final $typed_data.Uint8List evaluationEventResultRespProtoDescriptor = $convert.
 const FeedbackEventResultProto$json = {
   '1': 'FeedbackEventResultProto',
   '2': [
-    {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
+    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
     {'1': 'calculateType', '3': 2, '4': 1, '5': 5, '10': 'calculateType'},
     {'1': 'cost', '3': 3, '4': 1, '5': 5, '10': 'cost'},
     {'1': 'getReturn', '3': 4, '4': 1, '5': 1, '10': 'getReturn'},
@@ -308,11 +244,11 @@ const FeedbackEventResultProto$json = {
 
 /// Descriptor for `FeedbackEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackEventResultProtoDescriptor = $convert.base64Decode(
-    'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SIgoMZmVlZGJhY2tUeXBlGAEgASgFUgxmZWVkYm'
-    'Fja1R5cGUSJAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRISCgRjb3N0GAMg'
-    'ASgFUgRjb3N0EhwKCWdldFJldHVybhgEIAEoAVIJZ2V0UmV0dXJuEiQKDWdldFBlcmNlbnRhZ2'
-    'UYBSABKAFSDWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEo'
-    'BVIZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cw==');
+    'ChhGZWVkYmFja0V2ZW50UmVzdWx0UHJvdG8SHgoKcmV3YXJkVHlwZRgBIAEoBVIKcmV3YXJkVH'
+    'lwZRIkCg1jYWxjdWxhdGVUeXBlGAIgASgFUg1jYWxjdWxhdGVUeXBlEhIKBGNvc3QYAyABKAVS'
+    'BGNvc3QSHAoJZ2V0UmV0dXJuGAQgASgBUglnZXRSZXR1cm4SJAoNZ2V0UGVyY2VudGFnZRgFIA'
+    'EoAVINZ2V0UGVyY2VudGFnZRI8ChlmZWVkYmFja0V2ZW50UmVzdWx0U3RhdHVzGAYgASgFUhlm'
+    'ZWVkYmFja0V2ZW50UmVzdWx0U3RhdHVz');
 
 @$core.Deprecated('Use rewardEventResultProtoDescriptor instead')
 const RewardEventResultProto$json = {
@@ -354,7 +290,7 @@ final $typed_data.Uint8List payloadEventProtoDescriptor = $convert.base64Decode(
 const FeedbackEventProto$json = {
   '1': 'FeedbackEventProto',
   '2': [
-    {'1': 'feedbackType', '3': 1, '4': 1, '5': 5, '10': 'feedbackType'},
+    {'1': 'rewardType', '3': 1, '4': 1, '5': 5, '10': 'rewardType'},
     {'1': 'cost', '3': 2, '4': 1, '5': 5, '10': 'cost'},
     {'1': 'getReturn', '3': 3, '4': 1, '5': 1, '10': 'getReturn'},
     {'1': 'getPercentage', '3': 4, '4': 1, '5': 1, '10': 'getPercentage'},
@@ -364,10 +300,10 @@ const FeedbackEventProto$json = {
 
 /// Descriptor for `FeedbackEventProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List feedbackEventProtoDescriptor = $convert.base64Decode(
-    'ChJGZWVkYmFja0V2ZW50UHJvdG8SIgoMZmVlZGJhY2tUeXBlGAEgASgFUgxmZWVkYmFja1R5cG'
-    'USEgoEY29zdBgCIAEoBVIEY29zdBIcCglnZXRSZXR1cm4YAyABKAFSCWdldFJldHVybhIkCg1n'
-    'ZXRQZXJjZW50YWdlGAQgASgBUg1nZXRQZXJjZW50YWdlEjAKE2ZlZWRiYWNrRXZlbnRTdGF0dX'
-    'MYBSABKAVSE2ZlZWRiYWNrRXZlbnRTdGF0dXM=');
+    'ChJGZWVkYmFja0V2ZW50UHJvdG8SHgoKcmV3YXJkVHlwZRgBIAEoBVIKcmV3YXJkVHlwZRISCg'
+    'Rjb3N0GAIgASgFUgRjb3N0EhwKCWdldFJldHVybhgDIAEoAVIJZ2V0UmV0dXJuEiQKDWdldFBl'
+    'cmNlbnRhZ2UYBCABKAFSDWdldFBlcmNlbnRhZ2USMAoTZmVlZGJhY2tFdmVudFN0YXR1cxgFIA'
+    'EoBVITZmVlZGJhY2tFdmVudFN0YXR1cw==');
 
 @$core.Deprecated('Use containerEventProtoDescriptor instead')
 const ContainerEventProto$json = {
@@ -407,70 +343,6 @@ final $typed_data.Uint8List constraintEventReplyProtoDescriptor = $convert.base6
     'RyYWludFR5cGUYAiABKAVSDmNvbnN0cmFpbnRUeXBlEhgKB21hdGNoZXMYAyADKAlSB21hdGNo'
     'ZXMSHgoKbWlzTWF0Y2hlcxgEIAMoCVIKbWlzTWF0Y2hlcw==');
 
-@$core.Deprecated('Use rewardIDProtoDescriptor instead')
-const RewardIDProto$json = {
-  '1': 'RewardIDProto',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-  ],
-};
-
-/// Descriptor for `RewardIDProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List rewardIDProtoDescriptor = $convert.base64Decode(
-    'Cg1SZXdhcmRJRFByb3RvEg4KAmlkGAEgASgJUgJpZA==');
-
-@$core.Deprecated('Use cardRewardFlattenReplyDescriptor instead')
-const CardRewardFlattenReply$json = {
-  '1': 'CardRewardFlattenReply',
-  '2': [
-    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.card.Reply', '10': 'reply'},
-    {'1': 'cardRewardFlatten', '3': 2, '4': 1, '5': 11, '6': '.card.CardRewardFlatten', '10': 'cardRewardFlatten'},
-  ],
-};
-
-/// Descriptor for `CardRewardFlattenReply`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardFlattenReplyDescriptor = $convert.base64Decode(
-    'ChZDYXJkUmV3YXJkRmxhdHRlblJlcGx5EiEKBXJlcGx5GAEgASgLMgsuY2FyZC5SZXBseVIFcm'
-    'VwbHkSRQoRY2FyZFJld2FyZEZsYXR0ZW4YAiABKAsyFy5jYXJkLkNhcmRSZXdhcmRGbGF0dGVu'
-    'UhFjYXJkUmV3YXJkRmxhdHRlbg==');
-
-@$core.Deprecated('Use cardRewardFlattenDescriptor instead')
-const CardRewardFlatten$json = {
-  '1': 'CardRewardFlatten',
-  '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    {'1': 'channels', '3': 2, '4': 3, '5': 11, '6': '.card.CardRewardChannelFlatten', '10': 'channels'},
-    {'1': 'pays', '3': 3, '4': 1, '5': 11, '6': '.card.CardRewardPayFlatten', '10': 'pays'},
-    {'1': 'tasks', '3': 4, '4': 1, '5': 11, '6': '.card.CardRewardTasksFlatten', '10': 'tasks'},
-    {'1': 'constraints', '3': 5, '4': 3, '5': 11, '6': '.card.CardRewardConstraintFlatten', '10': 'constraints'},
-    {'1': 'labels', '3': 6, '4': 1, '5': 11, '6': '.card.CardRewardLabelFlatten', '10': 'labels'},
-  ],
-};
-
-/// Descriptor for `CardRewardFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardFlattenDescriptor = $convert.base64Decode(
-    'ChFDYXJkUmV3YXJkRmxhdHRlbhIOCgJpZBgBIAEoCVICaWQSOgoIY2hhbm5lbHMYAiADKAsyHi'
-    '5jYXJkLkNhcmRSZXdhcmRDaGFubmVsRmxhdHRlblIIY2hhbm5lbHMSLgoEcGF5cxgDIAEoCzIa'
-    'LmNhcmQuQ2FyZFJld2FyZFBheUZsYXR0ZW5SBHBheXMSMgoFdGFza3MYBCABKAsyHC5jYXJkLk'
-    'NhcmRSZXdhcmRUYXNrc0ZsYXR0ZW5SBXRhc2tzEkMKC2NvbnN0cmFpbnRzGAUgAygLMiEuY2Fy'
-    'ZC5DYXJkUmV3YXJkQ29uc3RyYWludEZsYXR0ZW5SC2NvbnN0cmFpbnRzEjQKBmxhYmVscxgGIA'
-    'EoCzIcLmNhcmQuQ2FyZFJld2FyZExhYmVsRmxhdHRlblIGbGFiZWxz');
-
-@$core.Deprecated('Use cardRewardLabelFlattenDescriptor instead')
-const CardRewardLabelFlatten$json = {
-  '1': 'CardRewardLabelFlatten',
-  '2': [
-    {'1': 'matches', '3': 1, '4': 3, '5': 11, '6': '.card.LabelProto', '10': 'matches'},
-    {'1': 'misMatches', '3': 2, '4': 3, '5': 11, '6': '.card.LabelProto', '10': 'misMatches'},
-  ],
-};
-
-/// Descriptor for `CardRewardLabelFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardLabelFlattenDescriptor = $convert.base64Decode(
-    'ChZDYXJkUmV3YXJkTGFiZWxGbGF0dGVuEioKB21hdGNoZXMYASADKAsyEC5jYXJkLkxhYmVsUH'
-    'JvdG9SB21hdGNoZXMSMAoKbWlzTWF0Y2hlcxgCIAMoCzIQLmNhcmQuTGFiZWxQcm90b1IKbWlz'
-    'TWF0Y2hlcw==');
-
 @$core.Deprecated('Use labelProtoDescriptor instead')
 const LabelProto$json = {
   '1': 'LabelProto',
@@ -483,35 +355,6 @@ const LabelProto$json = {
 /// Descriptor for `LabelProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List labelProtoDescriptor = $convert.base64Decode(
     'CgpMYWJlbFByb3RvEhIKBHR5cGUYASABKAVSBHR5cGUSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
-
-@$core.Deprecated('Use cardRewardConstraintFlattenDescriptor instead')
-const CardRewardConstraintFlatten$json = {
-  '1': 'CardRewardConstraintFlatten',
-  '2': [
-    {'1': 'constraintType', '3': 1, '4': 1, '5': 5, '10': 'constraintType'},
-    {'1': 'weekDays', '3': 2, '4': 3, '5': 5, '10': 'weekDays'},
-  ],
-};
-
-/// Descriptor for `CardRewardConstraintFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardConstraintFlattenDescriptor = $convert.base64Decode(
-    'ChtDYXJkUmV3YXJkQ29uc3RyYWludEZsYXR0ZW4SJgoOY29uc3RyYWludFR5cGUYASABKAVSDm'
-    'NvbnN0cmFpbnRUeXBlEhoKCHdlZWtEYXlzGAIgAygFUgh3ZWVrRGF5cw==');
-
-@$core.Deprecated('Use cardRewardTasksFlattenDescriptor instead')
-const CardRewardTasksFlatten$json = {
-  '1': 'CardRewardTasksFlatten',
-  '2': [
-    {'1': 'matches', '3': 2, '4': 3, '5': 11, '6': '.card.TaskProto', '10': 'matches'},
-    {'1': 'misMatches', '3': 3, '4': 3, '5': 11, '6': '.card.TaskProto', '10': 'misMatches'},
-  ],
-};
-
-/// Descriptor for `CardRewardTasksFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardTasksFlattenDescriptor = $convert.base64Decode(
-    'ChZDYXJkUmV3YXJkVGFza3NGbGF0dGVuEikKB21hdGNoZXMYAiADKAsyDy5jYXJkLlRhc2tQcm'
-    '90b1IHbWF0Y2hlcxIvCgptaXNNYXRjaGVzGAMgAygLMg8uY2FyZC5UYXNrUHJvdG9SCm1pc01h'
-    'dGNoZXM=');
 
 @$core.Deprecated('Use taskProtoDescriptor instead')
 const TaskProto$json = {
@@ -550,21 +393,6 @@ final $typed_data.Uint8List descriptionProtoDescriptor = $convert.base64Decode(
     'ChBEZXNjcmlwdGlvblByb3RvEhIKBG5hbWUYASABKAlSBG5hbWUSEgoEZGVzYxgCIAMoCVIEZG'
     'VzYxIUCgVvcmRlchgDIAEoBVIFb3JkZXI=');
 
-@$core.Deprecated('Use cardRewardPayFlattenDescriptor instead')
-const CardRewardPayFlatten$json = {
-  '1': 'CardRewardPayFlatten',
-  '2': [
-    {'1': 'matches', '3': 1, '4': 3, '5': 11, '6': '.card.PayProto', '10': 'matches'},
-    {'1': 'misMatches', '3': 2, '4': 3, '5': 11, '6': '.card.PayProto', '10': 'misMatches'},
-  ],
-};
-
-/// Descriptor for `CardRewardPayFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardPayFlattenDescriptor = $convert.base64Decode(
-    'ChRDYXJkUmV3YXJkUGF5RmxhdHRlbhIoCgdtYXRjaGVzGAEgAygLMg4uY2FyZC5QYXlQcm90b1'
-    'IHbWF0Y2hlcxIuCgptaXNNYXRjaGVzGAIgAygLMg4uY2FyZC5QYXlQcm90b1IKbWlzTWF0Y2hl'
-    'cw==');
-
 @$core.Deprecated('Use payProtoDescriptor instead')
 const PayProto$json = {
   '1': 'PayProto',
@@ -588,23 +416,6 @@ final $typed_data.Uint8List payProtoDescriptor = $convert.base64Decode(
     'BSADKAlSDGRlc2NyaXB0aW9ucxIeCgpjcmVhdGVEYXRlGAYgASgDUgpjcmVhdGVEYXRlEh4KCn'
     'VwZGF0ZURhdGUYByABKANSCnVwZGF0ZURhdGUSFAoFb3JkZXIYCCABKAVSBW9yZGVyEhwKCXBh'
     'eVN0YXR1cxgJIAEoBVIJcGF5U3RhdHVz');
-
-@$core.Deprecated('Use cardRewardChannelFlattenDescriptor instead')
-const CardRewardChannelFlatten$json = {
-  '1': 'CardRewardChannelFlatten',
-  '2': [
-    {'1': 'ChannelCategoryType', '3': 1, '4': 1, '5': 5, '10': 'ChannelCategoryType'},
-    {'1': 'matches', '3': 2, '4': 3, '5': 11, '6': '.card.ChannelProto', '10': 'matches'},
-    {'1': 'misMatches', '3': 3, '4': 3, '5': 11, '6': '.card.ChannelProto', '10': 'misMatches'},
-  ],
-};
-
-/// Descriptor for `CardRewardChannelFlatten`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cardRewardChannelFlattenDescriptor = $convert.base64Decode(
-    'ChhDYXJkUmV3YXJkQ2hhbm5lbEZsYXR0ZW4SMAoTQ2hhbm5lbENhdGVnb3J5VHlwZRgBIAEoBV'
-    'ITQ2hhbm5lbENhdGVnb3J5VHlwZRIsCgdtYXRjaGVzGAIgAygLMhIuY2FyZC5DaGFubmVsUHJv'
-    'dG9SB21hdGNoZXMSMgoKbWlzTWF0Y2hlcxgDIAMoCzISLmNhcmQuQ2hhbm5lbFByb3RvUgptaX'
-    'NNYXRjaGVz');
 
 @$core.Deprecated('Use channelProtoDescriptor instead')
 const ChannelProto$json = {

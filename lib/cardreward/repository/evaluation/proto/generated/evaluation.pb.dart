@@ -467,7 +467,7 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
   factory FeedbackEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FeedbackEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'feedbackType', $pb.PbFieldType.O3, protoName: 'feedbackType')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'calculateType', $pb.PbFieldType.O3, protoName: 'calculateType')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'getReturn', $pb.PbFieldType.OF, protoName: 'getReturn')
@@ -498,13 +498,13 @@ class FeedbackEventResultProto extends $pb.GeneratedMessage {
   static FeedbackEventResultProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get feedbackType => $_getIZ(0);
+  $core.int get rewardType => $_getIZ(0);
   @$pb.TagNumber(1)
-  set feedbackType($core.int v) { $_setSignedInt32(0, v); }
+  set rewardType($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFeedbackType() => $_has(0);
+  $core.bool hasRewardType() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFeedbackType() => clearField(1);
+  void clearRewardType() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get calculateType => $_getIZ(1);
@@ -567,9 +567,7 @@ class EventProto extends $pb.GeneratedMessage {
     ..p<$core.int>(6, _omitFieldNames ? '' : 'labels', $pb.PbFieldType.K3)
     ..aInt64(7, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate')
     ..a<$core.int>(8, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'currencyType', $pb.PbFieldType.O3, protoName: 'currencyType')
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
-    ..a<$core.int>(11, _omitFieldNames ? '' : 'pointType', $pb.PbFieldType.O3, protoName: 'pointType')
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
     ..hasRequiredFields = false
   ;
 
@@ -643,31 +641,13 @@ class EventProto extends $pb.GeneratedMessage {
   void clearCost() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.int get currencyType => $_getIZ(8);
+  $core.int get rewardType => $_getIZ(8);
   @$pb.TagNumber(9)
-  set currencyType($core.int v) { $_setSignedInt32(8, v); }
+  set rewardType($core.int v) { $_setSignedInt32(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasCurrencyType() => $_has(8);
+  $core.bool hasRewardType() => $_has(8);
   @$pb.TagNumber(9)
-  void clearCurrencyType() => clearField(9);
-
-  @$pb.TagNumber(10)
-  $core.int get rewardType => $_getIZ(9);
-  @$pb.TagNumber(10)
-  set rewardType($core.int v) { $_setSignedInt32(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasRewardType() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearRewardType() => clearField(10);
-
-  @$pb.TagNumber(11)
-  $core.int get pointType => $_getIZ(10);
-  @$pb.TagNumber(11)
-  set pointType($core.int v) { $_setSignedInt32(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasPointType() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearPointType() => clearField(11);
+  void clearRewardType() => clearField(9);
 }
 
 class EvaluationsReply extends $pb.GeneratedMessage {
@@ -786,7 +766,7 @@ class EvaluationProto extends $pb.GeneratedMessage {
     ..aInt64(3, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..aInt64(4, _omitFieldNames ? '' : 'startDate', protoName: 'startDate')
     ..aInt64(5, _omitFieldNames ? '' : 'endDate', protoName: 'endDate')
-    ..aOM<EvaluationRewardTypeProto>(6, _omitFieldNames ? '' : 'evaluationRewardType', protoName: 'evaluationRewardType', subBuilder: EvaluationRewardTypeProto.create)
+    ..aOM<RewardProto>(6, _omitFieldNames ? '' : 'reward', subBuilder: RewardProto.create)
     ..aOS(7, _omitFieldNames ? '' : 'ownerID', protoName: 'ownerID')
     ..aOM<PayloadProto>(8, _omitFieldNames ? '' : 'payload', subBuilder: PayloadProto.create)
     ..hasRequiredFields = false
@@ -859,15 +839,15 @@ class EvaluationProto extends $pb.GeneratedMessage {
   void clearEndDate() => clearField(5);
 
   @$pb.TagNumber(6)
-  EvaluationRewardTypeProto get evaluationRewardType => $_getN(5);
+  RewardProto get reward => $_getN(5);
   @$pb.TagNumber(6)
-  set evaluationRewardType(EvaluationRewardTypeProto v) { setField(6, v); }
+  set reward(RewardProto v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasEvaluationRewardType() => $_has(5);
+  $core.bool hasReward() => $_has(5);
   @$pb.TagNumber(6)
-  void clearEvaluationRewardType() => clearField(6);
+  void clearReward() => clearField(6);
   @$pb.TagNumber(6)
-  EvaluationRewardTypeProto ensureEvaluationRewardType() => $_ensure(5);
+  RewardProto ensureReward() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.String get ownerID => $_getSZ(6);
@@ -890,16 +870,18 @@ class EvaluationProto extends $pb.GeneratedMessage {
   PayloadProto ensurePayload() => $_ensure(7);
 }
 
-class EvaluationRewardTypeProto extends $pb.GeneratedMessage {
-  factory EvaluationRewardTypeProto() => create();
-  EvaluationRewardTypeProto._() : super();
-  factory EvaluationRewardTypeProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EvaluationRewardTypeProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class RewardProto extends $pb.GeneratedMessage {
+  factory RewardProto() => create();
+  RewardProto._() : super();
+  factory RewardProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RewardProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationRewardTypeProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'currencyType', $pb.PbFieldType.O3, protoName: 'currencyType')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'pointType', $pb.PbFieldType.O3, protoName: 'pointType')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RewardProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
+    ..aInt64(4, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
+    ..aInt64(5, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..hasRequiredFields = false
   ;
 
@@ -907,49 +889,67 @@ class EvaluationRewardTypeProto extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EvaluationRewardTypeProto clone() => EvaluationRewardTypeProto()..mergeFromMessage(this);
+  RewardProto clone() => RewardProto()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EvaluationRewardTypeProto copyWith(void Function(EvaluationRewardTypeProto) updates) => super.copyWith((message) => updates(message as EvaluationRewardTypeProto)) as EvaluationRewardTypeProto;
+  RewardProto copyWith(void Function(RewardProto) updates) => super.copyWith((message) => updates(message as RewardProto)) as RewardProto;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EvaluationRewardTypeProto create() => EvaluationRewardTypeProto._();
-  EvaluationRewardTypeProto createEmptyInstance() => create();
-  static $pb.PbList<EvaluationRewardTypeProto> createRepeated() => $pb.PbList<EvaluationRewardTypeProto>();
+  static RewardProto create() => RewardProto._();
+  RewardProto createEmptyInstance() => create();
+  static $pb.PbList<RewardProto> createRepeated() => $pb.PbList<RewardProto>();
   @$core.pragma('dart2js:noInline')
-  static EvaluationRewardTypeProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EvaluationRewardTypeProto>(create);
-  static EvaluationRewardTypeProto? _defaultInstance;
+  static RewardProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RewardProto>(create);
+  static RewardProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get rewardType => $_getIZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set rewardType($core.int v) { $_setSignedInt32(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasRewardType() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearRewardType() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get currencyType => $_getIZ(1);
+  $core.String get name => $_getSZ(1);
   @$pb.TagNumber(2)
-  set currencyType($core.int v) { $_setSignedInt32(1, v); }
+  set name($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCurrencyType() => $_has(1);
+  $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCurrencyType() => clearField(2);
+  void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get pointType => $_getIZ(2);
+  $core.int get rewardType => $_getIZ(2);
   @$pb.TagNumber(3)
-  set pointType($core.int v) { $_setSignedInt32(2, v); }
+  set rewardType($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasPointType() => $_has(2);
+  $core.bool hasRewardType() => $_has(2);
   @$pb.TagNumber(3)
-  void clearPointType() => clearField(3);
+  void clearRewardType() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get createDate => $_getI64(3);
+  @$pb.TagNumber(4)
+  set createDate($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCreateDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreateDate() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get updateDate => $_getI64(4);
+  @$pb.TagNumber(5)
+  set updateDate($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasUpdateDate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUpdateDate() => clearField(5);
 }
 
 class PayloadProto extends $pb.GeneratedMessage {
@@ -1049,7 +1049,7 @@ class FeedbackProto extends $pb.GeneratedMessage {
   factory FeedbackProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FeedbackProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'feedbackType', $pb.PbFieldType.O3, protoName: 'feedbackType')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'calculateType', $pb.PbFieldType.O3, protoName: 'calculateType')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'minCost', $pb.PbFieldType.O3, protoName: 'minCost')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'fixed', $pb.PbFieldType.O3)
@@ -1080,13 +1080,13 @@ class FeedbackProto extends $pb.GeneratedMessage {
   static FeedbackProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get feedbackType => $_getIZ(0);
+  $core.int get rewardType => $_getIZ(0);
   @$pb.TagNumber(1)
-  set feedbackType($core.int v) { $_setSignedInt32(0, v); }
+  set rewardType($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFeedbackType() => $_has(0);
+  $core.bool hasRewardType() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFeedbackType() => clearField(1);
+  void clearRewardType() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get calculateType => $_getIZ(1);
@@ -2198,7 +2198,7 @@ class ConstraintEvaluationRespProto extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstraintEvaluationRespProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'constraintType', $pb.PbFieldType.O3, protoName: 'constraintType')
-    ..aOM<ConstraintProto>(2, _omitFieldNames ? '' : 'contraint', subBuilder: ConstraintProto.create)
+    ..aOM<ConstraintProto>(2, _omitFieldNames ? '' : 'constraint', subBuilder: ConstraintProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -2233,15 +2233,15 @@ class ConstraintEvaluationRespProto extends $pb.GeneratedMessage {
   void clearConstraintType() => clearField(1);
 
   @$pb.TagNumber(2)
-  ConstraintProto get contraint => $_getN(1);
+  ConstraintProto get constraint => $_getN(1);
   @$pb.TagNumber(2)
-  set contraint(ConstraintProto v) { setField(2, v); }
+  set constraint(ConstraintProto v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasContraint() => $_has(1);
+  $core.bool hasConstraint() => $_has(1);
   @$pb.TagNumber(2)
-  void clearContraint() => clearField(2);
+  void clearConstraint() => clearField(2);
   @$pb.TagNumber(2)
-  ConstraintProto ensureContraint() => $_ensure(1);
+  ConstraintProto ensureConstraint() => $_ensure(1);
 }
 
 class LabelEvaluationRespProto extends $pb.GeneratedMessage {

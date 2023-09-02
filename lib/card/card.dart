@@ -78,7 +78,7 @@ class Banner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      '找CoCo',
+      '省摳摳',
       style: TextStyle(
         fontSize: 20,
       ),

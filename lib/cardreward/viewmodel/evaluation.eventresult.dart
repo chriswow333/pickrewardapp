@@ -27,15 +27,11 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
   Future<void> evaluateCardRewardEvaluation(EvaluationSelectedViewModel selectedViewModel) async {
 
     try {
+
       EventProto eventProto = EventProto();
+      
       eventProto.ownerID = selectedViewModel.cardRewardModel.id;
 
-      eventProto.rewardType = selectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.reward.rewardType;
-
-      eventProto.currencyType = selectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.currency.currencyType;
-      eventProto.pointType =  selectedViewModel.cardRewardModel.cardRewardTypeEvaluationResp.point.pointType;
-
-      
       eventProto.channelIDs.addAll(selectedViewModel.getChannelIDs().toList());
       eventProto.cost = selectedViewModel.getCost();
 
@@ -44,6 +40,7 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
       eventProto.labels.addAll(selectedViewModel.getLabels().toList());
       eventProto.payIDs.addAll(selectedViewModel.getPayIDs().toList());
       eventProto.taskIDs.addAll(selectedViewModel.getTaskIDs().toList());
+      eventProto.rewardType = selectedViewModel.cardRewardModel.reward.rewardType;
 
       EvaluationEventResultRespReply reply = await EvaluationService().evaluationClient.evaluateRespByOwnerID(eventProto);
 

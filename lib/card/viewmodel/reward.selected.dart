@@ -2,14 +2,6 @@
 import 'package:flutter/material.dart';
 
 
-enum RewardTypeEnum { 
-  CASH,
-  POINT;
-
-}
-
-
-
 class RewardSelectedViewModel with ChangeNotifier{
 
   RewardSelectedViewModel._internal();
@@ -69,23 +61,6 @@ class RewardSelectedViewModel with ChangeNotifier{
   
   int get cost => _selectedCost;
 
-
-  RewardTypeEnum _rewardType = RewardTypeEnum.CASH;
-
-  set rewardType(RewardTypeEnum rewardType) {
-    _rewardType = rewardType;
-    notifyListeners();
-  }
-  
-  bool isSelectedRewardType(RewardTypeEnum rewardType){
-    return _rewardType == rewardType;
-  }
-
-  RewardTypeEnum get rewardType => _rewardType;
-
-
-
-
   DateTime _eventDate = DateTime.now();
   set eventDate(DateTime eventDate) {
     _eventDate = eventDate;
@@ -94,14 +69,17 @@ class RewardSelectedViewModel with ChangeNotifier{
   DateTime get eventDate => _eventDate;
   
 
+  int _selectedRewardType = 0;
 
-  // RewardWayEnum _rewardWay = RewardWayEnum.CASH;
-  // set rewardWay(RewardWayEnum rewardWay) {
-  //   _rewardWay = rewardWay;
-  //   notifyListeners();
-  // }
+  set rewardType(int rewardType) {
+    if(rewardType == _selectedRewardType) {
+      return;
+    }
+    _selectedRewardType = rewardType;
+    notifyListeners();
+  }
 
-  // RewardWayEnum get rewardWay => _rewardWay;
+  int get rewardType => _selectedRewardType;
 
 }
 

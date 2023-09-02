@@ -52,6 +52,7 @@ class CardRewardService {
       codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
     ),
     );
+    
     _cardClient = CardClient(channel);
 
   }

@@ -20,13 +20,13 @@ final List<CardRewardEventResultProto> _cardRewardEventResults = [];
 
 List<CardRewardEventResultProto> get() => _cardRewardEventResults;
 
-
-
 Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
     
   List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
   List<String> payIDs = rewardSelectedViewModel.getPayIDs();
-  RewardTypeEnum rewardType = rewardSelectedViewModel.rewardType;
+
+  int rewardType = rewardSelectedViewModel.rewardType;
+  
   int cost = rewardSelectedViewModel.cost;
   DateTime eventDate = rewardSelectedViewModel.eventDate;
 
@@ -37,23 +37,7 @@ Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelect
   event.payIDs.addAll(payIDs);
   event.cost = cost;
   event.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
-  switch(rewardType){
-    case RewardTypeEnum.CASH:
-      event.rewardType = 1;
-      // default TWD
-      event.currencyType = 1;
-      break;
-    case RewardTypeEnum.POINT:
-      event.rewardType = 2;
-      event.pointType = 0;
-
-      break;
-    default:
-      event.rewardType = 1;
-      event.currencyType = 1;
-
-  }
-  
+  event.rewardType = rewardType;
 
   try {
 
@@ -77,9 +61,6 @@ Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelect
       print(e);
   }
   
-
-
-
 }
 
 }
