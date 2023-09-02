@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/viewmodel/pay.item.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class PayName extends StatelessWidget {
   const PayName({super.key});

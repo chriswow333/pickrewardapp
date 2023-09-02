@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
-import 'package:pickrewardapp/card/viewmodel/channel.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class ChannelItems extends StatelessWidget {
   const ChannelItems({super.key});
@@ -14,8 +15,9 @@ class ChannelItems extends StatelessWidget {
   Widget build(BuildContext context) {
 
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+
     int type = channelViewModel.channelCategoryType;
-    channelViewModel.fetchChannelsByChannelCategoryType(type);
+    
     List<ChannelItemModel> channelItemModels = channelViewModel.getChannelsByChannelCategoryType(type);
 
     return Container(
@@ -26,7 +28,7 @@ class ChannelItems extends StatelessWidget {
         mainAxisSpacing: 8.0,
         padding: EdgeInsets.zero,  
         children:[
-          for(ChannelItemModel channelItemModel in channelItemModels)
+          for(ChannelItemModel channelItemModel in channelItemModels ?? [])
             ChannelItem(channelItemModel:channelItemModel),
         ],
       ),
@@ -35,30 +37,18 @@ class ChannelItems extends StatelessWidget {
 }
 
 
-class ChannelItem extends StatefulWidget {
+
+class ChannelItem extends StatelessWidget {
   const ChannelItem({super.key, required this.channelItemModel});
 
   final ChannelItemModel channelItemModel;
 
   @override
-  State<ChannelItem> createState() => _ChannelItemState();
-}
-
-class _ChannelItemState extends State<ChannelItem> {
-  
-  
-  bool _selected = false;
-   
-  @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    _selected = rewardSelectedViewModel.existSelectedChannelID(widget.channelItemModel.id);
+    
+    bool selected = rewardSelectedViewModel.existSelectedChannelID(channelItemModel.id);
 
     return TextButton(
       style:ButtonStyle(
@@ -70,10 +60,10 @@ class _ChannelItemState extends State<ChannelItem> {
           ),
         ),
         side:MaterialStatePropertyAll(
-          _selected ? 
+          selected ? 
           BorderSide(
-            color:Colors.teal[900]!,
-            width: 1,
+            color:Palette.kToBlue[800]!,
+            width: 2,
           ):null
         ),
         padding:const MaterialStatePropertyAll(
@@ -81,18 +71,16 @@ class _ChannelItemState extends State<ChannelItem> {
         ),
       ),
       onPressed:(){
-        setState((){
-          _selected = !_selected;
-        });
-        rewardSelectedViewModel.channelID = widget.channelItemModel.id;
+        
+        rewardSelectedViewModel.channelID = channelItemModel.id;
       },
       child:Container(
         alignment: Alignment.center,
         padding: EdgeInsets.zero,
         child:Column(
           children:[
-            ChannelItemIcon(image:widget.channelItemModel.image),
-            ChannelItemName(name:widget.channelItemModel.name),
+            ChannelItemIcon(image:channelItemModel.image),
+            ChannelItemName(name:channelItemModel.name),
           ],
         ),
       ),
@@ -133,7 +121,7 @@ class ChannelItemName extends StatelessWidget {
         name,
         style: 
         TextStyle(
-          color: Colors.teal[900],
+          color: Palette.kToBlue[900],
         ),
       )
     );

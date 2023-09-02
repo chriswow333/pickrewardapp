@@ -7,6 +7,7 @@ import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/e
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
@@ -96,7 +97,7 @@ class LabelCategoryTypeIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Icon(
-        color:Colors.teal[700],
+        color:Palette.kToBlue[700],
         Icons.shopping_bag_sharp,
       )
     );
@@ -156,7 +157,7 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Icon(
-        color:Colors.teal[700],
+        color:Palette.kToBlack[700],
         Icons.shopping_bag_sharp,
       )
     );
@@ -174,7 +175,7 @@ class ChannelCategoryName extends StatelessWidget {
         name,
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[900],
+          color: Palette.kToBlack,
         ),  
       )
     );
@@ -326,7 +327,7 @@ class LabelItemIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Icon(
-        color:Colors.teal[700],
+        color:Palette.kToBlue[700],
         size:40,
         Icons.shopping_bag_sharp,
       )

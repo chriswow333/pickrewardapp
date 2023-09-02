@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/card/repository/card/card.dart';
 import 'package:pickrewardapp/card/repository/card/proto/generated/card.pb.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class CardRewardEventResultsViewModel with ChangeNotifier {
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/card.dart';
-import 'package:pickrewardapp/cardreward/cardreward.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pickrewardapp/channel_search/channel_search.dart';
+import 'package:pickrewardapp/shared/config/global_padding.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main() {
   runApp(const PickRewardApp());
@@ -16,7 +18,7 @@ class PickRewardApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme:ThemeData(
-        primarySwatch: Colors.teal,
+        primarySwatch: Palette.kToBlue
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -27,53 +29,75 @@ class PickRewardApp extends StatelessWidget {
         // Locale('en'), // English
         Locale('zh')
       ],
-      initialRoute:'/card',
-      routes:{
-        '/': (context)=> const HomePage(),
-        '/card':(context)=>  const CardScreen(),
-      },
+      home:HomeScreen(),
+      // initialRoute:'/',
+      // routes:{
+      //   '/':(context)=>  const CardScreen(),
+      // },
     );
   }
 }
 
 
-class CardScreen extends StatelessWidget {
-  const CardScreen({super.key});
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    
+    ChannelSearchPage(),
+
+    CardSearchPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body:Container(
         // alignment: Alignment.topCenter,
-        padding: const EdgeInsets.only(top:50),
-        child: CardPage(),
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:SingleChildScrollView(
-        child:Container(
-          alignment: Alignment.topCenter,
-          padding: const EdgeInsets.only(top:20),
-          child: SizedBox(
-            width:800,
-            child:Container(
-              child:const Text('okokok')
-            ),
-          ),
+        padding: GlobalPadding.global(),
+        child: Center(
+          child:_widgetOptions.elementAt(_selectedIndex),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '首頁',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.manage_search_sharp),
+            label: '通路搜尋',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.credit_card),
+            label: '信用卡',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Palette.kToBlue[600],
+        onTap: _onItemTapped,
       ),
     );
   }

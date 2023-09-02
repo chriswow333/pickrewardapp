@@ -4,13 +4,6 @@ import 'package:flutter/material.dart';
 
 class RewardSelectedViewModel with ChangeNotifier{
 
-  RewardSelectedViewModel._internal();
-
-  static final RewardSelectedViewModel _instance = RewardSelectedViewModel._internal();
-  
-  factory RewardSelectedViewModel() => _instance;
-
-
 
   final Set<String> _channelIDs = {};
   set channelID(String channelID) {
@@ -20,6 +13,7 @@ class RewardSelectedViewModel with ChangeNotifier{
     }else {
       _channelIDs.add(channelID);
     }
+    notifyListeners();
   }
 
   bool existSelectedChannelID(String channelID) {

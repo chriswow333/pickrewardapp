@@ -2,14 +2,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/component/channel.progress.channel.dart';
-import 'package:pickrewardapp/card/component/channel.progress.findcard.dart';
-import 'package:pickrewardapp/card/component/channel.progress.dart';
-import 'package:pickrewardapp/card/component/channel.progress.result.dart';
-import 'package:pickrewardapp/card/viewmodel/channel.progress.dart';
 
 class ChannelComponent extends StatelessWidget {
   const ChannelComponent({super.key});

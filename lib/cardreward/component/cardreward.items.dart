@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class RewardItems extends StatelessWidget {
@@ -86,7 +87,7 @@ class ActivityName extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child:Text(name,
         style:TextStyle(
-          color:Colors.cyan[900],
+          color:Palette.kToBlue[900],
           fontSize: 20,
         ),
       ),
@@ -144,7 +145,7 @@ class EvaluationRewardType extends StatelessWidget {
     
     return Text(reward.name,
       style:TextStyle(
-        color:Colors.cyan[900],
+        color:Palette.kToBlue[900],
         fontSize: 20,
       ),
     );
@@ -164,7 +165,7 @@ class EvaluationName extends StatelessWidget {
       child:
         Text(name,
           style:TextStyle(
-            color:Colors.cyan[900],
+            color:Palette.kToBlue[900],
             fontSize: 18,
             overflow: TextOverflow.clip,
           ),

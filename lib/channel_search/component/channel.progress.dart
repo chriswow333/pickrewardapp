@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 
 import 'package:provider/provider.dart';
 
 
-import 'package:pickrewardapp/card/viewmodel/channel.progress.dart';
 
 class RewardProgressBar extends StatelessWidget {
   const RewardProgressBar({super.key});
@@ -37,15 +38,15 @@ class FindResultProgressItem extends StatelessWidget {
         channelProgressViewModel.progress = ChannelProgressEnum.FindResult;
       },
       style:ButtonStyle(
-        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        elevation:MaterialStatePropertyAll(1.0),
+        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Colors.cyan[900]: Colors.cyan[50]
+          channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Palette.kToBlue[600]: Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
-              width:0.5,
+              width:1.0,
               color:Colors.black12,
             ),
             borderRadius: BorderRadius.circular(10),
@@ -56,7 +57,7 @@ class FindResultProgressItem extends StatelessWidget {
         '搜尋結果',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Colors.cyan[50]:Colors.cyan[900],
+          color:channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );
@@ -76,15 +77,15 @@ class FindCardProgressItem extends StatelessWidget {
         channelProgressViewModel.progress = ChannelProgressEnum.FindCard;
       },
       style:ButtonStyle(
-        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        elevation:MaterialStatePropertyAll(1.0),
+        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Colors.cyan[900]:Colors.cyan[50]
+          channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Palette.kToBlue[600]:Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
-              width:0.5,
+              width:1.0,
               color:Colors.black12,
             ),
             borderRadius: BorderRadius.circular(10),
@@ -95,7 +96,7 @@ class FindCardProgressItem extends StatelessWidget {
         '找卡片',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Colors.cyan[50]:Colors.cyan[900],
+          color:channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );
@@ -108,7 +109,12 @@ class ProgressArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Icon(Icons.arrow_forward),
+      child:Icon(
+        Icons.double_arrow_rounded,
+        color:Palette.kToBlue[100],
+        size:40,
+        weight: 10,
+      ),
     );
   }
 }
@@ -124,15 +130,15 @@ class ChannelProgressItem extends StatelessWidget {
         channelProgressViewModel.progress = ChannelProgressEnum.Channel; 
       },
       style:ButtonStyle(
-        padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        elevation:MaterialStatePropertyAll(1.0),
+        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
+        // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Colors.cyan[900]:Colors.cyan[50]
+          channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Palette.kToBlue[600]:Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
-              width:0.5,
+              width:1.0,
               color:Colors.black12,
             ),
             borderRadius: BorderRadius.circular(10),
@@ -143,7 +149,7 @@ class ChannelProgressItem extends StatelessWidget {
         '消費通路',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Colors.cyan[50]:Colors.cyan[900],
+          color:channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );

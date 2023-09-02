@@ -1,6 +1,6 @@
 
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Banner;
 import 'package:pickrewardapp/cardreward/component/cardreward.header.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.dart';
@@ -11,6 +11,7 @@ import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/component/banner.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
@@ -94,19 +95,5 @@ class CardRewardComponent extends StatelessWidget {
 }
 
 
-class Banner extends StatelessWidget {
-  const Banner({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      '省摳摳',
-      style: TextStyle(
-        fontSize: 20,
-      ),
-      
-    );
-  }
-}
 
 

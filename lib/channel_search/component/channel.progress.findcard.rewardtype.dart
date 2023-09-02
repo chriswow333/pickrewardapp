@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 
 class RewardTypeName extends StatelessWidget {
@@ -84,7 +84,9 @@ class PointType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    
     return TextButton(
       onPressed: (){
         rewardSelectedViewModel.rewardType = rewardPointType;

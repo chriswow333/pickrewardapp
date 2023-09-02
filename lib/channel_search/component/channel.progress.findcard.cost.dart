@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class CostName extends StatelessWidget {
   const CostName({super.key});

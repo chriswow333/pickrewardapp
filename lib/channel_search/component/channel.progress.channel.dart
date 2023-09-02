@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 
-import 'package:pickrewardapp/card/component/channel.progress.channel.categorytype.dart';
-import 'package:pickrewardapp/card/component/channel.progress.channel.item.dart';
+import 'channel.progress.channel.categorytype.dart';
+
 
 class ChannelProgress extends StatelessWidget {
   const ChannelProgress({super.key});
@@ -38,7 +39,6 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
   @override
   void initState(){
     super.initState();
-
   }
 
   @override

@@ -9,6 +9,7 @@ class ChannelViewModel with ChangeNotifier {
 
   ChannelViewModel(){
     ChannelService().init();
+    fetchChannelCategoryTypeModels();
   }
 
 
@@ -24,6 +25,9 @@ class ChannelViewModel with ChangeNotifier {
 
   final List<ChannelCategoryTypeModel> _channelCategoryTypeModels = [];
   get channelCategoryTypeModels => _channelCategoryTypeModels;
+
+
+
   Future<void> fetchChannelCategoryTypeModels() async {
     
     if (_channelCategoryTypeModels.isNotEmpty) return;
@@ -44,6 +48,9 @@ class ChannelViewModel with ChangeNotifier {
           )
         );
       }
+      
+      notifyListeners();
+
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
@@ -53,23 +60,26 @@ class ChannelViewModel with ChangeNotifier {
       print(e);
     }
   
-    notifyListeners();
   }
 
 
 
   final Map<int, List<ChannelItemModel>> _channelModels = {};
+  
   List<ChannelItemModel> getChannelsByChannelCategoryType(int channelCategoryType) {
+    _fetchChannelsByChannelCategoryType(channelCategoryType);
     return _channelModels[channelCategoryType] ?? [];
   }
 
-  Future<void> fetchChannelsByChannelCategoryType(int channelCategoryType) async{ 
+  Future<void> _fetchChannelsByChannelCategoryType(int channelCategoryType) async { 
+
     if (_channelModels.containsKey(channelCategoryType)) return;
 
     try {
 
       final channelCategoryTypeRequest = ChannelCategoryTypeRequest();
       channelCategoryTypeRequest.channelCategoryType = channelCategoryType;
+
       ChannelProtoReply channelProtoReply  = await ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
       List<ChannelItemModel> channelItemModels = [];
 
@@ -95,6 +105,7 @@ class ChannelViewModel with ChangeNotifier {
         ));
       }
       _channelModels[channelCategoryType] = channelItemModels;
+      notifyListeners();
 
     } on GrpcError catch (e) {
       ///handle all grpc errors here
@@ -105,7 +116,6 @@ class ChannelViewModel with ChangeNotifier {
       print(e);
     }
     
-    notifyListeners();
   }
 
 }

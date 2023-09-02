@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/card/viewmodel/channel.progress.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.eventresult.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cost.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.costdate.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.pay.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.rewardtype.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/component/channel.progress.findcard.cost.dart';
-import 'package:pickrewardapp/card/component/channel.progress.findcard.costdate.dart';
-import 'package:pickrewardapp/card/component/channel.progress.findcard.pay.dart';
-import 'package:pickrewardapp/card/component/channel.progress.findcard.rewardtype.dart';
-import 'package:pickrewardapp/card/viewmodel/pay.item.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
 class FindCardProgress extends StatelessWidget {
   const FindCardProgress({super.key});

@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/card/repository/card/proto/generated/card.pbgrpc.dart';
-import 'package:pickrewardapp/card/viewmodel/reward.eventresult.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';

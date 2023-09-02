@@ -1,24 +1,24 @@
 
 
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 
-enum ToggleTypeEnum {Channel, Card}
+// enum ToggleTypeEnum {Channel, Card}
 
 
-class ToggleSwitchViewModel with ChangeNotifier{
+// class ToggleSwitchViewModel with ChangeNotifier{
   
-  ToggleTypeEnum _type = ToggleTypeEnum.Channel;
+//   ToggleTypeEnum _type = ToggleTypeEnum.Channel;
   
-  set toggle(ToggleTypeEnum toggleTypeEnum) {
-    if (_type == toggleTypeEnum) return;
+//   set toggle(ToggleTypeEnum toggleTypeEnum) {
+//     if (_type == toggleTypeEnum) return;
 
-    _type = toggleTypeEnum;
-    notifyListeners();
-  }
+//     _type = toggleTypeEnum;
+//     notifyListeners();
+//   }
 
-  ToggleTypeEnum get type{
-    return _type;
-  }
-}
+//   ToggleTypeEnum get type{
+//     return _type;
+//   }
+// }
