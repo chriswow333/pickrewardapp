@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:pickrewardapp/card/repository/card/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
@@ -22,11 +23,29 @@ class CardResultsProgress extends StatelessWidget {
     List<CardRewardEventResultProto> cardRewardEventResults = cardRewardEventResultsViewModel.get();
 
     return Container(
-      height:500 ,
+      height:MediaQuery.of(context).size.height - 230 ,
       child:SingleChildScrollView(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
+            for(CardRewardEventResultProto c in cardRewardEventResults) 
+              CardResult(cardRewardEventResult: c,),
             for(CardRewardEventResultProto c in cardRewardEventResults) 
               CardResult(cardRewardEventResult: c,),
           ],
@@ -47,42 +66,146 @@ class CardResult extends StatelessWidget {
     CardRewardEvaluationEventResultProto cardEvaluation = cardRewardEventResult.cardRewardEvaluationEventResult;
     FeedbackEventResultProto feedbackEventResult = cardRewardEventResult.rewardEventResult.feedbackEventResultResp;
    
-    return Container(
-      padding:const EdgeInsets.only(bottom: 20),
-      child:TextButton(
-        style:ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.white),
-          elevation:MaterialStatePropertyAll(2),
-        ),
-        onPressed: (){
-          
-          CardItemModel cardItemModel = CardItemModel(
-            id:cardEvaluation.cardID,
-            name:cardEvaluation.cardName,
-            descriptions:cardEvaluation.cardDesc,
-            image:cardEvaluation.cardImage,
-          );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:[
+        Container(
+          padding:const EdgeInsets.only(bottom: 5, top:5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.9),
+                spreadRadius: 0,
+                blurRadius: 1,
+                offset: Offset(1, 2)
+              ),
+            ],
+          ),
+          child:TextButton(
+            style:ButtonStyle(
+              alignment: Alignment.center,
+              padding:const MaterialStatePropertyAll(
+                EdgeInsets.fromLTRB(0, 12, 0, 0),
+              ),
+            ),
+            onPressed: (){
+              
+              CardItemModel cardItemModel = CardItemModel(
+                id:cardEvaluation.cardID,
+                name:cardEvaluation.cardName,
+                descriptions:cardEvaluation.cardDesc,
+                image:cardEvaluation.cardImage,
+              );
 
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
-          );
-        },
-        child:Column(
-          children:[
-            CardUpdateDate(cardEndDate: cardEvaluation.cardRewardEndDate.toInt(),),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
+              );
+            },
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                CardTitle(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,cardImage: cardEvaluation.cardImage,),
-                RewardItem(reward: cardEvaluation.reward,),
-                CardRewardEventResult(feedbackEventResult: feedbackEventResult,),
-                CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
+                CardUpdateDate(cardEndDate: cardEvaluation.cardRewardEndDate.toInt(),),
+
+                Row(
+                  children:[
+                    CardIcon(image: cardEvaluation.cardImage,),
+                    SizedBox(width:20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:[
+                        EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
+                        RewardTypeName(rewardTypeName: cardEvaluation.reward.name,),
+                      ]
+                    )
+                  ]
+                ),
+                CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children:[
+                //     // CardTitle(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,cardImage: cardEvaluation.cardImage,),
+                //     // RewardItem(reward: cardEvaluation.reward,),
+                //     CardRewardEventResult(feedbackEventResult: feedbackEventResult,),
+                //     CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
+                //   ],
+                // ),
               ],
             ),
-          ],
+          ),
         ),
+        SizedBox(height:10),
+      ]
+    );
+  }
+}
+
+
+class RewardTypeName extends StatelessWidget {
+  const RewardTypeName({super.key, required this.rewardTypeName});
+  final String rewardTypeName;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text(rewardTypeName,
+        style: TextStyle(
+          fontSize: 20,
+          color:Palette.kToBlack[900],
+        ),
+      )
+    );
+  }
+}
+
+
+
+class EvaluationResult extends StatelessWidget {
+  const EvaluationResult({super.key, required this.reward, required this.feedbackEventResult});
+  
+  final RewardProto reward;
+  final FeedbackEventResultProto feedbackEventResult;
+
+  @override
+  Widget build(BuildContext context) {
+    String returnName = reward.rewardType == 0 ? "現金":"點數";
+    feedbackEventResult.getReturn;
+
+    double getReturn = feedbackEventResult.getReturn;
+    String getReturnStr = getReturn.toInt().toString();
+    String percentage = (feedbackEventResult.getPercentage * 100).toStringAsFixed(3);
+    int length = percentage.length - 1;
+    while(length > 0) {
+      if(percentage[length] != '0' && percentage[length] != "."){
+        break;
+      }
+      length--; 
+    }
+
+    percentage = percentage.substring(0,length+1);
+
+
+    return Container(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          if(feedbackEventResult.calculateType == 0)
+            Text("${percentage}% ${returnName}回饋, 折抵${getReturnStr}",
+              style:TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[800],
+              ),
+            ),
+          if(feedbackEventResult.calculateType == 1)
+            Text("折抵${getReturnStr}",
+              style:TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[800],
+              ),
+            )
+
+        ]
       )
     );
   }
@@ -103,7 +226,7 @@ class CardUpdateDate extends StatelessWidget {
         Text(dateTimeFormatted,
           style:TextStyle(
             fontSize: 10,
-            color:Colors.cyan[800],
+            color:Palette.kToBlack[800],
           ),
         ),
       ],
@@ -121,7 +244,7 @@ class CardRewardName extends StatelessWidget {
       child:Text(cardRewardName,
         style: TextStyle(
           fontSize: 12,
-          color:Colors.cyan[900],
+          color:Palette.kToBlack[900],
         ),
       ),
     );
@@ -145,13 +268,13 @@ class CardRewardEventResult extends StatelessWidget {
             Text(percentage.toStringAsFixed(3),
               style: TextStyle(
                 fontSize: 15,
-                color:Colors.cyan[900],
+                color:Palette.kToBlack[900],
               ),
             ),
           Text('折抵'+getReturn.toString(),
               style: TextStyle(
                 fontSize: 15,
-                color:Colors.cyan[900],
+                color:Palette.kToBlack[900],
               ),
             ),
           ],
@@ -178,7 +301,7 @@ class RewardItem extends StatelessWidget {
     return Text(reward.name,
       style:TextStyle(
         fontSize: 15,
-        color:Colors.cyan[900],
+        color:Palette.kToBlack[900],
       ),
     );
   }
@@ -196,7 +319,7 @@ class CardTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children:[
-        CardIcon(image: cardImage,),
+        // CardIcon(image: cardImage,),
         CardName(cardName: cardName, bankName: bankName,),
       ]
     );
@@ -213,8 +336,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
-        width:70,
-        height:50,
+        width:120,
+        height:90,
       );
   }
 }
@@ -228,21 +351,30 @@ class CardName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        Text(cardName,
-          style: TextStyle(
-            fontSize: 15,
-            color:Colors.cyan[900],
+    return Container(
+      width:120,
+      child:Column(
+        children:[
+          FittedBox(
+            fit:BoxFit.fitWidth,
+            child:Text(cardName,
+              style: TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[900],
+              ),
+            ),
           ),
-        ),
-        Text(bankName,
-          style: TextStyle(
-            fontSize: 12,
-            color:Colors.cyan[900],
+          FittedBox(
+            fit: BoxFit.fitWidth, 
+            child: Text(bankName,
+              style: TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[900],
+              ),
+            ),
           ),
-        ),
-      ]
+        ]
+      )
     );
   }
 }
