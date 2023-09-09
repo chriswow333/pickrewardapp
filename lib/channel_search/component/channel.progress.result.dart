@@ -165,7 +165,7 @@ class EvaluationResult extends StatelessWidget {
     percentage = percentage.substring(0,length+1);
 
     return Container(
-      width: 280,
+      width: MediaQuery.of(context).size.width - 150,
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -228,12 +228,12 @@ class CardRewardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:280,
+      width:MediaQuery.of(context).size.width - 150,
       child:Text(cardRewardName,
           style: TextStyle(
             color:Palette.kToBlack[900],
           ),
-          maxLines:2,
+          maxLines:null,
       )
     );
   }
@@ -289,25 +289,6 @@ class RewardItem extends StatelessWidget {
         fontSize: 15,
         color:Palette.kToBlack[900],
       ),
-    );
-  }
-}
-
-
-class CardTitle extends StatelessWidget {
-  const CardTitle({super.key, required this.cardName, required this.bankName, required this.cardImage});
-  
-  final String cardName;
-  final String bankName;
-  final String cardImage;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children:[
-        // CardIcon(image: cardImage,),
-        CardName(cardName: cardName, bankName: bankName,),
-      ]
     );
   }
 }

@@ -21,15 +21,16 @@ class ChannelItems extends StatelessWidget {
     List<ChannelItemModel> channelItemModels = channelViewModel.getChannelsByChannelCategoryType(type);
 
     return Container(
-      height:MediaQuery.of(context).size.height-373,
+      height:MediaQuery.of(context).size.height - 373,
       child:GridView.count(  
         crossAxisCount: 4,  
-        crossAxisSpacing: 20.0,  
+        crossAxisSpacing: 15.0,  
         mainAxisSpacing: 15.0,
         padding: EdgeInsets.zero,  
         children:[
           for(ChannelItemModel channelItemModel in channelItemModels ?? [])
             ChannelItem(channelItemModel:channelItemModel),
+
         ],
       ),
     );

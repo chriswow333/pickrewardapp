@@ -8,7 +8,7 @@ import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/c
 
 class CardRewardService {
 
-  String baseUrl = "localhost";
+  String baseUrl = "192.168.20.112";
   CardRewardService._internal();
 
 

@@ -4,6 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:provider/provider.dart';
@@ -23,12 +24,12 @@ class CardItems extends StatelessWidget {
     List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
 
     return Container(
-      height:400,
+      height:MediaQuery.of(context).size.height - 336,
       child:SingleChildScrollView(
         child:Column(
           children:[
             for(CardItemModel cardItemModel in cardItemModels)
-              CardItem(cardItemModel:cardItemModel)
+              CardItem(cardItemModel:cardItemModel),
           ],
         ),
       ),
@@ -46,127 +47,130 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children:[
-        TextButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
-            );
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-            elevation:MaterialStatePropertyAll(2),
+        Container(
+          padding:const EdgeInsets.only(bottom: 5, top:5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.9),
+                spreadRadius: 0,
+                blurRadius: 1,
+                offset: Offset(1, 2)
+              ),
+            ],
           ),
-          child:Container(
-            padding:const EdgeInsets.all(10),
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children:[
-                // CardUpdateDate(),
-                Row(
-                  children:[
-                    CardTitle(name:cardItemModel.name, image:cardItemModel.image),
-                    SizedBox(width:20),
-                    Expanded(
-                      child:CardDescs(descs:cardItemModel.descriptions),
-                    ),
-                    
-                  ],
-                ),
-              ]
-            )
-            
+          child:TextButton(
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
+              );
+            },
+            style:ButtonStyle(
+              alignment: Alignment.center,
+              padding: MaterialStatePropertyAll(
+                EdgeInsets.fromLTRB(0, 12, 0, 0),
+              ),
+            ),
+            child:Container(
+              child:Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Column(
+                    children:[
+                      CardIcon(image:cardItemModel.image),
+                      CardName(cardName: cardItemModel.name,),
+                    ],
+                  ),
+                  SizedBox(width:20),
+                  CardDescs(descs:cardItemModel.descriptions),
+                ],
+              ),
+            ),
           ),
         ),
         SizedBox(height:10,),
       ],
     );
     
-    ;
   }
 }
 
-
-class CardUpdateDate extends StatelessWidget {
-  const CardUpdateDate({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('2023/02/02',
-      style:TextStyle(
-        fontSize: 10,
-        color:Colors.cyan[900],
-      )
-    );
-  }
-}
 
 class CardDescs extends StatelessWidget {
   const CardDescs({super.key, required this.descs});
 
   final List<String> descs;
-  
   @override
   Widget build(BuildContext context) {
     
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        for(String desc in descs) 
-          Text(desc,
-            style:TextStyle(
-              fontSize: 12,
-              color:Colors.cyan[900],
+    return Container(
+      padding: EdgeInsets.only(top:5),
+      width: MediaQuery.of(context).size.width - 150,
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          for(String desc in descs) 
+            Container(
+              padding: EdgeInsets.only(bottom: 3),
+              child:Text(desc,
+                style:TextStyle(
+                  color:Palette.kToBlack[900],
+                ),
+                maxLines: null,
+              ),
             ),
-          ),
-      ]
+        ]
+      )
     );
   }
 }
 
 
+class CardIcon extends StatelessWidget {
+  const CardIcon({super.key, required this.image});
 
-class CardTitle extends StatelessWidget {
-  const CardTitle({super.key, required this.name, required this.image});
-  
-  final String name;
   final String image;
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        children:[
-          Image.memory(
-              base64Decode(image), 
-              width:70,
-              height:70,
-          ),
-          CardName(name:name),
-        ],
-      ),
-    );
+    return Image.memory(
+        gaplessPlayback: true,
+        base64Decode(image), 
+        width:120,
+        height:90,
+      );
   }
 }
+
+
+
 
 class CardName extends StatelessWidget {
-  const CardName({super.key, required this.name});
+  const CardName({super.key, required this.cardName});
+  
+  final String cardName;
 
-  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text(name,
-        style:TextStyle(
-          fontSize: 20,
-          color:Colors.cyan[900],
-        ),
-      ),
+      width:120,
+      child:Column(
+        children:[
+          FittedBox(
+            fit:BoxFit.fitWidth,
+            child:Text(cardName,
+              style: TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[900],
+              ),
+            ),
+          ),
+        ]
+      )
     );
   }
 }
-
 
