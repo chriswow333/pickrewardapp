@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,8 @@ class BankItems extends StatelessWidget {
 
 
 
+
+
 class BankItem extends StatelessWidget {
   
   const BankItem({super.key, required this.bankModel});
@@ -45,15 +48,37 @@ class BankItem extends StatelessWidget {
       onPressed: (){
         cardItemViewModel.fetchCardsByBankID(bankModel.id);
       },
-      style: ButtonStyle(
-        padding:MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 0, 5, 0),),
-      ),
-      child:Column(
-        children:[
-          BankIcon(image:bankModel.image),
-          BankName(name:bankModel.name),
-        ]
-      ),
+      child:SizedBox(
+        width:80,
+        child:Column(
+          children:[
+            BankIcon(image:bankModel.image),
+            BankName(id:bankModel.id,name:bankModel.name),
+            SizedBox(height: 5,),
+            if (cardItemViewModel.bankID == bankModel.id)
+              BottomLine(),
+          ]
+        ),
+      )
+      
+    );
+  }
+}
+
+
+
+class BottomLine extends StatelessWidget {
+  const BottomLine({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,  
+        ),
+        color:Palette.kToBlue[600],
+      ),  
     );
   }
 }
@@ -67,22 +92,31 @@ class BankIcon extends StatelessWidget {
       child:Image.memory(
         base64Decode(image), 
         width:70,
-        height:70,
+        height:50,
       ),
     );
   }
 }
 
 class BankName extends StatelessWidget {
-  const BankName({super.key, required this.name});
+  const BankName({super.key, required this.id, required this.name});
+  
+  final String id;
   final String name;
+  
   @override
   Widget build(BuildContext context) {
-    return Text(name,
-      style:TextStyle(
-        fontSize: 12,
-        color:Colors.cyan[900],
-      ),
+
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+
+    bool selected = cardItemViewModel.bankID == id;
+    return FittedBox(
+      fit:BoxFit.fill,
+      child:Text(name,
+        style: TextStyle(
+          color: selected ? Palette.kToBlue[600] :Palette.kToBlack[200],
+        ),  
+      )
     );
   }
 }
