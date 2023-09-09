@@ -116,22 +116,14 @@ class CardResult extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:[
                         EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
-                        RewardTypeName(rewardTypeName: cardEvaluation.reward.name,),
+                        SizedBox(height:5),
+                        CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
                       ]
                     )
                   ]
                 ),
+                
                 CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
-
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children:[
-                //     // CardTitle(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,cardImage: cardEvaluation.cardImage,),
-                //     // RewardItem(reward: cardEvaluation.reward,),
-                //     CardRewardEventResult(feedbackEventResult: feedbackEventResult,),
-                //     CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
-                //   ],
-                // ),
               ],
             ),
           ),
@@ -143,21 +135,6 @@ class CardResult extends StatelessWidget {
 }
 
 
-class RewardTypeName extends StatelessWidget {
-  const RewardTypeName({super.key, required this.rewardTypeName});
-  final String rewardTypeName;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text(rewardTypeName,
-        style: TextStyle(
-          fontSize: 20,
-          color:Palette.kToBlack[900],
-        ),
-      )
-    );
-  }
-}
 
 
 
@@ -169,7 +146,9 @@ class EvaluationResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String returnName = reward.rewardType == 0 ? "現金":"點數";
+    
     feedbackEventResult.getReturn;
 
     double getReturn = feedbackEventResult.getReturn;
@@ -185,28 +164,37 @@ class EvaluationResult extends StatelessWidget {
 
     percentage = percentage.substring(0,length+1);
 
-
     return Container(
-      child:Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      width: 280,
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           if(feedbackEventResult.calculateType == 0)
-            Text("${percentage}% ${returnName}回饋, 折抵${getReturnStr}",
-              style:TextStyle(
-                fontSize: 20,
-                color:Palette.kToBlack[800],
+            FittedBox(
+              alignment: Alignment.centerLeft,
+              fit:BoxFit.fill,
+              child:Text("折抵${getReturnStr} ${reward.name}   ${percentage}% ${returnName}回饋",
+                style:TextStyle(
+                  color:Palette.kToBlack[800],
+                  fontSize: 20,
+                ),
               ),
             ),
+            
+         
           if(feedbackEventResult.calculateType == 1)
-            Text("折抵${getReturnStr}",
-              style:TextStyle(
-                fontSize: 20,
-                color:Palette.kToBlack[800],
+            FittedBox(
+              alignment: Alignment.centerLeft,
+              fit:BoxFit.fill,
+              child:Text("折抵${getReturnStr} ",
+                style:TextStyle(
+                  fontSize: 20,
+                  color:Palette.kToBlack[800],
+                ),
               ),
             )
-
         ]
-      )
+      ),
     );
   }
 }
@@ -240,13 +228,13 @@ class CardRewardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
+      width:280,
       child:Text(cardRewardName,
-        style: TextStyle(
-          fontSize: 12,
-          color:Palette.kToBlack[900],
-        ),
-      ),
+          style: TextStyle(
+            color:Palette.kToBlack[900],
+          ),
+          maxLines:2,
+      )
     );
   }
 }
@@ -281,8 +269,6 @@ class CardRewardEventResult extends StatelessWidget {
         )
       );
     }else {
-
-
       return Container();
     }
     
