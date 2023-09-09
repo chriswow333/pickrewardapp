@@ -76,6 +76,7 @@ class CardItem extends StatelessWidget {
               ),
             ),
             child:Container(
+              padding: EdgeInsets.only(left:5),
               child:Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
@@ -109,7 +110,7 @@ class CardDescs extends StatelessWidget {
     
     return Container(
       padding: EdgeInsets.only(top:5),
-      width: MediaQuery.of(context).size.width - 150,
+      width: MediaQuery.of(context).size.width - 155,
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -137,11 +138,11 @@ class CardIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.memory(
-        gaplessPlayback: true,
-        base64Decode(image), 
-        width:120,
-        height:90,
-      );
+      gaplessPlayback: true,
+      base64Decode(image), 
+      width:120,
+      height:90,
+    );
   }
 }
 
