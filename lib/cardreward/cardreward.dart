@@ -80,9 +80,11 @@ class CardRewardComponent extends StatelessWidget {
           children:[
             if(cardRewardSelectedViewModel.isShowItemList())
               RewardItems(),
+             
              if(!cardRewardSelectedViewModel.isShowItemList() 
                 && cardRewardSelectedViewModel.cardRewardType() == 0)
               Activity(),
+
             if(!cardRewardSelectedViewModel.isShowItemList() 
                 && cardRewardSelectedViewModel.cardRewardType() == 1)
               Evaluation(),

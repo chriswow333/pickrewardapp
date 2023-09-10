@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class CardEvaluationDetails extends StatelessWidget {
@@ -42,7 +43,7 @@ class CardEvaluationDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top:10),
+      padding: const EdgeInsets.only(top:10, left:10,),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -64,8 +65,8 @@ class CardEvaluationDetailName extends StatelessWidget {
     return Container(
       child:Text(name,
         style:TextStyle(
-          color:Colors.cyan[900],
-          fontSize: 16,
+          color:Palette.kToBlack[900],
+          fontSize: 18,
         ),
       )
     );
@@ -78,7 +79,6 @@ class CardEvaluationDetailDescItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(left:10, top:5,),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -90,7 +90,6 @@ class CardEvaluationDetailDescItems extends StatelessWidget {
   }
 }
 
-
 class CardEvaluationDetailDescItem extends StatelessWidget {
   const CardEvaluationDetailDescItem({super.key, required this.desc});
   final String desc;
@@ -99,7 +98,7 @@ class CardEvaluationDetailDescItem extends StatelessWidget {
     return Container(
       child:Text(desc,
         style:TextStyle(
-          color:Colors.cyan[900],
+          color:Palette.kToBlack[900],
         ),
       )
     );
@@ -116,23 +115,38 @@ class EvaluationDetailTitle extends StatelessWidget {
     bool expanded = evaluationDetailToggleViewModel.get();
     IconData icon = expanded? Icons.arrow_drop_up_rounded:Icons.arrow_drop_down_rounded;
     return Container(
-      child:Row(
-        children:[
-          Text('詳細說明',
-            style:TextStyle(
-              color:Colors.cyan[900],
-              fontSize: 18,
+      child:TextButton(
+        style:ButtonStyle(
+          alignment: Alignment.center,
+          splashFactory:NoSplash.splashFactory,
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          TextButton(
-            onPressed: (){
-              evaluationDetailToggleViewModel.toggle();
-            },
-            child:Icon(icon,
-            )
+          padding:const MaterialStatePropertyAll(
+            EdgeInsets.fromLTRB(0, 0, 0, 0),
           ),
-        ]
-      )
+        ),
+        onPressed: (){
+          evaluationDetailToggleViewModel.toggle();
+        },
+        child:Row(
+          children:[
+            Text('詳細說明',
+              style:TextStyle(
+                color:Palette.kToBlack[900],
+                fontSize: 20,
+              ),
+            ),
+            Icon(icon,
+              size: 30,
+              color: Palette.kToBlack[900],
+            )
+          ]
+        ),
+        
+      ),
     );
     
   }

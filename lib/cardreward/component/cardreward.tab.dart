@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class CarTab extends StatelessWidget {
@@ -22,7 +23,7 @@ class CarTab extends StatelessWidget {
             },
             child:Text('卡片回饋',
               style:TextStyle(
-                color:Colors.cyan[900],
+                color:Palette.kToBlack[900],
               ),
             ),
           ),
@@ -30,7 +31,7 @@ class CarTab extends StatelessWidget {
             onPressed: (){},
             child:Text('點我辦卡',
               style:TextStyle(
-                color:Colors.cyan[900],
+                color:Palette.kToBlack[900],
               ),
             ),
           ),

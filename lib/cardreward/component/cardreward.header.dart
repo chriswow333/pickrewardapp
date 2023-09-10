@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
@@ -18,30 +19,37 @@ class CardHeader extends StatelessWidget {
     CardItemModel cardItemModel = cardViewModel.get();
     
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:[
-        CardTitle(name:cardItemModel.name, image:cardItemModel.image),
-        SizedBox(width:20),
-        Expanded(
-          child:CardDescriptions(descs: cardItemModel.descriptions,),
+        Column(
+          children:[
+            CardIcon(image:cardItemModel.image),
+            CardName(cardName: cardItemModel.name,),
+          ]
         ),
+        SizedBox(width:20),
+        CardDescriptions(descriptions: cardItemModel.descriptions,),
       ]
     );
   }
 }
 
 class CardDescriptions extends StatelessWidget {
-  const CardDescriptions({super.key, required this.descs});
+  const CardDescriptions({super.key, required this.descriptions});
 
-  final List<String> descs;
+  final List<String> descriptions;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        for (String desc in descs)
-          CardDescriptionItem(desc:desc),
-
-      ]
+    return Container(
+      width: MediaQuery.of(context).size.width - 140,
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          for (String desc in descriptions)
+            CardDescriptionItem(desc:desc),
+        ]
+      )
     );
   }
 }
@@ -55,63 +63,59 @@ class CardDescriptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding:const EdgeInsets.only(bottom: 10),
-      child:Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        Flexible(
-          child: Text(desc,
-            style:TextStyle(
-              color:Colors.cyan[900],
-              overflow: TextOverflow.clip,
-            ),
-          ),
+      padding: EdgeInsets.only(top:5),
+      alignment: Alignment.centerLeft,
+      child:Text(desc,
+        style:TextStyle(
+          color:Palette.kToBlack[900],
         ),
-      ]
-    )
+        maxLines: null,
+      )
     );
   }
 }
 
 
 
-class CardTitle extends StatelessWidget {
-  const CardTitle({super.key, required this.name, required this.image});
-  
-  final String name;
-  final String image;
 
+class CardIcon extends StatelessWidget {
+  const CardIcon({super.key, required this.image});
+
+  final String image;
   @override
   Widget build(BuildContext context) {
-    return Container(
-     child:Column(
-        children:[
-          Image.memory(
-              base64Decode(image), 
-              width:70,
-              height:70,
-          ),
-          CardName(name:name),
-        ],
-      ),
+    return Image.memory(
+      gaplessPlayback: true,
+      base64Decode(image), 
+      width:120,
+      height:90,
     );
   }
 }
-
 
 class CardName extends StatelessWidget {
-  const CardName({super.key, required this.name});
+  const CardName({super.key, required this.cardName});
 
-  final String name;
+  final String cardName;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text(name,
-        style:TextStyle(
-          fontSize: 20,
-          color:Colors.cyan[900],
-        ),
+      width:120,
+      child:Column(
+        children:[
+         FittedBox(
+            fit:BoxFit.fitWidth,
+            child:Text(cardName,
+              style: TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[900],
+              ),
+            ),
+          ),
+        ]
       ),
+      
     );
   }
 }

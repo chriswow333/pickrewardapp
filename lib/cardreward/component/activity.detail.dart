@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class CardActivityDetails extends StatelessWidget {
@@ -18,8 +19,6 @@ class CardActivityDetails extends StatelessWidget {
 
     if(cardRewardModel == null) return Container();
   
-
-
     return Container(
       child:Column(
         children:[
@@ -59,9 +58,9 @@ class CardActivityDetailName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('國內平日消費滿NT\$９萬享居家清潔服務一次，達NT\$18萬享2次(每年上限２次)',
+      child:Text(name,
         style:TextStyle(
-          color:Colors.cyan[900],
+          color:Palette.kToBlack[900],
           overflow: TextOverflow.clip,
         ),
       )
@@ -81,7 +80,7 @@ class CardActivityDetailDescItems extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for (final d in desc) 
-          CardActivityDetailDescItem(desc:d,),
+            CardActivityDetailDescItem(desc:d,),
         ]
       )
     );
@@ -98,7 +97,7 @@ class CardActivityDetailDescItem extends StatelessWidget {
       padding:const EdgeInsets.only(top:5),
       child:Text(desc,
         style:TextStyle(
-          color:Colors.cyan[900],
+          color:Palette.kToBlack[900],
           overflow: TextOverflow.clip,
         ),
       )

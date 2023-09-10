@@ -136,8 +136,7 @@ class ChannelItemName extends StatelessWidget {
       fit: BoxFit.fitWidth, 
       child:Text(
         name,
-        style: 
-        TextStyle(
+        style:TextStyle(
           color: Palette.kToBlack[600],
         ),
       )

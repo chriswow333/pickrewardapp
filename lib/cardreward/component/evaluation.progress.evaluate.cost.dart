@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class CardRewardEvaluationProgressCost extends StatelessWidget {
@@ -33,7 +34,7 @@ class CostName extends StatelessWidget {
     return Text('消費金額',
       style: TextStyle(
         fontSize: 20,
-        color: Colors.cyan[900],
+        color: Palette.kToBlack[900],
       ),  
     );
   }

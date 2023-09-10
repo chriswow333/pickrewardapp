@@ -17,7 +17,6 @@ class EvaluationProgressChannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
     EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
 
     return Column(
@@ -140,8 +139,11 @@ class ChannelCategoryType extends StatelessWidget {
       },
       child:Column(
         children:[
-          ChannelCategoryTypeIcon(id:channelCategoryType.id),
-          ChannelCategoryName(name:channelCategoryType.name),
+          ChannelCategoryTypeIcon(categoryType:channelCategoryType.id),
+          ChannelCategoryName(categoryType:channelCategoryType.id, name:channelCategoryType.name),
+          SizedBox(height:10),
+          if(channelCategoryType.id == categoryViewModel.get())
+            BottomLine(),
         ]
       )
     );
@@ -149,16 +151,63 @@ class ChannelCategoryType extends StatelessWidget {
 }
 
 
-class ChannelCategoryTypeIcon extends StatelessWidget {
-  const ChannelCategoryTypeIcon({super.key, required this.id});
-  final int id;
-  
+class BottomLine extends StatelessWidget {
+  const BottomLine({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      width:70,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,  
+        ),
+        color:Palette.kToBlue[600],
+      ),  
+    );
+  }
+}
+
+
+class ChannelCategoryTypeIcon extends StatelessWidget {
+  const ChannelCategoryTypeIcon({super.key, required this.categoryType});
+  
+  final int categoryType;
+  
+  @override
+  Widget build(BuildContext context) {
+
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+    bool selected = categoryType == categoryViewModel.get();
+
+    IconData icon = Icons.wallet_giftcard_outlined;
+
+    switch(categoryType) {
+      case 0:
+        icon = Icons.wallet_giftcard_outlined;
+        break;
+      case 1:
+        icon = Icons.food_bank_outlined;
+        break;
+      case 2:
+        icon = Icons.travel_explore_outlined;
+        break;
+      case 3:
+        icon = Icons.directions_transit_filled_outlined;
+        break;
+      case 4:
+        icon = Icons.card_travel_sharp;
+        break;
+      case 5:
+        icon = Icons.video_camera_front_outlined;
+        break;
+    }
+
+
+    return Container(
       child:Icon(
-        color:Palette.kToBlack[700],
-        Icons.shopping_bag_sharp,
+        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
+        icon,
       )
     );
   }
@@ -166,16 +215,23 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
 
 
 class ChannelCategoryName extends StatelessWidget {
-  const ChannelCategoryName({super.key, required this.name});
+  const ChannelCategoryName({super.key, required this.categoryType, required this.name});
+  
+  final int categoryType;
   final String name;
+  
   @override
   Widget build(BuildContext context) {
+
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+    bool selected = categoryType == categoryViewModel.get();
+
     return Container(
       child:Text(
         name,
         style: TextStyle(
           fontSize: 15,
-          color: Palette.kToBlack,
+          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
         ),  
       )
     );
@@ -210,8 +266,8 @@ class ChannelItems extends StatelessWidget {
       height:350,
       child:GridView.count(  
         crossAxisCount: 4,  
-        crossAxisSpacing: 8.0,  
-        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 15.0,  
+        mainAxisSpacing: 15.0,
         padding: EdgeInsets.zero,  
         children:[
           for (ChannelProto c in channelProtos) 
@@ -346,39 +402,59 @@ class ChannelItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    return TextButton(
-      style:ButtonStyle(
-        alignment: Alignment.center,
-        splashFactory:NoSplash.splashFactory,
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+
+    bool selected = evaluationSelectedViewModel.hasChannlID(channelProto.id);
+
+    return Container(
+      decoration: BoxDecoration(
+      color: Colors.white,
+      border:selected? Border.all(
+        color:Palette.kToBlue[800]!,
+        width: 1.5,
+      ):null,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20)
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 0,
+            blurRadius: 1,
+            offset: Offset(0, 0.5)
+          ),
+        ],
+      ),
+      child:TextButton(
+        style:ButtonStyle(
+          alignment: Alignment.center,
+          splashFactory:NoSplash.splashFactory,
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        
+          padding:const MaterialStatePropertyAll(
+            EdgeInsets.fromLTRB(0, 12, 0, 0),
           ),
         ),
-        side:evaluationSelectedViewModel.hasChannlID(channelProto.id)?
-          MaterialStatePropertyAll(
-            BorderSide(
-              color:Colors.teal[900]!,
-              width: 1,
-            )
-          ):null,
-        padding:const MaterialStatePropertyAll(
-          EdgeInsets.fromLTRB(0, 12, 0, 0),
+        onPressed:(){
+          evaluationSelectedViewModel.setChannelID(channelProto.id);
+        },
+        child:Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(left:2, right:2),
+          child:Column(
+            children:[
+              ChannelItemIcon(image: channelProto.image,),
+              ChannelItemName(name:channelProto.name),
+            ],
+          ),
         ),
-      ),
-      onPressed:(){
-        evaluationSelectedViewModel.setChannelID(channelProto.id);
-      },
-      child:Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
-        child:Column(
-          children:[
-            ChannelItemIcon(image: channelProto.image,),
-            ChannelItemName(name:channelProto.name),
-          ],
-        ),
-      ),
+      )
     );
   }
 }
@@ -413,9 +489,8 @@ class ChannelItemName extends StatelessWidget {
       fit: BoxFit.fitWidth, 
       child:Text(
         name,
-        style: 
-        TextStyle(
-          color: Colors.teal[900],
+        style:TextStyle(
+          color: Palette.kToBlack[600],
         ),
       )
     );

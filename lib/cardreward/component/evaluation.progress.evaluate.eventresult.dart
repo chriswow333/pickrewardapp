@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class CardRewardEvaluationEventResult extends StatelessWidget {
@@ -9,93 +10,17 @@ class CardRewardEvaluationEventResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        EvaluationEventResultTitle(),
-        EvaluationEventResult(),
-      ]
-    );
-  }
-}
-
-
-class EvaluationEventResult extends StatelessWidget {
-  const EvaluationEventResult({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return Row(
       children:[
-        EventResultGetPercentage(),
-        SizedBox(width:20),
         EventResultGetReturn(),
+        SizedBox(width:10,),
+        EventResultGetPercentage(),
       ]
     );
   }
 }
 
-class EvaluationEventResultTitle extends StatelessWidget {
-  const EvaluationEventResultTitle({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children:[
-        GetPercentageTitle(),
-        SizedBox(width:20,),
-        GetReturnTitle(),
-
-      ]
-    );
-  }
-}
-
-class GetPercentageTitle extends StatelessWidget {
-  const GetPercentageTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('回饋利率',
-      style: TextStyle(
-        fontSize: 15,
-        color: Colors.cyan[900],
-      ),  
-    );
-  }
-}
-
-class GetReturnTitle extends StatelessWidget {
-  const GetReturnTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    
-    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    String name = evaluationSelectedViewModel.cardRewardModel.reward.name;
-    
-    return Text(name,
-      style: TextStyle(
-        fontSize: 15,
-        color: Colors.cyan[900],
-      ),  
-    );
-  }
-}
-
-
-class EventResultName extends StatelessWidget {
-  const EventResultName({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('試算結果',
-      style: TextStyle(
-        fontSize: 20,
-        color: Colors.cyan[900],
-      ),  
-    );
-  }
-}
 
 
 class EventResultGetPercentage extends StatelessWidget {
@@ -105,14 +30,28 @@ class EventResultGetPercentage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);
-    double getPercentage = evaluationEventResultRespViewModel.feedbackEventResult.getPercentage;
+    double percentage = evaluationEventResultRespViewModel.feedbackEventResult.getPercentage * 100;
+    String percentageStr = percentage.toStringAsFixed(3);
+    int length = percentageStr.length - 1;
+    while(length > 0) {
+      if(percentageStr[length] != '0' && percentageStr[length] != "."){
+        break;
+      }
+      length--; 
+    }
+    percentageStr = percentageStr.substring(0,length+1);
+
+    if(percentage != 0.0) {
+      return Text(percentageStr+"%回饋",
+        style: TextStyle(
+          fontSize: 20,
+          color: Palette.kToBlack[900],
+        ),  
+      );  
+    }else {
+      return Container();
+    }
     
-    return Text(getPercentage.toString(),
-      style: TextStyle(
-        fontSize: 20,
-        color: Colors.cyan[900],
-      ),  
-    );
   }
 }
 
@@ -132,10 +71,10 @@ class EventResultGetReturn extends StatelessWidget {
     double getReturn = evaluationEventResultRespViewModel.feedbackEventResult.getReturn;
 
 
-    return Text(getReturn.toString() + " " + unit,
+    return Text("折抵 " +getReturn.toString() + " " + unit,
       style: TextStyle(
         fontSize: 20,
-        color: Colors.cyan[900],
+        color: Palette.kToBlack[900],
       ),  
     );
   }

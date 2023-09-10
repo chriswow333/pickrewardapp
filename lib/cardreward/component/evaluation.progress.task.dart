@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class EvaluationProgressTask extends StatelessWidget {
@@ -49,7 +50,7 @@ class TaskItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           TaskItemTitle(name:task.name, id:task.id),
-          TaskItemDescs(descItems: descItems,),
+          TaskItemDescriptions(descItems: descItems,),
         ]
       )
     );
@@ -79,20 +80,17 @@ class TaskItemTitle extends StatelessWidget {
           children:[
             Checkbox(
               checkColor: Colors.white,
-              fillColor: MaterialStatePropertyAll(Colors.cyan[900]),
+              fillColor: evaluationSelectedViewModel.hasTaskID(id)?
+                MaterialStatePropertyAll(Palette.kToBlue[600]):MaterialStatePropertyAll(Palette.kToBlack[600]),
               value: evaluationSelectedViewModel.hasTaskID(id),
               onChanged: (bool? value) {},
             ),
             Flexible(
-              child: FittedBox(
-                fit: BoxFit.fitWidth, 
-                child:Text(name,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.cyan[900],
-                    fontWeight: FontWeight.bold,
-                  ),  
-                ),
+              child: Text(name,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Palette.kToBlack[900],
+                ),  
               ),
             ),
           ]
@@ -103,15 +101,15 @@ class TaskItemTitle extends StatelessWidget {
 }
 
 
-class TaskItemDescs extends StatelessWidget {
-  const TaskItemDescs({super.key, required this.descItems});
+class TaskItemDescriptions extends StatelessWidget {
+  const TaskItemDescriptions({super.key, required this.descItems});
 
   final List<TaskDescriptionProto> descItems;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(left:40),
+      padding:const EdgeInsets.only(left:55),
       child:Column(
         children:[
           for(TaskDescriptionProto d in descItems)
@@ -130,7 +128,6 @@ class TaskItemDesc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left:10, top:5,),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -152,8 +149,7 @@ class TaskItemDescName extends StatelessWidget {
       Text(name,
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[900],
-          fontWeight:FontWeight.bold,
+          color: Palette.kToBlack[900],
         ),  
       )
     );

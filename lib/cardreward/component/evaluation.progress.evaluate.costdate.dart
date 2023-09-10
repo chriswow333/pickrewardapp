@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
@@ -13,7 +14,7 @@ class CardRewardEvaluationProgressCostDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(top:10),
+      padding:const EdgeInsets.only(top:20),
       child:Row(
         children:[
           CostDateName(),
@@ -33,7 +34,7 @@ class CostDateName extends StatelessWidget {
     return Text('消費日期',
       style: TextStyle(
         fontSize: 20,
-        color: Colors.cyan[900],
+        color: Palette.kToBlack[900],
       ),  
     );
   }
@@ -62,7 +63,8 @@ class CostDate extends StatelessWidget {
       },
       child:Text(formatter.format(costDate),
         style:TextStyle(
-          color: Colors.teal[900],
+          color: Palette.kToBlack[900],
+          fontSize: 18,
         ),
       )
     );
@@ -108,7 +110,7 @@ class CostDate extends StatelessWidget {
       fieldHintText: 'widget.fieldHintText',
       fieldLabelText: '消費日期',
       helpText: '請輸入消費日期',
-      initialEntryMode: DatePickerEntryMode.input,
+      initialEntryMode: DatePickerEntryMode.calendar,
       keyboardType:TextInputType.number,
       // routeSettings: widget.routeSettings,
       // currentDate: widget.currentDate,

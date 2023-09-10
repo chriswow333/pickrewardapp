@@ -87,7 +87,7 @@ class ActivityName extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child:Text(name,
         style:TextStyle(
-          color:Palette.kToBlue[900],
+          color:Palette.kToBlack[900],
           fontSize: 20,
         ),
       ),
@@ -121,12 +121,8 @@ class EvaluationItem extends StatelessWidget {
           child:Row(
             children:[
               EvaluationRewardType(reward: cardRewardModel.reward,),
-              Expanded(
-                child:FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child:EvaluationName(name: cardRewardModel.name,),
-                ),
-              ),
+              SizedBox(width:5,),
+              EvaluationName(name: cardRewardModel.name,),
             ]
           )
         )
@@ -143,10 +139,24 @@ class EvaluationRewardType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return Text(reward.name,
-      style:TextStyle(
-        color:Palette.kToBlue[900],
-        fontSize: 20,
+    int rewardType = reward.rewardType;
+
+    String rewardTypeName = "";
+    if(rewardType == 0) {
+      rewardTypeName = "現金回饋";
+    }else {
+      rewardTypeName = reward.name + " 回饋";
+    }
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 200,
+      ),
+      child:Text(rewardTypeName,
+        style:TextStyle(
+          color:Palette.kToBlack[900],
+          fontSize: 20,
+        ),
+        maxLines: null,
       ),
     );
   }
@@ -159,16 +169,12 @@ class EvaluationName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      // width:270,
-      padding: const EdgeInsets.only(left:20),
-      child:
-        Text(name,
+    return  Expanded(
+      child:Text(name,
           style:TextStyle(
-            color:Palette.kToBlue[900],
-            fontSize: 18,
-            overflow: TextOverflow.clip,
+            color:Palette.kToBlack[900],
           ),
+          maxLines: null,
       )
     );
   }
