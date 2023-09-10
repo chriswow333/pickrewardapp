@@ -13,6 +13,7 @@ service Card {
   rpc CreateCard (CardProto) returns (Reply) {}
   rpc GetAllBanks (EmptyRequest) returns (BanksProtoReply) {}
   rpc GetCardsByBankID (BankIDProto) returns (CardsProtoReply) {}
+  rpc GetLatestCards (EmptyRequest) returns (CardsProtoReply) {}
 
   rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
   rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}

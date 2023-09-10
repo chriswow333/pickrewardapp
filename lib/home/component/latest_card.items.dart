@@ -1,35 +1,57 @@
 
 
 
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
-import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:provider/provider.dart';
 
 
-
-class CardItems extends StatelessWidget {
-  const CardItems({super.key});
+class LatestTitle extends StatelessWidget {
+  const LatestTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
-    
-    final bankID = cardItemViewModel.bankID;
-
-    List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
-
     return Container(
-      height:MediaQuery.of(context).size.height - 336,
+
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          Text('近期更新',
+            style:TextStyle(
+              color:Palette.kToBlack[900],
+              fontSize: 20,
+            ),
+          ),
+        ]
+      )
+    );
+  }
+}
+
+class LatestCardItems extends StatelessWidget {
+  const LatestCardItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+
+    cardItemViewModel.fetchLatestCards();
+
+    List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
+    
+    return Container(
+      height:MediaQuery.of(context).size.height - 250,
       child:SingleChildScrollView(
         child:Column(
           children:[
             for(CardItemModel cardItemModel in cardItemModels)
-              CardItem(cardItemModel:cardItemModel),
+              LatestCardItem(cardItemModel:cardItemModel),
           ],
         ),
       ),
@@ -37,9 +59,11 @@ class CardItems extends StatelessWidget {
   }
 }
 
-class CardItem extends StatelessWidget {
 
-  const CardItem({super.key, required this.cardItemModel});
+
+class LatestCardItem extends StatelessWidget {
+
+  const LatestCardItem({super.key, required this.cardItemModel});
   
   final CardItemModel cardItemModel;
 
@@ -171,4 +195,3 @@ class CardName extends StatelessWidget {
     );
   }
 }
-

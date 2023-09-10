@@ -3,6 +3,7 @@ import 'package:pickrewardapp/card/card.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
+import 'package:pickrewardapp/home/home.dart';
 import 'package:pickrewardapp/shared/config/global_padding.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
@@ -53,10 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    
+    HomePage(),
     
     ChannelSearchPage(),
 
