@@ -18,7 +18,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
 class HomeComponent extends StatelessWidget {
   const HomeComponent({super.key});
 

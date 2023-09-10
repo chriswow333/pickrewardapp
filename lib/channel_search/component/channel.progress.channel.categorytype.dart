@@ -22,6 +22,14 @@ class ChannelCategoryTypes extends StatelessWidget {
       scrollDirection:Axis.horizontal,
       child:Row(
         children:[
+          Column(
+            children:[
+              LabelType(),
+              if(channelViewModel.channelCategoryType == -1)
+                BottomLine(),
+            ]
+          ),
+
           for (ChannelCategoryTypeModel channelCategoryTypeModel in channelViewModel.channelCategoryTypeModels)
             Column(
               children:[
@@ -54,6 +62,70 @@ class BottomLine extends StatelessWidget {
   }
 }
 
+
+class LabelType extends StatelessWidget {
+  const LabelType({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+  ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+
+    return Container(
+      child:TextButton(
+        onPressed: (){
+          channelViewModel.channelCategoryType = -1;
+        },
+        child:Column(
+          children:[
+            LabelIcon(),
+            LabelName(),
+          ],
+        ),
+      )
+    );
+  }
+}
+
+class LabelIcon extends StatelessWidget {
+  const LabelIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    IconData icon = Icons.list_alt_rounded;
+    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+    bool selected = channelViewModel.channelCategoryType == -1;
+    return Container(
+      child:Icon(
+        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
+        icon,
+      )
+    );
+  }
+}
+
+class LabelName extends StatelessWidget {
+  const LabelName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+    bool selected = channelViewModel.channelCategoryType == -1;
+
+    return Container(
+      child:Text(
+        '通路總覽',
+        style: TextStyle(
+          fontSize: 15,
+          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
+        ),  
+      )
+    );
+  }
+}
+
 class ChannelCategoryType extends StatelessWidget {
   const ChannelCategoryType({super.key, required this.channelCategoryTypeModel});
 
@@ -73,12 +145,10 @@ class ChannelCategoryType extends StatelessWidget {
           children:[
             ChannelCategoryTypeIcon(categoryType: channelCategoryTypeModel.id,),
             ChannelCategoryTypeName(categoryType:channelCategoryTypeModel.id, name:channelCategoryTypeModel.name),
-            
           ],
         ),
       )
     );
-    ;
   }
 }
 
@@ -102,7 +172,7 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
         icon = Icons.wallet_giftcard_outlined;
         break;
       case 1:
-        icon = Icons.food_bank_outlined;
+        icon = Icons.restaurant;
         break;
       case 2:
         icon = Icons.travel_explore_outlined;
@@ -147,7 +217,6 @@ class ChannelCategoryTypeName extends StatelessWidget {
           color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
         ),  
       )
-
     );
   }
 }

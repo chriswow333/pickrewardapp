@@ -4,10 +4,27 @@ import 'package:flutter/material.dart';
 
 class RewardSelectedViewModel with ChangeNotifier{
 
+  final Set<int> _labelIDs = {};
+  set labelIDs(int labelID) {
+    if(_labelIDs.contains(labelID)){
+      _labelIDs.remove(labelID);
+    }else {
+      _labelIDs.add(labelID);
+    }
+    notifyListeners();
+  }
+
+  bool existSelectedLabelID(int labelID) {
+    return _labelIDs.contains(labelID);
+  }
+
+  List<int> getAllLabelIDs(){
+    return _labelIDs.toList();
+  }
+
 
   final Set<String> _channelIDs = {};
   set channelID(String channelID) {
-
     if(_channelIDs.contains(channelID)){
       _channelIDs.remove(channelID);
     }else {

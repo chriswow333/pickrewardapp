@@ -21,7 +21,9 @@ final List<CardRewardEventResultProto> _cardRewardEventResults = [];
 List<CardRewardEventResultProto> get() => _cardRewardEventResults;
 
 Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
-    
+  
+  List<int> labelIDs = rewardSelectedViewModel.getAllLabelIDs();
+
   List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
   List<String> payIDs = rewardSelectedViewModel.getPayIDs();
 
@@ -33,6 +35,7 @@ Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelect
 
   EventProto event = EventProto();
 
+  event.labels.addAll(labelIDs);
   event.channelIDs.addAll(channelIDs);
   event.payIDs.addAll(payIDs);
   event.cost = cost;

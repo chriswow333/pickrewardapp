@@ -13,7 +13,7 @@ class ChannelViewModel with ChangeNotifier {
   }
 
 
-  int _channelCategoryType = 0;
+  int _channelCategoryType = -1; // -1 通路總覽
   int get channelCategoryType => _channelCategoryType;
   set channelCategoryType(int type) {
     if (type == _channelCategoryType)return;
@@ -173,3 +173,4 @@ class ChannelLabelModel {
     required this.order
   });
 }
+

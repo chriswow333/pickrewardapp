@@ -41,9 +41,13 @@ class LatestCardItems extends StatelessWidget {
     
     CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
 
-    cardItemViewModel.fetchLatestCards();
 
     List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
+
+    if(cardItemModels.isEmpty) {
+      cardItemViewModel.fetchLatestCards();
+    }
+
     
     return Container(
       height:MediaQuery.of(context).size.height - 250,

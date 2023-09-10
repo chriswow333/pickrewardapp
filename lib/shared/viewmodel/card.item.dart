@@ -31,9 +31,7 @@ class CardItemViewModel with ChangeNotifier {
 
     try {
 
-      EmptyRequest request = EmptyRequest();
-
-      CardsProtoReply cardProtosReply = await CardService().cardClient.getLatestCards(request);
+      CardsProtoReply cardProtosReply = await CardService().cardClient.getLatestCards(EmptyRequest());
       
       List<CardItemModel> cardItemModels = [];
 
