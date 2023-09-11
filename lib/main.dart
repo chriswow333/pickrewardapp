@@ -74,8 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body:Container(
         // alignment: Alignment.topCenter,
         padding: GlobalPadding.global(),
-        child: Center(
-          child:_widgetOptions.elementAt(_selectedIndex),
+        child: Container(
+          padding: EdgeInsets.only(top:10),
+          child:Center(
+            child:_widgetOptions.elementAt(_selectedIndex),
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

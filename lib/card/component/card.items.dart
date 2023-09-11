@@ -24,7 +24,7 @@ class CardItems extends StatelessWidget {
     List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
 
     return Container(
-      height:MediaQuery.of(context).size.height - 336,
+      height:MediaQuery.of(context).size.height - 346,
       child:SingleChildScrollView(
         child:Column(
           children:[

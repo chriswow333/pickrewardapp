@@ -76,12 +76,16 @@ class LabelCategoryType extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
+        categoryViewModel.toggle(-1);
         categoryViewModel.selectedLabel();
       },
       child:Column(
         children:[
           LabelCategoryTypeIcon(),
           LabelCategoryName(),
+          SizedBox(height:10,),
+          if(categoryViewModel.get() == -1)
+            BottomLine(),
         ]
       )
     );
@@ -94,10 +98,14 @@ class LabelCategoryTypeIcon extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+
+    IconData icon = Icons.list_alt_rounded;
+    bool selected = categoryViewModel.get() == -1;
     return Container(
       child:Icon(
-        color:Palette.kToBlue[700],
-        Icons.shopping_bag_sharp,
+        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
+        icon,
       )
     );
   }
@@ -109,20 +117,19 @@ class LabelCategoryName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+    bool selected = categoryViewModel.get() == -1;
     return Container(
       child:Text(
         '通路總覽',
         style: TextStyle(
           fontSize: 15,
-          color: Colors.cyan[900],
+          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
         ),  
       )
     );
   }
 }
-
-
-
 
 class ChannelCategoryType extends StatelessWidget {
   const ChannelCategoryType({super.key, required this.channelCategoryType});
@@ -346,7 +353,7 @@ class LabelItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         child:Column(
           children:[
-            LabelItemIcon(),
+            LabelItemIcon(labelType:label.labelType),
             LabelItemName(name:label.labelName),
           ],
         ),
@@ -367,7 +374,7 @@ class LabelItemName extends StatelessWidget {
         name,
         style: 
         TextStyle(
-          color: Colors.teal[900],
+          color: Palette.kToBlack[600],
         ),
       )
     );
@@ -376,16 +383,32 @@ class LabelItemName extends StatelessWidget {
 
 
 class LabelItemIcon extends StatelessWidget {
-  const LabelItemIcon({super.key});
+  const LabelItemIcon({super.key, required this.labelType,});
   
+  final int labelType;
   
   @override
   Widget build(BuildContext context) {
+
+
+    IconData iconData = Icons.filter_none;
+    switch (labelType) {
+      case 0:
+        iconData = Icons.horizontal_split_outlined;
+        break;
+      case 1:
+        iconData = Icons.home_outlined;
+        break;
+      case 2:
+        iconData = Icons.airplane_ticket_outlined;
+        break;
+    }
+
     return Container(
       child:Icon(
-        color:Palette.kToBlue[700],
+        color:Palette.kToBlack[600],
         size:40,
-        Icons.shopping_bag_sharp,
+        iconData,
       )
     );
   }

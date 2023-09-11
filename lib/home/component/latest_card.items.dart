@@ -50,7 +50,7 @@ class LatestCardItems extends StatelessWidget {
 
     
     return Container(
-      height:MediaQuery.of(context).size.height - 250,
+      height:MediaQuery.of(context).size.height - 260,
       child:SingleChildScrollView(
         child:Column(
           children:[

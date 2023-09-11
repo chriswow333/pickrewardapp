@@ -42,7 +42,7 @@ class CardDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width - 140,
+      width: MediaQuery.of(context).size.width - 150,
       child:Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children:[

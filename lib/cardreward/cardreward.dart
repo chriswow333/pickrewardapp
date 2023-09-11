@@ -11,7 +11,7 @@ import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
-import 'package:pickrewardapp/shared/component/banner.dart';
+import 'package:pickrewardapp/shared/config/global_padding.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class CardContentScreen extends StatelessWidget {
      return Scaffold(
       body:Container(
         // alignment: Alignment.topCenter,
-        padding: const EdgeInsets.only(top:50),
+        padding: GlobalPadding.global(),
         child: MultiProvider(
           providers: [
             ChangeNotifierProvider<CardRewardSelectedViewModel>(create:(_)=>CardRewardSelectedViewModel()),
@@ -53,8 +53,7 @@ class CardContentPage extends StatelessWidget {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Banner(),
-          SizedBox(height:20),
+          SizedBox(height:10),
           CardHeader(),
           Divider(),
           CarTab(),

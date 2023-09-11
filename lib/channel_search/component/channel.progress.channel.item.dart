@@ -24,7 +24,7 @@ class ChannelItems extends StatelessWidget {
       List<ChannelItemModel> channelItemModels = channelViewModel.getChannelsByChannelCategoryType(type);
 
       return Container(
-        height:MediaQuery.of(context).size.height - 373,
+        height:MediaQuery.of(context).size.height - 383,
         child:GridView.count(  
           crossAxisCount: 4,  
           crossAxisSpacing: 15.0,  
@@ -39,7 +39,7 @@ class ChannelItems extends StatelessWidget {
     }else {
       // 通路總覽
       return Container(
-        height:MediaQuery.of(context).size.height - 373,
+        height:MediaQuery.of(context).size.height - 383,
         child:GridView.count(  
           crossAxisCount: 4,  
           crossAxisSpacing: 15.0,  
