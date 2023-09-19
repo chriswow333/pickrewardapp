@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 
-option go_package = "pickrewardapi/api/evaluation/proto";
+// option go_package = "pickrewardapi/api/evaluation/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
@@ -60,16 +60,16 @@ message ContainerEventResultProto {
   repeated string matches = 3;
   repeated string misMatches = 4;
   repeated ContainerEventResultProto containerEventResults = 5;
-  ConstraintEventResultProto constraintEventResult = 6;
+  // ConstraintEventResultProto constraintEventResult = 6;
 }
 
 
-message ConstraintEventResultProto {
-  bool pass = 1;
-  int32 constraintType = 2;
-  repeated string matches = 3;
-  repeated string misMatches = 4;
-}
+// message ConstraintEventResultProto {
+//   bool pass = 1;
+//   int32 constraintType = 2;
+//   repeated string matches = 3;
+//   repeated string misMatches = 4;
+// }
 
 message FeedbackEventResultProto {
   int32 rewardType = 1;
@@ -152,7 +152,7 @@ message ContainerProto {
   string id = 1;
   int32 containerOperator = 2;
   int32 containerType = 3;
-  ConstraintProto constraint = 4;
+  repeated ConstraintProto constraints = 4;
   repeated ContainerProto containers = 5;
   repeated string taskIDs = 6;
   repeated string channelIDs = 7;
@@ -163,7 +163,8 @@ message ContainerProto {
 
 message ConstraintProto {
   int32 constraintType = 1;
-  repeated int32 weekDays = 2;
+  string constraintName = 2;
+  repeated int32 weekDays = 3;
 }
 
 message EvaluationIDProto {
@@ -264,13 +265,11 @@ message TaskDescriptionProto {
 
 
 message ConstraintsEvaluationRespProto {
-  repeated ConstraintEvaluationRespProto constraintEvaluationResps = 1;
+  repeated ConstraintProto matches = 1;
+  repeated ConstraintProto misMatches = 2;
+
 }
 
-message ConstraintEvaluationRespProto {
-  int32 constraintType = 1;
-  ConstraintProto constraint = 2;
-}
 
 message LabelEvaluationRespProto {
   repeated LabelProto matches = 1;

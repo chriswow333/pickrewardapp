@@ -336,7 +336,6 @@ class ContainerEventResultProto extends $pb.GeneratedMessage {
     ..pPS(3, _omitFieldNames ? '' : 'matches')
     ..pPS(4, _omitFieldNames ? '' : 'misMatches', protoName: 'misMatches')
     ..pc<ContainerEventResultProto>(5, _omitFieldNames ? '' : 'containerEventResults', $pb.PbFieldType.PM, protoName: 'containerEventResults', subBuilder: ContainerEventResultProto.create)
-    ..aOM<ConstraintEventResultProto>(6, _omitFieldNames ? '' : 'constraintEventResult', protoName: 'constraintEventResult', subBuilder: ConstraintEventResultProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -387,77 +386,6 @@ class ContainerEventResultProto extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(5)
   $core.List<ContainerEventResultProto> get containerEventResults => $_getList(4);
-
-  @$pb.TagNumber(6)
-  ConstraintEventResultProto get constraintEventResult => $_getN(5);
-  @$pb.TagNumber(6)
-  set constraintEventResult(ConstraintEventResultProto v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasConstraintEventResult() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearConstraintEventResult() => clearField(6);
-  @$pb.TagNumber(6)
-  ConstraintEventResultProto ensureConstraintEventResult() => $_ensure(5);
-}
-
-class ConstraintEventResultProto extends $pb.GeneratedMessage {
-  factory ConstraintEventResultProto() => create();
-  ConstraintEventResultProto._() : super();
-  factory ConstraintEventResultProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ConstraintEventResultProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstraintEventResultProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'pass')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'constraintType', $pb.PbFieldType.O3, protoName: 'constraintType')
-    ..pPS(3, _omitFieldNames ? '' : 'matches')
-    ..pPS(4, _omitFieldNames ? '' : 'misMatches', protoName: 'misMatches')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ConstraintEventResultProto clone() => ConstraintEventResultProto()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ConstraintEventResultProto copyWith(void Function(ConstraintEventResultProto) updates) => super.copyWith((message) => updates(message as ConstraintEventResultProto)) as ConstraintEventResultProto;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ConstraintEventResultProto create() => ConstraintEventResultProto._();
-  ConstraintEventResultProto createEmptyInstance() => create();
-  static $pb.PbList<ConstraintEventResultProto> createRepeated() => $pb.PbList<ConstraintEventResultProto>();
-  @$core.pragma('dart2js:noInline')
-  static ConstraintEventResultProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstraintEventResultProto>(create);
-  static ConstraintEventResultProto? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.bool get pass => $_getBF(0);
-  @$pb.TagNumber(1)
-  set pass($core.bool v) { $_setBool(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasPass() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPass() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get constraintType => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set constraintType($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasConstraintType() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearConstraintType() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.List<$core.String> get matches => $_getList(2);
-
-  @$pb.TagNumber(4)
-  $core.List<$core.String> get misMatches => $_getList(3);
 }
 
 class FeedbackEventResultProto extends $pb.GeneratedMessage {
@@ -1144,7 +1072,7 @@ class ContainerProto extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'containerOperator', $pb.PbFieldType.O3, protoName: 'containerOperator')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'containerType', $pb.PbFieldType.O3, protoName: 'containerType')
-    ..aOM<ConstraintProto>(4, _omitFieldNames ? '' : 'constraint', subBuilder: ConstraintProto.create)
+    ..pc<ConstraintProto>(4, _omitFieldNames ? '' : 'constraints', $pb.PbFieldType.PM, subBuilder: ConstraintProto.create)
     ..pc<ContainerProto>(5, _omitFieldNames ? '' : 'containers', $pb.PbFieldType.PM, subBuilder: ContainerProto.create)
     ..pPS(6, _omitFieldNames ? '' : 'taskIDs', protoName: 'taskIDs')
     ..pPS(7, _omitFieldNames ? '' : 'channelIDs', protoName: 'channelIDs')
@@ -1202,15 +1130,7 @@ class ContainerProto extends $pb.GeneratedMessage {
   void clearContainerType() => clearField(3);
 
   @$pb.TagNumber(4)
-  ConstraintProto get constraint => $_getN(3);
-  @$pb.TagNumber(4)
-  set constraint(ConstraintProto v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasConstraint() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearConstraint() => clearField(4);
-  @$pb.TagNumber(4)
-  ConstraintProto ensureConstraint() => $_ensure(3);
+  $core.List<ConstraintProto> get constraints => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.List<ContainerProto> get containers => $_getList(4);
@@ -1236,7 +1156,8 @@ class ConstraintProto extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstraintProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'constraintType', $pb.PbFieldType.O3, protoName: 'constraintType')
-    ..p<$core.int>(2, _omitFieldNames ? '' : 'weekDays', $pb.PbFieldType.K3, protoName: 'weekDays')
+    ..aOS(2, _omitFieldNames ? '' : 'constraintName', protoName: 'constraintName')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'weekDays', $pb.PbFieldType.K3, protoName: 'weekDays')
     ..hasRequiredFields = false
   ;
 
@@ -1271,7 +1192,16 @@ class ConstraintProto extends $pb.GeneratedMessage {
   void clearConstraintType() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<$core.int> get weekDays => $_getList(1);
+  $core.String get constraintName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set constraintName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConstraintName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConstraintName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get weekDays => $_getList(2);
 }
 
 class EvaluationIDProto extends $pb.GeneratedMessage {
@@ -2161,7 +2091,8 @@ class ConstraintsEvaluationRespProto extends $pb.GeneratedMessage {
   factory ConstraintsEvaluationRespProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstraintsEvaluationRespProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..pc<ConstraintEvaluationRespProto>(1, _omitFieldNames ? '' : 'constraintEvaluationResps', $pb.PbFieldType.PM, protoName: 'constraintEvaluationResps', subBuilder: ConstraintEvaluationRespProto.create)
+    ..pc<ConstraintProto>(1, _omitFieldNames ? '' : 'matches', $pb.PbFieldType.PM, subBuilder: ConstraintProto.create)
+    ..pc<ConstraintProto>(2, _omitFieldNames ? '' : 'misMatches', $pb.PbFieldType.PM, protoName: 'misMatches', subBuilder: ConstraintProto.create)
     ..hasRequiredFields = false
   ;
 
@@ -2187,61 +2118,10 @@ class ConstraintsEvaluationRespProto extends $pb.GeneratedMessage {
   static ConstraintsEvaluationRespProto? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<ConstraintEvaluationRespProto> get constraintEvaluationResps => $_getList(0);
-}
-
-class ConstraintEvaluationRespProto extends $pb.GeneratedMessage {
-  factory ConstraintEvaluationRespProto() => create();
-  ConstraintEvaluationRespProto._() : super();
-  factory ConstraintEvaluationRespProto.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ConstraintEvaluationRespProto.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstraintEvaluationRespProto', package: const $pb.PackageName(_omitMessageNames ? '' : 'evaluation'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'constraintType', $pb.PbFieldType.O3, protoName: 'constraintType')
-    ..aOM<ConstraintProto>(2, _omitFieldNames ? '' : 'constraint', subBuilder: ConstraintProto.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ConstraintEvaluationRespProto clone() => ConstraintEvaluationRespProto()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ConstraintEvaluationRespProto copyWith(void Function(ConstraintEvaluationRespProto) updates) => super.copyWith((message) => updates(message as ConstraintEvaluationRespProto)) as ConstraintEvaluationRespProto;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ConstraintEvaluationRespProto create() => ConstraintEvaluationRespProto._();
-  ConstraintEvaluationRespProto createEmptyInstance() => create();
-  static $pb.PbList<ConstraintEvaluationRespProto> createRepeated() => $pb.PbList<ConstraintEvaluationRespProto>();
-  @$core.pragma('dart2js:noInline')
-  static ConstraintEvaluationRespProto getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstraintEvaluationRespProto>(create);
-  static ConstraintEvaluationRespProto? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get constraintType => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set constraintType($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasConstraintType() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearConstraintType() => clearField(1);
+  $core.List<ConstraintProto> get matches => $_getList(0);
 
   @$pb.TagNumber(2)
-  ConstraintProto get constraint => $_getN(1);
-  @$pb.TagNumber(2)
-  set constraint(ConstraintProto v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasConstraint() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearConstraint() => clearField(2);
-  @$pb.TagNumber(2)
-  ConstraintProto ensureConstraint() => $_ensure(1);
+  $core.List<ConstraintProto> get misMatches => $_getList(1);
 }
 
 class LabelEvaluationRespProto extends $pb.GeneratedMessage {

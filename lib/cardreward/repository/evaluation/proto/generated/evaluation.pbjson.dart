@@ -106,7 +106,6 @@ const ContainerEventResultProto$json = {
     {'1': 'matches', '3': 3, '4': 3, '5': 9, '10': 'matches'},
     {'1': 'misMatches', '3': 4, '4': 3, '5': 9, '10': 'misMatches'},
     {'1': 'containerEventResults', '3': 5, '4': 3, '5': 11, '6': '.evaluation.ContainerEventResultProto', '10': 'containerEventResults'},
-    {'1': 'constraintEventResult', '3': 6, '4': 1, '5': 11, '6': '.evaluation.ConstraintEventResultProto', '10': 'constraintEventResult'},
   ],
 };
 
@@ -115,26 +114,7 @@ final $typed_data.Uint8List containerEventResultProtoDescriptor = $convert.base6
     'ChlDb250YWluZXJFdmVudFJlc3VsdFByb3RvEg4KAmlkGAEgASgJUgJpZBISCgRwYXNzGAIgAS'
     'gIUgRwYXNzEhgKB21hdGNoZXMYAyADKAlSB21hdGNoZXMSHgoKbWlzTWF0Y2hlcxgEIAMoCVIK'
     'bWlzTWF0Y2hlcxJbChVjb250YWluZXJFdmVudFJlc3VsdHMYBSADKAsyJS5ldmFsdWF0aW9uLk'
-    'NvbnRhaW5lckV2ZW50UmVzdWx0UHJvdG9SFWNvbnRhaW5lckV2ZW50UmVzdWx0cxJcChVjb25z'
-    'dHJhaW50RXZlbnRSZXN1bHQYBiABKAsyJi5ldmFsdWF0aW9uLkNvbnN0cmFpbnRFdmVudFJlc3'
-    'VsdFByb3RvUhVjb25zdHJhaW50RXZlbnRSZXN1bHQ=');
-
-@$core.Deprecated('Use constraintEventResultProtoDescriptor instead')
-const ConstraintEventResultProto$json = {
-  '1': 'ConstraintEventResultProto',
-  '2': [
-    {'1': 'pass', '3': 1, '4': 1, '5': 8, '10': 'pass'},
-    {'1': 'constraintType', '3': 2, '4': 1, '5': 5, '10': 'constraintType'},
-    {'1': 'matches', '3': 3, '4': 3, '5': 9, '10': 'matches'},
-    {'1': 'misMatches', '3': 4, '4': 3, '5': 9, '10': 'misMatches'},
-  ],
-};
-
-/// Descriptor for `ConstraintEventResultProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List constraintEventResultProtoDescriptor = $convert.base64Decode(
-    'ChpDb25zdHJhaW50RXZlbnRSZXN1bHRQcm90bxISCgRwYXNzGAEgASgIUgRwYXNzEiYKDmNvbn'
-    'N0cmFpbnRUeXBlGAIgASgFUg5jb25zdHJhaW50VHlwZRIYCgdtYXRjaGVzGAMgAygJUgdtYXRj'
-    'aGVzEh4KCm1pc01hdGNoZXMYBCADKAlSCm1pc01hdGNoZXM=');
+    'NvbnRhaW5lckV2ZW50UmVzdWx0UHJvdG9SFWNvbnRhaW5lckV2ZW50UmVzdWx0cw==');
 
 @$core.Deprecated('Use feedbackEventResultProtoDescriptor instead')
 const FeedbackEventResultProto$json = {
@@ -301,7 +281,7 @@ const ContainerProto$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'containerOperator', '3': 2, '4': 1, '5': 5, '10': 'containerOperator'},
     {'1': 'containerType', '3': 3, '4': 1, '5': 5, '10': 'containerType'},
-    {'1': 'constraint', '3': 4, '4': 1, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'constraint'},
+    {'1': 'constraints', '3': 4, '4': 3, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'constraints'},
     {'1': 'containers', '3': 5, '4': 3, '5': 11, '6': '.evaluation.ContainerProto', '10': 'containers'},
     {'1': 'taskIDs', '3': 6, '4': 3, '5': 9, '10': 'taskIDs'},
     {'1': 'channelIDs', '3': 7, '4': 3, '5': 9, '10': 'channelIDs'},
@@ -314,25 +294,27 @@ const ContainerProto$json = {
 final $typed_data.Uint8List containerProtoDescriptor = $convert.base64Decode(
     'Cg5Db250YWluZXJQcm90bxIOCgJpZBgBIAEoCVICaWQSLAoRY29udGFpbmVyT3BlcmF0b3IYAi'
     'ABKAVSEWNvbnRhaW5lck9wZXJhdG9yEiQKDWNvbnRhaW5lclR5cGUYAyABKAVSDWNvbnRhaW5l'
-    'clR5cGUSOwoKY29uc3RyYWludBgEIAEoCzIbLmV2YWx1YXRpb24uQ29uc3RyYWludFByb3RvUg'
-    'pjb25zdHJhaW50EjoKCmNvbnRhaW5lcnMYBSADKAsyGi5ldmFsdWF0aW9uLkNvbnRhaW5lclBy'
-    'b3RvUgpjb250YWluZXJzEhgKB3Rhc2tJRHMYBiADKAlSB3Rhc2tJRHMSHgoKY2hhbm5lbElEcx'
-    'gHIAMoCVIKY2hhbm5lbElEcxIWCgZwYXlJRHMYCCADKAlSBnBheUlEcxIWCgZsYWJlbHMYCSAD'
-    'KAVSBmxhYmVscw==');
+    'clR5cGUSPQoLY29uc3RyYWludHMYBCADKAsyGy5ldmFsdWF0aW9uLkNvbnN0cmFpbnRQcm90b1'
+    'ILY29uc3RyYWludHMSOgoKY29udGFpbmVycxgFIAMoCzIaLmV2YWx1YXRpb24uQ29udGFpbmVy'
+    'UHJvdG9SCmNvbnRhaW5lcnMSGAoHdGFza0lEcxgGIAMoCVIHdGFza0lEcxIeCgpjaGFubmVsSU'
+    'RzGAcgAygJUgpjaGFubmVsSURzEhYKBnBheUlEcxgIIAMoCVIGcGF5SURzEhYKBmxhYmVscxgJ'
+    'IAMoBVIGbGFiZWxz');
 
 @$core.Deprecated('Use constraintProtoDescriptor instead')
 const ConstraintProto$json = {
   '1': 'ConstraintProto',
   '2': [
     {'1': 'constraintType', '3': 1, '4': 1, '5': 5, '10': 'constraintType'},
-    {'1': 'weekDays', '3': 2, '4': 3, '5': 5, '10': 'weekDays'},
+    {'1': 'constraintName', '3': 2, '4': 1, '5': 9, '10': 'constraintName'},
+    {'1': 'weekDays', '3': 3, '4': 3, '5': 5, '10': 'weekDays'},
   ],
 };
 
 /// Descriptor for `ConstraintProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List constraintProtoDescriptor = $convert.base64Decode(
     'Cg9Db25zdHJhaW50UHJvdG8SJgoOY29uc3RyYWludFR5cGUYASABKAVSDmNvbnN0cmFpbnRUeX'
-    'BlEhoKCHdlZWtEYXlzGAIgAygFUgh3ZWVrRGF5cw==');
+    'BlEiYKDmNvbnN0cmFpbnROYW1lGAIgASgJUg5jb25zdHJhaW50TmFtZRIaCgh3ZWVrRGF5cxgD'
+    'IAMoBVIId2Vla0RheXM=');
 
 @$core.Deprecated('Use evaluationIDProtoDescriptor instead')
 const EvaluationIDProto$json = {
@@ -568,30 +550,16 @@ final $typed_data.Uint8List taskDescriptionProtoDescriptor = $convert.base64Deco
 const ConstraintsEvaluationRespProto$json = {
   '1': 'ConstraintsEvaluationRespProto',
   '2': [
-    {'1': 'constraintEvaluationResps', '3': 1, '4': 3, '5': 11, '6': '.evaluation.ConstraintEvaluationRespProto', '10': 'constraintEvaluationResps'},
+    {'1': 'matches', '3': 1, '4': 3, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'matches'},
+    {'1': 'misMatches', '3': 2, '4': 3, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'misMatches'},
   ],
 };
 
 /// Descriptor for `ConstraintsEvaluationRespProto`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List constraintsEvaluationRespProtoDescriptor = $convert.base64Decode(
-    'Ch5Db25zdHJhaW50c0V2YWx1YXRpb25SZXNwUHJvdG8SZwoZY29uc3RyYWludEV2YWx1YXRpb2'
-    '5SZXNwcxgBIAMoCzIpLmV2YWx1YXRpb24uQ29uc3RyYWludEV2YWx1YXRpb25SZXNwUHJvdG9S'
-    'GWNvbnN0cmFpbnRFdmFsdWF0aW9uUmVzcHM=');
-
-@$core.Deprecated('Use constraintEvaluationRespProtoDescriptor instead')
-const ConstraintEvaluationRespProto$json = {
-  '1': 'ConstraintEvaluationRespProto',
-  '2': [
-    {'1': 'constraintType', '3': 1, '4': 1, '5': 5, '10': 'constraintType'},
-    {'1': 'constraint', '3': 2, '4': 1, '5': 11, '6': '.evaluation.ConstraintProto', '10': 'constraint'},
-  ],
-};
-
-/// Descriptor for `ConstraintEvaluationRespProto`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List constraintEvaluationRespProtoDescriptor = $convert.base64Decode(
-    'Ch1Db25zdHJhaW50RXZhbHVhdGlvblJlc3BQcm90bxImCg5jb25zdHJhaW50VHlwZRgBIAEoBV'
-    'IOY29uc3RyYWludFR5cGUSOwoKY29uc3RyYWludBgCIAEoCzIbLmV2YWx1YXRpb24uQ29uc3Ry'
-    'YWludFByb3RvUgpjb25zdHJhaW50');
+    'Ch5Db25zdHJhaW50c0V2YWx1YXRpb25SZXNwUHJvdG8SNQoHbWF0Y2hlcxgBIAMoCzIbLmV2YW'
+    'x1YXRpb24uQ29uc3RyYWludFByb3RvUgdtYXRjaGVzEjsKCm1pc01hdGNoZXMYAiADKAsyGy5l'
+    'dmFsdWF0aW9uLkNvbnN0cmFpbnRQcm90b1IKbWlzTWF0Y2hlcw==');
 
 @$core.Deprecated('Use labelEvaluationRespProtoDescriptor instead')
 const LabelEvaluationRespProto$json = {
