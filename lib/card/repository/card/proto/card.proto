@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 
-// option go_package = "pickrewardapi/api/card/proto";
+option go_package = "pickrewardapi/api/card/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
@@ -14,6 +14,7 @@ service Card {
   rpc GetAllBanks (EmptyRequest) returns (BanksProtoReply) {}
   rpc GetCardsByBankID (BankIDProto) returns (CardsProtoReply) {}
   rpc GetLatestCards (EmptyRequest) returns (CardsProtoReply) {}
+
 
   rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
   rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}
@@ -48,7 +49,117 @@ message CardRewardProto {
   int32 cardRewardType = 9;
   string rewardID = 10;
   RewardProto reward = 11;
-  int32 order = 12;
+  EvaluationRespProto evaluationResp = 12;
+  int32 order = 13;
+}
+
+
+
+
+message EvaluationRespProto {
+  string id = 1;
+  repeated ChannelCategoryTypeProto channelCategoryTypes = 2;
+  repeated ChannelEvaluationRespProto channelEvaluationResps = 3;
+  PayEvaluationRespProto payEvaluationResp = 4;
+  TaskEvaluationRespProto taskEvaluationResp = 5;
+  ConstraintsEvaluationRespProto constraintsEvaluationResp = 6;
+  LabelEvaluationRespProto labelEvaluationResp = 7;
+}
+
+
+message ChannelCategoryTypeProto {
+  int32 id = 1;
+  string name = 2;
+  int32 order = 3;
+}
+
+
+message ChannelEvaluationRespProto {
+  int32 channelCategoryType = 1;
+  repeated ChannelProto matches = 2;
+  repeated ChannelProto misMatches = 3;
+}
+
+
+message ChannelProto {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string linkURL = 4;
+  repeated string descriptions = 5;
+  int32 channelCategoryType = 6;
+  int64 createDate = 7;
+  int64 updateDate = 8;
+  repeated ChannelLabelProto channelLabels = 9;
+  int32 order = 10;
+  int32  channelStatus = 11;
+}
+
+
+
+message PayEvaluationRespProto {
+  repeated PayProto matches = 1; 
+  repeated PayProto misMatches = 2;
+}
+
+
+
+message PayProto {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  repeated string descriptions = 4;
+  string linkURL = 5;
+  int64 createDate = 6;
+  int64 updateDate = 7;
+  int32 order = 8;
+  int32 payStatus = 9;
+}
+
+message TaskEvaluationRespProto {
+  repeated TaskProto matches = 1;
+  repeated TaskProto misMatches = 2;
+}
+
+message TaskProto {
+  string id = 1;
+  string name =2;
+  repeated TaskDescriptionProto descriptions = 3;
+  int32 taskOwner = 4;
+  string taskOwnerID = 5;
+  int64 createDate = 6;
+  int64 updateDate = 7;
+}
+
+message TaskDescriptionProto {
+  string name = 1;
+  repeated string desc = 2;
+  int32 order = 3;
+}
+
+
+message ConstraintsEvaluationRespProto {
+  repeated ConstraintProto matches = 1;
+  repeated ConstraintProto misMatches = 2;
+
+}
+
+
+message ConstraintProto {
+  int32 constraintType = 1;
+  string constraintName = 2;
+  repeated int32 weekDays = 3;
+}
+
+
+message LabelEvaluationRespProto {
+  repeated LabelProto matches = 1;
+  repeated LabelProto misMatches = 2;
+}
+
+message LabelProto {
+  int32 labelType = 1;
+  string labelName = 2;
 }
 
 
@@ -163,57 +274,17 @@ message ConstraintEventReplyProto {
   repeated string misMatches = 4;
 }
 
-message LabelProto {
-  int32 type = 1;
-  string name = 2;
-}
-
-message TaskProto {
-  string id = 1;
-  string name = 2;
-  repeated DescriptionProto descriptions = 3;
-  int32 taskOwner = 4;
-  string taskOwnerID = 5;
-  int64 createDate = 6;
-  int64 updateDate = 7;
-}
-
 message DescriptionProto {
   string name = 1;
   repeated string desc = 2;
   int32 order = 3;
 }
 
-message PayProto{
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  string linkURL = 4;
-  repeated string descriptions = 5;
-  int64 createDate = 6;
-  int64 updateDate = 7;
-  int32 order = 8;
-  int32 payStatus = 9;
-}
-
-message ChannelProto{
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  string linkURL = 4;
-  repeated string descriptions = 5;
-  int32 channelCategoryType = 6;
-  int64 createDate = 7;
-  int64 updateDate = 8;
-  repeated ChannelLabelProto channelLabels = 9;
-  int32 order = 10;
-  int32 channelStatus = 11;
-}
 
 
 message ChannelLabelProto {
-  int32 id = 1;
-  string name = 2;
+  int32 labelType = 1;
+  string labelName = 2;
   int32 order = 3;
 }
 
