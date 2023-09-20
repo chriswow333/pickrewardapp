@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/component/evaluation.progress.dart';
+import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/card.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
@@ -39,13 +40,19 @@ class Evaluation extends StatelessWidget {
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            
-            EvaluationHeader(cardRewardModel: cardRewardModel,),
+            Row(
+              children:[
+                Expanded(
+                  child:EvaluationHeader(cardRewardModel: cardRewardModel,),
+                ),
+              ],
+            ),
             Divider(height:10),
             CardEvaluationDetails(cardRewardModel: cardRewardModel,),
             EvaluationProgressContent(rewardID: cardRewardModel.id,),
           ],
         )
+        
       )
       
     );
@@ -64,19 +71,79 @@ class EvaluationHeader extends StatelessWidget {
 
     String name = cardRewardModel.name;
     return Container(
-      width: MediaQuery.of(context).size.width,
-      child:Row(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          EvaluationRewardTypeName(reward: cardRewardModel.reward,),
-          Expanded(
-            child: EvaluationName(name:name),
-          )
-          
+          Row(
+            children:[
+              EvaluationRewardTypeName(reward: cardRewardModel.reward,),
+              SizedBox(width:10),
+              EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
+            ]
+          ),
+          SizedBox(height:20),
+          EvaluationName(name:name),
         ]
+      ),
+      
+    );
+  }
+}
+
+class EvaluationConstraintTypes extends StatelessWidget {
+  const EvaluationConstraintTypes({super.key, required this.evaluationRespProto});
+
+  final EvaluationRespProto evaluationRespProto;
+
+  @override
+  Widget build(BuildContext context) {
+
+    ConstraintsEvaluationRespProto constraintProto = evaluationRespProto.constraintsEvaluationResp;
+    List<ConstraintProto> constraints = constraintProto.matches;
+
+
+    return Row(
+      children:[
+        for(ConstraintProto c in constraints)
+          EvaluationConstraintType(constraintProto: c,),
+
+      ]
+    );
+  }
+}
+
+
+class EvaluationConstraintType extends StatelessWidget {
+  const EvaluationConstraintType({super.key, required this.constraintProto,});
+
+  final ConstraintProto constraintProto;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right:5),
+      child:Container(
+        padding: const EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color:Palette.kToOrange[600]!,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child:Text(
+          style:TextStyle(
+          color:Palette.kToOrange[600],
+          fontSize: 13,
+        ),
+          constraintProto.constraintName
+        )
       )
     );
   }
 }
+
+
+
 
 class EvaluationName extends StatelessWidget {
   const EvaluationName({super.key, required this.name});
@@ -84,7 +151,7 @@ class EvaluationName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(left:20),
+      // padding:const EdgeInsets.only(left:20),
       child:Text(name,
         style:TextStyle(
           color:Palette.kToBlack[900],
@@ -101,7 +168,7 @@ class EvaluationRewardTypeName extends StatelessWidget {
   const EvaluationRewardTypeName({super.key, required this.reward});
   
   
-    final RewardModel reward;
+  final RewardModel reward;
 
   @override
   Widget build(BuildContext context) {
@@ -113,14 +180,23 @@ class EvaluationRewardTypeName extends StatelessWidget {
     if(rewardType == 0) {
       rewardTypeName = "現金回饋";
     }else {
-      rewardTypeName = reward.name + " 回饋";
+      rewardTypeName = reward.name + "回饋";
     }
     return Container(
+        padding: const EdgeInsets.all(5.0),
+       decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
       child:Text(rewardTypeName,
         style:TextStyle(
-          color:Palette.kToBlack[900],
+          color:Palette.kToBlue[600],
           fontSize: 20,
         ),
+        maxLines: null,
       )
     );
   }

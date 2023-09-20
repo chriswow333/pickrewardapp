@@ -7,7 +7,6 @@ import 'package:pickrewardapp/channel_search/component/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
-import 'package:pickrewardapp/shared/config/palette.dart';
 
 import 'package:provider/provider.dart';
 
