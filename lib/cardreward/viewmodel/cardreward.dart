@@ -52,7 +52,6 @@ class CardRewardViewModel with ChangeNotifier {
           updateDate:rewardProto.updateDate.toInt(),
         );
 
-
         _cardRewardModels.add(CardRewardModel(
           id: c.id,
           cardID: c.cardID,
@@ -62,11 +61,10 @@ class CardRewardViewModel with ChangeNotifier {
           reward: reward,
           startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()),
           endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()), 
+          evaluationRespProto:c.evaluationResp,
         ));
-
       }
 
-          
       notifyListeners();
 
      } on GrpcError catch (e) {
@@ -102,6 +100,7 @@ class CardRewardModel {
   final DateTime updateDate;
   final DateTime startDate;
   final DateTime endDate;
+  final EvaluationRespProto evaluationRespProto;
 
 
   CardRewardModel({
@@ -113,6 +112,8 @@ class CardRewardModel {
     required this.reward,
     required this.startDate,
     required this.endDate,
+    required this.evaluationRespProto,
+
   }):createDate=DateTime.now(), updateDate=DateTime.now(), order = 0;
 
 }

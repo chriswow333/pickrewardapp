@@ -72,7 +72,7 @@ class CardRewardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
   
     CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
-
+    
     return Expanded(
       child:SingleChildScrollView(
         child:Column(

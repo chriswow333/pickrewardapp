@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
+
 
 class RewardItems extends StatelessWidget {
   const RewardItems({super.key});
@@ -11,6 +13,7 @@ class RewardItems extends StatelessWidget {
   Widget build(BuildContext context) {
               
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
+    
     List<CardRewardModel> cardRewardModels = cardRewardViewModel.get();
 
     return Container(
@@ -99,16 +102,20 @@ class ActivityName extends StatelessWidget {
 class EvaluationItem extends StatelessWidget {
   const EvaluationItem({super.key, required this.cardRewardModel});
 
-
   final CardRewardModel cardRewardModel;
 
   @override
   Widget build(BuildContext context) {
 
     CardRewardSelectedViewModel cardRewardselectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
+
+    cardRewardModel.evaluationRespProto.constraintsEvaluationResp;
+
+
     return Container(
-      height:100,
+      height:130,
       padding:const EdgeInsets.only(bottom: 20),
+      alignment: Alignment.center,
       child:TextButton(
         onPressed: (){
           cardRewardselectedViewModel.goToCardRewardItem(cardRewardModel);
@@ -118,11 +125,29 @@ class EvaluationItem extends StatelessWidget {
           elevation:MaterialStatePropertyAll(2),
         ),
         child:Container(
+          padding:const EdgeInsets.only(top:5),
           child:Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children:[
-              EvaluationRewardType(reward: cardRewardModel.reward,),
-              SizedBox(width:5,),
-              EvaluationName(name: cardRewardModel.name,),
+              Expanded(
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Row(
+                      children:[
+                        EvaluationRewardType(reward: cardRewardModel.reward,),
+                        SizedBox(width:10,),
+                        EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
+                      ]
+                    ),
+
+                    SizedBox(height:10),
+                    
+                    EvaluationName(name: cardRewardModel.name,),
+                    
+                  ], 
+                ),
+              )
             ]
           )
         )
@@ -130,6 +155,62 @@ class EvaluationItem extends StatelessWidget {
     );
   }
 }
+
+
+class EvaluationConstraintTypes extends StatelessWidget {
+  const EvaluationConstraintTypes({super.key, required this.evaluationRespProto});
+
+  final EvaluationRespProto evaluationRespProto;
+
+  @override
+  Widget build(BuildContext context) {
+
+    ConstraintsEvaluationRespProto constraintProto = evaluationRespProto.constraintsEvaluationResp;
+    List<ConstraintProto> constraints = constraintProto.matches;
+
+
+    return Row(
+      children:[
+        for(ConstraintProto c in constraints)
+          EvaluationConstraintType(constraintProto: c,),
+
+      ]
+    );
+  }
+}
+
+
+class EvaluationConstraintType extends StatelessWidget {
+  const EvaluationConstraintType({super.key, required this.constraintProto,});
+
+  final ConstraintProto constraintProto;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right:5),
+      child:Container(
+        padding: const EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color:Palette.kToOrange[600]!,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child:Text(
+          style:TextStyle(
+          color:Palette.kToOrange[600],
+          fontSize: 13,
+        ),
+          constraintProto.constraintName
+        )
+      )
+    );
+  }
+}
+
+
+
 
 class EvaluationRewardType extends StatelessWidget {
   const EvaluationRewardType({super.key, required this.reward});
@@ -145,16 +226,21 @@ class EvaluationRewardType extends StatelessWidget {
     if(rewardType == 0) {
       rewardTypeName = "現金回饋";
     }else {
-      rewardTypeName = reward.name + " 回饋";
+      rewardTypeName = reward.name + "回饋";
     }
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: 200,
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       child:Text(rewardTypeName,
         style:TextStyle(
-          color:Palette.kToBlack[900],
-          fontSize: 20,
+          color:Palette.kToBlue[600],
+          fontSize: 18,
         ),
         maxLines: null,
       ),
@@ -173,6 +259,7 @@ class EvaluationName extends StatelessWidget {
       child:Text(name,
           style:TextStyle(
             color:Palette.kToBlack[900],
+            // fontSize: 18,
           ),
           maxLines: null,
       )
