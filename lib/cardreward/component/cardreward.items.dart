@@ -62,7 +62,7 @@ class ActivityItem extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: double.infinity),
       child:Container(
-        height:100,
+        // height:100,
         padding:const EdgeInsets.only(bottom: 20),
         child:TextButton(
           onPressed: (){  
@@ -72,10 +72,87 @@ class ActivityItem extends StatelessWidget {
             backgroundColor: MaterialStatePropertyAll(Colors.white),
             elevation:MaterialStatePropertyAll(2),
           ),
-          child:ActivityName(name:cardRewardModel.name),
+          child:Column(
+            children:[
+              Row(
+                children:[
+                  ActivityRewardType(),
+                  SizedBox(width:2),
+                  CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                ]
+              ),
+              ActivityName(name:cardRewardModel.name),
+            ]
+          )
         )
       )
     );    
+  }
+}
+
+
+class CardRewardDuration extends StatelessWidget {
+  const CardRewardDuration({super.key, required this.startDate, required this.endDate});
+
+  final DateTime startDate;
+  final DateTime endDate;
+  
+  @override
+  Widget build(BuildContext context) {
+    
+    DateTime now = DateTime.now();
+
+    String durationStatus = "進行中";
+
+    if (startDate.isAfter(now)) {
+      durationStatus = "尚未開始";
+    }else if (endDate.isBefore(now)) {
+      durationStatus = "已結束";
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child:Text(durationStatus,
+        style:TextStyle(
+          color:Palette.kToBlue[600],
+          fontSize: 12,
+        ),
+        maxLines: null,
+      ),
+    );
+  }
+}
+
+class ActivityRewardType extends StatelessWidget {
+  const ActivityRewardType({super.key,});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlue[600]!,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child:Text('一般回饋',
+        style:TextStyle(
+          color:Palette.kToBlue[600],
+          fontSize: 12,
+        ),
+        maxLines: null,
+      ),
+    );
   }
 }
 
@@ -109,13 +186,10 @@ class EvaluationItem extends StatelessWidget {
 
     CardRewardSelectedViewModel cardRewardselectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
 
-    cardRewardModel.evaluationRespProto.constraintsEvaluationResp;
-
-
     return Container(
-      height:130,
+      // height:130,
       padding:const EdgeInsets.only(bottom: 20),
-      alignment: Alignment.center,
+      // alignment: Alignment.center,
       child:TextButton(
         onPressed: (){
           cardRewardselectedViewModel.goToCardRewardItem(cardRewardModel);
@@ -255,14 +329,12 @@ class EvaluationName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
-      child:Text(name,
-          style:TextStyle(
-            color:Palette.kToBlack[900],
-            // fontSize: 18,
-          ),
-          maxLines: null,
-      )
+    return  Text(name,
+      style:TextStyle(
+        color:Palette.kToBlack[900],
+        // fontSize: 18,
+      ),
+      maxLines: null,
     );
   }
 }

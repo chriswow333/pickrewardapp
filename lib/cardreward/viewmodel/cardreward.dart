@@ -31,7 +31,7 @@ class CardRewardViewModel with ChangeNotifier {
       CardRewardsReply cardRewardsReply = await CardRewardService().cardClient.getCardRewardsByCardID(cardIDProto);
 
       for(final c in cardRewardsReply.cardRewards) {
-
+        print(c);
         List<CardRewardDescModel> descModels = [];
 
         for (final d in c.cardRewardDescriptions){
