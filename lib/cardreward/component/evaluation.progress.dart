@@ -39,7 +39,7 @@ class EvaluationProgressBar extends StatelessWidget {
         if(hasTask)
           TaskProgressItem(),
         ProgressArrow(),
-        EvaluateProgressItem()
+        EvaluateProgressItem(),
       ]
     );
   }
@@ -127,7 +127,7 @@ class ProgressArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:EdgeInsets.only(left:10, right:10),
+      // padding:EdgeInsets.only(left:10, right:10),
       child:Icon(
         Icons.double_arrow_rounded,
         color:Palette.kToBlue[100],

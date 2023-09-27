@@ -16,7 +16,9 @@ class CardComponent extends StatelessWidget {
         SizedBox(height:20,),
         BankItems(),
         SizedBox(height:20),
-        CardItems(),
+        Expanded(
+          child:CardItems(),
+        ),
       ],
     );
   }

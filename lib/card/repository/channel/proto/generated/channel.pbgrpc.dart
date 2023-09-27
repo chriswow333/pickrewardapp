@@ -18,6 +18,7 @@ import 'channel.pb.dart' as $0;
 
 export 'channel.pb.dart';
 
+// @$pb.GrpcServiceName('channel.Channel')
 class ChannelClient extends $grpc.Client {
   static final _$getChannelCategoryTypes = $grpc.ClientMethod<$0.EmptyRequest, $0.ChannelCategoryTypeProtoReply>(
       '/channel.Channel/GetChannelCategoryTypes',
@@ -51,6 +52,7 @@ class ChannelClient extends $grpc.Client {
   }
 }
 
+// @$pb.GrpcServiceName('channel.Channel')
 abstract class ChannelServiceBase extends $grpc.Service {
   $core.String get $name => 'channel.Channel';
 

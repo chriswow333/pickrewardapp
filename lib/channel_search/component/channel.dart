@@ -22,14 +22,21 @@ class ChannelComponent extends StatelessWidget {
     return Container(
       child:Column(
         children:[
-          RewardProgressBar(),
-          SizedBox(height:20), 
+          const RewardProgressBar(),
+          const SizedBox(height:20), 
           if (channelProgressViewModel.progress == ChannelProgressEnum.Channel)
-            ChannelProgress(),
+            const Expanded(
+              child: ChannelProgress(),
+            ),
           if (channelProgressViewModel.progress == ChannelProgressEnum.FindCard)
-            FindCardProgress(),
+            const Expanded(
+              child: FindCardProgress(),
+            ),
+            
           if (channelProgressViewModel.progress == ChannelProgressEnum.FindResult)
-            CardResultsProgress(),
+            const Expanded(
+              child: CardResultsProgress(),
+            ),
         ]
       ),
     );

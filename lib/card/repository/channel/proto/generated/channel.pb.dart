@@ -54,6 +54,8 @@ class ChannelCategoryTypeRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'channelCategoryType', $pb.PbFieldType.O3, protoName: 'channelCategoryType')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -86,6 +88,24 @@ class ChannelCategoryTypeRequest extends $pb.GeneratedMessage {
   $core.bool hasChannelCategoryType() => $_has(0);
   @$pb.TagNumber(1)
   void clearChannelCategoryType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get limit => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set limit($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get offset => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set offset($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasOffset() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOffset() => clearField(3);
 }
 
 class ChannelCategoryTypeProtoReply extends $pb.GeneratedMessage {

@@ -31,7 +31,6 @@ class CardRewardViewModel with ChangeNotifier {
       CardRewardsReply cardRewardsReply = await CardRewardService().cardClient.getCardRewardsByCardID(cardIDProto);
 
       for(final c in cardRewardsReply.cardRewards) {
-        print(c);
         List<CardRewardDescModel> descModels = [];
 
         for (final d in c.cardRewardDescriptions){
@@ -59,9 +58,9 @@ class CardRewardViewModel with ChangeNotifier {
           cardRewardDesc:descModels,
           cardRewardType: c.cardRewardType,
           reward: reward,
-          startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()),
-          endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()), 
-          evaluationRespProto:c.evaluationResp,
+          startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()*1000),
+          endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()*1000), 
+          evaluationRespProto:c.evaluationResp, 
         ));
       }
 

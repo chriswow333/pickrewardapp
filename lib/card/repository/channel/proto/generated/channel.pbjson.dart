@@ -27,13 +27,16 @@ const ChannelCategoryTypeRequest$json = {
   '1': 'ChannelCategoryTypeRequest',
   '2': [
     {'1': 'channelCategoryType', '3': 1, '4': 1, '5': 5, '10': 'channelCategoryType'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 5, '10': 'limit'},
+    {'1': 'offset', '3': 3, '4': 1, '5': 5, '10': 'offset'},
   ],
 };
 
 /// Descriptor for `ChannelCategoryTypeRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List channelCategoryTypeRequestDescriptor = $convert.base64Decode(
     'ChpDaGFubmVsQ2F0ZWdvcnlUeXBlUmVxdWVzdBIwChNjaGFubmVsQ2F0ZWdvcnlUeXBlGAEgAS'
-    'gFUhNjaGFubmVsQ2F0ZWdvcnlUeXBl');
+    'gFUhNjaGFubmVsQ2F0ZWdvcnlUeXBlEhQKBWxpbWl0GAIgASgFUgVsaW1pdBIWCgZvZmZzZXQY'
+    'AyABKAVSBm9mZnNldA==');
 
 @$core.Deprecated('Use channelCategoryTypeProtoReplyDescriptor instead')
 const ChannelCategoryTypeProtoReply$json = {

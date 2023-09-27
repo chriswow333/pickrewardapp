@@ -73,7 +73,8 @@ class CardRewardComponent extends StatelessWidget {
   
     CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
     
-    return Expanded(
+    return Container(
+      height:MediaQuery.of(context).size.height - 300,
       child:SingleChildScrollView(
         child:Column(
           children:[

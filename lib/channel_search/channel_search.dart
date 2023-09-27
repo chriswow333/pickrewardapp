@@ -11,6 +11,7 @@ import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 
+
 class ChannelSearchPage extends StatelessWidget {
   const ChannelSearchPage({super.key});
 

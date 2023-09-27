@@ -66,23 +66,35 @@ class ChannelViewModel with ChangeNotifier {
 
   final Map<int, List<ChannelItemModel>> _channelModels = {};
   
+  initChannelsByChannelCategoryType(int channelCategoryType) {
+    fetchChannelsByChannelCategoryType(channelCategoryType);
+  }
+
+
+
   List<ChannelItemModel> getChannelsByChannelCategoryType(int channelCategoryType) {
-    _fetchChannelsByChannelCategoryType(channelCategoryType);
+    // _fetchChannelsByChannelCategoryType(channelCategoryType);
     return _channelModels[channelCategoryType] ?? [];
   }
 
-  Future<void> _fetchChannelsByChannelCategoryType(int channelCategoryType) async { 
 
-    if (_channelModels.containsKey(channelCategoryType)) return;
+  Future<void> fetchChannelsByChannelCategoryType(int channelCategoryType) async { 
+
+    int offset = 0;
+    if(_channelModels[channelCategoryType] != null) {
+      offset = _channelModels[channelCategoryType]!.length;
+    } 
 
     try {
 
       final channelCategoryTypeRequest = ChannelCategoryTypeRequest();
       channelCategoryTypeRequest.channelCategoryType = channelCategoryType;
+      channelCategoryTypeRequest.limit = 21;
+      channelCategoryTypeRequest.offset = offset;
 
       ChannelProtoReply channelProtoReply  = await ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
       List<ChannelItemModel> channelItemModels = [];
-
+      
       for (ChannelProto channelProto in channelProtoReply.channelProto){
         
         List<ChannelLabelModel> channelLabelModels = [];
@@ -92,7 +104,7 @@ class ChannelViewModel with ChangeNotifier {
               id:channelLabelProto.id,
               name: channelLabelProto.name,
               order:channelLabelProto.order,
-            )
+            ) 
           );
         }
 
@@ -104,7 +116,13 @@ class ChannelViewModel with ChangeNotifier {
           channelLabels: channelLabelModels,
         ));
       }
-      _channelModels[channelCategoryType] = channelItemModels;
+
+      if(_channelModels[channelCategoryType] == null) {
+        _channelModels[channelCategoryType] = channelItemModels;
+      }else {
+        _channelModels[channelCategoryType]!.addAll(channelItemModels);
+      }
+
       notifyListeners();
 
     } on GrpcError catch (e) {

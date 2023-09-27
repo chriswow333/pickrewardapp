@@ -29,7 +29,9 @@ class HomeComponent extends StatelessWidget {
           SearchCardBar(),
           SizedBox(height:20),
           LatestTitle(),
-          LatestCardItems(),
+          Expanded(
+            child:LatestCardItems(),
+          )
         ]
       ),
     );

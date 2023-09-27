@@ -9,16 +9,16 @@ class ChannelProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        children:[
-          SearchChannelBar(),
-          SizedBox(height:20), 
-          ChannelCategoryTypes(),
-          SizedBox(height:20), 
-          ChannelItems(),
-        ]
-      )
+    return const Column(
+      children:[
+        SearchChannelBar(),
+        SizedBox(height:20), 
+        ChannelCategoryTypes(),
+        SizedBox(height:20), 
+        Expanded(
+          child:ChannelItems(),
+        ),
+      ]
     );
   }
 }

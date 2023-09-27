@@ -30,24 +30,6 @@ class CardResultsProgress extends StatelessWidget {
           children:[
             for(CardRewardEventResultProto c in cardRewardEventResults) 
               CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
           ],
         )
       ),

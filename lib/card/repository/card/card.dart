@@ -45,10 +45,10 @@ class CardService {
 
       ///use this if you are connecting with Tls
       // options: const ChannelOptions(),
-    options: ChannelOptions(
-      credentials: const ChannelCredentials.insecure(),
-      codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-    ),
+      options: ChannelOptions(
+        credentials: const ChannelCredentials.insecure(),
+        codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
+      ),
     );
     _cardClient = CardClient(channel);
 

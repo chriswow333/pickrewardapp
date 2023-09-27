@@ -50,16 +50,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int _selectedIndex = 1;
+
+  static const Widget homePage = HomePage();
+  static const Widget channelSearchPage = ChannelSearchPage();
+  static const Widget cardSearchPage = CardSearchPage();
+
+  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
-    
-    HomePage(),
-    
-    ChannelSearchPage(),
-
-    CardSearchPage(),
+    homePage,
+    channelSearchPage,
+    cardSearchPage,
   ];
 
   void _onItemTapped(int index) {
@@ -70,14 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body:Container(
         // alignment: Alignment.topCenter,
         padding: GlobalPadding.global(),
         child: Container(
+          // height:MediaQuery.of(context).size.height,
           padding: EdgeInsets.only(top:10),
-          child:Center(
-            child:_widgetOptions.elementAt(_selectedIndex),
+          child:IndexedStack(
+            children:_widgetOptions,
+            index:_selectedIndex,
           ),
         ),
       ),
@@ -85,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: '首頁',
+            label: '最近更新',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.manage_search_sharp),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/viewmodel/label.item.dart';
@@ -8,6 +9,8 @@ import 'package:provider/provider.dart';
 
 
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+
+
 
 class ChannelItems extends StatelessWidget {
   const ChannelItems({super.key});
@@ -17,24 +20,80 @@ class ChannelItems extends StatelessWidget {
 
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
 
-    int type = channelViewModel.channelCategoryType;
-    
+    return ChannelItemsWidget(channelViewModel:channelViewModel,);
+  }
+}
+
+
+
+class ChannelItemsWidget extends StatefulWidget {
+  const ChannelItemsWidget({super.key, required this.channelViewModel,});
+  final ChannelViewModel channelViewModel;
+
+  @override
+  State<ChannelItemsWidget> createState() => _ChannelItemsWidgetState();
+}
+
+class _ChannelItemsWidgetState extends State<ChannelItemsWidget> {
+
+  final ScrollController _controller = ScrollController(
+    keepScrollOffset:false,
+  );
+
+  void scrollFn(){
+
+    if (_controller.offset >= _controller.position.maxScrollExtent && !_controller.position.outOfRange) {
+      setState(() {
+        widget.channelViewModel.fetchChannelsByChannelCategoryType(_type);
+      });
+    }
+
+  } 
+
+  @override
+  void initState(){
+    _controller.addListener(scrollFn);
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
+  }
+
+  int _type = -1;
+
+  @override
+  Widget build(BuildContext context) {
+
+    int type = widget.channelViewModel.channelCategoryType;
+    setState(() {
+      if(_type != type) {
+        widget.channelViewModel.initChannelsByChannelCategoryType(type);
+      }
+      _type = type;
+    });
+
     if (type != -1) {
+      
+      List<ChannelItemModel> channelItems = widget.channelViewModel.getChannelsByChannelCategoryType(type);
 
-      List<ChannelItemModel> channelItemModels = channelViewModel.getChannelsByChannelCategoryType(type);
-
+      
       return Container(
-        height:MediaQuery.of(context).size.height - 383,
+        // height:MediaQuery.of(context).size.height - 383,
         child:GridView.count(  
-          crossAxisCount: 4,  
-          crossAxisSpacing: 15.0,  
-          mainAxisSpacing: 15.0,
-          padding: EdgeInsets.zero,  
-          children:[
-            for(ChannelItemModel channelItemModel in channelItemModels ?? [])
-              ChannelItem(channelItemModel:channelItemModel),
-          ],
-        ),
+            controller: _controller,
+            crossAxisCount: 4,  
+            crossAxisSpacing: 15.0,  
+            mainAxisSpacing: 15.0,
+            padding: EdgeInsets.zero,  
+            children:[
+              for(ChannelItemModel channelItemModel in channelItems)
+                ChannelItem(channelItemModel:channelItemModel),
+            ],
+          ),
+        
       );
     }else {
       // 通路總覽
@@ -54,6 +113,55 @@ class ChannelItems extends StatelessWidget {
     }
   }
 }
+
+
+// class ChannelItems extends StatelessWidget {
+//   const ChannelItems({super.key});
+
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+
+//     int type = channelViewModel.channelCategoryType;
+    
+//     if (type != -1) {
+      
+//       List<ChannelItemModel> channelItemModels = channelViewModel.getChannelsByChannelCategoryType(type, 0);
+
+//       return Container(
+//         height:MediaQuery.of(context).size.height - 383,
+//         child:GridView.count(  
+//             crossAxisCount: 4,  
+//             crossAxisSpacing: 15.0,  
+//             mainAxisSpacing: 15.0,
+//             padding: EdgeInsets.zero,  
+//             children:[
+//               for(ChannelItemModel channelItemModel in channelItemModels ?? [])
+//                 ChannelItem(channelItemModel:channelItemModel),
+//             ],
+//           ),
+        
+//       );
+//     }else {
+//       // 通路總覽
+//       return Container(
+//         height:MediaQuery.of(context).size.height - 383,
+//         child:GridView.count(  
+//           crossAxisCount: 4,  
+//           crossAxisSpacing: 15.0,  
+//           mainAxisSpacing: 15.0,
+//           padding: EdgeInsets.zero,  
+//           children:[
+//             for(LabelItemModel labelItemModel in LabelItemModel.getAll())
+//               LabelItem(labelItemModel:labelItemModel),
+//           ],
+//         ),
+//       );
+//     }
+//   }
+// }
 
 
 class LabelItem extends StatelessWidget {

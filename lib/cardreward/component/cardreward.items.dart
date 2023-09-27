@@ -76,9 +76,9 @@ class ActivityItem extends StatelessWidget {
             children:[
               Row(
                 children:[
+                  CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
                   ActivityRewardType(),
                   SizedBox(width:2),
-                  CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
                 ]
               ),
               ActivityName(name:cardRewardModel.name),
@@ -102,26 +102,28 @@ class CardRewardDuration extends StatelessWidget {
     
     DateTime now = DateTime.now();
 
-    String durationStatus = "進行中";
+    String durationStatus = "";
 
     if (startDate.isAfter(now)) {
       durationStatus = "尚未開始";
     }else if (endDate.isBefore(now)) {
       durationStatus = "已結束";
+    }else {
+      return Container();
     }
-
+  
     return Container(
       padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         border: Border.all(
-          color:Palette.kToBlue[600]!,
+          color:Palette.kToRed[600]!,
           width: 2,
         ),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child:Text(durationStatus,
         style:TextStyle(
-          color:Palette.kToBlue[600],
+          color:Palette.kToRed[600],
           fontSize: 12,
         ),
         maxLines: null,
@@ -209,12 +211,13 @@ class EvaluationItem extends StatelessWidget {
                   children:[
                     Row(
                       children:[
+                        CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                        SizedBox(width:10,),
                         EvaluationRewardType(reward: cardRewardModel.reward,),
                         SizedBox(width:10,),
                         EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
                       ]
                     ),
-
                     SizedBox(height:10),
                     
                     EvaluationName(name: cardRewardModel.name,),
