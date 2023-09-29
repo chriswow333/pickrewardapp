@@ -11,16 +11,13 @@ void main() {
   runApp(const PickRewardApp());
 }
 
-
 class PickRewardApp extends StatelessWidget {
   const PickRewardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme:ThemeData(
-        primarySwatch: Palette.kToBlue
-      ),
+      theme: ThemeData(primarySwatch: Palette.kToBlue),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -30,7 +27,7 @@ class PickRewardApp extends StatelessWidget {
         // Locale('en'), // English
         Locale('zh')
       ],
-      home:HomeScreen(),
+      home: HomeScreen(),
       // initialRoute:'/',
       // routes:{
       //   '/':(context)=>  const CardScreen(),
@@ -38,8 +35,6 @@ class PickRewardApp extends StatelessWidget {
     );
   }
 }
-
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,7 +44,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int _selectedIndex = 1;
 
   static const Widget homePage = HomePage();
@@ -72,17 +66,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      body:Container(
+      body: Container(
         // alignment: Alignment.topCenter,
         padding: GlobalPadding.global(),
         child: Container(
           // height:MediaQuery.of(context).size.height,
-          padding: EdgeInsets.only(top:10),
-          child:IndexedStack(
-            children:_widgetOptions,
-            index:_selectedIndex,
+          padding: EdgeInsets.only(top: 10),
+          child: IndexedStack(
+            children: _widgetOptions,
+            index: _selectedIndex,
           ),
         ),
       ),
@@ -108,4 +101,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

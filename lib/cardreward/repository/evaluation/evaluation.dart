@@ -4,7 +4,7 @@ import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/e
 class EvaluationService {
 
   ///here enter your host without the http part (e.g enter google.com now http://google.com)
-  String baseUrl = "localhost";
+  String baseUrl = "localhost"; //"192.168.20.112";
   EvaluationService._internal();
   
   static final EvaluationService _instance = EvaluationService._internal();

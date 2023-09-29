@@ -10,15 +10,23 @@ import 'package:provider/provider.dart';
 
 
 
-class ChannelCategoryTypes extends StatelessWidget {
+class ChannelCategoryTypes extends StatefulWidget {
   const ChannelCategoryTypes({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<ChannelCategoryTypes> createState() => _ChannelCategoryTypesState();
+}
 
+class _ChannelCategoryTypesState extends State<ChannelCategoryTypes> {
+
+  final ScrollController _controller = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
 
     return SingleChildScrollView(
+      controller: _controller,
       scrollDirection:Axis.horizontal,
       child:Row(
         children:[
@@ -44,6 +52,7 @@ class ChannelCategoryTypes extends StatelessWidget {
     );
   }
 }
+
 
 class BottomLine extends StatelessWidget {
   const BottomLine({super.key});
@@ -135,11 +144,14 @@ class ChannelCategoryType extends StatelessWidget {
   Widget build(BuildContext context) {
     
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-
     return Container(
+      key:channelViewModel.getChannelCategoryGlobalKeys(channelCategoryTypeModel.id),
       child:TextButton(
         onPressed: (){
           channelViewModel.channelCategoryType = channelCategoryTypeModel.id;
+          Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(channelCategoryTypeModel.id).currentContext!,
+            duration:Duration(milliseconds: 300),
+          );
         },
         child:Column(
           children:[

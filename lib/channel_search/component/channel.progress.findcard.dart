@@ -21,27 +21,17 @@ class FindCardProgress extends StatelessWidget {
     payItemViewModel.fetchPays();
 
     return Container(
-       height:MediaQuery.of(context).size.height - 240,
        child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-
           CostWidget(),
-          
           SizedBox(height:20),
-
           PayWidget(),
-
           SizedBox(height:20),
-
           CostDate(),
-
           SizedBox(height:20),
-          
           RewardTypeWidget(),
-
           SizedBox(height:40),
-          
           SubmitEvaluateCard(),
         ],
       )

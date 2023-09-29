@@ -23,7 +23,7 @@ class CardResultsProgress extends StatelessWidget {
     List<CardRewardEventResultProto> cardRewardEventResults = cardRewardEventResultsViewModel.get();
 
     return Container(
-      height:MediaQuery.of(context).size.height - 240 ,
+      // height:MediaQuery.of(context).size.height - 240 ,
       child:SingleChildScrollView(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -16,7 +16,7 @@ class ChannelProgress extends StatelessWidget {
         ChannelCategoryTypes(),
         SizedBox(height:20), 
         Expanded(
-          child:ChannelItems(),
+          child:ChannelItemGroups(),
         ),
       ]
     );
