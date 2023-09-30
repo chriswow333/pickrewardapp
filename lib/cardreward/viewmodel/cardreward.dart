@@ -12,12 +12,26 @@ class CardRewardViewModel with ChangeNotifier {
 
   List<CardRewardModel> get() => _cardRewardModels;
 
+  final Map<String, bool> _cardRewardExpanded = {};
+
 
   CardRewardViewModel(String cardID) {
     CardRewardService().init();
     _fetchCardRewards(cardID);
   }
 
+
+
+  toggleCardReward(String cardRewardID) {
+    _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
+    notifyListeners();
+  }
+
+  bool getCardRewardExpandStatus(String cardRewardID) {
+    return _cardRewardExpanded[cardRewardID]!;
+  }
+
+  
 
   Future<void> _fetchCardRewards(String cardID) async{ 
     
@@ -62,6 +76,8 @@ class CardRewardViewModel with ChangeNotifier {
           endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()*1000), 
           evaluationRespProto:c.evaluationResp, 
         ));
+
+        _cardRewardExpanded[c.id] = false;
       }
 
       notifyListeners();

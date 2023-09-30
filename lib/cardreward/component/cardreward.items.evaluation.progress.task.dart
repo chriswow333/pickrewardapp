@@ -22,15 +22,12 @@ class EvaluationProgressTask extends StatelessWidget {
     List<TaskProto> matches = taskResp.matches;
 
     return Container(
-      height:350,
-      child:SingleChildScrollView(
-        child:Column(
-          children:[
-            for(TaskProto t in matches)
-              TaskItem(task:t),
-          ]  
-        )
-      ),
+      child:Column(
+        children:[
+          for(TaskProto t in matches)
+            TaskItem(task:t),
+        ]  
+      )
     );
   }
 }

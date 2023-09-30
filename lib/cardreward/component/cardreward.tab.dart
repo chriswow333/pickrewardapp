@@ -3,7 +3,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -12,14 +11,13 @@ class CarTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
 
     return Container(
       child:Row(
         children:[
           TextButton(
             onPressed: (){
-              cardRewardSelectedViewModel.backToItems();
+              // cardRewardSelectedViewModel.backToItems();
             },
             child:Text('卡片回饋',
               style:TextStyle(

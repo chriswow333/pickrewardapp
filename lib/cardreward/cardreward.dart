@@ -4,13 +4,12 @@ import 'package:flutter/material.dart' hide Banner;
 import 'package:pickrewardapp/cardreward/component/cardreward.header.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.dart';
-import 'package:pickrewardapp/cardreward/component/activity.dart';
-import 'package:pickrewardapp/cardreward/component/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/reward.item.toggle.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/global_padding.dart';
 import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
@@ -27,15 +26,18 @@ class CardContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
      return Scaffold(
       body:Container(
-        // alignment: Alignment.topCenter,
         padding: GlobalPadding.global(),
         child: MultiProvider(
           providers: [
-            ChangeNotifierProvider<CardRewardSelectedViewModel>(create:(_)=>CardRewardSelectedViewModel()),
-            ChangeNotifierProvider<EvaluationProgressViewModel>(create:(_)=>EvaluationProgressViewModel()),
             ChangeNotifierProvider<CardViewModel>(create:(_)=>CardViewModel(cardItemModel)),
             ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardItemModel.id)),
             ChangeNotifierProvider<EvaluationDetailToggleViewModel>(create:(_)=>EvaluationDetailToggleViewModel()),
+            
+            ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel()), // TODO
+            // ChangeNotifierProvider<EvaluationChannelCategoryViewModel>(create:(_)=>EvaluationChannelCategoryViewModel()),
+            ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel()), // TODO
+            ChangeNotifierProvider<EvaluationEventResultRespViewModel>(create:(_)=>EvaluationEventResultRespViewModel()),
+       
           ],
           child:CardContentPage(),
         )
@@ -71,23 +73,21 @@ class CardRewardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-    CardRewardSelectedViewModel cardRewardSelectedViewModel = Provider.of<CardRewardSelectedViewModel>(context);
     
     return Container(
       height:MediaQuery.of(context).size.height - 300,
       child:SingleChildScrollView(
         child:Column(
           children:[
-            if(cardRewardSelectedViewModel.isShowItemList())
               RewardItems(),
              
-             if(!cardRewardSelectedViewModel.isShowItemList() 
-                && cardRewardSelectedViewModel.cardRewardType() == 0)
-              Activity(),
+            //  if(!cardRewardSelectedViewModel.isShowItemList() 
+            //     && cardRewardSelectedViewModel.cardRewardType() == 0)
+            //   Activity(),
 
-            if(!cardRewardSelectedViewModel.isShowItemList() 
-                && cardRewardSelectedViewModel.cardRewardType() == 1)
-              Evaluation(),
+            // if(!cardRewardSelectedViewModel.isShowItemList() 
+            //     && cardRewardSelectedViewModel.cardRewardType() == 1)
+            //   Evaluation(),
            
           ]
         ),

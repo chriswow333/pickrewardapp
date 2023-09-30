@@ -19,18 +19,20 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  FeedbackEventResultProto get feedbackEventResult => _feedbackEventResult ?? FeedbackEventResultProto();
-
-
-
+  FeedbackEventResultProto? get feedbackEventResult => _feedbackEventResult;
 
   Future<void> evaluateCardRewardEvaluation(EvaluationSelectedViewModel selectedViewModel) async {
 
     try {
 
+      if(selectedViewModel.cardRewardModel == null){
+        print('not found cardRewardModel when evaluationCardRewardEvaluation');
+        return;
+      } 
+
       EventProto eventProto = EventProto();
-      
-      eventProto.ownerID = selectedViewModel.cardRewardModel.id;
+
+      eventProto.ownerID = selectedViewModel.cardRewardModel!.id;
 
       eventProto.channelIDs.addAll(selectedViewModel.getChannelIDs().toList());
       eventProto.cost = selectedViewModel.getCost();
@@ -40,7 +42,7 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
       eventProto.labels.addAll(selectedViewModel.getLabels().toList());
       eventProto.payIDs.addAll(selectedViewModel.getPayIDs().toList());
       eventProto.taskIDs.addAll(selectedViewModel.getTaskIDs().toList());
-      eventProto.rewardType = selectedViewModel.cardRewardModel.reward.rewardType;
+      eventProto.rewardType = selectedViewModel.cardRewardModel!.reward.rewardType;
 
       EvaluationEventResultRespReply reply = await EvaluationService().evaluationClient.evaluateRespByOwnerID(eventProto);
 

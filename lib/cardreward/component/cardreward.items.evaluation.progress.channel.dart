@@ -17,261 +17,103 @@ class EvaluationProgressChannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
+    // EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
 
     return Column(
       children:[
-        ChannelCategoryTypes(),
-        if(categoryViewModel.isSelectedLabel())
-          LabelItems(),
-        if(!categoryViewModel.isSelectedLabel())
-          ChannelItems(),
+        // ChannelCategoryTypes(),
+        // if(categoryViewModel.isSelectedLabel())
+          // LabelItems(),
+        // if(!categoryViewModel.isSelectedLabel())
+          ChannelItemGroups(),
       ]
     );
   }
 }
 
 
-class ChannelCategoryTypes extends StatelessWidget {
-  const ChannelCategoryTypes({super.key});
+class ChannelItemGroups extends StatelessWidget {
+  const ChannelItemGroups({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
     EvaluationRespProto? resp = evaluationViewModel.get();
+    if(resp == null)return Container();
 
-    if (resp == null) return Container();
-  
-    List<ChannelCategoryTypeProto> channelCategoryTypes = resp.channelCategoryTypes;
-        
-    LabelEvaluationRespProto labelResp = resp.labelEvaluationResp;
-    List<LabelProto> labels = labelResp.matches;
-
-    return Container(
-      alignment: Alignment.centerLeft,
-      child:SingleChildScrollView(
-        scrollDirection:Axis.horizontal,
-        child:Row(
-          children:[
-            if (labels.isNotEmpty)
-              LabelCategoryType(),
-
-            for(ChannelCategoryTypeProto c in channelCategoryTypes)
-              ChannelCategoryType(channelCategoryType: c),
-            
-          ]
-        ),
-      )
-    );
-  }
-}
-
-class LabelCategoryType extends StatelessWidget {
-  const LabelCategoryType({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-
-    return TextButton(
-      onPressed: (){
-        categoryViewModel.toggle(-1);
-        categoryViewModel.selectedLabel();
-      },
-      child:Column(
-        children:[
-          LabelCategoryTypeIcon(),
-          LabelCategoryName(),
-          SizedBox(height:10,),
-          if(categoryViewModel.get() == -1)
-            BottomLine(),
-        ]
-      )
-    );
-  }
-}
-
-
-class LabelCategoryTypeIcon extends StatelessWidget {
-  const LabelCategoryTypeIcon({super.key,});
-  
-  @override
-  Widget build(BuildContext context) {
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-
-    IconData icon = Icons.list_alt_rounded;
-    bool selected = categoryViewModel.get() == -1;
-    return Container(
-      child:Icon(
-        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
-        icon,
-      )
-    );
-  }
-}
-
-
-class LabelCategoryName extends StatelessWidget {
-  const LabelCategoryName({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-    bool selected = categoryViewModel.get() == -1;
-    return Container(
-      child:Text(
-        '通路總覽',
-        style: TextStyle(
-          fontSize: 15,
-          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
-        ),  
-      )
-    );
-  }
-}
-
-class ChannelCategoryType extends StatelessWidget {
-  const ChannelCategoryType({super.key, required this.channelCategoryType});
-  final ChannelCategoryTypeProto channelCategoryType;
-  
-  @override
-  Widget build(BuildContext context) {
-    
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-
-    return TextButton(
-      onPressed: (){
-        categoryViewModel.toggle(channelCategoryType.id);
-      },
-      child:Column(
-        children:[
-          ChannelCategoryTypeIcon(categoryType:channelCategoryType.id),
-          ChannelCategoryName(categoryType:channelCategoryType.id, name:channelCategoryType.name),
-          SizedBox(height:10),
-          if(channelCategoryType.id == categoryViewModel.get())
-            BottomLine(),
-        ]
-      )
-    );
-  }
-}
-
-
-class BottomLine extends StatelessWidget {
-  const BottomLine({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width:70,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlue[600]!,  
-        ),
-        color:Palette.kToBlue[600],
-      ),  
-    );
-  }
-}
-
-
-class ChannelCategoryTypeIcon extends StatelessWidget {
-  const ChannelCategoryTypeIcon({super.key, required this.categoryType});
-  
-  final int categoryType;
-  
-  @override
-  Widget build(BuildContext context) {
-
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-    bool selected = categoryType == categoryViewModel.get();
-
-    IconData icon = Icons.wallet_giftcard_outlined;
-
-    switch(categoryType) {
-      case 0:
-        icon = Icons.wallet_giftcard_outlined;
-        break;
-      case 1:
-        icon = Icons.food_bank_outlined;
-        break;
-      case 2:
-        icon = Icons.travel_explore_outlined;
-        break;
-      case 3:
-        icon = Icons.directions_transit_filled_outlined;
-        break;
-      case 4:
-        icon = Icons.card_travel_sharp;
-        break;
-      case 5:
-        icon = Icons.video_camera_front_outlined;
-        break;
+    Map<int, List<ChannelProto>> allChannels = {};
+    Map<int, ChannelCategoryTypeProto> channelCategories = {};
+    for(ChannelCategoryTypeProto c in resp.channelCategoryTypes){
+      allChannels[c.id] = [];
+      channelCategories[c.id] = c;
     }
 
+    for (ChannelEvaluationRespProto c in resp.channelEvaluationResps){
+      for(ChannelProto ch in c.matches){
+        if(allChannels.containsKey(ch.channelCategoryType)) {
+          allChannels[ch.channelCategoryType]!.add(ch);
+        }else {
+          allChannels[ch.channelCategoryType] = [ch];
+        }
+      }
+    }
 
-    return Container(
-      child:Icon(
-        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
-        icon,
-      )
+    return Column(
+      children:[
+        LabelItemGroup(),
+        for(int c in allChannels.keys) 
+          ChannelItemGroup(channelCategoryTypeProto:channelCategories[c]!, channelProtos:allChannels[c]!)
+      ]
     );
   }
 }
 
 
-class ChannelCategoryName extends StatelessWidget {
-  const ChannelCategoryName({super.key, required this.categoryType, required this.name});
+class ChannelItemGroup extends StatelessWidget {
+  const ChannelItemGroup({super.key, required this.channelCategoryTypeProto,  required this.channelProtos});
   
-  final int categoryType;
-  final String name;
-  
+  final ChannelCategoryTypeProto channelCategoryTypeProto;
+  final List<ChannelProto> channelProtos;
+
   @override
   Widget build(BuildContext context) {
-
-    EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-    bool selected = categoryType == categoryViewModel.get();
-
     return Container(
-      child:Text(
-        name,
-        style: TextStyle(
-          fontSize: 15,
-          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
-        ),  
+      padding: EdgeInsets.only(bottom:10),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          ChannelItemGroupName(name:channelCategoryTypeProto.name),
+          ChannelItems(channelProtos: channelProtos),
+        ]
       )
+    );
+  }
+}
+
+class ChannelItemGroupName extends StatelessWidget {
+  const ChannelItemGroupName({super.key, required this.name});
+  final String name;
+  @override
+  Widget build(BuildContext context) {
+    return Text(name,
+      style:TextStyle(
+        color: Palette.kToBlack[600],
+        fontSize: 20,
+      ),
     );
   }
 }
 
 class ChannelItems extends StatelessWidget {
-  const ChannelItems({super.key});
-
+  const ChannelItems({super.key, required this.channelProtos});
+  final List<ChannelProto> channelProtos;
   @override
   Widget build(BuildContext context) {
 
-
-    EvaluationChannelCategoryViewModel categoryVideModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-    
-    int? selectedId = categoryVideModel.get();
-    if (selectedId == null )return Container();
-    
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationRespProto? resp = evaluationViewModel.get();
-    if(resp == null)return Container();
-
-    List<ChannelProto> channelProtos = [];
-    for (ChannelEvaluationRespProto c in resp.channelEvaluationResps){
-      if (c.channelCategoryType == selectedId){
-        channelProtos = c.matches;
-        break;
-      }
-    }
-
     return Container(
-      height:350,
       child:GridView.count(  
+        shrinkWrap:true,
+        physics:NeverScrollableScrollPhysics(),
         crossAxisCount: 4,  
         crossAxisSpacing: 15.0,  
         mainAxisSpacing: 15.0,
@@ -281,6 +123,39 @@ class ChannelItems extends StatelessWidget {
             ChannelItem(channelProto: c,),
         ],
       ),
+    );
+  }
+}
+
+
+class LabelItemGroup extends StatelessWidget {
+  const LabelItemGroup({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          LabelItemGroupName(),
+          LabelItems(),
+        ]
+      )
+    );
+  }
+}
+
+class LabelItemGroupName extends StatelessWidget {
+  const LabelItemGroupName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('通路總覽',
+      style: TextStyle(
+        color:Palette.kToBlack[600],
+        fontSize: 20,
+      ),
+      
     );
   }
 }
@@ -299,8 +174,9 @@ class LabelItems extends StatelessWidget {
     List<LabelProto> labels = labelResp.matches;
 
     return Container(
-      height:400,
       child:GridView.count(  
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 4,  
         crossAxisSpacing: 8.0,  
         mainAxisSpacing: 8.0,

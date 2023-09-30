@@ -7,9 +7,14 @@ import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 class EvaluationSelectedViewModel with ChangeNotifier {
 
 
-  EvaluationSelectedViewModel({required this.cardRewardModel});
 
-  final CardRewardModel cardRewardModel;
+  CardRewardModel? _cardRewardModel;
+
+  set cardRewardModel(CardRewardModel? cardRewardModel){
+    _cardRewardModel = cardRewardModel;
+  }
+
+  CardRewardModel? get cardRewardModel => _cardRewardModel;
 
   Set<String> _channelIDs = {};
   Set<String> _taskIDs = {};

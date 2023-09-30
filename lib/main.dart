@@ -46,11 +46,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 1;
 
-  static const Widget homePage = HomePage();
-  static const Widget channelSearchPage = ChannelSearchPage();
-  static const Widget cardSearchPage = CardSearchPage();
-
-  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
+  static const Widget channelSearchPage = ChannelSearchPage(key: PageStorageKey<String>('Screen-B'));
+  static const Widget cardSearchPage = CardSearchPage(key: PageStorageKey<String>('Screen-C'));
 
   static const List<Widget> _widgetOptions = <Widget>[
     homePage,
@@ -58,18 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
     cardSearchPage,
   ];
 
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // alignment: Alignment.topCenter,
-        padding: GlobalPadding.global(),
+      body: SafeArea(
+        // padding: GlobalPadding.global(),
         child: Container(
           // height:MediaQuery.of(context).size.height,
           padding: EdgeInsets.only(top: 10),

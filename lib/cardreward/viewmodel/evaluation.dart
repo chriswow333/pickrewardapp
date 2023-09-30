@@ -15,13 +15,11 @@ class EvaluationViewModel with ChangeNotifier{
   
   EvaluationRespProto? get() => _resp;
 
-  EvaluationViewModel(String rewardID) {
+  EvaluationViewModel() {
     EvaluationService().init();
-    _fetchEvaluationResp(rewardID);
   }
- 
 
-  Future<void> _fetchEvaluationResp(String rewardID) async {
+  Future<void> fetchEvaluationResp(String rewardID) async {
     
     try {
       

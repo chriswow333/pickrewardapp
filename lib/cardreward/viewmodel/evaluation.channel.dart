@@ -2,26 +2,26 @@
 import 'package:flutter/material.dart';
 
 
-class EvaluationChannelCategoryViewModel with ChangeNotifier {
+// class EvaluationChannelCategoryViewModel with ChangeNotifier {
 
-  int? _selectedChannelCategoryId;
+//   int? _selectedChannelCategoryId;
 
-  bool _selectedLabelCategory = false;
+//   bool _selectedLabelCategory = false;
 
 
-  selectedLabel() {
-    _selectedLabelCategory = true;
-    notifyListeners();
-  }
+//   selectedLabel() {
+//     _selectedLabelCategory = true;
+//     notifyListeners();
+//   }
 
-  bool isSelectedLabel() => _selectedLabelCategory;
+//   bool isSelectedLabel() => _selectedLabelCategory;
 
-  toggle(int selectedChannelCategoryId) {
-    _selectedChannelCategoryId = selectedChannelCategoryId;
-    _selectedLabelCategory = false;
-    notifyListeners();
-  }
+//   toggle(int selectedChannelCategoryId) {
+//     _selectedChannelCategoryId = selectedChannelCategoryId;
+//     _selectedLabelCategory = false;
+//     notifyListeners();
+//   }
 
-  int? get() => _selectedChannelCategoryId;
+//   int? get() => _selectedChannelCategoryId;
 
-}
+// }

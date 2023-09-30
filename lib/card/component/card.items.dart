@@ -60,9 +60,10 @@ class CardItem extends StatelessWidget {
           ),
           child:TextButton(
             onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute(
+                  builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)
+                ),
               );
             },
             style:ButtonStyle(

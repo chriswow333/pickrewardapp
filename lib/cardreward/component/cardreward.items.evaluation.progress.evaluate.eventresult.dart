@@ -28,9 +28,13 @@ class EventResultGetPercentage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    
     EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);
-    double percentage = evaluationEventResultRespViewModel.feedbackEventResult.getPercentage * 100;
+    if(evaluationEventResultRespViewModel.feedbackEventResult == null) {
+      return Container();
+    }
+
+    double percentage = evaluationEventResultRespViewModel.feedbackEventResult!.getPercentage * 100;
     String percentageStr = percentage.toStringAsFixed(3);
     int length = percentageStr.length - 1;
     while(length > 0) {
@@ -63,20 +67,23 @@ class EventResultGetReturn extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-
-    String unit = evaluationSelectedViewModel.cardRewardModel.reward.name;
-
-
+  
     EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);
-    double getReturn = evaluationEventResultRespViewModel.feedbackEventResult.getReturn;
+    if (evaluationEventResultRespViewModel.feedbackEventResult == null){
+      return Container();
+    }
 
 
+    String unit = evaluationSelectedViewModel.cardRewardModel!.reward.name;
+    double getReturn = evaluationEventResultRespViewModel.feedbackEventResult!.getReturn;
     return Text("折抵 " +getReturn.toString() + " " + unit,
       style: TextStyle(
         fontSize: 20,
         color: Palette.kToBlack[900],
       ),  
     );
+
+    
   }
 }
 

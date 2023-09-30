@@ -8,13 +8,13 @@ enum EvaluationProgressEnum {
 }
 
 
-class EvaluationProgressViewModel with ChangeNotifier {
-  EvaluationProgressEnum _progress = EvaluationProgressEnum.Channel;
+// class EvaluationProgressViewModel with ChangeNotifier {
+//   EvaluationProgressEnum _progress = EvaluationProgressEnum.Channel;
 
-  set (EvaluationProgressEnum progress) { 
-    _progress = progress;
-    notifyListeners();
-  }
-  get () => _progress;
+//   set (EvaluationProgressEnum progress) { 
+//     _progress = progress;
+//     notifyListeners();
+//   }
+//   get () => _progress;
     
-}
+// }
