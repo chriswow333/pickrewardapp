@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -16,18 +15,7 @@ class EvaluationProgressChannel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // EvaluationChannelCategoryViewModel categoryViewModel = Provider.of<EvaluationChannelCategoryViewModel>(context);
-
-    return Column(
-      children:[
-        // ChannelCategoryTypes(),
-        // if(categoryViewModel.isSelectedLabel())
-          // LabelItems(),
-        // if(!categoryViewModel.isSelectedLabel())
-          ChannelItemGroups(),
-      ]
-    );
+    return ChannelItemGroups();
   }
 }
 
@@ -37,6 +25,7 @@ class ChannelItemGroups extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
     EvaluationRespProto? resp = evaluationViewModel.get();
     if(resp == null)return Container();

@@ -18,30 +18,39 @@ class ActivityItem extends StatelessWidget {
     bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
     
     return Container(
-      padding:const EdgeInsets.only(bottom: 20),
-      child:TextButton(
-        onPressed: (){  
-          cardRewardViewModel.toggleCardReward(cardRewardModel.id);
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.white),
-          elevation:MaterialStatePropertyAll(2),
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
         ),
-        child:Column(
-          children:[
-            Row(
-              children:[
-                CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-                ActivityRewardType(),
-                SizedBox(width:2),
-              ]
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      child:Column(
+        children:[
+          TextButton(
+            style:const ButtonStyle(
+              splashFactory:NoSplash.splashFactory,
             ),
-            ActivityName(name:cardRewardModel.name),
-
-            if(expanded)
-              CardActivityDetails(cardRewardDescModels: cardRewardModel.cardRewardDesc,),
-          ]
-        )
+            onPressed: (){
+              cardRewardViewModel.toggleCardReward(cardRewardModel.id);
+            },
+            child:Column(
+              children:[
+                Row(
+                  children:[
+                    CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                    ActivityRewardType(),
+                  ]
+                ),
+                ActivityName(name:cardRewardModel.name),
+              ]
+            )
+          ),
+          if(expanded)
+            CardActivityDetails(cardRewardDescModels: cardRewardModel.cardRewardDesc,),
+        ]
       )
     );
   }
@@ -148,12 +157,17 @@ class CardActivityDetails extends StatelessWidget {
   final List<CardRewardDescModel> cardRewardDescModels;
   @override
   Widget build(BuildContext context) {
-
-
   
     return Container(
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          Divider(
+            color:Palette.kToBlack[50],
+          ),
+          SizedBox(height:5),
+          CardActivityDetailTitle(),
+          SizedBox(height:5),
           for (final c in cardRewardDescModels) 
             CardActivityDetail(cardRewardDescModel: c,),
         ],
@@ -163,7 +177,22 @@ class CardActivityDetails extends StatelessWidget {
 }
 
 
+class CardActivityDetailTitle extends StatelessWidget {
+  const CardActivityDetailTitle({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text('詳細說明',
+        style:TextStyle(
+          color:Palette.kToBlack[900],
+          overflow: TextOverflow.clip,
+          fontSize: 20,
+        ),
+      )
+    );
+  }
+}
 
 class CardActivityDetail extends StatelessWidget {
   const CardActivityDetail({super.key, required this.cardRewardDescModel});
@@ -173,7 +202,6 @@ class CardActivityDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top:20),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -197,6 +225,7 @@ class CardActivityDetailName extends StatelessWidget {
         style:TextStyle(
           color:Palette.kToBlack[900],
           overflow: TextOverflow.clip,
+          fontSize: 15,
         ),
       )
     );

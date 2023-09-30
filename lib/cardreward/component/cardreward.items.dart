@@ -18,8 +18,9 @@ class RewardItems extends StatelessWidget {
     List<CardRewardModel> cardRewardModels = cardRewardViewModel.get();
 
     return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:Wrap(
+        runSpacing: 15,
+        direction: Axis.horizontal, 
         children:[
           for(final c in cardRewardModels)
             RewardItem(cardRewardModel: c,),
@@ -33,7 +34,6 @@ class RewardItem extends StatelessWidget {
   const RewardItem({super.key, required this.cardRewardModel, });
   
   final CardRewardModel cardRewardModel;
-
 
   @override
   Widget build(BuildContext context) {

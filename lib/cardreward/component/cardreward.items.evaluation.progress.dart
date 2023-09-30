@@ -9,7 +9,6 @@ import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.p
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -32,12 +31,17 @@ class EvaluationProgressContent extends StatelessWidget {
     evaluationSelectedViewModel.cardRewardModel = cardRewardModel;
 
     return Container(
-      padding: const EdgeInsets.only(top:20),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          CardRewardEvaluationDetails(cardRewardDescModels:cardRewardModel.cardRewardDesc),
+          Divider(
+            color:Palette.kToBlack[50],
+          ),
           CardRewardEvaluationProgress(evaluationViewModel:evaluationViewModel, cardRewardModel: cardRewardModel,),
+          Divider(
+            color:Palette.kToBlack[50],
+          ),
+          CardRewardEvaluationDetails(cardRewardDescModels:cardRewardModel.cardRewardDesc),
         ],
       ),
     );
@@ -109,7 +113,7 @@ class CardRewardEvaluationDetails extends StatefulWidget {
 class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetails> {
 
 
-  bool expanded = false;
+  bool expanded = true;
 
   void toggleExpanded(){
     setState(() {
@@ -140,10 +144,16 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
   const CardRewardEvaluationDetailTitle({super.key, required this.toggleExpanded});
 
   final VoidCallback toggleExpanded;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child:TextButton(
+        style:ButtonStyle(
+          padding:MaterialStatePropertyAll(EdgeInsets.all(0)),
+          splashFactory:NoSplash.splashFactory,
+          side:MaterialStatePropertyAll(BorderSide.none),
+        ),
         onPressed: (){
           toggleExpanded();
         },

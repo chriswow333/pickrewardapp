@@ -19,13 +19,17 @@ class EvaluationItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
-
     bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
 
     return Container(
-      padding:const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        border: Border.all(),
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
+        ),
       ),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -35,6 +39,9 @@ class EvaluationItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                 TextButton(
+                  style:const ButtonStyle(
+                    splashFactory:NoSplash.splashFactory,
+                  ),
                   onPressed: (){
                     cardRewardViewModel.toggleCardReward(cardRewardModel.id);
                   },
@@ -43,16 +50,16 @@ class EvaluationItem extends StatelessWidget {
                       Row(
                         children:[
                           CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-                          SizedBox(width:10,),
+                          SizedBox(width:5,),
                           EvaluationRewardType(reward: cardRewardModel.reward,),
-                          SizedBox(width:10,),
+                          SizedBox(width:5,),
                           EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
                         ],
                       ),
-                      SizedBox(height:10),
+                      SizedBox(height:5),
                       EvaluationName(name: cardRewardModel.name,),
-                    ]
-                  )
+                    ],
+                  ),
                 ),
                 if(expanded)
                   EvaluationProgressContent(cardRewardModel: cardRewardModel),
@@ -211,7 +218,7 @@ class EvaluationName extends StatelessWidget {
     return  Text(name,
       style:TextStyle(
         color:Palette.kToBlack[900],
-        fontSize: 18,
+        fontSize: 20,
       ),
       maxLines: null,
     );
