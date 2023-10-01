@@ -208,42 +208,44 @@ class LabelItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-
+    bool selected = evaluationSelectedViewModel.hasLabel(label.labelType);
     return Container(
       alignment: Alignment.center,
       child:TextButton(
         style:ButtonStyle(
           alignment: Alignment.center,
           splashFactory:NoSplash.splashFactory,
-          // shape: MaterialStatePropertyAll(
-          //   RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(100),
-          //   ),
-          // ),
-          side:evaluationSelectedViewModel.hasLabel(label.labelType)?
-          MaterialStatePropertyAll(
-            BorderSide(
-              color:Palette.kToBlue[600]!,
-              width: 1,
-            )
-          ):null,
           padding: MaterialStatePropertyAll(
-            EdgeInsets.zero,
-          ),
+          EdgeInsets.zero,
+        )
         ),
         onPressed:(){
           evaluationSelectedViewModel.setLabel(label.labelType);
         },
-        child:Container(
-          alignment: Alignment.center,
-          child:Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-              LabelItemIcon(labelType:label.labelType),
-              LabelItemName(name:label.labelName),
-            ],
-          ),
-        ),
+        child:Stack(
+          children:[
+            Container(
+              alignment: Alignment.center,
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  LabelItemIcon(labelType:label.labelType),
+                  LabelItemName(name:label.labelName),
+                ],
+              ),
+            ),
+            if(selected)
+              Container(
+                alignment: Alignment.topLeft,
+                child: Icon(
+                  Icons.check_circle_outlined,
+                  color:Palette.kToOrange[600],
+                  size:25,
+                ),
+              ),
+          ]
+        )
+        
       )
     );
     ;
@@ -262,7 +264,6 @@ class LabelItemName extends StatelessWidget {
         name,
         style: TextStyle(
           color: Palette.kToBlack[600],
-          fontSize: 14,
         ),
       )
     );
@@ -295,7 +296,7 @@ class LabelItemIcon extends StatelessWidget {
     return Container(
       child:Icon(
         color:Palette.kToBlack[600],
-        size:30,
+        size:40,
         iconData,
       )
     );
@@ -320,13 +321,6 @@ class ChannelItem extends StatelessWidget {
       style:ButtonStyle(
         alignment: Alignment.center,
         splashFactory:NoSplash.splashFactory,
-        side:selected?
-        MaterialStatePropertyAll(
-          BorderSide(
-            color:Palette.kToBlue[600]!,
-            width: 1,
-          )
-        ):null,
         padding: MaterialStatePropertyAll(
           EdgeInsets.zero,
         )
@@ -335,14 +329,33 @@ class ChannelItem extends StatelessWidget {
         evaluationSelectedViewModel.setChannelID(channelProto.id);
       },
 
-      child:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child:Stack(
         children:[
-          ChannelItemIcon(image: channelProto.image,),
-          ChannelItemName(name:channelProto.name),
-        ],
-      ),
+          Container(
+            alignment: Alignment.center,
+            child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:[
+                ChannelItemIcon(image: channelProto.image,),
+                ChannelItemName(name:channelProto.name),
+              ],
+            ),
+          ),
+          
+          if(selected)
+            Container(
+              alignment: Alignment.topLeft,
+              child: Icon(
+                Icons.check_circle_outlined,
+                color:Palette.kToOrange[600],
+                size:25,
+              ),
+            ),
+        ]
+      )
+      
+      
     );
   }
 }

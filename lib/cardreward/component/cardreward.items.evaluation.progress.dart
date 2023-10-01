@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.dart';
-import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.eventresult.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
@@ -84,8 +83,6 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         EvaluationProgressTitle(),
-        SizedBox(height:10),
-        CardRewardEvaluationEventResult(),
         SizedBox(height:10),
         EvaluationProgressBar(changeEvaluationProgress:changeEvaluationProgress, progress:_progress),
         SizedBox(height:10),

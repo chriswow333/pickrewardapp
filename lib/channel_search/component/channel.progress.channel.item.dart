@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 
 
@@ -241,21 +240,13 @@ class LabelItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     bool selected = rewardSelectedViewModel.existSelectedLabelID(labelItemModel.id);
 
     return TextButton(
-        style:ButtonStyle(
-        alignment: Alignment.center,
+      style:ButtonStyle(
+        alignment: Alignment.topLeft,
         splashFactory:NoSplash.splashFactory,
-        side:selected?
-        MaterialStatePropertyAll(
-          BorderSide(
-            color:Palette.kToBlue[600]!,
-            width: 1,
-          )
-        ):null,
         padding: MaterialStatePropertyAll(
           EdgeInsets.zero,
         )
@@ -264,14 +255,33 @@ class LabelItem extends StatelessWidget {
       rewardSelectedViewModel.labelIDs =  labelItemModel.id;          
       },
       child:Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(left:2, right:2),
-        child:Column(
+        child:Stack(
           children:[
-            LabelItemIcon(id:labelItemModel.id),
-            LabelItemName(name:labelItemModel.name),
-          ],
-        ),
+            Container(
+              alignment: Alignment.center,
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                  LabelItemIcon(id:labelItemModel.id),
+                  LabelItemName(name:labelItemModel.name),
+                ],
+              ),
+            ),
+            
+
+            if(selected)
+              Container(
+                alignment: Alignment.topLeft,
+                child: Icon(
+                  Icons.check_circle_outlined,
+                  color:Palette.kToOrange[600],
+                  size:25,
+                ),
+              ),
+
+          ]
+        )
+        
       ),
     );
   }
@@ -337,20 +347,12 @@ class ChannelItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    
     bool selected = rewardSelectedViewModel.existSelectedChannelID(channelItemModel.id);
 
     return TextButton(
       style:ButtonStyle(
         alignment: Alignment.center,
         splashFactory:NoSplash.splashFactory,
-        side:selected?
-        MaterialStatePropertyAll(
-          BorderSide(
-            color:Palette.kToBlue[600]!,
-            width: 1,
-          )
-        ):null,
         padding: MaterialStatePropertyAll(
           EdgeInsets.zero,
         )
@@ -361,12 +363,30 @@ class ChannelItem extends StatelessWidget {
       child:Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(left:2, right:2),
-        child:Column(
+        child:Stack(
           children:[
-            ChannelItemIcon(image:channelItemModel.image),
-            ChannelItemName(name:channelItemModel.name),
-          ],
-        ),
+            Container(
+              alignment: Alignment.center,
+              child:Column(
+                children:[
+                  ChannelItemIcon(image:channelItemModel.image),
+                  ChannelItemName(name:channelItemModel.name),
+                ],
+              ),
+            ),
+            if(selected)
+              Container(
+                alignment: Alignment.topLeft,
+                child: Icon(
+                  Icons.check_circle_outlined,
+                  color:Palette.kToOrange[600],
+                  size:25,
+                ),
+              ),
+          ]
+        )
+        
+        
       ),
     );
   }
@@ -399,6 +419,7 @@ class ChannelItemName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FittedBox(
       fit: BoxFit.fitWidth, 
       child:Text(

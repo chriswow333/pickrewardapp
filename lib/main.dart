@@ -37,7 +37,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   // static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
   static const Widget channelSearchPage = ChannelSearchPage();

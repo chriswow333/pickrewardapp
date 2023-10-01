@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.cost.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.costdate.dart';
-import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.eventresult.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.pay.dart';
 import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
@@ -16,7 +15,8 @@ class EvaluationProgressEvaluate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+  
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
@@ -40,12 +40,69 @@ class EvaluationProgressEvaluate extends StatelessWidget {
           )
         ),
         
+        if(!evaluationSelectedViewModel.evaluated)
+          CardRewardEvaluationBtn(),
 
-        CardRewardEvaluationBtn(),
+        if(evaluationSelectedViewModel.evaluated)
+          EvaluateEventResult()
       ]
     );
   }
 }
+
+class EvaluateEventResult extends StatelessWidget {
+  const EvaluateEventResult({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
+
+
+    EvaluationEventResultRespViewModel evaluationEventResultRespViewModel = Provider.of<EvaluationEventResultRespViewModel>(context);
+    if(evaluationEventResultRespViewModel.feedbackEventResult == null) {
+      return Container();
+    }
+
+    FeedbackEventResultProto feedbackEventResult = evaluationEventResultRespViewModel.feedbackEventResult!;
+    
+    
+    String returnUnit = evaluationSelectedViewModel.cardRewardModel!.reward.rewardType == 0 ? "元":"點";
+    feedbackEventResult.getReturn;
+
+    double getReturn = feedbackEventResult.getReturn;
+    String getReturnStr = getReturn.toInt().toString();
+    String percentage = (feedbackEventResult.getPercentage * 100).toStringAsFixed(3);
+    int length = percentage.length - 1;
+    while(length > 0) {
+      if(percentage[length] != '0' && percentage[length] != "."){
+        break;
+      }
+      length--; 
+    }
+
+    percentage = percentage.substring(0,length+1);
+
+    return Container(
+      padding:EdgeInsets.only(top:25),
+      alignment: Alignment.center,
+      child:Container(
+        padding:EdgeInsets.only(top: 10, bottom: 10, left:20, right: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          color: Palette.kToOrange[600],
+        ),
+        child:Text('獲得 ${percentage}% ${getReturnStr}${returnUnit}',
+          style:TextStyle(
+            color:Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.w400,
+          ),
+        )
+      )
+    );
+  }
+}
+
 class CardRewardEvaluationBtn extends StatelessWidget {
   const CardRewardEvaluationBtn({super.key});
 

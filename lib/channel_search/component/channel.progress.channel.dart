@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:provider/provider.dart';
 
 import 'channel.progress.channel.categorytype.dart';
 
@@ -10,6 +13,7 @@ class ChannelProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         SearchChannelBar(),
         SizedBox(height:20), 
@@ -22,7 +26,6 @@ class ChannelProgress extends StatelessWidget {
     );
   }
 }
-
 
 
 class SearchChannelBar extends StatefulWidget {

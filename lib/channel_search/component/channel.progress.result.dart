@@ -167,7 +167,7 @@ class EvaluationResult extends StatelessWidget {
                 ),
                 Text('獲得 ${percentage}% ${getReturnStr}${returnUnit} ',
                   style:TextStyle(
-                    color:Palette.kToOrange[500],
+                    color:Palette.kToOrange[600],
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -176,17 +176,25 @@ class EvaluationResult extends StatelessWidget {
             ),
          
           if(feedbackEventResult.calculateType == 1)
-            FittedBox(
-              alignment: Alignment.centerLeft,
-              fit:BoxFit.fill,
-              child:Text("折抵${getReturnStr} ",
-                style:TextStyle(
-                  fontSize: 18,
-                  color:Palette.kToBlue[600],
-                  fontWeight: FontWeight.bold,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                Text('${rewardName}回饋',
+                  style:TextStyle(
+                    color:Palette.kToBlue[600],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            )
+                Text('折抵 ${getReturnStr}${returnUnit} ',
+                  style:TextStyle(
+                    color:Palette.kToOrange[600],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]
+            ),
         ]
       ),
     );
