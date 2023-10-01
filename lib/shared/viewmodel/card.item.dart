@@ -57,7 +57,9 @@ class CardItemViewModel with ChangeNotifier {
 
   Future<void> fetchCardsByBankID(String bankID) async{ 
 
-    if (bankID == _bankID)return;
+    if (bankID == _bankID){
+      return;
+    }
 
     if(_cardItemModels[bankID] == null){
 

@@ -17,16 +17,30 @@ class EvaluationProgressEvaluate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-
-    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         CardRewardEvaluationProgressPay(),
-        CardRewardEvaluationProgressCost(),
-        CardRewardEvaluationProgressCostDate(),
-       
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color:Palette.kToBlack[50]!,
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          child:Column(
+            children:[
+              CardRewardEvaluationProgressCost(),
+              SizedBox(height:25),
+              CardRewardEvaluationProgressCostDate(),
+            ]
+          )
+        ),
+        
+
         CardRewardEvaluationBtn(),
       ]
     );

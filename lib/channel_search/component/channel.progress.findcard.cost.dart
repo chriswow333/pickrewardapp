@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'package:provider/provider.dart';
 
@@ -13,32 +15,26 @@ class CostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 0,
-            blurRadius: 1,
-            offset: Offset(0, 0.5)
-          ),
-        ],
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
       ),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           CostName(),
-          
-          SizedBox(height:5),
-          
+          SizedBox(height:10),
           CostButtons(),
+
+          SizedBox(height:25),
+
+          CostDateName(),
+          CostDateValue(),
         ]
       )
     );
@@ -52,8 +48,8 @@ class CostName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('消費金額',
       style: TextStyle(
-        fontSize: 20,
-        color: Palette.kToBlack[400],
+        fontSize: 18,
+        color: Palette.kToBlack[600],
       ),  
     );
   }
@@ -90,54 +86,41 @@ class Lessthan1000Btn extends StatelessWidget {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int selectedCost = rewardSelectedViewModel.cost;
 
-    return Container(
-      decoration: BoxDecoration(
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
-          bottomLeft: Radius.circular(5),
-          bottomRight: Radius.circular(5)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1)
+    return TextButton(
+      onPressed: (){
+        if(_cost == selectedCost)return;
+        rewardSelectedViewModel.cost = _cost;
+      },
+      style:ButtonStyle(
+        backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
+        side:_cost == selectedCost ? MaterialStatePropertyAll(
+          BorderSide(
+            width:1.0,
+            color: Palette.kToBlack[600]!,
+          )
+        ):null,
+        padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+        animationDuration:Duration(microseconds: 0),
+      ),
+      child:Column(
+        children:[
+          Row(
+            children:[
+              Icon(
+                Icons.monetization_on_rounded,
+                color:_cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
+              ),
+            ],
+          ),
+          
+          Text('~1000',
+            style: TextStyle(
+              fontSize: 15,
+              color: _cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
+            ),
           ),
         ],
       ),
-      child:TextButton(
-        onPressed: (){
-          if(_cost == selectedCost)return;
-          rewardSelectedViewModel.cost = _cost;
-        },
-        style:ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-          side:_cost == selectedCost ? MaterialStatePropertyAll(BorderSide(width:1.0)):null,
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
-          animationDuration:Duration(microseconds: 0),
-        ),
-        child:Column(
-          children:[
-            Row(
-              children:[
-                Icon(
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
-                ),
-              ],
-            ),
-            
-            Text('~1000',
-              style: TextStyle(
-                fontSize: 15,
-                color: _cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
-              ),
-            ),
-          ],
-        ),
-      )
     );
     
     ;
@@ -158,22 +141,6 @@ class From1000To5000Btn extends StatelessWidget {
     int selectedCost = rewardSelectedViewModel.cost;
 
     return Container(
-      decoration: BoxDecoration(
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
-          bottomLeft: Radius.circular(5),
-          bottomRight: Radius.circular(5)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1)
-          ),
-        ],
-      ),
       child:TextButton(
         onPressed: (){
           if(_cost == selectedCost)return;
@@ -181,7 +148,12 @@ class From1000To5000Btn extends StatelessWidget {
         },
         style:ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-          side:_cost == selectedCost ? MaterialStatePropertyAll(BorderSide(width:1.0)):null,
+          side:_cost == selectedCost ? MaterialStatePropertyAll(
+            BorderSide(
+              width:1.0,
+              color: Palette.kToBlack[600]!,
+            )
+          ):null,
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
           animationDuration:Duration(microseconds: 0),
         ),
@@ -228,22 +200,7 @@ class MoreThan5000Btn extends StatelessWidget {
 
 
     return Container(
-      decoration: BoxDecoration(
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
-          bottomLeft: Radius.circular(5),
-          bottomRight: Radius.circular(5)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1)
-          ),
-        ],
-      ),
+      
       child:TextButton(
         onPressed: (){
           if(_cost == selectedCost)return;
@@ -252,7 +209,12 @@ class MoreThan5000Btn extends StatelessWidget {
         },
         style:ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-          side:_cost == selectedCost ? MaterialStatePropertyAll(BorderSide(width:1.0)):null,
+          side:_cost == selectedCost ? MaterialStatePropertyAll(
+            BorderSide(
+              width:1.0,
+              color: Palette.kToBlack[600]!,
+            )
+          ):null,
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
           animationDuration:Duration(microseconds: 0),
         ),
@@ -294,3 +256,77 @@ class MoreThan5000Btn extends StatelessWidget {
 
 
 
+
+
+
+class CostDateName extends StatelessWidget {
+  const CostDateName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('消費日期',
+      style:TextStyle(
+        fontSize: 18,
+        color:Palette.kToBlack[600],
+      ),
+    );
+  }
+}
+
+
+
+
+final DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+class CostDateValue extends StatelessWidget {
+  const CostDateValue({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    return TextButton(
+      onPressed: (){
+        Future<DateTime?> future = showDialog<DateTime>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+            title: Text('消費日期',
+              style:TextStyle(
+                fontSize: 20,
+                color:Palette.kToBlack[400],
+              ),
+            ),
+            content:Container(
+                height: 350,
+                width:100,
+                child:SfDateRangePicker(
+                  view: DateRangePickerView.month,
+                  selectionMode: DateRangePickerSelectionMode.single,
+                  showNavigationArrow:true,
+                  showActionButtons:true,
+                  initialSelectedDate:rewardSelectedViewModel.eventDate,
+                  onSubmit:(Object? obj){
+                    Navigator.pop(context, obj);
+                  },
+                  onCancel:() {
+                    Navigator.pop(context);
+                  }
+                )
+              ),
+            );
+          }
+        );
+        future.then((data){
+          rewardSelectedViewModel.eventDate = data as DateTime;
+        });
+      },
+      child:Text(formatter.format(rewardSelectedViewModel.eventDate),
+        style:TextStyle(
+          fontSize: 18,
+          color:Palette.kToBlack[600],
+        ),
+      )
+    );
+  }
+}

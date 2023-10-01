@@ -10,18 +10,22 @@ class CardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        SearchCardBar(),
-        SizedBox(height:20,),
-        BankItems(),
-        SizedBox(height:20),
-        Expanded(
-          child:CardItems(),
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.all(10),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          SearchCardBar(),
+          SizedBox(height:20,),
+          BankItems(),
+          Divider(),
+          Expanded(
+            child:CardItems(),
+          ),
+        ],
+      )
     );
+    ;
   }
 }
-
 

@@ -14,37 +14,30 @@ class PayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 0,
-            blurRadius: 1,
-            offset: Offset(0, 0.5)
-          ),
-        ],
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
       ),
-      child:Row(
+      padding: EdgeInsets.all(10),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          PayName(),
+          SizedBox(height:10,),
+          Row(
             children:[
-              PayName(),
-              SizedBox(height:10,),
-              PayItems(),
+              Expanded(
+                child:PayItems(),
+              )
             ]
           )
-        ]
+          
+    ]
       )
-      
     );
   }
 }
@@ -56,8 +49,8 @@ class PayName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('行動支付',
       style: TextStyle(
-        fontSize: 20,
-        color: Palette.kToBlack[400],
+        fontSize: 18,
+        color: Palette.kToBlack[600],
       ),  
     );
   }
@@ -74,17 +67,13 @@ class PayItems extends StatelessWidget {
     List<PayItemModel> payItemModels = payItemViewModel.pays;
 
     return Container(
-      width:MediaQuery.of(context).size.width - 30,
       child:SingleChildScrollView(
         scrollDirection:Axis.horizontal,
-        
-        child:Row(
+        child:Wrap(
+          spacing: 10,
           children:[
             for(PayItemModel payItemModel in payItemModels)
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child:PayItem(payItemModel:payItemModel),  
-              ),
+              PayItem(payItemModel:payItemModel),  
           ]
         ),
       )
@@ -113,49 +102,37 @@ class _PayItemState extends State<PayItem> {
     _selected = rewardSelectedViewModel.existSelectedPayID(id);
 
     return Container(
-      decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1)
-          ),
-        ],
-      ),
       child:TextButton(
         style:ButtonStyle(
-          alignment: Alignment.center,
-          splashFactory:NoSplash.splashFactory,
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          side:_selected ? MaterialStatePropertyAll(BorderSide(width:1.0)):null,
-          padding:const MaterialStatePropertyAll(
-            EdgeInsets.fromLTRB(10, 15, 10, 5),
-          ),
-        ),
+        alignment: Alignment.center,
+        splashFactory:NoSplash.splashFactory,
+        side:_selected?
+        MaterialStatePropertyAll(
+          BorderSide(
+            color:Palette.kToBlue[600]!,
+            width: 1,
+          )
+        ):null,
+        padding: MaterialStatePropertyAll(
+          EdgeInsets.zero,
+        )
+      ),
         onPressed: (){
           setState((){
             _selected = !_selected;
           });
           rewardSelectedViewModel.payID = id;
         },
+        child:Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(10),
         child:Column(
           children:[
             PayItemIcon(image:widget.payItemModel.image),
             PayItemName(name:widget.payItemModel.name),
           ],
         ),
+        )
       )
     );
   }
@@ -175,8 +152,8 @@ class PayItemIcon extends StatelessWidget {
       child:Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
-        width:60,
-        height:40,
+        width:70,
+        height:50,
       ),
     );
   }
@@ -189,7 +166,6 @@ class PayItemName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.all(3),
       child:Text(name,
         style: 
         TextStyle(

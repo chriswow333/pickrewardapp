@@ -56,14 +56,14 @@ class ChannelViewModel with ChangeNotifier {
       ///handle all generic errors here
       print(e);
     }
-  
   }
-
 
 
   final Map<int, List<ChannelItemModel>> _channelModels = {};
   final Map<int, bool> _hasMoreChannels = {};
-  final Map<int, ChannelGlobalKeyModel> _globalKeys = {};
+  final Map<int, ChannelGlobalKeyModel> _globalKeys = {
+  
+  };
 
   bool hasMoreChannels(int channelCategoryType) {
     return _hasMoreChannels[channelCategoryType] ?? false;
@@ -79,14 +79,15 @@ class ChannelViewModel with ChangeNotifier {
   }
 
 
+  List<ChannelGlobalKeyModel> getAllChannelItemGlobalKeyModels() {
+    List<ChannelGlobalKeyModel> channelItemKeyModels = [];
 
-  List<GlobalKey> getAllChannelItemGlobalKeys() {
-    List<GlobalKey> channelItemKeys = [];
-    for (int i = 0; i < _globalKeys.keys.length; i++){
-      channelItemKeys.add(_globalKeys[i]!.channelItem);
-    }
 
-    return channelItemKeys;
+    _globalKeys.forEach((key, value) {
+      channelItemKeyModels.add(value);
+    });
+    channelItemKeyModels.sort((a, b)=> a.id.compareTo(b.id));
+    return channelItemKeyModels;
   }
 
   GlobalKey getChannelItemGlobalKeys(int channelCategoryType) {
@@ -98,24 +99,12 @@ class ChannelViewModel with ChangeNotifier {
     }
   }
 
-  int findVisibleChannelCategory(Key channelItemKey) {
-    int category = 0;
-    print(channelItemKey);
-    for (int i = 0; i < _globalKeys.keys.length; i++){
-      if(_globalKeys[i]!.channelItem.hashCode == channelItemKey.hashCode){
-        print("found key is i");
-        return i;
-      }
-    }
-
-    print("not found");
-    return 0;
-  }
-
 
   Future<void> initChannelModels(int channelCategoryType) async{
 
+
     _globalKeys[channelCategoryType] = ChannelGlobalKeyModel(
+      id:channelCategoryType,
       channelCategory: GlobalKey(), 
       channelItem: GlobalKey(),
     );
@@ -214,7 +203,6 @@ class ChannelViewModel with ChangeNotifier {
   }
 
 
-
   Future<ChannelProtoReply> getChannelsByChannelCategoryTypeApi(int channelCategoryType, int offset, int limit) async { 
 
    try {
@@ -246,7 +234,9 @@ class ChannelViewModel with ChangeNotifier {
 class ChannelGlobalKeyModel {
   final GlobalKey channelItem;
   final GlobalKey channelCategory;
+  final int id;
   ChannelGlobalKeyModel({
+    required this.id,
     required this.channelItem,
     required this.channelCategory
   }); 

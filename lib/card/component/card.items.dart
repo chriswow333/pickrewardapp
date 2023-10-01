@@ -21,17 +21,62 @@ class CardItems extends StatelessWidget {
     
     final bankID = cardItemViewModel.bankID;
 
+    if(bankID == "") {
+      List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
+       if(cardItemModels.isEmpty) {
+          cardItemViewModel.fetchLatestCards();
+        }
+      return Container(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Text('近期更新',
+              style: TextStyle(
+                color:Palette.kToBlack[600],
+              ),
+            ),
+            Expanded(
+              child:SingleChildScrollView(
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    for(CardItemModel cardItemModel in cardItemModels)
+                      CardItem(cardItemModel:cardItemModel),
+                  ],
+                ),
+              ),
+            ),
+          ]
+        )
+        
+      );
+    }
+
+
     List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
 
     return Container(
-      child:SingleChildScrollView(
-        child:Column(
-          children:[
-            for(CardItemModel cardItemModel in cardItemModels)
-              CardItem(cardItemModel:cardItemModel),
-          ],
-        ),
-      ),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Text('卡片列表',
+            style: TextStyle(
+              color:Palette.kToBlack[600],
+            ),
+          ),
+          Expanded(
+            child:SingleChildScrollView(
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  for(CardItemModel cardItemModel in cardItemModels)
+                    CardItem(cardItemModel:cardItemModel),
+                ],
+              ),
+            ),
+          ),
+        ]
+      )
     );
   }
 }
@@ -44,56 +89,67 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.9),
-                spreadRadius: 0,
-                blurRadius: 1,
-                offset: Offset(1, 2)
-              ),
-            ],
+    return Container(
+      padding: EdgeInsets.only(top:10, bottom: 10),
+      child:Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color:Colors.white,
           ),
-          child:TextButton(
-            onPressed: (){
-              Navigator.of(context, rootNavigator: true).push(
-                MaterialPageRoute(
-                  builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          color:Palette.kToBlue[50],
+          boxShadow: [
+            BoxShadow(
+              color: Palette.kToBlack[200]!,
+              offset: const Offset(
+                1.0,
+                1.0,
+              ),
+              blurRadius: 1.0,
+              // spreadRadius: 0.5,
+            ), //BoxShadow
+            BoxShadow(
+              color: Colors.white,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
+        ),
+        child:TextButton(
+          onPressed: (){
+            Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)
+              ),
+            );
+          },
+          style:const ButtonStyle(
+            splashFactory:NoSplash.splashFactory,
+          ),
+          child:Container(
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                CardName(cardName: cardItemModel.name,),
+                Row(
+                  children:[
+                    CardIcon(image:cardItemModel.image),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: CardDescs(descs:cardItemModel.descriptions),
+                    )
+                  ]
                 ),
-              );
-            },
-            style:ButtonStyle(
-              alignment: Alignment.center,
-              padding: MaterialStatePropertyAll(
-                EdgeInsets.fromLTRB(0, 12, 0, 0),
-              ),
-            ),
-            child:Container(
-              padding: EdgeInsets.only(left:5),
-              child:Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  Column(
-                    children:[
-                      CardIcon(image:cardItemModel.image),
-                      CardName(cardName: cardItemModel.name,),
-                    ],
-                  ),
-                  SizedBox(width:20),
-                  CardDescs(descs:cardItemModel.descriptions),
-                ],
-              ),
+              ]
             ),
           ),
         ),
-        SizedBox(height:10,),
-      ],
+      )
     );
-    
   }
 }
 
@@ -107,7 +163,6 @@ class CardDescs extends StatelessWidget {
     
     return Container(
       padding: EdgeInsets.only(top:5),
-      width: MediaQuery.of(context).size.width - 155,
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -137,8 +192,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
       gaplessPlayback: true,
       base64Decode(image), 
-      width:120,
-      height:90,
+      width:90,
+      height:70,
     );
   }
 }
@@ -154,20 +209,13 @@ class CardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:120,
-      child:Column(
-        children:[
-          FittedBox(
-            fit:BoxFit.fitWidth,
-            child:Text(cardName,
-              style: TextStyle(
-                fontSize: 20,
-                color:Palette.kToBlack[900],
-              ),
-            ),
-          ),
-        ]
-      )
+      child:Text(cardName,
+      style: TextStyle(
+        fontSize: 20,
+        color:Palette.kToBlack[600],
+        fontWeight: FontWeight.w500,
+      ),
+      ),
     );
   }
 }

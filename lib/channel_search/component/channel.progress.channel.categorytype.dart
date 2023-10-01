@@ -79,11 +79,14 @@ class LabelType extends StatelessWidget {
   Widget build(BuildContext context) {
 
   ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-
     return Container(
+      key:channelViewModel.getChannelCategoryGlobalKeys(-1),
       child:TextButton(
         onPressed: (){
           channelViewModel.channelCategoryType = -1;
+          Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(-1).currentContext!,
+            duration:Duration(milliseconds: 300),
+          );
         },
         child:Column(
           children:[

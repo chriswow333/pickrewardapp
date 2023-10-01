@@ -4,7 +4,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:pickrewardapp/card/repository/card/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
@@ -23,10 +22,9 @@ class CardResultsProgress extends StatelessWidget {
     List<CardRewardEventResultProto> cardRewardEventResults = cardRewardEventResultsViewModel.get();
 
     return Container(
-      // height:MediaQuery.of(context).size.height - 240 ,
       child:SingleChildScrollView(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child:Wrap(
+          runSpacing: 20,
           children:[
             for(CardRewardEventResultProto c in cardRewardEventResults) 
               CardResult(cardRewardEventResult: c,),
@@ -48,70 +46,76 @@ class CardResult extends StatelessWidget {
     CardRewardEvaluationEventResultProto cardEvaluation = cardRewardEventResult.cardRewardEvaluationEventResult;
     FeedbackEventResultProto feedbackEventResult = cardRewardEventResult.rewardEventResult.feedbackEventResultResp;
    
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        Container(
-          padding:const EdgeInsets.only(bottom: 5, top:5),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.9),
-                spreadRadius: 0,
-                blurRadius: 1,
-                offset: Offset(1, 2)
-              ),
-            ],
+    return Container(
+    padding: const EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      border: Border.all(
+        color:Colors.white,
+      ),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      color:Palette.kToBlue[50],
+      boxShadow: [
+        BoxShadow(
+          color: Palette.kToBlack[200]!,
+          offset: const Offset(
+            1.0,
+            1.0,
           ),
-          child:TextButton(
-            style:ButtonStyle(
-              alignment: Alignment.center,
-              padding:const MaterialStatePropertyAll(
-                EdgeInsets.fromLTRB(0, 12, 0, 0),
-              ),
-            ),
-            onPressed: (){
-              
-              CardItemModel cardItemModel = CardItemModel(
-                id:cardEvaluation.cardID,
-                name:cardEvaluation.cardName,
-                descriptions:cardEvaluation.cardDesc,
-                image:cardEvaluation.cardImage,
-              );
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
-              );
-            },
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                CardUpdateDate(cardEndDate: cardEvaluation.cardRewardEndDate.toInt(),),
-
-                Row(
-                  children:[
-                    CardIcon(image: cardEvaluation.cardImage,),
-                    SizedBox(width:20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
-                        EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
-                        SizedBox(height:5),
-                        CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
-                      ]
-                    )
-                  ]
-                ),
-                
-                CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
-              ],
-            ),
-          ),
+          blurRadius: 1.0,
+          // spreadRadius: 0.5,
+        ), //BoxShadow
+        BoxShadow(
+          color: Colors.white,
+          offset: const Offset(0.0, 0.0),
+          blurRadius: 0.0,
+          spreadRadius: 0.0,
+        ), //BoxShadow
+      ],
+    ),
+      child:TextButton(
+        style:const ButtonStyle(
+          splashFactory:NoSplash.splashFactory,
         ),
-        SizedBox(height:10),
-      ]
+        onPressed: (){
+          CardItemModel cardItemModel = CardItemModel(
+            id:cardEvaluation.cardID,
+            name:cardEvaluation.cardName,
+            descriptions:cardEvaluation.cardDesc,
+            image:cardEvaluation.cardImage,
+          );
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
+          );
+        },
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
+            SizedBox(height:10),
+            Row(
+              children:[
+                CardIcon(image: cardEvaluation.cardImage,),
+                SizedBox(width: 10,),
+                Expanded(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
+                      SizedBox(height:5),
+                      CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
+                    ]
+                  )
+                ),
+              ]
+            ),
+            
+          ],
+        ),
+      ),
     );
   }
 }
@@ -129,8 +133,8 @@ class EvaluationResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String returnName = reward.rewardType == 0 ? "現金":"點數";
-    
+    String returnUnit = reward.rewardType == 0 ? "元":"點";
+    String rewardName = reward.rewardType == 0 ? "現金":reward.name;
     feedbackEventResult.getReturn;
 
     double getReturn = feedbackEventResult.getReturn;
@@ -147,22 +151,29 @@ class EvaluationResult extends StatelessWidget {
     percentage = percentage.substring(0,length+1);
 
     return Container(
-      width: MediaQuery.of(context).size.width - 150,
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           if(feedbackEventResult.calculateType == 0)
-            FittedBox(
-              alignment: Alignment.centerLeft,
-              fit:BoxFit.fill,
-              child:Text("折抵${getReturnStr} ${reward.name}   ${percentage}% ${returnName}回饋",
-                style:TextStyle(
-                  color:Palette.kToBlack[800],
-                  fontSize: 20,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                Text('${rewardName}回饋',
+                  style:TextStyle(
+                    color:Palette.kToBlue[600],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                Text('獲得 ${percentage}% ${getReturnStr}${returnUnit} ',
+                  style:TextStyle(
+                    color:Palette.kToOrange[500],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]
             ),
-            
          
           if(feedbackEventResult.calculateType == 1)
             FittedBox(
@@ -170,8 +181,9 @@ class EvaluationResult extends StatelessWidget {
               fit:BoxFit.fill,
               child:Text("折抵${getReturnStr} ",
                 style:TextStyle(
-                  fontSize: 20,
-                  color:Palette.kToBlack[800],
+                  fontSize: 18,
+                  color:Palette.kToBlue[600],
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             )
@@ -182,27 +194,6 @@ class EvaluationResult extends StatelessWidget {
 }
 
 
-class CardUpdateDate extends StatelessWidget {
-  const CardUpdateDate({super.key, required this.cardEndDate});
-
-  final int cardEndDate;
-  @override
-  Widget build(BuildContext context) {
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(cardEndDate*1000);
-    String dateTimeFormatted = DateFormat("yyyy/MM/dd").format(dateTime);
-    return Row(
-      children:[
-        Expanded(child:Container()),
-        Text(dateTimeFormatted,
-          style:TextStyle(
-            fontSize: 10,
-            color:Palette.kToBlack[800],
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class CardRewardName extends StatelessWidget {
   const CardRewardName({super.key, required this.cardRewardName});
@@ -210,10 +201,9 @@ class CardRewardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:MediaQuery.of(context).size.width - 150,
       child:Text(cardRewardName,
           style: TextStyle(
-            color:Palette.kToBlack[900],
+            color:Palette.kToBlack[600],
           ),
           maxLines:null,
       )
@@ -285,8 +275,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
-        width:120,
-        height:90,
+        width:90,
+        height:70,
       );
   }
 }
@@ -301,25 +291,20 @@ class CardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:120,
-      child:Column(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          FittedBox(
-            fit:BoxFit.fitWidth,
-            child:Text(cardName,
+            Text(cardName,
               style: TextStyle(
                 fontSize: 20,
-                color:Palette.kToBlack[900],
+                color:Palette.kToBlack[600],
               ),
             ),
-          ),
-          FittedBox(
-            fit: BoxFit.fitWidth, 
-            child: Text(bankName,
-              style: TextStyle(
-                fontSize: 20,
-                color:Palette.kToBlack[900],
-              ),
+          SizedBox(width:10),
+          Text(bankName,
+            style: TextStyle(
+              fontSize: 14,
+              color:Palette.kToBlack[600],
             ),
           ),
         ]

@@ -3,8 +3,6 @@ import 'package:pickrewardapp/card/card.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
-import 'package:pickrewardapp/home/home.dart';
-import 'package:pickrewardapp/shared/config/global_padding.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main() {
@@ -24,14 +22,9 @@ class PickRewardApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        // Locale('en'), // English
         Locale('zh')
       ],
       home: HomeScreen(),
-      // initialRoute:'/',
-      // routes:{
-      //   '/':(context)=>  const CardScreen(),
-      // },
     );
   }
 }
@@ -46,12 +39,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 1;
 
-  static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
-  static const Widget channelSearchPage = ChannelSearchPage(key: PageStorageKey<String>('Screen-B'));
-  static const Widget cardSearchPage = CardSearchPage(key: PageStorageKey<String>('Screen-C'));
+  // static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
+  static const Widget channelSearchPage = ChannelSearchPage();
+  static const Widget cardSearchPage = CardSearchPage();
 
   static const List<Widget> _widgetOptions = <Widget>[
-    homePage,
     channelSearchPage,
     cardSearchPage,
   ];
@@ -81,16 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '最近更新',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.manage_search_sharp),
             label: '通路搜尋',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.credit_card),
-            label: '信用卡',
+            label: '信用卡搜尋',
           ),
         ],
         currentIndex: _selectedIndex,

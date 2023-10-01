@@ -15,6 +15,7 @@ class ChannelComponent extends StatelessWidget {
     ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
 
     return Container(
+      padding: EdgeInsets.all(10),
       child: Column(children: [
         const RewardProgressBar(),
         const SizedBox(height: 20),

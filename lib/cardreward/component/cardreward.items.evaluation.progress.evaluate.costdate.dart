@@ -14,14 +14,16 @@ class CardRewardEvaluationProgressCostDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(top:20),
-      child:Row(
+      alignment: Alignment.topLeft,
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           CostDateName(),
           CostDate(),
         ]
-      ),
+      )
     );
+    ;
   }
 }
 
@@ -33,8 +35,8 @@ class CostDateName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('消費日期',
       style: TextStyle(
-        fontSize: 20,
-        color: Palette.kToBlack[900],
+        color: Palette.kToBlack[600],
+        fontSize: 18,
       ),  
     );
   }
@@ -42,7 +44,6 @@ class CostDateName extends StatelessWidget {
 
 
 final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
-
 
 
 class CostDate extends StatelessWidget {
@@ -55,6 +56,11 @@ class CostDate extends StatelessWidget {
     DateTime costDate = evaluationSelectedViewModel.getCostDate();
 
     return TextButton(
+      style: ButtonStyle(
+        padding: MaterialStatePropertyAll(
+          EdgeInsets.zero,
+        )
+      ),
       onPressed: (){
         Future<DateTime?> value = onShowPicker(context, DateTime.now());
         value.then((value) => 
@@ -63,8 +69,8 @@ class CostDate extends StatelessWidget {
       },
       child:Text(formatter.format(costDate),
         style:TextStyle(
-          color: Palette.kToBlack[900],
-          fontSize: 18,
+          fontSize: 16,
+          color: Palette.kToBlack[600],
         ),
       )
     );

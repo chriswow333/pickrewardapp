@@ -27,15 +27,39 @@ class CardRewardEvaluationProgressPay extends StatelessWidget {
     
     if(pays.length == 0)return Container();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        PayName(),
-        PayItems(pays: pays,),
-      ]
+    return Container(
+      padding:EdgeInsets.only(bottom:15),
+      child:Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color:Palette.kToBlack[50]!,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            PayName(),
+            SizedBox(height:10),
+            Row(
+              children:[
+                Expanded(
+                  child:PayItems(pays: pays,),
+                ),
+              ]
+            ),
+          ]
+        )
+        
+      )
     );
   }
 }
+
+
 
 class PayName extends StatelessWidget {
   const PayName({super.key});
@@ -43,10 +67,10 @@ class PayName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('行動支付',
-      style: TextStyle(
-        fontSize: 20,
-        color: Palette.kToBlack[900],
-      ),  
+      style:TextStyle(
+        color: Palette.kToBlack[600],
+        fontSize: 18,
+      ),
     );
   }
 }
@@ -56,22 +80,21 @@ class PayItems extends StatelessWidget {
   final List<PayProto> pays;
   @override
   Widget build(BuildContext context) {
-        
-
-    return SingleChildScrollView(
-      scrollDirection:Axis.horizontal,
-      child:Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children:[ 
-          for(PayProto p in pays)
-            PayItem(pay:p),
-
-        ]
-      ),
+    return Container(
+      child:SingleChildScrollView(
+        scrollDirection:Axis.horizontal,
+        child:Wrap(
+          spacing: 10,
+          children:[ 
+            for(PayProto p in pays) PayItem(pay:p),
+          ]
+        ),
+      )
     );
   }
 }
+
+
 
 class PayItem extends StatelessWidget {
   const PayItem({super.key, required this.pay});
@@ -83,43 +106,20 @@ class PayItem extends StatelessWidget {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
 
-    return Container(
-      decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1)
-          ),
-        ],
-      ),
-      child:TextButton(
+    return TextButton(
         style:ButtonStyle(
           alignment: Alignment.center,
           splashFactory:NoSplash.splashFactory,
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          side:evaluationSelectedViewModel.hasPayID(pay.id) ? 
-            MaterialStatePropertyAll(
-              BorderSide(
-                width:1.0,
-                color:Palette.kToBlue[600]!,
-              )
-            ):null,
-          padding:const MaterialStatePropertyAll(
-            EdgeInsets.fromLTRB(10, 15, 10, 5),
-          ),
+          side:evaluationSelectedViewModel.hasPayID(pay.id)?
+          MaterialStatePropertyAll(
+            BorderSide(
+              color:Palette.kToBlue[600]!,
+              width: 1,
+            )
+          ):null,
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.all(10),
+          )
         ),
         onPressed: () {  
           evaluationSelectedViewModel.setPayID(pay.id);
@@ -134,10 +134,12 @@ class PayItem extends StatelessWidget {
             ],
           ),
         ),
-      )
     );
   }
 }
+
+
+
 
 class PayItemIcon extends StatelessWidget {
   const PayItemIcon({super.key, required this.image});
@@ -167,7 +169,7 @@ class PayItemName extends StatelessWidget {
       child:Text(
         name,
         style:TextStyle(
-          color: Palette.kToBlack[900],
+          color: Palette.kToBlack[600],
         ),
       )
     );

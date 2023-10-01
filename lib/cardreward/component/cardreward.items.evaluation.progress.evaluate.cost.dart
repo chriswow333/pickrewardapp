@@ -10,14 +10,12 @@ class CardRewardEvaluationProgressCost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
-      padding:const EdgeInsets.only(top:10),
-      child:Row(
+      alignment: Alignment.topLeft,
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           CostName(),
-          SizedBox(width:20),
           Cost(),
         ]
       )
@@ -32,10 +30,10 @@ class CostName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('消費金額',
-      style: TextStyle(
-        fontSize: 20,
-        color: Palette.kToBlack[900],
-      ),  
+      style:TextStyle(
+        color: Palette.kToBlack[600],
+        fontSize: 18,
+      ),
     );
   }
 }
@@ -49,10 +47,7 @@ class Cost extends StatefulWidget {
 }
 
 class _CostState extends State<Cost> {
-
-  // TextEditingController _controller = new TextEditingController(text: '1000');
-    TextEditingController _controller = new TextEditingController();
-
+  TextEditingController _controller = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +56,10 @@ class _CostState extends State<Cost> {
     _controller.text = evaluationSelectedViewModel.getCost().toString();
 
     return SizedBox(
-      width:150,
+      width:100,
       child:TextField(
         controller: _controller,
+        textAlign:TextAlign.start,
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
@@ -72,6 +68,9 @@ class _CostState extends State<Cost> {
           int intVal = int.parse(text);
           evaluationSelectedViewModel.setCost(intVal);
         },
+        style:TextStyle(
+          fontSize: 16,
+        ),
         decoration:InputDecoration(
           // border: OutlineInputBorder(),
           // labelText:dsd 'Password',

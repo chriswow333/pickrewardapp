@@ -46,7 +46,6 @@ class ChannelItemGroups extends StatelessWidget {
         }
       }
     }
-
     return Wrap(
       runSpacing: 25,
       children:[
@@ -319,22 +318,22 @@ class ChannelItem extends StatelessWidget {
 
     return TextButton(
       style:ButtonStyle(
-          alignment: Alignment.center,
-          splashFactory:NoSplash.splashFactory,
-          side:selected?
-          MaterialStatePropertyAll(
-            BorderSide(
-              color:Palette.kToBlue[600]!,
-              width: 1,
-            )
-          ):null,
-          padding: MaterialStatePropertyAll(
-            EdgeInsets.zero,
+        alignment: Alignment.center,
+        splashFactory:NoSplash.splashFactory,
+        side:selected?
+        MaterialStatePropertyAll(
+          BorderSide(
+            color:Palette.kToBlue[600]!,
+            width: 1,
           )
-        ),
-        onPressed:(){
-          evaluationSelectedViewModel.setChannelID(channelProto.id);
-        },
+        ):null,
+        padding: MaterialStatePropertyAll(
+          EdgeInsets.zero,
+        )
+      ),
+      onPressed:(){
+        evaluationSelectedViewModel.setChannelID(channelProto.id);
+      },
 
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -379,7 +378,7 @@ class ChannelItemName extends StatelessWidget {
       child:Text(name,
         style:TextStyle(
           color: Palette.kToBlack[600],
-          fontSize: 14,
+          // fontize: 14,
         ),
       )
     );

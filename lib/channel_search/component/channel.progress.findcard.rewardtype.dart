@@ -11,24 +11,16 @@ class RewardTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 0,
-            blurRadius: 1,
-            offset: Offset(0, 0.5)
-          ),
-        ],
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
       ),
+            padding: EdgeInsets.all(10),
+
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[

@@ -66,6 +66,7 @@ class EvaluationItem extends StatelessWidget {
                       Row(
                         children:[
                           EvaluationRewardType(reward: cardRewardModel.reward,),
+                          SizedBox(width:5),
                           CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
                           SizedBox(width:5),
                           EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),

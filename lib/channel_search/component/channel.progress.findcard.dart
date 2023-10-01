@@ -3,7 +3,6 @@ import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cost.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.costdate.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.pay.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.rewardtype.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -27,8 +26,6 @@ class FindCardProgress extends StatelessWidget {
           CostWidget(),
           SizedBox(height:20),
           PayWidget(),
-          SizedBox(height:20),
-          CostDate(),
           SizedBox(height:20),
           RewardTypeWidget(),
           SizedBox(height:40),

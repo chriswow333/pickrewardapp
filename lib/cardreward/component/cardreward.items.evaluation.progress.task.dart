@@ -80,7 +80,9 @@ class TaskItemTitle extends StatelessWidget {
               fillColor: evaluationSelectedViewModel.hasTaskID(id)?
                 MaterialStatePropertyAll(Palette.kToBlue[600]):MaterialStatePropertyAll(Palette.kToBlack[600]),
               value: evaluationSelectedViewModel.hasTaskID(id),
-              onChanged: (bool? value) {},
+              onChanged: (bool? value) {
+                evaluationSelectedViewModel.setTaskID(id);
+              },
             ),
             Flexible(
               child: Text(name,

@@ -29,10 +29,6 @@ class BankItems extends StatelessWidget {
 }
 
 
-
-
-
-
 class BankItem extends StatelessWidget {
   
   const BankItem({super.key, required this.bankModel});
@@ -60,12 +56,9 @@ class BankItem extends StatelessWidget {
           ]
         ),
       )
-      
     );
   }
 }
-
-
 
 class BottomLine extends StatelessWidget {
   const BottomLine({super.key});
