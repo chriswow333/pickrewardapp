@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
@@ -21,42 +22,93 @@ class ActivityItem extends StatelessWidget {
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(
-          color:Palette.kToBlack[50]!,
+          color:expanded ? Palette.kToBlack[50]! : Colors.white,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-      ),
-      child:Column(
-        children:[
-          TextButton(
-            style:const ButtonStyle(
-              splashFactory:NoSplash.splashFactory,
+        color:expanded?null: Palette.kToBlue[50],
+        boxShadow: expanded?null:[
+          BoxShadow(
+            color: Palette.kToBlack[200]!,
+            offset: const Offset(
+              1.0,
+              1.0,
             ),
-            onPressed: (){
-              cardRewardViewModel.toggleCardReward(cardRewardModel.id);
-            },
-            child:Column(
-              children:[
-                Row(
-                  children:[
-                    CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-                    ActivityRewardType(),
-                  ]
-                ),
-                ActivityName(name:cardRewardModel.name),
-              ]
-            )
-          ),
-          if(expanded)
-            CardActivityDetails(cardRewardDescModels: cardRewardModel.cardRewardDesc,),
-        ]
-      )
+            blurRadius: 1.0,
+            // spreadRadius: 0.5,
+          ), //BoxShadow
+          BoxShadow(
+            color: Colors.white,
+            offset: const Offset(0.0, 0.0),
+            blurRadius: 0.0,
+            spreadRadius: 0.0,
+          ), //BoxShadow
+        ],
+      ),
+      child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            TextButton(
+              style:const ButtonStyle(
+                splashFactory:NoSplash.splashFactory,
+              ),
+              onPressed: (){
+                cardRewardViewModel.toggleCardReward(cardRewardModel.id);
+              },
+              child:Wrap(
+                runAlignment: WrapAlignment.start,
+                runSpacing: 5,
+                children:[
+                  Row(
+                    children:[
+                      ActivityRewardType(),
+                      SizedBox(width:5),
+                      CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                    ]
+                  ),
+                  CardRewardDuration(startDateTime: cardRewardModel.startDate, endDateTime: cardRewardModel.endDate,),
+                  ActivityName(name:cardRewardModel.name),
+                ]
+              )
+            ),
+            if(expanded)
+              CardActivityDetails(cardRewardDescModels: cardRewardModel.cardRewardDesc,),
+          ]
+        )
     );
   }
 }
 
 
+
+
+
+class CardRewardDuration extends StatelessWidget {
+  const CardRewardDuration({super.key, required this.startDateTime, required this.endDateTime});
+
+  final DateTime startDateTime;
+  final DateTime endDateTime;
+  
+  @override
+  Widget build(BuildContext context) {
+    
+    DateFormat formatter = DateFormat('yyyy/MM/dd');
+
+    final startDate = formatter.format(startDateTime);
+    final endDate =  formatter.format(endDateTime);
+    
+    return Container(
+      child:Text('${startDate.toString()} - ${endDate.toString()}',
+        style: TextStyle(
+          color: Palette.kToBlack[200],
+          fontSize: 12,
+        ),
+      )
+    );
+  }
+}
 
 
 class ActivityName extends StatelessWidget {
@@ -88,18 +140,18 @@ class ActivityRewardType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlue[600]!,
-          width: 2,
-        ),
-        borderRadius: BorderRadius.circular(15.0),
+        // border: Border.all(
+        //   color:Palette.kToBlue[600]!,
+        //   width: 2,
+        // ),
+        // borderRadius: BorderRadius.circular(15.0),
       ),
       child:Text('一般回饋',
         style:TextStyle(
           color:Palette.kToBlue[600],
-          fontSize: 12,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
         ),
         maxLines: null,
       ),
@@ -109,8 +161,8 @@ class ActivityRewardType extends StatelessWidget {
 
 
 
-class CardRewardDuration extends StatelessWidget {
-  const CardRewardDuration({super.key, required this.startDate, required this.endDate});
+class CardRewardDurationMessage extends StatelessWidget {
+  const CardRewardDurationMessage({super.key, required this.startDate, required this.endDate});
 
   final DateTime startDate;
   final DateTime endDate;
@@ -135,7 +187,7 @@ class CardRewardDuration extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           color:Palette.kToRed[600]!,
-          width: 2,
+          width: 1,
         ),
         borderRadius: BorderRadius.circular(15.0),
       ),

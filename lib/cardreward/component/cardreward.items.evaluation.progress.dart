@@ -38,6 +38,7 @@ class EvaluationProgressContent extends StatelessWidget {
             color:Palette.kToBlack[50],
           ),
           CardRewardEvaluationProgress(evaluationViewModel:evaluationViewModel, cardRewardModel: cardRewardModel,),
+          SizedBox(height:25),
           Divider(
             color:Palette.kToBlack[50],
           ),
@@ -60,7 +61,7 @@ class CardRewardEvaluationProgress extends StatefulWidget {
 
 class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgress> {
 
-  EvaluationProgressEnum _progress = EvaluationProgressEnum.Task;
+  EvaluationProgressEnum _progress = EvaluationProgressEnum.Channel;
 
   void changeEvaluationProgress(EvaluationProgressEnum newProgress) {
 
@@ -84,7 +85,6 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
       children:[
         EvaluationProgressTitle(),
         SizedBox(height:10),
-
         CardRewardEvaluationEventResult(),
         SizedBox(height:10),
         EvaluationProgressBar(changeEvaluationProgress:changeEvaluationProgress, progress:_progress),
@@ -128,7 +128,7 @@ class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetail
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          CardRewardEvaluationDetailTitle(toggleExpanded: toggleExpanded,),
+          CardRewardEvaluationDetailTitle(expanded:expanded, toggleExpanded: toggleExpanded,),
           if(expanded)
             for (final c in widget.cardRewardDescModels) 
               CardRewradEvaluationDetail(cardRewardDescModel: c,),
@@ -141,15 +141,16 @@ class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetail
 
 class CardRewardEvaluationDetailTitle extends StatelessWidget {
 
-  const CardRewardEvaluationDetailTitle({super.key, required this.toggleExpanded});
-
-  final VoidCallback toggleExpanded;
+  const CardRewardEvaluationDetailTitle({super.key, required this.expanded, required this.toggleExpanded});
+  final bool expanded;
+  final VoidCallback toggleExpanded; 
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child:TextButton(
-        style:ButtonStyle(
+        style:const ButtonStyle(
           padding:MaterialStatePropertyAll(EdgeInsets.all(0)),
           splashFactory:NoSplash.splashFactory,
           side:MaterialStatePropertyAll(BorderSide.none),
@@ -157,13 +158,22 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
         onPressed: (){
           toggleExpanded();
         },
-        child:Text('詳細說明',
-          style:TextStyle(
-            color:Palette.kToBlack[900],
-            overflow: TextOverflow.clip,
-            fontSize: 20,
-          ),
+        child:Row(
+          children:[
+            Icon(
+              expanded ? Icons.arrow_drop_down_rounded:Icons.arrow_right_rounded,
+              color: Palette.kToBlack[600],
+            ),
+            Text('詳細說明',
+              style:TextStyle(
+                color:Palette.kToBlack[900],
+                overflow: TextOverflow.clip,
+                fontSize: 20,
+              ),
+            )
+          ]
         )
+        
       ),
       
     );

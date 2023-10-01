@@ -47,7 +47,8 @@ class ChannelItemGroups extends StatelessWidget {
       }
     }
 
-    return Column(
+    return Wrap(
+      runSpacing: 25,
       children:[
         LabelItemGroup(),
         for(int c in allChannels.keys) 
@@ -67,11 +68,20 @@ class ChannelItemGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom:10),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      padding: EdgeInsets.all(10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           ChannelItemGroupName(name:channelCategoryTypeProto.name),
+          SizedBox(height:10),
           ChannelItems(channelProtos: channelProtos),
         ]
       )
@@ -87,7 +97,7 @@ class ChannelItemGroupName extends StatelessWidget {
     return Text(name,
       style:TextStyle(
         color: Palette.kToBlack[600],
-        fontSize: 20,
+        fontSize: 18,
       ),
     );
   }
@@ -123,10 +133,20 @@ class LabelItemGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      padding: EdgeInsets.all(10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           LabelItemGroupName(),
+          SizedBox(height:10),
           LabelItems(),
         ]
       )
@@ -142,7 +162,7 @@ class LabelItemGroupName extends StatelessWidget {
     return Text('通路總覽',
       style: TextStyle(
         color:Palette.kToBlack[600],
-        fontSize: 20,
+        fontSize: 18,
       ),
       
     );
@@ -165,7 +185,7 @@ class LabelItems extends StatelessWidget {
     return Container(
       child:GridView.count(  
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 4,  
         crossAxisSpacing: 8.0,  
         mainAxisSpacing: 8.0,
@@ -190,40 +210,44 @@ class LabelItem extends StatelessWidget {
 
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
 
-    return TextButton(
-      style:ButtonStyle(
-        alignment: Alignment.center,
-        splashFactory:NoSplash.splashFactory,
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    return Container(
+      alignment: Alignment.center,
+      child:TextButton(
+        style:ButtonStyle(
+          alignment: Alignment.center,
+          splashFactory:NoSplash.splashFactory,
+          // shape: MaterialStatePropertyAll(
+          //   RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(100),
+          //   ),
+          // ),
+          side:evaluationSelectedViewModel.hasLabel(label.labelType)?
+          MaterialStatePropertyAll(
+            BorderSide(
+              color:Palette.kToBlue[600]!,
+              width: 1,
+            )
+          ):null,
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.zero,
           ),
         ),
-        side:evaluationSelectedViewModel.hasLabel(label.labelType)?
-        MaterialStatePropertyAll(
-          BorderSide(
-            color:Colors.teal[900]!,
-            width: 1,
-          )
-        ):null,
-        padding:const MaterialStatePropertyAll(
-          EdgeInsets.fromLTRB(0, 15, 0, 0),
+        onPressed:(){
+          evaluationSelectedViewModel.setLabel(label.labelType);
+        },
+        child:Container(
+          alignment: Alignment.center,
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+              LabelItemIcon(labelType:label.labelType),
+              LabelItemName(name:label.labelName),
+            ],
+          ),
         ),
-      ),
-      onPressed:(){
-        evaluationSelectedViewModel.setLabel(label.labelType);
-      },
-      child:Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.zero,
-        child:Column(
-          children:[
-            LabelItemIcon(labelType:label.labelType),
-            LabelItemName(name:label.labelName),
-          ],
-        ),
-      ),
+      )
     );
+    ;
   }
 }
 
@@ -237,9 +261,9 @@ class LabelItemName extends StatelessWidget {
       fit: BoxFit.fitWidth, 
       child:Text(
         name,
-        style: 
-        TextStyle(
+        style: TextStyle(
           color: Palette.kToBlack[600],
+          fontSize: 14,
         ),
       )
     );
@@ -272,7 +296,7 @@ class LabelItemIcon extends StatelessWidget {
     return Container(
       child:Icon(
         color:Palette.kToBlack[600],
-        size:40,
+        size:30,
         iconData,
       )
     );
@@ -293,56 +317,33 @@ class ChannelItem extends StatelessWidget {
 
     bool selected = evaluationSelectedViewModel.hasChannlID(channelProto.id);
 
-    return Container(
-      decoration: BoxDecoration(
-      color: Colors.white,
-      border:selected? Border.all(
-        color:Palette.kToBlue[800]!,
-        width: 1.5,
-      ):null,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20)
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 0,
-            blurRadius: 1,
-            offset: Offset(0, 0.5)
-          ),
-        ],
-      ),
-      child:TextButton(
-        style:ButtonStyle(
+    return TextButton(
+      style:ButtonStyle(
           alignment: Alignment.center,
           splashFactory:NoSplash.splashFactory,
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-            ),
-          ),
-        
-          padding:const MaterialStatePropertyAll(
-            EdgeInsets.fromLTRB(0, 12, 0, 0),
-          ),
+          side:selected?
+          MaterialStatePropertyAll(
+            BorderSide(
+              color:Palette.kToBlue[600]!,
+              width: 1,
+            )
+          ):null,
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.zero,
+          )
         ),
         onPressed:(){
           evaluationSelectedViewModel.setChannelID(channelProto.id);
         },
-        child:Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.only(left:2, right:2),
-          child:Column(
-            children:[
-              ChannelItemIcon(image: channelProto.image,),
-              ChannelItemName(name:channelProto.name),
-            ],
-          ),
-        ),
-      )
+
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:[
+          ChannelItemIcon(image: channelProto.image,),
+          ChannelItemName(name:channelProto.name),
+        ],
+      ),
     );
   }
 }
@@ -375,10 +376,10 @@ class ChannelItemName extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.fitWidth, 
-      child:Text(
-        name,
+      child:Text(name,
         style:TextStyle(
           color: Palette.kToBlack[600],
+          fontSize: 14,
         ),
       )
     );

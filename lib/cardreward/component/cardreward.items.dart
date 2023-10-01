@@ -18,6 +18,7 @@ class RewardItems extends StatelessWidget {
     List<CardRewardModel> cardRewardModels = cardRewardViewModel.get();
 
     return Container(
+      padding:EdgeInsets.only(left:5, right: 5),
       child:Wrap(
         runSpacing: 15,
         direction: Axis.horizontal, 

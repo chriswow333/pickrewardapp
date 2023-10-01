@@ -1,8 +1,5 @@
-
-
-
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -25,11 +22,29 @@ class EvaluationItem extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(
-          color:Palette.kToBlack[50]!,
+          color:expanded?Palette.kToBlack[50]!:Colors.white,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
+        color:expanded?null: Palette.kToBlue[50],
+        boxShadow: expanded?null:[
+          BoxShadow(
+            color: Palette.kToBlack[200]!,
+            offset: const Offset(
+              1.0,
+              1.0,
+            ),
+            blurRadius: 1.0,
+            // spreadRadius: 0.5,
+          ), //BoxShadow
+          BoxShadow(
+            color: Colors.white,
+            offset: const Offset(0.0, 0.0),
+            blurRadius: 0.0,
+            spreadRadius: 0.0,
+          ), //BoxShadow
+        ],
       ),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -46,17 +61,19 @@ class EvaluationItem extends StatelessWidget {
                     cardRewardViewModel.toggleCardReward(cardRewardModel.id);
                   },
                   child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children:[
                       Row(
                         children:[
-                          CardRewardDuration(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-                          SizedBox(width:5,),
                           EvaluationRewardType(reward: cardRewardModel.reward,),
-                          SizedBox(width:5,),
+                          CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                          SizedBox(width:5),
                           EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
                         ],
                       ),
                       SizedBox(height:5),
+                      CardRewardDuration(startDateTime: cardRewardModel.startDate, endDateTime: cardRewardModel.endDate,),
+                      SizedBox(height:10),
                       EvaluationName(name: cardRewardModel.name,),
                     ],
                   ),
@@ -75,8 +92,34 @@ class EvaluationItem extends StatelessWidget {
 
 
 
+
 class CardRewardDuration extends StatelessWidget {
-  const CardRewardDuration({super.key, required this.startDate, required this.endDate});
+  const CardRewardDuration({super.key, required this.startDateTime, required this.endDateTime});
+
+  final DateTime startDateTime;
+  final DateTime endDateTime;
+  
+  @override
+  Widget build(BuildContext context) {
+    
+    DateFormat formatter = DateFormat('yyyy/MM/dd');
+
+    final startDate = formatter.format(startDateTime);
+    final endDate =  formatter.format(endDateTime);
+    
+    return Container(
+      child:Text('${startDate.toString()} - ${endDate.toString()}',
+        style: TextStyle(
+          color: Palette.kToBlack[200],
+          fontSize: 12,
+        ),
+      )
+    );
+  }
+}
+
+class CardRewardDurationMessage extends StatelessWidget {
+  const CardRewardDurationMessage({super.key, required this.startDate, required this.endDate});
 
   final DateTime startDate;
   final DateTime endDate;
@@ -101,7 +144,7 @@ class CardRewardDuration extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           color:Palette.kToRed[600]!,
-          width: 2,
+          width: 1,
         ),
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -128,12 +171,11 @@ class EvaluationConstraintTypes extends StatelessWidget {
     ConstraintsEvaluationRespProto constraintProto = evaluationRespProto.constraintsEvaluationResp;
     List<ConstraintProto> constraints = constraintProto.matches;
 
-
-    return Row(
+    return Wrap(
+      spacing: 5,
       children:[
         for(ConstraintProto c in constraints)
           EvaluationConstraintType(constraintProto: c,),
-
       ]
     );
   }
@@ -147,23 +189,20 @@ class EvaluationConstraintType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right:5),
-      child:Container(
-        padding: const EdgeInsets.all(5.0),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color:Palette.kToOrange[600]!,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(12.0),
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToOrange[600]!,
+          width: 2,
         ),
-        child:Text(
-          style:TextStyle(
-          color:Palette.kToOrange[600],
-          fontSize: 13,
-        ),
-          constraintProto.constraintName
-        )
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child:Text(
+        style:TextStyle(
+        color:Palette.kToOrange[600],
+        fontSize: 13,
+      ),
+        constraintProto.constraintName
       )
     );
   }
@@ -189,18 +228,14 @@ class EvaluationRewardType extends StatelessWidget {
       rewardTypeName = reward.name + "回饋";
     }
     return Container(
-      padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlue[600]!,
-          width: 2,
-        ),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child:Text(rewardTypeName,
         style:TextStyle(
           color:Palette.kToBlue[600],
           fontSize: 18,
+          fontWeight: FontWeight.bold,
         ),
         maxLines: null,
       ),

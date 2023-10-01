@@ -59,7 +59,10 @@ class CardContentPage extends StatelessWidget {
           CardHeader(),
           Divider(),
           CarTab(),
-          CardRewardComponent(),
+          Expanded(
+            child:CardRewardComponent(),
+          )
+          
         ]
       );
   }
@@ -72,27 +75,11 @@ class CardRewardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
-    
-    return Container(
-      height:MediaQuery.of(context).size.height - 300,
-      child:SingleChildScrollView(
-        child:Column(
-          children:[
-              RewardItems(),
-             
-            //  if(!cardRewardSelectedViewModel.isShowItemList() 
-            //     && cardRewardSelectedViewModel.cardRewardType() == 0)
-            //   Activity(),
-
-            // if(!cardRewardSelectedViewModel.isShowItemList() 
-            //     && cardRewardSelectedViewModel.cardRewardType() == 1)
-            //   Evaluation(),
-           
-          ]
-        ),
-      ),
+    return SingleChildScrollView(
+      child: RewardItems(),
     );
+    
+   
   }
 }
 

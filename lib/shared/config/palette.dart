@@ -9,7 +9,7 @@ class Palette {
     0xFF0052D4, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch. 
     const <int, Color>{ 
       // 50: const Color(0xFFFFFFFF ),//10% 
-      // 100: const Color(0xFF91B9FA),//20% 
+      100: const Color(0xFFE15A5A),//20% 
       // 200: const Color(0xFF74A4F1),//30% 
       // 300: const Color(0xFF6598E9),//40% 
       // 400: const Color(0xFF578CE2),//50% 
