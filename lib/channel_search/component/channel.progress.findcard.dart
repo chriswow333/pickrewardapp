@@ -11,7 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
 class FindCardProgress extends StatelessWidget {
-  const FindCardProgress({super.key});
+  const FindCardProgress({super.key, required this.changePage,});
+
+  final Function changePage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class FindCardProgress extends StatelessWidget {
           SizedBox(height:20),
           RewardTypeWidget(),
           SizedBox(height:40),
-          SubmitEvaluateCard(),
+          SubmitEvaluateCard(changePage:changePage),
         ],
       )
     );
@@ -39,14 +41,15 @@ class FindCardProgress extends StatelessWidget {
 
 
 class SubmitEvaluateCard extends StatelessWidget {
-  const SubmitEvaluateCard({super.key});
+  const SubmitEvaluateCard({super.key, required this.changePage});
+
+  final Function changePage;
 
   @override
   Widget build(BuildContext context) {
     
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context);
-    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
 
     return Row(
       // decoration: BoxDecoration(
@@ -61,7 +64,7 @@ class SubmitEvaluateCard extends StatelessWidget {
             backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[600]),
           ),
           onPressed: (){
-            channelProgressViewModel.progress = ChannelProgressEnum.FindResult;
+            changePage(ChannelProgressPage.result);
 
             cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
 

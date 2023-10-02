@@ -19,7 +19,6 @@ class ChannelSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
    return  MultiProvider(
       providers:[
-        ChangeNotifierProvider<ChannelProgressViewModel>(create:(_)=>ChannelProgressViewModel()),
         ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
         ChangeNotifierProvider<RewardSelectedViewModel>(create:(_)=>RewardSelectedViewModel()),
         ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),

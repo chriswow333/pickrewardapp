@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
-import 'package:provider/provider.dart';
-
-
 
 class RewardProgressBar extends StatelessWidget {
-  const RewardProgressBar({super.key});
-
+  const RewardProgressBar({super.key, required this.page, required this.changePage});
+  final int page;
+  final Function changePage;
   @override
   Widget build(BuildContext context) {
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
-        ChannelProgressItem(),
+        ChannelProgressItem(page:page, changePage: changePage,),
         ProgressArrow(),
-        FindCardProgressItem(),
+        FindCardProgressItem(page:page, changePage: changePage,),
         ProgressArrow(),
-        FindResultProgressItem(),
+        FindResultProgressItem(page:page, changePage: changePage,),
       ],
     );
   }
@@ -26,22 +25,23 @@ class RewardProgressBar extends StatelessWidget {
 
 
 class FindResultProgressItem extends StatelessWidget {
-  const FindResultProgressItem({super.key});
+  const FindResultProgressItem({super.key, required this.page, required this.changePage});
+
+  final int page;
+  final Function changePage;
 
   @override
   Widget build(BuildContext context) {
 
-    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
-
     return TextButton(
       onPressed: (){
-        channelProgressViewModel.progress = ChannelProgressEnum.FindResult;
+        changePage(ChannelProgressPage.result);
       },
       style:ButtonStyle(
         // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Palette.kToBlue[600]: Palette.kToBlue[50]
+          page == ChannelProgressPage.result ? Palette.kToBlue[600]: Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -57,7 +57,7 @@ class FindResultProgressItem extends StatelessWidget {
         '搜尋結果',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.FindResult ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color:page == ChannelProgressPage.result ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );
@@ -65,22 +65,22 @@ class FindResultProgressItem extends StatelessWidget {
 }
 
 class FindCardProgressItem extends StatelessWidget {
-  const FindCardProgressItem({super.key});
+  const FindCardProgressItem({super.key, required this.page, required this.changePage});
+  final int page;
+  final Function changePage;
 
   @override
   Widget build(BuildContext context) {
     
-    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
-    
     return TextButton(
       onPressed: (){
-        channelProgressViewModel.progress = ChannelProgressEnum.FindCard;
+        changePage(ChannelProgressPage.findCard);
       },
       style:ButtonStyle(
         // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          page == ChannelProgressPage.findCard ? Palette.kToBlue[600]:Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -96,7 +96,7 @@ class FindCardProgressItem extends StatelessWidget {
         '找卡片',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.FindCard ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color:page == ChannelProgressPage.findCard ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );
@@ -119,21 +119,24 @@ class ProgressArrow extends StatelessWidget {
   }
 }
 class ChannelProgressItem extends StatelessWidget {
-  const ChannelProgressItem({super.key});
+  const ChannelProgressItem({super.key, required this.page, required this.changePage});
+  final int page;
+  final Function changePage;
+  
 
   @override
   Widget build(BuildContext context) {
 
-    ChannelProgressViewModel channelProgressViewModel = Provider.of<ChannelProgressViewModel>(context);
     return TextButton(
       onPressed: (){
-        channelProgressViewModel.progress = ChannelProgressEnum.Channel; 
+        // channelProgressViewModel.progress = ChannelProgressEnum.Channel; 
+        changePage(ChannelProgressPage.channel);
       },
       style:ButtonStyle(
         // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          page == ChannelProgressPage.channel ? Palette.kToBlue[600]:Palette.kToBlue[50]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
@@ -149,7 +152,7 @@ class ChannelProgressItem extends StatelessWidget {
         '消費通路',
         style: TextStyle(
           fontSize: 20,
-          color:channelProgressViewModel.progress == ChannelProgressEnum.Channel ? Palette.kToBlue[50]:Palette.kToBlue[600],
+           color: page == ChannelProgressPage.channel ?  Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
     );
