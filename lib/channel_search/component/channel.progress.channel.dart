@@ -9,7 +9,7 @@ import 'channel.progress.channel.categorytype.dart';
 
 class ChannelProgress extends StatelessWidget {
   const ChannelProgress({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(

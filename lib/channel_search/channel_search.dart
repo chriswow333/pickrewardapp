@@ -23,6 +23,7 @@ class ChannelSearchPage extends StatelessWidget {
         ChangeNotifierProvider<RewardSelectedViewModel>(create:(_)=>RewardSelectedViewModel()),
         ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
         ChangeNotifierProvider<CardRewardEventResultsViewModel>(create:(_)=>CardRewardEventResultsViewModel()),
+        ChangeNotifierProvider<ChannelProgressSelectedPage>(create:(_)=>ChannelProgressSelectedPage()),
       ],
       child:ChannelComponent(),
     );

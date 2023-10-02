@@ -8,6 +8,9 @@ import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 import 'package:provider/provider.dart';
 
 
+
+
+
 class ChannelComponent extends StatefulWidget {
   const ChannelComponent({super.key});
 
@@ -18,7 +21,6 @@ class ChannelComponent extends StatefulWidget {
 class _ChannelComponentState extends State<ChannelComponent> with SingleTickerProviderStateMixin {
 
   late PageController _controller;
-  int _page = ChannelProgressPage.channel;
 
   @override
   void initState(){
@@ -26,42 +28,33 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
      _controller = PageController();
   }
 
-
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
-   _handleChangePage(int page) {
-    setState(() {
-      _page = page;
-    });
-  }
-
-  _changePage(int page){
-    _controller.jumpToPage(page);
-  }
-
-
   @override
   Widget build(BuildContext context) {
 
+    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context, listen:false);
     return Container(
       padding: const EdgeInsets.all(10),
       child:Column(
         children:[
-          RewardProgressBar(page:_page, changePage: _changePage,),
+          RewardProgressBar(controller:_controller),
           const SizedBox(height: 20),
           Expanded(
             child:PageView(
+              physics: ClampingScrollPhysics(),
               controller:_controller,
-              allowImplicitScrolling:true,
-              onPageChanged:_handleChangePage,
+              // allowImplicitScrolling:true,
+              onPageChanged:(int page){
+                channelProgressSelectedPage.changePage(page);
+              },
               children:[
                 ChannelProgress(),
-                FindCardProgress(changePage: _changePage,),
+                FindCardProgress(controller:_controller),
                 CardResultsProgress(),
               ]
             )
@@ -119,24 +112,32 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
 // class ChannelComponent extends StatelessWidget {
 //   const ChannelComponent({super.key});
 
+
+
 //   @override
 //   Widget build(BuildContext context) {
     
+//     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
 
 //     return Container(
 //       padding: EdgeInsets.all(10),
 //       child: Column(children: [
-//         const RewardProgressBar(),
+//         RewardProgressBar(page: channelProgressSelectedPage.page,changePage: (int page) {
+//           channelProgressSelectedPage.changePage(page);
+//         }),
 //         const SizedBox(height: 20),
-//         if (channelProgressViewModel.progress == ChannelProgressEnum.Channel)
+//         if (channelProgressSelectedPage.page == ChannelProgressPage.channel)
 //           const Expanded(
 //             child: ChannelProgress(),
 //           ),
-//         if (channelProgressViewModel.progress == ChannelProgressEnum.FindCard)
-//           const Expanded(
-//             child: FindCardProgress(),
+//         if (channelProgressSelectedPage.page == ChannelProgressPage.findCard)
+//           Expanded(
+//             child: FindCardProgress(changePage: (int page){
+//                 channelProgressSelectedPage.changePage(page);
+
+//             }),
 //           ),
-//         if (channelProgressViewModel.progress == ChannelProgressEnum.FindResult)
+//         if (channelProgressSelectedPage.page == ChannelProgressPage.result)
 //           const Expanded(
 //             child: CardResultsProgress(),
 //           ),

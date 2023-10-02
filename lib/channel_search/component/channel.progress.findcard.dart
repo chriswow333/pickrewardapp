@@ -11,9 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
 class FindCardProgress extends StatelessWidget {
-  const FindCardProgress({super.key, required this.changePage,});
+  const FindCardProgress({super.key, required this.controller});
 
-  final Function changePage;
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class FindCardProgress extends StatelessWidget {
           SizedBox(height:20),
           RewardTypeWidget(),
           SizedBox(height:40),
-          SubmitEvaluateCard(changePage:changePage),
+          SubmitEvaluateCard(controller:controller),
         ],
       )
     );
@@ -41,15 +41,16 @@ class FindCardProgress extends StatelessWidget {
 
 
 class SubmitEvaluateCard extends StatelessWidget {
-  const SubmitEvaluateCard({super.key, required this.changePage});
+  const SubmitEvaluateCard({super.key, required this.controller});
 
-  final Function changePage;
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context);
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context,listen:false);
+    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
+    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context,listen:false);
 
     return Row(
       // decoration: BoxDecoration(
@@ -64,10 +65,8 @@ class SubmitEvaluateCard extends StatelessWidget {
             backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[600]),
           ),
           onPressed: (){
-            changePage(ChannelProgressPage.result);
-
+            controller.jumpToPage(ChannelProgressPage.result);
             cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
-
           },
           child:Text('送出選卡',
             style: TextStyle(
