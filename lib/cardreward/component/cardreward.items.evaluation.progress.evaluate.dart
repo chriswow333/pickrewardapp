@@ -82,24 +82,48 @@ class EvaluateEventResult extends StatelessWidget {
 
     percentage = percentage.substring(0,length+1);
 
-    return Container(
-      padding:EdgeInsets.only(top:25),
-      alignment: Alignment.center,
-      child:Container(
-        padding:EdgeInsets.only(top: 10, bottom: 10, left:20, right: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          color: Palette.kToOrange[600],
-        ),
-        child:Text('獲得 ${percentage}% ${getReturnStr}${returnUnit}',
-          style:TextStyle(
-            color:Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+    if(feedbackEventResult.calculateType == 0){
+      return Container(
+        padding:EdgeInsets.only(top:25),
+        alignment: Alignment.center,
+        child:Container(
+          padding:EdgeInsets.only(top: 10, bottom: 10, left:20, right: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Palette.kToOrange[600],
           ),
+          child:Text('獲得 ${percentage}% ${getReturnStr}${returnUnit}',
+            style:TextStyle(
+              color:Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.w400,
+            ),
+          )
         )
-      )
-    );
+      );
+    }else if (feedbackEventResult.calculateType == 1){
+      return Container(
+        padding:EdgeInsets.only(top:25),
+        alignment: Alignment.center,
+        child:Container(
+          padding:EdgeInsets.only(top: 10, bottom: 10, left:20, right: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Palette.kToOrange[600],
+          ),
+          child:Text('折抵 ${getReturnStr}${returnUnit}',
+            style:TextStyle(
+              color:Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.w400,
+            ),
+          )
+        )
+      );
+    }
+
+    return Container();
+    
   }
 }
 

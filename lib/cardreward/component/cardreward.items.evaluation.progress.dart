@@ -273,6 +273,7 @@ class EvaluationProgressBar extends StatelessWidget {
     bool hasTask = resp.taskEvaluationResp.matches.length != 0  || resp.taskEvaluationResp.misMatches.length != 0;
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
         ChannelProgressItem(changeEvaluationProgress: changeEvaluationProgress, progress:progress,),
         if(hasTask)
@@ -317,7 +318,7 @@ class EvaluateProgressItem extends StatelessWidget {
       child:Text(
         '消費方式',
         style: TextStyle(
-          fontSize: 20,
+          // fontSize: 20,
           color: progress == EvaluationProgressEnum.Evaluate ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
@@ -356,7 +357,7 @@ class TaskProgressItem extends StatelessWidget {
       child:Text(
         '任務活動',
         style: TextStyle(
-          fontSize: 20,
+          // fontSize: 20,
           color: progress == EvaluationProgressEnum.Task ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
@@ -412,7 +413,7 @@ class ChannelProgressItem extends StatelessWidget {
       child:Text(
         '消費通路',
         style: TextStyle(
-          fontSize: 20,
+          // fontSize: 18,
           color: progress == EvaluationProgressEnum.Channel ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )

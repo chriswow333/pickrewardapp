@@ -121,20 +121,22 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               ),
             ),
             SizedBox(height: 10,),
-            GridView.count(  
+
+            GridView.builder(
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
-              crossAxisCount: 4,  
-              crossAxisSpacing: 15.0,  
-              mainAxisSpacing: 15.0,
-              padding: EdgeInsets.zero,  
-              children:[
-                for(ChannelItemModel channelItemModel in channelItemModels)
-                  ChannelItem(channelItemModel:channelItemModel),
-                if(hasMore)
-                  AddMore(channelCategory: channelCategoryType,),
-              ],
-            ),
+              itemCount: channelItemModels.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15,
+                // childAspectRatio: 0.7,
+              ),
+              itemBuilder: (context, index){
+                return ChannelItem(channelItemModel:channelItemModels[index]);
+              }),
+              if(hasMore)
+                AddMore(channelCategory: channelCategoryType,),
           ]
         ),
       )

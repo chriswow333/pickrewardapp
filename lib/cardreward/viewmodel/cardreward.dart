@@ -13,6 +13,7 @@ class CardRewardViewModel with ChangeNotifier {
   List<CardRewardModel> get() => _cardRewardModels;
 
   final Map<String, bool> _cardRewardExpanded = {};
+  CardRewardModel? expandedCardRewardEvaluation;
 
 
   CardRewardViewModel(String cardID) {
@@ -21,16 +22,32 @@ class CardRewardViewModel with ChangeNotifier {
   }
 
 
-
   toggleCardReward(String cardRewardID) {
     _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
+    
+    for(CardRewardModel c in _cardRewardModels) {
+      if(c.id == cardRewardID) {
+        if(c.cardRewardType == 1) {
+          if(expandedCardRewardEvaluation == null) {
+            expandedCardRewardEvaluation = c;
+          }else {
+            expandedCardRewardEvaluation = null;
+          }
+        }else {
+          expandedCardRewardEvaluation = null; 
+        }
+        break;
+      }
+    }
+
+    
+
     notifyListeners();
   }
 
   bool getCardRewardExpandStatus(String cardRewardID) {
     return _cardRewardExpanded[cardRewardID]!;
   }
-
   
 
   Future<void> _fetchCardRewards(String cardID) async{ 
