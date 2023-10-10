@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
@@ -41,7 +41,7 @@ class EvaluationProgressContent extends StatelessWidget {
           Divider(
             color:Palette.kToBlack[50],
           ),
-          CardRewardEvaluationDetails(cardRewardDescModels:cardRewardModel.cardRewardDesc),
+          CardRewardEvaluationDetails(cardRewardDescModels:cardRewardModel.descriptions),
         ],
       ),
     );
@@ -101,7 +101,7 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
 class CardRewardEvaluationDetails extends StatefulWidget {
   const CardRewardEvaluationDetails({super.key, required this.cardRewardDescModels});
   
-  final List<CardRewardDescModel> cardRewardDescModels;
+  final List<DescriptionModel> cardRewardDescModels;
 
   @override
   State<CardRewardEvaluationDetails> createState() => _CardRewardEvaluationDetailsState();
@@ -181,7 +181,7 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
 class CardRewradEvaluationDetail extends StatelessWidget {
   const CardRewradEvaluationDetail({super.key, required this.cardRewardDescModel});
 
-  final CardRewardDescModel cardRewardDescModel;
+  final DescriptionModel cardRewardDescModel;
 
   @override
   Widget build(BuildContext context) {
@@ -266,11 +266,12 @@ class EvaluationProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationRespProto? resp =  evaluationViewModel.get();
+    EvaluationResp? evaluationResp =  evaluationViewModel.evaluationResp;
 
-    if (resp == null) return Container();
+    if (evaluationResp == null) return Container();
     
-    bool hasTask = resp.taskEvaluationResp.matches.length != 0  || resp.taskEvaluationResp.misMatches.length != 0;
+    bool hasTask = evaluationResp.taskEvaluationResp.matches.length != 0  
+      || evaluationResp.taskEvaluationResp.misMatches.length != 0;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

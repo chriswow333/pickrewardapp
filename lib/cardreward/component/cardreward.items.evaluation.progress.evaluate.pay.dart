@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -16,15 +16,14 @@ class CardRewardEvaluationProgressPay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationRespProto? resp = evaluationViewModel.get();
 
-    if (resp == null) return Container();
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
+    if (evaluationResp == null) return Container();
     
-    PayEvaluationRespProto payResp = resp.payEvaluationResp;
+    PayEvaluationResp payEvaluationResp = evaluationResp.payEvaluationResp;
     
-    List<PayProto> pays = payResp.matches;
-    
+    List<PayEvaluationResp_Pay> pays = payEvaluationResp.matches;
     if(pays.length == 0)return Container();
 
     return Container(
@@ -77,7 +76,7 @@ class PayName extends StatelessWidget {
 
 class PayItems extends StatelessWidget {
   const PayItems({super.key, required this.pays});
-  final List<PayProto> pays;
+  final List<PayEvaluationResp_Pay> pays;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,7 +85,7 @@ class PayItems extends StatelessWidget {
         child:Wrap(
           spacing: 10,
           children:[ 
-            for(PayProto p in pays) PayItem(pay:p),
+            for(PayEvaluationResp_Pay p in pays) PayItem(pay:p),
           ]
         ),
       )
@@ -99,7 +98,7 @@ class PayItems extends StatelessWidget {
 class PayItem extends StatelessWidget {
   const PayItem({super.key, required this.pay});
   
-  final PayProto pay;
+  final PayEvaluationResp_Pay pay;
 
   @override
   Widget build(BuildContext context) {

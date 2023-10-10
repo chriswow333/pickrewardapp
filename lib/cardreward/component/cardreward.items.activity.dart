@@ -74,7 +74,7 @@ class ActivityItem extends StatelessWidget {
               )
             ),
             if(expanded)
-              CardActivityDetails(cardRewardDescModels: cardRewardModel.cardRewardDesc,),
+              CardActivityDetails(cardRewardDescModels: cardRewardModel.descriptions,),
           ]
         )
     );
@@ -206,7 +206,7 @@ class CardRewardDurationMessage extends StatelessWidget {
 class CardActivityDetails extends StatelessWidget {
   const CardActivityDetails({super.key, required this.cardRewardDescModels});
 
-  final List<CardRewardDescModel> cardRewardDescModels;
+  final List<DescriptionModel> cardRewardDescModels;
   @override
   Widget build(BuildContext context) {
   
@@ -249,7 +249,7 @@ class CardActivityDetailTitle extends StatelessWidget {
 class CardActivityDetail extends StatelessWidget {
   const CardActivityDetail({super.key, required this.cardRewardDescModel});
 
-  final CardRewardDescModel cardRewardDescModel;
+  final DescriptionModel cardRewardDescModel;
 
   @override
   Widget build(BuildContext context) {

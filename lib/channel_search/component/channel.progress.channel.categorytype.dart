@@ -42,7 +42,7 @@ class _ChannelCategoryTypesState extends State<ChannelCategoryTypes> {
             Column(
               children:[
                 ChannelCategoryType(channelCategoryTypeModel: channelCategoryTypeModel,),
-                if(channelViewModel.channelCategoryType == channelCategoryTypeModel.id)
+                if(channelViewModel.channelCategoryType == channelCategoryTypeModel.categoryType)
                   BottomLine(),
               ]                
             ),
@@ -148,18 +148,18 @@ class ChannelCategoryType extends StatelessWidget {
     
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
     return Container(
-      key:channelViewModel.getChannelCategoryGlobalKeys(channelCategoryTypeModel.id),
+      key:channelViewModel.getChannelCategoryGlobalKeys(channelCategoryTypeModel.categoryType),
       child:TextButton(
         onPressed: (){
-          channelViewModel.channelCategoryType = channelCategoryTypeModel.id;
-          Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(channelCategoryTypeModel.id).currentContext!,
+          channelViewModel.channelCategoryType = channelCategoryTypeModel.categoryType;
+          Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(channelCategoryTypeModel.categoryType).currentContext!,
             duration:Duration(milliseconds: 300),
           );
         },
         child:Column(
           children:[
-            ChannelCategoryTypeIcon(categoryType: channelCategoryTypeModel.id,),
-            ChannelCategoryTypeName(categoryType:channelCategoryTypeModel.id, name:channelCategoryTypeModel.name),
+            ChannelCategoryTypeIcon(categoryType: channelCategoryTypeModel.categoryType,),
+            ChannelCategoryTypeName(categoryType:channelCategoryTypeModel.categoryType, name:channelCategoryTypeModel.name),
           ],
         ),
       )

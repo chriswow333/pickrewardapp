@@ -1,0 +1,259 @@
+syntax = "proto3";
+
+
+option go_package = "pickrewardapi/api/card/proto";
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.helloworld";
+// option java_outer_classname = "HelloWorldProto";
+
+package card;
+
+service Card {
+  rpc GetAllBanks (AllBanksReq) returns (BanksReply) {}
+  rpc GetLatestCards (EmptyReq) returns (CardsReply) {}
+  rpc GetCardsByBankID (CardsByBankIDReq) returns (CardsReply) {}
+  rpc GetCardRewardsByCardID(CardRewardsByCardIDReq) returns (CardRewardsReply){}
+
+  rpc EvaluateCards(CardEventReq) returns (EvaluateCardRewardsReply){}
+}
+
+
+
+message Reply {
+  int32 status = 1;
+  Error error = 2;
+}
+
+
+message Error {
+  int32 errorCode = 1;
+  string errorMessage = 2;
+}
+
+
+message AllBanksReq {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message BanksReply {
+
+  message Bank {
+    string id = 1;
+    string name = 2;
+    string image = 3;
+    int32 order = 4;
+    int32 bankStatus = 5;
+  }
+
+  Reply reply = 1;
+  repeated Bank banks = 2;
+}
+
+
+message CardsByBankIDReq{
+  string id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+
+
+message CardsReply{
+  message Card {
+    string id = 1;
+    string name = 2;
+    repeated string descriptions = 3;
+    string image = 4;
+    int64 createDate = 5;
+    int64 updateDate = 6;
+    string linkURL = 7;
+    string bankID = 8;
+    int32 order = 9;
+    int32 cardStatus = 10;
+  }
+  
+
+
+  Reply reply = 1;
+  repeated Card cards = 2;
+}
+
+
+
+message CardRewardsByCardIDReq {
+  string cardID = 1;
+  int32 limit = 2; 
+  int32 offset = 3;
+}
+
+
+
+message CardRewardsReply {
+
+  message Reward {
+    string id = 1;
+    string name = 2;
+    int32 rewardType = 3;
+    int64 createDate = 4;
+    int64 updateDate = 5;
+  }
+
+  message Description{
+    string name = 1;
+    int32 order = 2;
+    repeated string desc = 3;
+  }
+
+  message CardReward {
+    string id = 1;
+    string cardID = 2;
+    string name = 3;
+    repeated Description descriptions = 4;
+    int64 createDate = 5;
+    int64 updateDate = 6;
+    int64 startDate = 7;
+    int64 endDate = 8;
+    int32 cardRewardType = 9;
+    Reward reward = 10;
+    int32 order = 11;
+  }
+
+
+  Reply reply = 1;
+  repeated CardReward cardRewards = 2;
+}
+
+
+message CardEventReq {
+  repeated string taskIDs = 1;
+  repeated string payIDs = 2;
+  repeated string channelIDs = 3;
+  repeated int32 labels = 4;
+  int64 eventDate = 5;
+  int32 cost = 6;
+  int32 rewardType = 7;
+
+}
+
+
+message EvaluateCardRewardsReply {
+
+  message CardRewardEventResult {
+  string id = 1;
+  CardRewardEvaluationEventResult cardRewardEvaluationEventResult = 2;
+  EvaluationEventResultResp evaluationEventResultResp = 3; 
+} 
+
+  Reply reply = 1;
+  repeated CardRewardEventResult cardRewardEventResults = 2;
+}
+
+
+message CardRewardEvaluationEventResult {
+  message Reward {
+    string id = 1;
+    string name = 2;
+    int32 rewardType = 3;
+    int64 createDate = 4;
+    int64 updateDate = 5;
+  }
+
+  string cardID = 1;
+  string cardName = 2;
+  repeated string cardDesc = 3;
+  string cardImage = 4;
+  string bankID = 5;
+  string bankName = 6;
+  int64 cardRewardStartDate = 7;
+  int64 cardRewardEndDate = 8;
+  string cardRewardName = 9;
+  Reward reward = 10;
+}
+
+
+
+message EvaluationEventResultResp{
+
+  message FeedbackEventResultResp {
+    int32 rewardType = 1;
+    int32 calculateType = 2;
+    int32 cost = 3;
+    double getReturn = 4;
+    double getPercentage = 5;
+    int32 feedbackEventResultStatus = 6; 
+  }
+
+  string id = 1;
+  FeedbackEventResultResp feedbackEventResultResp = 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// message RewardEventResultProto{
+//   string id  = 1;
+//   int32 rewardEventStatus = 2;
+//   PayloadEventProto payloadEvent = 3;
+// }
+
+// message PayloadEventProto {
+//   string id = 1;
+//   bool pass = 2;
+//   FeedbackEventProto feedbackEvent = 3;
+//   repeated PayloadEventProto payloadEvents = 4;
+//   ContainerEventProto containerEvent = 5;
+// }
+
+// message FeedbackEventProto {
+//   int32 rewardType = 1;
+//   int32 cost = 2;
+//   double getReturn = 3;
+//   double getPercentage = 4;
+//   int32 feedbackEventStatus = 5;
+// }
+
+// message ContainerEventProto {
+//   string id = 1;
+//   bool pass = 2;
+//   repeated ContainerEventProto containerEvents = 3;
+//   repeated string matches = 4;
+//   repeated string misMatches = 5;
+//   ConstraintEventReplyProto cotraintEvent = 6;
+// }
+
+// message ConstraintEventReplyProto {
+//   bool pass = 1;
+//   int32 constraintType = 2;
+//   repeated string matches = 3;
+//   repeated string misMatches = 4;
+// }
+
+// message DescriptionProto {
+//   string name = 1;
+//   repeated string desc = 2;
+//   int32 order = 3;
+// }
+
+
+
+
+message EmptyReq{}
+
+
+

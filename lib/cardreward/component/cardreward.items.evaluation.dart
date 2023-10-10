@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:provider/provider.dart';
-import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/card.pbgrpc.dart';
 
 
 class EvaluationItem extends StatelessWidget {
@@ -15,8 +16,14 @@ class EvaluationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context, listen:false);
+    evaluationViewModel.fetchEvaluationResp(cardRewardModel.id);
+
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
-    bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
+
+    // bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
+    bool expanded = true;
 
     return Container(
       padding: const EdgeInsets.all(5),
@@ -69,7 +76,7 @@ class EvaluationItem extends StatelessWidget {
                           SizedBox(width:5),
                           CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
                           SizedBox(width:5),
-                          EvaluationConstraintTypes(evaluationRespProto:cardRewardModel.evaluationRespProto,),
+                          EvaluationConstraintTypes(),
                         ],
                       ),
                       SizedBox(height:5),
@@ -162,21 +169,28 @@ class CardRewardDurationMessage extends StatelessWidget {
 
 
 class EvaluationConstraintTypes extends StatelessWidget {
-  const EvaluationConstraintTypes({super.key, required this.evaluationRespProto});
+  const EvaluationConstraintTypes({super.key});
 
-  final EvaluationRespProto evaluationRespProto;
+  // final EvaluationRespProto evaluationRespProto;
 
   @override
   Widget build(BuildContext context) {
 
-    ConstraintsEvaluationRespProto constraintProto = evaluationRespProto.constraintsEvaluationResp;
-    List<ConstraintProto> constraints = constraintProto.matches;
+    EvaluationViewModel evaluationViewModel= Provider.of<EvaluationViewModel>(context);
+    EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
+    if(evaluationResp == null ){
+      return Container();
+    }
+   ConstraintsEvaluationResp constraintResp = evaluationResp.constraintsEvaluationResp;
+
+    // ConstraintsEvaluationRespProto constraintProto = evaluationRespProto.constraintsEvaluationResp;
+    // List<ConstraintProto> constraints = constraintProto.matches;
 
     return Wrap(
       spacing: 5,
       children:[
-        for(ConstraintProto c in constraints)
-          EvaluationConstraintType(constraintProto: c,),
+        for(ConstraintsEvaluationResp_Constraint c in constraintResp.matches)
+          EvaluationConstraintType(constraint: c,),
       ]
     );
   }
@@ -184,9 +198,9 @@ class EvaluationConstraintTypes extends StatelessWidget {
 
 
 class EvaluationConstraintType extends StatelessWidget {
-  const EvaluationConstraintType({super.key, required this.constraintProto,});
+  const EvaluationConstraintType({super.key, required this.constraint,});
 
-  final ConstraintProto constraintProto;
+  final ConstraintsEvaluationResp_Constraint constraint;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -203,7 +217,7 @@ class EvaluationConstraintType extends StatelessWidget {
         color:Palette.kToOrange[600],
         fontSize: 13,
       ),
-        constraintProto.constraintName
+        constraint.constraintName
       )
     );
   }

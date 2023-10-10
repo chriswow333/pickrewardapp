@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 
-import 'package:pickrewardapp/card/repository/pay/pay.dart';
-import 'package:pickrewardapp/card/repository/pay/proto/generated/pay.pb.dart';
+import 'package:pickrewardapp/shared/repository/pay/pay.dart';
+import 'package:pickrewardapp/shared/repository/pay/proto/generated/pay.pb.dart';
+
+
+
 
 class PayItemViewModel with ChangeNotifier {
 
-    
+  static int initOffset = 0;
+  static int initLimit = 100;
+
+
   PayItemViewModel() {
     PayService().init();
   }
@@ -22,19 +28,30 @@ class PayItemViewModel with ChangeNotifier {
     if(_payItemModels.isNotEmpty)return;
 
     try{
+      
+      AllPaysReq allPaysReq = AllPaysReq();
+      allPaysReq.limit = initLimit;
+      allPaysReq.offset = initOffset;
 
-      PayProtoReply payProtoReply = await PayService().payClient.getAllPays(EmptyRequest());
-      for (PayProto payProto in payProtoReply.payProto){
+      PaysReply paysReply = await PayService().payClient.getAllPays(allPaysReq);
+      for (PaysReply_Pay pay in paysReply.pays){
         
         _payItemModels.add(
           PayItemModel(
-            id:payProto.id,
-            name: payProto.name,
-            image: payProto.image,
-            order:payProto.order
+            id:pay.id,
+            name: pay.name,
+            image: pay.image,
+            linkURL: pay.linkURL,
+            descriptions: pay.descriptions,
+            createDate: pay.createDate.toInt(),
+            updateDate: pay.updateDate.toInt(),
+            order:pay.order,
+            payStatus: pay.payStatus,
           )
         );
       }
+
+      notifyListeners();
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
@@ -44,7 +61,6 @@ class PayItemViewModel with ChangeNotifier {
       print(e);
     }
 
-    notifyListeners();
   }
   
 
@@ -68,13 +84,13 @@ class PayItemModel {
     required this.id,
     required this.name, 
     required this.image, 
-    // required this.linkURL,
-    // required this.descriptions,
-    // required this.createDate, 
-    // required this.updateDate, 
+    required this.linkURL,
+    required this.descriptions,
+    required this.createDate, 
+    required this.updateDate, 
     required this.order, 
-    // required this.payStatus
-}):linkURL="", descriptions= [], createDate = 0, updateDate = 0, payStatus = 0;
+    required this.payStatus
+});
 
 
   

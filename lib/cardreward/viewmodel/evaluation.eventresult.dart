@@ -5,21 +5,24 @@
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/evaluation.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/evaluation.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 
 class EvaluationEventResultRespViewModel with ChangeNotifier {
 
 
-  FeedbackEventResultProto? _feedbackEventResult;
+  EvaluationEventResultRespReply_FeedbackEventResultResp? _feedbackEventResult;
 
-  set evaluationEventResult (EvaluationEventResultRespProto evaluationEventResultResp) {
+
+  set evaluationEventResult (EvaluationEventResultRespReply_EvaluationEventResultResp evaluationEventResultResp) {
     _feedbackEventResult = evaluationEventResultResp.feedbackEventResultResp;
     notifyListeners();
   }
 
-  FeedbackEventResultProto? get feedbackEventResult => _feedbackEventResult;
+  EvaluationEventResultRespReply_FeedbackEventResultResp? get feedbackEventResult => _feedbackEventResult;
+
+
 
   Future<void> evaluateCardRewardEvaluation(EvaluationSelectedViewModel selectedViewModel) async {
 
@@ -30,21 +33,22 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
         return;
       } 
 
-      EventProto eventProto = EventProto();
 
-      eventProto.ownerID = selectedViewModel.cardRewardModel!.id;
+      EventReq eventReq = EventReq();
 
-      eventProto.channelIDs.addAll(selectedViewModel.getChannelIDs().toList());
-      eventProto.cost = selectedViewModel.getCost();
+      eventReq.ownerID = selectedViewModel.cardRewardModel!.id;
+
+      eventReq.cost = selectedViewModel.getCost();
+      eventReq.channelIDs.addAll(selectedViewModel.getChannelIDs().toList());
+      eventReq.labels.addAll(selectedViewModel.getLabels().toList());
+      eventReq.payIDs.addAll(selectedViewModel.getPayIDs().toList());
+      eventReq.taskIDs.addAll(selectedViewModel.getTaskIDs().toList());
+      eventReq.rewardType = selectedViewModel.cardRewardModel!.reward.rewardType;
 
       DateTime eventDate = selectedViewModel.getCostDate();
-      eventProto.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
-      eventProto.labels.addAll(selectedViewModel.getLabels().toList());
-      eventProto.payIDs.addAll(selectedViewModel.getPayIDs().toList());
-      eventProto.taskIDs.addAll(selectedViewModel.getTaskIDs().toList());
-      eventProto.rewardType = selectedViewModel.cardRewardModel!.reward.rewardType;
+      eventReq.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch ~/ 1000).toString());
 
-      EvaluationEventResultRespReply reply = await EvaluationService().evaluationClient.evaluateRespByOwnerID(eventProto);
+      EvaluationEventResultRespReply reply = await EvaluationService().evaluationClient.evaluateRespByOwnerID(eventReq);
 
       evaluationEventResult = reply.evaluationEventResultResp;
 

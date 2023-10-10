@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -14,17 +14,17 @@ class EvaluationProgressTask extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationRespProto? resp = evaluationViewModel.get();
-    if (resp == null) return Container();
+    EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
+    if (evaluationResp == null) return Container();
 
-    TaskEvaluationRespProto taskResp = resp.taskEvaluationResp;
+    TaskEvaluationResp taskEvaluationResp = evaluationResp.taskEvaluationResp;
       
-    List<TaskProto> matches = taskResp.matches;
+    List<TaskEvaluationResp_Task> matches = taskEvaluationResp.matches;
 
     return Container(
       child:Column(
         children:[
-          for(TaskProto t in matches)
+          for(TaskEvaluationResp_Task t in matches)
             TaskItem(task:t),
         ]  
       )
@@ -36,12 +36,12 @@ class EvaluationProgressTask extends StatelessWidget {
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key, required this.task});
 
-  final TaskProto task;
+  final TaskEvaluationResp_Task task;
   
   @override
   Widget build(BuildContext context) {
 
-    List<TaskDescriptionProto> descItems = task.descriptions;
+    List<TaskEvaluationResp_Task_TaskDescription> descItems = task.descriptions;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class TaskItemTitle extends StatelessWidget {
 class TaskItemDescriptions extends StatelessWidget {
   const TaskItemDescriptions({super.key, required this.descItems});
 
-  final List<TaskDescriptionProto> descItems;
+  final List<TaskEvaluationResp_Task_TaskDescription> descItems;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,7 @@ class TaskItemDescriptions extends StatelessWidget {
       padding:const EdgeInsets.only(left:55),
       child:Column(
         children:[
-          for(TaskDescriptionProto d in descItems)
+          for(TaskEvaluationResp_Task_TaskDescription d in descItems)
             TaskItemDesc(desc:d),
         ]
       )
@@ -122,7 +122,7 @@ class TaskItemDescriptions extends StatelessWidget {
 class TaskItemDesc extends StatelessWidget {
   const TaskItemDesc({super.key, required this.desc});
 
-  final TaskDescriptionProto desc;
+  final TaskEvaluationResp_Task_TaskDescription desc;
   
   @override
   Widget build(BuildContext context) {

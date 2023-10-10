@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/cardreward/repository/cardreward/cardreward.dart';
-import 'package:pickrewardapp/cardreward/repository/cardreward/proto/generated/card.pbgrpc.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/shared/repository/card/card.dart';
+import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 
 class CardRewardViewModel with ChangeNotifier {
 
@@ -13,16 +13,17 @@ class CardRewardViewModel with ChangeNotifier {
   List<CardRewardModel> get() => _cardRewardModels;
 
   final Map<String, bool> _cardRewardExpanded = {};
+
   CardRewardModel? expandedCardRewardEvaluation;
 
 
   CardRewardViewModel(String cardID) {
-    CardRewardService().init();
+    CardService().init();
     _fetchCardRewards(cardID);
   }
 
 
-  toggleCardReward(String cardRewardID) {
+  void toggleCardReward(String cardRewardID) {
     _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
     
     for(CardRewardModel c in _cardRewardModels) {
@@ -40,8 +41,6 @@ class CardRewardViewModel with ChangeNotifier {
       }
     }
 
-    
-
     notifyListeners();
   }
 
@@ -50,49 +49,53 @@ class CardRewardViewModel with ChangeNotifier {
   }
   
 
+
+  static int initLimit = 1000;
+  static int initOffset = 0;
   Future<void> _fetchCardRewards(String cardID) async{ 
     
     if (_cardRewardModels.isNotEmpty) return;
 
     try {
       
-      CardIDProto cardIDProto = CardIDProto();
-      cardIDProto.cardID = cardID;
+      CardRewardsByCardIDReq cardRewardsByCardIDReq = CardRewardsByCardIDReq();
+      cardRewardsByCardIDReq.cardID = cardID;
+      cardRewardsByCardIDReq.limit = initLimit;
+      cardRewardsByCardIDReq.offset = initOffset;
+
       
-      CardRewardsReply cardRewardsReply = await CardRewardService().cardClient.getCardRewardsByCardID(cardIDProto);
+      CardRewardsReply cardRewardsReply = await CardService().cardClient.getCardRewardsByCardID(cardRewardsByCardIDReq);
 
       for(final c in cardRewardsReply.cardRewards) {
-        List<CardRewardDescModel> descModels = [];
-
-        for (final d in c.cardRewardDescriptions){
-          descModels.add(CardRewardDescModel(
-            name:d.name,
-            desc: d.desc,
-          ));
-        }
 
 
-        RewardProto rewardProto = c.reward;
-
-        RewardModel reward = RewardModel(
-          id:rewardProto.id,
-          name:rewardProto.name,
-          rewardType: rewardProto.rewardType,
-          createDate: rewardProto.createDate.toInt(),
-          updateDate:rewardProto.updateDate.toInt(),
-        );
-
-        _cardRewardModels.add(CardRewardModel(
+        CardRewardModel cardRewardModel = CardRewardModel(
           id: c.id,
           cardID: c.cardID,
           name:c.name,
-          cardRewardDesc:descModels,
-          cardRewardType: c.cardRewardType,
-          reward: reward,
+          descriptions:c.descriptions
+            .map((d) => DescriptionModel(
+              name:d.name,
+              order:d.order,
+              desc: d.desc,
+            )).toList(),
+          createDate: DateTime.fromMillisecondsSinceEpoch(c.createDate.toInt()*1000),
+          updateDate: DateTime.fromMillisecondsSinceEpoch(c.updateDate.toInt()*1000),
           startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()*1000),
           endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()*1000), 
-          evaluationRespProto:c.evaluationResp, 
-        ));
+          cardRewardType: c.cardRewardType,
+          reward: RewardModel(
+            id:c.reward.id,
+            name:c.reward.name,
+            rewardType: c.reward.rewardType,
+            createDate: c.reward.createDate.toInt(),
+            updateDate:c.reward.updateDate.toInt(),
+          ),
+          order: c.order,
+        );
+
+
+        _cardRewardModels.add(cardRewardModel);
 
         _cardRewardExpanded[c.id] = false;
       }
@@ -112,10 +115,10 @@ class CardRewardViewModel with ChangeNotifier {
 }
 
 
-class CardViewModel with ChangeNotifier {
-  final CardItemModel cardItemModel;
-  CardViewModel(this.cardItemModel);
-  get() => cardItemModel;
+class CardHeaderViewModel with ChangeNotifier {
+  final CardHeaderItemModel _cardHeaderItemModel;
+  CardHeaderViewModel(this._cardHeaderItemModel);
+  get cardHeaderItemModel => _cardHeaderItemModel;
 }
 
 
@@ -124,29 +127,30 @@ class CardRewardModel {
   final String id;
   final String cardID;
   final String name;
-  final List<CardRewardDescModel> cardRewardDesc;
+  final List<DescriptionModel> descriptions;
+  final DateTime createDate;
+  final DateTime updateDate;
+
+  final DateTime startDate;
+  final DateTime endDate;
   final int cardRewardType;
   final RewardModel reward;
   final int order;
-  final DateTime createDate;
-  final DateTime updateDate;
-  final DateTime startDate;
-  final DateTime endDate;
-  final EvaluationRespProto evaluationRespProto;
 
 
   CardRewardModel({
     required this.id,
     required this.cardID,
     required this.name,
-    required this.cardRewardDesc,
-    required this.cardRewardType,
-    required this.reward,
+    required this.descriptions,
+    required this.createDate,
+    required this.updateDate,
     required this.startDate,
     required this.endDate,
-    required this.evaluationRespProto,
-
-  }):createDate=DateTime.now(), updateDate=DateTime.now(), order = 0;
+    required this.cardRewardType,
+    required this.reward,
+    required this.order,
+  });
 
 }
 
@@ -159,14 +163,15 @@ class RewardModel {
   RewardModel({required this.id, required this.rewardType, required this.name, required this.createDate, required this.updateDate});
 }
 
-class CardRewardDescModel {
+class DescriptionModel {
   
   final String name;
   final int order;
   final List<String> desc;
 
-  CardRewardDescModel({
+  DescriptionModel({
     required this.name,
+    required this.order,
     required this.desc,
-  }):order = 0;
+  });
 }

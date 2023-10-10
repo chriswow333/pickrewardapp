@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 class CardHeader extends StatelessWidget {
@@ -15,20 +15,20 @@ class CardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    CardViewModel cardViewModel = Provider.of<CardViewModel>(context);
-    CardItemModel cardItemModel = cardViewModel.get();
+    CardHeaderViewModel cardHeaderViewModel = Provider.of<CardHeaderViewModel>(context);
+    CardHeaderItemModel cardHeaderItemModel = cardHeaderViewModel.cardHeaderItemModel;
     
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         Column(
           children:[
-            CardIcon(image:cardItemModel.image),
-            CardName(cardName: cardItemModel.name,),
+            CardIcon(image:cardHeaderItemModel.image),
+            CardName(cardName: cardHeaderItemModel.name,),
           ]
         ),
         SizedBox(width:20),
-        CardDescriptions(descriptions: cardItemModel.descriptions,),
+        CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
       ]
     );
   }

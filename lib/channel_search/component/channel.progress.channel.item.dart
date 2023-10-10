@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/viewmodel/label.item.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/label.item.dart';
 import 'package:provider/provider.dart';
 
 
@@ -86,14 +86,14 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
 
   @override
   void initState(){
-    widget.channelViewModel.initChannelModels(widget.channelCategoryTypeModel.id);
+    widget.channelViewModel.initChannelModels(widget.channelCategoryTypeModel.categoryType);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    int channelCategoryType = widget.channelCategoryTypeModel.id;
+    int channelCategoryType = widget.channelCategoryTypeModel.categoryType;
     
     List<ChannelItemModel> channelItemModels = widget.channelViewModel.getChannelsByChannelCategoryType(channelCategoryType);
 

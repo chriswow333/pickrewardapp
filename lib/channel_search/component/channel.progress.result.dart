@@ -4,11 +4,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/card/repository/card/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 class CardResultsProgress extends StatelessWidget {
@@ -19,14 +19,14 @@ class CardResultsProgress extends StatelessWidget {
 
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context);
 
-    List<CardRewardEventResultProto> cardRewardEventResults = cardRewardEventResultsViewModel.get();
+    List<EvaluateCardRewardsReply_CardRewardEventResult> cardRewardEventResults = cardRewardEventResultsViewModel.cardRewardEventResults;
 
     return Container(
       child:SingleChildScrollView(
         child:Wrap(
           runSpacing: 20,
           children:[
-            for(CardRewardEventResultProto c in cardRewardEventResults) 
+            for(EvaluateCardRewardsReply_CardRewardEventResult c in cardRewardEventResults) 
               CardResult(cardRewardEventResult: c,),
           ],
         )
@@ -38,13 +38,13 @@ class CardResultsProgress extends StatelessWidget {
 class CardResult extends StatelessWidget {
   const CardResult({super.key, required this.cardRewardEventResult});
   
-  final CardRewardEventResultProto cardRewardEventResult;
+  final EvaluateCardRewardsReply_CardRewardEventResult cardRewardEventResult;
   
   @override
   Widget build(BuildContext context) {
 
-    CardRewardEvaluationEventResultProto cardEvaluation = cardRewardEventResult.cardRewardEvaluationEventResult;
-    FeedbackEventResultProto feedbackEventResult = cardRewardEventResult.rewardEventResult.feedbackEventResultResp;
+    CardRewardEvaluationEventResult cardEvaluation = cardRewardEventResult.cardRewardEvaluationEventResult;
+    EvaluationEventResultResp_FeedbackEventResultResp feedbackEventResult = cardRewardEventResult.evaluationEventResultResp.feedbackEventResultResp;
    
     return Container(
     padding: const EdgeInsets.all(5),
@@ -79,16 +79,16 @@ class CardResult extends StatelessWidget {
           splashFactory:NoSplash.splashFactory,
         ),
         onPressed: (){
-          CardItemModel cardItemModel = CardItemModel(
+          CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
             id:cardEvaluation.cardID,
             name:cardEvaluation.cardName,
             descriptions:cardEvaluation.cardDesc,
-            image:cardEvaluation.cardImage,
+            image:cardEvaluation.cardImage, 
           );
 
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)),
+            MaterialPageRoute(builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)),
           );
         },
         child:Column(
@@ -127,8 +127,8 @@ class CardResult extends StatelessWidget {
 class EvaluationResult extends StatelessWidget {
   const EvaluationResult({super.key, required this.reward, required this.feedbackEventResult});
   
-  final RewardProto reward;
-  final FeedbackEventResultProto feedbackEventResult;
+  final CardRewardEvaluationEventResult_Reward reward;
+  final EvaluationEventResultResp_FeedbackEventResultResp feedbackEventResult;
 
   @override
   Widget build(BuildContext context) {
@@ -218,60 +218,60 @@ class CardRewardName extends StatelessWidget {
     );
   }
 }
-class CardRewardEventResult extends StatelessWidget {
-  const CardRewardEventResult({super.key, required this.feedbackEventResult});
+// class CardRewardEventResult extends StatelessWidget {
+//   const CardRewardEventResult({super.key, required this.feedbackEventResult});
 
-  final FeedbackEventResultProto feedbackEventResult;
+//   final FeedbackEventResultProto feedbackEventResult;
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
     
-    if (feedbackEventResult.calculateType == 0 ) {
-      double percentage = feedbackEventResult.getPercentage * 100;
-      double getReturn = feedbackEventResult.getReturn;
+//     if (feedbackEventResult.calculateType == 0 ) {
+//       double percentage = feedbackEventResult.getPercentage * 100;
+//       double getReturn = feedbackEventResult.getReturn;
 
-      return Flexible(
-        child: Column(
-          children:[
-            Text(percentage.toStringAsFixed(3),
-              style: TextStyle(
-                fontSize: 15,
-                color:Palette.kToBlack[900],
-              ),
-            ),
-          Text('折抵'+getReturn.toString(),
-              style: TextStyle(
-                fontSize: 15,
-                color:Palette.kToBlack[900],
-              ),
-            ),
-          ],
-        )
-      );
-    }else {
-      return Container();
-    }
+//       return Flexible(
+//         child: Column(
+//           children:[
+//             Text(percentage.toStringAsFixed(3),
+//               style: TextStyle(
+//                 fontSize: 15,
+//                 color:Palette.kToBlack[900],
+//               ),
+//             ),
+//           Text('折抵'+getReturn.toString(),
+//               style: TextStyle(
+//                 fontSize: 15,
+//                 color:Palette.kToBlack[900],
+//               ),
+//             ),
+//           ],
+//         )
+//       );
+//     }else {
+//       return Container();
+//     }
     
-  }
-}
+//   }
+// }
 
-class RewardItem extends StatelessWidget {
-  const RewardItem({super.key, required this.reward});
+// class RewardItem extends StatelessWidget {
+//   const RewardItem({super.key, required this.reward});
 
-  final RewardProto reward;
+//   final RewardProto reward;
   
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    return Text(reward.name,
-      style:TextStyle(
-        fontSize: 15,
-        color:Palette.kToBlack[900],
-      ),
-    );
-  }
-}
+//     return Text(reward.name,
+//       style:TextStyle(
+//         fontSize: 15,
+//         color:Palette.kToBlack[900],
+//       ),
+//     );
+//   }
+// }
 
 
 class CardIcon extends StatelessWidget {

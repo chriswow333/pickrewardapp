@@ -11,16 +11,16 @@ import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/global_padding.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 
 
 
 class CardContentScreen extends StatelessWidget {
-  const CardContentScreen({super.key, required this.cardItemModel});
+  const CardContentScreen({super.key, required this.cardHeaderItemModel});
 
-  final CardItemModel cardItemModel;
+  final CardHeaderItemModel cardHeaderItemModel;
   
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class CardContentScreen extends StatelessWidget {
         padding: GlobalPadding.global(),
         child: MultiProvider(
           providers: [
-            ChangeNotifierProvider<CardViewModel>(create:(_)=>CardViewModel(cardItemModel)),
-            ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardItemModel.id)),
+            ChangeNotifierProvider<CardHeaderViewModel>(create:(_)=>CardHeaderViewModel(cardHeaderItemModel)),
+            ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardHeaderItemModel.id)),
             ChangeNotifierProvider<EvaluationDetailToggleViewModel>(create:(_)=>EvaluationDetailToggleViewModel()),
             
             ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel()), // TODO

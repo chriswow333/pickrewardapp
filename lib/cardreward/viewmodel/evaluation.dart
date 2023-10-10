@@ -3,32 +3,31 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/evaluation.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/evaluation.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 
 
 
 class EvaluationViewModel with ChangeNotifier{
 
     
-  EvaluationRespProto? _resp;
+  EvaluationResp? _resp;
   
-  EvaluationRespProto? get() => _resp;
+  EvaluationResp? get evaluationResp => _resp;
 
   EvaluationViewModel() {
     EvaluationService().init();
   }
 
-  Future<void> fetchEvaluationResp(String rewardID) async {
-    
+  Future<void> fetchEvaluationResp(String cardRewardID) async {
     try {
       
-      EvaluationIDProto evaluationIDProto = EvaluationIDProto();
-      evaluationIDProto.id = rewardID;
-      EvaluationRespReply reply = await EvaluationService().evaluationClient.getEvaluationRespByOwnerID(evaluationIDProto);
+      OwnerIDReq ownerIDReq = OwnerIDReq();
+      ownerIDReq.ownerID = cardRewardID;
+      EvaluationRespReply evaluationRespReply = await EvaluationService().evaluationClient.getEvaluationRespByOwnerID(ownerIDReq);
       
-      EvaluationRespProto respProto = reply.evaluationResp;
-      _resp = respProto;
+      EvaluationResp evaluationResp = evaluationRespReply.evaluationResp;
+      _resp = evaluationResp;
       
       notifyListeners();
 
@@ -40,9 +39,5 @@ class EvaluationViewModel with ChangeNotifier{
       ///handle all generic errors here
       print(e);
     }
-    
-
   }
-
-
 }

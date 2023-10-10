@@ -16,7 +16,7 @@ class CardEvaluationDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<CardRewardDescModel> cardRewardDesc = cardRewardModel.cardRewardDesc;
+    List<DescriptionModel> cardRewardDesc = cardRewardModel.descriptions;
 
     EvaluationDetailToggleViewModel evaluationDetailToggleViewModel = Provider.of<EvaluationDetailToggleViewModel>(context);
     return Container(
@@ -38,7 +38,7 @@ class CardEvaluationDetails extends StatelessWidget {
 class CardEvaluationDetail extends StatelessWidget {
   const CardEvaluationDetail({super.key, required this.cardRewardDescModel});
   
-  final CardRewardDescModel cardRewardDescModel;
+  final DescriptionModel cardRewardDescModel;
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 
@@ -86,6 +86,7 @@ class BankIcon extends StatelessWidget {
         base64Decode(image), 
         width:70,
         height:50,
+        gaplessPlayback:true,
       ),
     );
   }

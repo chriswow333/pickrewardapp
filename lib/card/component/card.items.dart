@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:provider/provider.dart';
 
@@ -121,9 +121,17 @@ class CardItem extends StatelessWidget {
         ),
         child:TextButton(
           onPressed: (){
+
+            CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
+              id:cardItemModel.id,
+              name:cardItemModel.name,
+              descriptions:cardItemModel.descriptions,
+              image:cardItemModel.image,
+            );
+            
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
-                builder: (context) =>  CardContentScreen(cardItemModel:cardItemModel)
+                builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)
               ),
             );
           },

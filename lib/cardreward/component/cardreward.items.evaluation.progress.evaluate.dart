@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.cost.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.costdate.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.pay.dart';
-import 'package:pickrewardapp/cardreward/repository/evaluation/proto/generated/evaluation.pb.dart';
+import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -63,8 +63,8 @@ class EvaluateEventResult extends StatelessWidget {
       return Container();
     }
 
-    FeedbackEventResultProto feedbackEventResult = evaluationEventResultRespViewModel.feedbackEventResult!;
-    
+    EvaluationEventResultRespReply_FeedbackEventResultResp? feedbackEventResult = evaluationEventResultRespViewModel.feedbackEventResult;
+    if(feedbackEventResult == null) return Container();
     
     String returnUnit = evaluationSelectedViewModel.cardRewardModel!.reward.rewardType == 0 ? "元":"點";
     feedbackEventResult.getReturn;

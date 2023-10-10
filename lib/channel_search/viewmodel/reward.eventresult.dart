@@ -5,8 +5,8 @@ import 'package:fixnum/fixnum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/card/repository/card/card.dart';
-import 'package:pickrewardapp/card/repository/card/proto/generated/card.pb.dart';
+import 'package:pickrewardapp/shared/repository/card/card.dart';
+import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pb.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class CardRewardEventResultsViewModel with ChangeNotifier {
@@ -16,54 +16,43 @@ class CardRewardEventResultsViewModel with ChangeNotifier {
   }
 
 
-final List<CardRewardEventResultProto> _cardRewardEventResults = [];
+final List<EvaluateCardRewardsReply_CardRewardEventResult> _cardRewardEventResults = [];
 
-List<CardRewardEventResultProto> get() => _cardRewardEventResults;
+  List<EvaluateCardRewardsReply_CardRewardEventResult> get cardRewardEventResults => _cardRewardEventResults;
 
-Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
-  
-  List<int> labelIDs = rewardSelectedViewModel.getAllLabelIDs();
+  Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
+    
+    List<int> labelIDs = rewardSelectedViewModel.getAllLabelIDs();
 
-  List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
-  List<String> payIDs = rewardSelectedViewModel.getPayIDs();
+    List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
+    List<String> payIDs = rewardSelectedViewModel.getPayIDs();
+    int rewardType = rewardSelectedViewModel.rewardType;
+    int cost = rewardSelectedViewModel.cost;
+    DateTime eventDate = rewardSelectedViewModel.eventDate;
 
-  int rewardType = rewardSelectedViewModel.rewardType;
-  
-  int cost = rewardSelectedViewModel.cost;
-  DateTime eventDate = rewardSelectedViewModel.eventDate;
+    CardEventReq cardEventReq = CardEventReq();
+    cardEventReq.labels.addAll(labelIDs);
+    cardEventReq.channelIDs.addAll(channelIDs);
+    cardEventReq.payIDs.addAll(payIDs);
+    cardEventReq.cost = cost;
+    cardEventReq.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
+    cardEventReq.rewardType = rewardType;
 
+    try {
 
-  EventProto event = EventProto();
+      EvaluateCardRewardsReply evaluateCardRewardsReply = await CardService().cardClient.evaluateCards(cardEventReq);
 
-  event.labels.addAll(labelIDs);
-  event.channelIDs.addAll(channelIDs);
-  event.payIDs.addAll(payIDs);
-  event.cost = cost;
-  event.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
-  event.rewardType = rewardType;
+      _cardRewardEventResults.clear();
+      _cardRewardEventResults.addAll(evaluateCardRewardsReply.cardRewardEventResults);
+      notifyListeners();
 
-  try {
-
-    CardEventProto cardEvent = CardEventProto();
-    cardEvent.event = event;
-
-    print(event);
-    EvaluateCardRewardsProtoReply reply = await CardService().cardClient.evaluateCards(cardEvent);
-    print(reply.cardRewardEventResults);
-
-    _cardRewardEventResults.clear();
-    _cardRewardEventResults.addAll(reply.cardRewardEventResults);
-    notifyListeners();
-
-  } on GrpcError catch (e) {
+    } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
       print(e);
-  } catch (e) {
+    } catch (e) {
       ///handle all generic errors here
       print(e);
+    }
   }
-  
-}
-
 }

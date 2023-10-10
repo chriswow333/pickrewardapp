@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'package:pickrewardapp/card/component/card.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
-import 'package:pickrewardapp/shared/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
 

@@ -1,338 +1,338 @@
-syntax = "proto3";
-
-
-option go_package = "pickrewardapi/api/card/proto";
-// option java_multiple_files = true;
-// option java_package = "io.grpc.examples.helloworld";
-// option java_outer_classname = "HelloWorldProto";
+// syntax = "proto3";
+
+
+// option go_package = "pickrewardapi/api/card/proto";
+// // option java_multiple_files = true;
+// // option java_package = "io.grpc.examples.helloworld";
+// // option java_outer_classname = "HelloWorldProto";
 
-package card;
-
-service Card {
-  rpc CreateBank (BankProto) returns (Reply) {}
-  rpc CreateCard (CardProto) returns (Reply) {}
-  rpc GetAllBanks (EmptyRequest) returns (BanksProtoReply) {}
-  rpc GetCardsByBankID (BankIDProto) returns (CardsProtoReply) {}
-  rpc GetLatestCards (EmptyRequest) returns (CardsProtoReply) {}
-
-
-  rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
-  rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}
-  rpc EvaluateCards(CardEventProto) returns (EvaluateCardRewardsProtoReply){}
-}
-
-message CardIDProto {
-  string cardID = 1;
-}
-
-message CardContentReply{
-  Reply reply = 1;
-  CardProto card = 2;
-  repeated CardRewardProto cardRewards = 3;
-}
-
-
-message CardRewardsReply {
-  Reply reply = 1;
-  repeated CardRewardProto cardRewards = 2;
-}
-
-message CardRewardProto {
-  string id = 1;
-  string cardID = 2;
-  string name = 3;
-  repeated CardRewardDescriptionProto cardRewardDescriptions = 4;
-  int64 createDate = 5;
-  int64 updateDate = 6;
-  int64 startDate = 7;
-  int64 endDate = 8;
-  int32 cardRewardType = 9;
-  string rewardID = 10;
-  RewardProto reward = 11;
-  EvaluationRespProto evaluationResp = 12;
-  int32 order = 13;
-}
-
-
-
-
-message EvaluationRespProto {
-  string id = 1;
-  repeated ChannelCategoryTypeProto channelCategoryTypes = 2;
-  repeated ChannelEvaluationRespProto channelEvaluationResps = 3;
-  PayEvaluationRespProto payEvaluationResp = 4;
-  TaskEvaluationRespProto taskEvaluationResp = 5;
-  ConstraintsEvaluationRespProto constraintsEvaluationResp = 6;
-  LabelEvaluationRespProto labelEvaluationResp = 7;
-}
-
-
-message ChannelCategoryTypeProto {
-  int32 id = 1;
-  string name = 2;
-  int32 order = 3;
-}
-
-
-message ChannelEvaluationRespProto {
-  int32 channelCategoryType = 1;
-  repeated ChannelProto matches = 2;
-  repeated ChannelProto misMatches = 3;
-}
-
-
-message ChannelProto {
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  string linkURL = 4;
-  repeated string descriptions = 5;
-  int32 channelCategoryType = 6;
-  int64 createDate = 7;
-  int64 updateDate = 8;
-  repeated ChannelLabelProto channelLabels = 9;
-  int32 order = 10;
-  int32  channelStatus = 11;
-}
-
-
-
-message PayEvaluationRespProto {
-  repeated PayProto matches = 1; 
-  repeated PayProto misMatches = 2;
-}
-
+// package card;
+
+// service Card {
+//   rpc CreateBank (BankProto) returns (Reply) {}
+//   rpc CreateCard (CardProto) returns (Reply) {}
+//   rpc GetAllBanks (EmptyRequest) returns (BanksProtoReply) {}
+//   rpc GetCardsByBankID (BankIDProto) returns (CardsProtoReply) {}
+//   rpc GetLatestCards (EmptyRequest) returns (CardsProtoReply) {}
+
+
+//   rpc ModifiedCardReward(CardRewardProto)returns (Reply){}
+//   rpc GetCardRewardsByCardID(CardIDProto) returns (CardRewardsReply){}
+//   rpc EvaluateCards(CardEventProto) returns (EvaluateCardRewardsProtoReply){}
+// }
+
+// message CardIDProto {
+//   string cardID = 1;
+// }
+
+// message CardContentReply{
+//   Reply reply = 1;
+//   CardProto card = 2;
+//   repeated CardRewardProto cardRewards = 3;
+// }
+
+
+// message CardRewardsReply {
+//   Reply reply = 1;
+//   repeated CardRewardProto cardRewards = 2;
+// }
+
+// message CardRewardProto {
+//   string id = 1;
+//   string cardID = 2;
+//   string name = 3;
+//   repeated CardRewardDescriptionProto cardRewardDescriptions = 4;
+//   int64 createDate = 5;
+//   int64 updateDate = 6;
+//   int64 startDate = 7;
+//   int64 endDate = 8;
+//   int32 cardRewardType = 9;
+//   string rewardID = 10;
+//   RewardProto reward = 11;
+//   EvaluationRespProto evaluationResp = 12;
+//   int32 order = 13;
+// }
+
+
+
+
+// message EvaluationRespProto {
+//   string id = 1;
+//   repeated ChannelCategoryTypeProto channelCategoryTypes = 2;
+//   repeated ChannelEvaluationRespProto channelEvaluationResps = 3;
+//   PayEvaluationRespProto payEvaluationResp = 4;
+//   TaskEvaluationRespProto taskEvaluationResp = 5;
+//   ConstraintsEvaluationRespProto constraintsEvaluationResp = 6;
+//   LabelEvaluationRespProto labelEvaluationResp = 7;
+// }
+
+
+// message ChannelCategoryTypeProto {
+//   int32 id = 1;
+//   string name = 2;
+//   int32 order = 3;
+// }
+
+
+// message ChannelEvaluationRespProto {
+//   int32 channelCategoryType = 1;
+//   repeated ChannelProto matches = 2;
+//   repeated ChannelProto misMatches = 3;
+// }
+
+
+// message ChannelProto {
+//   string id = 1;
+//   string name = 2;
+//   string image = 3;
+//   string linkURL = 4;
+//   repeated string descriptions = 5;
+//   int32 channelCategoryType = 6;
+//   int64 createDate = 7;
+//   int64 updateDate = 8;
+//   repeated ChannelLabelProto channelLabels = 9;
+//   int32 order = 10;
+//   int32  channelStatus = 11;
+// }
+
+
+
+// message PayEvaluationRespProto {
+//   repeated PayProto matches = 1; 
+//   repeated PayProto misMatches = 2;
+// }
+
 
-
-message PayProto {
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  repeated string descriptions = 4;
-  string linkURL = 5;
-  int64 createDate = 6;
-  int64 updateDate = 7;
-  int32 order = 8;
-  int32 payStatus = 9;
-}
-
-message TaskEvaluationRespProto {
-  repeated TaskProto matches = 1;
-  repeated TaskProto misMatches = 2;
-}
-
-message TaskProto {
-  string id = 1;
-  string name =2;
-  repeated TaskDescriptionProto descriptions = 3;
-  int32 taskOwner = 4;
-  string taskOwnerID = 5;
-  int64 createDate = 6;
-  int64 updateDate = 7;
-}
-
-message TaskDescriptionProto {
-  string name = 1;
-  repeated string desc = 2;
-  int32 order = 3;
-}
-
-
-message ConstraintsEvaluationRespProto {
-  repeated ConstraintProto matches = 1;
-  repeated ConstraintProto misMatches = 2;
-
-}
-
-
-message ConstraintProto {
-  int32 constraintType = 1;
-  string constraintName = 2;
-  repeated int32 weekDays = 3;
-}
-
-
-message LabelEvaluationRespProto {
-  repeated LabelProto matches = 1;
-  repeated LabelProto misMatches = 2;
-}
-
-message LabelProto {
-  int32 labelType = 1;
-  string labelName = 2;
-}
-
-
-message RewardProto {
-  string id = 1;
-  string name = 2;
-  int32 rewardType = 3;
-  int64 createDate = 4;
-  int64 updateDate = 5;
-}
-
-
-
-message CardRewardDescriptionProto {
- string name = 1;
- int32 order = 2;
- repeated string desc = 3;
-}
-
-
-message CardEventProto {
-  EventProto event = 1;
-}
-
-message EventProto {
-  string evaluationID = 1;
-  repeated string taskIDs = 2;
-  repeated string payIDs = 3;
-  repeated string channelIDs = 4;
-  repeated int32 labels = 5;
-  int64 eventDate = 6;
-  int32 cost = 7;
-  int32 rewardType = 8;
-}
-
-
-message EvaluateCardRewardsProtoReply {
-  Reply reply = 1;
-  repeated CardRewardEventResultProto cardRewardEventResults = 2;
-}
-
-
-message CardRewardEventResultProto {
-  string id = 1;
-  CardRewardEvaluationEventResultProto cardRewardEvaluationEventResult = 2;
-  EvaluationEventResultRespProto rewardEventResult = 3; 
-} 
-
-
-message CardRewardEvaluationEventResultProto {
-  string cardID = 1;
-  string cardName = 2;
-  repeated string cardDesc = 3;
-  string cardImage = 4;
-  string bankID = 5;
-  string bankName = 6;
-  int64 cardRewardStartDate = 7;
-  int64 cardRewardEndDate = 8;
-  string cardRewardName = 9;
-  RewardProto reward = 10;
-}
-
-message EvaluationEventResultRespProto{
-  string id = 1;
-  FeedbackEventResultProto feedbackEventResultResp = 2;
-}
-
-message FeedbackEventResultProto {
-  int32 rewardType = 1;
-  int32 calculateType = 2;
-  int32 cost = 3;
-  double getReturn = 4;
-  double getPercentage = 5;
-  int32 feedbackEventResultStatus = 6; 
-}
-
-message RewardEventResultProto{
-  string id  = 1;
-  int32 rewardEventStatus = 2;
-  PayloadEventProto payloadEvent = 3;
-}
-
-message PayloadEventProto {
-  string id = 1;
-  bool pass = 2;
-  FeedbackEventProto feedbackEvent = 3;
-  repeated PayloadEventProto payloadEvents = 4;
-  ContainerEventProto containerEvent = 5;
-}
-
-message FeedbackEventProto {
-  int32 rewardType = 1;
-  int32 cost = 2;
-  double getReturn = 3;
-  double getPercentage = 4;
-  int32 feedbackEventStatus = 5;
-}
-
-message ContainerEventProto {
-  string id = 1;
-  bool pass = 2;
-  repeated ContainerEventProto containerEvents = 3;
-  repeated string matches = 4;
-  repeated string misMatches = 5;
-  ConstraintEventReplyProto cotraintEvent = 6;
-}
-
-message ConstraintEventReplyProto {
-  bool pass = 1;
-  int32 constraintType = 2;
-  repeated string matches = 3;
-  repeated string misMatches = 4;
-}
-
-message DescriptionProto {
-  string name = 1;
-  repeated string desc = 2;
-  int32 order = 3;
-}
-
-
-
-message ChannelLabelProto {
-  int32 labelType = 1;
-  string labelName = 2;
-  int32 order = 3;
-}
-
-message EmptyRequest{}
-
-message BankIDProto{
-  string id = 1;
-}
-
-message CardProto {
-  string id = 1;
-  string name = 2;
-  repeated string descriptions = 3;
-  string image = 4;
-  int64 createDate = 5;
-  int64 updateDate = 6;
-  string linkURL = 7;
-  string bankID = 8;
-  int32 order = 9;
-  int32 cardStatus = 10;
-}
-
-message CardsProtoReply{
-  Reply reply = 1;
-  repeated CardProto cards = 2;
-}
-
-
-message BanksProtoReply {
-  Reply reply = 1;
-  repeated BankProto banks = 2;
-}
-
-message BankProto {
-  string id = 1;
-  string name = 2;
-  string image = 3;
-  int32 order = 4;
-}
-
-
-message Reply {
-  int32 status = 1;
-  Error error = 2;
-}
-
-
-message Error {
-  int32 errorCode = 1;
-  string errorMessage = 2;
-}
+
+// message PayProto {
+//   string id = 1;
+//   string name = 2;
+//   string image = 3;
+//   repeated string descriptions = 4;
+//   string linkURL = 5;
+//   int64 createDate = 6;
+//   int64 updateDate = 7;
+//   int32 order = 8;
+//   int32 payStatus = 9;
+// }
+
+// message TaskEvaluationRespProto {
+//   repeated TaskProto matches = 1;
+//   repeated TaskProto misMatches = 2;
+// }
+
+// message TaskProto {
+//   string id = 1;
+//   string name =2;
+//   repeated TaskDescriptionProto descriptions = 3;
+//   int32 taskOwner = 4;
+//   string taskOwnerID = 5;
+//   int64 createDate = 6;
+//   int64 updateDate = 7;
+// }
+
+// message TaskDescriptionProto {
+//   string name = 1;
+//   repeated string desc = 2;
+//   int32 order = 3;
+// }
+
+
+// message ConstraintsEvaluationRespProto {
+//   repeated ConstraintProto matches = 1;
+//   repeated ConstraintProto misMatches = 2;
+
+// }
+
+
+// message ConstraintProto {
+//   int32 constraintType = 1;
+//   string constraintName = 2;
+//   repeated int32 weekDays = 3;
+// }
+
+
+// message LabelEvaluationRespProto {
+//   repeated LabelProto matches = 1;
+//   repeated LabelProto misMatches = 2;
+// }
+
+// message LabelProto {
+//   int32 labelType = 1;
+//   string labelName = 2;
+// }
+
+
+// message RewardProto {
+//   string id = 1;
+//   string name = 2;
+//   int32 rewardType = 3;
+//   int64 createDate = 4;
+//   int64 updateDate = 5;
+// }
+
+
+
+// message CardRewardDescriptionProto {
+//  string name = 1;
+//  int32 order = 2;
+//  repeated string desc = 3;
+// }
+
+
+// message CardEventProto {
+//   EventProto event = 1;
+// }
+
+// message EventProto {
+//   string evaluationID = 1;
+//   repeated string taskIDs = 2;
+//   repeated string payIDs = 3;
+//   repeated string channelIDs = 4;
+//   repeated int32 labels = 5;
+//   int64 eventDate = 6;
+//   int32 cost = 7;
+//   int32 rewardType = 8;
+// }
+
+
+// message EvaluateCardRewardsProtoReply {
+//   Reply reply = 1;
+//   repeated CardRewardEventResultProto cardRewardEventResults = 2;
+// }
+
+
+// message CardRewardEventResultProto {
+//   string id = 1;
+//   CardRewardEvaluationEventResultProto cardRewardEvaluationEventResult = 2;
+//   EvaluationEventResultRespProto rewardEventResult = 3; 
+// } 
+
+
+// message CardRewardEvaluationEventResultProto {
+//   string cardID = 1;
+//   string cardName = 2;
+//   repeated string cardDesc = 3;
+//   string cardImage = 4;
+//   string bankID = 5;
+//   string bankName = 6;
+//   int64 cardRewardStartDate = 7;
+//   int64 cardRewardEndDate = 8;
+//   string cardRewardName = 9;
+//   RewardProto reward = 10;
+// }
+
+// message EvaluationEventResultRespProto{
+//   string id = 1;
+//   FeedbackEventResultProto feedbackEventResultResp = 2;
+// }
+
+// message FeedbackEventResultProto {
+//   int32 rewardType = 1;
+//   int32 calculateType = 2;
+//   int32 cost = 3;
+//   double getReturn = 4;
+//   double getPercentage = 5;
+//   int32 feedbackEventResultStatus = 6; 
+// }
+
+// message RewardEventResultProto{
+//   string id  = 1;
+//   int32 rewardEventStatus = 2;
+//   PayloadEventProto payloadEvent = 3;
+// }
+
+// message PayloadEventProto {
+//   string id = 1;
+//   bool pass = 2;
+//   FeedbackEventProto feedbackEvent = 3;
+//   repeated PayloadEventProto payloadEvents = 4;
+//   ContainerEventProto containerEvent = 5;
+// }
+
+// message FeedbackEventProto {
+//   int32 rewardType = 1;
+//   int32 cost = 2;
+//   double getReturn = 3;
+//   double getPercentage = 4;
+//   int32 feedbackEventStatus = 5;
+// }
+
+// message ContainerEventProto {
+//   string id = 1;
+//   bool pass = 2;
+//   repeated ContainerEventProto containerEvents = 3;
+//   repeated string matches = 4;
+//   repeated string misMatches = 5;
+//   ConstraintEventReplyProto cotraintEvent = 6;
+// }
+
+// message ConstraintEventReplyProto {
+//   bool pass = 1;
+//   int32 constraintType = 2;
+//   repeated string matches = 3;
+//   repeated string misMatches = 4;
+// }
+
+// message DescriptionProto {
+//   string name = 1;
+//   repeated string desc = 2;
+//   int32 order = 3;
+// }
+
+
+
+// message ChannelLabelProto {
+//   int32 labelType = 1;
+//   string labelName = 2;
+//   int32 order = 3;
+// }
+
+// message EmptyRequest{}
+
+// message BankIDProto{
+//   string id = 1;
+// }
+
+// message CardProto {
+//   string id = 1;
+//   string name = 2;
+//   repeated string descriptions = 3;
+//   string image = 4;
+//   int64 createDate = 5;
+//   int64 updateDate = 6;
+//   string linkURL = 7;
+//   string bankID = 8;
+//   int32 order = 9;
+//   int32 cardStatus = 10;
+// }
+
+// message CardsProtoReply{
+//   Reply reply = 1;
+//   repeated CardProto cards = 2;
+// }
+
+
+// message BanksProtoReply {
+//   Reply reply = 1;
+//   repeated BankProto banks = 2;
+// }
+
+// message BankProto {
+//   string id = 1;
+//   string name = 2;
+//   string image = 3;
+//   int32 order = 4;
+// }
+
+
+// message Reply {
+//   int32 status = 1;
+//   Error error = 2;
+// }
+
+
+// message Error {
+//   int32 errorCode = 1;
+//   string errorMessage = 2;
+// }
