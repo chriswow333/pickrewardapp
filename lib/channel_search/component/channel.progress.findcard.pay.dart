@@ -82,64 +82,62 @@ class PayItems extends StatelessWidget {
   }
 }
 
-class PayItem extends StatefulWidget {
+class PayItem extends StatelessWidget {
   const PayItem({super.key, required this.payItemModel});
 
-   final PayItemModel payItemModel;
-  @override
-  State<PayItem> createState() => _PayItemState();
-}
+  final PayItemModel payItemModel;
 
-class _PayItemState extends State<PayItem> {
 
-  bool _selected = false;
-  
   @override
   Widget build(BuildContext context) {
-  
-    String id = widget.payItemModel.id;
+    String id = payItemModel.id;
+
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    _selected = rewardSelectedViewModel.existSelectedPayID(id);
+    
+    bool selected = rewardSelectedViewModel.existSelectedPayID(id);
 
     return Container(
       child:TextButton(
         style:ButtonStyle(
         alignment: Alignment.center,
         splashFactory:NoSplash.splashFactory,
-        side:_selected?
-        MaterialStatePropertyAll(
-          BorderSide(
-            color:Palette.kToBlue[600]!,
-            width: 1,
-          )
-        ):null,
         padding: MaterialStatePropertyAll(
           EdgeInsets.zero,
         )
       ),
         onPressed: (){
-          setState((){
-            _selected = !_selected;
-          });
           rewardSelectedViewModel.payID = id;
         },
         child:Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(10),
-        child:Column(
-          children:[
-            PayItemIcon(image:widget.payItemModel.image),
-            PayItemName(name:widget.payItemModel.name),
-          ],
-        ),
+          child:Stack(
+            children:[
+              Container(
+                alignment: Alignment.center,
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children:[
+                    PayItemIcon(image:payItemModel.image),
+                    PayItemName(name:payItemModel.name),
+                  ],
+                ),
+              ),
+
+              if(selected)
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Icon(
+                    Icons.check_circle_outlined,
+                    color:Palette.kToOrange[600],
+                    size:25,
+                  ),
+                ),
+            ]
+          )
         )
       )
     );
   }
 }
-
-
-
 
 class PayItemIcon extends StatelessWidget {
   const PayItemIcon({super.key, required this.image});

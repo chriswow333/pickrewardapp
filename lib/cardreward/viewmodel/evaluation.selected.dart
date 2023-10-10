@@ -9,8 +9,10 @@ class EvaluationSelectedViewModel with ChangeNotifier {
   CardRewardModel? _cardRewardModel;
 
   set setCardRewardModel(CardRewardModel? cardRewardModel){
+    reset();
     _cardRewardModel = cardRewardModel;
   }
+
 
   CardRewardModel? get cardRewardModel => _cardRewardModel;
 
@@ -102,5 +104,17 @@ class EvaluationSelectedViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+
+
+
+  void reset(){
+    _evaluated = false;
+    _channelIDs = {};
+    _taskIDs = {};
+    _payIDs = {};
+    _labels = {};
+    _cost = 1000;
+    _costDate = DateTime.now();
+  }
 
 }

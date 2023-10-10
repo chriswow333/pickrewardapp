@@ -109,13 +109,6 @@ class PayItem extends StatelessWidget {
         style:ButtonStyle(
           alignment: Alignment.center,
           splashFactory:NoSplash.splashFactory,
-          side:evaluationSelectedViewModel.hasPayID(pay.id)?
-          MaterialStatePropertyAll(
-            BorderSide(
-              color:Palette.kToBlue[600]!,
-              width: 1,
-            )
-          ):null,
           padding: MaterialStatePropertyAll(
             EdgeInsets.all(10),
           )
@@ -126,12 +119,29 @@ class PayItem extends StatelessWidget {
         child:Container(
           alignment: Alignment.center,
           padding: EdgeInsets.zero,
-          child:Column(
-            children:[
-              PayItemIcon(image:pay.image),
-              PayItemName(name:pay.name),
-            ],
-          ),
+          child:Container(
+            child:Stack(
+              children:[
+                Column(
+                  children:[
+                    PayItemIcon(image:pay.image),
+                    PayItemName(name:pay.name),
+                  ],
+                ),
+                if(evaluationSelectedViewModel.hasPayID(pay.id))
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Icon(
+                      Icons.check_circle_outlined,
+                      color:Palette.kToOrange[600],
+                      size:25,
+                    ),
+                  ),
+              ]
+            )
+          )
+          
+          
         ),
     );
   }

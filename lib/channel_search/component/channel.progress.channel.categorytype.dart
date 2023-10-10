@@ -201,6 +201,24 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
       case 5:
         icon = Icons.video_camera_front_outlined;
         break;
+      case 6:
+        icon = Icons.water_damage_outlined;
+        break;
+      case 7:
+        icon = Icons.theaters_outlined;
+        break;
+      case 8:
+        icon = Icons.health_and_safety;
+        break;
+      case 9:
+        icon = Icons.shopping_cart_outlined;
+        break;
+      case 10:
+        icon = Icons.bike_scooter;
+        break;
+      case 11:
+        icon = Icons.sports_cricket_outlined;
+        break;
     }
 
     return Container(

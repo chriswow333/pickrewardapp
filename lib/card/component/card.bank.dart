@@ -68,9 +68,9 @@ class BottomLine extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
         border: Border.all(
-          color:Palette.kToBlue[600]!,  
+          color:Palette.kToBlack[400]!,  
         ),
-        color:Palette.kToBlue[600],
+        color:Palette.kToBlack[400],
       ),  
     );
   }
@@ -108,7 +108,7 @@ class BankName extends StatelessWidget {
       fit:BoxFit.fill,
       child:Text(name,
         style: TextStyle(
-          color: selected ? Palette.kToBlue[600] :Palette.kToBlack[200],
+          color: selected ? Palette.kToBlack[400] :Palette.kToBlack[400],
         ),  
       )
     );
