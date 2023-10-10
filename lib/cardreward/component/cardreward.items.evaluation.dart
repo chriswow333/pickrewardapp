@@ -84,8 +84,6 @@ class EvaluationItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                // if(expanded)
-                //   EvaluationProgressContent(cardRewardModel: cardRewardModel),
               ], 
             ),
           )

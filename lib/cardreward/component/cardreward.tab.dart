@@ -70,28 +70,57 @@ class EvaluationTabBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context, listen:false);
+    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context,);
 
-    return TextButton(
-      onPressed: (){
-        cardRewardTabViewModel.changeCardRewardType = CardRewardTypeEnum.evaluation;
-      },
-      child:Row(
-        children:[
-          Icon(
-            Icons.monetization_on_outlined,
-            color: Palette.kToBlack[600],
-            size: 18,
-          ),
-          SizedBox(width:2),
-          Text('回饋',
-            style:TextStyle(
-              color:Palette.kToBlack[600],
-              fontSize: 16,
+    return Container(
+      width:70,
+      child:TextButton(
+        onPressed: (){
+          cardRewardTabViewModel.changeCardRewardType = CardRewardTypeEnum.evaluation;
+        },
+        child:Column(
+          children:[
+            Row(
+              children:[
+                Icon(
+                  Icons.monetization_on_outlined,
+                  color: Palette.kToBlack[600],
+                  size: 18,
+                ),
+                SizedBox(width:2),
+                Text('回饋',
+                  style:TextStyle(
+                    color:Palette.kToBlack[600],
+                    fontSize: 16,
+                  ),
+                ),    
+              ]
             ),
-          ),    
-        ]
+             if(cardRewardTabViewModel.cardRewardType == CardRewardTypeEnum.evaluation)
+              BottomLine(),
+          ]
+        )
       )
+    );
+  }
+}
+
+
+class BottomLine extends StatelessWidget {
+  const BottomLine({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlack[400]!, 
+          // width: 10,
+        ),
+        color:Palette.kToBlack[400],
+        
+      ),
+    
     );
   }
 }
@@ -101,28 +130,39 @@ class ActivityTabBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context, listen:false);
+    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
 
-    return TextButton(
+    return Container(
+      width:70,
+      child:TextButton(
         onPressed: (){
             cardRewardTabViewModel.changeCardRewardType = CardRewardTypeEnum.activity;
         },
-        child:Row(
+        child:Column(
           children:[
-            Icon(
-              Icons.event_available_outlined,
-              color: Palette.kToBlack[600],
-              size: 18,
+            Row(
+              children:[
+                Icon(
+                  Icons.event_available_outlined,
+                  color: Palette.kToBlack[600],
+                  size: 18,
+                ),
+                SizedBox(width:2),
+                Text('活動',
+                  style:TextStyle(
+                    color:Palette.kToBlack[600],
+                    fontSize: 16,
+                  ),
+                ),    
+              ]
             ),
-            SizedBox(width:2),
-            Text('活動',
-              style:TextStyle(
-                color:Palette.kToBlack[600],
-                fontSize: 16,
-              ),
-            ),    
+            if(cardRewardTabViewModel.cardRewardType == CardRewardTypeEnum.activity)
+              BottomLine()
           ]
         )
-      );
+      )
+    );
+    
+    ;
   }
 }

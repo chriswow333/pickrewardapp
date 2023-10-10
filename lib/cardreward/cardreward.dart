@@ -64,7 +64,7 @@ class CardContentPage extends StatelessWidget {
           CarTab(),
           Expanded(
             child:CardRewardComponent(),
-          )
+          ),
           
         ]
       );
