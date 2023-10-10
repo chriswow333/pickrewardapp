@@ -2,17 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
 import 'package:pickrewardapp/shared/repository/card/card.dart';
 import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 
 class CardRewardViewModel with ChangeNotifier {
 
-  final List<CardRewardModel> _cardRewardModels = [];
+  final List<CardRewardModel> _activityCardRewardModels = [];
 
-  List<CardRewardModel> get() => _cardRewardModels;
+  List<CardRewardModel> get activityCardRewardModels => _activityCardRewardModels;
+  
+  
+  final List<CardRewardModel> _evaluationCardRewardModels = [];
+  List<CardRewardModel> get evaluationCardRewardModels => _evaluationCardRewardModels;
 
-  final Map<String, bool> _cardRewardExpanded = {};
+
+
+
+  // final Map<String, bool> _cardRewardExpanded = {};
 
   CardRewardModel? expandedCardRewardEvaluation;
 
@@ -23,38 +31,41 @@ class CardRewardViewModel with ChangeNotifier {
   }
 
 
-  void toggleCardReward(String cardRewardID) {
-    _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
+  // void toggleCardReward(String cardRewardID) {
+    // _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
     
-    for(CardRewardModel c in _cardRewardModels) {
-      if(c.id == cardRewardID) {
-        if(c.cardRewardType == 1) {
-          if(expandedCardRewardEvaluation == null) {
-            expandedCardRewardEvaluation = c;
-          }else {
-            expandedCardRewardEvaluation = null;
-          }
-        }else {
-          expandedCardRewardEvaluation = null; 
-        }
-        break;
-      }
-    }
+    // for(CardRewardModel c in _cardRewardModels) {
+    //   if(c.id == cardRewardID) {
+    //     if(c.cardRewardType == 1) {
+    //       if(expandedCardRewardEvaluation == null) {
+    //         expandedCardRewardEvaluation = c;
+    //       }else {
+    //         expandedCardRewardEvaluation = null;
+    //       }
+    //     }else {
+    //       expandedCardRewardEvaluation = null; 
+    //     }
+    //     break;
+    //   }
+    // }
 
-    notifyListeners();
-  }
+    // notifyListeners();
+  // }
 
-  bool getCardRewardExpandStatus(String cardRewardID) {
-    return _cardRewardExpanded[cardRewardID]!;
-  }
+  // bool getCardRewardExpandStatus(String cardRewardID) {
+  //   return _cardRewardExpanded[cardRewardID]!;
+  // }
   
 
 
+  bool fetchedCardRewards = false;
   static int initLimit = 1000;
   static int initOffset = 0;
   Future<void> _fetchCardRewards(String cardID) async{ 
     
-    if (_cardRewardModels.isNotEmpty) return;
+    if (fetchedCardRewards) return;
+
+    fetchedCardRewards = true;
 
     try {
       
@@ -63,11 +74,9 @@ class CardRewardViewModel with ChangeNotifier {
       cardRewardsByCardIDReq.limit = initLimit;
       cardRewardsByCardIDReq.offset = initOffset;
 
-      
       CardRewardsReply cardRewardsReply = await CardService().cardClient.getCardRewardsByCardID(cardRewardsByCardIDReq);
 
       for(final c in cardRewardsReply.cardRewards) {
-
 
         CardRewardModel cardRewardModel = CardRewardModel(
           id: c.id,
@@ -95,9 +104,11 @@ class CardRewardViewModel with ChangeNotifier {
         );
 
 
-        _cardRewardModels.add(cardRewardModel);
-
-        _cardRewardExpanded[c.id] = false;
+        if(cardRewardModel.cardRewardType == CardRewardTypeEnum.activity.cardRewardType) {
+          _activityCardRewardModels.add(cardRewardModel);
+        }else if(cardRewardModel.cardRewardType == CardRewardTypeEnum.evaluation.cardRewardType) {
+          _evaluationCardRewardModels.add(cardRewardModel);
+        }
       }
 
       notifyListeners();

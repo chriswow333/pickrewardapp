@@ -4,20 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:provider/provider.dart';
 
-class ActivityItem extends StatelessWidget {
+
+class ActivityItem extends StatefulWidget {
   const ActivityItem({super.key, required this.cardRewardModel});
 
   final CardRewardModel cardRewardModel;
 
   @override
-  Widget build(BuildContext context) {
+  State<ActivityItem> createState() => _ActivityItemState();
+}
 
-    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
-    
-    bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
-    
+class _ActivityItemState extends State<ActivityItem> {
+
+  bool expanded = false;
+
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
@@ -55,7 +59,10 @@ class ActivityItem extends StatelessWidget {
                 splashFactory:NoSplash.splashFactory,
               ),
               onPressed: (){
-                cardRewardViewModel.toggleCardReward(cardRewardModel.id);
+                setState(() {
+                  expanded = !expanded;
+                });
+                // cardRewardViewModel.toggleCardReward(cardRewardModel.id);
               },
               child:Wrap(
                 runAlignment: WrapAlignment.start,
@@ -65,24 +72,21 @@ class ActivityItem extends StatelessWidget {
                     children:[
                       ActivityRewardType(),
                       SizedBox(width:5),
-                      CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
+                      CardRewardDurationMessage(startDate: widget.cardRewardModel.startDate, endDate: widget.cardRewardModel.endDate,),
                     ]
                   ),
-                  CardRewardDuration(startDateTime: cardRewardModel.startDate, endDateTime: cardRewardModel.endDate,),
-                  ActivityName(name:cardRewardModel.name),
+                  CardRewardDuration(startDateTime: widget.cardRewardModel.startDate, endDateTime: widget.cardRewardModel.endDate,),
+                  ActivityName(name:widget.cardRewardModel.name),
                 ]
               )
             ),
             if(expanded)
-              CardActivityDetails(cardRewardDescModels: cardRewardModel.descriptions,),
+              CardActivityDetails(cardRewardDescModels: widget.cardRewardModel.descriptions,),
           ]
         )
     );
   }
 }
-
-
-
 
 
 class CardRewardDuration extends StatelessWidget {

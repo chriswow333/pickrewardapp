@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -18,30 +18,21 @@ import 'package:provider/provider.dart';
 
 
 class EvaluationProgressContent extends StatelessWidget {
-  const EvaluationProgressContent({super.key, required this.cardRewardModel});
-
-  final CardRewardModel cardRewardModel;
+  const EvaluationProgressContent({super.key,});
 
   @override
   Widget build(BuildContext context) {
-    
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    evaluationSelectedViewModel.cardRewardModel = cardRewardModel;
 
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Divider(
-            color:Palette.kToBlack[50],
-          ),
-          CardRewardEvaluationProgress(evaluationViewModel:evaluationViewModel, cardRewardModel: cardRewardModel,),
+          CardRewardEvaluationProgress(),
           SizedBox(height:25),
           Divider(
             color:Palette.kToBlack[50],
           ),
-          CardRewardEvaluationDetails(cardRewardDescModels:cardRewardModel.descriptions),
+          CardRewardEvaluationDetails(),
         ],
       ),
     );
@@ -50,9 +41,7 @@ class EvaluationProgressContent extends StatelessWidget {
 
 
 class CardRewardEvaluationProgress extends StatefulWidget {
-  const CardRewardEvaluationProgress({super.key, required this.evaluationViewModel, required this.cardRewardModel});
-  final EvaluationViewModel evaluationViewModel;
-  final CardRewardModel cardRewardModel;
+  const CardRewardEvaluationProgress({super.key,});
 
   @override
   State<CardRewardEvaluationProgress> createState() => _CardRewardEvaluationProgressState();
@@ -72,16 +61,18 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
 
   @override
   void initState(){
-    widget.evaluationViewModel.fetchEvaluationResp(widget.cardRewardModel.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
+        SizedBox(height:10),
         EvaluationProgressTitle(),
         SizedBox(height:10),
         EvaluationProgressBar(changeEvaluationProgress:changeEvaluationProgress, progress:_progress),
@@ -99,9 +90,7 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
 
 
 class CardRewardEvaluationDetails extends StatefulWidget {
-  const CardRewardEvaluationDetails({super.key, required this.cardRewardDescModels});
-  
-  final List<DescriptionModel> cardRewardDescModels;
+  const CardRewardEvaluationDetails({super.key,});
 
   @override
   State<CardRewardEvaluationDetails> createState() => _CardRewardEvaluationDetailsState();
@@ -121,13 +110,19 @@ class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetail
   @override
   Widget build(BuildContext context) {
 
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
+
+    if(cardRewardModel == null)return Container();
+
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           CardRewardEvaluationDetailTitle(expanded:expanded, toggleExpanded: toggleExpanded,),
           if(expanded)
-            for (final c in widget.cardRewardDescModels) 
+            for (final c in cardRewardModel.descriptions) 
               CardRewradEvaluationDetail(cardRewardDescModel: c,),
         ],
       ),

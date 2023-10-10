@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:provider/provider.dart';
@@ -16,26 +17,21 @@ class EvaluationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context, listen:false);
-    evaluationViewModel.fetchEvaluationResp(cardRewardModel.id);
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context, listen:false);
 
-    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
-
-    // bool expanded = cardRewardViewModel.getCardRewardExpandStatus(cardRewardModel.id);
-    bool expanded = true;
-
+    
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(
-          color:expanded?Palette.kToBlack[50]!:Colors.white,
+          color:Colors.white,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-        color:expanded?null: Palette.kToBlue[50],
-        boxShadow: expanded?null:[
+        color: Palette.kToBlue[50],
+        boxShadow:[
           BoxShadow(
             color: Palette.kToBlack[200]!,
             offset: const Offset(
@@ -65,7 +61,9 @@ class EvaluationItem extends StatelessWidget {
                     splashFactory:NoSplash.splashFactory,
                   ),
                   onPressed: (){
-                    cardRewardViewModel.toggleCardReward(cardRewardModel.id);
+                    evaluationViewModel.setCardReward(cardRewardModel);
+                    evaluationSelectedViewModel.setCardRewardModel = cardRewardModel;
+
                   },
                   child:Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,8 +84,8 @@ class EvaluationItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                if(expanded)
-                  EvaluationProgressContent(cardRewardModel: cardRewardModel),
+                // if(expanded)
+                //   EvaluationProgressContent(cardRewardModel: cardRewardModel),
               ], 
             ),
           )

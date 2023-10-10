@@ -7,12 +7,12 @@ import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 class EvaluationSelectedViewModel with ChangeNotifier {
 
   CardRewardModel? _cardRewardModel;
-  set cardRewardModel(CardRewardModel? cardRewardModel){
+
+  set setCardRewardModel(CardRewardModel? cardRewardModel){
     _cardRewardModel = cardRewardModel;
   }
+
   CardRewardModel? get cardRewardModel => _cardRewardModel;
-
-
 
   bool _evaluated = false;
   set evaluated(bool action) { 

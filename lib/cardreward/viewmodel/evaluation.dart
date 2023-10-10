@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/evaluation.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 
@@ -10,14 +11,33 @@ import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evalu
 
 class EvaluationViewModel with ChangeNotifier{
 
-    
+  EvaluationViewModel() {
+    EvaluationService().init();
+  }
+
+  bool _selectedEvaluationItem = false;
+  CardRewardModel? _cardRewardModel; 
+
+  Future<void> setCardReward(CardRewardModel cardRewardModel) async{
+    _selectedEvaluationItem = true;
+    _cardRewardModel = cardRewardModel;
+    await fetchEvaluationResp(cardRewardModel.id);
+  }
+
+  backToCardRewardItems(){
+    _selectedEvaluationItem = false;
+    notifyListeners();
+  }
+
+
+  get selectedEvaluationItem => _selectedEvaluationItem;
+
+  get cardRewardModel => _cardRewardModel;
+  
   EvaluationResp? _resp;
   
   EvaluationResp? get evaluationResp => _resp;
 
-  EvaluationViewModel() {
-    EvaluationService().init();
-  }
 
   Future<void> fetchEvaluationResp(String cardRewardID) async {
     try {

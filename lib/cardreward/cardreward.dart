@@ -5,6 +5,7 @@ import 'package:pickrewardapp/cardreward/component/cardreward.header.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
@@ -37,7 +38,9 @@ class CardContentScreen extends StatelessWidget {
             // ChangeNotifierProvider<EvaluationChannelCategoryViewModel>(create:(_)=>EvaluationChannelCategoryViewModel()),
             ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel()), // TODO
             ChangeNotifierProvider<EvaluationEventResultRespViewModel>(create:(_)=>EvaluationEventResultRespViewModel()),
-       
+            ChangeNotifierProvider<CardRewardTabViewModel>(create:(_)=>CardRewardTabViewModel()),
+
+            
           ],
           child:CardContentPage(),
         )
