@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/channel_search/model/channel.dart';
+import 'package:pickrewardapp/channel_search/model/channel_category.dart';
+import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
 
 
 import 'package:pickrewardapp/shared/repository/channel/channel.dart';
@@ -128,33 +131,6 @@ class ChannelViewModel with ChangeNotifier {
     }).catchError((error){
       print(error);
     });
-
-      // for (ChannelReply_Channel channel in value.channels){
-      //   channelItemModels.add(ChannelItemModel(
-      //     id:channel.id,
-      //     name:channel.name,
-      //     image:channel.image,
-      //     linkURL: channel.linkURL,
-      //     descriptions: channel.descriptions,
-      //     channelCategoryType: channel.channelCategoryType,
-      //     createDate: channel.createDate as int,
-      //     updateDate:channel.updateDate as int,
-      //     labels:channel.labels,
-      //     channelStatus: channel.channelStatus,
-      //   ));
-      // }
-
-      // _channelModels[channelCategoryType] = channelItemModels;
-
-      // if(channelItemModels.length == initLimit) {
-      //   _hasMoreChannels[channelCategoryType] = true;
-      // }else {
-      //   _hasMoreChannels[channelCategoryType] = false;
-      // }
-      // notifyListeners();
-    // }).catchError((error){
-    //   print(error);
-    // });
   }
 
 
@@ -180,47 +156,6 @@ class ChannelViewModel with ChangeNotifier {
       print(error);
     });
 
-
-
-
-
-    // _getChannelsByChannelCategoryTypeApi(channelCategoryType, offset, eachLimit).then((value){
-    //   List<ChannelItemModel> channelItemModels = [];
-      
-    //   for (ChannelProto channelProto in value.channelProto){
-        
-    //     List<ChannelLabelModel> channelLabelModels = [];
-    //     for (ChannelLabelProto channelLabelProto in channelProto.channelLabelProtos){
-    //       channelLabelModels.add(
-    //         ChannelLabelModel(
-    //           id:channelLabelProto.id,
-    //           name: channelLabelProto.name,
-    //           order:channelLabelProto.order,
-    //         ) 
-    //       );
-    //     }
-
-    //     channelItemModels.add(ChannelItemModel(
-    //       id:channelProto.id,
-    //       name:channelProto.name,
-    //       image:channelProto.image,
-    //       channelCategoryType: channelProto.channelCategoryType,
-    //       channelLabels: channelLabelModels,
-    //     ));
-    //   }
-      
-
-    //   _channelModels[channelCategoryType]!.addAll(channelItemModels);
-
-    //   if(channelItemModels.length == limit) {
-    //     _hasMoreChannels[channelCategoryType] = true;
-    //   }else {
-    //     _hasMoreChannels[channelCategoryType] = false;
-    //   }
-    //   notifyListeners();
-    // }).catchError((error){
-    //   print(error);
-    // });
   }
 
   List<ChannelItemModel> getChannelsByChannelCategoryType(int channelCategoryType) {
@@ -286,68 +221,4 @@ class ChannelViewModel with ChangeNotifier {
 
 }
 
-
-class ChannelGlobalKeyModel {
-  final GlobalKey channelItem;
-  final GlobalKey channelCategory;
-  final int id;
-  ChannelGlobalKeyModel({
-    required this.id,
-    required this.channelItem,
-    required this.channelCategory
-  }); 
-}
-
-class ChannelCategoryTypeModel {
-  final int categoryType;
-  final String name;
-  final int order;
-
-  ChannelCategoryTypeModel({
-    required this.categoryType, 
-    required this.name, 
-    required this.order
-  });
-}
-
-class ChannelItemModel {
-
-  final String id;
-  final String name;
-  final String image;
-  final String linkURL;
-  final List<String> descriptions;
-  final int channelCategoryType;
-  final int createDate;
-  final int updateDate;
-  final List<int> labels;
-  // final List<ChannelLabelModel> channelLabels;
-  final int channelStatus;
-
-  ChannelItemModel({
-    required this.id, 
-    required this.name, 
-    required this.image, 
-    required this.linkURL, 
-    required this.descriptions, 
-    required this.channelCategoryType, 
-    required this.createDate, 
-    required this.updateDate, 
-    required this.labels, 
-    required this.channelStatus
-  });
-
-}
-
-// class ChannelLabelModel {
-//   final int id;
-//   final String name;
-//   final int order;
-
-//   ChannelLabelModel({
-//     required this.id, 
-//     required this.name, 
-//     required this.order
-//   });
-// }
 

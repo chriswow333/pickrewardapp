@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/card/model/bank.dart';
 
 
 import 'package:pickrewardapp/shared/repository/card/card.dart';
@@ -51,9 +52,3 @@ class BankViewModel with ChangeNotifier{
 }
 
 
-class BankModel {
-  BankModel(this.name, this.id, this.image,);
-  final String name;
-  final String id;
-  final String image;
-}

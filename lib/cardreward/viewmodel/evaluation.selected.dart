@@ -2,7 +2,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 
 class EvaluationSelectedViewModel with ChangeNotifier {
 

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/evaluation.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';

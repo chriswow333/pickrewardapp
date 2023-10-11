@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.channel.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.evaluate.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
+import 'package:pickrewardapp/cardreward/model/evaluation_progress.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.prgress.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 

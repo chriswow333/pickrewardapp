@@ -347,6 +347,55 @@ final $typed_data.Uint8List evaluationEventResultRespDescriptor = $convert.base6
     'dFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEoBVIZZmVlZGJhY2'
     'tFdmVudFJlc3VsdFN0YXR1cw==');
 
+@$core.Deprecated('Use searchCardReqDescriptor instead')
+const SearchCardReq$json = {
+  '1': 'SearchCardReq',
+  '2': [
+    {'1': 'keyword', '3': 1, '4': 1, '5': 9, '10': 'keyword'},
+  ],
+};
+
+/// Descriptor for `SearchCardReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List searchCardReqDescriptor = $convert.base64Decode(
+    'Cg1TZWFyY2hDYXJkUmVxEhgKB2tleXdvcmQYASABKAlSB2tleXdvcmQ=');
+
+@$core.Deprecated('Use searchCardReplyDescriptor instead')
+const SearchCardReply$json = {
+  '1': 'SearchCardReply',
+  '2': [
+    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.card.Reply', '10': 'reply'},
+    {'1': 'cards', '3': 2, '4': 3, '5': 11, '6': '.card.SearchCardReply.Card', '10': 'cards'},
+  ],
+  '3': [SearchCardReply_Card$json],
+};
+
+@$core.Deprecated('Use searchCardReplyDescriptor instead')
+const SearchCardReply_Card$json = {
+  '1': 'Card',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'descriptions', '3': 3, '4': 3, '5': 9, '10': 'descriptions'},
+    {'1': 'image', '3': 4, '4': 1, '5': 9, '10': 'image'},
+    {'1': 'createDate', '3': 5, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 6, '4': 1, '5': 3, '10': 'updateDate'},
+    {'1': 'linkURL', '3': 7, '4': 1, '5': 9, '10': 'linkURL'},
+    {'1': 'bankID', '3': 8, '4': 1, '5': 9, '10': 'bankID'},
+    {'1': 'order', '3': 9, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'cardStatus', '3': 10, '4': 1, '5': 5, '10': 'cardStatus'},
+  ],
+};
+
+/// Descriptor for `SearchCardReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List searchCardReplyDescriptor = $convert.base64Decode(
+    'Cg9TZWFyY2hDYXJkUmVwbHkSIQoFcmVwbHkYASABKAsyCy5jYXJkLlJlcGx5UgVyZXBseRIwCg'
+    'VjYXJkcxgCIAMoCzIaLmNhcmQuU2VhcmNoQ2FyZFJlcGx5LkNhcmRSBWNhcmRzGowCCgRDYXJk'
+    'Eg4KAmlkGAEgASgJUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiIKDGRlc2NyaXB0aW9ucxgDIA'
+    'MoCVIMZGVzY3JpcHRpb25zEhQKBWltYWdlGAQgASgJUgVpbWFnZRIeCgpjcmVhdGVEYXRlGAUg'
+    'ASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBiABKANSCnVwZGF0ZURhdGUSGAoHbGlua1'
+    'VSTBgHIAEoCVIHbGlua1VSTBIWCgZiYW5rSUQYCCABKAlSBmJhbmtJRBIUCgVvcmRlchgJIAEo'
+    'BVIFb3JkZXISHgoKY2FyZFN0YXR1cxgKIAEoBVIKY2FyZFN0YXR1cw==');
+
 @$core.Deprecated('Use emptyReqDescriptor instead')
 const EmptyReq$json = {
   '1': 'EmptyReq',

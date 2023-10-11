@@ -3,6 +3,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -25,7 +26,7 @@ class CardEvaluationDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           EvaluationDetailTitle(),
-          if (evaluationDetailToggleViewModel.get())
+          if (evaluationDetailToggleViewModel.expanded)
             for (final d in cardRewardDesc)  
               CardEvaluationDetail(cardRewardDescModel: d,),
         ],
@@ -112,7 +113,7 @@ class EvaluationDetailTitle extends StatelessWidget {
   Widget build(BuildContext context) {
 
     EvaluationDetailToggleViewModel evaluationDetailToggleViewModel = Provider.of<EvaluationDetailToggleViewModel>(context);
-    bool expanded = evaluationDetailToggleViewModel.get();
+    bool expanded = evaluationDetailToggleViewModel.expanded;
     IconData icon = expanded? Icons.arrow_drop_up_rounded:Icons.arrow_drop_down_rounded;
     return Container(
       child:TextButton(

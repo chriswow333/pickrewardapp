@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 

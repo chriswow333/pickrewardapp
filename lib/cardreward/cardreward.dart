@@ -6,13 +6,12 @@ import 'package:pickrewardapp/cardreward/component/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.channel.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/global_padding.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
+import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
 

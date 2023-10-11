@@ -1472,6 +1472,222 @@ class EvaluationEventResultResp extends $pb.GeneratedMessage {
   EvaluationEventResultResp_FeedbackEventResultResp ensureFeedbackEventResultResp() => $_ensure(1);
 }
 
+class SearchCardReq extends $pb.GeneratedMessage {
+  factory SearchCardReq() => create();
+  SearchCardReq._() : super();
+  factory SearchCardReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchCardReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'keyword')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SearchCardReq clone() => SearchCardReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SearchCardReq copyWith(void Function(SearchCardReq) updates) => super.copyWith((message) => updates(message as SearchCardReq)) as SearchCardReq;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReq create() => SearchCardReq._();
+  SearchCardReq createEmptyInstance() => create();
+  static $pb.PbList<SearchCardReq> createRepeated() => $pb.PbList<SearchCardReq>();
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchCardReq>(create);
+  static SearchCardReq? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get keyword => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set keyword($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasKeyword() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKeyword() => clearField(1);
+}
+
+class SearchCardReply_Card extends $pb.GeneratedMessage {
+  factory SearchCardReply_Card() => create();
+  SearchCardReply_Card._() : super();
+  factory SearchCardReply_Card.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchCardReply_Card.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply.Card', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..pPS(3, _omitFieldNames ? '' : 'descriptions')
+    ..aOS(4, _omitFieldNames ? '' : 'image')
+    ..aInt64(5, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
+    ..aInt64(6, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
+    ..aOS(7, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
+    ..aOS(8, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SearchCardReply_Card clone() => SearchCardReply_Card()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SearchCardReply_Card copyWith(void Function(SearchCardReply_Card) updates) => super.copyWith((message) => updates(message as SearchCardReply_Card)) as SearchCardReply_Card;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReply_Card create() => SearchCardReply_Card._();
+  SearchCardReply_Card createEmptyInstance() => create();
+  static $pb.PbList<SearchCardReply_Card> createRepeated() => $pb.PbList<SearchCardReply_Card>();
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReply_Card getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchCardReply_Card>(create);
+  static SearchCardReply_Card? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get descriptions => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.String get image => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set image($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasImage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearImage() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get createDate => $_getI64(4);
+  @$pb.TagNumber(5)
+  set createDate($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCreateDate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCreateDate() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get updateDate => $_getI64(5);
+  @$pb.TagNumber(6)
+  set updateDate($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasUpdateDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUpdateDate() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get linkURL => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set linkURL($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasLinkURL() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearLinkURL() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get bankID => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set bankID($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasBankID() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBankID() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.int get order => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set order($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasOrder() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearOrder() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.int get cardStatus => $_getIZ(9);
+  @$pb.TagNumber(10)
+  set cardStatus($core.int v) { $_setSignedInt32(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasCardStatus() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearCardStatus() => clearField(10);
+}
+
+class SearchCardReply extends $pb.GeneratedMessage {
+  factory SearchCardReply() => create();
+  SearchCardReply._() : super();
+  factory SearchCardReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchCardReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
+    ..pc<SearchCardReply_Card>(2, _omitFieldNames ? '' : 'cards', $pb.PbFieldType.PM, subBuilder: SearchCardReply_Card.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SearchCardReply clone() => SearchCardReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SearchCardReply copyWith(void Function(SearchCardReply) updates) => super.copyWith((message) => updates(message as SearchCardReply)) as SearchCardReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReply create() => SearchCardReply._();
+  SearchCardReply createEmptyInstance() => create();
+  static $pb.PbList<SearchCardReply> createRepeated() => $pb.PbList<SearchCardReply>();
+  @$core.pragma('dart2js:noInline')
+  static SearchCardReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchCardReply>(create);
+  static SearchCardReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Reply get reply => $_getN(0);
+  @$pb.TagNumber(1)
+  set reply(Reply v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReply() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReply() => clearField(1);
+  @$pb.TagNumber(1)
+  Reply ensureReply() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<SearchCardReply_Card> get cards => $_getList(1);
+}
+
 class EmptyReq extends $pb.GeneratedMessage {
   factory EmptyReq() => create();
   EmptyReq._() : super();

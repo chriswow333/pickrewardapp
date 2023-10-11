@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/shared/model/card.dart';
 
 import 'package:pickrewardapp/shared/repository/card/card.dart';
 import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
@@ -128,47 +129,6 @@ class CardItemViewModel with ChangeNotifier {
 }
 
 
-class CardItemModel {
-
-  final String id;
-  final String name;
-  final List<String> descriptions;
-  final String image;
-  int createDate;
-  int updateDate;
-  String linkURL;
-  String bankID;
-  int order;
-  int cardStatus;
-
-  CardItemModel({
-    required this.id,
-    required this.name,
-    required this.descriptions,
-    required this.image,
-    required this.createDate,
-    required this.updateDate,
-    required this.linkURL,
-    required this.bankID,
-    required this.order,
-    required this.cardStatus,
-  });
-}
 
 
 
-class CardHeaderItemModel {
-
-  final String id;
-  final String name;
-  final List<String> descriptions;
-  final String image;
- 
-
-  CardHeaderItemModel({
-    required this.id,
-    required this.name,
-    required this.descriptions,
-    required this.image,
-  });
-}

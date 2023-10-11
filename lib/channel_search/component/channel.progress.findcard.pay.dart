@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/pay.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 

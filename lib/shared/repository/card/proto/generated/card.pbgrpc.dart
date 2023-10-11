@@ -40,6 +40,10 @@ class CardClient extends $grpc.Client {
       '/card.Card/EvaluateCards',
       ($0.CardEventReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.EvaluateCardRewardsReply.fromBuffer(value));
+  static final _$searchCard = $grpc.ClientMethod<$0.SearchCardReq, $0.SearchCardReply>(
+      '/card.Card/SearchCard',
+      ($0.SearchCardReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.SearchCardReply.fromBuffer(value));
 
   CardClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -65,6 +69,10 @@ class CardClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.EvaluateCardRewardsReply> evaluateCards($0.CardEventReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$evaluateCards, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SearchCardReply> searchCard($0.SearchCardReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$searchCard, request, options: options);
   }
 }
 
@@ -108,6 +116,13 @@ abstract class CardServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CardEventReq.fromBuffer(value),
         ($0.EvaluateCardRewardsReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SearchCardReq, $0.SearchCardReply>(
+        'SearchCard',
+        searchCard_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SearchCardReq.fromBuffer(value),
+        ($0.SearchCardReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.BanksReply> getAllBanks_Pre($grpc.ServiceCall call, $async.Future<$0.AllBanksReq> request) async {
@@ -130,9 +145,14 @@ abstract class CardServiceBase extends $grpc.Service {
     return evaluateCards(call, await request);
   }
 
+  $async.Future<$0.SearchCardReply> searchCard_Pre($grpc.ServiceCall call, $async.Future<$0.SearchCardReq> request) async {
+    return searchCard(call, await request);
+  }
+
   $async.Future<$0.BanksReply> getAllBanks($grpc.ServiceCall call, $0.AllBanksReq request);
   $async.Future<$0.CardsReply> getLatestCards($grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.CardsReply> getCardsByBankID($grpc.ServiceCall call, $0.CardsByBankIDReq request);
   $async.Future<$0.CardRewardsReply> getCardRewardsByCardID($grpc.ServiceCall call, $0.CardRewardsByCardIDReq request);
   $async.Future<$0.EvaluateCardRewardsReply> evaluateCards($grpc.ServiceCall call, $0.CardEventReq request);
+  $async.Future<$0.SearchCardReply> searchCard($grpc.ServiceCall call, $0.SearchCardReq request);
 }

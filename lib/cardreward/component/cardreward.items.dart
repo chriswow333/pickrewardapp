@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.activity.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.dart';
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';

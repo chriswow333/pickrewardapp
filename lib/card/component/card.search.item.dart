@@ -1,85 +1,108 @@
 
 
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
-import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
+import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/model/card.dart';
+import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
-
-
-class CardItems extends StatelessWidget {
-  const CardItems({super.key});
+class CardSearchItems extends StatelessWidget {
+  const CardSearchItems({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
-    
-    final bankID = cardItemViewModel.bankID;
-
-    if(bankID == "") {
-      List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
-      if(cardItemModels.isEmpty) {
-        cardItemViewModel.fetchLatestCards();
-      }
-      
-      return Container(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            Text('近期更新',
-              style: TextStyle(
-                color:Palette.kToBlack[600],
-              ),
-            ),
-            Expanded(
-              child:SingleChildScrollView(
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    for(CardItemModel cardItemModel in cardItemModels)
-                      CardItem(cardItemModel:cardItemModel),
-                  ],
-                ),
-              ),
-            ),
-          ]
-        )
-        
-      );
-    }
-
-
-    List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
-
-    return Container(
+    SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
+    bool loading = searchCardViewModel.loading;
+    return Expanded(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text('卡片列表',
+          Text('搜尋結果',
             style: TextStyle(
               color:Palette.kToBlack[600],
             ),
           ),
-          Expanded(
-            child:SingleChildScrollView(
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  for(CardItemModel cardItemModel in cardItemModels)
-                    CardItem(cardItemModel:cardItemModel),
-                ],
+          if(loading)
+            LoadingItem(),
+
+          if(!loading)
+            SearchItems(),
+        ],
+      )
+    );
+  }
+}
+
+class LoadingItem extends StatelessWidget {
+  const LoadingItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          SizedBox(
+            width:40,
+            height:40,
+            child:CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(
+                Palette.kToBlue[600]
               ),
-            ),
+            )
           ),
         ]
       )
+    );
+  }
+}
+
+
+class SearchItems extends StatelessWidget {
+  const SearchItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
+    List<CardItemModel> cardItemModels = searchCardViewModel.searchItemModels;
+
+    return Expanded(
+      child:SingleChildScrollView(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            if(searchCardViewModel.searched && cardItemModels.isEmpty) 
+              EmptyItem(),
+
+            for(CardItemModel c in cardItemModels)
+              CardItem(cardItemModel: c,)
+          ]
+        )
+      )
+    );
+  }
+}
+
+class EmptyItem extends StatelessWidget {
+  const EmptyItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          Text('查無資料'),
+        ]
+      )
+      
+      
     );
   }
 }

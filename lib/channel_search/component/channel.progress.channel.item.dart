@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/channel.dart';
+import 'package:pickrewardapp/channel_search/model/channel_category.dart';
+import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
+import 'package:pickrewardapp/channel_search/model/label.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/label.item.dart';
 import 'package:provider/provider.dart';
 
 

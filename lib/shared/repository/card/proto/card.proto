@@ -15,8 +15,9 @@ service Card {
   rpc GetCardRewardsByCardID(CardRewardsByCardIDReq) returns (CardRewardsReply){}
 
   rpc EvaluateCards(CardEventReq) returns (EvaluateCardRewardsReply){}
-}
 
+  rpc SearchCard(SearchCardReq) returns (SearchCardReply){}
+}
 
 
 message Reply {
@@ -191,6 +192,29 @@ message EvaluationEventResultResp{
 
 
 
+
+message SearchCardReq{
+  string keyword = 1;
+}
+
+
+message SearchCardReply{
+  message Card {
+    string id = 1;
+    string name = 2;
+    repeated string descriptions = 3;
+    string image = 4;
+    int64 createDate = 5;
+    int64 updateDate = 6;
+    string linkURL = 7;
+    string bankID = 8;
+    int32 order = 9;
+    int32 cardStatus = 10;
+  }
+  
+  Reply reply = 1;
+  repeated Card cards = 2;
+}
 
 
 

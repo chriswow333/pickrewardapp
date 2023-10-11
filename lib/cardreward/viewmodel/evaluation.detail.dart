@@ -13,7 +13,6 @@ class EvaluationDetailToggleViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-
-  get() => _expanded;
+  get expanded => _expanded;
 
 }

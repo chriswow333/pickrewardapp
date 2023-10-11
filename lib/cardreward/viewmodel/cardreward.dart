@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
+import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:pickrewardapp/shared/repository/card/card.dart';
 import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 
 class CardRewardViewModel with ChangeNotifier {
 
@@ -18,10 +19,6 @@ class CardRewardViewModel with ChangeNotifier {
   List<CardRewardModel> get evaluationCardRewardModels => _evaluationCardRewardModels;
 
 
-
-
-  // final Map<String, bool> _cardRewardExpanded = {};
-
   CardRewardModel? expandedCardRewardEvaluation;
 
 
@@ -29,34 +26,6 @@ class CardRewardViewModel with ChangeNotifier {
     CardService().init();
     _fetchCardRewards(cardID);
   }
-
-
-  // void toggleCardReward(String cardRewardID) {
-    // _cardRewardExpanded[cardRewardID] = !_cardRewardExpanded[cardRewardID]!;
-    
-    // for(CardRewardModel c in _cardRewardModels) {
-    //   if(c.id == cardRewardID) {
-    //     if(c.cardRewardType == 1) {
-    //       if(expandedCardRewardEvaluation == null) {
-    //         expandedCardRewardEvaluation = c;
-    //       }else {
-    //         expandedCardRewardEvaluation = null;
-    //       }
-    //     }else {
-    //       expandedCardRewardEvaluation = null; 
-    //     }
-    //     break;
-    //   }
-    // }
-
-    // notifyListeners();
-  // }
-
-  // bool getCardRewardExpandStatus(String cardRewardID) {
-  //   return _cardRewardExpanded[cardRewardID]!;
-  // }
-  
-
 
   bool fetchedCardRewards = false;
   static int initLimit = 1000;
@@ -133,56 +102,3 @@ class CardHeaderViewModel with ChangeNotifier {
 }
 
 
-class CardRewardModel {
-
-  final String id;
-  final String cardID;
-  final String name;
-  final List<DescriptionModel> descriptions;
-  final DateTime createDate;
-  final DateTime updateDate;
-
-  final DateTime startDate;
-  final DateTime endDate;
-  final int cardRewardType;
-  final RewardModel reward;
-  final int order;
-
-
-  CardRewardModel({
-    required this.id,
-    required this.cardID,
-    required this.name,
-    required this.descriptions,
-    required this.createDate,
-    required this.updateDate,
-    required this.startDate,
-    required this.endDate,
-    required this.cardRewardType,
-    required this.reward,
-    required this.order,
-  });
-
-}
-
-class RewardModel {
-  final String id;
-  final String name;
-  final int rewardType;
-  final int createDate;
-  final int updateDate;
-  RewardModel({required this.id, required this.rewardType, required this.name, required this.createDate, required this.updateDate});
-}
-
-class DescriptionModel {
-  
-  final String name;
-  final int order;
-  final List<String> desc;
-
-  DescriptionModel({
-    required this.name,
-    required this.order,
-    required this.desc,
-  });
-}

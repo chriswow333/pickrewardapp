@@ -4,6 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
