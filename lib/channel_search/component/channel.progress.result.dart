@@ -9,7 +9,6 @@ import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:provider/provider.dart';
 
 class CardResultsProgress extends StatelessWidget {

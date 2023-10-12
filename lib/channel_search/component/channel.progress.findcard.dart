@@ -51,7 +51,6 @@ class SubmitEvaluateCard extends StatelessWidget {
     
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context,listen:false);
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
-    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context,listen:false);
 
     return Row(
       // decoration: BoxDecoration(

@@ -363,7 +363,7 @@ class ChannelItem extends StatelessWidget {
         )
       ),
       onPressed:(){
-        rewardSelectedViewModel.channelID = channelItemModel.id;
+        rewardSelectedViewModel.channelID = channelItemModel;
       },
       child:Container(
         alignment: Alignment.center,

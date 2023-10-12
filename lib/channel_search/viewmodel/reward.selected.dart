@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/channel.dart';
 
 
 class RewardSelectedViewModel with ChangeNotifier{
@@ -23,23 +24,25 @@ class RewardSelectedViewModel with ChangeNotifier{
   }
 
 
-  final Set<String> _channelIDs = {};
-  set channelID(String channelID) {
-    if(_channelIDs.contains(channelID)){
-      _channelIDs.remove(channelID);
+  final Map<String,ChannelItemModel> _channelItemModels = {};
+  set channelID(ChannelItemModel channelItemModel) {
+    if(_channelItemModels.containsKey(channelItemModel.id)){
+      _channelItemModels.remove(channelItemModel.id);
     }else {
-      _channelIDs.add(channelID);
+      _channelItemModels[channelItemModel.id] = channelItemModel;
     }
     notifyListeners();
   }
 
   bool existSelectedChannelID(String channelID) {
-    return _channelIDs.contains(channelID);
+    return _channelItemModels.containsKey(channelID);
   }
 
   List<String> getChannelIDs(){
-    return _channelIDs.toList();
+    return _channelItemModels.keys.toList();
   }
+
+  List get channelItemModels => _channelItemModels.values.toList();
 
   final Set<String> _payIDs = {};
 

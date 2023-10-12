@@ -28,6 +28,10 @@ class ChannelClient extends $grpc.Client {
       '/channel.Channel/GetChannelsByChannelCategoryType',
       ($0.ChannelCategoryTypeReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
+  static final _$searchChannel = $grpc.ClientMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
+      '/channel.Channel/SearchChannel',
+      ($0.SearchChannelReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.SearchChannelReply.fromBuffer(value));
 
   ChannelClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -41,6 +45,10 @@ class ChannelClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.ChannelReply> getChannelsByChannelCategoryType($0.ChannelCategoryTypeReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getChannelsByChannelCategoryType, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SearchChannelReply> searchChannel($0.SearchChannelReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$searchChannel, request, options: options);
   }
 }
 
@@ -63,6 +71,13 @@ abstract class ChannelServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ChannelCategoryTypeReq.fromBuffer(value),
         ($0.ChannelReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
+        'SearchChannel',
+        searchChannel_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SearchChannelReq.fromBuffer(value),
+        ($0.SearchChannelReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
@@ -73,6 +88,11 @@ abstract class ChannelServiceBase extends $grpc.Service {
     return getChannelsByChannelCategoryType(call, await request);
   }
 
+  $async.Future<$0.SearchChannelReply> searchChannel_Pre($grpc.ServiceCall call, $async.Future<$0.SearchChannelReq> request) async {
+    return searchChannel(call, await request);
+  }
+
   $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes($grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.ChannelReply> getChannelsByChannelCategoryType($grpc.ServiceCall call, $0.ChannelCategoryTypeReq request);
+  $async.Future<$0.SearchChannelReply> searchChannel($grpc.ServiceCall call, $0.SearchChannelReq request);
 }

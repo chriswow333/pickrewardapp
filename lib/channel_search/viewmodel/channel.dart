@@ -28,8 +28,6 @@ class ChannelViewModel with ChangeNotifier {
   get channelCategoryTypeModels => _channelCategoryTypeModels;
 
 
-
-
   Future<void> fetchChannelCategoryTypeModels() async {
 
     try {

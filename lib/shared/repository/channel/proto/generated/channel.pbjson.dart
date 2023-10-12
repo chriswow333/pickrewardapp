@@ -132,3 +132,81 @@ final $typed_data.Uint8List channelReplyDescriptor = $convert.base64Decode(
     'dGVEYXRlGAggASgDUgp1cGRhdGVEYXRlEhYKBmxhYmVscxgJIAMoBVIGbGFiZWxzEhQKBW9yZG'
     'VyGAogASgFUgVvcmRlchIkCg1jaGFubmVsU3RhdHVzGAsgASgFUg1jaGFubmVsU3RhdHVz');
 
+@$core.Deprecated('Use searchChannelReqDescriptor instead')
+const SearchChannelReq$json = {
+  '1': 'SearchChannelReq',
+  '2': [
+    {'1': 'keyword', '3': 1, '4': 1, '5': 9, '10': 'keyword'},
+  ],
+};
+
+/// Descriptor for `SearchChannelReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List searchChannelReqDescriptor = $convert.base64Decode(
+    'ChBTZWFyY2hDaGFubmVsUmVxEhgKB2tleXdvcmQYASABKAlSB2tleXdvcmQ=');
+
+@$core.Deprecated('Use searchChannelReplyDescriptor instead')
+const SearchChannelReply$json = {
+  '1': 'SearchChannelReply',
+  '2': [
+    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.channel.Reply', '10': 'reply'},
+    {'1': 'searchChannels', '3': 2, '4': 3, '5': 11, '6': '.channel.SearchChannelReply.SearchChannel', '10': 'searchChannels'},
+  ],
+  '3': [SearchChannelReply_SearchChannel$json],
+};
+
+@$core.Deprecated('Use searchChannelReplyDescriptor instead')
+const SearchChannelReply_SearchChannel$json = {
+  '1': 'SearchChannel',
+  '2': [
+    {'1': 'channelCategoryType', '3': 1, '4': 1, '5': 11, '6': '.channel.SearchChannelReply.SearchChannel.ChannelCategoryType', '10': 'channelCategoryType'},
+    {'1': 'channels', '3': 2, '4': 3, '5': 11, '6': '.channel.SearchChannelReply.SearchChannel.Channel', '10': 'channels'},
+  ],
+  '3': [SearchChannelReply_SearchChannel_Channel$json, SearchChannelReply_SearchChannel_ChannelCategoryType$json],
+};
+
+@$core.Deprecated('Use searchChannelReplyDescriptor instead')
+const SearchChannelReply_SearchChannel_Channel$json = {
+  '1': 'Channel',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'image', '3': 3, '4': 1, '5': 9, '10': 'image'},
+    {'1': 'linkURL', '3': 4, '4': 1, '5': 9, '10': 'linkURL'},
+    {'1': 'descriptions', '3': 5, '4': 3, '5': 9, '10': 'descriptions'},
+    {'1': 'channelCategoryType', '3': 6, '4': 1, '5': 5, '10': 'channelCategoryType'},
+    {'1': 'createDate', '3': 7, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 8, '4': 1, '5': 3, '10': 'updateDate'},
+    {'1': 'labels', '3': 9, '4': 3, '5': 5, '10': 'labels'},
+    {'1': 'order', '3': 10, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'channelStatus', '3': 11, '4': 1, '5': 5, '10': 'channelStatus'},
+  ],
+};
+
+@$core.Deprecated('Use searchChannelReplyDescriptor instead')
+const SearchChannelReply_SearchChannel_ChannelCategoryType$json = {
+  '1': 'ChannelCategoryType',
+  '2': [
+    {'1': 'categoryType', '3': 1, '4': 1, '5': 5, '10': 'categoryType'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'order', '3': 3, '4': 1, '5': 5, '10': 'order'},
+  ],
+};
+
+/// Descriptor for `SearchChannelReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List searchChannelReplyDescriptor = $convert.base64Decode(
+    'ChJTZWFyY2hDaGFubmVsUmVwbHkSJAoFcmVwbHkYASABKAsyDi5jaGFubmVsLlJlcGx5UgVyZX'
+    'BseRJRCg5zZWFyY2hDaGFubmVscxgCIAMoCzIpLmNoYW5uZWwuU2VhcmNoQ2hhbm5lbFJlcGx5'
+    'LlNlYXJjaENoYW5uZWxSDnNlYXJjaENoYW5uZWxzGv4ECg1TZWFyY2hDaGFubmVsEm8KE2NoYW'
+    '5uZWxDYXRlZ29yeVR5cGUYASABKAsyPS5jaGFubmVsLlNlYXJjaENoYW5uZWxSZXBseS5TZWFy'
+    'Y2hDaGFubmVsLkNoYW5uZWxDYXRlZ29yeVR5cGVSE2NoYW5uZWxDYXRlZ29yeVR5cGUSTQoIY2'
+    'hhbm5lbHMYAiADKAsyMS5jaGFubmVsLlNlYXJjaENoYW5uZWxSZXBseS5TZWFyY2hDaGFubmVs'
+    'LkNoYW5uZWxSCGNoYW5uZWxzGscCCgdDaGFubmVsEg4KAmlkGAEgASgJUgJpZBISCgRuYW1lGA'
+    'IgASgJUgRuYW1lEhQKBWltYWdlGAMgASgJUgVpbWFnZRIYCgdsaW5rVVJMGAQgASgJUgdsaW5r'
+    'VVJMEiIKDGRlc2NyaXB0aW9ucxgFIAMoCVIMZGVzY3JpcHRpb25zEjAKE2NoYW5uZWxDYXRlZ2'
+    '9yeVR5cGUYBiABKAVSE2NoYW5uZWxDYXRlZ29yeVR5cGUSHgoKY3JlYXRlRGF0ZRgHIAEoA1IK'
+    'Y3JlYXRlRGF0ZRIeCgp1cGRhdGVEYXRlGAggASgDUgp1cGRhdGVEYXRlEhYKBmxhYmVscxgJIA'
+    'MoBVIGbGFiZWxzEhQKBW9yZGVyGAogASgFUgVvcmRlchIkCg1jaGFubmVsU3RhdHVzGAsgASgF'
+    'Ug1jaGFubmVsU3RhdHVzGmMKE0NoYW5uZWxDYXRlZ29yeVR5cGUSIgoMY2F0ZWdvcnlUeXBlGA'
+    'EgASgFUgxjYXRlZ29yeVR5cGUSEgoEbmFtZRgCIAEoCVIEbmFtZRIUCgVvcmRlchgDIAEoBVIF'
+    'b3JkZXI=');
+

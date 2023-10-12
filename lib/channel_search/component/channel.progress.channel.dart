@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
-import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:provider/provider.dart';
 
 import 'channel.progress.channel.categorytype.dart';
@@ -12,73 +14,42 @@ class ChannelProgress extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         SearchChannelBar(),
-        SizedBox(height:20), 
-        ChannelCategoryTypes(),
-        SizedBox(height:20), 
-        Expanded(
-          child:ChannelItemGroups(),
-        ),
+        SizedBox(height:10),
+        SelectedChannelResult(),
+        if(searchChannelViewModel.searchChannelFlag)
+          SearchChannelItems(),
+        if(!searchChannelViewModel.searchChannelFlag)
+          NormalChannelGroup(),
+       
       ]
     );
   }
 }
 
 
-class SearchChannelBar extends StatefulWidget {
-  const SearchChannelBar({ Key? key }) : super(key: key);
-
-  @override
-  _SearchChannelBarState createState() => _SearchChannelBarState();
-}
-
-class _SearchChannelBarState extends State<SearchChannelBar> {
-
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState(){
-    super.initState();
-  }
+class NormalChannelGroup extends StatelessWidget {
+  const NormalChannelGroup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height:40,
-      child:TextField(
-        controller:_searchController,
-        textAlign: TextAlign.start,
-        textAlignVertical:TextAlignVertical.bottom,
-        onChanged: (String value){
-          // creditCardViewModel.searchKeyword(value);
-        },
-        decoration: InputDecoration(
-          hintText: '消費通路',
-          prefixIcon:const Icon(Icons.search),
-          suffixIcon: IconButton(
-            icon:const Icon(Icons.clear),
-            onPressed: () {
-              _searchController.clear();
-              // creditCardViewModel.searchKeyword('');
-            },
+    return Expanded(
+      child:Column(
+        children:[
+          
+          ChannelCategoryTypes(),
+          SizedBox(height:20), 
+          Expanded(
+            child:ChannelItemGroups(),
           ),
-          border:OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          )
-        ),
-        style:const TextStyle(
-          fontSize:18,
-        ),
-      ),
+        ]
+      )
     );
   }
 }
-
-
-
-
-
-

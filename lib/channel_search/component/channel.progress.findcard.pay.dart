@@ -37,7 +37,7 @@ class PayWidget extends StatelessWidget {
             ]
           )
           
-    ]
+        ]
       )
     );
   }
