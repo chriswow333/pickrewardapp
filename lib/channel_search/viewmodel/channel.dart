@@ -64,9 +64,7 @@ class ChannelViewModel with ChangeNotifier {
 
   final Map<int, List<ChannelItemModel>> _channelModels = {};
   final Map<int, bool> _hasMoreChannels = {};
-  final Map<int, ChannelGlobalKeyModel> _globalKeys = {
-  
-  };
+  final Map<int, ChannelGlobalKeyModel> _globalKeys = {};
 
   bool hasMoreChannels(int channelCategoryType) {
     return _hasMoreChannels[channelCategoryType] ?? false;
@@ -107,7 +105,8 @@ class ChannelViewModel with ChangeNotifier {
 
   Future<void> initChannelModels(int channelCategoryType) async{
 
-
+    if(_globalKeys.containsKey(channelCategoryType))return;
+    
     _globalKeys[channelCategoryType] = ChannelGlobalKeyModel(
       id:channelCategoryType,
       channelCategory: GlobalKey(), 

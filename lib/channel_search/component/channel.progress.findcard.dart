@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cost.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.pay.dart';
@@ -23,9 +23,12 @@ class FindCardProgress extends StatelessWidget {
     payItemViewModel.fetchPays();
 
     return Container(
-       child:Column(
+      child:SingleChildScrollView(
+        child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          SelectedChannelResult(),
+          SizedBox(height:20),
           CostWidget(),
           SizedBox(height:20),
           PayWidget(),
@@ -35,6 +38,8 @@ class FindCardProgress extends StatelessWidget {
           SubmitEvaluateCard(controller:controller),
         ],
       )
+      ),
+      
     );
   }
 }

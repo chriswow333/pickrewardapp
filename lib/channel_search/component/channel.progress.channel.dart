@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selected.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +22,6 @@ class ChannelProgress extends StatelessWidget {
       children:[
         SearchChannelBar(),
         SizedBox(height:10),
-        SelectedChannelResult(),
         if(searchChannelViewModel.searchChannelFlag)
           SearchChannelItems(),
         if(!searchChannelViewModel.searchChannelFlag)
@@ -42,7 +41,6 @@ class NormalChannelGroup extends StatelessWidget {
     return Expanded(
       child:Column(
         children:[
-          
           ChannelCategoryTypes(),
           SizedBox(height:20), 
           Expanded(

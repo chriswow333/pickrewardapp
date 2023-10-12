@@ -36,8 +36,8 @@ class SelectedChannelResult extends StatelessWidget {
         children:[
           Text('已選通路',
             style:TextStyle(
-              color:Palette.kToBlack[400],
-              fontSize: 16,
+              fontSize: 18,
+              color: Palette.kToBlack[600],
             ),
           ),
           SizedBox(height: 10,),
@@ -75,33 +75,19 @@ class SelectedChannelItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context, listen:false);
 
     
-    return TextButton(
-      style:ButtonStyle(
-        alignment: Alignment.center,
-        splashFactory:NoSplash.splashFactory,
-        padding: MaterialStatePropertyAll(
-          EdgeInsets.zero,
-        )
-      ),
-      onPressed:(){
-        rewardSelectedViewModel.channelID = channelItemModel;
-        // rewardSelectedViewModel.channelID = channelItemModel.id;
-      },
-      child:Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(left:2, right:2),
-        child:Stack(
-          children:[
-            Container(
-              alignment: Alignment.center,
-              child:SelectedChannelItemIcon(image:channelItemModel.image),
-            ),
-          ]
-        )
-      ),
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.only(left:2, right:2),
+      child:Stack(
+        children:[
+          Container(
+            alignment: Alignment.center,
+            child:SelectedChannelItemIcon(image:channelItemModel.image),
+          ),
+        ]
+      )
     );
   }
 }
