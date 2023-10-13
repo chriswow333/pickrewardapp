@@ -35,11 +35,9 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
         textAlign: TextAlign.start,
         textAlignVertical:TextAlignVertical.bottom,
         onChanged: (String value){
-          _searchController.text = value;
           searchChannelViewModel.changeKeyword(value);
         },
         onEditingComplete: (){
-
           searchChannelViewModel.searchChannel();
           searchChannelViewModel.setLoading();
         },
@@ -49,6 +47,7 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
           suffixIcon: IconButton(
             icon:const Icon(Icons.clear),
             onPressed: () {
+              FocusScope.of(context).unfocus();
               _searchController.clear();
               searchChannelViewModel.changeKeyword(_searchController.text);
             },

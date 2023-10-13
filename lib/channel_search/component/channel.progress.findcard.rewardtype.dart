@@ -25,7 +25,7 @@ class RewardTypeWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           RewardTypeName(),
-          SizedBox(height:10),
+          SizedBox(height:5),
           RewardTypeItems(),
         ]
       )

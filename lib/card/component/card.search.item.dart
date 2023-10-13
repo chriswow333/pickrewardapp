@@ -147,7 +147,7 @@ class CardItem extends StatelessWidget {
         ),
         child:TextButton(
           onPressed: (){
-
+            FocusScope.of(context).unfocus();
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,

@@ -29,9 +29,9 @@ class FindCardProgress extends StatelessWidget {
         children:[
           SelectedChannelResult(),
           SizedBox(height:20),
-          CostWidget(),
-          SizedBox(height:20),
           PayWidget(),
+          SizedBox(height:20),
+          CostWidget(),
           SizedBox(height:20),
           RewardTypeWidget(),
           SizedBox(height:40),

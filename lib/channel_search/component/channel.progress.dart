@@ -37,6 +37,7 @@ class FindResultProgressItem extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
+        FocusScope.of(context).unfocus();
         controller.jumpToPage(ChannelProgressPage.result);
       },
       style:ButtonStyle(
@@ -78,6 +79,7 @@ class FindCardProgressItem extends StatelessWidget {
     
     return TextButton(
       onPressed: (){
+        FocusScope.of(context).unfocus();
         controller.jumpToPage(ChannelProgressPage.findCard);
       },
       style:ButtonStyle(

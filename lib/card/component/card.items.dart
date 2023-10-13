@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 class CardItems extends StatelessWidget {
   const CardItems({super.key});
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -29,7 +30,22 @@ class CardItems extends StatelessWidget {
         cardItemViewModel.fetchLatestCards();
       }
       
-      return Container(
+      return LatestCardItems(cardItemModels: cardItemModels,);
+    }
+
+    return CardItemsByBankID(cardItemViewModel: cardItemViewModel,);
+      
+  }
+}
+
+
+
+class LatestCardItems extends StatelessWidget {
+  const LatestCardItems({super.key, required this.cardItemModels});
+  final List<CardItemModel> cardItemModels;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
@@ -53,10 +69,44 @@ class CardItems extends StatelessWidget {
         )
         
       );
+  }
+}
+
+
+
+class CardItemsByBankID extends StatefulWidget {
+  const CardItemsByBankID({super.key, required this.cardItemViewModel});
+
+  final CardItemViewModel cardItemViewModel;
+  
+  @override
+  State<CardItemsByBankID> createState() => _CardItemsByBankIDState();
+}
+
+class _CardItemsByBankIDState extends State<CardItemsByBankID> {
+
+  late ScrollController _controller;
+
+  @override
+  void initState(){
+    _controller = ScrollController();
+    _controller.addListener(scrollToEnd);
+    super.initState();
+  }
+
+  void scrollToEnd(){
+    
+    var scrollPosition = _controller.position;
+    if(scrollPosition.pixels == scrollPosition.maxScrollExtent) {
+      widget.cardItemViewModel.fetchCardsByBankIDOnScroll();
     }
+  }
 
-
-    List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(bankID);
+  
+  @override
+  Widget build(BuildContext context) {
+  
+  List<CardItemModel> cardItemModels = widget.cardItemViewModel.getCardsByBankID(widget.cardItemViewModel.bankID);
 
     return Container(
       child:Column(
@@ -69,6 +119,8 @@ class CardItems extends StatelessWidget {
           ),
           Expanded(
             child:SingleChildScrollView(
+              // physics:ClampingScrollPhysics(),
+              controller:_controller,
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
@@ -83,6 +135,7 @@ class CardItems extends StatelessWidget {
     );
   }
 }
+
 
 class CardItem extends StatelessWidget {
 
@@ -124,7 +177,7 @@ class CardItem extends StatelessWidget {
         ),
         child:TextButton(
           onPressed: (){
-
+            FocusScope.of(context).unfocus();
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,

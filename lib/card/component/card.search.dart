@@ -31,7 +31,6 @@ class _SearchCardBarState extends State<SearchCardBar> {
         textAlign: TextAlign.start,
         textAlignVertical:TextAlignVertical.bottom,
         onChanged: (String value){
-          _searchController.text = value;
           cardSearchViewModel.changeKeyword(value);
         },
         onEditingComplete: (){
@@ -44,6 +43,7 @@ class _SearchCardBarState extends State<SearchCardBar> {
           suffixIcon: IconButton(
             icon:const Icon(Icons.clear),
             onPressed: () {
+              FocusScope.of(context).unfocus();
               _searchController.clear();
               cardSearchViewModel.changeKeyword(_searchController.text);
             },

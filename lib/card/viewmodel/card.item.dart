@@ -66,10 +66,23 @@ class CardItemViewModel with ChangeNotifier {
 
 
 
-  final int initLimit = 5;
-  final int initOffset = 0;
-  Future<void> fetchCardsByBankID(String bankID) async{ 
+  
 
+  bool loading = false;
+  Future<void> fetchCardsByBankIDOnScroll() async{ 
+    if(loading)return;
+    
+    List<CardItemModel>? cardItemModels =  _cardItemModels[_bankID]?? [];
+    int offset = cardItemModels.length;
+    loading = true;
+    await _fetchCardsByBankID(_bankID, offset);
+    loading = false;
+  }
+
+
+  static int initOffset = 0; 
+  Future<void> fetchCardsByBankIDWhenPressBank(String bankID) async{ 
+    
     if (bankID == _bankID) return;
 
     if(_cardItemModels.containsKey(bankID)){
@@ -78,6 +91,12 @@ class CardItemViewModel with ChangeNotifier {
       return;
     }
 
+    _fetchCardsByBankID(bankID, initOffset);
+  }
+
+  static int initLimit = 5;
+  Future<void> _fetchCardsByBankID(String bankID, int offset) async{ 
+    print(offset);
     try {
 
       CardsByBankIDReq cardsByBankIDReq = CardsByBankIDReq();
@@ -87,14 +106,13 @@ class CardItemViewModel with ChangeNotifier {
       if(_cardItemModels.containsKey(bankID)){
         cardsByBankIDReq.offset = _cardItemModels[bankID]!.length;
       }else {
-        cardsByBankIDReq.offset = initOffset;
+        cardsByBankIDReq.offset = offset;
       }
       
 
       CardsReply cardsReply = await CardService().cardClient.getCardsByBankID(cardsByBankIDReq);
       
       List<CardItemModel> cardItemModels = [];
-
 
       for(CardsReply_Card card in cardsReply.cards)  {
         cardItemModels.add(CardItemModel(
@@ -111,8 +129,12 @@ class CardItemViewModel with ChangeNotifier {
         ));
       }
 
-
-      _cardItemModels[bankID] = cardItemModels;
+      if(_cardItemModels.containsKey(bankID)) {
+        _cardItemModels[bankID]!.addAll(cardItemModels);
+      }else {
+        _cardItemModels[bankID] = cardItemModels;
+      }
+      
       _bankID = bankID;
       notifyListeners();
 

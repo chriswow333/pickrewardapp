@@ -16,11 +16,6 @@ class SelectedChannelResult extends StatelessWidget {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
-    int selectedChannelLength = rewardSelectedViewModel.channelItemModels.length;
-    if (selectedChannelLength == 0) {
-      return SizedBox.shrink();
-    }
-
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -74,9 +69,6 @@ class SelectedChannelItem extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    
-
-    
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.only(left:2, right:2),
@@ -99,8 +91,6 @@ class SelectedChannelItemIcon extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    
-
     return Container(
       child:Image.memory(
         gaplessPlayback: true,

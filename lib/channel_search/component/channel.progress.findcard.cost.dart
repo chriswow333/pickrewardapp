@@ -30,8 +30,7 @@ class CostWidget extends StatelessWidget {
           CostName(),
           SizedBox(height:10),
           CostButtons(),
-
-          SizedBox(height:25),
+          SizedBox(height:10),
 
           CostDateName(),
           CostDateValue(),
@@ -108,6 +107,7 @@ class Lessthan1000Btn extends StatelessWidget {
             children:[
               Icon(
                 Icons.monetization_on_rounded,
+                size:20,
                 color:_cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
               ),
             ],
@@ -115,7 +115,7 @@ class Lessthan1000Btn extends StatelessWidget {
           
           Text('~1000',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14,
               color: _cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
             ),
           ),
@@ -162,10 +162,12 @@ class From1000To5000Btn extends StatelessWidget {
             Row(
               children:[
                 Icon(
+                  size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
                 ),
                 Icon(
+                  size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
                 ),
@@ -173,7 +175,7 @@ class From1000To5000Btn extends StatelessWidget {
             ),
             Text('1000~5000',
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 14,
                 color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
               ),
             ),
@@ -223,14 +225,17 @@ class MoreThan5000Btn extends StatelessWidget {
             Row(
               children:[
                 Icon(
+                  size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
                 ),
                 Icon(
+                  size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
                 ),
                 Icon(
+                  size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
                 ),
@@ -238,7 +243,7 @@ class MoreThan5000Btn extends StatelessWidget {
             ),
             Text('5000~',
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 14,
                 color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
               ),
             ),

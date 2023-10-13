@@ -42,7 +42,8 @@ class BankItem extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
-        cardItemViewModel.fetchCardsByBankID(bankModel.id);
+        FocusScope.of(context).unfocus();
+        cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
       },
       child:SizedBox(
         width:80,
