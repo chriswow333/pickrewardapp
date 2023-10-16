@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pickrewardapp/card/card.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
-void main() {
+void main()async {
+
+  //  await dotenv.load(fileName: ".env.dev"); 
+  // await dotenv.load(fileName: ".env.test");
+  await dotenv.load(fileName: ".env.prod");
+  
   runApp(const PickRewardApp());
 }
 

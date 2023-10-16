@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: card.proto
+//  source: channel.proto
 //
 // @dart = 2.12
 

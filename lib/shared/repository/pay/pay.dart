@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
 import 'package:pickrewardapp/shared/repository/pay/proto/generated/pay.pbgrpc.dart';
@@ -9,7 +10,7 @@ class PayService {
 
 
 ///here enter your host without the http part (e.g enter google.com now http://google.com)
-  String baseUrl = "192.168.20.112"; // "localhost"; //"192.168.20.112";
+  // String baseUrl = "tsincoco.com"; // "localhost"; //"192.168.20.112";
 
   PayService._internal();
   
@@ -37,10 +38,14 @@ class PayService {
   ///here we create a channel and use it to initialize the HelloClientthat was generated
   ///
   _createChannel() {
+
+    String baseUrl = dotenv.env['BASE_URL'] ?? "localhost";
+    String port = dotenv.env['BASE_PORT'] ?? "50051";
+    int portInt = int.parse(port);
+    
     final channel = ClientChannel(
       baseUrl,
-
-      port: 50055,
+      port: portInt,
 
       ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
       //options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
@@ -48,7 +53,13 @@ class PayService {
       ///use this if you are connecting with Tls
       // options: const ChannelOptions(),
       options: ChannelOptions(
-        credentials: const ChannelCredentials.insecure(),
+        // credentials: const ChannelCredentials.insecure(),
+        credentials: ChannelCredentials.secure(
+          // certificates: Uint8List.fromList(await File('./Users/chrisyu/data/creditcard/app/pickrewardapp/lib/shared/repository/channel/fullchain.pem').readAsBytes()),
+          onBadCertificate:(certificate, str ) {
+            return true;
+          }
+        ),
         codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
       ),
     );

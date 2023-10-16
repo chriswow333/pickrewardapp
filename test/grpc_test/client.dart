@@ -16,27 +16,33 @@
 /// Dart implementation of the gRPC helloworld.Greeter client.
 import 'package:grpc/grpc.dart';
 
-import 'generated/card.pbgrpc.dart';
+import 'generated/channel.pbgrpc.dart';
 
 Future<void> main(List<String> args) async {
   final channel = ClientChannel(
-    'localhost',
-    port: 50055,
+    'tsincoco.com',
+    port: 443,
     options: ChannelOptions(
-      credentials: const ChannelCredentials.insecure(),
+    credentials: ChannelCredentials.secure(
+        // certificates: Uint8List.fromList(await File('./Users/chrisyu/data/creditcard/app/pickrewardapp/lib/shared/repository/channel/fullchain.pem').readAsBytes()),
+        onBadCertificate:(certificate, str ) {
+          print('helllllo');
+          print(certificate);
+          return true;
+        }
+      ),
       codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
     ),
   );
 
-  final stub = CardClient(channel);
+  final stub = ChannelClient(channel);
 
   final name = args.isNotEmpty ? args[0] : 'world';
 
   try {
-    final response = await stub.getAllBanks(
-      EmptyRequest(),
+    final response = await stub.getChannelCategoryTypes(EmptyReq());
       // options: CallOptions(compression: const GzipCodec()),
-    );
+    
     print('Greeter client received: ${response}');
   } catch (e) {
     print('Caught error: $e');
