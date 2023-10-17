@@ -29,7 +29,9 @@ class CardHeader extends StatelessWidget {
           ]
         ),
         SizedBox(width:20),
-        CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
+        Expanded(
+          child:CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
+        ),
       ]
     );
   }
@@ -43,7 +45,6 @@ class CardDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width - 150,
       child:Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children:[
@@ -64,13 +65,12 @@ class CardDescriptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:5),
       alignment: Alignment.centerLeft,
       child:Text(desc,
         style:TextStyle(
           color:Palette.kToBlack[900],
+          overflow:TextOverflow.visible
         ),
-        maxLines: null,
       )
     );
   }

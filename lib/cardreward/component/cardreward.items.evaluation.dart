@@ -20,7 +20,6 @@ class EvaluationItem extends StatelessWidget {
 
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context, listen:false);
     EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context, listen:false);
-
     
     return Container(
       padding: const EdgeInsets.all(5),

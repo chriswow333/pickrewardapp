@@ -4,6 +4,7 @@ import 'package:pickrewardapp/card/card.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
+import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main()async {
@@ -67,14 +68,30 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         // padding: GlobalPadding.global(),
-        child: Container(
-          // height:MediaQuery.of(context).size.height,
-          padding: EdgeInsets.only(top: 10),
-          child: IndexedStack(
-            children: _widgetOptions,
-            index: _selectedIndex,
-          ),
-        ),
+        child: Center(
+          child:LayoutBuilder(
+            builder:((context, constraints) {
+              double screenWidth = MediaQuery.of(context).size.width;
+              double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
+
+              if (screenWidth > tabletWidthThreshold) {
+                return Container(
+                  width: tabletWidthThreshold,
+                  child: IndexedStack(
+                    children: _widgetOptions,
+                    index: _selectedIndex,
+                  ),
+                );
+              } else {
+                // 屏幕较小，不限制应用宽度
+                return IndexedStack(
+                  children: _widgetOptions,
+                  index: _selectedIndex,
+                );
+              }
+            }),
+          )
+        )
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

@@ -67,7 +67,6 @@ class LatestCardItems extends StatelessWidget {
             ),
           ]
         )
-        
       );
   }
 }
@@ -106,7 +105,7 @@ class _CardItemsByBankIDState extends State<CardItemsByBankID> {
   @override
   Widget build(BuildContext context) {
   
-  List<CardItemModel> cardItemModels = widget.cardItemViewModel.getCardsByBankID(widget.cardItemViewModel.bankID);
+    List<CardItemModel> cardItemModels = widget.cardItemViewModel.getCardsByBankID(widget.cardItemViewModel.bankID);
 
     return Container(
       child:Column(
@@ -119,7 +118,7 @@ class _CardItemsByBankIDState extends State<CardItemsByBankID> {
           ),
           Expanded(
             child:SingleChildScrollView(
-              // physics:ClampingScrollPhysics(),
+              physics: AlwaysScrollableScrollPhysics(),
               controller:_controller,
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

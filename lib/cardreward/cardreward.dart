@@ -10,7 +10,7 @@ import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.detail.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.eventresult.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
-import 'package:pickrewardapp/shared/config/global_padding.dart';
+import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +25,39 @@ class CardContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-      body:Container(
-        padding: GlobalPadding.global(),
+      body:SafeArea(
+        child:Center(
+          child:LayoutBuilder(
+            builder:(context, constraints) {
+              double screenWidth = MediaQuery.of(context).size.width;
+              double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
+
+              if (screenWidth > tabletWidthThreshold) {
+                return Container(
+                  width: tabletWidthThreshold,
+                  child: CardContentPage(cardHeaderItemModel:cardHeaderItemModel),
+                );
+              } else {
+                // 屏幕较小，不限制应用宽度
+                return CardContentPage(cardHeaderItemModel:cardHeaderItemModel);
+              }
+            },
+          )
+        )
+      )
+      ,
+    );
+  }
+}
+
+
+class CardContentPage extends StatelessWidget {
+  const CardContentPage({super.key, required this.cardHeaderItemModel});
+  final CardHeaderItemModel cardHeaderItemModel;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
         child: MultiProvider(
           providers: [
             ChangeNotifierProvider<CardHeaderViewModel>(create:(_)=>CardHeaderViewModel(cardHeaderItemModel)),
@@ -41,31 +72,20 @@ class CardContentScreen extends StatelessWidget {
 
             
           ],
-          child:CardContentPage(),
-        )
-      ),
-    );
-  }
-}
-
-
-class CardContentPage extends StatelessWidget {
-  const CardContentPage({super.key,});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          SizedBox(height:10),
-          CardHeader(),
-          Divider(),
-          CarTab(),
-          Expanded(
-            child:CardRewardComponent(),
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              SizedBox(height:10),
+              CardHeader(),
+              Divider(),
+              CarTab(),
+              Expanded(
+                child:CardRewardComponent(),
+              ),
+              
+            ]
           ),
-          
-        ]
+        )
       );
   }
 }
@@ -80,8 +100,6 @@ class CardRewardComponent extends StatelessWidget {
     return SingleChildScrollView(
       child: RewardItems(),
     );
-    
-   
   }
 }
 
