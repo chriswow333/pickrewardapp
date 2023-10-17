@@ -8,9 +8,9 @@ import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main()async {
 
-  //  await dotenv.load(fileName: ".env.dev"); 
+   await dotenv.load(fileName: ".env.dev"); 
   // await dotenv.load(fileName: ".env.test");
-  await dotenv.load(fileName: ".env.prod");
+  // await dotenv.load(fileName: ".env.prod");
   
   runApp(const PickRewardApp());
 }

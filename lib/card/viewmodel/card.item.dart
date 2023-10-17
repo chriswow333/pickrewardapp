@@ -96,7 +96,6 @@ class CardItemViewModel with ChangeNotifier {
 
   static int initLimit = 5;
   Future<void> _fetchCardsByBankID(String bankID, int offset) async{ 
-    print(offset);
     try {
 
       CardsByBankIDReq cardsByBankIDReq = CardsByBankIDReq();

@@ -36,31 +36,57 @@ class CardService {
   ///
   _createChannel() {
 
+
+    String useTls = dotenv.env['USE_TLS'] ?? "false";
+    late bool useTlsBool;
+    if (useTls == "true") {
+      useTlsBool = true;
+    }
+    else {
+      useTlsBool = false;
+    }
     String baseUrl = dotenv.env['BASE_URL'] ?? "localhost";
     String port = dotenv.env['BASE_PORT'] ?? "50051";
     int portInt = int.parse(port);
+    late final channel;
 
-    final channel = ClientChannel(
-      baseUrl,
-      port: portInt,
+   if (useTlsBool) {
+      channel = ClientChannel(
+        baseUrl,
+        port: portInt,
+        ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
+        //options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
 
-      ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
-      //options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
-
-      ///use this if you are connecting with Tls
-      // options: const ChannelOptions(),
-      options: ChannelOptions(
-        // credentials: const ChannelCredentials.insecure(),
-        credentials: ChannelCredentials.secure(
-          // certificates: Uint8List.fromList(await File('./Users/chrisyu/data/creditcard/app/pickrewardapp/lib/shared/repository/channel/fullchain.pem').readAsBytes()),
-          onBadCertificate:(certificate, str ) {
-            return true;
-          }
+        ///use this if you are connecting with Tls
+        // options: const ChannelOptions(),
+        options: ChannelOptions(
+          // credentials: const ChannelCredentials.insecure(),
+          credentials: ChannelCredentials.secure(
+            // certificates: Uint8List.fromList(await File('./Users/chrisyu/data/creditcard/app/pickrewardapp/lib/shared/repository/channel/fullchain.pem').readAsBytes()),
+            onBadCertificate:(certificate, str ) {
+              return true;
+            }
+          ),
+          codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
         ),
-        codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-      ),
-    );
-    _cardClient = CardClient(channel);
+      );
+    
+    }else {
+      channel = ClientChannel(
+        baseUrl,
+        port: portInt,
+        ///use credentials: ChannelCredentials.insecure() if you want to connect without Tls
+        //options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
 
+        ///use this if you are connecting with Tls
+        // options: const ChannelOptions(),
+        options: ChannelOptions(
+          credentials: const ChannelCredentials.insecure(),
+          codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
+        ),
+      );
+    }
+
+    _cardClient = CardClient(channel);
   }
 }
