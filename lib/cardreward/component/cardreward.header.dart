@@ -4,6 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
@@ -32,7 +33,7 @@ class CardHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:[
                 CardName(cardName: cardHeaderItemModel.name,),
-                CardUpdateDate(),    
+                CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
               ]
             )            
           ]
@@ -79,11 +80,18 @@ class BackToCardListBtn extends StatelessWidget {
 
 
 class CardUpdateDate extends StatelessWidget {
-  const CardUpdateDate({super.key});
+  const CardUpdateDate({super.key, required this.updateDateInt});
 
+  final int updateDateInt;
   @override
   Widget build(BuildContext context) {
-    return Text('更新日期:2023/10/01',
+    
+    final updateDateTime = DateTime.fromMillisecondsSinceEpoch(updateDateInt*1000);
+    DateFormat formatter = DateFormat('yyyy/MM/dd');
+
+    final updateDate = formatter.format(updateDateTime);
+    
+    return Text('更新日期:${updateDate}',
       style: TextStyle(
         fontSize: 10,
         color: Palette.kToBlack[400],

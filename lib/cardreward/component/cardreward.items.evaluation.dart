@@ -270,7 +270,7 @@ class EvaluationName extends StatelessWidget {
     return  Text(name,
       style:TextStyle(
         color:Palette.kToBlack[900],
-        fontSize: 20,
+        fontSize: 18,
       ),
       maxLines: null,
     );

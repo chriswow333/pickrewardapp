@@ -23,6 +23,7 @@ class EvaluationProgressContent extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
+      padding: EdgeInsets.only(left:10, right:10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
