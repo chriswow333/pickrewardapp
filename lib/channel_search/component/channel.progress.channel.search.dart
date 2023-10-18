@@ -1,9 +1,4 @@
 
-
-
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:provider/provider.dart';

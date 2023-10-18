@@ -153,6 +153,8 @@ class CardItem extends StatelessWidget {
               name:cardItemModel.name,
               descriptions:cardItemModel.descriptions,
               image:cardItemModel.image,
+              updateDate: cardItemModel.updateDate,
+              lintUrl: cardItemModel.linkURL,
             );
             
             Navigator.of(context, rootNavigator: true).push(

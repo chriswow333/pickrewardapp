@@ -1209,12 +1209,14 @@ class CardRewardEvaluationEventResult extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'cardName', protoName: 'cardName')
     ..pPS(3, _omitFieldNames ? '' : 'cardDesc', protoName: 'cardDesc')
     ..aOS(4, _omitFieldNames ? '' : 'cardImage', protoName: 'cardImage')
-    ..aOS(5, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..aOS(6, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
-    ..aInt64(7, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
-    ..aInt64(8, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
-    ..aOS(9, _omitFieldNames ? '' : 'cardRewardName', protoName: 'cardRewardName')
-    ..aOM<CardRewardEvaluationEventResult_Reward>(10, _omitFieldNames ? '' : 'reward', subBuilder: CardRewardEvaluationEventResult_Reward.create)
+    ..aInt64(5, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
+    ..aOS(6, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
+    ..aOS(7, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
+    ..aOS(8, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
+    ..aInt64(9, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
+    ..aInt64(10, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
+    ..aOS(11, _omitFieldNames ? '' : 'cardRewardName', protoName: 'cardRewardName')
+    ..aOM<CardRewardEvaluationEventResult_Reward>(12, _omitFieldNames ? '' : 'reward', subBuilder: CardRewardEvaluationEventResult_Reward.create)
     ..hasRequiredFields = false
   ;
 
@@ -1270,60 +1272,78 @@ class CardRewardEvaluationEventResult extends $pb.GeneratedMessage {
   void clearCardImage() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get bankID => $_getSZ(4);
+  $fixnum.Int64 get updateDate => $_getI64(4);
   @$pb.TagNumber(5)
-  set bankID($core.String v) { $_setString(4, v); }
+  set updateDate($fixnum.Int64 v) { $_setInt64(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasBankID() => $_has(4);
+  $core.bool hasUpdateDate() => $_has(4);
   @$pb.TagNumber(5)
-  void clearBankID() => clearField(5);
+  void clearUpdateDate() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get bankName => $_getSZ(5);
+  $core.String get linkURL => $_getSZ(5);
   @$pb.TagNumber(6)
-  set bankName($core.String v) { $_setString(5, v); }
+  set linkURL($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasBankName() => $_has(5);
+  $core.bool hasLinkURL() => $_has(5);
   @$pb.TagNumber(6)
-  void clearBankName() => clearField(6);
+  void clearLinkURL() => clearField(6);
 
   @$pb.TagNumber(7)
-  $fixnum.Int64 get cardRewardStartDate => $_getI64(6);
+  $core.String get bankID => $_getSZ(6);
   @$pb.TagNumber(7)
-  set cardRewardStartDate($fixnum.Int64 v) { $_setInt64(6, v); }
+  set bankID($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCardRewardStartDate() => $_has(6);
+  $core.bool hasBankID() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCardRewardStartDate() => clearField(7);
+  void clearBankID() => clearField(7);
 
   @$pb.TagNumber(8)
-  $fixnum.Int64 get cardRewardEndDate => $_getI64(7);
+  $core.String get bankName => $_getSZ(7);
   @$pb.TagNumber(8)
-  set cardRewardEndDate($fixnum.Int64 v) { $_setInt64(7, v); }
+  set bankName($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasCardRewardEndDate() => $_has(7);
+  $core.bool hasBankName() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCardRewardEndDate() => clearField(8);
+  void clearBankName() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.String get cardRewardName => $_getSZ(8);
+  $fixnum.Int64 get cardRewardStartDate => $_getI64(8);
   @$pb.TagNumber(9)
-  set cardRewardName($core.String v) { $_setString(8, v); }
+  set cardRewardStartDate($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasCardRewardName() => $_has(8);
+  $core.bool hasCardRewardStartDate() => $_has(8);
   @$pb.TagNumber(9)
-  void clearCardRewardName() => clearField(9);
+  void clearCardRewardStartDate() => clearField(9);
 
   @$pb.TagNumber(10)
-  CardRewardEvaluationEventResult_Reward get reward => $_getN(9);
+  $fixnum.Int64 get cardRewardEndDate => $_getI64(9);
   @$pb.TagNumber(10)
-  set reward(CardRewardEvaluationEventResult_Reward v) { setField(10, v); }
+  set cardRewardEndDate($fixnum.Int64 v) { $_setInt64(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasReward() => $_has(9);
+  $core.bool hasCardRewardEndDate() => $_has(9);
   @$pb.TagNumber(10)
-  void clearReward() => clearField(10);
-  @$pb.TagNumber(10)
-  CardRewardEvaluationEventResult_Reward ensureReward() => $_ensure(9);
+  void clearCardRewardEndDate() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get cardRewardName => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set cardRewardName($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasCardRewardName() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearCardRewardName() => clearField(11);
+
+  @$pb.TagNumber(12)
+  CardRewardEvaluationEventResult_Reward get reward => $_getN(11);
+  @$pb.TagNumber(12)
+  set reward(CardRewardEvaluationEventResult_Reward v) { setField(12, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasReward() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearReward() => clearField(12);
+  @$pb.TagNumber(12)
+  CardRewardEvaluationEventResult_Reward ensureReward() => $_ensure(11);
 }
 
 class EvaluationEventResultResp_FeedbackEventResultResp extends $pb.GeneratedMessage {

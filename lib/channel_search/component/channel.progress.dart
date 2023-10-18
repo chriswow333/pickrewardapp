@@ -41,8 +41,6 @@ class FindResultProgressItem extends StatelessWidget {
         controller.jumpToPage(ChannelProgressPage.result);
       },
       style:ButtonStyle(
-        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
           channelProgressSelectedPage.page == ChannelProgressPage.result ? Palette.kToBlue[600]: Palette.kToBlue[50]
         ),

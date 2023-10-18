@@ -84,6 +84,9 @@ class CardResult extends StatelessWidget {
             name:cardEvaluation.cardName,
             descriptions:cardEvaluation.cardDesc,
             image:cardEvaluation.cardImage, 
+            updateDate: cardEvaluation.updateDate.toInt(),
+            lintUrl: cardEvaluation.linkURL,
+            
           );
 
           Navigator.push(

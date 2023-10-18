@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:provider/provider.dart';
 

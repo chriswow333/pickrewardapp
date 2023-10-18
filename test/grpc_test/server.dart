@@ -1,4 +1,3 @@
-import 'package:grpc/grpc.dart';
 
 // import 'generated/helloworld.pbgrpc.dart';
 

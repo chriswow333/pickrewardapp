@@ -141,10 +141,10 @@ message CardEventReq {
 message EvaluateCardRewardsReply {
 
   message CardRewardEventResult {
-  string id = 1;
-  CardRewardEvaluationEventResult cardRewardEvaluationEventResult = 2;
-  EvaluationEventResultResp evaluationEventResultResp = 3; 
-} 
+    string id = 1;
+    CardRewardEvaluationEventResult cardRewardEvaluationEventResult = 2;
+    EvaluationEventResultResp evaluationEventResultResp = 3; 
+  } 
 
   Reply reply = 1;
   repeated CardRewardEventResult cardRewardEventResults = 2;
@@ -164,12 +164,14 @@ message CardRewardEvaluationEventResult {
   string cardName = 2;
   repeated string cardDesc = 3;
   string cardImage = 4;
-  string bankID = 5;
-  string bankName = 6;
-  int64 cardRewardStartDate = 7;
-  int64 cardRewardEndDate = 8;
-  string cardRewardName = 9;
-  Reward reward = 10;
+  int64 updateDate = 5;
+  string linkURL = 6;
+  string bankID = 7;
+  string bankName = 8;
+  int64 cardRewardStartDate = 9;
+  int64 cardRewardEndDate = 10;
+  string cardRewardName = 11;
+  Reward reward = 12;
 }
 
 

@@ -28,9 +28,6 @@ class EvaluationProgressContent extends StatelessWidget {
         children:[
           CardRewardEvaluationProgress(),
           SizedBox(height:25),
-          Divider(
-            color:Palette.kToBlack[50],
-          ),
           CardRewardEvaluationDetails(),
         ],
       ),
@@ -71,6 +68,7 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
+        CardRewardName(),
         SizedBox(height:10),
         EvaluationProgressTitle(),
         SizedBox(height:10),
@@ -83,6 +81,26 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
         if (_progress == EvaluationProgressEnum.Evaluate)            
           EvaluationProgressEvaluate(),
       ]
+    );
+  }
+}
+
+class CardRewardName extends StatelessWidget {
+  const CardRewardName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
+    if (cardRewardModel == null)return Container();
+
+    return Text(cardRewardModel.name,
+      style:TextStyle(
+        color:Palette.kToBlack[900],
+        overflow: TextOverflow.clip,
+        fontSize: 20,
+      ),
     );
   }
 }
@@ -264,11 +282,11 @@ class EvaluationProgressBar extends StatelessWidget {
 
     if (evaluationResp == null) return Container();
     
-    bool hasTask = evaluationResp.taskEvaluationResp.matches.length != 0  
+    bool hasTask = evaluationResp.taskEvaluationResp.matches.length != 0 
       || evaluationResp.taskEvaluationResp.misMatches.length != 0;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
       children:[
         ChannelProgressItem(changeEvaluationProgress: changeEvaluationProgress, progress:progress,),
         if(hasTask)
@@ -366,7 +384,7 @@ class ProgressArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding:EdgeInsets.only(left:10, right:10),
+      padding:EdgeInsets.only(left:10, right:10),
       child:Icon(
         Icons.double_arrow_rounded,
         color:Palette.kToBlue[100],
@@ -426,7 +444,7 @@ class EvaluationProgressTitle extends StatelessWidget {
       child:Text('試算回饋',
         style:TextStyle(
           color:Palette.kToBlack[900],
-          fontSize: 20,
+          fontSize: 16,
         ),
       ),
     );

@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/card/model/bank.dart';
+import 'package:logger/logger.dart';
+import 'package:pickrewardapp/shared/config/logger.dart';
 
 
 import 'package:pickrewardapp/shared/repository/card/card.dart';
@@ -16,7 +20,7 @@ class BankViewModel with ChangeNotifier{
  
   final List<BankModel> _bankModels = [];
 
-  get banks => _bankModels;
+  List<BankModel >get banks => _bankModels;
 
 
   static int initLimit = 1000;
@@ -42,10 +46,11 @@ class BankViewModel with ChangeNotifier{
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
-      print(e);
+      logger.e(e);
+
     } catch (e) {
       ///handle all generic errors here
-      print(e);
+      logger.e(e);
     }
   }
 

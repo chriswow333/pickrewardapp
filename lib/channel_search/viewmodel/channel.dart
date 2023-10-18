@@ -3,6 +3,7 @@ import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_category.dart';
 import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
+import 'package:pickrewardapp/shared/config/logger.dart';
 
 
 import 'package:pickrewardapp/shared/repository/channel/channel.dart';
@@ -52,10 +53,10 @@ class ChannelViewModel with ChangeNotifier {
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
-      print(e);
+      logger.e(e);
     } catch (e) {
       ///handle all generic errors here
-      print(e);
+      logger.e(e);
     }
   }
 
@@ -125,8 +126,8 @@ class ChannelViewModel with ChangeNotifier {
       }
       notifyListeners();
 
-    }).catchError((error){
-      print(error);
+    }).catchError((e){
+      logger.e(e);
     });
   }
 
@@ -149,8 +150,8 @@ class ChannelViewModel with ChangeNotifier {
       _channelModels[channelCategoryType]!.addAll(value);
       notifyListeners();
       
-    }).catchError((error){
-      print(error);
+    }).catchError((e){
+      logger.e(e);
     });
 
   }
@@ -183,8 +184,8 @@ class ChannelViewModel with ChangeNotifier {
 
       return channelItemModels;
 
-    }).catchError((error){
-      print(error);
+    }).catchError((e){
+      logger.e(e);
     });
 
   }
@@ -202,10 +203,10 @@ class ChannelViewModel with ChangeNotifier {
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
-      print(e);
+      logger.e(e);
     } catch (e) {
       ///handle all generic errors here
-      print(e);
+      logger.e(e);
     }
 
     return Future.error('error fetch');

@@ -49,7 +49,7 @@ class BackToRewardItemsBtn extends StatelessWidget {
       child:Row(
         children:[
           Icon(
-            Icons.arrow_back_outlined,
+            Icons.arrow_back_ios_new_outlined,
             color: Palette.kToBlack[600],
             size: 18,
           ),

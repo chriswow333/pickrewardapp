@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
+import 'package:pickrewardapp/shared/config/logger.dart';
 import 'package:pickrewardapp/shared/repository/channel/channel.dart';
 import 'package:pickrewardapp/shared/repository/channel/proto/generated/channel.pb.dart';
 
@@ -93,9 +94,9 @@ class SearchChannelViewModel with ChangeNotifier {
 
       notifyListeners();
     } on GrpcError catch (e) {
-      print(e);
+      logger.e(e);
     } catch (e) {
-      print(e);
+      logger.e(e);
     }
   }
 

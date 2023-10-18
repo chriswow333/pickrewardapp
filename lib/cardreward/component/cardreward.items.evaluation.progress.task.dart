@@ -22,12 +22,38 @@ class EvaluationProgressTask extends StatelessWidget {
     List<TaskEvaluationResp_Task> matches = taskEvaluationResp.matches;
 
     return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color:Palette.kToBlack[50]!,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          TaskName(),
           for(TaskEvaluationResp_Task t in matches)
             TaskItem(task:t),
+
         ]  
       )
+    );
+  }
+}
+
+class TaskName extends StatelessWidget {
+  const TaskName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('任務活動',
+    style:TextStyle(
+        color: Palette.kToBlack[600],
+        fontSize: 18,
+      ),
     );
   }
 }

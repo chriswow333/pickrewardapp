@@ -4,6 +4,8 @@ class CardHeaderItemModel {
   final String name;
   final List<String> descriptions;
   final String image;
+  final int updateDate;
+  final String lintUrl;
  
 
   CardHeaderItemModel({
@@ -11,5 +13,7 @@ class CardHeaderItemModel {
     required this.name,
     required this.descriptions,
     required this.image,
+    required this.updateDate,
+    required this.lintUrl,
   });
 }

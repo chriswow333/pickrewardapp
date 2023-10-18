@@ -26,8 +26,6 @@ Future<void> main(List<String> args) async {
     credentials: ChannelCredentials.secure(
         // certificates: Uint8List.fromList(await File('./Users/chrisyu/data/creditcard/app/pickrewardapp/lib/shared/repository/channel/fullchain.pem').readAsBytes()),
         onBadCertificate:(certificate, str ) {
-          print('helllllo');
-          print(certificate);
           return true;
         }
       ),

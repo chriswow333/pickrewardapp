@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart' hide Banner;
-import 'package:pickrewardapp/card/component/card.bank.dart';
-import 'package:pickrewardapp/card/component/card.items.dart';
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:provider/provider.dart';

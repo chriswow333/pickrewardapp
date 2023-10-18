@@ -47,14 +47,19 @@ class Cost extends StatefulWidget {
 }
 
 class _CostState extends State<Cost> {
-  TextEditingController _controller = new TextEditingController();
+
+
+  late TextEditingController _controller;
+  @override
+  void initState(){
+    _controller = new TextEditingController(text:'1000');
+    super.initState();
+  }
+   
 
   @override
   Widget build(BuildContext context) {
-    
-    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-    _controller.text = evaluationSelectedViewModel.getCost().toString();
-
+    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context,listen:false);
     return SizedBox(
       width:100,
       child:TextField(
@@ -65,8 +70,7 @@ class _CostState extends State<Cost> {
           FilteringTextInputFormatter.digitsOnly
         ], //
         onChanged: (text){
-          int intVal = int.parse(text);
-          evaluationSelectedViewModel.setCost(intVal);
+          evaluationSelectedViewModel.setCost(int.parse(text));
         },
         style:TextStyle(
           fontSize: 16,

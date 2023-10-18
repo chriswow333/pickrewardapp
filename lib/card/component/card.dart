@@ -45,6 +45,7 @@ class BankCardItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           BankItems(),
           Divider(),

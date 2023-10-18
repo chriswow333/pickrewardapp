@@ -122,8 +122,6 @@ class Lessthan1000Btn extends StatelessWidget {
         ],
       ),
     );
-    
-    ;
   }
 }
 
@@ -251,17 +249,8 @@ class MoreThan5000Btn extends StatelessWidget {
         ),
       )
     );
-    ;
   }
 }
-
-
-
-
-
-
-
-
 
 
 class CostDateName extends StatelessWidget {

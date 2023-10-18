@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/channel_search/model/pay.dart';
+import 'package:pickrewardapp/shared/config/logger.dart';
 
 
 import 'package:pickrewardapp/shared/repository/pay/pay.dart';
@@ -56,10 +57,10 @@ class PayItemViewModel with ChangeNotifier {
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
-      print(e);
+      logger.e(e);
     } catch (e) {
       ///handle all generic errors here
-      print(e);
+      logger.e(e);
     }
 
   }

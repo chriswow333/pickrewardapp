@@ -129,7 +129,7 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
               itemCount: channelItemModels.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,

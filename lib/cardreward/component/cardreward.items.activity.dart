@@ -145,13 +145,6 @@ class ActivityRewardType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        // border: Border.all(
-        //   color:Palette.kToBlue[600]!,
-        //   width: 2,
-        // ),
-        // borderRadius: BorderRadius.circular(15.0),
-      ),
       child:Text('一般回饋',
         style:TextStyle(
           color:Palette.kToBlue[600],

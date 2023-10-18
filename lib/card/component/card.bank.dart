@@ -14,11 +14,11 @@ class BankItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BankViewModel bankViewModel = Provider.of<BankViewModel>(context);
-
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child:Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children:[
           for(BankModel bankModel in bankViewModel.banks)
             BankItem(bankModel:bankModel),

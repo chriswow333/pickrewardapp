@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
@@ -16,23 +15,79 @@ class CardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    CardHeaderViewModel cardHeaderViewModel = Provider.of<CardHeaderViewModel>(context);
+    CardHeaderViewModel cardHeaderViewModel = Provider.of<CardHeaderViewModel>(context, listen:false);
     CardHeaderItemModel cardHeaderItemModel = cardHeaderViewModel.cardHeaderItemModel;
     
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
-        Column(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:[
+            BackToCardListBtn(),
             CardIcon(image:cardHeaderItemModel.image),
-            CardName(cardName: cardHeaderItemModel.name,),
+            SizedBox(width:10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:[
+                CardName(cardName: cardHeaderItemModel.name,),
+                CardUpdateDate(),    
+              ]
+            )            
           ]
         ),
-        SizedBox(width:20),
-        Expanded(
+        SizedBox(height:5),
+        Container(
+          padding: EdgeInsets.only(left:20),
           child:CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
         ),
       ]
+    );
+  }
+}
+
+
+
+class BackToCardListBtn extends StatelessWidget {
+  const BackToCardListBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:TextButton(
+      style: ButtonStyle(
+        iconColor: MaterialStatePropertyAll(Palette.kToBlack[600]),
+        minimumSize:MaterialStatePropertyAll(Size.zero),
+        side:MaterialStatePropertyAll(BorderSide.none),
+      ),
+      onPressed: (){
+        Navigator.of(context).pop();
+      }, 
+      child: Container(
+        child:Icon(
+          Icons.arrow_back_ios_new_outlined,
+        ),
+      ),
+    )
+    )
+    ;
+  }
+}
+
+
+
+
+class CardUpdateDate extends StatelessWidget {
+  const CardUpdateDate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('更新日期:2023/10/01',
+      style: TextStyle(
+        fontSize: 10,
+        color: Palette.kToBlack[400],
+      ),
     );
   }
 }
@@ -102,7 +157,6 @@ class CardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:120,
       child:Column(
         children:[
          FittedBox(
