@@ -5,6 +5,13 @@ import 'package:pickrewardapp/channel_search/model/channel.dart';
 
 class RewardSelectedViewModel with ChangeNotifier{
 
+  bool _alreadyFindCardOnce = false;
+  set setFindCardResultArrow(bool flag) {
+    _alreadyFindCardOnce = flag;
+    notifyListeners();
+  }
+  bool get alreadyFindCardOnce => _alreadyFindCardOnce;
+
   final Set<int> _labelIDs = {};
   set labelIDs(int labelID) {
     if(_labelIDs.contains(labelID)){

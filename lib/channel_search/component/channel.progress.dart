@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +17,9 @@ class RewardProgressBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
         ChannelProgressItem(controller: controller,),
-        ProgressArrow(),
+        ProgressArrowToFindCard(),
         FindCardProgressItem(controller: controller,),
-        ProgressArrow(),
+        ProgressArrowToResult(),
         FindResultProgressItem(controller: controller,),
       ],
     );
@@ -107,21 +108,47 @@ class FindCardProgressItem extends StatelessWidget {
   }
 }
 
-class ProgressArrow extends StatelessWidget {
-  const ProgressArrow({super.key});
+class ProgressArrowToFindCard extends StatelessWidget {
+  const ProgressArrowToFindCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
+    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    bool selected = channelIDLength + labelLength > 0;
+
     return Container(
       child:Icon(
         Icons.double_arrow_rounded,
-        color:Palette.kToBlue[100],
+        color:selected ? Palette.kToBlue[600]:Palette.kToBlue[100],
         size:40,
         weight: 10,
       ),
     );
   }
 }
+
+
+class ProgressArrowToResult extends StatelessWidget {
+  const ProgressArrowToResult({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    bool flag = rewardSelectedViewModel.alreadyFindCardOnce;
+    return Container(
+      child:Icon(
+        Icons.double_arrow_rounded,
+        color:flag ? Palette.kToBlue[600]:Palette.kToBlue[100],
+        size:40,
+        weight: 10,
+      ),
+    );
+  }
+}
+
 class ChannelProgressItem extends StatelessWidget {
   const ChannelProgressItem({super.key, required this.controller});
   

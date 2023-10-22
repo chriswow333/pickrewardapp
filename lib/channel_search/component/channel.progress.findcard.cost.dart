@@ -94,7 +94,7 @@ class Lessthan1000Btn extends StatelessWidget {
         backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
         side:_cost == selectedCost ? MaterialStatePropertyAll(
           BorderSide(
-            width:1.0,
+            width:1.5,
             color: Palette.kToBlack[600]!,
           )
         ):null,
@@ -108,7 +108,7 @@ class Lessthan1000Btn extends StatelessWidget {
               Icon(
                 Icons.monetization_on_rounded,
                 size:20,
-                color:_cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
+                color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
               ),
             ],
           ),
@@ -116,7 +116,7 @@ class Lessthan1000Btn extends StatelessWidget {
           Text('~1000',
             style: TextStyle(
               fontSize: 14,
-              color: _cost == selectedCost ? Palette.kToBlack[900]:Palette.kToBlack[200],
+              color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
             ),
           ),
         ],
@@ -148,7 +148,7 @@ class From1000To5000Btn extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
           side:_cost == selectedCost ? MaterialStatePropertyAll(
             BorderSide(
-              width:1.0,
+              width:1.5,
               color: Palette.kToBlack[600]!,
             )
           ):null,
@@ -211,7 +211,7 @@ class MoreThan5000Btn extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
           side:_cost == selectedCost ? MaterialStatePropertyAll(
             BorderSide(
-              width:1.0,
+              width:1.5,
               color: Palette.kToBlack[600]!,
             )
           ):null,

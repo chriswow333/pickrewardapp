@@ -20,18 +20,33 @@ class CardResultsProgress extends StatelessWidget {
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context);
 
     List<EvaluateCardRewardsReply_CardRewardEventResult> cardRewardEventResults = cardRewardEventResultsViewModel.cardRewardEventResults;
-
-    return Container(
-      child:SingleChildScrollView(
-        child:Wrap(
-          runSpacing: 20,
-          children:[
-            for(EvaluateCardRewardsReply_CardRewardEventResult c in cardRewardEventResults) 
-              CardResult(cardRewardEventResult: c,),
-          ],
+    
+    int len = cardRewardEventResults.length;
+    if(cardRewardEventResults.isNotEmpty) {
+      return Container(
+        child:SingleChildScrollView(
+          child:Wrap(
+            runSpacing: 20,
+            children:[
+              for(EvaluateCardRewardsReply_CardRewardEventResult c in cardRewardEventResults) 
+                CardResult(cardRewardEventResult: c,),
+            ],
+          )
+        ),
+      );
+    }else {
+      return Container(
+        alignment: Alignment.topCenter,
+        child:Text('無搜尋結果',
+          style:TextStyle(
+            fontSize: 18,
+            color:Palette.kToBlack[600],
+          )
         )
-      ),
-    );
+      );
+    }
+
+    
   }
 }
 

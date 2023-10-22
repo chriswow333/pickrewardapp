@@ -306,11 +306,24 @@ class LabelItemIcon extends StatelessWidget {
         iconData = Icons.horizontal_split_outlined;
         break;
       case 1:
-        iconData = Icons.home_outlined;
+        iconData = Icons.wallet;
         break;
       case 2:
         iconData = Icons.airplane_ticket_outlined;
         break;
+
+      case 3:
+        iconData = Icons.phone_android_rounded;
+        break;
+
+      case 4:
+        iconData = Icons.store_mall_directory_outlined;
+        break;
+
+      case 5:
+        iconData = Icons.restaurant_menu_rounded;
+        break;
+
     }
 
     return Container(

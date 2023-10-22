@@ -28,7 +28,6 @@ class FindCardProgress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           SelectedChannelResult(),
-          SizedBox(height:20),
           PayWidget(),
           SizedBox(height:20),
           CostWidget(),
@@ -39,11 +38,9 @@ class FindCardProgress extends StatelessWidget {
         ],
       )
       ),
-      
     );
   }
 }
-
 
 
 class SubmitEvaluateCard extends StatelessWidget {
@@ -54,24 +51,29 @@ class SubmitEvaluateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context,listen:false);
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
 
+
+    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
+    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    bool hasChannel = channelIDLength + labelLength > 0;
+
     return Row(
-      // decoration: BoxDecoration(
-      //   border:Border.all(),
-      // ),
       mainAxisAlignment: MainAxisAlignment.center,
       children:[
         TextButton(
           style: ButtonStyle(
             padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
             shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
-            backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[600]),
+            backgroundColor: hasChannel? MaterialStatePropertyAll(Palette.kToBlue[600]): MaterialStatePropertyAll(Palette.kToBlack[50]),
           ),
           onPressed: (){
-            controller.jumpToPage(ChannelProgressPage.result);
-            cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
+            if(hasChannel) {
+              controller.jumpToPage(ChannelProgressPage.result);
+              cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
+              rewardSelectedViewModel.setFindCardResultArrow = true;
+            }
           },
           child:Text('送出選卡',
             style: TextStyle(
@@ -82,6 +84,10 @@ class SubmitEvaluateCard extends StatelessWidget {
         )
       ],
     );
+   
+
+
+    
   }
 }
 
