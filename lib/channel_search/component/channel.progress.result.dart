@@ -21,7 +21,6 @@ class CardResultsProgress extends StatelessWidget {
 
     List<EvaluateCardRewardsReply_CardRewardEventResult> cardRewardEventResults = cardRewardEventResultsViewModel.cardRewardEventResults;
     
-    int len = cardRewardEventResults.length;
     if(cardRewardEventResults.isNotEmpty) {
       return Container(
         child:SingleChildScrollView(

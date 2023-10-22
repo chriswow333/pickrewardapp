@@ -46,7 +46,7 @@ class BankItem extends StatelessWidget {
         cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
       },
       child:SizedBox(
-        width:80,
+        width:70,
         child:Column(
           children:[
             BankIcon(image:bankModel.image),
@@ -85,8 +85,8 @@ class BankIcon extends StatelessWidget {
     return Container(
       child:Image.memory(
         base64Decode(image), 
-        width:70,
-        height:50,
+        width:50,
+        height:30,
         gaplessPlayback:true,
       ),
     );
