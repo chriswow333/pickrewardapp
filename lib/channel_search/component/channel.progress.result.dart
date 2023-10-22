@@ -113,31 +113,29 @@ class CardResult extends StatelessWidget {
           children:[
             CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
             SizedBox(height:10),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                CardIcon(image: cardEvaluation.cardImage,),
-                SizedBox(width: 10,),
-                Expanded(
-                  child:Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:[
-                      EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
-                      SizedBox(height:5),
-                      CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
-                    ]
-                  )
-                ),
+                CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
+                Row(
+                  children:[
+                    CardIcon(image: cardEvaluation.cardImage,),
+                    SizedBox(width:20),
+                    Column(
+                      children:[
+                        EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
+                      ]
+                    )
+                  ]
+                )
               ]
-            ),
-            
+            )
           ],
         ),
       ),
     );
   }
 }
-
-
 
 
 
@@ -179,14 +177,12 @@ class EvaluationResult extends StatelessWidget {
                   style:TextStyle(
                     color:Palette.kToBlue[600],
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text('獲得 ${percentage}% ${getReturnStr}${returnUnit} ',
                   style:TextStyle(
                     color:Palette.kToOrange[600],
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ]
@@ -229,6 +225,7 @@ class CardRewardName extends StatelessWidget {
       child:Text(cardRewardName,
           style: TextStyle(
             color:Palette.kToBlack[600],
+            fontSize: 18,
           ),
           maxLines:null,
       )
@@ -300,8 +297,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
-        width:90,
-        height:70,
+        width:70,
+        height:50,
       );
   }
 }
