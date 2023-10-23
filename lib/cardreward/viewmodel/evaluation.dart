@@ -34,7 +34,7 @@ class EvaluationViewModel with ChangeNotifier{
 
   get selectedEvaluationItem => _selectedEvaluationItem;
 
-  get cardRewardModel => _cardRewardModel;
+  CardRewardModel? get cardRewardModel => _cardRewardModel;
   
   EvaluationResp? _resp;
   

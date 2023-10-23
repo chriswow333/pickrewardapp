@@ -158,7 +158,7 @@ const CardRewardsReply$json = {
     {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.card.Reply', '10': 'reply'},
     {'1': 'cardRewards', '3': 2, '4': 3, '5': 11, '6': '.card.CardRewardsReply.CardReward', '10': 'cardRewards'},
   ],
-  '3': [CardRewardsReply_Reward$json, CardRewardsReply_Description$json, CardRewardsReply_CardReward$json],
+  '3': [CardRewardsReply_Reward$json, CardRewardsReply_Description$json, CardRewardsReply_Task$json, CardRewardsReply_CardReward$json],
 };
 
 @$core.Deprecated('Use cardRewardsReplyDescriptor instead')
@@ -184,6 +184,17 @@ const CardRewardsReply_Description$json = {
 };
 
 @$core.Deprecated('Use cardRewardsReplyDescriptor instead')
+const CardRewardsReply_Task$json = {
+  '1': 'Task',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'shortName', '3': 2, '4': 1, '5': 9, '10': 'shortName'},
+    {'1': 'order', '3': 3, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'descriptions', '3': 4, '4': 3, '5': 11, '6': '.card.CardRewardsReply.Description', '10': 'descriptions'},
+  ],
+};
+
+@$core.Deprecated('Use cardRewardsReplyDescriptor instead')
 const CardRewardsReply_CardReward$json = {
   '1': 'CardReward',
   '2': [
@@ -198,6 +209,7 @@ const CardRewardsReply_CardReward$json = {
     {'1': 'cardRewardType', '3': 9, '4': 1, '5': 5, '10': 'cardRewardType'},
     {'1': 'reward', '3': 10, '4': 1, '5': 11, '6': '.card.CardRewardsReply.Reward', '10': 'reward'},
     {'1': 'order', '3': 11, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'tasks', '3': 12, '4': 3, '5': 11, '6': '.card.CardRewardsReply.Task', '10': 'tasks'},
   ],
 };
 
@@ -209,14 +221,17 @@ final $typed_data.Uint8List cardRewardsReplyDescriptor = $convert.base64Decode(
     'FtZRIeCgpyZXdhcmRUeXBlGAMgASgFUgpyZXdhcmRUeXBlEh4KCmNyZWF0ZURhdGUYBCABKANS'
     'CmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgFIAEoA1IKdXBkYXRlRGF0ZRpLCgtEZXNjcmlwdG'
     'lvbhISCgRuYW1lGAEgASgJUgRuYW1lEhQKBW9yZGVyGAIgASgFUgVvcmRlchISCgRkZXNjGAMg'
-    'AygJUgRkZXNjGv0CCgpDYXJkUmV3YXJkEg4KAmlkGAEgASgJUgJpZBIWCgZjYXJkSUQYAiABKA'
-    'lSBmNhcmRJRBISCgRuYW1lGAMgASgJUgRuYW1lEkYKDGRlc2NyaXB0aW9ucxgEIAMoCzIiLmNh'
-    'cmQuQ2FyZFJld2FyZHNSZXBseS5EZXNjcmlwdGlvblIMZGVzY3JpcHRpb25zEh4KCmNyZWF0ZU'
-    'RhdGUYBSABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgGIAEoA1IKdXBkYXRlRGF0ZRIc'
-    'CglzdGFydERhdGUYByABKANSCXN0YXJ0RGF0ZRIYCgdlbmREYXRlGAggASgDUgdlbmREYXRlEi'
-    'YKDmNhcmRSZXdhcmRUeXBlGAkgASgFUg5jYXJkUmV3YXJkVHlwZRI1CgZyZXdhcmQYCiABKAsy'
-    'HS5jYXJkLkNhcmRSZXdhcmRzUmVwbHkuUmV3YXJkUgZyZXdhcmQSFAoFb3JkZXIYCyABKAVSBW'
-    '9yZGVy');
+    'AygJUgRkZXNjGpYBCgRUYXNrEhIKBG5hbWUYASABKAlSBG5hbWUSHAoJc2hvcnROYW1lGAIgAS'
+    'gJUglzaG9ydE5hbWUSFAoFb3JkZXIYAyABKAVSBW9yZGVyEkYKDGRlc2NyaXB0aW9ucxgEIAMo'
+    'CzIiLmNhcmQuQ2FyZFJld2FyZHNSZXBseS5EZXNjcmlwdGlvblIMZGVzY3JpcHRpb25zGrADCg'
+    'pDYXJkUmV3YXJkEg4KAmlkGAEgASgJUgJpZBIWCgZjYXJkSUQYAiABKAlSBmNhcmRJRBISCgRu'
+    'YW1lGAMgASgJUgRuYW1lEkYKDGRlc2NyaXB0aW9ucxgEIAMoCzIiLmNhcmQuQ2FyZFJld2FyZH'
+    'NSZXBseS5EZXNjcmlwdGlvblIMZGVzY3JpcHRpb25zEh4KCmNyZWF0ZURhdGUYBSABKANSCmNy'
+    'ZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgGIAEoA1IKdXBkYXRlRGF0ZRIcCglzdGFydERhdGUYBy'
+    'ABKANSCXN0YXJ0RGF0ZRIYCgdlbmREYXRlGAggASgDUgdlbmREYXRlEiYKDmNhcmRSZXdhcmRU'
+    'eXBlGAkgASgFUg5jYXJkUmV3YXJkVHlwZRI1CgZyZXdhcmQYCiABKAsyHS5jYXJkLkNhcmRSZX'
+    'dhcmRzUmVwbHkuUmV3YXJkUgZyZXdhcmQSFAoFb3JkZXIYCyABKAVSBW9yZGVyEjEKBXRhc2tz'
+    'GAwgAygLMhsuY2FyZC5DYXJkUmV3YXJkc1JlcGx5LlRhc2tSBXRhc2tz');
 
 @$core.Deprecated('Use cardEventReqDescriptor instead')
 const CardEventReq$json = {
@@ -285,7 +300,8 @@ const CardRewardEvaluationEventResult$json = {
     {'1': 'cardRewardStartDate', '3': 9, '4': 1, '5': 3, '10': 'cardRewardStartDate'},
     {'1': 'cardRewardEndDate', '3': 10, '4': 1, '5': 3, '10': 'cardRewardEndDate'},
     {'1': 'cardRewardName', '3': 11, '4': 1, '5': 9, '10': 'cardRewardName'},
-    {'1': 'reward', '3': 12, '4': 1, '5': 11, '6': '.card.CardRewardEvaluationEventResult.Reward', '10': 'reward'},
+    {'1': 'cardRewardTaskShortNames', '3': 12, '4': 3, '5': 9, '10': 'cardRewardTaskShortNames'},
+    {'1': 'reward', '3': 13, '4': 1, '5': 11, '6': '.card.CardRewardEvaluationEventResult.Reward', '10': 'reward'},
   ],
   '3': [CardRewardEvaluationEventResult_Reward$json],
 };
@@ -311,10 +327,11 @@ final $typed_data.Uint8List cardRewardEvaluationEventResultDescriptor = $convert
     'a0lEEhoKCGJhbmtOYW1lGAggASgJUghiYW5rTmFtZRIwChNjYXJkUmV3YXJkU3RhcnREYXRlGA'
     'kgASgDUhNjYXJkUmV3YXJkU3RhcnREYXRlEiwKEWNhcmRSZXdhcmRFbmREYXRlGAogASgDUhFj'
     'YXJkUmV3YXJkRW5kRGF0ZRImCg5jYXJkUmV3YXJkTmFtZRgLIAEoCVIOY2FyZFJld2FyZE5hbW'
-    'USRAoGcmV3YXJkGAwgASgLMiwuY2FyZC5DYXJkUmV3YXJkRXZhbHVhdGlvbkV2ZW50UmVzdWx0'
-    'LlJld2FyZFIGcmV3YXJkGowBCgZSZXdhcmQSDgoCaWQYASABKAlSAmlkEhIKBG5hbWUYAiABKA'
-    'lSBG5hbWUSHgoKcmV3YXJkVHlwZRgDIAEoBVIKcmV3YXJkVHlwZRIeCgpjcmVhdGVEYXRlGAQg'
-    'ASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBSABKANSCnVwZGF0ZURhdGU=');
+    'USOgoYY2FyZFJld2FyZFRhc2tTaG9ydE5hbWVzGAwgAygJUhhjYXJkUmV3YXJkVGFza1Nob3J0'
+    'TmFtZXMSRAoGcmV3YXJkGA0gASgLMiwuY2FyZC5DYXJkUmV3YXJkRXZhbHVhdGlvbkV2ZW50Um'
+    'VzdWx0LlJld2FyZFIGcmV3YXJkGowBCgZSZXdhcmQSDgoCaWQYASABKAlSAmlkEhIKBG5hbWUY'
+    'AiABKAlSBG5hbWUSHgoKcmV3YXJkVHlwZRgDIAEoBVIKcmV3YXJkVHlwZRIeCgpjcmVhdGVEYX'
+    'RlGAQgASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBSABKANSCnVwZGF0ZURhdGU=');
 
 @$core.Deprecated('Use evaluationEventResultRespDescriptor instead')
 const EvaluationEventResultResp$json = {

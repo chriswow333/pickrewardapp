@@ -1,25 +1,22 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
-class EvaluationProgressTask extends StatelessWidget {
-  const EvaluationProgressTask({super.key});
+
+
+class CardRewardEvaluationTask extends StatelessWidget {
+  const CardRewardEvaluationTask({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
-    if (evaluationResp == null) return Container();
-
-    TaskEvaluationResp taskEvaluationResp = evaluationResp.taskEvaluationResp;
-      
-    List<TaskEvaluationResp_Task> matches = taskEvaluationResp.matches;
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -35,14 +32,14 @@ class EvaluationProgressTask extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           TaskName(),
-          for(TaskEvaluationResp_Task t in matches)
-            TaskItem(task:t),
-
+          for(TaskModel t in evaluationViewModel.cardRewardModel!.tasks)
+            TaskItem(taskModel:t),
         ]  
       )
     );
   }
 }
+
 
 class TaskName extends StatelessWidget {
   const TaskName({super.key});
@@ -58,66 +55,85 @@ class TaskName extends StatelessWidget {
   }
 }
 
+class TaskItem extends StatefulWidget {
+  const TaskItem({super.key, required this.taskModel});
 
-class TaskItem extends StatelessWidget {
-  const TaskItem({super.key, required this.task});
+  final TaskModel taskModel;
 
-  final TaskEvaluationResp_Task task;
-  
+  @override
+  State<TaskItem> createState() => _TaskItemState();
+}
+
+class _TaskItemState extends State<TaskItem> {
+
+  bool expandedDetail = false;
+
+  callbackExpanded(){
+    setState(() {
+      expandedDetail = !expandedDetail;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    List<TaskEvaluationResp_Task_TaskDescription> descItems = task.descriptions;
+    List<DescriptionModel> descItems = widget.taskModel.descriptions;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          TaskItemTitle(name:task.name, id:task.id),
-          TaskItemDescriptions(descItems: descItems,),
+          TaskItemTitle(taskModel: widget.taskModel, callbackExpanded: callbackExpanded, expandedDetail: expandedDetail,),
+          if(expandedDetail)
+            TaskItemDescriptions(descItems: descItems,),
         ]
       )
     );
   }
 }
 
-class TaskItemTitle extends StatelessWidget {
-  const TaskItemTitle({super.key, required this.name, required this.id});
 
-  final String name;
-  final String id;
+class TaskItemTitle extends StatelessWidget {
+
+  const TaskItemTitle({super.key, required this.callbackExpanded, required this.taskModel, required this.expandedDetail});
+
+  final TaskModel taskModel;
+  final Function callbackExpanded;
+  final bool expandedDetail;
 
   @override
   Widget build(BuildContext context) {
-
-    EvaluationSelectedViewModel evaluationSelectedViewModel = Provider.of<EvaluationSelectedViewModel>(context);
-
     return Container(
       child:TextButton(
         style:const ButtonStyle(
          splashFactory:NoSplash.splashFactory,
         ),
         onPressed: (){
-          evaluationSelectedViewModel.setTaskID(id);
+          callbackExpanded();
         },
         child:Row(
           children:[
-            Checkbox(
-              checkColor: Colors.white,
-              fillColor: evaluationSelectedViewModel.hasTaskID(id)?
-                MaterialStatePropertyAll(Palette.kToBlue[600]):MaterialStatePropertyAll(Palette.kToBlack[600]),
-              value: evaluationSelectedViewModel.hasTaskID(id),
-              onChanged: (bool? value) {
-                evaluationSelectedViewModel.setTaskID(id);
-              },
+            Container(
+              padding:EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                border: Border.all(
+                  color: Palette.kToRed[600]!,
+                ),
+              ),
+              child:Text(taskModel.shortName,
+                style: TextStyle(
+                  color: Palette.kToRed[600]!,
+                ),
+              )
             ),
-            Flexible(
-              child: Text(name,
+            SizedBox(width:10),
+            Expanded(
+              child:Text(taskModel.name,
                 style: TextStyle(
                   fontSize: 18,
                   color: Palette.kToBlack[900],
                 ),  
               ),
-            ),
+            )
           ]
         )
       ),
@@ -126,18 +142,19 @@ class TaskItemTitle extends StatelessWidget {
 }
 
 
+
 class TaskItemDescriptions extends StatelessWidget {
   const TaskItemDescriptions({super.key, required this.descItems});
-
-  final List<TaskEvaluationResp_Task_TaskDescription> descItems;
+  final List<DescriptionModel> descItems;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.only(left:55),
+      padding: const EdgeInsets.only(left:5),
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          for(TaskEvaluationResp_Task_TaskDescription d in descItems)
+          for(DescriptionModel d in descItems)
             TaskItemDesc(desc:d),
         ]
       )
@@ -145,11 +162,12 @@ class TaskItemDescriptions extends StatelessWidget {
   }
 }
 
-class TaskItemDesc extends StatelessWidget {
-  const TaskItemDesc({super.key, required this.desc});
 
-  final TaskEvaluationResp_Task_TaskDescription desc;
-  
+class TaskItemDesc extends StatelessWidget {
+  const TaskItemDesc({super.key, required this.desc,});
+
+  final DescriptionModel desc;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -170,8 +188,7 @@ class TaskItemDescName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:
-      Text(name,
+      child:Text(name,
         style: TextStyle(
           fontSize: 15,
           color: Palette.kToBlack[900],
@@ -187,15 +204,14 @@ class TaskItemDescDesc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding:const EdgeInsets.only(left:5),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for(String d in desc)
             Text(d,
               style: TextStyle(
-              fontSize: 15,
-              color: Colors.cyan[900],
+              fontSize: 13,
+              color: Palette.kToBlack[500],
             ),  
           )
         ]

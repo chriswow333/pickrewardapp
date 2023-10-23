@@ -106,6 +106,13 @@ message CardRewardsReply {
     repeated string desc = 3;
   }
 
+  message Task{
+    string name = 1;
+    string shortName = 2;
+    int32 order = 3;
+    repeated Description descriptions = 4;
+  }
+
   message CardReward {
     string id = 1;
     string cardID = 2;
@@ -118,6 +125,7 @@ message CardRewardsReply {
     int32 cardRewardType = 9;
     Reward reward = 10;
     int32 order = 11;
+    repeated Task tasks = 12;
   }
 
 
@@ -171,7 +179,8 @@ message CardRewardEvaluationEventResult {
   int64 cardRewardStartDate = 9;
   int64 cardRewardEndDate = 10;
   string cardRewardName = 11;
-  Reward reward = 12;
+  repeated string cardRewardTaskShortNames = 12;
+  Reward reward = 13;
 }
 
 
@@ -217,65 +226,6 @@ message SearchCardReply{
   Reply reply = 1;
   repeated Card cards = 2;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// message RewardEventResultProto{
-//   string id  = 1;
-//   int32 rewardEventStatus = 2;
-//   PayloadEventProto payloadEvent = 3;
-// }
-
-// message PayloadEventProto {
-//   string id = 1;
-//   bool pass = 2;
-//   FeedbackEventProto feedbackEvent = 3;
-//   repeated PayloadEventProto payloadEvents = 4;
-//   ContainerEventProto containerEvent = 5;
-// }
-
-// message FeedbackEventProto {
-//   int32 rewardType = 1;
-//   int32 cost = 2;
-//   double getReturn = 3;
-//   double getPercentage = 4;
-//   int32 feedbackEventStatus = 5;
-// }
-
-// message ContainerEventProto {
-//   string id = 1;
-//   bool pass = 2;
-//   repeated ContainerEventProto containerEvents = 3;
-//   repeated string matches = 4;
-//   repeated string misMatches = 5;
-//   ConstraintEventReplyProto cotraintEvent = 6;
-// }
-
-// message ConstraintEventReplyProto {
-//   bool pass = 1;
-//   int32 constraintType = 2;
-//   repeated string matches = 3;
-//   repeated string misMatches = 4;
-// }
-
-// message DescriptionProto {
-//   string name = 1;
-//   repeated string desc = 2;
-//   int32 order = 3;
-// }
-
 
 
 

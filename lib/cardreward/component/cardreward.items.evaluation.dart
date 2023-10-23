@@ -93,18 +93,63 @@ class CardRewawrdTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       // padding: EdgeInsets.only(bottom:10),
       child:Row(
         children:[
           CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-          EvaluationConstraintTypes(),
+          TaskItems(tasks: cardRewardModel.tasks,),
         ]
       )
     );
   }
 }
 
+
+class TaskItems extends StatelessWidget {
+  const TaskItems({super.key, required this.tasks});
+  final List<TaskModel> tasks;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children:[
+        for(TaskModel t in tasks)
+          TaskShortName(shortName: t.shortName)
+      ]
+    );
+  }
+}
+
+
+class TaskShortName extends StatelessWidget {
+  const TaskShortName({super.key, required this.shortName});
+  final String shortName;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right:5),
+      child:Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
+          border: Border.all(
+            color:Palette.kToRed[600]!,
+          ),
+        ),
+        child:Text(shortName,
+          style: TextStyle(
+            fontSize: 12,
+            color:Palette.kToRed[600]
+          ),
+        )
+      )
+    );
+  }
+}
 
 
 class CardRewardDuration extends StatelessWidget {
@@ -174,56 +219,56 @@ class CardRewardDurationMessage extends StatelessWidget {
 }
 
 
-class EvaluationConstraintTypes extends StatelessWidget {
-  const EvaluationConstraintTypes({super.key});
+// class EvaluationConstraintTypes extends StatelessWidget {
+//   const EvaluationConstraintTypes({super.key});
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    EvaluationViewModel evaluationViewModel= Provider.of<EvaluationViewModel>(context);
-    EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
-    if(evaluationResp == null ){
-      return Container();
-    }
-   ConstraintsEvaluationResp constraintResp = evaluationResp.constraintsEvaluationResp;
-
-
-    return Wrap(
-      spacing: 5,
-      children:[
-        for(ConstraintsEvaluationResp_Constraint c in constraintResp.matches)
-          EvaluationConstraintType(constraint: c,),
-      ]
-    );
-  }
-}
+//     EvaluationViewModel evaluationViewModel= Provider.of<EvaluationViewModel>(context);
+//     EvaluationResp? evaluationResp = evaluationViewModel.evaluationResp;
+//     if(evaluationResp == null ){
+//       return Container();
+//     }
+//    ConstraintsEvaluationResp constraintResp = evaluationResp.constraintsEvaluationResp;
 
 
-class EvaluationConstraintType extends StatelessWidget {
-  const EvaluationConstraintType({super.key, required this.constraint,});
+//     return Wrap(
+//       spacing: 5,
+//       children:[
+//         for(ConstraintsEvaluationResp_Constraint c in constraintResp.matches)
+//           EvaluationConstraintType(constraint: c,),
+//       ]
+//     );
+//   }
+// }
 
-  final ConstraintsEvaluationResp_Constraint constraint;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToOrange[600]!,
-          width: 2,
-        ),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child:Text(
-        style:TextStyle(
-        color:Palette.kToOrange[600],
-        fontSize: 13,
-      ),
-        constraint.constraintName
-      )
-    );
-  }
-}
+
+// class EvaluationConstraintType extends StatelessWidget {
+//   const EvaluationConstraintType({super.key, required this.constraint,});
+
+//   final ConstraintsEvaluationResp_Constraint constraint;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(5.0),
+//       decoration: BoxDecoration(
+//         border: Border.all(
+//           color:Palette.kToOrange[600]!,
+//           width: 2,
+//         ),
+//         borderRadius: BorderRadius.circular(12.0),
+//       ),
+//       child:Text(
+//         style:TextStyle(
+//         color:Palette.kToOrange[600],
+//         fontSize: 13,
+//       ),
+//         constraint.constraintName
+//       )
+//     );
+//   }
+// }
 
 
 

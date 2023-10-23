@@ -738,6 +738,72 @@ class CardRewardsReply_Description extends $pb.GeneratedMessage {
   $core.List<$core.String> get desc => $_getList(2);
 }
 
+class CardRewardsReply_Task extends $pb.GeneratedMessage {
+  factory CardRewardsReply_Task() => create();
+  CardRewardsReply_Task._() : super();
+  factory CardRewardsReply_Task.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardRewardsReply_Task.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Task', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'shortName', protoName: 'shortName')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..pc<CardRewardsReply_Description>(4, _omitFieldNames ? '' : 'descriptions', $pb.PbFieldType.PM, subBuilder: CardRewardsReply_Description.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardRewardsReply_Task clone() => CardRewardsReply_Task()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardRewardsReply_Task copyWith(void Function(CardRewardsReply_Task) updates) => super.copyWith((message) => updates(message as CardRewardsReply_Task)) as CardRewardsReply_Task;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardRewardsReply_Task create() => CardRewardsReply_Task._();
+  CardRewardsReply_Task createEmptyInstance() => create();
+  static $pb.PbList<CardRewardsReply_Task> createRepeated() => $pb.PbList<CardRewardsReply_Task>();
+  @$core.pragma('dart2js:noInline')
+  static CardRewardsReply_Task getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardRewardsReply_Task>(create);
+  static CardRewardsReply_Task? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get shortName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set shortName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasShortName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearShortName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get order => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set order($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasOrder() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOrder() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<CardRewardsReply_Description> get descriptions => $_getList(3);
+}
+
 class CardRewardsReply_CardReward extends $pb.GeneratedMessage {
   factory CardRewardsReply_CardReward() => create();
   CardRewardsReply_CardReward._() : super();
@@ -756,6 +822,7 @@ class CardRewardsReply_CardReward extends $pb.GeneratedMessage {
     ..a<$core.int>(9, _omitFieldNames ? '' : 'cardRewardType', $pb.PbFieldType.O3, protoName: 'cardRewardType')
     ..aOM<CardRewardsReply_Reward>(10, _omitFieldNames ? '' : 'reward', subBuilder: CardRewardsReply_Reward.create)
     ..a<$core.int>(11, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..pc<CardRewardsReply_Task>(12, _omitFieldNames ? '' : 'tasks', $pb.PbFieldType.PM, subBuilder: CardRewardsReply_Task.create)
     ..hasRequiredFields = false
   ;
 
@@ -874,6 +941,9 @@ class CardRewardsReply_CardReward extends $pb.GeneratedMessage {
   $core.bool hasOrder() => $_has(10);
   @$pb.TagNumber(11)
   void clearOrder() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.List<CardRewardsReply_Task> get tasks => $_getList(11);
 }
 
 class CardRewardsReply extends $pb.GeneratedMessage {
@@ -1216,7 +1286,8 @@ class CardRewardEvaluationEventResult extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'cardRewardStartDate', protoName: 'cardRewardStartDate')
     ..aInt64(10, _omitFieldNames ? '' : 'cardRewardEndDate', protoName: 'cardRewardEndDate')
     ..aOS(11, _omitFieldNames ? '' : 'cardRewardName', protoName: 'cardRewardName')
-    ..aOM<CardRewardEvaluationEventResult_Reward>(12, _omitFieldNames ? '' : 'reward', subBuilder: CardRewardEvaluationEventResult_Reward.create)
+    ..pPS(12, _omitFieldNames ? '' : 'cardRewardTaskShortNames', protoName: 'cardRewardTaskShortNames')
+    ..aOM<CardRewardEvaluationEventResult_Reward>(13, _omitFieldNames ? '' : 'reward', subBuilder: CardRewardEvaluationEventResult_Reward.create)
     ..hasRequiredFields = false
   ;
 
@@ -1335,15 +1406,18 @@ class CardRewardEvaluationEventResult extends $pb.GeneratedMessage {
   void clearCardRewardName() => clearField(11);
 
   @$pb.TagNumber(12)
-  CardRewardEvaluationEventResult_Reward get reward => $_getN(11);
-  @$pb.TagNumber(12)
-  set reward(CardRewardEvaluationEventResult_Reward v) { setField(12, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasReward() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearReward() => clearField(12);
-  @$pb.TagNumber(12)
-  CardRewardEvaluationEventResult_Reward ensureReward() => $_ensure(11);
+  $core.List<$core.String> get cardRewardTaskShortNames => $_getList(11);
+
+  @$pb.TagNumber(13)
+  CardRewardEvaluationEventResult_Reward get reward => $_getN(12);
+  @$pb.TagNumber(13)
+  set reward(CardRewardEvaluationEventResult_Reward v) { setField(13, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasReward() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearReward() => clearField(13);
+  @$pb.TagNumber(13)
+  CardRewardEvaluationEventResult_Reward ensureReward() => $_ensure(12);
 }
 
 class EvaluationEventResultResp_FeedbackEventResultResp extends $pb.GeneratedMessage {

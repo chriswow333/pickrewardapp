@@ -60,6 +60,8 @@ class CardResult extends StatelessWidget {
     CardRewardEvaluationEventResult cardEvaluation = cardRewardEventResult.cardRewardEvaluationEventResult;
     EvaluationEventResultResp_FeedbackEventResultResp feedbackEventResult = cardRewardEventResult.evaluationEventResultResp.feedbackEventResultResp;
    
+    List<String> shortNames = cardEvaluation.cardRewardTaskShortNames;   
+    
     return Container(
     padding: const EdgeInsets.all(5),
     decoration: BoxDecoration(
@@ -112,20 +114,17 @@ class CardResult extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             CardName(cardName: cardEvaluation.cardName, bankName: cardEvaluation.bankName,),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
+                TaskShortNames(shortNames:shortNames),
                 CardRewardName(cardRewardName: cardEvaluation.cardRewardName,),
                 Row(
                   children:[
                     CardIcon(image: cardEvaluation.cardImage,),
-                    SizedBox(width:20),
-                    Column(
-                      children:[
-                        EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
-                      ]
-                    )
+                    const SizedBox(width:20),
+                    EvaluationResult(reward:cardEvaluation.reward, feedbackEventResult: feedbackEventResult,),
                   ]
                 )
               ]
@@ -138,6 +137,49 @@ class CardResult extends StatelessWidget {
 }
 
 
+class TaskShortNames extends StatelessWidget {
+  const TaskShortNames({super.key, required this.shortNames});
+  final List<String> shortNames;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children:[
+        for(String shortName in shortNames)
+          TaskShortName(shortName: shortName)
+      ]
+    );
+  }
+}
+
+
+class TaskShortName extends StatelessWidget {
+  const TaskShortName({super.key, required this.shortName});
+  final String shortName;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right:5),
+      child:Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
+          border: Border.all(
+            color:Palette.kToRed[600]!,
+          ),
+        ),
+        child:Text(shortName,
+          style: TextStyle(
+            fontSize: 12,
+            color:Palette.kToRed[600]
+          ),
+        )
+      )
+    );
+  }
+}
 
 class EvaluationResult extends StatelessWidget {
   const EvaluationResult({super.key, required this.reward, required this.feedbackEventResult});

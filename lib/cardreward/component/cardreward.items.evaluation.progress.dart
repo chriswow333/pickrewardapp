@@ -7,6 +7,7 @@ import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.p
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/model/evaluation_progress.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -63,7 +64,6 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
 
   @override
   Widget build(BuildContext context) {
-    
 
 
     return Column(
@@ -78,7 +78,7 @@ class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgr
         if (_progress == EvaluationProgressEnum.Channel)
           EvaluationProgressChannel(),
         if (_progress == EvaluationProgressEnum.Task)            
-          EvaluationProgressTask(),
+          CardRewardEvaluationTask(),
         if (_progress == EvaluationProgressEnum.Evaluate)            
           EvaluationProgressEvaluate(),
       ]
@@ -278,13 +278,19 @@ class EvaluationProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
+    
+
     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
     EvaluationResp? evaluationResp =  evaluationViewModel.evaluationResp;
 
     if (evaluationResp == null) return Container();
-    
-    bool hasTask = evaluationResp.taskEvaluationResp.matches.length != 0 
-      || evaluationResp.taskEvaluationResp.misMatches.length != 0;
+
+    CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
+    bool hasTask = false;
+    if(cardRewardModel != null &&cardRewardModel!.tasks.length > 0) {
+      hasTask = true;
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
