@@ -40,8 +40,9 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
                 searchChannelViewModel.changeKeyword("");
               }, 
               child:Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_ios_new_rounded,
                 color: Palette.kToBlue[600],
+                size:20
               ),
             ),
           Expanded(
