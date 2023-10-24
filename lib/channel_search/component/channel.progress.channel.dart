@@ -22,7 +22,7 @@ class ChannelProgress extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         if(searchChannelViewModel.searchChannelFlag)
-          const SearchChannelItems(),
+          SearchChannelItems(controller:controller),
         if(!searchChannelViewModel.searchChannelFlag)
           NormalChannelGroup(controller: controller,),
       ]

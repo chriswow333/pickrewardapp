@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
@@ -10,33 +11,48 @@ import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class SearchChannelItems extends StatelessWidget {
-  const SearchChannelItems({super.key});
+  const SearchChannelItems({super.key, required this.controller});
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
     SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
     bool loading = searchCardViewModel.loading;
     return Expanded(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:Stack(
         children:[
-          
-          Container(
-            padding:EdgeInsets.only(top:10, bottom: 5),
-            child:Text('搜尋結果',
-              style: TextStyle(
-                color:Palette.kToBlack[600],
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              
+              Container(
+                padding:EdgeInsets.only(top:10, bottom: 5),
+                child:Text('搜尋結果',
+                  style: TextStyle(
+                    color:Palette.kToBlack[600],
+                  ),
+                ),
               ),
-            ),
+              
+              if(loading)
+                LoadingItem(),
+
+              if(!loading)
+                SearchItems(),
+            ],
+          ),
+
+          Container(
+            alignment: Alignment.bottomCenter,
+            child:SelectedChannelResult(controller: controller,),
           ),
           
-          if(loading)
-            LoadingItem(),
 
-          if(!loading)
-            SearchItems(),
-        ],
+
+        ]
       )
+      
+      
     );
   }
 }
