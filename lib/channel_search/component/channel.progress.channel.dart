@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +10,9 @@ import 'channel.progress.channel.categorytype.dart';
 
 
 class ChannelProgress extends StatelessWidget {
-  const ChannelProgress({super.key});
-  
+  const ChannelProgress({super.key, required this.controller});
+  final PageController controller;
+
   @override
   Widget build(BuildContext context) {
     
@@ -19,13 +21,10 @@ class ChannelProgress extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
-        SearchChannelBar(),
-        SizedBox(height:10),
         if(searchChannelViewModel.searchChannelFlag)
-          SearchChannelItems(),
+          const SearchChannelItems(),
         if(!searchChannelViewModel.searchChannelFlag)
-          NormalChannelGroup(),
-       
+          NormalChannelGroup(controller: controller,),
       ]
     );
   }
@@ -33,7 +32,8 @@ class ChannelProgress extends StatelessWidget {
 
 
 class NormalChannelGroup extends StatelessWidget {
-  const NormalChannelGroup({super.key});
+  const NormalChannelGroup({super.key, required this.controller});
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,17 @@ class NormalChannelGroup extends StatelessWidget {
           ChannelCategoryTypes(),
           SizedBox(height:20), 
           Expanded(
-            child:ChannelItemGroups(),
+            child:Stack(
+              children:[
+                ChannelItemGroups(),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child:SelectedChannelResult(controller: controller,),
+                )
+                
+              ]
+            )
+            
           ),
         ]
       )

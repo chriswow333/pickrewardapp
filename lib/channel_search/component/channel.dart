@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
@@ -43,21 +44,21 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
       padding: const EdgeInsets.all(10),
       child:Column(
         children:[
+          const SearchChannelBar(),
+          const SizedBox(height: 10),
           RewardProgressBar(controller:_controller),
-          const SizedBox(height: 20),
           Expanded(
             child:PageView(
               dragStartBehavior:DragStartBehavior.down,
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               controller:_controller,
-              // allowImplicitScrolling:true,
               onPageChanged:(int page){
                 channelProgressSelectedPage.changePage(page);
               },
               children:[
-                ChannelProgress(),
+                ChannelProgress(controller:_controller),
                 FindCardProgress(controller:_controller),
-                CardResultsProgress(),
+                const CardResultsProgress(),
               ]
             )
           ),

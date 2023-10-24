@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.selectedchannel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.selectedchannel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
@@ -27,7 +27,7 @@ class FindCardProgress extends StatelessWidget {
         child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          SelectedChannelResult(),
+          SizedBox(height:10),
           PayWidget(),
           SizedBox(height:20),
           CostWidget(),

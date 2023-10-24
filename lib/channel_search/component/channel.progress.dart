@@ -12,7 +12,6 @@ class RewardProgressBar extends StatelessWidget {
   final PageController controller;
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
@@ -58,7 +57,7 @@ class FindResultProgressItem extends StatelessWidget {
       child:Text(
         '搜尋結果',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           color:channelProgressSelectedPage.page == ChannelProgressPage.result ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
@@ -82,8 +81,6 @@ class FindCardProgressItem extends StatelessWidget {
         controller.jumpToPage(ChannelProgressPage.findCard);
       },
       style:ButtonStyle(
-        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
           channelProgressSelectedPage.page == ChannelProgressPage.findCard ? Palette.kToBlue[600]:Palette.kToBlue[50]
         ),
@@ -100,7 +97,7 @@ class FindCardProgressItem extends StatelessWidget {
       child:Text(
         '找卡片',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ? Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )
@@ -123,7 +120,7 @@ class ProgressArrowToFindCard extends StatelessWidget {
       child:Icon(
         Icons.double_arrow_rounded,
         color:selected ? Palette.kToBlue[600]:Palette.kToBlue[100],
-        size:40,
+        size:25,
         weight: 10,
       ),
     );
@@ -142,7 +139,7 @@ class ProgressArrowToResult extends StatelessWidget {
       child:Icon(
         Icons.double_arrow_rounded,
         color:flag ? Palette.kToBlue[600]:Palette.kToBlue[100],
-        size:40,
+        size:25,
         weight: 10,
       ),
     );
@@ -160,7 +157,6 @@ class ChannelProgressItem extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
-        // channelProgressSelectedPage.changePage(ChannelProgressPage.channel);
         controller.jumpToPage(ChannelProgressPage.channel);
       },
       style:ButtonStyle(
@@ -171,7 +167,7 @@ class ChannelProgressItem extends StatelessWidget {
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            side:BorderSide(
+            side:const BorderSide(
               width:1.0,
               color:Colors.black12,
             ),
@@ -180,9 +176,9 @@ class ChannelProgressItem extends StatelessWidget {
         ),
       ),
       child:Text(
-        '消費通路',
+        '選通路',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 16,
            color: channelProgressSelectedPage.page == ChannelProgressPage.channel ?  Palette.kToBlue[50]:Palette.kToBlue[600],
         ),  
       )

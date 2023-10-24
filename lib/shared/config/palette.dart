@@ -57,6 +57,8 @@ static const MaterialColor kToOrange = const MaterialColor(
   static const MaterialColor kToBlack = const MaterialColor( 
     0x00373737, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch. 
     const <int, Color>{ 
+      0: const Color(0xFFFFFFFF ),//0% 
+      20: const Color(0xFFECECEC ),//10% 
       50: const Color(0xFFB7B7B7 ),//10% 
       100: const Color(0xFF989898),//20% 
       200: const Color(0xFF797979),//30% 
