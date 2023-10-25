@@ -28,23 +28,11 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
       height:40,
       child:Row(
         children:[
-          Icon(
+          const Icon(
             Icons.abc_outlined,
             size: 40,
           ),
           SizedBox(width:10),
-          if(searchedFlag)
-            TextButton(
-              onPressed: (){
-                _searchController.text = "";
-                searchChannelViewModel.changeKeyword("");
-              }, 
-              child:Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Palette.kToBlue[600],
-                size:20
-              ),
-            ),
           Expanded(
             child:TextField(
               controller:_searchController,
@@ -60,14 +48,6 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
               decoration: InputDecoration(
                 hintText: '搜尋通路',
                 prefixIcon:const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon:const Icon(Icons.clear),
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    _searchController.clear();
-                    searchChannelViewModel.changeKeyword(_searchController.text);
-                  },
-                ),
                 border:OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 )
@@ -77,7 +57,15 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
               ),
             ),
           ),
-          
+          if(searchedFlag)
+            TextButton(
+              onPressed: (){
+                FocusScope.of(context).unfocus();
+                _searchController.clear();
+                searchChannelViewModel.changeKeyword(_searchController.text);
+              },
+              child:Text('取消')
+            )
 
         ]
       )
