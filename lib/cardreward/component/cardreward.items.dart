@@ -59,33 +59,3 @@ class RewardItems extends StatelessWidget {
   }
 }
 
-
-
-// class RewardItem extends StatelessWidget {
-//   const RewardItem({super.key, required this.cardRewardModel, });
-  
-//   final CardRewardModel cardRewardModel;
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-//     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-
-//     if(evaluationViewModel.selectedEvaluationItem){
-//       return EvaluationProgressContent();
-//     }else {
-//       if (cardRewardModel.cardRewardType == CardRewardTypeEnum.activity.cardRewardType) {
-//         return ActivityItem(cardRewardModel: cardRewardModel,);
-//       }else if (cardRewardModel.cardRewardType == CardRewardTypeEnum.evaluation.cardRewardType){
-//         return EvaluationItem(cardRewardModel: cardRewardModel,);
-//       }else {
-//         return Container();
-//       }  
-//     }
-
-    
-
-    
-//   }
-// }
-

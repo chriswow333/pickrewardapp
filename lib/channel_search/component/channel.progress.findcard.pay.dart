@@ -125,10 +125,10 @@ class PayItem extends StatelessWidget {
               if(selected)
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Icon(
-                    Icons.check_circle_outlined,
-                    color:Palette.kToOrange[600],
-                    size:25,
+                  child: Image.asset(
+                    'images/logo.png',
+                    width: 25,
+                    height:25,
                   ),
                 ),
             ]

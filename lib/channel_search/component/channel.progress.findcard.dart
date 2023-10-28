@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.selectedchannel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
@@ -66,7 +66,15 @@ class SubmitEvaluateCard extends StatelessWidget {
           style: ButtonStyle(
             padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
             shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
-            backgroundColor: hasChannel? MaterialStatePropertyAll(Palette.kToBlue[600]): MaterialStatePropertyAll(Palette.kToBlack[50]),
+            backgroundColor: hasChannel ?
+               MaterialStatePropertyAll(Palette.kToBlack[400]): MaterialStatePropertyAll(Palette.kToBlack[20]),
+
+            side:MaterialStatePropertyAll(
+              BorderSide(
+                width:1.5,
+                color: hasChannel ? Palette.kToBlack[400]!:Palette.kToBlack[0]!,
+              )
+            ),
           ),
           onPressed: (){
             if(hasChannel) {
@@ -78,7 +86,7 @@ class SubmitEvaluateCard extends StatelessWidget {
           child:Text('送出選卡',
             style: TextStyle(
               fontSize: 25,
-              color:Palette.kToBlue[50],
+              color:Palette.kToBlack[0],
             ),
           ),
         )

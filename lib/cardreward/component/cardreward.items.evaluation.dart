@@ -28,7 +28,7 @@ class EvaluationItem extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-        color: Palette.kToBlue[50],
+        color: Palette.kToBlack[0],
         boxShadow:[
           BoxShadow(
             color: Palette.kToBlack[200]!,
@@ -295,8 +295,8 @@ class EvaluationRewardType extends StatelessWidget {
       ),
       child:Text(rewardTypeName,
         style:TextStyle(
-          color:Palette.kToBlue[600],
-          fontSize: 18,
+          color:Palette.kToBlack[600],
+          fontSize: 14,
           // fontWeight: FontWeight.bold,
         ),
         maxLines: null,

@@ -217,13 +217,13 @@ class EvaluationResult extends StatelessWidget {
               children:[
                 Text('${rewardName}回饋',
                   style:TextStyle(
-                    color:Palette.kToBlue[600],
+                    color:Palette.kToBlack[600],
                     fontSize: 18,
                   ),
                 ),
                 Text('獲得 ${percentage}% ${getReturnStr}${returnUnit} ',
                   style:TextStyle(
-                    color:Palette.kToOrange[600],
+                    color:Palette.kToYellow[400],
                     fontSize: 18,
                   ),
                 ),
@@ -236,14 +236,14 @@ class EvaluationResult extends StatelessWidget {
               children:[
                 Text('${rewardName}回饋',
                   style:TextStyle(
-                    color:Palette.kToBlue[600],
+                    color:Palette.kToBlack[600],
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text('折抵 ${getReturnStr}${returnUnit} ',
                   style:TextStyle(
-                    color:Palette.kToOrange[600],
+                    color:Palette.kToYellow[400],
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

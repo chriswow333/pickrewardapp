@@ -51,7 +51,8 @@ class ChannelItemGroups extends StatelessWidget {
       children:[
         LabelItemGroup(),
         for(int c in allChannels.keys) 
-          ChannelItemGroup(channelCategoryType:channelCategories[c]!, channels:allChannels[c]!)
+          if (channelCategories[c] != null && allChannels[c] != null)
+          ChannelItemGroup(channelCategoryType:channelCategories[c]!, channels:allChannels[c]!),
       ]
     );
   }
@@ -170,14 +171,19 @@ class ChannelItem extends StatelessWidget {
           ),
           
           if(selected)
-            Container(
-              alignment: Alignment.topLeft,
-              child: Icon(
-                Icons.check_circle_outlined,
-                color:Palette.kToOrange[600],
-                size:25,
-              ),
+            Image.asset(
+              'images/logo.png',
+              width: 25,
+              height: 25,
             ),
+            // Container(
+            //   alignment: Alignment.topLeft,
+            //   child: Icon(
+            //     Icons.check_circle_outlined,
+            //     color:Palette.kToOrange[600],
+            //     size:25,
+            //   ),
+            // ),
         ]
       )
       
@@ -344,13 +350,10 @@ class LabelItem extends StatelessWidget {
               ),
             ),
             if(selected)
-              Container(
-                alignment: Alignment.topLeft,
-                child: Icon(
-                  Icons.check_circle_outlined,
-                  color:Palette.kToOrange[600],
-                  size:25,
-                ),
+              Image.asset(
+                'images/logo.png',
+                width:25,
+                height:25,
               ),
           ]
         )

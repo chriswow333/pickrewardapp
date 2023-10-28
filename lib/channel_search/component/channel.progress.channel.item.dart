@@ -124,7 +124,6 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               ),
             ),
             SizedBox(height: 10,),
-
             GridView.builder(
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
@@ -277,10 +276,10 @@ class LabelItem extends StatelessWidget {
             if(selected)
               Container(
                 alignment: Alignment.topLeft,
-                child: Icon(
-                  Icons.check_circle_outlined,
-                  color:Palette.kToOrange[600],
-                  size:25,
+                child: Image.asset(
+                  'images/logo.png',
+                  width: 25,
+                  height: 25,
                 ),
               ),
 
@@ -395,10 +394,10 @@ class ChannelItem extends StatelessWidget {
             if(selected)
               Container(
                 alignment: Alignment.topLeft,
-                child: Icon(
-                  Icons.check_circle_outlined,
-                  color:Palette.kToOrange[600],
-                  size:25,
+                child: Image.asset(
+                  'images/logo.png',
+                  width:25,
+                  height: 25,
                 ),
               ),
           ]
@@ -409,7 +408,6 @@ class ChannelItem extends StatelessWidget {
     );
   }
 }
-
 
 
 class ChannelItemIcon extends StatelessWidget {

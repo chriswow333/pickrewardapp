@@ -42,13 +42,15 @@ class FindResultProgressItem extends StatelessWidget {
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.result ? Palette.kToBlue[600]: Palette.kToBlue[50]
+          channelProgressSelectedPage.page == ChannelProgressPage.result ? 
+            Palette.kToYellow[600]: Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:channelProgressSelectedPage.page == ChannelProgressPage.result ?
+                Palette.kToYellow[400]!: Palette.kToBlack[400]!
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -58,7 +60,8 @@ class FindResultProgressItem extends StatelessWidget {
         '搜尋結果',
         style: TextStyle(
           fontSize: 16,
-          color:channelProgressSelectedPage.page == ChannelProgressPage.result ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color:channelProgressSelectedPage.page == ChannelProgressPage.result ? 
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );
@@ -82,13 +85,15 @@ class FindCardProgressItem extends StatelessWidget {
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.findCard ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          channelProgressSelectedPage.page == ChannelProgressPage.findCard ? 
+            Palette.kToYellow[400]:Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ? 
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -98,7 +103,8 @@ class FindCardProgressItem extends StatelessWidget {
         '找卡片',
         style: TextStyle(
           fontSize: 16,
-          color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ?
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );
@@ -119,7 +125,7 @@ class ProgressArrowToFindCard extends StatelessWidget {
     return Container(
       child:Icon(
         Icons.double_arrow_rounded,
-        color:selected ? Palette.kToBlue[600]:Palette.kToBlue[100],
+        color:selected ? Palette.kToBlack[400]:Palette.kToBlack[50],
         size:25,
         weight: 10,
       ),
@@ -138,7 +144,7 @@ class ProgressArrowToResult extends StatelessWidget {
     return Container(
       child:Icon(
         Icons.double_arrow_rounded,
-        color:flag ? Palette.kToBlue[600]:Palette.kToBlue[100],
+        color:flag ? Palette.kToBlack[400]:Palette.kToBlack[50],
         size:25,
         weight: 10,
       ),
@@ -163,13 +169,15 @@ class ChannelProgressItem extends StatelessWidget {
         // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
         // elevation:MaterialStatePropertyAll(1.0),
         backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.channel ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          channelProgressSelectedPage.page == ChannelProgressPage.channel ? 
+            Palette.kToYellow[400]:Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            side:const BorderSide(
+            side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:channelProgressSelectedPage.page == ChannelProgressPage.channel ?
+                Palette.kToBlack[0]!:Palette.kToBlack[400]!,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -179,7 +187,8 @@ class ChannelProgressItem extends StatelessWidget {
         '選通路',
         style: TextStyle(
           fontSize: 16,
-           color: channelProgressSelectedPage.page == ChannelProgressPage.channel ?  Palette.kToBlue[50]:Palette.kToBlue[600],
+           color: channelProgressSelectedPage.page == ChannelProgressPage.channel ?  
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );

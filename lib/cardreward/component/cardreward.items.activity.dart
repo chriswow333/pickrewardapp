@@ -32,7 +32,7 @@ class _ActivityItemState extends State<ActivityItem> {
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-        color:expanded?null: Palette.kToBlue[50],
+        color:expanded?null: Palette.kToBlack[0],
         boxShadow: expanded?null:[
           BoxShadow(
             color: Palette.kToBlack[200]!,
@@ -71,8 +71,7 @@ class _ActivityItemState extends State<ActivityItem> {
                 children:[
                   Row(
                     children:[
-                      ActivityRewardType(),
-                      SizedBox(width:5),
+                      // SizedBox(width:5),
                       CardRewardDurationMessage(startDate: widget.cardRewardModel.startDate, endDate: widget.cardRewardModel.endDate,),
                     ]
                   ),
@@ -136,26 +135,6 @@ class ActivityName extends StatelessWidget {
 }
 
 
-
-
-class ActivityRewardType extends StatelessWidget {
-  const ActivityRewardType({super.key,});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text('一般回饋',
-        style:TextStyle(
-          color:Palette.kToBlue[600],
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-        maxLines: null,
-      ),
-    );
-  }
-}
 
 
 

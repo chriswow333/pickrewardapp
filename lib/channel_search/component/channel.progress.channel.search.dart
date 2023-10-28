@@ -28,9 +28,10 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
       height:40,
       child:Row(
         children:[
-          const Icon(
-            Icons.abc_outlined,
-            size: 40,
+          Container(
+            child:Image.asset(
+              'images/logo.png',
+            ),
           ),
           SizedBox(width:10),
           Expanded(
@@ -66,11 +67,8 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
               },
               child:Text('取消')
             )
-
         ]
       )
-      
-      
     );
   }
 }

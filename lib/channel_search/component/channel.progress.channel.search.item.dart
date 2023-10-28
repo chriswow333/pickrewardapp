@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.selectedchannel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';

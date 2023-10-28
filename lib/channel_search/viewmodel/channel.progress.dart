@@ -1,8 +1,4 @@
-
-
-
 import 'package:flutter/material.dart';
-
 
 
 class ChannelProgressSelectedPage with ChangeNotifier{
@@ -12,7 +8,6 @@ class ChannelProgressSelectedPage with ChangeNotifier{
     _page = page;
     notifyListeners();
   }
-
   int get page => _page;
 
 }

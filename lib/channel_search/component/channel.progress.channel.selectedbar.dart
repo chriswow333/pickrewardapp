@@ -25,7 +25,7 @@ class SelectedChannelResult extends StatelessWidget {
 
     if(selected) {
       return Container(
-        color:Palette.kToBlack[20]!,
+        color:Palette.kToBlack[0]!,
         height:50,
         child:Container(
           child:Row(
@@ -48,7 +48,7 @@ class SelectedChannelResult extends StatelessWidget {
                 child:TextButton(
                   style: ButtonStyle(
                     backgroundColor:MaterialStateProperty.all(
-                      Palette.kToBlue[600]!,
+                      Palette.kToBlack[400]!,
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

@@ -49,7 +49,6 @@ class ChannelViewModel with ChangeNotifier {
       }
       
       notifyListeners();
-
     } on GrpcError catch (e) {
       ///handle all grpc errors here
       ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...

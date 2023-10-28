@@ -133,7 +133,6 @@ class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetail
 
     if(cardRewardModel == null)return Container();
 
-
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,13 +322,15 @@ class EvaluateProgressItem extends StatelessWidget {
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          progress == EvaluationProgressEnum.Evaluate ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          progress == EvaluationProgressEnum.Evaluate ? 
+            Palette.kToYellow[400]:Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:progress == EvaluationProgressEnum.Evaluate ? 
+            Palette.kToYellow[400]!:Palette.kToBlack[400]!
             ),
             borderRadius: BorderRadius.circular(10),
           ),
@@ -339,7 +340,8 @@ class EvaluateProgressItem extends StatelessWidget {
         '消費方式',
         style: TextStyle(
           // fontSize: 20,
-          color: progress == EvaluationProgressEnum.Evaluate ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color: progress == EvaluationProgressEnum.Evaluate ? 
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );
@@ -362,23 +364,26 @@ class TaskProgressItem extends StatelessWidget {
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          progress == EvaluationProgressEnum.Task ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          progress == EvaluationProgressEnum.Task ? 
+            Palette.kToYellow[400]:Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:progress == EvaluationProgressEnum.Task ? 
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),
       child:Text(
-        '任務活動',
+        '任務',
         style: TextStyle(
           // fontSize: 20,
-          color: progress == EvaluationProgressEnum.Task ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color: progress == EvaluationProgressEnum.Task ? 
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );
@@ -394,8 +399,8 @@ class ProgressArrow extends StatelessWidget {
       padding:EdgeInsets.only(left:10, right:10),
       child:Icon(
         Icons.double_arrow_rounded,
-        color:Palette.kToBlue[100],
-        size:40,
+        color:Palette.kToBlack[400],
+        size:20,
         weight: 10,
       ),
     );
@@ -418,23 +423,25 @@ class ChannelProgressItem extends StatelessWidget {
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          progress == EvaluationProgressEnum.Channel ? Palette.kToBlue[600]:Palette.kToBlue[50]
+          progress == EvaluationProgressEnum.Channel ? Palette.kToYellow[400]:Palette.kToBlack[0]
         ),
         shape:MaterialStatePropertyAll(
           RoundedRectangleBorder(
             side:BorderSide(
               width:1.0,
-              color:Colors.black12,
+              color:progress == EvaluationProgressEnum.Channel ? 
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),
       child:Text(
-        '消費通路',
+        '選通路',
         style: TextStyle(
           // fontSize: 18,
-          color: progress == EvaluationProgressEnum.Channel ? Palette.kToBlue[50]:Palette.kToBlue[600],
+          color: progress == EvaluationProgressEnum.Channel ? 
+            Palette.kToBlack[0]:Palette.kToBlack[400],
         ),  
       )
     );

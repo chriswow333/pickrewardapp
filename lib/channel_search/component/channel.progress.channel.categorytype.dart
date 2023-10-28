@@ -62,9 +62,9 @@ class BottomLine extends StatelessWidget {
         width:70,
         decoration: BoxDecoration(
         border: Border.all(
-          color:Palette.kToBlue[600]!,  
+          color:Palette.kToYellow[500]!,  
         ),
-        color:Palette.kToBlue[600],
+        color:Palette.kToYellow[500],
       ),  
     );
   }
@@ -109,7 +109,7 @@ class LabelIcon extends StatelessWidget {
     bool selected = channelViewModel.channelCategoryType == -1;
     return Container(
       child:Icon(
-        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
+        color:selected ? Palette.kToYellow[500] : Palette.kToBlack[200],
         icon,
       )
     );
@@ -130,7 +130,7 @@ class LabelName extends StatelessWidget {
         '通路總覽',
         style: TextStyle(
           fontSize: 15,
-          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
+          color: selected? Palette.kToYellow[500] : Palette.kToBlack[200],
         ),  
       )
     );
@@ -222,7 +222,7 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
 
     return Container(
       child:Icon(
-        color:selected ? Palette.kToBlue[600] : Palette.kToBlack[200],
+        color:selected ? Palette.kToYellow[500] : Palette.kToBlack[200],
         icon,
       )
     );
@@ -246,7 +246,7 @@ class ChannelCategoryTypeName extends StatelessWidget {
         name,
         style: TextStyle(
           fontSize: 15,
-          color: selected? Palette.kToBlue[600] : Palette.kToBlack[200],
+          color: selected? Palette.kToYellow[500] : Palette.kToBlack[200],
         ),  
       )
     );

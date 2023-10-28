@@ -72,15 +72,15 @@ class EvaluateEventResult extends StatelessWidget {
     double getReturn = feedbackEventResult.getReturn;
     String getReturnStr = getReturn.toInt().toString();
     String percentage = (feedbackEventResult.getPercentage * 100).toStringAsFixed(3);
-    int length = percentage.length - 1;
-    while(length > 0) {
-      if(percentage[length] != '0' && percentage[length] != "."){
-        break;
-      }
-      length--; 
-    }
+    // int length = percentage.length - 1;
+    // while(length > 0) {
+    //   if(percentage[length] != '0' && percentage[length] != "."){
+    //     break;
+    //   }
+    //   length--; 
+    // }
 
-    percentage = percentage.substring(0,length+1);
+    // percentage = percentage.substring(0,length+1);
 
     if(feedbackEventResult.calculateType == 0){
       return Container(
@@ -90,7 +90,7 @@ class EvaluateEventResult extends StatelessWidget {
           padding:EdgeInsets.only(top: 10, bottom: 10, left:20, right: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: Palette.kToOrange[600],
+            color: Palette.kToYellow[400],
           ),
           child:Text('獲得 ${percentage}% ${getReturnStr}${returnUnit}',
             style:TextStyle(
@@ -146,7 +146,7 @@ class CardRewardEvaluationBtn extends StatelessWidget {
               padding:const MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
               shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
               backgroundColor: MaterialStatePropertyAll(
-                evaluationSelectedViewModel.evaluated ? null: Palette.kToBlue[600]
+                evaluationSelectedViewModel.evaluated ? null: Palette.kToBlack[400]
               ),
             ),
             onPressed: (){
@@ -157,7 +157,7 @@ class CardRewardEvaluationBtn extends StatelessWidget {
             child:Text('試算回饋',
               style: TextStyle(
                 fontSize: 25,
-                color:evaluationSelectedViewModel.evaluated ?Palette.kToBlack[100]:Palette.kToBlue[50],
+                color:evaluationSelectedViewModel.evaluated ?Palette.kToBlack[20]:Palette.kToBlack[0],
               ),
             ),
           )

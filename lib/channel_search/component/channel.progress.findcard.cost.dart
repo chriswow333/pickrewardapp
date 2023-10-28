@@ -31,7 +31,6 @@ class CostWidget extends StatelessWidget {
           SizedBox(height:10),
           CostButtons(),
           SizedBox(height:10),
-
           CostDateName(),
           CostDateValue(),
         ]
@@ -91,13 +90,13 @@ class Lessthan1000Btn extends StatelessWidget {
         rewardSelectedViewModel.cost = _cost;
       },
       style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-        side:_cost == selectedCost ? MaterialStatePropertyAll(
+        backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+        side:MaterialStatePropertyAll(
           BorderSide(
             width:1.5,
-            color: Palette.kToBlack[600]!,
+            color: _cost == selectedCost ? Palette.kToYellow[400]!:Palette.kToBlack[200]!,
           )
-        ):null,
+        ),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
         animationDuration:Duration(microseconds: 0),
       ),
@@ -108,7 +107,8 @@ class Lessthan1000Btn extends StatelessWidget {
               Icon(
                 Icons.monetization_on_rounded,
                 size:20,
-                color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                color:_cost == selectedCost ? 
+                  Palette.kToYellow[400]:Palette.kToBlack[200],
               ),
             ],
           ),
@@ -116,7 +116,8 @@ class Lessthan1000Btn extends StatelessWidget {
           Text('~1000',
             style: TextStyle(
               fontSize: 14,
-              color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+              color: _cost == selectedCost ? 
+                Palette.kToYellow[400]:Palette.kToBlack[200],
             ),
           ),
         ],
@@ -145,13 +146,13 @@ class From1000To5000Btn extends StatelessWidget {
           rewardSelectedViewModel.cost = _cost;
         },
         style:ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-          side:_cost == selectedCost ? MaterialStatePropertyAll(
+          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+          side:MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: Palette.kToBlack[600]!,
+              color: _cost == selectedCost ? Palette.kToYellow[400]!: Palette.kToBlack[200]!,
             )
-          ):null,
+          ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
           animationDuration:Duration(microseconds: 0),
         ),
@@ -162,19 +163,22 @@ class From1000To5000Btn extends StatelessWidget {
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                  color:_cost == selectedCost ? 
+                    Palette.kToYellow[400]:Palette.kToBlack[200],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                  color:_cost == selectedCost ?
+                    Palette.kToYellow[400]:Palette.kToBlack[200],
                 ),
               ],
             ),
             Text('1000~5000',
               style: TextStyle(
                 fontSize: 14,
-                color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                color: _cost == selectedCost ? 
+                  Palette.kToYellow[400]:Palette.kToBlack[200],
               ),
             ),
           ],
@@ -208,13 +212,14 @@ class MoreThan5000Btn extends StatelessWidget {
 
         },
         style:ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Palette.kToBlue[50]),
-          side:_cost == selectedCost ? MaterialStatePropertyAll(
+          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+          side: MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: Palette.kToBlack[600]!,
+              color: _cost == selectedCost ? 
+                Palette.kToYellow[400]!:Palette.kToBlack[200]!,
             )
-          ):null,
+          ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
           animationDuration:Duration(microseconds: 0),
         ),
@@ -225,24 +230,28 @@ class MoreThan5000Btn extends StatelessWidget {
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                  color:_cost == selectedCost ? 
+                    Palette.kToYellow[400]:Palette.kToBlack[200],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                  color:_cost == selectedCost ? 
+                    Palette.kToYellow[400]:Palette.kToBlack[200],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                  color:_cost == selectedCost ? 
+                    Palette.kToYellow[400]:Palette.kToBlack[200],
                 ),
               ],
             ),
             Text('5000~',
               style: TextStyle(
                 fontSize: 14,
-                color: _cost == selectedCost ? Palette.kToBlack[600]:Palette.kToBlack[200],
+                color: _cost == selectedCost ? 
+                  Palette.kToYellow[400]:Palette.kToBlack[200],
               ),
             ),
           ],
