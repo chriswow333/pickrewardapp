@@ -86,7 +86,7 @@ class CashType extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: rewardSelectedViewModel.rewardType == rewardCashType ?
-              MaterialStatePropertyAll(Palette.kToYellow[400]): MaterialStatePropertyAll(Palette.kToBlack[200]),
+              MaterialStatePropertyAll(Palette.kToYellow[400]): MaterialStatePropertyAll(Palette.kToBlack[400]),
             value: rewardSelectedViewModel.rewardType == rewardCashType ,
             onChanged: (bool? value) {
               rewardSelectedViewModel.rewardType = rewardCashType;
@@ -130,7 +130,7 @@ class PointType extends StatelessWidget {
           Checkbox(
             checkColor: Colors.white,
             fillColor: rewardSelectedViewModel.rewardType == rewardPointType ?
-              MaterialStatePropertyAll(Palette.kToYellow[400]): MaterialStatePropertyAll(Palette.kToBlack[200]),
+              MaterialStatePropertyAll(Palette.kToYellow[400]): MaterialStatePropertyAll(Palette.kToBlack[400]),
             value: rewardSelectedViewModel.rewardType == rewardPointType ,
             onChanged: (bool? value) {
               rewardSelectedViewModel.rewardType = rewardPointType;

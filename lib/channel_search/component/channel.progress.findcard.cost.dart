@@ -94,7 +94,7 @@ class Lessthan1000Btn extends StatelessWidget {
         side:MaterialStatePropertyAll(
           BorderSide(
             width:1.5,
-            color: _cost == selectedCost ? Palette.kToYellow[400]!:Palette.kToBlack[200]!,
+            color: _cost == selectedCost ? Palette.kToYellow[400]!:Palette.kToBlack[400]!,
           )
         ),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
@@ -108,7 +108,7 @@ class Lessthan1000Btn extends StatelessWidget {
                 Icons.monetization_on_rounded,
                 size:20,
                 color:_cost == selectedCost ? 
-                  Palette.kToYellow[400]:Palette.kToBlack[200],
+                  Palette.kToYellow[400]:Palette.kToBlack[400],
               ),
             ],
           ),
@@ -117,7 +117,7 @@ class Lessthan1000Btn extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               color: _cost == selectedCost ? 
-                Palette.kToYellow[400]:Palette.kToBlack[200],
+                Palette.kToYellow[400]:Palette.kToBlack[400],
             ),
           ),
         ],
@@ -150,7 +150,7 @@ class From1000To5000Btn extends StatelessWidget {
           side:MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: _cost == selectedCost ? Palette.kToYellow[400]!: Palette.kToBlack[200]!,
+              color: _cost == selectedCost ? Palette.kToYellow[400]!: Palette.kToBlack[400]!,
             )
           ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
@@ -164,13 +164,13 @@ class From1000To5000Btn extends StatelessWidget {
                   size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[200],
+                    Palette.kToYellow[400]:Palette.kToBlack[400],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ?
-                    Palette.kToYellow[400]:Palette.kToBlack[200],
+                    Palette.kToYellow[400]:Palette.kToBlack[400],
                 ),
               ],
             ),
@@ -178,7 +178,7 @@ class From1000To5000Btn extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: _cost == selectedCost ? 
-                  Palette.kToYellow[400]:Palette.kToBlack[200],
+                  Palette.kToYellow[400]:Palette.kToBlack[400],
               ),
             ),
           ],
@@ -217,7 +217,7 @@ class MoreThan5000Btn extends StatelessWidget {
             BorderSide(
               width:1.5,
               color: _cost == selectedCost ? 
-                Palette.kToYellow[400]!:Palette.kToBlack[200]!,
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
@@ -231,19 +231,19 @@ class MoreThan5000Btn extends StatelessWidget {
                   size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[200],
+                    Palette.kToYellow[400]:Palette.kToBlack[400],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[200],
+                    Palette.kToYellow[400]:Palette.kToBlack[400],
                 ),
                 Icon(
                   size:20,
                   Icons.monetization_on_rounded,
                   color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[200],
+                    Palette.kToYellow[400]:Palette.kToBlack[400],
                 ),
               ],
             ),
@@ -251,7 +251,7 @@ class MoreThan5000Btn extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: _cost == selectedCost ? 
-                  Palette.kToYellow[400]:Palette.kToBlack[200],
+                  Palette.kToYellow[400]:Palette.kToBlack[400],
               ),
             ),
           ],

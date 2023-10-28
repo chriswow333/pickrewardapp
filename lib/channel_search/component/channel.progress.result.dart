@@ -238,14 +238,12 @@ class EvaluationResult extends StatelessWidget {
                   style:TextStyle(
                     color:Palette.kToBlack[600],
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text('折抵 ${getReturnStr}${returnUnit} ',
                   style:TextStyle(
                     color:Palette.kToYellow[400],
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ]

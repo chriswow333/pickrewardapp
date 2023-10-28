@@ -22,7 +22,7 @@ class PickRewardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Palette.kToBlue),
+      theme: ThemeData(primarySwatch: Palette.kToBlack),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
