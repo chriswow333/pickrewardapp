@@ -28,14 +28,17 @@ class CardHeader extends StatelessWidget {
             BackToCardListBtn(),
             CardIcon(image:cardHeaderItemModel.image),
             SizedBox(width:10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:[
-                CardName(cardName: cardHeaderItemModel.name,),
-                CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
-              ]
-            )            
+            Expanded(
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  CardName(cardName: cardHeaderItemModel.name,),
+                  CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
+                ]
+              )
+            ),
+                        
           ]
         ),
         SizedBox(height:5),
@@ -164,21 +167,11 @@ class CardName extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        children:[
-         FittedBox(
-            fit:BoxFit.fitWidth,
-            child:Text(cardName,
-              style: TextStyle(
-                fontSize: 20,
-                color:Palette.kToBlack[900],
-              ),
-            ),
-          ),
-        ]
+    return Text(cardName,
+      style: TextStyle(
+        fontSize: 20,
+        color:Palette.kToBlack[900],
       ),
-      
     );
   }
 }

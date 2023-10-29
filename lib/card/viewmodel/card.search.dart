@@ -32,7 +32,7 @@ class SearchCardViewModel with ChangeNotifier {
     }
     notifyListeners();
   }
-  
+
 
   bool _searched = false;
   get searched => _searched;

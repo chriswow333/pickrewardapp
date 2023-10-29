@@ -22,21 +22,7 @@ class CardComponent extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Row(
-            children:[
-              Container(
-                child:Image.asset(
-                  'images/logo.png'
-                ),
-                height: 40,
-              ),
-              SizedBox(width:10),
-              Expanded(
-                child:SearchCardBar(),
-              ),
-            ]
-          ),
-          
+          SearchCardBar(),
           SizedBox(height:20,),
           if(searchCardViewModel.searchCardFlag)
             CardSearchItems(),
@@ -49,6 +35,7 @@ class CardComponent extends StatelessWidget {
     );
   }
 }
+
 
 
 
