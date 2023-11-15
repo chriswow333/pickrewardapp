@@ -8,18 +8,19 @@
       "name": "pickrewardapp",
       "request": "launch",
       "type": "dart"
-    },
-    {
-      "name": "pickrewardapp (profile mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "pickrewardapp (release mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
     }
+    // ,
+    // {
+    //   "name": "pickrewardapp (profile mode)",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "flutterMode": "profile"
+    // },
+    // {
+    //   "name": "pickrewardapp (release mode)",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "flutterMode": "release"
+    // }
   ]
 }

@@ -9,9 +9,9 @@ import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main()async {
 
-  //  await dotenv.load(fileName: ".env.dev"); 
+   await dotenv.load(fileName: ".env.dev"); 
   // await dotenv.load(fileName: ".env.test");
-  await dotenv.load(fileName: ".env.prod");
+  // await dotenv.load(fileName: ".env.prod");
   
   runApp(const PickRewardApp());
 }
@@ -22,6 +22,7 @@ class PickRewardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner:false,
       theme: ThemeData(primarySwatch: Palette.kToBlack),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
