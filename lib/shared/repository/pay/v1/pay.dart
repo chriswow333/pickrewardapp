@@ -4,7 +4,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/shared/repository/pay/proto/generated/pay.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pbgrpc.dart';
 
 class PayService {
 
@@ -22,7 +22,7 @@ class PayService {
   static PayService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late PayClient _payClient;
+  late PayV1Client _payClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -31,7 +31,7 @@ class PayService {
   }
 
   ///provide public access to the HelloClient instance
-  PayClient get payClient {
+  PayV1Client get payClient {
     return _payClient;
   }
 
@@ -89,7 +89,7 @@ class PayService {
         ),
       );
     }
-    _payClient = PayClient(channel);
+    _payClient = PayV1Client(channel);
   }
 
 }

@@ -18,22 +18,22 @@ import 'channel.pb.dart' as $0;
 
 export 'channel.pb.dart';
 
-// @$pb.GrpcServiceName('channel.Channel')
-class ChannelClient extends $grpc.Client {
+// @$pb.GrpcServiceName('channel.ChannelV1')
+class ChannelV1Client extends $grpc.Client {
   static final _$getChannelCategoryTypes = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
-      '/channel.Channel/GetChannelCategoryTypes',
+      '/channel.ChannelV1/GetChannelCategoryTypes',
       ($0.EmptyReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelCategoryTypeReply.fromBuffer(value));
   static final _$getChannelsByChannelCategoryType = $grpc.ClientMethod<$0.ChannelCategoryTypeReq, $0.ChannelReply>(
-      '/channel.Channel/GetChannelsByChannelCategoryType',
+      '/channel.ChannelV1/GetChannelsByChannelCategoryType',
       ($0.ChannelCategoryTypeReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
   static final _$searchChannel = $grpc.ClientMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
-      '/channel.Channel/SearchChannel',
+      '/channel.ChannelV1/SearchChannel',
       ($0.SearchChannelReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SearchChannelReply.fromBuffer(value));
 
-  ChannelClient($grpc.ClientChannel channel,
+  ChannelV1Client($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
@@ -52,11 +52,11 @@ class ChannelClient extends $grpc.Client {
   }
 }
 
-// @$pb.GrpcServiceName('channel.Channel')
-abstract class ChannelServiceBase extends $grpc.Service {
-  $core.String get $name => 'channel.Channel';
+// @$pb.GrpcServiceName('channel.ChannelV1')
+abstract class ChannelV1ServiceBase extends $grpc.Service {
+  $core.String get $name => 'channel.ChannelV1';
 
-  ChannelServiceBase() {
+  ChannelV1ServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
         'GetChannelCategoryTypes',
         getChannelCategoryTypes_Pre,

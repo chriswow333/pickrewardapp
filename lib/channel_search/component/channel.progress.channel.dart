@@ -21,6 +21,9 @@ class ChannelProgress extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
+
+        const SearchChannelBar(),
+        const SizedBox(height: 10),
         if(searchChannelViewModel.searchChannelFlag)
           SearchChannelItems(controller:controller),
         if(!searchChannelViewModel.searchChannelFlag)
@@ -46,10 +49,6 @@ class NormalChannelGroup extends StatelessWidget {
             child:Stack(
               children:[
                 ChannelItemGroups(),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child:SelectedChannelResult(controller: controller,),
-                )
               ]
             )
           ),

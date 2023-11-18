@@ -5,8 +5,8 @@ import 'package:pickrewardapp/channel_search/model/pay.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
 
-import 'package:pickrewardapp/shared/repository/pay/pay.dart';
-import 'package:pickrewardapp/shared/repository/pay/proto/generated/pay.pb.dart';
+import 'package:pickrewardapp/shared/repository/pay/v1/pay.dart';
+import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pb.dart';
 
 
 

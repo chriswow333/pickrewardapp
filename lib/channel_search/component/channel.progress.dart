@@ -6,192 +6,315 @@ import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
-class RewardProgressBar extends StatelessWidget {
-  const RewardProgressBar({super.key, required this.controller});
-
-  final PageController controller;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children:[
-        ChannelProgressItem(controller: controller,),
-        ProgressArrowToFindCard(),
-        FindCardProgressItem(controller: controller,),
-        ProgressArrowToResult(),
-        FindResultProgressItem(controller: controller,),
-      ],
-    );
-  }
-}
-
-
-class FindResultProgressItem extends StatelessWidget {
-  const FindResultProgressItem({super.key, required this.controller});
-
-  final PageController controller;
+class ChannelProgressBar extends StatelessWidget {
+  const ChannelProgressBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
 
-    return TextButton(
-      onPressed: (){
-        FocusScope.of(context).unfocus();
-        controller.jumpToPage(ChannelProgressPage.result);
-      },
-      style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.result ? 
-            Palette.kToYellow[600]: Palette.kToBlack[0]
-        ),
-        shape:MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            side:BorderSide(
-              width:1.0,
-              color:channelProgressSelectedPage.page == ChannelProgressPage.result ?
-                Palette.kToYellow[400]!: Palette.kToBlack[400]!
+
+    return Container(
+      padding: EdgeInsets.only(top:5),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:[
+          Container(
+            child:Stack(
+              children:[
+                Container(
+                  height:20,
+                  padding: const EdgeInsets.only(top:5, left:2, right:2,),
+                  child:LayoutBuilder(
+                    builder: (context, constraints) {
+                      double width = constraints.maxWidth;
+                      return Row(
+                        children: [
+                          ChannelLane(width: width,),
+                          CostLane(width: width,),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  child:Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:[
+                      ChannelSpot(),
+                      FindCardSpot(),
+                      Container(
+                        width: 25.0, 
+                        height: 25.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: channelProgressSelectedPage.page == ChannelProgressPage.result ? 
+                          Palette.kToOrange[300]:Palette.kToBlack[20], // You can customize the color of the circle
+                        ),
+                        child:channelProgressSelectedPage.page == ChannelProgressPage.result?Icon(
+                          Icons.check,
+                          color:Palette.kToBlack[0],
+                        ):Container(),
+                      ),
+                    ]
+                  )
+                ),
+              ]
             ),
-            borderRadius: BorderRadius.circular(10),
           ),
-        ),
-      ),
-      child:Text(
-        '搜尋結果',
-        style: TextStyle(
-          fontSize: 16,
-          color:channelProgressSelectedPage.page == ChannelProgressPage.result ? 
-            Palette.kToBlack[0]:Palette.kToBlack[400],
-        ),  
+
+          Container(
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:[
+                Text('通路'),
+                Text('消費'),
+                Text('結果'),
+              ]
+            )
+          )
+        ]
       )
     );
   }
 }
 
-class FindCardProgressItem extends StatelessWidget {
-  const FindCardProgressItem({super.key, required this.controller});
-  
-  final PageController controller;
-  
+
+
+class FindCardSpot extends StatelessWidget {
+  const FindCardSpot({super.key});
+
   @override
   Widget build(BuildContext context) {
-    
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
-    
-    return TextButton(
-      onPressed: (){
-        FocusScope.of(context).unfocus();
-        controller.jumpToPage(ChannelProgressPage.findCard);
-      },
-      style:ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.findCard ? 
-            Palette.kToYellow[400]:Palette.kToBlack[0]
-        ),
-        shape:MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            side:BorderSide(
-              width:1.0,
-              color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ? 
-                Palette.kToYellow[400]!:Palette.kToBlack[400]!
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
-      child:Text(
-        '找卡片',
-        style: TextStyle(
-          fontSize: 16,
-          color:channelProgressSelectedPage.page == ChannelProgressPage.findCard ?
-            Palette.kToBlack[0]:Palette.kToBlack[400],
-        ),  
-      )
-    );
-  }
-}
-
-class ProgressArrowToFindCard extends StatelessWidget {
-  const ProgressArrowToFindCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
     int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
-    bool selected = channelIDLength + labelLength > 0;
+    bool channelSelected = channelIDLength + labelLength > 0;
 
-    return Container(
-      child:Icon(
-        Icons.double_arrow_rounded,
-        color:selected ? Palette.kToBlack[400]:Palette.kToBlack[50],
-        size:25,
-        weight: 10,
-      ),
-    );
+
+    if(channelProgressSelectedPage.page == ChannelProgressPage.findCard) {
+      return Container(
+        width: 25.0,
+        height: 25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Palette.kToYellow[300],
+        ),
+        child:channelSelected?Icon(
+          Icons.check,
+          color:Palette.kToBlack[0],
+        ):Container(),
+      );
+    }else {
+      return Container(
+        width: 25.0,
+        height: 25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: channelSelected? Palette.kToBlack[0]:Palette.kToBlack[20],
+          border: channelSelected?Border.all(
+            color:Palette.kToYellow[300]!,
+          ):null
+        ),
+        child:channelSelected?Icon(
+          Icons.check,
+          color:Palette.kToYellow[300],
+        ):Container(),
+      );
+    }
   }
 }
 
 
-class ProgressArrowToResult extends StatelessWidget {
-  const ProgressArrowToResult({super.key});
+class ChannelSpot extends StatelessWidget {
+  const ChannelSpot({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool flag = rewardSelectedViewModel.alreadyFindCardOnce;
-    return Container(
-      child:Icon(
-        Icons.double_arrow_rounded,
-        color:flag ? Palette.kToBlack[400]:Palette.kToBlack[50],
-        size:25,
-        weight: 10,
-      ),
-    );
+    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
+    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    bool channelSelected = channelIDLength + labelLength > 0;
+
+    if(channelProgressSelectedPage.page == ChannelProgressPage.channel) {
+      return Container(
+        width: 25.0,
+        height: 25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Palette.kToYellow[300],
+        ),
+        child:channelSelected?Icon(
+          Icons.check,
+          color:Palette.kToBlack[0],
+        ):Container(),
+      );
+    }else {
+      return Container(
+        width: 25.0,
+        height: 25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: channelSelected? Palette.kToBlack[0]:Palette.kToBlack[20],
+          border: channelSelected?Border.all(
+            color:Palette.kToYellow[300]!,
+          ):null
+        ),
+        child:channelSelected?Icon(
+          Icons.check,
+          color:Palette.kToYellow[300],
+        ):Container(),
+      );
+    }
+    
   }
 }
 
-class ChannelProgressItem extends StatelessWidget {
-  const ChannelProgressItem({super.key, required this.controller});
-  
-  final PageController controller;
+class ChannelLane extends StatefulWidget {
+  const ChannelLane({super.key, required this.width});
+  final double width;
+
+  @override
+  State<ChannelLane> createState() => _ChannelLaneState();
+}
+
+class _ChannelLaneState extends State<ChannelLane> with SingleTickerProviderStateMixin{
+
+  late AnimationController _animationController;
+  late Animation<Color?> _colorAnimation;
+
+  @override
+  void initState(){
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    _colorAnimation = _animationController.drive(
+      ColorTween(
+        begin: Palette.kToBlack[20],
+        end: Palette.kToYellow[300],
+      ),
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
+    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    bool channelSelected = channelIDLength + labelLength > 0;
+
+     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+
+
+    if(channelSelected && channelProgressSelectedPage.page == ChannelProgressPage.findCard) {
+      _animationController.forward();
+    }else if(!channelSelected) {
+      _animationController.reverse();
+    }
+
+
+    return Container(
+      width: widget.width / 2,
+      height: 15.0,
+      child:AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return LinearProgressIndicator(
+            value: _animationController.value,
+            backgroundColor: Palette.kToBlack[20],
+            valueColor: AlwaysStoppedAnimation<Color?>(_colorAnimation.value),
+          );
+        },
+      )
+    );
+  }
+
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+}
+
+
+
+
+
+class CostLane extends StatefulWidget {
+  const CostLane({super.key, required this.width});
+  final double width;
+
+  @override
+  State<CostLane> createState() => _CostLaneState();
+}
+
+class _CostLaneState extends State<CostLane> with SingleTickerProviderStateMixin{
+
+  late AnimationController _animationController;
+  late Animation<Color?> _colorAnimation;
+
+  @override
+  void initState(){
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    _colorAnimation = _animationController.drive(
+      ColorTween(
+        begin: Palette.kToBlack[20],
+        end: Palette.kToYellow[300],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+    
+    if(channelProgressSelectedPage.page == ChannelProgressPage.result){
+      _animationController.forward();
+    }else {
+      _animationController.reverse();
+    }
 
-    return TextButton(
-      onPressed: (){
-        controller.jumpToPage(ChannelProgressPage.channel);
-      },
-      style:ButtonStyle(
-        // padding:MaterialStatePropertyAll(EdgeInsets.all(5)),
-        // elevation:MaterialStatePropertyAll(1.0),
-        backgroundColor: MaterialStatePropertyAll(
-          channelProgressSelectedPage.page == ChannelProgressPage.channel ? 
-            Palette.kToYellow[400]:Palette.kToBlack[0]
-        ),
-        shape:MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            side:BorderSide(
-              width:1.0,
-              color:channelProgressSelectedPage.page == ChannelProgressPage.channel ?
-                Palette.kToBlack[0]!:Palette.kToBlack[400]!,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
-      child:Text(
-        '選通路',
-        style: TextStyle(
-          fontSize: 16,
-           color: channelProgressSelectedPage.page == ChannelProgressPage.channel ?  
-            Palette.kToBlack[0]:Palette.kToBlack[400],
-        ),  
+
+    return Container(
+      width: widget.width / 2,
+      height: 15.0,
+      child:AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return LinearProgressIndicator(
+            value: _animationController.value,
+            backgroundColor: Palette.kToBlack[20],
+            valueColor: AlwaysStoppedAnimation<Color?>(_colorAnimation.value),
+          );
+        },
       )
     );
   }
-}
 
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+}

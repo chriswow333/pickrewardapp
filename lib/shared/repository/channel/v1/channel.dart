@@ -2,7 +2,7 @@
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/shared/repository/channel/proto/generated/channel.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';
 
 class ChannelService {
   
@@ -19,7 +19,7 @@ class ChannelService {
   static ChannelService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late ChannelClient _channelClient;
+  late ChannelV1Client _channelClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -28,7 +28,7 @@ class ChannelService {
   }
 
   ///provide public access to the HelloClient instance
-  ChannelClient get channelClient {
+  ChannelV1Client get channelClient {
     return _channelClient;
   }
 
@@ -86,7 +86,7 @@ class ChannelService {
       );
     }
     
-    _channelClient = ChannelClient(channel);
+    _channelClient = ChannelV1Client(channel);
   }
 
 }

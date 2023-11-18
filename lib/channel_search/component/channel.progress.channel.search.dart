@@ -28,11 +28,7 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
       height:40,
       child:Row(
         children:[
-          Container(
-            child:Image.asset(
-              'images/logo.png',
-            ),
-          ),
+          
           SizedBox(width:10),
           Expanded(
             child:TextField(

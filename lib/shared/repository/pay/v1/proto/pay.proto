@@ -9,7 +9,7 @@ option go_package = "pickrewardapi/api/pay/proto";
 package pay;
 
 // The greeting service definition.
-service Pay {
+service PayV1 {
   rpc GetAllPays (AllPaysReq) returns (PaysReply){}
 }
 

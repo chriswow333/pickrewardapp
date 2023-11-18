@@ -27,8 +27,7 @@ class _ChannelItemGroupsState extends State<ChannelItemGroups> {
 
   @override 
   void initState(){
-    _controller.addListener(() {
-    });
+    _controller.addListener(() {});
     super.initState();
   }
 
@@ -106,12 +105,10 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
       key: widget.channelViewModel.getChannelItemGlobalKeys(channelCategoryType),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlack[50]!,
-        ),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
+        color:Palette.kToBlack[0],
       ),
       child:Container(
         child:Column(
@@ -197,30 +194,28 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
       key: channelViewModel.getChannelItemGlobalKeys(-1),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlack[50]!,
-        ),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
+        color: Palette.kToBlack[0],
       ),
       child:Container(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            Text('通路總覽',
+            Text('猜你常用',
               style:TextStyle(
                 color:Palette.kToBlack[600],
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             GridView.count(  
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
               crossAxisCount: 4,  
-              crossAxisSpacing: 15.0,  
-              mainAxisSpacing: 15.0,
+              crossAxisSpacing: 10.0,  
+              mainAxisSpacing: 10.0,
               padding: EdgeInsets.zero,  
               children:[
                 for(LabelItemModel l in LabelItemModel.getAll())
@@ -235,7 +230,6 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
 }
 
 
-
 class LabelItem extends StatelessWidget {
   const LabelItem({super.key, required this.labelItemModel});
   
@@ -245,10 +239,8 @@ class LabelItem extends StatelessWidget {
   Widget build(BuildContext context) {
     
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool selected = rewardSelectedViewModel.existSelectedLabelID(labelItemModel.id);
-
     return TextButton(
-      style:ButtonStyle(
+      style:const ButtonStyle(
         alignment: Alignment.topLeft,
         splashFactory:NoSplash.splashFactory,
         padding: MaterialStatePropertyAll(
@@ -256,99 +248,39 @@ class LabelItem extends StatelessWidget {
         )
       ),
       onPressed:(){
-      rewardSelectedViewModel.labelIDs =  labelItemModel.id;          
+        rewardSelectedViewModel.labelIDs =  labelItemModel.id;          
       },
-      child:Container(
-        child:Stack(
-          children:[
-            Container(
-              alignment: Alignment.center,
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children:[
-                  LabelItemIcon(id:labelItemModel.id),
-                  LabelItemName(name:labelItemModel.name),
-                ],
-              ),
-            ),
-            
-
-            if(selected)
-              Container(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  'images/logo.png',
-                  width: 25,
-                  height: 25,
-                ),
-              ),
-
-          ]
-        )
-        
-      ),
-    );
-  }
-}
-
-
-class LabelItemIcon extends StatelessWidget {
-  const LabelItemIcon({super.key, required this.id});
-
-  final int id;
-
-  @override
-  Widget build(BuildContext context) {
-    IconData iconData = Icons.filter_none;
-    switch (id) {
-      case 0:
-        iconData = Icons.horizontal_split_outlined;
-        break;
-      case 1:
-        iconData = Icons.wallet;
-        break;
-      case 2:
-        iconData = Icons.airplane_ticket_outlined;
-        break;
-
-      case 3:
-        iconData = Icons.phone_android_rounded;
-        break;
-
-      case 4:
-        iconData = Icons.store_mall_directory_outlined;
-        break;
-
-      case 5:
-        iconData = Icons.restaurant_menu_rounded;
-        break;
-
-    }
-
-    return Container(
-      child:Icon(
-        color:Palette.kToBlack[200],
-        iconData,
-        size:40,
-      )
+      child:LabelItemName(labelItemModel:labelItemModel),
     );
   }
 }
 
 
 class LabelItemName extends StatelessWidget {
-  const LabelItemName({super.key, required this.name});
+  const LabelItemName({super.key, required this.labelItemModel});
 
-  final String name;
+  final LabelItemModel labelItemModel;
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.fitWidth, 
+    
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    bool selected = rewardSelectedViewModel.existSelectedLabelID(labelItemModel.id);
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: selected?Palette.kToYellow[300]!:Palette.kToBlack[20]!,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      padding: const EdgeInsets.all(10),
       child:Text(
-        name,
+        labelItemModel.name,
         style:TextStyle(
           color: Palette.kToBlack[600],
+          fontSize: 16
         ),
       )
     );
@@ -362,10 +294,7 @@ class ChannelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool selected = rewardSelectedViewModel.existSelectedChannelID(channelItemModel.id);
-
     return TextButton(
       style:ButtonStyle(
         alignment: Alignment.center,
@@ -380,30 +309,12 @@ class ChannelItem extends StatelessWidget {
       child:Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(left:2, right:2),
-        child:Stack(
+        child:Column(
           children:[
-            Container(
-              alignment: Alignment.center,
-              child:Column(
-                children:[
-                  ChannelItemIcon(image:channelItemModel.image),
-                  ChannelItemName(name:channelItemModel.name),
-                ],
-              ),
-            ),
-            if(selected)
-              Container(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  'images/logo.png',
-                  width:25,
-                  height: 25,
-                ),
-              ),
-          ]
-        )
-        
-        
+            ChannelItemIcon(channelItemModel:channelItemModel),
+            ChannelItemName(name:channelItemModel.name),
+          ],
+        ),
       ),
     );
   }
@@ -411,19 +322,39 @@ class ChannelItem extends StatelessWidget {
 
 
 class ChannelItemIcon extends StatelessWidget {
-  const ChannelItemIcon({super.key, required this.image});
+  const ChannelItemIcon({super.key, required this.channelItemModel});
   
-  final String image;
+  final ChannelItemModel channelItemModel;
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Image.memory(
-        gaplessPlayback: true,
-        base64Decode(image), 
-        width:70,
-        height:50,
-      ),
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    bool selected = rewardSelectedViewModel.existSelectedChannelID(channelItemModel.id);
+
+    return Stack(
+      alignment:Alignment.center,
+      children:[
+        Container(
+          decoration: selected?BoxDecoration(
+            border: Border.all(
+              width: 1.5,
+              color: Palette.kToYellow[300]!,
+            ),
+            shape: BoxShape.circle,
+          ):null,
+          width: 55,
+          height: 55,
+        ),
+        ClipOval(
+          child:Image.memory(
+            gaplessPlayback: true,
+            base64Decode(channelItemModel.image), 
+            width:50,
+            height:50,
+          ),
+        )
+      ]
     );
   }
 }

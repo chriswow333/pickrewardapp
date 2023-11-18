@@ -17,19 +17,20 @@ class CostWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlack[50]!,
-        ),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
+        color:Palette.kToBlack[0],
       ),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          SizedBox(height:10),
           CostName(),
           SizedBox(height:10),
           CostButtons(),
+          SizedBox(height:10),
+          Divider(thickness:1),
           SizedBox(height:10),
           CostDateName(),
           CostDateValue(),
@@ -44,7 +45,7 @@ class CostName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('消費金額',
+    return Text('消費金額(新台幣)',
       style: TextStyle(
         fontSize: 18,
         color: Palette.kToBlack[600],
@@ -60,10 +61,11 @@ class CostButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:[
         Lessthan1000Btn(),
+        SizedBox(width:20),
         From1000To5000Btn(),
+        SizedBox(width:20),
         MoreThan5000Btn(),
       ]
     );
@@ -98,34 +100,22 @@ class Lessthan1000Btn extends StatelessWidget {
           )
         ),
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
-        animationDuration:Duration(microseconds: 0),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+        ),
       ),
-      child:Column(
-        children:[
-          Row(
-            children:[
-              Icon(
-                Icons.monetization_on_rounded,
-                size:20,
-                color:_cost == selectedCost ? 
-                  Palette.kToYellow[400]:Palette.kToBlack[400],
-              ),
-            ],
-          ),
-          
-          Text('~1000',
-            style: TextStyle(
-              fontSize: 14,
-              color: _cost == selectedCost ? 
-                Palette.kToYellow[400]:Palette.kToBlack[400],
-            ),
-          ),
-        ],
+      child:Text('\$1000',
+        style: TextStyle(
+          fontSize: 14,
+          color: _cost == selectedCost ? 
+            Palette.kToYellow[400]:Palette.kToBlack[400],
+        ),
       ),
     );
   }
 }
-
 
 
 class From1000To5000Btn extends StatelessWidget {
@@ -153,28 +143,16 @@ class From1000To5000Btn extends StatelessWidget {
               color: _cost == selectedCost ? Palette.kToYellow[400]!: Palette.kToBlack[400]!,
             )
           ),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
-          animationDuration:Duration(microseconds: 0),
         ),
         child:Column(
           children:[
-            Row(
-              children:[
-                Icon(
-                  size:20,
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[400],
-                ),
-                Icon(
-                  size:20,
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ?
-                    Palette.kToYellow[400]:Palette.kToBlack[400],
-                ),
-              ],
-            ),
-            Text('1000~5000',
+            Text('\$5000',
               style: TextStyle(
                 fontSize: 14,
                 color: _cost == selectedCost ? 
@@ -194,14 +172,13 @@ class From1000To5000Btn extends StatelessWidget {
 class MoreThan5000Btn extends StatelessWidget {
   const MoreThan5000Btn({super.key});
 
-  final int _cost = 8000;
+  final int _cost = 10000;
 
 
   @override
   Widget build(BuildContext context) {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int selectedCost = rewardSelectedViewModel.cost;
-
 
     return Container(
       
@@ -220,41 +197,20 @@ class MoreThan5000Btn extends StatelessWidget {
                 Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
           animationDuration:Duration(microseconds: 0),
         ),
-        child:Column(
-          children:[
-            Row(
-              children:[
-                Icon(
-                  size:20,
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[400],
-                ),
-                Icon(
-                  size:20,
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[400],
-                ),
-                Icon(
-                  size:20,
-                  Icons.monetization_on_rounded,
-                  color:_cost == selectedCost ? 
-                    Palette.kToYellow[400]:Palette.kToBlack[400],
-                ),
-              ],
-            ),
-            Text('5000~',
-              style: TextStyle(
-                fontSize: 14,
-                color: _cost == selectedCost ? 
-                  Palette.kToYellow[400]:Palette.kToBlack[400],
-              ),
-            ),
-          ],
+        child:Text('\$10000',
+          style: TextStyle(
+            fontSize: 14,
+            color: _cost == selectedCost ? 
+              Palette.kToYellow[400]:Palette.kToBlack[400],
+          ),
         ),
       )
     );

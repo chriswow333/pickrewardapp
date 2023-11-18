@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
@@ -42,9 +42,8 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
       padding: const EdgeInsets.all(10),
       child:Column(
         children:[
-          const SearchChannelBar(),
+          ChannelHeaderTitle(controller: _controller,),
           const SizedBox(height: 10),
-          RewardProgressBar(controller:_controller),
           Expanded(
             child:PageView(
               dragStartBehavior:DragStartBehavior.down,
@@ -56,7 +55,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
               children:[
                 ChannelProgress(controller:_controller),
                 FindCardProgress(controller:_controller),
-                const CardResultsProgress(),
+                CardRewardEvaluationResultsProgress(),
               ]
             )
           ),
@@ -65,3 +64,42 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
     );
   }
 }
+
+
+class ChannelHeaderTitle extends StatelessWidget {
+  const ChannelHeaderTitle({super.key, required this.controller});
+
+  final PageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children:[
+        Container(
+          padding: const EdgeInsets.only(left:10,right:10),
+          child:Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              SizedBox(
+                height: 50,
+                child:Image.asset(
+                  'images/logo.png',
+                ),
+              ),
+              const SizedBox(width:20),
+              SizedBox(
+                width:MediaQuery.of(context).size.width * 0.7,
+                child:ChannelProgressBar(),
+              ),
+            ]
+          ),
+        ),
+        const SizedBox(height: 20,),
+        SizedBox(
+          child:SelectedChannelResult(controller: controller,),
+        )
+      ]
+    );
+  }
+}
+

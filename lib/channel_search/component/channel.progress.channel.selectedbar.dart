@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/model/label.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
@@ -19,61 +21,111 @@ class SelectedChannelResult extends StatelessWidget {
   Widget build(BuildContext context) {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
+    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+
+    
+    int leftPage = channelProgressSelectedPage.page - 1;
+    int rightPage = channelProgressSelectedPage.page + 1;
+
+
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
     int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
-    bool selected = channelIDLength + labelLength > 0;
+    bool channelSelected = channelIDLength + labelLength > 0;
 
-    if(selected) {
-      return Container(
-        color:Palette.kToBlack[0]!,
-        height:50,
-        child:Container(
-          child:Row(
-            children:[
-              Expanded(
-                child:SingleChildScrollView(
-                  scrollDirection:Axis.horizontal,
-                  child:Row(
-                    children:[
-                      for(int labelID in rewardSelectedViewModel.getAllLabelIDs())
-                        SelectedLabelItem(labelID: labelID,),
-                      for(ChannelItemModel channelItemModel in rewardSelectedViewModel.channelItemModels)
-                        SelectedChannelItem(channelItemModel: channelItemModel,),
-                    ]
-                  )
-                )
-              ),
+
+    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
+
+
+    return Container(
+      height: 40,
+      child:Row(
+        children:[
+          if(channelSelected && leftPage >= 0)
               Container(
-                padding: EdgeInsets.only(left:10,right:10),
-                child:TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:MaterialStateProperty.all(
-                      Palette.kToBlack[400]!,
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0), // Adjust the radius for the desired shape
-                      ),
-                    )
-                  ),
-                  onPressed: (){
+                child:InkWell(
+                  onTap:(){
                     FocusScope.of(context).unfocus();
-                    controller.jumpToPage(ChannelProgressPage.findCard);
+                    controller.jumpToPage(leftPage);
                   },
-                  child:Text('下一步',
-                     style: TextStyle(
-                      color:Palette.kToBlack[0],
-                     ),
-                  ),
+                  child:Icon(
+                    Icons.arrow_back_ios_new_sharp,
+                  )
+                ),
+              ),
+          if(!channelSelected)
+            Container(
+              child:Text('選擇你的消費通路',
+                style: TextStyle(
+                  fontSize: 20,
+                  color:Palette.kToBlack[500],
+                  fontWeight: FontWeight.bold,
                 ),
               )
-            ]
-          ),
-          
-        )
-      );
-    }
-    return Container();
+            ),
+
+          if(channelProgressSelectedPage.page != ChannelProgressPage.result)
+            Expanded(
+              child:SingleChildScrollView(
+                scrollDirection:Axis.horizontal,
+                child:Row(
+                  children:[
+                    for(int labelID in rewardSelectedViewModel.getAllLabelIDs())
+                      SelectedLabelItem(labelID: labelID,),
+                    for(ChannelItemModel channelItemModel in rewardSelectedViewModel.channelItemModels)
+                      SelectedChannelItem(channelItemModel: channelItemModel,),
+                  ]
+                )
+              )
+            ),
+          if(channelProgressSelectedPage.page == ChannelProgressPage.result)
+            const Expanded(
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Text('查詢高回饋信用卡結果',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )  
+                ]
+              ),
+            ),
+            
+
+          SizedBox(width:10),
+          if(rightPage <= ChannelProgressPage.result && channelSelected)
+            Container(
+              decoration: BoxDecoration(
+                color: Palette.kToBlack[600],
+                borderRadius:BorderRadius.all(Radius.circular(10.0)),
+              ),
+              padding: const EdgeInsets.all(5),
+              child:InkWell(
+                onTap:(){
+
+                    if(channelProgressSelectedPage.page == ChannelProgressPage.findCard){
+                    cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
+                    rewardSelectedViewModel.setFindCardResultArrow = true;
+                  }
+
+                  if(channelSelected){
+                    FocusScope.of(context).unfocus();
+                    controller.jumpToPage(rightPage);
+                  }
+                  
+                },
+                child:Text('下一步',
+                  style: TextStyle(
+                    color:Palette.kToBlack[0],
+                  ),
+                )
+              ),
+            ),
+        ]
+      ),
+    );
   }
 }
 
@@ -84,15 +136,22 @@ class SelectedLabelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String labelName = LabelItemModel.getLabelName(labelID);
     
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
     return Container(
-      padding: const EdgeInsets.only(right:2,),
-      child:Text(labelName,
-        style: TextStyle(
-          color:Palette.kToBlack[600],
-          fontSize: 10,
-        ),
+      child:InkWell(
+        onTap: (){
+          rewardSelectedViewModel.labelIDs = labelID;
+        },
+        child:Text(labelName,
+          style: TextStyle(
+            color:Palette.kToBlack[600],
+            fontSize: 10,
+          ),
+        )
       )
     );
   }
@@ -106,28 +165,27 @@ class SelectedChannelItem extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
     return Container(
       padding:EdgeInsets.only(right:2,),
-      child:SelectedChannelItemIcon(image:channelItemModel.image),
-    );
-  }
-}
-
-class SelectedChannelItemIcon extends StatelessWidget {
-  const SelectedChannelItemIcon({super.key, required this.image});
-  
-  final String image;
-  
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child:Image.memory(
-        gaplessPlayback: true,
-        base64Decode(image), 
-        width:30,
-        height:30,
-        fit: BoxFit.contain,
-      ),
+      child:Center(
+        child:ClipOval(
+          child:InkWell(
+            onTap:(){
+              rewardSelectedViewModel.channelID = channelItemModel;
+            },
+            child:Image.memory(
+              gaplessPlayback: true,
+              base64Decode(channelItemModel.image), 
+              width:30,
+              height:30,
+              fit: BoxFit.contain,
+            ),
+          )
+        )
+      )
     );
   }
 }

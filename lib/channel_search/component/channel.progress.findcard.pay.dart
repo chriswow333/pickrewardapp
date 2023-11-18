@@ -16,28 +16,110 @@ class PayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlack[50]!,
-        ),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
+        color:Palette.kToBlack[0],
       ),
       padding: EdgeInsets.all(10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          SizedBox(height:10,),
           PayName(),
           SizedBox(height:10,),
-          Row(
-            children:[
-              Expanded(
-                child:PayItems(),
-              )
-            ]
-          )
-          
+          PayUsage(),
+          Divider(),
+          PayItems(),
         ]
+      )
+    );
+  }
+}
+
+class PayUsage extends StatelessWidget {
+  const PayUsage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children:[
+          PayUse(),
+          PayNoUse(),
+        ]
+      )
+    );
+  }
+}
+
+
+class PayNoUse extends StatelessWidget {
+  const PayNoUse({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:TextButton(
+        onPressed: (){},
+        style:ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+          side: MaterialStatePropertyAll(
+            BorderSide(
+              width:1.5,
+              color: Palette.kToBlack[400]!,
+            )
+          ),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          animationDuration:Duration(microseconds: 0),
+        ),
+        child:Text('不使用',
+          style:TextStyle(
+            // fontSize: 16,
+            color:Palette.kToBlack[500],
+          )
+        )
+      )
+    );
+  }
+}
+class PayUse extends StatelessWidget {
+  const PayUse({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:TextButton(
+        onPressed: (){},
+        style:ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+          side: MaterialStatePropertyAll(
+            BorderSide(
+              width:1.5,
+              color: Palette.kToBlack[400]!,
+            )
+          ),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          animationDuration:Duration(microseconds: 0),
+        ),
+        child:Text('使用',
+          style:TextStyle(
+            // fontSize: 16,
+            color:Palette.kToBlack[500],
+          )
+        )
       )
     );
   }
@@ -94,7 +176,6 @@ class PayItem extends StatelessWidget {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     
-    bool selected = rewardSelectedViewModel.existSelectedPayID(id);
 
     return Container(
       child:TextButton(
@@ -109,51 +190,56 @@ class PayItem extends StatelessWidget {
           rewardSelectedViewModel.payID = id;
         },
         child:Container(
-          child:Stack(
+          alignment: Alignment.center,
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children:[
-              Container(
-                alignment: Alignment.center,
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:[
-                    PayItemIcon(image:payItemModel.image),
-                    PayItemName(name:payItemModel.name),
-                  ],
-                ),
-              ),
-
-              if(selected)
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    'images/logo.png',
-                    width: 25,
-                    height:25,
-                  ),
-                ),
-            ]
-          )
-        )
+              PayItemIcon(payItemModel:payItemModel),
+              PayItemName(name:payItemModel.name),
+            ],
+          ),
+        ),
       )
     );
   }
 }
 
 class PayItemIcon extends StatelessWidget {
-  const PayItemIcon({super.key, required this.image});
+  const PayItemIcon({super.key, required this.payItemModel});
   
-  final String image;
+  final PayItemModel payItemModel;
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Image.memory(
-        gaplessPlayback: true,
-        base64Decode(image), 
-        width:70,
-        height:50,
-      ),
-    );
+
+      RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+      bool selected = rewardSelectedViewModel.existSelectedPayID(payItemModel.id);
+
+    return Stack(
+      alignment:Alignment.center,
+      children:[
+        Container(
+          decoration: selected?BoxDecoration(
+            border: Border.all(
+              width: 1.5,
+              color: Palette.kToYellow[300]!,
+            ),
+            shape: BoxShape.circle,
+          ):null,
+          width: 55,
+          height: 55,
+        ),
+        ClipOval(
+          child:Image.memory(
+            gaplessPlayback: true,
+            base64Decode(payItemModel.image), 
+            width:50,
+            height:50,
+          ),
+        )
+      ]
+    )
+    ;
   }
 }
 

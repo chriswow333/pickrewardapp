@@ -59,12 +59,14 @@ class BottomLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width:70,
+        width:7,
+        height:7,
         decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color:Palette.kToYellow[500]!,  
+          color:Palette.kToYellow[300]!,  
         ),
-        color:Palette.kToYellow[500],
+        color:Palette.kToYellow[300],
       ),  
     );
   }
@@ -103,13 +105,10 @@ class LabelIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     IconData icon = Icons.list_alt_rounded;
-    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-    bool selected = channelViewModel.channelCategoryType == -1;
     return Container(
       child:Icon(
-        color:selected ? Palette.kToYellow[500] : Palette.kToBlack[200],
+        color: Palette.kToBlack[200],
         icon,
       )
     );
@@ -121,16 +120,12 @@ class LabelName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-    bool selected = channelViewModel.channelCategoryType == -1;
-
     return Container(
       child:Text(
-        '通路總覽',
+        '常用',
         style: TextStyle(
           fontSize: 15,
-          color: selected? Palette.kToYellow[500] : Palette.kToBlack[200],
+          color:  Palette.kToBlack[200],
         ),  
       )
     );
@@ -176,9 +171,6 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-    bool selected = categoryType == channelViewModel.channelCategoryType;
-
     
     IconData icon = Icons.wallet_giftcard_outlined;
     switch(categoryType) {
@@ -222,7 +214,7 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
 
     return Container(
       child:Icon(
-        color:selected ? Palette.kToYellow[500] : Palette.kToBlack[200],
+        color:Palette.kToBlack[200],
         icon,
       )
     );
@@ -238,15 +230,12 @@ class ChannelCategoryTypeName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-    bool selected = categoryType == channelViewModel.channelCategoryType;
-
     return Container(
       child:Text(
         name,
         style: TextStyle(
           fontSize: 15,
-          color: selected? Palette.kToYellow[500] : Palette.kToBlack[200],
+          color:  Palette.kToBlack[200],
         ),  
       )
     );

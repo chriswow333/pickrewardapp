@@ -9,7 +9,7 @@ option go_package = "pickrewardapi/api/channel/proto";
 package channel;
 
 // The greeting service definition.
-service Channel {
+service ChannelV1 {
   rpc GetChannelCategoryTypes (EmptyReq) returns (ChannelCategoryTypeReply){}
   rpc GetChannelsByChannelCategoryType (ChannelCategoryTypeReq) returns (ChannelReply){}
   rpc SearchChannel(SearchChannelReq) returns (SearchChannelReply) {}

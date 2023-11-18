@@ -5,7 +5,7 @@ import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cost.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.pay.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.rewardtype.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -22,80 +22,47 @@ class FindCardProgress extends StatelessWidget {
     PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
     payItemViewModel.fetchPays();
 
-    return Container(
-      child:SingleChildScrollView(
-        child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          SizedBox(height:10),
-          PayWidget(),
-          SizedBox(height:20),
-          CostWidget(),
-          SizedBox(height:20),
-          RewardTypeWidget(),
-          SizedBox(height:40),
-          SubmitEvaluateCard(controller:controller),
-        ],
-      )
-      ),
+    return Column(
+      children:[
+        CardRewardMessage(),
+        Expanded(
+          child:SingleChildScrollView(
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                SizedBox(height:20),
+                CostWidget(),
+                SizedBox(height:20),
+                CardRewardTypeWidget(),
+                SizedBox(height:20),
+                PayWidget(),
+                SizedBox(height:40),
+              ],
+            )
+          ),
+        )
+      ]
+      
     );
   }
 }
 
-
-class SubmitEvaluateCard extends StatelessWidget {
-  const SubmitEvaluateCard({super.key, required this.controller});
-
-  final PageController controller;
+class CardRewardMessage extends StatelessWidget {
+  const CardRewardMessage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
-
-
-    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
-    bool hasChannel = channelIDLength + labelLength > 0;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children:[
-        TextButton(
-          style: ButtonStyle(
-            padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:5, bottom:5)),
-            shape:MaterialStatePropertyAll(RoundedRectangleBorder( borderRadius: BorderRadius.circular(20) )),
-            backgroundColor: hasChannel ?
-               MaterialStatePropertyAll(Palette.kToBlack[400]): MaterialStatePropertyAll(Palette.kToBlack[20]),
-
-            side:MaterialStatePropertyAll(
-              BorderSide(
-                width:1.5,
-                color: hasChannel ? Palette.kToBlack[400]!:Palette.kToBlack[0]!,
-              )
-            ),
-          ),
-          onPressed: (){
-            if(hasChannel) {
-              controller.jumpToPage(ChannelProgressPage.result);
-              cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
-              rewardSelectedViewModel.setFindCardResultArrow = true;
-            }
-          },
-          child:Text('送出選卡',
-            style: TextStyle(
-              fontSize: 25,
-              color:Palette.kToBlack[0],
-            ),
-          ),
-        )
-      ],
+    return Container(
+      alignment: Alignment.center,
+      child:Text('還差一步! 請確認搜尋條件',
+        style: TextStyle(
+          fontSize: 25,
+          color:Palette.kToBlack[500],
+          fontWeight: FontWeight.bold
+        ),
+      )
     );
-   
-
-
-    
   }
 }
+
 
