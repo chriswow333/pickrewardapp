@@ -23,7 +23,7 @@ class EvaluationViewModel with ChangeNotifier{
   Future<void> setCardReward(CardRewardModel cardRewardModel) async{
     _selectedEvaluationItem = true;
     _cardRewardModel = cardRewardModel;
-    await fetchEvaluationResp(cardRewardModel.id);
+    // await fetchEvaluationResp(cardRewardModel.id);
   }
 
   backToCardRewardItems(){

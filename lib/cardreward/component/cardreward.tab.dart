@@ -14,57 +14,18 @@ class CarTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-
-    bool selectedEvaluation = evaluationViewModel.selectedEvaluationItem;
-
-    if(selectedEvaluation) {
-      return BackToRewardItemsBtn();
-    }else {
-      return Container(
-        child:Row(
-          children:[
-            EvaluationTabBtn(),
-            ActivityTabBtn(),
-          ]
-        )
-      );
-    }
-  }
-}
-
-
-class BackToRewardItemsBtn extends StatelessWidget {
-  const BackToRewardItemsBtn({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    return TextButton(
-      onPressed: (){
-        evaluationViewModel.backToCardRewardItems();
-      },
+    return Container(
       child:Row(
         children:[
-          Icon(
-            Icons.arrow_back_ios_new_outlined,
-            color: Palette.kToBlack[600],
-            size: 18,
-          ),
-          SizedBox(width:2),
-          Text('返回列表',
-            style:TextStyle(
-              color:Palette.kToBlack[600],
-              fontSize: 16,
-            ),
-          ),    
+          EvaluationTabBtn(),
+          ActivityTabBtn(),
         ]
       )
     );
   }
 }
+
+
 
 class EvaluationTabBtn extends StatelessWidget {
   const EvaluationTabBtn({super.key});
@@ -98,7 +59,7 @@ class EvaluationTabBtn extends StatelessWidget {
               ]
             ),
              if(cardRewardTabViewModel.cardRewardType == CardRewardTypeEnum.evaluation)
-              BottomLine(),
+              BottomSpot(),
           ]
         )
       )
@@ -107,19 +68,17 @@ class EvaluationTabBtn extends StatelessWidget {
 }
 
 
-class BottomLine extends StatelessWidget {
-  const BottomLine({super.key});
+class BottomSpot extends StatelessWidget {
+  const BottomSpot({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToBlack[400]!, 
-          // width: 10,
-        ),
-        color:Palette.kToBlack[400],
-        
+      width: 7,
+      height: 7,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color:Palette.kToYellow[300],
       ),
     
     );
@@ -158,7 +117,7 @@ class ActivityTabBtn extends StatelessWidget {
               ]
             ),
             if(cardRewardTabViewModel.cardRewardType == CardRewardTypeEnum.activity)
-              BottomLine()
+              BottomSpot()
           ]
         )
       )

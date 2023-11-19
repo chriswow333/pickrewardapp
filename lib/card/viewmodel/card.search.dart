@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 import 'package:pickrewardapp/shared/model/card.dart';
-import 'package:pickrewardapp/shared/repository/card/card.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
 
-import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
 
 
 class SearchCardViewModel with ChangeNotifier {

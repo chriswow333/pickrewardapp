@@ -22,17 +22,22 @@ class PayWidget extends StatelessWidget {
         color:Palette.kToBlack[0],
       ),
       padding: EdgeInsets.all(10),
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:Row(
         children:[
-          SizedBox(height:10,),
-          PayName(),
-          SizedBox(height:10,),
-          PayUsage(),
-          Divider(),
-          PayItems(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              SizedBox(height:10,),
+              PayName(),
+              SizedBox(height:10,),
+              PayUsage(),
+              // Divider(),
+              // PayItems(),
+            ]
+          )
         ]
       )
+      
     );
   }
 }

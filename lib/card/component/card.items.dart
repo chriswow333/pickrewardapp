@@ -155,24 +155,7 @@ class CardItem extends StatelessWidget {
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
-          color:Palette.kToBlue[50],
-          boxShadow: [
-            BoxShadow(
-              color: Palette.kToBlack[200]!,
-              offset: const Offset(
-                1.0,
-                1.0,
-              ),
-              blurRadius: 1.0,
-              // spreadRadius: 0.5,
-            ), //BoxShadow
-            BoxShadow(
-              color: Colors.white,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ],
+          color:Palette.kToBlack[0],
         ),
         child:TextButton(
           onPressed: (){
@@ -200,13 +183,14 @@ class CardItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                 CardName(cardName: cardItemModel.name,),
+                SizedBox(height:5),
                 Row(
                   children:[
-                    CardIcon(image:cardItemModel.image),
-                    SizedBox(width: 10,),
                     Expanded(
                       child: CardDescs(descs:cardItemModel.descriptions),
-                    )
+                    ),
+                    const SizedBox(width: 10,),
+                    CardIcon(image:cardItemModel.image),
                   ]
                 ),
               ]
@@ -233,7 +217,7 @@ class CardDescs extends StatelessWidget {
         children:[
           for(String desc in descs) 
             Container(
-              padding: EdgeInsets.only(bottom: 3),
+              padding: EdgeInsets.only(bottom: 5),
               child:Text(desc,
                 style:TextStyle(
                   color:Palette.kToBlack[900],
@@ -257,8 +241,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
       gaplessPlayback: true,
       base64Decode(image), 
-      width:90,
-      height:70,
+      width:70,
+      height:50,
     );
   }
 }
@@ -278,7 +262,7 @@ class CardName extends StatelessWidget {
       style: TextStyle(
         fontSize: 20,
         color:Palette.kToBlack[600],
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.bold,
       ),
       ),
     );

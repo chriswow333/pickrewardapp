@@ -16,14 +16,13 @@ class RewardItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
     CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
 
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+    // EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
 
-    if(evaluationViewModel.selectedEvaluationItem){
-      return const EvaluationProgressContent();
-    }
+    // if(evaluationViewModel.selectedEvaluationItem){
+    //   return const EvaluationProgressContent();
+    // }
 
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
 

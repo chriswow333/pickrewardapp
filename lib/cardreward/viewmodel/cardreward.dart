@@ -6,8 +6,8 @@ import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
-import 'package:pickrewardapp/shared/repository/card/card.dart';
-import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
 
 class CardRewardViewModel with ChangeNotifier {
 

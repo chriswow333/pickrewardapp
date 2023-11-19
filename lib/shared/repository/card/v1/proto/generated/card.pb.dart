@@ -20,7 +20,7 @@ class Reply extends $pb.GeneratedMessage {
   factory Reply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Reply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.O3)
     ..aOM<Error>(2, _omitFieldNames ? '' : 'error', subBuilder: Error.create)
     ..hasRequiredFields = false
@@ -74,7 +74,7 @@ class Error extends $pb.GeneratedMessage {
   factory Error.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Error.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'errorCode', $pb.PbFieldType.O3, protoName: 'errorCode')
     ..aOS(2, _omitFieldNames ? '' : 'errorMessage', protoName: 'errorMessage')
     ..hasRequiredFields = false
@@ -126,7 +126,7 @@ class AllBanksReq extends $pb.GeneratedMessage {
   factory AllBanksReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AllBanksReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllBanksReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllBanksReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -178,7 +178,7 @@ class BanksReply_Bank extends $pb.GeneratedMessage {
   factory BanksReply_Bank.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory BanksReply_Bank.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BanksReply.Bank', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BanksReply.Bank', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'image')
@@ -260,7 +260,7 @@ class BanksReply extends $pb.GeneratedMessage {
   factory BanksReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory BanksReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BanksReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BanksReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<BanksReply_Bank>(2, _omitFieldNames ? '' : 'banks', $pb.PbFieldType.PM, subBuilder: BanksReply_Bank.create)
     ..hasRequiredFields = false
@@ -308,7 +308,7 @@ class CardsByBankIDReq extends $pb.GeneratedMessage {
   factory CardsByBankIDReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardsByBankIDReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsByBankIDReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsByBankIDReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
@@ -370,7 +370,7 @@ class CardsReply_Card extends $pb.GeneratedMessage {
   factory CardsReply_Card.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardsReply_Card.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsReply.Card', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsReply.Card', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..pPS(3, _omitFieldNames ? '' : 'descriptions')
@@ -496,7 +496,7 @@ class CardsReply extends $pb.GeneratedMessage {
   factory CardsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<CardsReply_Card>(2, _omitFieldNames ? '' : 'cards', $pb.PbFieldType.PM, subBuilder: CardsReply_Card.create)
     ..hasRequiredFields = false
@@ -544,7 +544,7 @@ class CardRewardsByCardIDReq extends $pb.GeneratedMessage {
   factory CardRewardsByCardIDReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsByCardIDReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsByCardIDReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsByCardIDReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
@@ -606,7 +606,7 @@ class CardRewardsReply_Reward extends $pb.GeneratedMessage {
   factory CardRewardsReply_Reward.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsReply_Reward.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Reward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Reward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
@@ -688,7 +688,7 @@ class CardRewardsReply_Description extends $pb.GeneratedMessage {
   factory CardRewardsReply_Description.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsReply_Description.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Description', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Description', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
     ..pPS(3, _omitFieldNames ? '' : 'desc')
@@ -744,7 +744,7 @@ class CardRewardsReply_Task extends $pb.GeneratedMessage {
   factory CardRewardsReply_Task.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsReply_Task.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Task', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Task', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'shortName', protoName: 'shortName')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
@@ -810,7 +810,7 @@ class CardRewardsReply_CardReward extends $pb.GeneratedMessage {
   factory CardRewardsReply_CardReward.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsReply_CardReward.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.CardReward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.CardReward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
     ..aOS(3, _omitFieldNames ? '' : 'name')
@@ -952,7 +952,7 @@ class CardRewardsReply extends $pb.GeneratedMessage {
   factory CardRewardsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<CardRewardsReply_CardReward>(2, _omitFieldNames ? '' : 'cardRewards', $pb.PbFieldType.PM, protoName: 'cardRewards', subBuilder: CardRewardsReply_CardReward.create)
     ..hasRequiredFields = false
@@ -994,20 +994,15 @@ class CardRewardsReply extends $pb.GeneratedMessage {
   $core.List<CardRewardsReply_CardReward> get cardRewards => $_getList(1);
 }
 
-class CardEventReq extends $pb.GeneratedMessage {
-  factory CardEventReq() => create();
-  CardEventReq._() : super();
-  factory CardEventReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CardEventReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class EventReq_ChannelWithLabelEvent extends $pb.GeneratedMessage {
+  factory EventReq_ChannelWithLabelEvent() => create();
+  EventReq_ChannelWithLabelEvent._() : super();
+  factory EventReq_ChannelWithLabelEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventReq_ChannelWithLabelEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardEventReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
-    ..pPS(1, _omitFieldNames ? '' : 'taskIDs', protoName: 'taskIDs')
-    ..pPS(2, _omitFieldNames ? '' : 'payIDs', protoName: 'payIDs')
-    ..pPS(3, _omitFieldNames ? '' : 'channelIDs', protoName: 'channelIDs')
-    ..p<$core.int>(4, _omitFieldNames ? '' : 'labels', $pb.PbFieldType.K3)
-    ..aInt64(5, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventReq.ChannelWithLabelEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'channelID', protoName: 'channelID')
+    ..p<$core.int>(2, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.K3, protoName: 'channelLabels')
     ..hasRequiredFields = false
   ;
 
@@ -1015,61 +1010,264 @@ class CardEventReq extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  CardEventReq clone() => CardEventReq()..mergeFromMessage(this);
+  EventReq_ChannelWithLabelEvent clone() => EventReq_ChannelWithLabelEvent()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  CardEventReq copyWith(void Function(CardEventReq) updates) => super.copyWith((message) => updates(message as CardEventReq)) as CardEventReq;
+  EventReq_ChannelWithLabelEvent copyWith(void Function(EventReq_ChannelWithLabelEvent) updates) => super.copyWith((message) => updates(message as EventReq_ChannelWithLabelEvent)) as EventReq_ChannelWithLabelEvent;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static CardEventReq create() => CardEventReq._();
-  CardEventReq createEmptyInstance() => create();
-  static $pb.PbList<CardEventReq> createRepeated() => $pb.PbList<CardEventReq>();
+  static EventReq_ChannelWithLabelEvent create() => EventReq_ChannelWithLabelEvent._();
+  EventReq_ChannelWithLabelEvent createEmptyInstance() => create();
+  static $pb.PbList<EventReq_ChannelWithLabelEvent> createRepeated() => $pb.PbList<EventReq_ChannelWithLabelEvent>();
   @$core.pragma('dart2js:noInline')
-  static CardEventReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardEventReq>(create);
-  static CardEventReq? _defaultInstance;
+  static EventReq_ChannelWithLabelEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq_ChannelWithLabelEvent>(create);
+  static EventReq_ChannelWithLabelEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$core.String> get taskIDs => $_getList(0);
+  $core.String get channelID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set channelID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasChannelID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearChannelID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get channelLabels => $_getList(1);
+}
+
+class EventReq_ChannelEvent extends $pb.GeneratedMessage {
+  factory EventReq_ChannelEvent() => create();
+  EventReq_ChannelEvent._() : super();
+  factory EventReq_ChannelEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventReq_ChannelEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventReq.ChannelEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..pc<EventReq_ChannelWithLabelEvent>(1, _omitFieldNames ? '' : 'channelsWithLabelEvents', $pb.PbFieldType.PM, protoName: 'channelsWithLabelEvents', subBuilder: EventReq_ChannelWithLabelEvent.create)
+    ..p<$core.int>(2, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.K3, protoName: 'channelLabels')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EventReq_ChannelEvent clone() => EventReq_ChannelEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EventReq_ChannelEvent copyWith(void Function(EventReq_ChannelEvent) updates) => super.copyWith((message) => updates(message as EventReq_ChannelEvent)) as EventReq_ChannelEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EventReq_ChannelEvent create() => EventReq_ChannelEvent._();
+  EventReq_ChannelEvent createEmptyInstance() => create();
+  static $pb.PbList<EventReq_ChannelEvent> createRepeated() => $pb.PbList<EventReq_ChannelEvent>();
+  @$core.pragma('dart2js:noInline')
+  static EventReq_ChannelEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq_ChannelEvent>(create);
+  static EventReq_ChannelEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<EventReq_ChannelWithLabelEvent> get channelsWithLabelEvents => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get channelLabels => $_getList(1);
+}
+
+class EventReq_CardEvent extends $pb.GeneratedMessage {
+  factory EventReq_CardEvent() => create();
+  EventReq_CardEvent._() : super();
+  factory EventReq_CardEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventReq_CardEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventReq.CardEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
+    ..aOB(2, _omitFieldNames ? '' : 'cardRewardTaskLabelPass', protoName: 'cardRewardTaskLabelPass')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'cardRewardTaskLabels', $pb.PbFieldType.K3, protoName: 'cardRewardTaskLabels')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EventReq_CardEvent clone() => EventReq_CardEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EventReq_CardEvent copyWith(void Function(EventReq_CardEvent) updates) => super.copyWith((message) => updates(message as EventReq_CardEvent)) as EventReq_CardEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EventReq_CardEvent create() => EventReq_CardEvent._();
+  EventReq_CardEvent createEmptyInstance() => create();
+  static $pb.PbList<EventReq_CardEvent> createRepeated() => $pb.PbList<EventReq_CardEvent>();
+  @$core.pragma('dart2js:noInline')
+  static EventReq_CardEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq_CardEvent>(create);
+  static EventReq_CardEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get rewardType => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set rewardType($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRewardType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRewardType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get cardRewardTaskLabelPass => $_getBF(1);
+  @$pb.TagNumber(2)
+  set cardRewardTaskLabelPass($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCardRewardTaskLabelPass() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCardRewardTaskLabelPass() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get cardRewardTaskLabels => $_getList(2);
+}
+
+class EventReq_PayEvent extends $pb.GeneratedMessage {
+  factory EventReq_PayEvent() => create();
+  EventReq_PayEvent._() : super();
+  factory EventReq_PayEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventReq_PayEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventReq.PayEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'pass')
+    ..pPS(2, _omitFieldNames ? '' : 'payIDs', protoName: 'payIDs')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EventReq_PayEvent clone() => EventReq_PayEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EventReq_PayEvent copyWith(void Function(EventReq_PayEvent) updates) => super.copyWith((message) => updates(message as EventReq_PayEvent)) as EventReq_PayEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EventReq_PayEvent create() => EventReq_PayEvent._();
+  EventReq_PayEvent createEmptyInstance() => create();
+  static $pb.PbList<EventReq_PayEvent> createRepeated() => $pb.PbList<EventReq_PayEvent>();
+  @$core.pragma('dart2js:noInline')
+  static EventReq_PayEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq_PayEvent>(create);
+  static EventReq_PayEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get pass => $_getBF(0);
+  @$pb.TagNumber(1)
+  set pass($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPass() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPass() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.List<$core.String> get payIDs => $_getList(1);
+}
+
+class EventReq extends $pb.GeneratedMessage {
+  factory EventReq() => create();
+  EventReq._() : super();
+  factory EventReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'eventDate', protoName: 'eventDate')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
+    ..aOM<EventReq_ChannelEvent>(3, _omitFieldNames ? '' : 'channelEvent', protoName: 'channelEvent', subBuilder: EventReq_ChannelEvent.create)
+    ..aOM<EventReq_PayEvent>(4, _omitFieldNames ? '' : 'payEvent', protoName: 'payEvent', subBuilder: EventReq_PayEvent.create)
+    ..aOM<EventReq_CardEvent>(5, _omitFieldNames ? '' : 'cardEvent', protoName: 'cardEvent', subBuilder: EventReq_CardEvent.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EventReq clone() => EventReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EventReq copyWith(void Function(EventReq) updates) => super.copyWith((message) => updates(message as EventReq)) as EventReq;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EventReq create() => EventReq._();
+  EventReq createEmptyInstance() => create();
+  static $pb.PbList<EventReq> createRepeated() => $pb.PbList<EventReq>();
+  @$core.pragma('dart2js:noInline')
+  static EventReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq>(create);
+  static EventReq? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get eventDate => $_getI64(0);
+  @$pb.TagNumber(1)
+  set eventDate($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEventDate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEventDate() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get cost => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set cost($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCost() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCost() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.String> get channelIDs => $_getList(2);
+  EventReq_ChannelEvent get channelEvent => $_getN(2);
+  @$pb.TagNumber(3)
+  set channelEvent(EventReq_ChannelEvent v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasChannelEvent() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearChannelEvent() => clearField(3);
+  @$pb.TagNumber(3)
+  EventReq_ChannelEvent ensureChannelEvent() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.List<$core.int> get labels => $_getList(3);
+  EventReq_PayEvent get payEvent => $_getN(3);
+  @$pb.TagNumber(4)
+  set payEvent(EventReq_PayEvent v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPayEvent() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPayEvent() => clearField(4);
+  @$pb.TagNumber(4)
+  EventReq_PayEvent ensurePayEvent() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $fixnum.Int64 get eventDate => $_getI64(4);
+  EventReq_CardEvent get cardEvent => $_getN(4);
   @$pb.TagNumber(5)
-  set eventDate($fixnum.Int64 v) { $_setInt64(4, v); }
+  set cardEvent(EventReq_CardEvent v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasEventDate() => $_has(4);
+  $core.bool hasCardEvent() => $_has(4);
   @$pb.TagNumber(5)
-  void clearEventDate() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.int get cost => $_getIZ(5);
-  @$pb.TagNumber(6)
-  set cost($core.int v) { $_setSignedInt32(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasCost() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearCost() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.int get rewardType => $_getIZ(6);
-  @$pb.TagNumber(7)
-  set rewardType($core.int v) { $_setSignedInt32(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasRewardType() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearRewardType() => clearField(7);
+  void clearCardEvent() => clearField(5);
+  @$pb.TagNumber(5)
+  EventReq_CardEvent ensureCardEvent() => $_ensure(4);
 }
 
 class EvaluateCardRewardsReply_CardRewardEventResult extends $pb.GeneratedMessage {
@@ -1078,7 +1276,7 @@ class EvaluateCardRewardsReply_CardRewardEventResult extends $pb.GeneratedMessag
   factory EvaluateCardRewardsReply_CardRewardEventResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EvaluateCardRewardsReply_CardRewardEventResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateCardRewardsReply.CardRewardEventResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateCardRewardsReply.CardRewardEventResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<CardRewardEvaluationEventResult>(2, _omitFieldNames ? '' : 'cardRewardEvaluationEventResult', protoName: 'cardRewardEvaluationEventResult', subBuilder: CardRewardEvaluationEventResult.create)
     ..aOM<EvaluationEventResultResp>(3, _omitFieldNames ? '' : 'evaluationEventResultResp', protoName: 'evaluationEventResultResp', subBuilder: EvaluationEventResultResp.create)
@@ -1144,7 +1342,7 @@ class EvaluateCardRewardsReply extends $pb.GeneratedMessage {
   factory EvaluateCardRewardsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EvaluateCardRewardsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateCardRewardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluateCardRewardsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<EvaluateCardRewardsReply_CardRewardEventResult>(2, _omitFieldNames ? '' : 'cardRewardEventResults', $pb.PbFieldType.PM, protoName: 'cardRewardEventResults', subBuilder: EvaluateCardRewardsReply_CardRewardEventResult.create)
     ..hasRequiredFields = false
@@ -1192,7 +1390,7 @@ class CardRewardEvaluationEventResult_Reward extends $pb.GeneratedMessage {
   factory CardRewardEvaluationEventResult_Reward.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardEvaluationEventResult_Reward.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResult.Reward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResult.Reward', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
@@ -1274,7 +1472,7 @@ class CardRewardEvaluationEventResult extends $pb.GeneratedMessage {
   factory CardRewardEvaluationEventResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory CardRewardEvaluationEventResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardEvaluationEventResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'cardID', protoName: 'cardID')
     ..aOS(2, _omitFieldNames ? '' : 'cardName', protoName: 'cardName')
     ..pPS(3, _omitFieldNames ? '' : 'cardDesc', protoName: 'cardDesc')
@@ -1426,7 +1624,7 @@ class EvaluationEventResultResp_FeedbackEventResultResp extends $pb.GeneratedMes
   factory EvaluationEventResultResp_FeedbackEventResultResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EvaluationEventResultResp_FeedbackEventResultResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultResp.FeedbackEventResultResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultResp.FeedbackEventResultResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'rewardType', $pb.PbFieldType.O3, protoName: 'rewardType')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'calculateType', $pb.PbFieldType.O3, protoName: 'calculateType')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'cost', $pb.PbFieldType.O3)
@@ -1518,7 +1716,7 @@ class EvaluationEventResultResp extends $pb.GeneratedMessage {
   factory EvaluationEventResultResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EvaluationEventResultResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<EvaluationEventResultResp_FeedbackEventResultResp>(2, _omitFieldNames ? '' : 'feedbackEventResultResp', protoName: 'feedbackEventResultResp', subBuilder: EvaluationEventResultResp_FeedbackEventResultResp.create)
     ..hasRequiredFields = false
@@ -1572,7 +1770,7 @@ class SearchCardReq extends $pb.GeneratedMessage {
   factory SearchCardReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchCardReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'keyword')
     ..hasRequiredFields = false
   ;
@@ -1614,7 +1812,7 @@ class SearchCardReply_Card extends $pb.GeneratedMessage {
   factory SearchCardReply_Card.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchCardReply_Card.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply.Card', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply.Card', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..pPS(3, _omitFieldNames ? '' : 'descriptions')
@@ -1740,7 +1938,7 @@ class SearchCardReply extends $pb.GeneratedMessage {
   factory SearchCardReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchCardReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchCardReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<SearchCardReply_Card>(2, _omitFieldNames ? '' : 'cards', $pb.PbFieldType.PM, subBuilder: SearchCardReply_Card.create)
     ..hasRequiredFields = false
@@ -1788,7 +1986,7 @@ class EmptyReq extends $pb.GeneratedMessage {
   factory EmptyReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EmptyReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmptyReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmptyReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 

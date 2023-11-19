@@ -53,7 +53,7 @@ class BankItem extends StatelessWidget {
             BankName(id:bankModel.id,name:bankModel.name),
             SizedBox(height: 5,),
             if (cardItemViewModel.bankID == bankModel.id)
-              BottomLine(),
+              BottomSpot(),
           ]
         ),
       )
@@ -61,16 +61,16 @@ class BankItem extends StatelessWidget {
   }
 }
 
-class BottomLine extends StatelessWidget {
-  const BottomLine({super.key});
+class BottomSpot extends StatelessWidget {
+  const BottomSpot({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-        border: Border.all(
-          color:Palette.kToYellow[400]!,  
-        ),
+      width: 7,
+      height: 7,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
         color:Palette.kToYellow[400],
       ),  
     );
@@ -82,10 +82,10 @@ class BankIcon extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipOval(
       child:Image.memory(
         base64Decode(image), 
-        width:50,
+        width:30,
         height:30,
         gaplessPlayback:true,
       ),
@@ -101,15 +101,11 @@ class BankName extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
-    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
-
-    bool selected = cardItemViewModel.bankID == id;
     return FittedBox(
       fit:BoxFit.fill,
       child:Text(name,
         style: TextStyle(
-          color: selected ? Palette.kToYellow[400] :Palette.kToBlack[400],
+          color: Palette.kToBlack[400],
         ),  
       )
     );

@@ -127,23 +127,23 @@ class CardItem extends StatelessWidget {
             Radius.circular(10),
           ),
           color:Palette.kToBlue[50],
-          boxShadow: [
-            BoxShadow(
-              color: Palette.kToBlack[200]!,
-              offset: const Offset(
-                1.0,
-                1.0,
-              ),
-              blurRadius: 1.0,
-              // spreadRadius: 0.5,
-            ), //BoxShadow
-            BoxShadow(
-              color: Colors.white,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Palette.kToBlack[200]!,
+          //     offset: const Offset(
+          //       1.0,
+          //       1.0,
+          //     ),
+          //     blurRadius: 1.0,
+          //     // spreadRadius: 0.5,
+          //   ), //BoxShadow
+          //   BoxShadow(
+          //     color: Colors.white,
+          //     offset: const Offset(0.0, 0.0),
+          //     blurRadius: 0.0,
+          //     spreadRadius: 0.0,
+          //   ), //BoxShadow
+          // ],
         ),
         child:TextButton(
           onPressed: (){

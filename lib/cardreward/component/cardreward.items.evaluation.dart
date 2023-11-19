@@ -4,7 +4,6 @@ import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:provider/provider.dart';
 
 
@@ -21,6 +20,7 @@ class EvaluationItem extends StatelessWidget {
     
     return Container(
       padding: const EdgeInsets.all(5),
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         border: Border.all(
           color:Colors.white,
@@ -29,22 +29,6 @@ class EvaluationItem extends StatelessWidget {
           Radius.circular(10),
         ),
         color: Palette.kToBlack[0],
-        boxShadow:[
-          BoxShadow(
-            color: Palette.kToBlack[200]!,
-            offset: const Offset(
-              1.0,
-              1.0,
-            ),
-            blurRadius: 1.0,
-          ), 
-          BoxShadow(
-            color: Colors.white,
-            offset: const Offset(0.0, 0.0),
-            blurRadius: 0.0,
-            spreadRadius: 0.0,
-          ), 
-        ],
       ),
       child:TextButton(
         style:const ButtonStyle(
@@ -53,53 +37,93 @@ class EvaluationItem extends StatelessWidget {
         onPressed: (){
           evaluationViewModel.setCardReward(cardRewardModel);
           evaluationSelectedViewModel.setCardRewardModel = cardRewardModel;
-
         },
-        child:Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            Container(
-              child:EvaluationRewardType(reward: cardRewardModel.reward,),
-            ),
-            
-            const SizedBox(width:10),
-            Expanded(
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  CardRewawrdTag(cardRewardModel:cardRewardModel),
-                  EvaluationName(name: cardRewardModel.name,),
-                  const SizedBox(height:5),
-                  CardRewardDuration(startDateTime: cardRewardModel.startDate, endDateTime: cardRewardModel.endDate,),
-                ],
-              ),
-            ),
-            
+            EvaluationName(name: cardRewardModel.name,),
+            CardRewardDuration(startDateTime: cardRewardModel.startDate, endDateTime: cardRewardModel.endDate,),
+            CardRewardTask(cardRewardModel: cardRewardModel,),
+            Divider(),
+            CardRewardDescriptions(cardRewardModel: cardRewardModel,),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+class CardRewardDescriptions extends StatelessWidget {
+  const CardRewardDescriptions({super.key, required this.cardRewardModel});
+  final CardRewardModel cardRewardModel;
+  @override
+  Widget build(BuildContext context) {
+    cardRewardModel.descriptions;
+    return Container(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          for(DescriptionModel descriptionModel in cardRewardModel.descriptions)
+            CardRewardDescription(descriptionModel: descriptionModel,),
+        ]
+      )
+    );
+  }
+
+}
+
+class CardRewardDescription extends StatelessWidget {
+  const CardRewardDescription({super.key, required this.descriptionModel});
+
+  final DescriptionModel descriptionModel;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top:10),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Container(
+            child:Text('${descriptionModel.name}',
+              style: TextStyle(
+                fontSize:18,
+              ),
+            ),
+          ),
+          for(String d in descriptionModel.desc)
+            Container(
+              child:Text('${d}',
+                style:TextStyle(
+                ),
+              ),
+            ),
+        ]
       )
     );
   }
 }
 
 
-
-
-class CardRewawrdTag extends StatelessWidget {
-  const CardRewawrdTag({super.key, required this.cardRewardModel});
+class CardRewardTask extends StatelessWidget {
+  const CardRewardTask({super.key, required this.cardRewardModel});
 
   final CardRewardModel cardRewardModel;
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-      // padding: EdgeInsets.only(bottom:10),
-      child:Row(
+      padding: EdgeInsets.only(top:20),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          CardRewardDurationMessage(startDate: cardRewardModel.startDate, endDate: cardRewardModel.endDate,),
-          TaskItems(tasks: cardRewardModel.tasks,),
+          Text('活動任務',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          TaskItems(tasks:cardRewardModel.tasks)
         ]
       )
     );
@@ -113,15 +137,59 @@ class TaskItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children:[
         for(TaskModel t in tasks)
-          TaskShortName(shortName: t.shortName)
+          TaskItem(taskModel: t)
       ]
     );
   }
 }
 
+
+class TaskItem extends StatelessWidget {
+  const TaskItem({super.key, required this.taskModel});
+
+  final TaskModel taskModel;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top:10),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color:Palette.kToRed[100]!,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child:Text('${taskModel.shortName}',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color:Palette.kToRed[100],
+              ),
+            ),
+          ),
+          
+          Container(
+            padding:EdgeInsets.only(left:10, top:5),
+            child:Text('${taskModel.name}',
+              style: TextStyle(
+                // fontSize: 18,
+              ),
+            )
+          )
+          
+        ]
+      ),
+    );
+  }
+}
 
 class TaskShortName extends StatelessWidget {
   const TaskShortName({super.key, required this.shortName});
@@ -142,7 +210,7 @@ class TaskShortName extends StatelessWidget {
         ),
         child:Text(shortName,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 16,
             color:Palette.kToRed[600]
           ),
         )
@@ -167,13 +235,30 @@ class CardRewardDuration extends StatelessWidget {
     final endDate =  formatter.format(endDateTime);
     
     return Container(
-      child:Text('${startDate.toString()} - ${endDate.toString()}',
-        style: TextStyle(
-          color: Palette.kToBlack[200],
-          fontSize: 12,
-        ),
+      padding: EdgeInsets.only(top:20),
+      child:Row(
+        children:[
+
+            Text('活動期間',
+              style: TextStyle(
+                color: Palette.kToBlack[500],
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(width:20),
+            Container(
+              child:Text('${startDate.toString()} - ${endDate.toString()}',
+                style: TextStyle(
+                  color: Palette.kToBlack[500],
+                  fontSize: 16,
+                ),
+              )
+            )
+          
+        ]
       )
     );
+    ;
   }
 }
 
@@ -312,12 +397,15 @@ class EvaluationName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Text(name,
-      style:TextStyle(
-        color:Palette.kToBlack[900],
-        fontSize: 18,
-      ),
-      maxLines: null,
+    return Container(
+      child:Text(name,
+        style:TextStyle(
+          color:Palette.kToBlack[900],
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        maxLines: null,
+      )
     );
   }
 }

@@ -6,15 +6,15 @@ option go_package = "pickrewardapi/api/card/proto";
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
-package card;
+package card_v1;
 
-service Card {
+service CardV1 {
   rpc GetAllBanks (AllBanksReq) returns (BanksReply) {}
   rpc GetLatestCards (EmptyReq) returns (CardsReply) {}
   rpc GetCardsByBankID (CardsByBankIDReq) returns (CardsReply) {}
   rpc GetCardRewardsByCardID(CardRewardsByCardIDReq) returns (CardRewardsReply){}
 
-  rpc EvaluateCards(CardEventReq) returns (EvaluateCardRewardsReply){}
+  rpc EvaluateCards(EventReq) returns (EvaluateCardRewardsReply){}
 
   rpc SearchCard(SearchCardReq) returns (SearchCardReply){}
 }
@@ -134,16 +134,38 @@ message CardRewardsReply {
 }
 
 
-message CardEventReq {
-  repeated string taskIDs = 1;
-  repeated string payIDs = 2;
-  repeated string channelIDs = 3;
-  repeated int32 labels = 4;
-  int64 eventDate = 5;
-  int32 cost = 6;
-  int32 rewardType = 7;
+message EventReq {
+
+  message ChannelWithLabelEvent{
+    string channelID = 1;
+    repeated int32 channelLabels = 2;
+  }
+
+  message ChannelEvent {
+    repeated ChannelWithLabelEvent channelsWithLabelEvents = 1;
+    repeated int32 channelLabels = 2;
+  }
+
+  message CardEvent {
+    int32 rewardType = 1;
+    bool cardRewardTaskLabelPass = 2;
+    repeated int32 cardRewardTaskLabels = 3;
+  }
+
+  message PayEvent {
+    bool pass = 1;
+    repeated string payIDs = 2;
+  }
+
+  int64 eventDate = 1;
+  int32 cost = 2;
+  ChannelEvent channelEvent = 3;
+  PayEvent payEvent = 4;
+  CardEvent cardEvent = 5;
 
 }
+
+
 
 
 message EvaluateCardRewardsReply {

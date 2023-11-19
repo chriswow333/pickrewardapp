@@ -3,7 +3,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
 
-import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
 
 class CardService {
 ///here enter your host without the http part (e.g enter google.com now http://google.com)
@@ -19,7 +19,7 @@ class CardService {
   static CardService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late CardClient _cardClient;
+  late CardV1Client _cardClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -28,7 +28,7 @@ class CardService {
   }
 
   ///provide public access to the HelloClient instance
-  CardClient get cardClient {
+  CardV1Client get cardClient {
     return _cardClient;
   }
 
@@ -87,6 +87,6 @@ class CardService {
       );
     }
 
-    _cardClient = CardClient(channel);
+    _cardClient = CardV1Client(channel);
   }
 }

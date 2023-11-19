@@ -7,7 +7,6 @@ import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.p
 import 'package:pickrewardapp/cardreward/component/cardreward.items.evaluation.progress.task.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/model/evaluation_progress.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/repository/evaluation/proto/generated/evaluation.pb.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -17,142 +16,141 @@ import 'package:provider/provider.dart';
 
 
 
-class EvaluationProgressContent extends StatelessWidget {
-  const EvaluationProgressContent({super.key,});
+// class EvaluationProgressContent extends StatelessWidget {
+//   const EvaluationProgressContent({super.key,});
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-    return Container(
-      padding: EdgeInsets.only(left:10, right:10),
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          CardRewardEvaluationProgress(),
-          SizedBox(height:25),
-          CardRewardEvaluationDetails(),
-        ],
-      ),
-    );
-  }
-}
-
-
-class CardRewardEvaluationProgress extends StatefulWidget {
-  const CardRewardEvaluationProgress({super.key,});
-
-  @override
-  State<CardRewardEvaluationProgress> createState() => _CardRewardEvaluationProgressState();
-}
-
-class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgress> {
-
-  EvaluationProgressEnum _progress = EvaluationProgressEnum.Channel;
-
-  void changeEvaluationProgress(EvaluationProgressEnum newProgress) {
-
-    if(_progress == newProgress)return;
-    setState(() {
-      _progress = newProgress;
-    });
-  }
-
-  @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.only(left:10, right:10),
+//       child:Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children:[
+//           CardRewardEvaluationProgress(),
+//           SizedBox(height:25),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        CardRewardName(),
-        SizedBox(height:10),
-        EvaluationProgressTitle(),
-        SizedBox(height:10),
-        EvaluationProgressBar(changeEvaluationProgress:changeEvaluationProgress, progress:_progress),
-        SizedBox(height:10),
-        if (_progress == EvaluationProgressEnum.Channel)
-          EvaluationProgressChannel(),
-        if (_progress == EvaluationProgressEnum.Task)            
-          CardRewardEvaluationTask(),
-        if (_progress == EvaluationProgressEnum.Evaluate)            
-          EvaluationProgressEvaluate(),
-      ]
-    );
-  }
-}
+// class CardRewardEvaluationProgress extends StatefulWidget {
+//   const CardRewardEvaluationProgress({super.key,});
 
-class CardRewardName extends StatelessWidget {
-  const CardRewardName({super.key});
+//   @override
+//   State<CardRewardEvaluationProgress> createState() => _CardRewardEvaluationProgressState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
+// class _CardRewardEvaluationProgressState extends State<CardRewardEvaluationProgress> {
 
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
-    if (cardRewardModel == null)return Container();
+//   EvaluationProgressEnum _progress = EvaluationProgressEnum.Channel;
 
-    return Text(cardRewardModel.name,
-      style:TextStyle(
-        color:Palette.kToBlack[900],
-        overflow: TextOverflow.clip,
-        fontSize: 20,
-      ),
-    );
-  }
-}
+//   void changeEvaluationProgress(EvaluationProgressEnum newProgress) {
+
+//     if(_progress == newProgress)return;
+//     setState(() {
+//       _progress = newProgress;
+//     });
+//   }
+
+//   @override
+//   void initState(){
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
 
 
-class CardRewardEvaluationDetails extends StatefulWidget {
-  const CardRewardEvaluationDetails({super.key,});
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children:[
+//         CardRewardName(),
+//         SizedBox(height:10),
+//         EvaluationProgressTitle(),
+//         SizedBox(height:10),
+//         EvaluationProgressBar(changeEvaluationProgress:changeEvaluationProgress, progress:_progress),
+//         SizedBox(height:10),
+//         if (_progress == EvaluationProgressEnum.Channel)
+//           EvaluationProgressChannel(),
+//         if (_progress == EvaluationProgressEnum.Task)            
+//           CardRewardEvaluationTask(),
+//         if (_progress == EvaluationProgressEnum.Evaluate)            
+//           EvaluationProgressEvaluate(),
+//       ]
+//     );
+//   }
+// }
 
-  @override
-  State<CardRewardEvaluationDetails> createState() => _CardRewardEvaluationDetailsState();
-}
+// class CardRewardName extends StatelessWidget {
+//   const CardRewardName({super.key});
 
-class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetails> {
+//   @override
+//   Widget build(BuildContext context) {
+
+//     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+//     CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
+//     if (cardRewardModel == null)return Container();
+
+//     return Text(cardRewardModel.name,
+//       style:TextStyle(
+//         color:Palette.kToBlack[900],
+//         overflow: TextOverflow.clip,
+//         fontSize: 20,
+//       ),
+//     );
+//   }
+// }
 
 
-  bool expanded = true;
+// class CardRewardEvaluationDetails extends StatefulWidget {
+//   const CardRewardEvaluationDetails({super.key,});
 
-  void toggleExpanded(){
-    setState(() {
-      expanded = !expanded;
-    });
-  }
+//   @override
+//   State<CardRewardEvaluationDetails> createState() => _CardRewardEvaluationDetailsState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
+// class _CardRewardEvaluationDetailsState extends State<CardRewardEvaluationDetails> {
 
-    EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
-    CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
 
-    if(cardRewardModel == null)return Container();
+//   // bool expanded = true;
 
-    return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          CardRewardEvaluationDetailTitle(expanded:expanded, toggleExpanded: toggleExpanded,),
-          if(expanded)
-            for (final c in cardRewardModel.descriptions) 
-              CardRewradEvaluationDetail(cardRewardDescModel: c,),
-        ],
-      ),
-    );
-  }
-}
+//   // void toggleExpanded(){
+//   //   setState(() {
+//   //     expanded = !expanded;
+//   //   });
+//   // }
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     EvaluationViewModel evaluationViewModel = Provider.of<EvaluationViewModel>(context);
+//     CardRewardModel? cardRewardModel = evaluationViewModel.cardRewardModel;
+
+//     if(cardRewardModel == null)return Container();
+
+//     return Container(
+//       child:Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children:[
+//           CardRewardEvaluationDetailTitle(expanded:true,),
+//           // if(expanded)
+//             for (final c in cardRewardModel.descriptions) 
+//               CardRewradEvaluationDetail(cardRewardDescModel: c,),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 class CardRewardEvaluationDetailTitle extends StatelessWidget {
 
-  const CardRewardEvaluationDetailTitle({super.key, required this.expanded, required this.toggleExpanded});
+  const CardRewardEvaluationDetailTitle({super.key, required this.expanded});
   final bool expanded;
-  final VoidCallback toggleExpanded; 
+  // final VoidCallback toggleExpanded; 
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +163,7 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
           side:MaterialStatePropertyAll(BorderSide.none),
         ),
         onPressed: (){
-          toggleExpanded();
+          // toggleExpanded();
         },
         child:Row(
           children:[

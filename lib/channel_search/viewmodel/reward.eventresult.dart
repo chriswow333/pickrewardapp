@@ -5,8 +5,8 @@ import 'package:fixnum/fixnum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/shared/repository/card/card.dart';
-import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pb.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pb.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class CardRewardEventResultsViewModel with ChangeNotifier {
@@ -30,13 +30,13 @@ final List<EvaluateCardRewardsReply_CardRewardEventResult> _cardRewardEventResul
     int cost = rewardSelectedViewModel.cost;
     DateTime eventDate = rewardSelectedViewModel.eventDate;
 
-    CardEventReq cardEventReq = CardEventReq();
-    cardEventReq.labels.addAll(labelIDs);
-    cardEventReq.channelIDs.addAll(channelIDs);
-    cardEventReq.payIDs.addAll(payIDs);
-    cardEventReq.cost = cost;
-    cardEventReq.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
-    cardEventReq.rewardType = rewardType;
+    EventReq cardEventReq = EventReq();
+    // cardEventReq.labels.addAll(labelIDs);
+    // cardEventReq.channelIDs.addAll(channelIDs);
+    // cardEventReq.payIDs.addAll(payIDs);
+    // cardEventReq.cost = cost;
+    // cardEventReq.eventDate = Int64.parseInt((eventDate.millisecondsSinceEpoch / 1000).toInt().toString());
+    // cardEventReq.rewardType = rewardType;
 
     try {
 

@@ -19,35 +19,40 @@ class CardHeader extends StatelessWidget {
     CardHeaderViewModel cardHeaderViewModel = Provider.of<CardHeaderViewModel>(context, listen:false);
     CardHeaderItemModel cardHeaderItemModel = cardHeaderViewModel.cardHeaderItemModel;
     
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            BackToCardListBtn(),
-            CardIcon(image:cardHeaderItemModel.image),
-            SizedBox(width:10),
-            Expanded(
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:[
-                  CardName(cardName: cardHeaderItemModel.name,),
-                  CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
-                ]
-              )
-            ),
-                        
-          ]
-        ),
-        SizedBox(height:5),
-        Container(
-          padding: EdgeInsets.only(left:20),
-          child:CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
-        ),
-      ]
+    return Container(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:[
+              BackToCardListBtn(),
+              Flexible(
+                flex: 5,
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:[
+                    CardName(cardName: cardHeaderItemModel.name,),
+                    CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
+                  ]
+                ),
+              ),
+              SizedBox(width:10),
+              Flexible(
+                child:CardIcon(image:cardHeaderItemModel.image),             
+              ),
+            ]
+          ),
+          SizedBox(height:5),
+          Container(
+            padding: EdgeInsets.only(left:20),
+            child:CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
+          ),
+        ]
+      )
     );
+    ;
   }
 }
 
@@ -154,8 +159,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
       gaplessPlayback: true,
       base64Decode(image), 
-      width:120,
-      height:90,
+      width:70,
+      height:50,
     );
   }
 }
@@ -171,6 +176,7 @@ class CardName extends StatelessWidget {
       style: TextStyle(
         fontSize: 20,
         color:Palette.kToBlack[900],
+        fontWeight: FontWeight.bold,
       ),
     );
   }

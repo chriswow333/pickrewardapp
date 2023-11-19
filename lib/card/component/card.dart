@@ -18,7 +18,7 @@ class CardComponent extends StatelessWidget {
     SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -26,7 +26,6 @@ class CardComponent extends StatelessWidget {
           SizedBox(height:20,),
           if(searchCardViewModel.searchCardFlag)
             CardSearchItems(),
-        
           if(!searchCardViewModel.searchCardFlag)
             BankCardItems(),
         ]

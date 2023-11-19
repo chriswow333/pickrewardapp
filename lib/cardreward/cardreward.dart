@@ -31,7 +31,6 @@ class CardContentScreen extends StatelessWidget {
             builder:(context, constraints) {
               double screenWidth = MediaQuery.of(context).size.width;
               double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
-
               if (screenWidth > tabletWidthThreshold) {
                 return Container(
                   width: tabletWidthThreshold,
@@ -63,14 +62,10 @@ class CardContentPage extends StatelessWidget {
             ChangeNotifierProvider<CardHeaderViewModel>(create:(_)=>CardHeaderViewModel(cardHeaderItemModel)),
             ChangeNotifierProvider<CardRewardViewModel>(create:(_)=>CardRewardViewModel(cardHeaderItemModel.id)),
             ChangeNotifierProvider<EvaluationDetailToggleViewModel>(create:(_)=>EvaluationDetailToggleViewModel()),
-            
-            ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel()), // TODO
-            // ChangeNotifierProvider<EvaluationChannelCategoryViewModel>(create:(_)=>EvaluationChannelCategoryViewModel()),
-            ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel()), // TODO
+            ChangeNotifierProvider<EvaluationViewModel>(create:(_)=>EvaluationViewModel()),
+            ChangeNotifierProvider<EvaluationSelectedViewModel>(create:(_)=>EvaluationSelectedViewModel()), 
             ChangeNotifierProvider<EvaluationEventResultRespViewModel>(create:(_)=>EvaluationEventResultRespViewModel()),
             ChangeNotifierProvider<CardRewardTabViewModel>(create:(_)=>CardRewardTabViewModel()),
-
-            
           ],
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,

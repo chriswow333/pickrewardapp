@@ -18,8 +18,7 @@ class ActivityItem extends StatefulWidget {
 
 class _ActivityItemState extends State<ActivityItem> {
 
-  bool expanded = false;
-
+  bool expanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,63 +26,43 @@ class _ActivityItemState extends State<ActivityItem> {
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(
-          color:expanded ? Palette.kToBlack[50]! : Colors.white,
+          color: Colors.white,
         ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(10),
+          Radius.circular(20),
         ),
-        color:expanded?null: Palette.kToBlack[0],
-        boxShadow: expanded?null:[
-          BoxShadow(
-            color: Palette.kToBlack[200]!,
-            offset: const Offset(
-              1.0,
-              1.0,
-            ),
-            blurRadius: 1.0,
-            // spreadRadius: 0.5,
-          ), //BoxShadow
-          BoxShadow(
-            color: Colors.white,
-            offset: const Offset(0.0, 0.0),
-            blurRadius: 0.0,
-            spreadRadius: 0.0,
-          ), //BoxShadow
-        ],
+        color:Palette.kToBlack[0],
       ),
-      child:
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            TextButton(
-              style:const ButtonStyle(
-                splashFactory:NoSplash.splashFactory,
-              ),
-              onPressed: (){
-                setState(() {
-                  expanded = !expanded;
-                });
-                // cardRewardViewModel.toggleCardReward(cardRewardModel.id);
-              },
-              child:Wrap(
-                runAlignment: WrapAlignment.start,
-                runSpacing: 5,
-                children:[
-                  Row(
-                    children:[
-                      // SizedBox(width:5),
-                      CardRewardDurationMessage(startDate: widget.cardRewardModel.startDate, endDate: widget.cardRewardModel.endDate,),
-                    ]
-                  ),
-                  CardRewardDuration(startDateTime: widget.cardRewardModel.startDate, endDateTime: widget.cardRewardModel.endDate,),
-                  ActivityName(name:widget.cardRewardModel.name),
-                ]
-              )
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          TextButton(
+            style:const ButtonStyle(
+              splashFactory:NoSplash.splashFactory,
             ),
-            if(expanded)
-              CardActivityDetails(cardRewardDescModels: widget.cardRewardModel.descriptions,),
-          ]
-        )
+            onPressed: (){
+              setState(() {
+                expanded = !expanded;
+              });
+            },
+            child:Wrap(
+              runAlignment: WrapAlignment.start,
+              runSpacing: 5,
+              children:[
+                Row(
+                  children:[
+                    CardRewardDurationMessage(startDate: widget.cardRewardModel.startDate, endDate: widget.cardRewardModel.endDate,),
+                  ]
+                ),
+                CardRewardDuration(startDateTime: widget.cardRewardModel.startDate, endDateTime: widget.cardRewardModel.endDate,),
+                ActivityName(name:widget.cardRewardModel.name),
+              ]
+            )
+          ),
+          // if(expanded)
+            CardActivityDetails(cardRewardDescModels: widget.cardRewardModel.descriptions,),
+        ]
+      )
     );
   }
 }
@@ -194,8 +173,8 @@ class CardActivityDetails extends StatelessWidget {
           Divider(
             color:Palette.kToBlack[50],
           ),
-          SizedBox(height:5),
-          CardActivityDetailTitle(),
+          // SizedBox(height:5),
+          // CardActivityDetailTitle(),
           SizedBox(height:5),
           for (final c in cardRewardDescModels) 
             CardActivityDetail(cardRewardDescModel: c,),
@@ -206,22 +185,22 @@ class CardActivityDetails extends StatelessWidget {
 }
 
 
-class CardActivityDetailTitle extends StatelessWidget {
-  const CardActivityDetailTitle({super.key});
+// class CardActivityDetailTitle extends StatelessWidget {
+//   const CardActivityDetailTitle({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text('詳細說明',
-        style:TextStyle(
-          color:Palette.kToBlack[900],
-          overflow: TextOverflow.clip,
-          fontSize: 20,
-        ),
-      )
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child:Text('詳細說明',
+//         style:TextStyle(
+//           color:Palette.kToBlack[900],
+//           overflow: TextOverflow.clip,
+//           fontSize: 20,
+//         ),
+//       )
+//     );
+//   }
+// }
 
 class CardActivityDetail extends StatelessWidget {
   const CardActivityDetail({super.key, required this.cardRewardDescModel});
