@@ -18,6 +18,7 @@ class CardRewardEvaluationResultsProgress extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+
           CardRewardSelected(),
           SizedBox(height:10),
           CardRewardEvaluationMessage(),
@@ -199,10 +200,17 @@ class CardRewardEvaluationResult extends StatelessWidget {
               ),
             builder: (context) {
               return Container(
-                padding: EdgeInsets.only(top:20),
+                // padding: EdgeInsets.only(top:20),
                 height:MediaQuery.of(context).size.height * 0.65,
                 child:Column(
                   children: [
+                    SizedBox(height:5),
+                    Container(
+                      width:MediaQuery.of(context).size.width * 0.2,
+                      height:3,
+                      color:Palette.kToBlack[50],
+                    ),
+                    SizedBox(height:10),
                     CardRewarEvaluationDetailTitle(),
                     SizedBox(height: 20,),
                     Expanded(
