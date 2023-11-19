@@ -4,12 +4,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
-import 'package:pickrewardapp/shared/repository/card/proto/generated/card.pbgrpc.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
-import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.result.detail.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:provider/provider.dart';
 
 class CardRewardEvaluationResultsProgress extends StatelessWidget {
   const CardRewardEvaluationResultsProgress({super.key});
@@ -117,8 +113,6 @@ class CardRewardSelected extends StatelessWidget {
 }
 
 
-
-
 class CardRewardSelectedChannel extends StatelessWidget {
   const CardRewardSelectedChannel({super.key});
 
@@ -134,8 +128,6 @@ class CardRewardSelectedChannel extends StatelessWidget {
     );
   }
 }
-
-
 
 
 class CardRewardSelectedLabels extends StatelessWidget {
@@ -181,14 +173,11 @@ class CardRewardEvaluationResults extends StatelessWidget {
           CardRewardEvaluationResult(),
           CardRewardEvaluationResult(),
           CardRewardEvaluationResult(),
-          
         ]
       )
     );
   }
 }
-
-
 
 
 class CardRewardEvaluationResult extends StatelessWidget {
@@ -198,35 +187,95 @@ class CardRewardEvaluationResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 10),
-      child:Container(
-        padding: EdgeInsets.fromLTRB(20,30,20,30),
-        decoration: BoxDecoration(
-          color:Palette.kToBlack[0],
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        child:Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children:[
-            Flexible(
-              flex: 2,
-              child: CardRewardRank(rank: 1,),
-            ),
-            Flexible(
-              flex: 8,
-              child: CardRewardEventResultItem(), 
-            ),
-            Flexible(
-              flex: 4,
-              child: CardIcon(image: "",),
-            ),
-          ]
+      child:InkWell(
+        onTap: (){
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled:true,
+            isDismissible: true, 
+            // barrierColor:Colors.transparent,
+             shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+              ),
+            builder: (context) {
+              return Container(
+                padding: EdgeInsets.only(top:20),
+                height:MediaQuery.of(context).size.height * 0.65,
+                child:Column(
+                  children: [
+                    CardRewarEvaluationDetailTitle(),
+                    SizedBox(height: 20,),
+                    Expanded(
+                      child:SingleChildScrollView(
+                        child:CardRewardEvaluationResultDetails(),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        child:Container(
+          padding: EdgeInsets.fromLTRB(20,30,20,30),
+          decoration: BoxDecoration(
+            color:Palette.kToBlack[0],
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child:Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children:[
+              Flexible(
+                flex: 2,
+                child: CardRewardRank(rank: 1,),
+              ),
+              Flexible(
+                flex: 8,
+                child: CardRewardEventResultItem(), 
+              ),
+              Flexible(
+                flex: 4,
+                child: CardIcon(image: "",),
+              ),
+            ]
+          )
         )
-      )
+      ),
+      
     );
     ;
   }
 }
+
+
+
+
+class CardRewarEvaluationDetailTitle extends StatelessWidget {
+  const CardRewarEvaluationDetailTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          CardIcon(image: "",),
+          SizedBox(width: 20,),
+          Flexible(
+            child: Text('玫瑰Giving卡'),
+          ),
+          SizedBox(width: 20,),
+          Flexible(
+            child: Text('最高回饋 3% 30元'),
+          ),
+          
+        ]
+      ),
+    );
+  }
+}
+
 
 class CardIcon extends StatelessWidget {
   const CardIcon({super.key, required this.image});

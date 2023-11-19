@@ -12,7 +12,6 @@ class ChannelProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
 
 
     return Container(
@@ -45,19 +44,7 @@ class ChannelProgressBar extends StatelessWidget {
                     children:[
                       ChannelSpot(),
                       FindCardSpot(),
-                      Container(
-                        width: 25.0, 
-                        height: 25.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: channelProgressSelectedPage.page == ChannelProgressPage.result ? 
-                          Palette.kToOrange[300]:Palette.kToBlack[20], // You can customize the color of the circle
-                        ),
-                        child:channelProgressSelectedPage.page == ChannelProgressPage.result?Icon(
-                          Icons.check,
-                          color:Palette.kToBlack[0],
-                        ):Container(),
-                      ),
+                      ResultSpot(),
                     ]
                   )
                 ),
@@ -78,6 +65,31 @@ class ChannelProgressBar extends StatelessWidget {
         ]
       )
     );
+  }
+}
+
+class ResultSpot extends StatelessWidget {
+  const ResultSpot({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
+    return Container(
+        width: 25.0, 
+        height: 25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: rewardSelectedViewModel.alreadyFindCardOnce ? 
+          Palette.kToOrange[300]:Palette.kToBlack[20], // You can customize the color of the circle
+        ),
+        child:channelProgressSelectedPage.page == ChannelProgressPage.result?Icon(
+          Icons.check,
+          color:Palette.kToBlack[0],
+        ):Container(),
+      );
   }
 }
 
@@ -286,9 +298,9 @@ class _CostLaneState extends State<CostLane> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     
-    if(channelProgressSelectedPage.page == ChannelProgressPage.result){
+    if(rewardSelectedViewModel.alreadyFindCardOnce){
       _animationController.forward();
     }else {
       _animationController.reverse();
