@@ -47,7 +47,7 @@ class CardRewardEvaluatioResultDetail extends StatelessWidget {
           children:[
             CardRewardDurationDate(),
             SizedBox(height:10),
-            CardRewardLabels(),
+            CardRewardTag(),
             SizedBox(height:10),
             CardRewardName(),
             SizedBox(height:10),
@@ -124,7 +124,7 @@ class CardRewardEvaluationResultChannels extends StatelessWidget {
             ),
             child:Text('符合已選通路'),
           ),
-
+          SizedBox(height:10),
           Wrap(
             children:[
                 CardRewardEvaluationResultChannel(),
@@ -132,7 +132,6 @@ class CardRewardEvaluationResultChannels extends StatelessWidget {
                 CardRewardEvaluationResultChannel(),
                 CardRewardEvaluationResultChannel(),
                 CardRewardEvaluationResultChannel(),
-                
                 CardRewardEvaluationResultChannel(),
             ]
           )
@@ -191,14 +190,15 @@ class CardRewardDurationDate extends StatelessWidget {
   }
 }
 
-class CardRewardLabels extends StatelessWidget {
-  const CardRewardLabels({super.key});
+class CardRewardTag extends StatelessWidget {
+  const CardRewardTag({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child:Row(
         children:[
+          CardRewardType(),
           CardRewardLabel(),
           CardRewardLabel(),
         ]
@@ -207,6 +207,30 @@ class CardRewardLabels extends StatelessWidget {
   }
 }
 
+class CardRewardType extends StatelessWidget {
+  const CardRewardType({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(right:5, ),
+      child:Container(
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Palette.kToYellow[300]!,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child:Text('現金回饋',
+          style: TextStyle(
+            color:Palette.kToYellow[300],
+          ),
+        )
+      )
+    );
+  }
+}
 class CardRewardLabel extends StatelessWidget {
   const CardRewardLabel({super.key});
   
@@ -217,13 +241,17 @@ class CardRewardLabel extends StatelessWidget {
       child:Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
-          border: Border.all(),
+          border: Border.all(
+            color:Palette.kToRed[600]!,
+          ),
           borderRadius: BorderRadius.circular(20),
         ),
-        child:Text('限定日')
+        child:Text('限定日',
+          style: TextStyle(
+            color:Palette.kToRed[600],
+          ),
+        )
       )
-      
-      
     );
   }
 }

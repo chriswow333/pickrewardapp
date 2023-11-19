@@ -11,11 +11,8 @@ class ChannelProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Container(
-      padding: EdgeInsets.only(top:5),
+      padding: const EdgeInsets.only(top:1),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children:[
@@ -51,7 +48,6 @@ class ChannelProgressBar extends StatelessWidget {
               ]
             ),
           ),
-
           Container(
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,19 +73,39 @@ class ResultSpot extends StatelessWidget {
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
-    return Container(
+    bool sendedFindCard = rewardSelectedViewModel.sendedFindCard;
+
+    if(sendedFindCard){
+
+      return Container(
         width: 25.0, 
         height: 25.0,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: rewardSelectedViewModel.alreadyFindCardOnce ? 
-          Palette.kToOrange[300]:Palette.kToBlack[20], // You can customize the color of the circle
+          border: Border.all(
+            color:Palette.kToYellow[300]!,
+          ),
+          color: channelProgressSelectedPage.page == ChannelProgressPage.result ? 
+          Palette.kToOrange[300]:Palette.kToBlack[0],
         ),
-        child:channelProgressSelectedPage.page == ChannelProgressPage.result?Icon(
+        child:Icon(
           Icons.check,
-          color:Palette.kToBlack[0],
-        ):Container(),
+          color:channelProgressSelectedPage.page == ChannelProgressPage.result? 
+            Palette.kToBlack[0]:Palette.kToOrange[300],
+        )
       );
+    }else {
+      return Container(
+        width: 25.0,
+        height:25.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: channelProgressSelectedPage.page == ChannelProgressPage.result ? 
+            Palette.kToYellow[300]:Palette.kToBlack[20],
+        ),
+      );
+    }
+    
   }
 }
 
@@ -239,7 +255,7 @@ class _ChannelLaneState extends State<ChannelLane> with SingleTickerProviderStat
 
     return Container(
       width: widget.width / 2,
-      height: 15.0,
+      height: 10.0,
       child:AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) {
@@ -300,7 +316,7 @@ class _CostLaneState extends State<CostLane> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     
-    if(rewardSelectedViewModel.alreadyFindCardOnce){
+    if(rewardSelectedViewModel.sendedFindCard){
       _animationController.forward();
     }else {
       _animationController.reverse();
@@ -309,7 +325,7 @@ class _CostLaneState extends State<CostLane> with SingleTickerProviderStateMixin
 
     return Container(
       width: widget.width / 2,
-      height: 15.0,
+      height: 10.0,
       child:AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) {

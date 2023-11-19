@@ -5,20 +5,26 @@ import 'package:pickrewardapp/channel_search/model/channel.dart';
 
 class RewardSelectedViewModel with ChangeNotifier{
 
-  bool _alreadyFindCardOnce = false;
-  set setFindCardResultArrow(bool flag) {
-    _alreadyFindCardOnce = flag;
+  bool _sendedFindCard = false;
+  set sendedFindCard(bool flag) {
+    _sendedFindCard = flag;
     notifyListeners();
   }
-  bool get alreadyFindCardOnce => _alreadyFindCardOnce;
+  bool get sendedFindCard => _sendedFindCard;
 
   final Set<int> _labelIDs = {};
   set labelIDs(int labelID) {
+      
     if(_labelIDs.contains(labelID)){
       _labelIDs.remove(labelID);
     }else {
       _labelIDs.add(labelID);
     }
+
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
+    }
+
     notifyListeners();
   }
 
@@ -33,10 +39,15 @@ class RewardSelectedViewModel with ChangeNotifier{
 
   final Map<String,ChannelItemModel> _channelItemModels = {};
   set channelID(ChannelItemModel channelItemModel) {
+
     if(_channelItemModels.containsKey(channelItemModel.id)){
       _channelItemModels.remove(channelItemModel.id);
     }else {
       _channelItemModels[channelItemModel.id] = channelItemModel;
+    }
+
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
     }
     notifyListeners();
   }
@@ -60,6 +71,10 @@ class RewardSelectedViewModel with ChangeNotifier{
       _payIDs.add(payID);
     } 
 
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
+    }
+
     notifyListeners();
   }
 
@@ -77,6 +92,11 @@ class RewardSelectedViewModel with ChangeNotifier{
   set cost(int cost){
     if (cost == _selectedCost) return;
     _selectedCost = cost;
+
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
+    }
+
     notifyListeners();
   } 
   
@@ -85,6 +105,11 @@ class RewardSelectedViewModel with ChangeNotifier{
   DateTime _eventDate = DateTime.now();
   set eventDate(DateTime eventDate) {
     _eventDate = eventDate;
+    
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
+    }
+
     notifyListeners();
   }
   DateTime get eventDate => _eventDate;
@@ -96,7 +121,13 @@ class RewardSelectedViewModel with ChangeNotifier{
     if(rewardType == _selectedRewardType) {
       return;
     }
+
     _selectedRewardType = rewardType;
+
+    if(_sendedFindCard) {
+      _sendedFindCard = false;
+    }
+
     notifyListeners();
   }
 

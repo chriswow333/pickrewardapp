@@ -36,12 +36,11 @@ class SelectedChannelResult extends StatelessWidget {
 
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
 
-
     return Container(
       height: 40,
       child:Row(
         children:[
-          if(channelSelected && leftPage >= 0)
+          if(leftPage >= 0)
               Container(
                 child:InkWell(
                   onTap:(){
@@ -53,7 +52,7 @@ class SelectedChannelResult extends StatelessWidget {
                   )
                 ),
               ),
-          if(!channelSelected)
+          if(!channelSelected && channelProgressSelectedPage.page != ChannelProgressPage.result)
             Container(
               child:Text('選擇你的消費通路',
                 style: TextStyle(
@@ -105,9 +104,9 @@ class SelectedChannelResult extends StatelessWidget {
               child:InkWell(
                 onTap:(){
 
-                    if(channelProgressSelectedPage.page == ChannelProgressPage.findCard){
+                  if(channelProgressSelectedPage.page == ChannelProgressPage.findCard){
                     cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
-                    rewardSelectedViewModel.setFindCardResultArrow = true;
+                    rewardSelectedViewModel.sendedFindCard = true;
                   }
 
                   if(channelSelected){
