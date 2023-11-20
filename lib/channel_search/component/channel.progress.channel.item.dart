@@ -126,7 +126,7 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               physics:NeverScrollableScrollPhysics(),
               itemCount: channelItemModels.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+                crossAxisCount: 5,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
                 // childAspectRatio: 0.7,
@@ -213,7 +213,7 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
             GridView.count(  
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
-              crossAxisCount: 4,  
+              crossAxisCount: 5,  
               crossAxisSpacing: 10.0,  
               mainAxisSpacing: 10.0,
               padding: EdgeInsets.zero,  
@@ -276,12 +276,13 @@ class LabelItemName extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(10),
-      child:Text(
-        labelItemModel.name,
-        style:TextStyle(
-          color: Palette.kToBlack[600],
-          fontSize: 16
-        ),
+      child:FittedBox(
+        child:Text(
+          labelItemModel.name,
+          style:TextStyle(
+            color: Palette.kToBlack[600],
+          ),
+        )
       )
     );
   }
@@ -343,15 +344,15 @@ class ChannelItemIcon extends StatelessWidget {
             ),
             shape: BoxShape.circle,
           ):null,
-          width: 55,
-          height: 55,
+          width: 45,
+          height: 45,
         ),
         ClipOval(
           child:Image.memory(
             gaplessPlayback: true,
             base64Decode(channelItemModel.image), 
-            width:50,
-            height:50,
+            width:40,
+            height:40,
           ),
         )
       ]

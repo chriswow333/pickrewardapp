@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
@@ -39,15 +39,16 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
 
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context, listen:false);
     return Container(
+      decoration: BoxDecoration(
+      ),
       padding: const EdgeInsets.all(10),
       child:Column(
         children:[
-          ChannelHeaderTitle(controller: _controller,),
           const SizedBox(height: 10),
           Expanded(
             child:PageView(
               dragStartBehavior:DragStartBehavior.down,
-              physics: const ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),// NeverScrollableScrollPhysics(),
               controller:_controller,
               onPageChanged:(int page){
                 channelProgressSelectedPage.changePage(page);
@@ -59,6 +60,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
               ]
             )
           ),
+         
         ]
       ),
     );
@@ -67,9 +69,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
 
 
 class ChannelHeaderTitle extends StatelessWidget {
-  const ChannelHeaderTitle({super.key, required this.controller});
-
-  final PageController controller;
+  const ChannelHeaderTitle({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -87,17 +87,14 @@ class ChannelHeaderTitle extends StatelessWidget {
                 ),
               ),
               const SizedBox(width:20),
-              SizedBox(
+              Container(
+                padding: EdgeInsets.only(top:5),
                 width:MediaQuery.of(context).size.width * 0.7,
-                child:ChannelProgressBar(),
+                child:const SearchChannelBar(),
               ),
             ]
           ),
         ),
-        const SizedBox(height: 20,),
-        SizedBox(
-          child:SelectedChannelResult(controller: controller,),
-        )
       ]
     );
   }

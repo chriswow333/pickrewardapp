@@ -3,9 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
-import 'package:pickrewardapp/channel_search/model/label.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
@@ -20,171 +18,212 @@ class SelectedChannelResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
 
-    
-    int leftPage = channelProgressSelectedPage.page - 1;
-    int rightPage = channelProgressSelectedPage.page + 1;
+    if(channelProgressSelectedPage.page == ChannelProgressPage.channel){
+      return ChannelPageBar(controller: controller,);
+    }else if (channelProgressSelectedPage.page == ChannelProgressPage.findCard){
+      return FindCardPageBar(controller: controller,);
+    }
+
+    return Container();
+  }
+}
 
 
-    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
-    bool channelSelected = channelIDLength + labelLength > 0;
+class FindCardPageBar extends StatelessWidget {
+  const FindCardPageBar({super.key, required this.controller});
 
+  final PageController controller;
+  @override
+  Widget build(BuildContext context) {
 
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
 
     return Container(
-      height: 40,
       child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          if(leftPage >= 0)
-              Container(
-                child:InkWell(
-                  onTap:(){
-                    FocusScope.of(context).unfocus();
-                    controller.jumpToPage(leftPage);
-                  },
-                  child:Icon(
-                    Icons.arrow_back_ios_new_sharp,
-                  )
+          InkWell(
+            onTap:(){
+            },
+            child:Row(
+              children:[
+                  
+                Icon(
+                  Icons.restore,
                 ),
-              ),
-          if(!channelSelected && channelProgressSelectedPage.page != ChannelProgressPage.result)
-            Container(
-              child:Text('選擇你的消費通路',
-                style: TextStyle(
-                  fontSize: 20,
-                  color:Palette.kToBlack[500],
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            ),
-
-          if(channelProgressSelectedPage.page != ChannelProgressPage.result)
-            Expanded(
-              child:SingleChildScrollView(
-                scrollDirection:Axis.horizontal,
-                child:Row(
-                  children:[
-                    for(int labelID in rewardSelectedViewModel.getAllLabelIDs())
-                      SelectedLabelItem(labelID: labelID,),
-                    for(ChannelItemModel channelItemModel in rewardSelectedViewModel.channelItemModels)
-                      SelectedChannelItem(channelItemModel: channelItemModel,),
-                  ]
-                )
-              )
-            ),
-          if(channelProgressSelectedPage.page == ChannelProgressPage.result)
-            const Expanded(
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Text('查詢高回饋信用卡結果',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )  
-                ]
-              ),
-            ),
+                SizedBox(width:5),
+                Text('重置預設條件')
+              ]
+            )
+          ),
+            
             
 
           SizedBox(width:10),
-          if(rightPage <= ChannelProgressPage.result && channelSelected)
-            Container(
-              decoration: BoxDecoration(
-                color: Palette.kToBlack[600],
-                borderRadius:BorderRadius.all(Radius.circular(10.0)),
-              ),
-              padding: const EdgeInsets.all(5),
-              child:InkWell(
-                onTap:(){
+          Container(
+            decoration: BoxDecoration(
+              color: Palette.kToBlack[600],
+              borderRadius:BorderRadius.all(Radius.circular(10.0)),
+            ),
+            padding: const EdgeInsets.only(left:10, right:10, top:5, bottom: 5),
+            child:InkWell(
+              onTap:(){
+                cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
+                rewardSelectedViewModel.sendedFindCard = true;
 
-                  if(channelProgressSelectedPage.page == ChannelProgressPage.findCard){
-                    cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(rewardSelectedViewModel);
-                    rewardSelectedViewModel.sendedFindCard = true;
-                  }
+                FocusScope.of(context).unfocus();
+                controller.jumpToPage(ChannelProgressPage.result);
+                
+              },
+              child:Text('下一步',
+                style: TextStyle(
+                  color:Palette.kToBlack[0],
+                ),
+              )
+            ),
+          ),
+        ]
+      )
+    );
+  }
+}
 
-                  if(channelSelected){
-                    FocusScope.of(context).unfocus();
-                    controller.jumpToPage(rightPage);
-                  }
-                  
-                },
-                child:Text('下一步',
+
+
+class ChannelPageBar extends StatelessWidget {
+  const ChannelPageBar({super.key, required this.controller});
+  final PageController controller;
+  @override
+  Widget build(BuildContext context) {
+
+    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
+    int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
+    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    
+    bool channelSelected = channelIDLength + labelLength > 0;
+
+
+
+    return Container(
+      child:Row(
+        children:[
+          if(!channelSelected)
+            Expanded(
+              child:Container(
+                child:Text('請選擇至少一個通路',
                   style: TextStyle(
-                    color:Palette.kToBlack[0],
+                    fontSize: 16,
+                    color:Palette.kToBlack[500],
                   ),
                 )
               ),
             ),
-        ]
-      ),
-    );
-  }
-}
 
-
-class SelectedLabelItem extends StatelessWidget {
-  const SelectedLabelItem({super.key, required this.labelID});
-  final int labelID;
-
-  @override
-  Widget build(BuildContext context) {
-
-    String labelName = LabelItemModel.getLabelName(labelID);
-    
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-
-    return Container(
-      child:InkWell(
-        onTap: (){
-          rewardSelectedViewModel.labelIDs = labelID;
-        },
-        child:Text(labelName,
-          style: TextStyle(
-            color:Palette.kToBlack[600],
-            fontSize: 10,
-          ),
-        )
-      )
-    );
-  }
-}
-
-
-class SelectedChannelItem extends StatelessWidget {
-  const SelectedChannelItem({super.key, required this.channelItemModel});
-
-  final ChannelItemModel channelItemModel;
-  
-  @override
-  Widget build(BuildContext context) {
-
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-
-    return Container(
-      padding:EdgeInsets.only(right:2,),
-      child:Center(
-        child:ClipOval(
-          child:InkWell(
-            onTap:(){
-              rewardSelectedViewModel.channelID = channelItemModel;
-            },
-            child:Image.memory(
-              gaplessPlayback: true,
-              base64Decode(channelItemModel.image), 
-              width:30,
-              height:30,
-              fit: BoxFit.contain,
+          if(channelSelected)
+            Expanded(
+              child:Container(
+                child:Row(
+                  children:[
+                    InkWell(
+                      onTap:(){
+                        rewardSelectedViewModel.resetChannelAndLabels();
+                      },
+                      child:const Icon(
+                        Icons.cancel_outlined,
+                      ),
+                    ),
+                    SizedBox(width:5),
+                    Text('已選${channelIDLength + labelLength}個通路')
+                  ]
+                )
+              ),
             ),
-          )
-        )
+            
+          Container(
+            decoration: BoxDecoration(
+              color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
+              borderRadius:BorderRadius.all(Radius.circular(10.0)),
+            ),
+            padding: const EdgeInsets.only(left:10, right:10, top:5, bottom: 5),
+            child:InkWell(
+              onTap:(){
+                FocusScope.of(context).unfocus();
+                controller.jumpToPage(ChannelProgressPage.findCard);
+              },
+              child:Text('下一步',
+                style: TextStyle(
+                  color:Palette.kToBlack[0],
+                ),
+              )
+            ),
+          ),
+        ]
       )
     );
   }
 }
+
+
+// class SelectedLabelItem extends StatelessWidget {
+//   const SelectedLabelItem({super.key, required this.labelID});
+//   final int labelID;
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     String labelName = LabelItemModel.getLabelName(labelID);
+    
+//     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
+//     return Container(
+//       child:InkWell(
+//         onTap: (){
+//           rewardSelectedViewModel.labelIDs = labelID;
+//         },
+//         child:Text(labelName,
+//           style: TextStyle(
+//             color:Palette.kToBlack[600],
+//             fontSize: 10,
+//           ),
+//         )
+//       )
+//     );
+//   }
+// }
+
+
+// class SelectedChannelItem extends StatelessWidget {
+//   const SelectedChannelItem({super.key, required this.channelItemModel});
+
+//   final ChannelItemModel channelItemModel;
+  
+//   @override
+//   Widget build(BuildContext context) {
+
+//     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+
+//     return Container(
+//       padding:EdgeInsets.only(right:2,),
+//       child:Center(
+//         child:ClipOval(
+//           child:InkWell(
+//             onTap:(){
+//               rewardSelectedViewModel.channelID = channelItemModel;
+//             },
+//             child:Image.memory(
+//               gaplessPlayback: true,
+//               base64Decode(channelItemModel.image), 
+//               width:30,
+//               height:30,
+//               fit: BoxFit.contain,
+//             ),
+//           )
+//         )
+//       )
+//     );
+//   }
+// }

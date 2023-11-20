@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/component/channel.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
@@ -21,13 +22,16 @@ class ChannelProgress extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
-
-        const SearchChannelBar(),
+        const ChannelHeaderTitle(),
         const SizedBox(height: 10),
         if(searchChannelViewModel.searchChannelFlag)
           SearchChannelItems(controller:controller),
         if(!searchChannelViewModel.searchChannelFlag)
           NormalChannelGroup(controller: controller,),
+        const SizedBox(height: 20,),
+        SizedBox(
+          child:SelectedChannelResult(controller: controller,),
+        )
       ]
     );
   }

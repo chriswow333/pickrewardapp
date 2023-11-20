@@ -40,6 +40,10 @@ class FindCardProgress extends StatelessWidget {
               ],
             )
           ),
+        ),
+        const SizedBox(height: 20,),
+        SizedBox(
+          child:SelectedChannelResult(controller: controller,),
         )
       ]
       

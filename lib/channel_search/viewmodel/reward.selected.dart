@@ -62,6 +62,14 @@ class RewardSelectedViewModel with ChangeNotifier{
 
   List get channelItemModels => _channelItemModels.values.toList();
 
+
+  resetChannelAndLabels(){
+    _labelIDs.clear();
+    _channelItemModels.clear();
+
+    notifyListeners();
+  }
+
   final Set<String> _payIDs = {};
 
   set payID(String payID) {
