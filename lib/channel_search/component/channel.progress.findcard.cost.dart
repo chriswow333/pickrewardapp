@@ -15,7 +15,7 @@ class CostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left:16, right:16, top:8, bottom: 8),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
@@ -45,9 +45,9 @@ class CostName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('消費金額(新台幣)',
+    return Text('預估消費金額(新台幣)',
       style: TextStyle(
-        fontSize: 18,
+        fontSize: 16,
         color: Palette.kToBlack[600],
       ),  
     );
@@ -99,7 +99,7 @@ class Lessthan1000Btn extends StatelessWidget {
             color: _cost == selectedCost ? Palette.kToYellow[400]!:Palette.kToBlack[400]!,
           )
         ),
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+        padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -148,7 +148,7 @@ class From1000To5000Btn extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
         ),
         child:Column(
           children:[
@@ -202,7 +202,7 @@ class MoreThan5000Btn extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
         child:Text('\$10000',

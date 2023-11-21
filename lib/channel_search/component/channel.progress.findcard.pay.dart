@@ -1,12 +1,7 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/model/pay.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 
 class PayWidget extends StatelessWidget {
@@ -21,7 +16,7 @@ class PayWidget extends StatelessWidget {
         ),
         color:Palette.kToBlack[0],
       ),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20),
       child:Row(
         children:[
           Column(
@@ -31,8 +26,6 @@ class PayWidget extends StatelessWidget {
               PayName(),
               SizedBox(height:10,),
               PayUsage(),
-              // Divider(),
-              // PayItems(),
             ]
           )
         ]
@@ -82,12 +75,12 @@ class PayNoUse extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
         child:Text('不使用',
           style:TextStyle(
-            // fontSize: 16,
+            fontSize: 14,
             color:Palette.kToBlack[500],
           )
         )
@@ -116,12 +109,12 @@ class PayUse extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
         child:Text('使用',
           style:TextStyle(
-            // fontSize: 16,
+            fontSize: 14,
             color:Palette.kToBlack[500],
           )
         )
@@ -137,132 +130,132 @@ class PayName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('行動支付',
       style: TextStyle(
-        fontSize: 18,
+        fontSize: 16,
         color: Palette.kToBlack[600],
       ),  
     );
   }
 }
 
-class PayItems extends StatelessWidget {
-  const PayItems({super.key});
+// class PayItems extends StatelessWidget {
+//   const PayItems({super.key});
 
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
     
-    PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
+//     PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
 
-    List<PayItemModel> payItemModels = payItemViewModel.pays;
+//     List<PayItemModel> payItemModels = payItemViewModel.pays;
 
-    return Container(
-      child:SingleChildScrollView(
-        scrollDirection:Axis.horizontal,
-        child:Wrap(
-          spacing: 10,
-          children:[
-            for(PayItemModel payItemModel in payItemModels)
-              PayItem(payItemModel:payItemModel),  
-          ]
-        ),
-      )
-    );
-  }
-}
+//     return Container(
+//       child:SingleChildScrollView(
+//         scrollDirection:Axis.horizontal,
+//         child:Wrap(
+//           spacing: 10,
+//           children:[
+//             for(PayItemModel payItemModel in payItemModels)
+//               PayItem(payItemModel:payItemModel),  
+//           ]
+//         ),
+//       )
+//     );
+//   }
+// }
 
-class PayItem extends StatelessWidget {
-  const PayItem({super.key, required this.payItemModel});
+// class PayItem extends StatelessWidget {
+//   const PayItem({super.key, required this.payItemModel});
 
-  final PayItemModel payItemModel;
+//   final PayItemModel payItemModel;
 
 
-  @override
-  Widget build(BuildContext context) {
-    String id = payItemModel.id;
+//   @override
+//   Widget build(BuildContext context) {
+//     String id = payItemModel.id;
 
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+//     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     
 
-    return Container(
-      child:TextButton(
-        style:ButtonStyle(
-        alignment: Alignment.center,
-        splashFactory:NoSplash.splashFactory,
-        padding: MaterialStatePropertyAll(
-          EdgeInsets.zero,
-        )
-      ),
-        onPressed: (){
-          rewardSelectedViewModel.payID = id;
-        },
-        child:Container(
-          alignment: Alignment.center,
-          child:Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children:[
-              PayItemIcon(payItemModel:payItemModel),
-              PayItemName(name:payItemModel.name),
-            ],
-          ),
-        ),
-      )
-    );
-  }
-}
+//     return Container(
+//       child:TextButton(
+//         style:ButtonStyle(
+//         alignment: Alignment.center,
+//         splashFactory:NoSplash.splashFactory,
+//         padding: MaterialStatePropertyAll(
+//           EdgeInsets.zero,
+//         )
+//       ),
+//         onPressed: (){
+//           rewardSelectedViewModel.payID = id;
+//         },
+//         child:Container(
+//           alignment: Alignment.center,
+//           child:Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children:[
+//               PayItemIcon(payItemModel:payItemModel),
+//               PayItemName(name:payItemModel.name),
+//             ],
+//           ),
+//         ),
+//       )
+//     );
+//   }
+// }
 
-class PayItemIcon extends StatelessWidget {
-  const PayItemIcon({super.key, required this.payItemModel});
+// class PayItemIcon extends StatelessWidget {
+//   const PayItemIcon({super.key, required this.payItemModel});
   
-  final PayItemModel payItemModel;
+//   final PayItemModel payItemModel;
   
-  @override
-  Widget build(BuildContext context) {
+//   @override
+//   Widget build(BuildContext context) {
 
-      RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-      bool selected = rewardSelectedViewModel.existSelectedPayID(payItemModel.id);
+//       RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+//       bool selected = rewardSelectedViewModel.existSelectedPayID(payItemModel.id);
 
-    return Stack(
-      alignment:Alignment.center,
-      children:[
-        Container(
-          decoration: selected?BoxDecoration(
-            border: Border.all(
-              width: 1.5,
-              color: Palette.kToYellow[300]!,
-            ),
-            shape: BoxShape.circle,
-          ):null,
-          width: 55,
-          height: 55,
-        ),
-        ClipOval(
-          child:Image.memory(
-            gaplessPlayback: true,
-            base64Decode(payItemModel.image), 
-            width:50,
-            height:50,
-          ),
-        )
-      ]
-    )
-    ;
-  }
-}
+//     return Stack(
+//       alignment:Alignment.center,
+//       children:[
+//         Container(
+//           decoration: selected?BoxDecoration(
+//             border: Border.all(
+//               width: 1.5,
+//               color: Palette.kToYellow[300]!,
+//             ),
+//             shape: BoxShape.circle,
+//           ):null,
+//           width: 55,
+//           height: 55,
+//         ),
+//         ClipOval(
+//           child:Image.memory(
+//             gaplessPlayback: true,
+//             base64Decode(payItemModel.image), 
+//             width:50,
+//             height:50,
+//           ),
+//         )
+//       ]
+//     )
+//     ;
+//   }
+// }
 
-class PayItemName extends StatelessWidget {
-  const PayItemName({super.key, required this.name});
+// class PayItemName extends StatelessWidget {
+//   const PayItemName({super.key, required this.name});
 
-  final String name;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Text(name,
-        style: 
-        TextStyle(
-          fontSize: 15,
-          color: Palette.kToBlack[600],
-        ),
-      )
-    );
-  }
-}
+//   final String name;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child:Text(name,
+//         style: 
+//         TextStyle(
+//           fontSize: 15,
+//           color: Palette.kToBlack[600],
+//         ),
+//       )
+//     );
+//   }
+// }
 

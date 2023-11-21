@@ -128,7 +128,7 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
                 mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
+                crossAxisSpacing: 10,
                 // childAspectRatio: 0.7,
               ),
               itemBuilder: (context, index){
@@ -213,9 +213,9 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
             GridView.count(  
               shrinkWrap:true,
               physics:NeverScrollableScrollPhysics(),
-              crossAxisCount: 5,  
+              crossAxisCount: 4,  
               crossAxisSpacing: 10.0,  
-              mainAxisSpacing: 10.0,
+              mainAxisSpacing: 0,
               padding: EdgeInsets.zero,  
               children:[
                 for(LabelItemModel l in LabelItemModel.getAll())
@@ -248,7 +248,7 @@ class LabelItem extends StatelessWidget {
         )
       ),
       onPressed:(){
-        rewardSelectedViewModel.labelIDs =  labelItemModel.id;          
+        rewardSelectedViewModel.label =  labelItemModel;          
       },
       child:LabelItemName(labelItemModel:labelItemModel),
     );
@@ -297,7 +297,7 @@ class ChannelItem extends StatelessWidget {
   Widget build(BuildContext context) {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     return TextButton(
-      style:ButtonStyle(
+      style:const ButtonStyle(
         alignment: Alignment.center,
         splashFactory:NoSplash.splashFactory,
         padding: MaterialStatePropertyAll(

@@ -22,7 +22,7 @@ final List<EvaluateCardRewardsReply_CardRewardEventResult> _cardRewardEventResul
 
   Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
     
-    List<int> labelIDs = rewardSelectedViewModel.getAllLabelIDs();
+    List<int> labelIDs = rewardSelectedViewModel.labels.map((e) => e.id).toList();
 
     List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
     List<String> payIDs = rewardSelectedViewModel.getPayIDs();

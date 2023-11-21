@@ -56,7 +56,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
               children:[
                 ChannelProgress(controller:_controller),
                 FindCardProgress(controller:_controller),
-                CardRewardEvaluationResultsProgress(),
+                CardRewardEvaluationResultsProgress(controller:_controller),
               ]
             )
           ),
@@ -73,29 +73,32 @@ class ChannelHeaderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        Container(
-          padding: const EdgeInsets.only(left:10,right:10),
-          child:Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:[
-              SizedBox(
-                height: 50,
-                child:Image.asset(
-                  'images/logo.png',
+    return Container(
+      padding: EdgeInsets.only(left:5, right:5),
+      child:Column(
+        children:[
+          Container(
+            child:Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                SizedBox(
+                  height: 50,
+                  child:Image.asset(
+                    'images/logo.png',
+                  ),
                 ),
-              ),
-              const SizedBox(width:20),
-              Container(
-                padding: EdgeInsets.only(top:5),
-                width:MediaQuery.of(context).size.width * 0.7,
-                child:const SearchChannelBar(),
-              ),
-            ]
+                const SizedBox(width:20),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(top:5),
+                    child:const SearchChannelBar(),
+                  ),
+                ),
+              ]
+            ),
           ),
-        ),
-      ]
+        ]
+      )
     );
   }
 }

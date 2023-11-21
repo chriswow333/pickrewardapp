@@ -17,7 +17,7 @@ class CardRewardTypeWidget extends StatelessWidget {
         ),
         color:Palette.kToBlack[0],
       ),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20),
 
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class CardRewardTypeName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('信用卡回饋方式',
       style:TextStyle(
-        fontSize: 20,
+        fontSize: 16,
         color:Palette.kToBlack[400],
       )
     );
@@ -98,13 +98,13 @@ class CashType extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+        padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
         animationDuration:Duration(microseconds: 0),
       ),
       child:Container(
         child:Text('現金回饋',
           style:TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             color:Palette.kToBlack[400],
           ),
         ),
@@ -145,12 +145,12 @@ class PointType extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+        padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
         animationDuration:Duration(microseconds: 0),
       ),
       child:Text('點數回饋',
         style:TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           color:Palette.kToBlack[400],
         ),
       ),
@@ -178,7 +178,7 @@ class CardRewardLabelName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text('信用卡任務篩選(可多選)',
       style:TextStyle(
-        fontSize: 20,
+        fontSize: 16,
         color:Palette.kToBlack[500],
       )
     );
@@ -232,12 +232,12 @@ class CardRewardLabelItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:20, right:20, top:10, bottom: 10)),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
         child:Text(cardRewardLabel,
           style:TextStyle(
-            // fontSize: 16,
+            fontSize: 14,
             color:Palette.kToBlack[500],
           )
         )

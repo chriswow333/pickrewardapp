@@ -1,6 +1,5 @@
 
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
@@ -60,8 +59,6 @@ class FindCardPageBar extends StatelessWidget {
             )
           ),
             
-            
-
           SizedBox(width:10),
           Container(
             decoration: BoxDecoration(
@@ -75,7 +72,11 @@ class FindCardPageBar extends StatelessWidget {
                 rewardSelectedViewModel.sendedFindCard = true;
 
                 FocusScope.of(context).unfocus();
-                controller.jumpToPage(ChannelProgressPage.result);
+                controller.animateToPage(
+                  ChannelProgressPage.result, 
+                  duration: Duration(milliseconds: 150), 
+                  curve: Curves.linear
+                );
                 
               },
               child:Text('下一步',
@@ -102,7 +103,7 @@ class ChannelPageBar extends StatelessWidget {
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    int labelLength = rewardSelectedViewModel.labels.length;
     
     bool channelSelected = channelIDLength + labelLength > 0;
 
@@ -151,8 +152,14 @@ class ChannelPageBar extends StatelessWidget {
             padding: const EdgeInsets.only(left:10, right:10, top:5, bottom: 5),
             child:InkWell(
               onTap:(){
-                FocusScope.of(context).unfocus();
-                controller.jumpToPage(ChannelProgressPage.findCard);
+                if(channelSelected){
+                  FocusScope.of(context).unfocus();
+                  controller.animateToPage(
+                    ChannelProgressPage.findCard, 
+                    duration: Duration(milliseconds: 150), 
+                    curve: Curves.linear
+                  );
+                }
               },
               child:Text('下一步',
                 style: TextStyle(

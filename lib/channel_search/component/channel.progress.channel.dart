@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
@@ -19,21 +18,27 @@ class ChannelProgress extends StatelessWidget {
     
     SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
     
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[
-        const ChannelHeaderTitle(),
-        const SizedBox(height: 10),
-        if(searchChannelViewModel.searchChannelFlag)
-          SearchChannelItems(controller:controller),
-        if(!searchChannelViewModel.searchChannelFlag)
-          NormalChannelGroup(controller: controller,),
-        const SizedBox(height: 20,),
-        SizedBox(
-          child:SelectedChannelResult(controller: controller,),
-        )
-      ]
+    return Container(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          const ChannelHeaderTitle(),
+          const SizedBox(height: 10),
+          if(searchChannelViewModel.searchChannelFlag)
+            SearchChannelItems(controller:controller),
+          if(!searchChannelViewModel.searchChannelFlag)
+          Expanded(
+            child:NormalChannelGroup(controller: controller,),
+          ),
+            
+          const SizedBox(height: 20,),
+          SizedBox(
+            child:SelectedChannelResult(controller: controller,),
+          )
+        ]
+      )
     );
+    ;
   }
 }
 
@@ -44,7 +49,7 @@ class NormalChannelGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
       child:Column(
         children:[
           ChannelCategoryTypes(),
@@ -52,7 +57,11 @@ class NormalChannelGroup extends StatelessWidget {
           Expanded(
             child:Stack(
               children:[
-                ChannelItemGroups(),
+                Container(
+                  padding: EdgeInsets.only(left:5, right:5),
+                  child:ChannelItemGroups(),
+                )
+                
               ]
             )
           ),

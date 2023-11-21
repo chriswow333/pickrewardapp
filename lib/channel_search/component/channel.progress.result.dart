@@ -5,20 +5,24 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.result.detail.dart';
+import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
 class CardRewardEvaluationResultsProgress extends StatelessWidget {
-  const CardRewardEvaluationResultsProgress({super.key});
+  const CardRewardEvaluationResultsProgress({super.key, required this.controller});
+
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
 
-
     return Container(
+      padding: EdgeInsets.only(left:5, right:5),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-
+          ResultProgressTitle(controller:controller),
+          SizedBox(height:10),
           CardRewardSelected(),
           SizedBox(height:10),
           CardRewardEvaluationMessage(),
@@ -34,7 +38,7 @@ class CardRewardEvaluationResultsProgress extends StatelessWidget {
           ),
           Container(
             height:60,
-            child:ReEvaluateItem(),
+            child:ReEvaluateItem(controller: controller,),
           )
         ]   
       )
@@ -43,9 +47,52 @@ class CardRewardEvaluationResultsProgress extends StatelessWidget {
 }
 
 
+class ResultProgressTitle extends StatelessWidget {
+  
+  const ResultProgressTitle({super.key, required this.controller});
+  
+  final PageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child:Stack(
+        children:[
+          InkWell(
+            onTap:(){
+              controller.animateToPage(ChannelProgressPage.findCard, 
+                duration: const Duration(milliseconds: 200), 
+                curve: Curves.linear
+              );
+            },
+            child:const Icon(
+              Icons.arrow_back_ios_new
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+              Text('查詢高回饋信用卡',
+                style: TextStyle(
+                  fontSize: 18,
+                  color:Palette.kToBlack[500],
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ]
+          ),
+        ]
+      )
+    );
+  }
+}
+
 
 class ReEvaluateItem extends StatelessWidget {
-  const ReEvaluateItem({super.key});
+  const ReEvaluateItem({super.key, required this.controller});
+
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +104,12 @@ class ReEvaluateItem extends StatelessWidget {
         children:[
           Text('不滿意以上信用卡?'),
           TextButton(
-            onPressed: (){},
+            onPressed: (){
+              controller.animateToPage(ChannelProgressPage.channel, 
+                duration: const Duration(milliseconds: 200), 
+                curve: Curves.linear
+              );
+            },
             style:ButtonStyle(
               splashFactory:NoSplash.splashFactory,
               backgroundColor:MaterialStatePropertyAll(
@@ -122,7 +174,7 @@ class CardRewardSelectedChannel extends StatelessWidget {
     return Container( 
       child:Text('刷蝦皮,momo, 區城市',
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
       )
@@ -137,11 +189,14 @@ class CardRewardSelectedLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('2023/01/01, \$ 5000, 接受新戶,限定日等任務活動')
+      child:Text('2023/01/01, \$ 5000, 接受新戶,限定日等任務活動',
+        style:TextStyle(
+          fontSize: 12,
+        )
+      )
     );
   }
 }
-
 
 
 
@@ -201,7 +256,7 @@ class CardRewardEvaluationResult extends StatelessWidget {
             builder: (context) {
               return Container(
                 // padding: EdgeInsets.only(top:20),
-                height:MediaQuery.of(context).size.height * 0.65,
+                height:MediaQuery.of(context).size.height * 0.8,
                 child:Column(
                   children: [
                     SizedBox(height:5),
@@ -235,14 +290,17 @@ class CardRewardEvaluationResult extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children:[
               Flexible(
-                flex: 2,
+                fit:FlexFit.tight,
+                flex: 4,
                 child: CardRewardRank(rank: 1,),
               ),
               Flexible(
-                flex: 8,
+                fit:FlexFit.tight,
+                flex: 10,
                 child: CardRewardEventResultItem(), 
               ),
               Flexible(
+                // fit:FlexFit.tight,
                 flex: 4,
                 child: CardIcon(image: "",),
               ),
@@ -265,17 +323,26 @@ class CardRewarEvaluationDetailTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top:10),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          CardIcon(image: "",),
-          SizedBox(width: 20,),
           Flexible(
-            child: Text('玫瑰Giving卡'),
+            child: Text('玫瑰Giving卡',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           SizedBox(width: 20,),
           Flexible(
-            child: Text('最高回饋 3% 30元'),
+            child: Text('最高回饋 3% 30元',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           
         ]
@@ -334,7 +401,11 @@ class CardRewardFeedback extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('獲得3% 30元')
+      child:Text('獲得3% 30元',
+        style:TextStyle(
+          fontSize: 12,
+        )
+      )
     );
   }
 }
@@ -349,7 +420,7 @@ class CardName extends StatelessWidget {
     return Container(
       child:Text('${name}',
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
       )
@@ -367,7 +438,7 @@ class CardRewardRank extends StatelessWidget {
     return Container(
       child:Text('Top ${rank}',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
         ),
       )
     );

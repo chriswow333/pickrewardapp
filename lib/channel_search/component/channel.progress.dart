@@ -119,7 +119,7 @@ class FindCardSpot extends StatelessWidget {
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    int labelLength = rewardSelectedViewModel.labels.length;
     bool channelSelected = channelIDLength + labelLength > 0;
 
 
@@ -167,7 +167,7 @@ class ChannelSpot extends StatelessWidget {
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    int labelLength = rewardSelectedViewModel.labels.length;
     bool channelSelected = channelIDLength + labelLength > 0;
 
     if(channelProgressSelectedPage.page == ChannelProgressPage.channel) {
@@ -240,7 +240,7 @@ class _ChannelLaneState extends State<ChannelLane> with SingleTickerProviderStat
 
     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
     int channelIDLength = rewardSelectedViewModel.getChannelIDs().length;
-    int labelLength = rewardSelectedViewModel.getAllLabelIDs().length;
+    int labelLength = rewardSelectedViewModel.labels.length;
     bool channelSelected = channelIDLength + labelLength > 0;
 
      ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);

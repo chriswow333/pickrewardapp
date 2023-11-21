@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
+import 'package:pickrewardapp/channel_search/model/label.dart';
 
 
 class RewardSelectedViewModel with ChangeNotifier{
@@ -12,29 +13,26 @@ class RewardSelectedViewModel with ChangeNotifier{
   }
   bool get sendedFindCard => _sendedFindCard;
 
-  final Set<int> _labelIDs = {};
-  set labelIDs(int labelID) {
-      
-    if(_labelIDs.contains(labelID)){
-      _labelIDs.remove(labelID);
+  final Map<int, LabelItemModel> _labels = {};
+
+  set label(LabelItemModel labelItemModel) {
+
+    if(_labels.containsKey(labelItemModel.id)) {
+      _labels.remove(labelItemModel.id);
     }else {
-      _labelIDs.add(labelID);
+      _labels[labelItemModel.id] = labelItemModel;
     }
-
-    if(_sendedFindCard) {
-      _sendedFindCard = false;
-    }
-
+    
     notifyListeners();
   }
 
   bool existSelectedLabelID(int labelID) {
-    return _labelIDs.contains(labelID);
+
+    return _labels.containsKey(labelID);
+
   }
 
-  List<int> getAllLabelIDs(){
-    return _labelIDs.toList();
-  }
+  List<LabelItemModel> get labels => _labels.values.toList();
 
 
   final Map<String,ChannelItemModel> _channelItemModels = {};
@@ -60,11 +58,11 @@ class RewardSelectedViewModel with ChangeNotifier{
     return _channelItemModels.keys.toList();
   }
 
-  List get channelItemModels => _channelItemModels.values.toList();
+  List<ChannelItemModel> get channelItemModels => _channelItemModels.values.toList();
 
 
   resetChannelAndLabels(){
-    _labelIDs.clear();
+    _labels.clear();
     _channelItemModels.clear();
 
     notifyListeners();
