@@ -312,7 +312,9 @@ class ChannelItem extends StatelessWidget {
         padding: EdgeInsets.only(left:2, right:2),
         child:Column(
           children:[
-            ChannelItemIcon(channelItemModel:channelItemModel),
+            Expanded(
+              child:ChannelItemIcon(channelItemModel:channelItemModel),
+            ),
             ChannelItemName(name:channelItemModel.name),
           ],
         ),

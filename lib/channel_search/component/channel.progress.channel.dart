@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
@@ -42,6 +42,41 @@ class ChannelProgress extends StatelessWidget {
   }
 }
 
+class ChannelHeaderTitle extends StatelessWidget {
+  const ChannelHeaderTitle({super.key,});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Column(
+        children:[
+          Container(
+            child:Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                SizedBox(
+                  height: 50,
+                  child:Image.asset(
+                    'images/logo.png',
+                  ),
+                ),
+                const SizedBox(width:20),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(top:5),
+                    child:const SearchChannelBar(),
+                  ),
+                ),
+              ]
+            ),
+          ),
+        ]
+      )
+    );
+  }
+}
+
+
 
 class NormalChannelGroup extends StatelessWidget {
   const NormalChannelGroup({super.key, required this.controller});
@@ -50,6 +85,7 @@ class NormalChannelGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       child:Column(
         children:[
           ChannelCategoryTypes(),
@@ -58,10 +94,8 @@ class NormalChannelGroup extends StatelessWidget {
             child:Stack(
               children:[
                 Container(
-                  padding: EdgeInsets.only(left:5, right:5),
                   child:ChannelItemGroups(),
                 )
-                
               ]
             )
           ),

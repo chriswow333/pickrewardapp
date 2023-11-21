@@ -68,38 +68,4 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
 }
 
 
-class ChannelHeaderTitle extends StatelessWidget {
-  const ChannelHeaderTitle({super.key,});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left:5, right:5),
-      child:Column(
-        children:[
-          Container(
-            child:Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                SizedBox(
-                  height: 50,
-                  child:Image.asset(
-                    'images/logo.png',
-                  ),
-                ),
-                const SizedBox(width:20),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(top:5),
-                    child:const SearchChannelBar(),
-                  ),
-                ),
-              ]
-            ),
-          ),
-        ]
-      )
-    );
-  }
-}
 
