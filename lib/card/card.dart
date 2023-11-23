@@ -1,13 +1,12 @@
 
 import 'package:flutter/material.dart' hide Banner;
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/eventresult.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pickrewardapp/card/component/card.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
 
 class CardSearchPage extends StatelessWidget {
@@ -19,7 +18,7 @@ class CardSearchPage extends StatelessWidget {
       providers:[
         ChangeNotifierProvider<BankViewModel>(create:(_)=>BankViewModel()),
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
-        ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
+        // ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
         ChangeNotifierProvider<CardRewardEventResultsViewModel>(create:(_)=>CardRewardEventResultsViewModel()),
         ChangeNotifierProvider<SearchCardViewModel>(create:(_)=>SearchCardViewModel()),
         

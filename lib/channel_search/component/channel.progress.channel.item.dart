@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_category.dart';
 import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
-import 'package:pickrewardapp/channel_search/model/label.dart';
+import 'package:pickrewardapp/channel_search/model/channel_label.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
-
-
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
-
 
 
 class ChannelItemGroups extends StatefulWidget {
@@ -62,7 +59,7 @@ class _ChannelItemGroupsState extends State<ChannelItemGroups> {
           child:Wrap(
             runSpacing: 25,
             children:[
-              LabelItemGroup(channelViewModel: channelViewModel,),
+              ChannelLabelItemGroup(channelViewModel: channelViewModel,),
               for(ChannelCategoryTypeModel c in channelCategoryTypes)
                 ChannelItemGroup(channelCategoryTypeModel: c, channelViewModel: channelViewModel,),
             ]
@@ -157,7 +154,7 @@ class AddMore extends StatelessWidget {
       onPressed: (){
         channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
       },
-      child:Text("更多",
+      child:Text("查看更多",
         style: TextStyle(
           fontSize: 16,
           color:Palette.kToBlack[200],
@@ -169,17 +166,17 @@ class AddMore extends StatelessWidget {
 
 
 
-class LabelItemGroup extends StatefulWidget {
-  const LabelItemGroup({super.key, required this.channelViewModel});
+class ChannelLabelItemGroup extends StatefulWidget {
+  const ChannelLabelItemGroup({super.key, required this.channelViewModel});
 
     final ChannelViewModel channelViewModel;
 
   
   @override
-  State<LabelItemGroup> createState() => _LabelItemGroupState();
+  State<ChannelLabelItemGroup> createState() => _ChannelLabelItemGroupState();
 }
 
-class _LabelItemGroupState extends State<LabelItemGroup> {
+class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
   
   @override
   void initState(){
@@ -189,7 +186,9 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
   
   @override
   Widget build(BuildContext context) {
+
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
+    
     return Container(
       key: channelViewModel.getChannelItemGlobalKeys(-1),
       padding: const EdgeInsets.all(10),
@@ -203,24 +202,24 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            Text('猜你常用',
-              style:TextStyle(
-                color:Palette.kToBlack[600],
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 20,),
-            GridView.count(  
-              shrinkWrap:true,
-              physics:NeverScrollableScrollPhysics(),
-              crossAxisCount: 4,  
-              crossAxisSpacing: 10.0,  
-              mainAxisSpacing: 0,
-              padding: EdgeInsets.zero,  
+            Row(
               children:[
-                for(LabelItemModel l in LabelItemModel.getAll())
-                  LabelItem(labelItemModel: l,),
-              ],
+                Text('猜你常用',
+                  style:TextStyle(
+                    color:Palette.kToBlack[600],
+                    fontSize: 18,
+                  ),
+                ),
+              ]
+            ),
+            const SizedBox(height: 20,),
+            Wrap(
+              spacing:10,
+              runSpacing: 10,
+              children:[
+                for(ChannelLabelModel l in ChannelLabelModelMock.getAll())
+                  ChannelLabelItem(labelItemModel: l,),
+              ]
             ),
           ]
         ),
@@ -230,42 +229,44 @@ class _LabelItemGroupState extends State<LabelItemGroup> {
 }
 
 
-class LabelItem extends StatelessWidget {
-  const LabelItem({super.key, required this.labelItemModel});
+class ChannelLabelItem extends StatelessWidget {
+  const ChannelLabelItem({super.key, required this.labelItemModel});
   
-  final LabelItemModel labelItemModel;
+  final ChannelLabelModel labelItemModel;
 
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    return TextButton(
-      style:const ButtonStyle(
-        alignment: Alignment.topLeft,
-        splashFactory:NoSplash.splashFactory,
-        padding: MaterialStatePropertyAll(
-          EdgeInsets.zero,
-        )
-      ),
-      onPressed:(){
-        rewardSelectedViewModel.label =  labelItemModel;          
-      },
-      child:LabelItemName(labelItemModel:labelItemModel),
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    return Container(
+      child:TextButton(
+        style:const ButtonStyle(
+          alignment: Alignment.topLeft,
+          splashFactory:NoSplash.splashFactory,
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.zero,
+          )
+        ),
+        onPressed:(){
+          criteriaViewModel.channelLabel =  labelItemModel;          
+        },
+        child:ChannelLabelItemName(channelLabelModel:labelItemModel),
+      )
     );
   }
 }
 
 
-class LabelItemName extends StatelessWidget {
-  const LabelItemName({super.key, required this.labelItemModel});
+class ChannelLabelItemName extends StatelessWidget {
+  const ChannelLabelItemName({super.key, required this.channelLabelModel});
 
-  final LabelItemModel labelItemModel;
+  final ChannelLabelModel channelLabelModel;
 
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool selected = rewardSelectedViewModel.existSelectedLabelID(labelItemModel.id);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    bool selected = criteriaViewModel.existChannelLabel(channelLabelModel.label);
 
     return Container(
       decoration: BoxDecoration(
@@ -278,7 +279,7 @@ class LabelItemName extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child:FittedBox(
         child:Text(
-          labelItemModel.name,
+          channelLabelModel.name,
           style:TextStyle(
             color: Palette.kToBlack[600],
           ),
@@ -295,7 +296,7 @@ class ChannelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     return TextButton(
       style:const ButtonStyle(
         alignment: Alignment.center,
@@ -305,7 +306,7 @@ class ChannelItem extends StatelessWidget {
         )
       ),
       onPressed:(){
-        rewardSelectedViewModel.channelID = channelItemModel;
+        criteriaViewModel.channel = channelItemModel;
       },
       child:Container(
         alignment: Alignment.center,
@@ -332,8 +333,8 @@ class ChannelItemIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool selected = rewardSelectedViewModel.existSelectedChannelID(channelItemModel.id);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    bool selected = criteriaViewModel.existChannel(channelItemModel.id);
 
     return Stack(
       alignment:Alignment.center,

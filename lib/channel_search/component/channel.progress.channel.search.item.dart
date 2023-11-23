@@ -3,10 +3,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -134,10 +134,12 @@ class ChannelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
     return TextButton(
       onPressed: (){
-          rewardSelectedViewModel.channelID = channelItemModel;
+          criteriaViewModel.channel = channelItemModel;
       },
       child:Container(
         child:Row(
@@ -160,8 +162,8 @@ class SelectedIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-    bool selected = rewardSelectedViewModel.existSelectedChannelID(id);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    bool selected = criteriaViewModel.existChannel(id);
 
     if(selected) {
       return Container(

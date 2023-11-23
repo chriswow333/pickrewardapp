@@ -1,13 +1,11 @@
 
 
 
-import 'package:fixnum/fixnum.dart';
-
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
 import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pb.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
 
 class CardRewardEventResultsViewModel with ChangeNotifier {
 
@@ -20,15 +18,15 @@ final List<EvaluateCardRewardsReply_CardRewardEventResult> _cardRewardEventResul
 
   List<EvaluateCardRewardsReply_CardRewardEventResult> get cardRewardEventResults => _cardRewardEventResults;
 
-  Future<void> evaluateCardRewardsEventResult(RewardSelectedViewModel rewardSelectedViewModel)async{
+  Future<void> evaluateCardRewardsEventResult(CriteriaViewModel criteriaViewModel)async{
     
-    List<int> labelIDs = rewardSelectedViewModel.labels.map((e) => e.id).toList();
+    List<int> channelLabels = criteriaViewModel.channelLabels.map((e) => e.label).toList();
 
-    List<String> channelIDs = rewardSelectedViewModel.getChannelIDs();
-    List<String> payIDs = rewardSelectedViewModel.getPayIDs();
-    int rewardType = rewardSelectedViewModel.rewardType;
-    int cost = rewardSelectedViewModel.cost;
-    DateTime eventDate = rewardSelectedViewModel.eventDate;
+    List<String> channelIDs = criteriaViewModel.getChannelIDs();
+
+    int rewardType = criteriaViewModel.rewardType.type;
+    int cost = criteriaViewModel.cost;
+    DateTime eventDate = criteriaViewModel.date;
 
     EventReq cardEventReq = EventReq();
     // cardEventReq.labels.addAll(labelIDs);

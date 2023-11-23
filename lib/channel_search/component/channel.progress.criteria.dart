@@ -1,48 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.eventresult.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cost.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.pay.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.cardreward.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.criteria.date.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.criteria.pay.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.criteria.rewardnlabel.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/channel_search/viewmodel/pay.item.dart';
 
-class FindCardProgress extends StatelessWidget {
-  const FindCardProgress({super.key, required this.controller});
+class CriteriaProgress extends StatelessWidget {
+  const CriteriaProgress({super.key, required this.controller});
 
   final PageController controller;
 
   @override
   Widget build(BuildContext context) {
 
-    PayItemViewModel payItemViewModel = Provider.of<PayItemViewModel>(context);
-    payItemViewModel.fetchPays();
-
     return Container(
-      padding: EdgeInsets.only(left:5, right:5),
+      padding: EdgeInsets.only(left:5,right:5),
       child:Column(
         children:[
-          FindCardProgressTitle(controller: controller,),
-          SizedBox(height:20),
-          ChannelSelectedItems(),
-          SizedBox(height:20),
-          Expanded(
+          CriteriaProgressTitle(controller: controller,),
+          const SizedBox(height:20),
+          const ChannelSelectedItems(),
+          const SizedBox(height:20),
+          const Expanded(
             child:SingleChildScrollView(
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
-                  CardRewardMessage(),
+                  CriteriaMessage(),
                   SizedBox(height:20),
-                  CostWidget(),
-                  SizedBox(height:20),
-                  CardRewardTypeWidget(),
+                  DateWidget(),
                   SizedBox(height:20),
                   PayWidget(),
-                  SizedBox(height:40),
+                  SizedBox(height:20),
+                  RewardTypeAndTaskLabelWidget(),
                 ],
               )
             ),
@@ -57,9 +51,9 @@ class FindCardProgress extends StatelessWidget {
   }
 }
 
-class FindCardProgressTitle extends StatelessWidget {
+class CriteriaProgressTitle extends StatelessWidget {
   
-  const FindCardProgressTitle({super.key, required this.controller});
+  const CriteriaProgressTitle({super.key, required this.controller});
   
   final PageController controller;
 
@@ -103,34 +97,39 @@ class ChannelSelectedItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
 
-    List<String> channelNames = rewardSelectedViewModel.channelItemModels.map((e) => e.name).toList();
-    List<String> selectedNames = rewardSelectedViewModel.labels.map((e) => e.name).toList();
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
+    List<String> channelNames = criteriaViewModel.channelItemModels.map((e) => e.name).toList();
+    List<String> selectedNames = criteriaViewModel.channelLabels.map((e) => e.name).toList();
+
     selectedNames.addAll(channelNames);
-    String names = selectedNames.join(",");
+    String names = selectedNames.join(", ");
+
+
     return Container(
       padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color:Palette.kToBlack[0],
         borderRadius: BorderRadius.circular(20),
       ),
-      
       child:Row(
         children:[
           Container(
-            padding: EdgeInsets.only(right:20),
-            child:Text('已選通路',
+            padding: const EdgeInsets.only(right:20),
+            child:const Text('已選通路',
               style:TextStyle(
                 fontSize: 14,
               )
             ),
           ),
-          // SizedBox(width:10),
           Expanded(
-            child:Text(names,
-              style: TextStyle(
-                fontSize: 14,
+            child:Container(
+              alignment: Alignment.centerRight,
+              child:Text(names,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
               ),
             ),
           ),
@@ -141,8 +140,8 @@ class ChannelSelectedItems extends StatelessWidget {
 }
 
 
-class CardRewardMessage extends StatelessWidget {
-  const CardRewardMessage({super.key});
+class CriteriaMessage extends StatelessWidget {
+  const CriteriaMessage({super.key});
 
   @override
   Widget build(BuildContext context) {

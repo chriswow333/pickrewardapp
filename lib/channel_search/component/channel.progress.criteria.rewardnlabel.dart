@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/reward_type.dart';
+import 'package:pickrewardapp/channel_search/model/task_label.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/channel_search/viewmodel/reward.selected.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 
 
-class CardRewardTypeWidget extends StatelessWidget {
-  const CardRewardTypeWidget({super.key});
+class RewardTypeAndTaskLabelWidget extends StatelessWidget {
+  const RewardTypeAndTaskLabelWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,9 @@ class CardRewardTypeWidget extends StatelessWidget {
           SizedBox(height:10),
           Divider(thickness: 1,),
           SizedBox(height:10),
-          CardRewardLabelName(),
+          TaskLabelName(),
           SizedBox(height:10),
-          CardRewardLabelItems(),
+          TaskLabelItems(),
         ]
       )
     );
@@ -49,6 +51,7 @@ class CardRewardTypeName extends StatelessWidget {
       style:TextStyle(
         fontSize: 16,
         color:Palette.kToBlack[400],
+        fontWeight: FontWeight.bold,
       )
     );
   }
@@ -73,23 +76,22 @@ class CardRewardTypeItems extends StatelessWidget {
 class CashType extends StatelessWidget {
   const CashType({super.key});
 
-  final int rewardCashType = 0;
 
   @override
   Widget build(BuildContext context) {
     
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
 
     return TextButton(
       onPressed: (){
-        rewardSelectedViewModel.rewardType = rewardCashType;
+        criteriaViewModel.rewardType = RewardType.cash;
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
         side: MaterialStatePropertyAll(
           BorderSide(
             width:1.5,
-            color: rewardSelectedViewModel.rewardType == rewardCashType ? 
+            color: criteriaViewModel.rewardType.compareTo(RewardType.cash) == 0 ? 
               Palette.kToYellow[400]!:Palette.kToBlack[400]!,
           )
         ),
@@ -102,7 +104,7 @@ class CashType extends StatelessWidget {
         animationDuration:Duration(microseconds: 0),
       ),
       child:Container(
-        child:Text('現金回饋',
+        child:Text(RewardType.cash.name,
           style:TextStyle(
             fontSize: 14,
             color:Palette.kToBlack[400],
@@ -119,24 +121,21 @@ class PointType extends StatelessWidget {
   
   const PointType({super.key});
 
-    final int rewardPointType = 1;
-
-
   @override
   Widget build(BuildContext context) {
 
-    RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     
     return TextButton(
       onPressed: (){
-        rewardSelectedViewModel.rewardType = rewardPointType;
+        criteriaViewModel.rewardType = RewardType.point;
       },
       style:ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
         side: MaterialStatePropertyAll(
           BorderSide(
             width:1.5,
-            color: rewardSelectedViewModel.rewardType == rewardPointType ? 
+            color: criteriaViewModel.rewardType.compareTo(RewardType.point) == 0 ? 
               Palette.kToYellow[400]!:Palette.kToBlack[400]!,
           )
         ),
@@ -148,7 +147,7 @@ class PointType extends StatelessWidget {
         padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
         animationDuration:Duration(microseconds: 0),
       ),
-      child:Text('點數回饋',
+      child:Text(RewardType.point.name,
         style:TextStyle(
           fontSize: 14,
           color:Palette.kToBlack[400],
@@ -159,20 +158,8 @@ class PointType extends StatelessWidget {
 }
 
 
-
-class CardRewardLabel extends StatelessWidget {
-  const CardRewardLabel({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
-
-
-class CardRewardLabelName extends StatelessWidget {
-  const CardRewardLabelName({super.key});
+class TaskLabelName extends StatelessWidget {
+  const TaskLabelName({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -180,51 +167,62 @@ class CardRewardLabelName extends StatelessWidget {
       style:TextStyle(
         fontSize: 16,
         color:Palette.kToBlack[500],
+        fontWeight: FontWeight.bold,
       )
     );
   }
 }
 
 
-class CardRewardLabelItems extends StatelessWidget {
-  const CardRewardLabelItems({super.key});
+class TaskLabelItems extends StatelessWidget {
+  const TaskLabelItems({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    List<String> cardRewardLabels = [
-      '新戶','需登錄','限量','限定日'
-    ];
+    List<TaskLabelModel> taskLabels = TaskLabelModelMock.getAll();
+
+    // List<String> cardRewardLabels = [
+    //   '新戶','需登錄','限量','限定日'
+    // ];
+
     return Container(
       child:Wrap(
         spacing:10,
         runSpacing: 5,
         children:[
-          for(int i = 0; i < cardRewardLabels.length; i++)
-            CardRewardLabelItem(cardRewardLabel: cardRewardLabels[i],),
+          for(int i = 0; i < taskLabels.length; i++)
+            TaskLabelItem(taskLabelModel: taskLabels[i],),
         ]
       )
     );
   }
 }
 
-class CardRewardLabelItem extends StatelessWidget {
-  const CardRewardLabelItem({super.key, required this.cardRewardLabel});
+class TaskLabelItem extends StatelessWidget {
+  const TaskLabelItem({super.key, required this.taskLabelModel});
 
-  final String cardRewardLabel;
+  final TaskLabelModel taskLabelModel;
+
+
   @override
   Widget build(BuildContext context) {
+
+    
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
     return Container(
       child:TextButton(
         onPressed: (){
-
+          criteriaViewModel.taskLabel = taskLabelModel;
         },
         style:ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
           side: MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: Palette.kToBlack[400]!,
+              color: criteriaViewModel.existTaskLabel(taskLabelModel.label)?
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),
           shape: MaterialStateProperty.all(
@@ -235,7 +233,7 @@ class CardRewardLabelItem extends StatelessWidget {
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
-        child:Text(cardRewardLabel,
+        child:Text(taskLabelModel.name,
           style:TextStyle(
             fontSize: 14,
             color:Palette.kToBlack[500],

@@ -4,12 +4,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.result.detail.dart';
+import 'package:intl/intl.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.result.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
+import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:provider/provider.dart';
 
-class CardRewardEvaluationResultsProgress extends StatelessWidget {
-  const CardRewardEvaluationResultsProgress({super.key, required this.controller});
+class EventResultProgress extends StatelessWidget {
+  const EventResultProgress({super.key, required this.controller});
 
   final PageController controller;
 
@@ -21,23 +25,23 @@ class CardRewardEvaluationResultsProgress extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          ResultProgressTitle(controller:controller),
+          EventResultProgressTitle(controller:controller),
           SizedBox(height:10),
-          CardRewardSelected(),
+          EvaluationCriteriaSelected(),
           SizedBox(height:10),
-          CardRewardEvaluationMessage(),
+          EventResultMessage(),
           SizedBox(height:20),
           Expanded(
             child:SingleChildScrollView(
               child:Column(
                 children:[
-                  CardRewardEvaluationResults(),
+                  EventResults(),
                 ]
               )
             )
           ),
+          SizedBox(height:20),
           Container(
-            height:60,
             child:ReEvaluateItem(controller: controller,),
           )
         ]   
@@ -47,9 +51,9 @@ class CardRewardEvaluationResultsProgress extends StatelessWidget {
 }
 
 
-class ResultProgressTitle extends StatelessWidget {
+class EventResultProgressTitle extends StatelessWidget {
   
-  const ResultProgressTitle({super.key, required this.controller});
+  const EventResultProgressTitle({super.key, required this.controller});
   
   final PageController controller;
 
@@ -61,7 +65,7 @@ class ResultProgressTitle extends StatelessWidget {
         children:[
           InkWell(
             onTap:(){
-              controller.animateToPage(ChannelProgressPage.findCard, 
+              controller.animateToPage(ChannelProgressPage.criteria, 
                 duration: const Duration(milliseconds: 200), 
                 curve: Curves.linear
               );
@@ -97,29 +101,37 @@ class ReEvaluateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:20, right:20, top:10, bottom: 10),
       child:Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('不滿意以上信用卡?'),
-          TextButton(
-            onPressed: (){
-              controller.animateToPage(ChannelProgressPage.channel, 
-                duration: const Duration(milliseconds: 200), 
-                curve: Curves.linear
-              );
-            },
-            style:ButtonStyle(
-              splashFactory:NoSplash.splashFactory,
-              backgroundColor:MaterialStatePropertyAll(
-                  Palette.kToBlack[500]
-              ),
+          Text('不滿意以上信用卡?',
+            style: TextStyle(
+              fontSize: 14,
             ),
-            child:Text('我要重新找卡',
-              style: TextStyle(
-                color: Palette.kToBlack[0],
-              ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Palette.kToBlack[600],
+              borderRadius:BorderRadius.all(Radius.circular(12.0)),
+            ),
+            padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
+            child:InkWell(
+              onTap: (){
+                controller.animateToPage(ChannelProgressPage.channel, 
+                  duration: const Duration(milliseconds: 200), 
+                  curve: Curves.linear
+                );
+              },
+              child:Container(
+                padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                child:Text('我要重新找卡',
+                  style: TextStyle(
+                    color: Palette.kToBlack[0],
+                    fontSize: 16,
+                  ),
+                )
+              )
             )
           )
         ]
@@ -129,8 +141,8 @@ class ReEvaluateItem extends StatelessWidget {
   }
 }
 
-class CardRewardSelected extends StatelessWidget {
-  const CardRewardSelected({super.key});
+class EvaluationCriteriaSelected extends StatelessWidget {
+  const EvaluationCriteriaSelected({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -151,9 +163,10 @@ class CardRewardSelected extends StatelessWidget {
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
-                  CardRewardSelectedChannel(),
+                  CriteriaSelectedChannel(),
                   SizedBox(height:10),
-                  CardRewardSelectedLabels(),
+                  CriteriaSelectedCostAndDate(),
+                  CriteriaSelectedTaskLabels(),
                   CardRewardSelectedPay(),
                 ]
               )
@@ -166,13 +179,21 @@ class CardRewardSelected extends StatelessWidget {
 }
 
 
-class CardRewardSelectedChannel extends StatelessWidget {
-  const CardRewardSelectedChannel({super.key});
+class CriteriaSelectedChannel extends StatelessWidget {
+  const CriteriaSelectedChannel({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
+    List<String> channelNames = criteriaViewModel.channelItemModels.map((e) => e.name).toList();
+    List<String> selectedNames = criteriaViewModel.channelLabels.map((e) => e.name).toList();
+    selectedNames.addAll(channelNames);
+    String names = selectedNames.join(", ");
+
     return Container( 
-      child:Text('刷蝦皮,momo, 區城市',
+      child:Text(names,
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
@@ -182,19 +203,49 @@ class CardRewardSelectedChannel extends StatelessWidget {
   }
 }
 
-
-class CardRewardSelectedLabels extends StatelessWidget {
-  const CardRewardSelectedLabels({super.key});
+class CriteriaSelectedCostAndDate extends StatelessWidget {
+  const CriteriaSelectedCostAndDate({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    DateTime dateTime = criteriaViewModel.date;
+        int cost = criteriaViewModel.cost;
+
+    String formattedDate = DateFormat('yyyy/MM/dd').format(dateTime);
+
     return Container(
-      child:Text('2023/01/01, \$ 5000, 接受新戶,限定日等任務活動',
+      child:Text('預計刷卡日期: $formattedDate, 預計刷卡: $cost元',
         style:TextStyle(
           fontSize: 12,
         )
       )
     );
+  }
+}
+
+class CriteriaSelectedTaskLabels extends StatelessWidget {
+  const CriteriaSelectedTaskLabels({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    String taskLabels = criteriaViewModel.taskLabels.map((e) => e.name).join(", ");
+
+    if(taskLabels.isNotEmpty) {
+      taskLabels = "接受$taskLabels等任務活動";
+      return Container(
+        child:Text(taskLabels,
+          style:TextStyle(
+            fontSize: 12,
+          )
+        )
+      );
+    }
+    
+    return Container();
   }
 }
 
@@ -205,112 +256,23 @@ class CardRewardSelectedPay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:Text('使用行動支付, 含...')
-    );
-  }
-}
 
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
 
-class CardRewardEvaluationResults extends StatelessWidget {
-  const CardRewardEvaluationResults({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-          CardRewardEvaluationResult(),
-        ]
-      )
-    );
-  }
-}
-
-
-class CardRewardEvaluationResult extends StatelessWidget {
-  const CardRewardEvaluationResult({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 10),
-      child:InkWell(
-        onTap: (){
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled:true,
-            isDismissible: true, 
-            // barrierColor:Colors.transparent,
-             shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-              ),
-            builder: (context) {
-              return Container(
-                // padding: EdgeInsets.only(top:20),
-                height:MediaQuery.of(context).size.height * 0.8,
-                child:Column(
-                  children: [
-                    SizedBox(height:5),
-                    Container(
-                      width:MediaQuery.of(context).size.width * 0.2,
-                      height:3,
-                      color:Palette.kToBlack[50],
-                    ),
-                    SizedBox(height:10),
-                    CardRewarEvaluationDetailTitle(),
-                    SizedBox(height: 20,),
-                    Expanded(
-                      child:SingleChildScrollView(
-                        child:CardRewardEvaluationResultDetails(),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        child:Container(
-          padding: EdgeInsets.fromLTRB(20,30,20,30),
-          decoration: BoxDecoration(
-            color:Palette.kToBlack[0],
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child:Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:[
-              Flexible(
-                fit:FlexFit.tight,
-                flex: 4,
-                child: CardRewardRank(rank: 1,),
-              ),
-              Flexible(
-                fit:FlexFit.tight,
-                flex: 10,
-                child: CardRewardEventResultItem(), 
-              ),
-              Flexible(
-                // fit:FlexFit.tight,
-                flex: 4,
-                child: CardIcon(image: "",),
-              ),
-            ]
+    PayUsageEnum payUsage = criteriaViewModel.payUsage;
+    String payUsageStr = "";
+    
+    if (payUsage != PayUsageEnum.whatever) {
+      payUsageStr = "${payUsage.name}行動支付";
+      return Container(
+        child:Text(payUsageStr,
+          style:TextStyle(
+            fontSize: 12,
           )
         )
-      ),
-      
-    );
-    ;
+      );
+    }
+    return Container();
   }
 }
 
@@ -446,8 +408,8 @@ class CardRewardRank extends StatelessWidget {
 }
 
 
-class CardRewardEvaluationMessage extends StatelessWidget {
-  const CardRewardEvaluationMessage({super.key});
+class EventResultMessage extends StatelessWidget {
+  const EventResultMessage({super.key});
 
   @override
   Widget build(BuildContext context) {

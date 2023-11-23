@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.channel.selectedbar.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.findcard.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.result.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/channel.progress.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.criteria.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
 
 import 'package:provider/provider.dart';
 
@@ -39,24 +37,21 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
 
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context, listen:false);
     return Container(
-      decoration: BoxDecoration(
-      ),
       padding: const EdgeInsets.all(10),
       child:Column(
         children:[
           const SizedBox(height: 10),
           Expanded(
             child:PageView(
-              dragStartBehavior:DragStartBehavior.down,
-              physics: const ClampingScrollPhysics(),// NeverScrollableScrollPhysics(),
+              physics: const ClampingScrollPhysics(), // NeverScrollableScrollPhysics(),
               controller:_controller,
               onPageChanged:(int page){
                 channelProgressSelectedPage.changePage(page);
               },
               children:[
                 ChannelProgress(controller:_controller),
-                FindCardProgress(controller:_controller),
-                CardRewardEvaluationResultsProgress(controller:_controller),
+                CriteriaProgress(controller:_controller),
+                EventResultProgress(controller:_controller),
               ]
             )
           ),

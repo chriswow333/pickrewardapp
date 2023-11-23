@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -16,8 +19,8 @@ class PayWidget extends StatelessWidget {
         ),
         color:Palette.kToBlack[0],
       ),
-      padding: EdgeInsets.all(20),
-      child:Row(
+      padding: const EdgeInsets.all(20),
+      child:const Row(
         children:[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +28,7 @@ class PayWidget extends StatelessWidget {
               SizedBox(height:10,),
               PayName(),
               SizedBox(height:10,),
-              PayUsage(),
+              PayUsageWidget(),
             ]
           )
         ]
@@ -35,19 +38,59 @@ class PayWidget extends StatelessWidget {
   }
 }
 
-class PayUsage extends StatelessWidget {
-  const PayUsage({super.key});
+class PayUsageWidget extends StatelessWidget {
+  const PayUsageWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return const Wrap(
+      spacing: 10,
+      runSpacing: 10,
+      children:[
+        PayUse(),
+        PayNoUse(),
+        PayWhatever(),
+      ]
+    );
+  }
+}
+
+class PayWhatever extends StatelessWidget {
+  const PayWhatever({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
     return Container(
-      child:Wrap(
-        spacing: 10,
-        runSpacing: 10,
-        children:[
-          PayUse(),
-          PayNoUse(),
-        ]
+      child:TextButton(
+        onPressed: (){
+          criteriaViewModel.payUsage = PayUsageEnum.whatever;
+        },
+        style:ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
+          side: MaterialStatePropertyAll(
+            BorderSide(
+              width:1.5,
+              color: criteriaViewModel.payUsage.compareTo(PayUsageEnum.whatever) == 0?
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
+            )
+          ),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
+          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+          animationDuration:Duration(microseconds: 0),
+        ),
+        child:Text(PayUsageEnum.whatever.name,
+          style:TextStyle(
+            fontSize: 14,
+            color:Palette.kToBlack[500],
+          )
+        )
       )
     );
   }
@@ -59,15 +102,21 @@ class PayNoUse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
     return Container(
       child:TextButton(
-        onPressed: (){},
+        onPressed: (){
+          criteriaViewModel.payUsage = PayUsageEnum.no;
+        },
         style:ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
           side: MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: Palette.kToBlack[400]!,
+              color: criteriaViewModel.payUsage.compareTo(PayUsageEnum.no) == 0?
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),
           shape: MaterialStateProperty.all(
@@ -78,7 +127,7 @@ class PayNoUse extends StatelessWidget {
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
-        child:Text('不使用',
+        child:Text(PayUsageEnum.no.name,
           style:TextStyle(
             fontSize: 14,
             color:Palette.kToBlack[500],
@@ -93,15 +142,22 @@ class PayUse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
+
     return Container(
       child:TextButton(
-        onPressed: (){},
+        onPressed: (){
+          criteriaViewModel.payUsage = PayUsageEnum.use;
+        },
         style:ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
           side: MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: Palette.kToBlack[400]!,
+              color: criteriaViewModel.payUsage.compareTo(PayUsageEnum.use) == 0?
+                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),
           shape: MaterialStateProperty.all(
@@ -112,7 +168,7 @@ class PayUse extends StatelessWidget {
           padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
           animationDuration:Duration(microseconds: 0),
         ),
-        child:Text('使用',
+        child:Text(PayUsageEnum.use.name,
           style:TextStyle(
             fontSize: 14,
             color:Palette.kToBlack[500],
@@ -132,6 +188,7 @@ class PayName extends StatelessWidget {
       style: TextStyle(
         fontSize: 16,
         color: Palette.kToBlack[600],
+        fontWeight: FontWeight.bold,
       ),  
     );
   }

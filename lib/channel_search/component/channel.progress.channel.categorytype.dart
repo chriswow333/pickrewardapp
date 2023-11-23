@@ -9,25 +9,17 @@ import 'package:provider/provider.dart';
 
 
 
-class ChannelCategoryTypes extends StatefulWidget {
+class ChannelCategoryTypes extends StatelessWidget {
   const ChannelCategoryTypes({super.key});
-
-  @override
-  State<ChannelCategoryTypes> createState() => _ChannelCategoryTypesState();
-}
-
-class _ChannelCategoryTypesState extends State<ChannelCategoryTypes> {
-
-  final ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
 
     return SingleChildScrollView(
-      controller: _controller,
       scrollDirection:Axis.horizontal,
       child:Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children:[
           Column(
             children:[
@@ -51,7 +43,6 @@ class _ChannelCategoryTypesState extends State<ChannelCategoryTypes> {
     );
   }
 }
-
 
 class BottomLine extends StatelessWidget {
   const BottomLine({super.key});
@@ -108,7 +99,7 @@ class LabelIcon extends StatelessWidget {
     IconData icon = Icons.list_alt_rounded;
     return Container(
       child:Icon(
-        color: Palette.kToBlack[200],
+        color: Palette.kToBlack[500],
         icon,
       )
     );
@@ -125,7 +116,7 @@ class LabelName extends StatelessWidget {
         '常用',
         style: TextStyle(
           fontSize: 15,
-          color:  Palette.kToBlack[200],
+          color:  Palette.kToBlack[500],
         ),  
       )
     );
@@ -214,7 +205,7 @@ class ChannelCategoryTypeIcon extends StatelessWidget {
 
     return Container(
       child:Icon(
-        color:Palette.kToBlack[200],
+        color:Palette.kToBlack[500],
         icon,
       )
     );
@@ -235,7 +226,7 @@ class ChannelCategoryTypeName extends StatelessWidget {
         name,
         style: TextStyle(
           fontSize: 15,
-          color:  Palette.kToBlack[200],
+          color:  Palette.kToBlack[500],
         ),  
       )
     );

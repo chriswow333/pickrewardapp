@@ -16,7 +16,7 @@ class ChannelViewModel with ChangeNotifier {
     fetchChannelCategoryTypeModels();
   }
 
-  int _channelCategoryType = -1; // -1 通路總覽
+  int _channelCategoryType = -1; // -1 channel label
   int get channelCategoryType => _channelCategoryType;
 
   set channelCategoryType(int type) {
@@ -34,11 +34,9 @@ class ChannelViewModel with ChangeNotifier {
     try {
 
       ChannelCategoryTypeReply channelCategoryTypeReply = await ChannelService().channelClient.getChannelCategoryTypes(EmptyReq());
-  
       List<ChannelCategoryTypeReply_ChannelCategoryType> channelCategoryTypes = channelCategoryTypeReply.channelCategoryTypes;
 
       for (ChannelCategoryTypeReply_ChannelCategoryType channelCategoryType in channelCategoryTypes) {
-
         _channelCategoryTypeModels.add(
           ChannelCategoryTypeModel( 
             categoryType : channelCategoryType.categoryType,
@@ -50,11 +48,8 @@ class ChannelViewModel with ChangeNotifier {
       
       notifyListeners();
     } on GrpcError catch (e) {
-      ///handle all grpc errors here
-      ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
       logger.e(e);
     } catch (e) {
-      ///handle all generic errors here
       logger.e(e);
     }
   }
@@ -83,7 +78,6 @@ class ChannelViewModel with ChangeNotifier {
   List<ChannelGlobalKeyModel> getAllChannelItemGlobalKeyModels() {
     List<ChannelGlobalKeyModel> channelItemKeyModels = [];
 
-
     _globalKeys.forEach((key, value) {
       channelItemKeyModels.add(value);
     });
@@ -101,9 +95,9 @@ class ChannelViewModel with ChangeNotifier {
 
 
   static int initOffset = 0;
-  static int initLimit = 4;
+  static int initLimit = 5;
 
-  Future<void> initChannelModels(int channelCategoryType) async{
+  Future<void> initChannelModels(int channelCategoryType) async {
 
     if(_globalKeys.containsKey(channelCategoryType))return;
     
@@ -131,7 +125,7 @@ class ChannelViewModel with ChangeNotifier {
   }
 
 
-  static int eachLimit = 4;
+  static int eachLimit = 5;
 
   Future<void> addMoreChannelsByChannelCategoryType(int channelCategoryType) async { 
 
@@ -166,7 +160,6 @@ class ChannelViewModel with ChangeNotifier {
       List<ChannelItemModel> channelItemModels = [];
       
       for (ChannelReply_Channel channel in value.channels){
-
         channelItemModels.add(ChannelItemModel(
           id:channel.id,
           name:channel.name,
@@ -190,7 +183,6 @@ class ChannelViewModel with ChangeNotifier {
   }
 
 
-
   Future<ChannelReply> _fetchChannelsByChannelCategoryTypeApi(int categoryType, int offset, int limit) async { 
 
    try {
@@ -200,21 +192,14 @@ class ChannelViewModel with ChangeNotifier {
       channelCategoryTypeRequest.offset = offset;
       return await ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
     } on GrpcError catch (e) {
-      ///handle all grpc errors here
-      ///errors such us UNIMPLEMENTED,UNIMPLEMENTED etc...
       logger.e(e);
     } catch (e) {
-      ///handle all generic errors here
       logger.e(e);
     }
 
     return Future.error('error fetch');
     
   }
-
-
-
-
 
 }
 
