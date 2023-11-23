@@ -14,7 +14,7 @@ service CardV1 {
   rpc GetCardsByBankID (CardsByBankIDReq) returns (CardsReply) {}
   rpc GetCardRewardsByCardID(CardRewardsByCardIDReq) returns (CardRewardsReply){}
 
-  rpc EvaluateCards(EventReq) returns (EvaluateCardRewardsReply){}
+  rpc EvaluateCards(EventReq) returns (EvaluateCardsReply){}
 
   rpc SearchCard(SearchCardReq) returns (SearchCardReply){}
 }
@@ -136,28 +136,27 @@ message CardRewardsReply {
 
 message EventReq {
 
-  message ChannelWithLabelEvent{
+  message ChannelIDEvent{
     string channelID = 1;
     repeated int32 channelLabels = 2;
   }
 
   message ChannelEvent {
-    repeated ChannelWithLabelEvent channelsWithLabelEvents = 1;
+    repeated ChannelIDEvent channelIDEvent = 1;
     repeated int32 channelLabels = 2;
   }
 
   message CardEvent {
     int32 rewardType = 1;
-    bool cardRewardTaskLabelPass = 2;
-    repeated int32 cardRewardTaskLabels = 3;
+    repeated int32 taskLabels = 2;
   }
 
   message PayEvent {
-    bool pass = 1;
+    int32 status = 1;
     repeated string payIDs = 2;
   }
 
-  int64 eventDate = 1;
+  int64 date = 1;
   int32 cost = 2;
   ChannelEvent channelEvent = 3;
   PayEvent payEvent = 4;
@@ -168,42 +167,39 @@ message EventReq {
 
 
 
-message EvaluateCardRewardsReply {
+message EvaluateCardsReply {
 
-  message CardRewardEventResult {
+
+  message CardRewardEventResultResp {
     string id = 1;
-    CardRewardEvaluationEventResult cardRewardEvaluationEventResult = 2;
-    EvaluationEventResultResp evaluationEventResultResp = 3; 
-  } 
-
-  Reply reply = 1;
-  repeated CardRewardEventResult cardRewardEventResults = 2;
-}
-
-
-message CardRewardEvaluationEventResult {
-  message Reward {
-    string id = 1;
-    string name = 2;
-    int32 rewardType = 3;
-    int64 createDate = 4;
-    int64 updateDate = 5;
+    string cardRewardName = 2;
+    int64 cardRewardStartDate = 3;
+    int64 cardRewardEndDate = 4;
+    repeated string taskLabelNames = 5;
+    string rewardTypeName = 6;
+    EvaluationEventResultResp evaluationEventResultResp = 7; 
   }
 
-  string cardID = 1;
-  string cardName = 2;
-  repeated string cardDesc = 3;
-  string cardImage = 4;
-  int64 updateDate = 5;
-  string linkURL = 6;
-  string bankID = 7;
-  string bankName = 8;
-  int64 cardRewardStartDate = 9;
-  int64 cardRewardEndDate = 10;
-  string cardRewardName = 11;
-  repeated string cardRewardTaskShortNames = 12;
-  Reward reward = 13;
+  message CardEventResultResp {
+    string cardID = 1;
+    string cardName = 2;
+    string cardImage = 3;
+    repeated string cardDesc = 4;
+    int64 updateDate = 5;
+    string linkURL = 6;
+    string bankID = 7;
+    string bankName = 8;
+    repeated CardRewardEventResultResp cardRewardEventResultResps = 9;
+  } 
+
+
+
+
+  Reply reply = 1;
+  repeated CardEventResultResp cardEventResults = 2;
 }
+
+
 
 
 

@@ -38,7 +38,7 @@ class CriteriaPageBar extends StatelessWidget {
   Widget build(BuildContext context) {
 
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
-    CardRewardEventResultsViewModel cardRewardEventResultsViewModel = Provider.of<CardRewardEventResultsViewModel>(context,listen:false);
+    CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,listen:false);
 
     return Container(
       child:Row(
@@ -68,7 +68,7 @@ class CriteriaPageBar extends StatelessWidget {
             padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
             child:InkWell(
               onTap:(){
-                cardRewardEventResultsViewModel.evaluateCardRewardsEventResult(criteriaViewModel);
+                cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
 
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(

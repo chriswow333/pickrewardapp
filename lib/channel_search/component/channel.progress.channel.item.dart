@@ -130,9 +130,16 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
               ),
               itemBuilder: (context, index){
                 return ChannelItem(channelItemModel:channelItemModels[index]);
-              }),
-              if(hasMore)
+              }
+            ),
+            if(hasMore)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
                 AddMore(channelCategory: channelCategoryType,),
+              ]
+            )
+              
           ]
         ),
       )
@@ -150,15 +157,31 @@ class AddMore extends StatelessWidget {
   Widget build(BuildContext context) {
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
 
-    return TextButton(
-      onPressed: (){
-        channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
-      },
-      child:Text("查看更多",
-        style: TextStyle(
-          fontSize: 16,
-          color:Palette.kToBlack[200],
+    return Container(
+      padding: EdgeInsets.only(top:20),
+      child:Container(
+        width: 70,
+        height: 30,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color:Palette.kToBlack[200]!,
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(20),
         ),
+        alignment: Alignment.center,
+        child:InkWell(
+          onTap: (){
+            channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
+          },
+          child:Text("查看更多",
+            style: TextStyle(
+              fontSize: 12,
+              color:Palette.kToBlack[500],
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        )
       )
     );
   }

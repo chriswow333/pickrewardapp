@@ -36,10 +36,10 @@ class CardV1Client extends $grpc.Client {
       '/card_v1.CardV1/GetCardRewardsByCardID',
       ($0.CardRewardsByCardIDReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CardRewardsReply.fromBuffer(value));
-  static final _$evaluateCards = $grpc.ClientMethod<$0.EventReq, $0.EvaluateCardRewardsReply>(
+  static final _$evaluateCards = $grpc.ClientMethod<$0.EventReq, $0.EvaluateCardsReply>(
       '/card_v1.CardV1/EvaluateCards',
       ($0.EventReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.EvaluateCardRewardsReply.fromBuffer(value));
+      ($core.List<$core.int> value) => $0.EvaluateCardsReply.fromBuffer(value));
   static final _$searchCard = $grpc.ClientMethod<$0.SearchCardReq, $0.SearchCardReply>(
       '/card_v1.CardV1/SearchCard',
       ($0.SearchCardReq value) => value.writeToBuffer(),
@@ -67,7 +67,7 @@ class CardV1Client extends $grpc.Client {
     return $createUnaryCall(_$getCardRewardsByCardID, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.EvaluateCardRewardsReply> evaluateCards($0.EventReq request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$0.EvaluateCardsReply> evaluateCards($0.EventReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$evaluateCards, request, options: options);
   }
 
@@ -109,13 +109,13 @@ abstract class CardV1ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CardRewardsByCardIDReq.fromBuffer(value),
         ($0.CardRewardsReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.EventReq, $0.EvaluateCardRewardsReply>(
+    $addMethod($grpc.ServiceMethod<$0.EventReq, $0.EvaluateCardsReply>(
         'EvaluateCards',
         evaluateCards_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.EventReq.fromBuffer(value),
-        ($0.EvaluateCardRewardsReply value) => value.writeToBuffer()));
+        ($0.EvaluateCardsReply value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.SearchCardReq, $0.SearchCardReply>(
         'SearchCard',
         searchCard_Pre,
@@ -141,7 +141,7 @@ abstract class CardV1ServiceBase extends $grpc.Service {
     return getCardRewardsByCardID(call, await request);
   }
 
-  $async.Future<$0.EvaluateCardRewardsReply> evaluateCards_Pre($grpc.ServiceCall call, $async.Future<$0.EventReq> request) async {
+  $async.Future<$0.EvaluateCardsReply> evaluateCards_Pre($grpc.ServiceCall call, $async.Future<$0.EventReq> request) async {
     return evaluateCards(call, await request);
   }
 
@@ -153,6 +153,6 @@ abstract class CardV1ServiceBase extends $grpc.Service {
   $async.Future<$0.CardsReply> getLatestCards($grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.CardsReply> getCardsByBankID($grpc.ServiceCall call, $0.CardsByBankIDReq request);
   $async.Future<$0.CardRewardsReply> getCardRewardsByCardID($grpc.ServiceCall call, $0.CardRewardsByCardIDReq request);
-  $async.Future<$0.EvaluateCardRewardsReply> evaluateCards($grpc.ServiceCall call, $0.EventReq request);
+  $async.Future<$0.EvaluateCardsReply> evaluateCards($grpc.ServiceCall call, $0.EventReq request);
   $async.Future<$0.SearchCardReply> searchCard($grpc.ServiceCall call, $0.SearchCardReq request);
 }

@@ -19,7 +19,7 @@ class CardSearchPage extends StatelessWidget {
         ChangeNotifierProvider<BankViewModel>(create:(_)=>BankViewModel()),
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
         // ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
-        ChangeNotifierProvider<CardRewardEventResultsViewModel>(create:(_)=>CardRewardEventResultsViewModel()),
+        ChangeNotifierProvider<CardEventResultsViewModel>(create:(_)=>CardEventResultsViewModel()),
         ChangeNotifierProvider<SearchCardViewModel>(create:(_)=>SearchCardViewModel()),
         
       ],

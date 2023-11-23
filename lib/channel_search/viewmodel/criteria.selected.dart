@@ -123,9 +123,6 @@ class CriteriaViewModel with ChangeNotifier{
   }
 
 
-
-
-
 /// result page
 
 /// cost 
@@ -135,63 +132,6 @@ class CriteriaViewModel with ChangeNotifier{
     notifyListeners();
   }
   int get cost => _cost;
-
-
-
-
-  // final Set<String> _payIDs = {};
-
-  // set payID(String payID) {
-  //   if(_payIDs.contains(payID)) {
-  //     _payIDs.remove(payID); 
-  //   }else { 
-  //     _payIDs.add(payID);
-  //   } 
-
-  //   // if(_sendedFindCard) {
-  //   //   _sendedFindCard = false;
-  //   // }
-
-  //   notifyListeners();
-  // }
-
-  // bool existSelectedPayID(String payID) {
-  //   return _payIDs.contains(payID);
-  // }
-  // List<String> getPayIDs(){
-  //   return _payIDs.toList();
-  // }
-
-
-
-  // int _selectedCost = 1000;
-
-  // set cost(int cost){
-  //   if (cost == _selectedCost) return;
-  //   _selectedCost = cost;
-
-  //   // if(_sendedFindCard) {
-  //   //   _sendedFindCard = false;
-  //   // }
-
-  //   notifyListeners();
-  // } 
-  
-  // int get cost => _selectedCost;
-
-  // DateTime _eventDate = DateTime.now();
-  // set eventDate(DateTime eventDate) {
-  //   _eventDate = eventDate;
-    
-  //   // if(_sendedFindCard) {
-  //   //   _sendedFindCard = false;
-  //   // }
-
-  //   notifyListeners();
-  // }
-  // DateTime get eventDate => _eventDate;
-  
-
 
 }
 

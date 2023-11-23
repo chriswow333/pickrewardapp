@@ -4,25 +4,25 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.result.detail.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/eventresult.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pb.dart';
+import 'package:provider/provider.dart';
 
-class EventResults extends StatelessWidget {
-  const EventResults({super.key});
+class CardEventResults extends StatelessWidget {
+  const CardEventResults({super.key});
 
   @override
   Widget build(BuildContext context) {
+    CardEventResultsViewModel cardEventResultViewModel =Provider.of<CardEventResultsViewModel>(context);
+    cardEventResultViewModel.cardEventResults;
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          EventResult(),
-          EventResult(),
-          EventResult(),
-          EventResult(),
-          EventResult(),
-          EventResult(),
-          EventResult(),
-          EventResult(),
+          for(int i = 0; i <  cardEventResultViewModel.cardEventResults.length; i++)
+            CardEventResult(cardEventResult: cardEventResultViewModel.cardEventResults[i], rank: i,),
         ]
       )
     );
@@ -30,8 +30,11 @@ class EventResults extends StatelessWidget {
 }
 
 
-class EventResult extends StatelessWidget {
-  const EventResult({super.key});
+class CardEventResult extends StatelessWidget {
+  const CardEventResult({super.key, required this.cardEventResult, required this.rank});
+
+  final int rank;
+  final EvaluateCardsReply_CardEventResultResp cardEventResult;
 
   @override
   Widget build(BuildContext context) {
@@ -86,17 +89,17 @@ class EventResult extends StatelessWidget {
               Flexible(
                 fit:FlexFit.tight,
                 flex: 4,
-                child: CardRewardRank(rank: 1,),
+                child: CardRewardRank(rank: rank+1,),
               ),
               Flexible(
                 fit:FlexFit.tight,
                 flex: 10,
-                child: CardRewardEventResultItem(), 
+                child: CardRewardEventResultItem(cardEventResult: cardEventResult,), 
               ),
               Flexible(
                 // fit:FlexFit.tight,
                 flex: 4,
-                child: CardIcon(image: "",),
+                child: CardIcon(image: cardEventResult.cardImage,),
               ),
             ]
           )
@@ -108,3 +111,130 @@ class EventResult extends StatelessWidget {
   }
 }
 
+
+
+class CardRewarEvaluationDetailTitle extends StatelessWidget {
+  const CardRewarEvaluationDetailTitle({super.key});
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top:10),
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          Flexible(
+            child: Text('玫瑰Giving卡',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(width: 20,),
+          Flexible(
+            child: Text('最高回饋 3% 30元',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          
+        ]
+      ),
+    );
+  }
+}
+
+
+class CardRewardEventResultItem extends StatelessWidget {
+  const CardRewardEventResultItem({super.key, required this.cardEventResult});
+  
+  final EvaluateCardsReply_CardEventResultResp cardEventResult;
+  
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          CardName(name:cardEventResult.cardName),
+          CardRewardFeedback(cardEventResult: cardEventResult,),
+        ]
+      )
+    );
+  }
+}
+
+
+
+class CardName extends StatelessWidget {
+  const CardName({super.key, required this.name});
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text('${name}',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+      )
+    );
+  }
+}
+
+
+
+
+class CardRewardRank extends StatelessWidget {
+  const CardRewardRank({super.key, required this.rank});
+
+  final int rank;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Text('Top ${rank}',
+        style: TextStyle(
+          fontSize: 14,
+        ),
+      )
+    );
+  }
+}
+
+
+
+class CardRewardFeedback extends StatelessWidget {
+  const CardRewardFeedback({super.key, required this.cardEventResult});
+
+  final EvaluateCardsReply_CardEventResultResp cardEventResult;
+
+  @override
+  Widget build(BuildContext context) {
+
+    if(cardEventResult.cardRewardEventResultResps.isEmpty)return Container();
+
+
+    EvaluationEventResultResp_FeedbackEventResultResp feedback = cardEventResult
+    .cardRewardEventResultResps[0]
+    .evaluationEventResultResp
+    .feedbackEventResultResp;
+
+    String percentage = (feedback.getPercentage * 100).toStringAsFixed(1);
+
+
+    return Container(
+      child:Text('回饋$percentage%, 獲得${feedback.getReturn}元',
+        style:TextStyle(
+          fontSize: 12,
+        )
+      )
+    );
+  }
+}
