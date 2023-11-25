@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/task_label.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
@@ -20,7 +21,7 @@ class ChannelSearchPage extends StatelessWidget {
       providers:[
         ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
         ChangeNotifierProvider<CriteriaViewModel>(create:(_)=>CriteriaViewModel()),
-        // ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
+        ChangeNotifierProvider<TaskLabelViewModel>(create:(_)=>TaskLabelViewModel()),
         ChangeNotifierProvider<CardEventResultsViewModel>(create:(_)=>CardEventResultsViewModel()),
         ChangeNotifierProvider<ChannelProgressSelectedPage>(create:(_)=>ChannelProgressSelectedPage()),
         ChangeNotifierProvider<SearchChannelViewModel>(create:(_)=>SearchChannelViewModel()),

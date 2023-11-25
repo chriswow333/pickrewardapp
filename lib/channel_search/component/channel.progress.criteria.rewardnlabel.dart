@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/reward_type.dart';
 import 'package:pickrewardapp/channel_search/model/task_label.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/task_label.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -180,19 +181,16 @@ class TaskLabelItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<TaskLabelModel> taskLabels = TaskLabelModelMock.getAll();
 
-    // List<String> cardRewardLabels = [
-    //   '新戶','需登錄','限量','限定日'
-    // ];
+   TaskLabelViewModel taskLabelViewModel = Provider.of<TaskLabelViewModel>(context);
 
     return Container(
       child:Wrap(
         spacing:10,
         runSpacing: 5,
         children:[
-          for(int i = 0; i < taskLabels.length; i++)
-            TaskLabelItem(taskLabelModel: taskLabels[i],),
+          for(TaskLabelModel taskLabelModel in taskLabelViewModel.taskLabelModels)
+            TaskLabelItem(taskLabelModel: taskLabelModel,),
         ]
       )
     );

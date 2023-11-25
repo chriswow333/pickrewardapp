@@ -8,15 +8,3 @@ class TaskLabelModel {
 }
 
 
-class TaskLabelModelMock {
-  
-  static List<TaskLabelModel> getAll(){
-    return [
-      TaskLabelModel(0, '新戶'),
-      TaskLabelModel(1, '需登錄'),
-      TaskLabelModel(2, '限量'),
-      TaskLabelModel(3, '限定日'),
-      
-    ];
-  }
-}
