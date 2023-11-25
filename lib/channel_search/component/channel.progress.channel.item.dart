@@ -240,7 +240,7 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
               spacing:10,
               runSpacing: 10,
               children:[
-                for(ChannelLabelModel l in ChannelLabelModelMock.getAll())
+                for(ChannelLabelModel l in channelViewModel.channelLabelModels)
                   ChannelLabelItem(labelItemModel: l,),
               ]
             ),

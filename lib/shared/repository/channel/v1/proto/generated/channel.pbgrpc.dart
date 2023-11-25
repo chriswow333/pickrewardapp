@@ -32,6 +32,10 @@ class ChannelV1Client extends $grpc.Client {
       '/channel.ChannelV1/SearchChannel',
       ($0.SearchChannelReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SearchChannelReply.fromBuffer(value));
+  static final _$getShowChannelLabels = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelLabelsReply>(
+      '/channel.ChannelV1/GetShowChannelLabels',
+      ($0.EmptyReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.ChannelLabelsReply.fromBuffer(value));
 
   ChannelV1Client($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -49,6 +53,10 @@ class ChannelV1Client extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.SearchChannelReply> searchChannel($0.SearchChannelReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchChannel, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ChannelLabelsReply> getShowChannelLabels($0.EmptyReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getShowChannelLabels, request, options: options);
   }
 }
 
@@ -78,6 +86,13 @@ abstract class ChannelV1ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SearchChannelReq.fromBuffer(value),
         ($0.SearchChannelReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ChannelLabelsReply>(
+        'GetShowChannelLabels',
+        getShowChannelLabels_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.EmptyReq.fromBuffer(value),
+        ($0.ChannelLabelsReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
@@ -92,7 +107,12 @@ abstract class ChannelV1ServiceBase extends $grpc.Service {
     return searchChannel(call, await request);
   }
 
+  $async.Future<$0.ChannelLabelsReply> getShowChannelLabels_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
+    return getShowChannelLabels(call, await request);
+  }
+
   $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes($grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.ChannelReply> getChannelsByChannelCategoryType($grpc.ServiceCall call, $0.ChannelCategoryTypeReq request);
   $async.Future<$0.SearchChannelReply> searchChannel($grpc.ServiceCall call, $0.SearchChannelReq request);
+  $async.Future<$0.ChannelLabelsReply> getShowChannelLabels($grpc.ServiceCall call, $0.EmptyReq request);
 }

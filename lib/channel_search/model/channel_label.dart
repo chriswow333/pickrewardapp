@@ -6,20 +6,7 @@ class ChannelLabelModel {
   ChannelLabelModel(this.label, this.name);
 }
 
-class ChannelLabelModelMock {
-  
-  static List<ChannelLabelModel> getAll(){
 
-    return [
-      ChannelLabelModel(0, '國外消費'),
-      ChannelLabelModel(1, '網購'),
-      ChannelLabelModel(2, '一般消費'),
-      ChannelLabelModel(3, '繳水電'),
-      ChannelLabelModel(4, '瓦斯'),
-      ChannelLabelModel(5, '出國旅遊'),
-    ];
-  }
-}
 
 
 // class LabelItemModel {

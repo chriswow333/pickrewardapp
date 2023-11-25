@@ -44,6 +44,10 @@ class CardV1Client extends $grpc.Client {
       '/card_v1.CardV1/SearchCard',
       ($0.SearchCardReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SearchCardReply.fromBuffer(value));
+  static final _$getShowTaskLabels = $grpc.ClientMethod<$0.EmptyReq, $0.TaskLabelsReply>(
+      '/card_v1.CardV1/GetShowTaskLabels',
+      ($0.EmptyReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.TaskLabelsReply.fromBuffer(value));
 
   CardV1Client($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -73,6 +77,10 @@ class CardV1Client extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.SearchCardReply> searchCard($0.SearchCardReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchCard, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.TaskLabelsReply> getShowTaskLabels($0.EmptyReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getShowTaskLabels, request, options: options);
   }
 }
 
@@ -123,6 +131,13 @@ abstract class CardV1ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.SearchCardReq.fromBuffer(value),
         ($0.SearchCardReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.TaskLabelsReply>(
+        'GetShowTaskLabels',
+        getShowTaskLabels_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.EmptyReq.fromBuffer(value),
+        ($0.TaskLabelsReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.BanksReply> getAllBanks_Pre($grpc.ServiceCall call, $async.Future<$0.AllBanksReq> request) async {
@@ -149,10 +164,15 @@ abstract class CardV1ServiceBase extends $grpc.Service {
     return searchCard(call, await request);
   }
 
+  $async.Future<$0.TaskLabelsReply> getShowTaskLabels_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
+    return getShowTaskLabels(call, await request);
+  }
+
   $async.Future<$0.BanksReply> getAllBanks($grpc.ServiceCall call, $0.AllBanksReq request);
   $async.Future<$0.CardsReply> getLatestCards($grpc.ServiceCall call, $0.EmptyReq request);
   $async.Future<$0.CardsReply> getCardsByBankID($grpc.ServiceCall call, $0.CardsByBankIDReq request);
   $async.Future<$0.CardRewardsReply> getCardRewardsByCardID($grpc.ServiceCall call, $0.CardRewardsByCardIDReq request);
   $async.Future<$0.EvaluateCardsReply> evaluateCards($grpc.ServiceCall call, $0.EventReq request);
   $async.Future<$0.SearchCardReply> searchCard($grpc.ServiceCall call, $0.SearchCardReq request);
+  $async.Future<$0.TaskLabelsReply> getShowTaskLabels($grpc.ServiceCall call, $0.EmptyReq request);
 }

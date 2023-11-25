@@ -3,6 +3,7 @@ import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_category.dart';
 import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
+import 'package:pickrewardapp/channel_search/model/channel_label.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
 
@@ -14,6 +15,7 @@ class ChannelViewModel with ChangeNotifier {
   ChannelViewModel(){
     ChannelService().init();
     fetchChannelCategoryTypeModels();
+    fetchChannelLabelModels();
   }
 
   int _channelCategoryType = -1; // -1 channel label
@@ -26,16 +28,11 @@ class ChannelViewModel with ChangeNotifier {
   }
 
   final List<ChannelCategoryTypeModel> _channelCategoryTypeModels = [];
-  get channelCategoryTypeModels => _channelCategoryTypeModels;
-
-
+  List<ChannelCategoryTypeModel> get channelCategoryTypeModels => _channelCategoryTypeModels;
   Future<void> fetchChannelCategoryTypeModels() async {
-
     try {
-
       ChannelCategoryTypeReply channelCategoryTypeReply = await ChannelService().channelClient.getChannelCategoryTypes(EmptyReq());
       List<ChannelCategoryTypeReply_ChannelCategoryType> channelCategoryTypes = channelCategoryTypeReply.channelCategoryTypes;
-
       for (ChannelCategoryTypeReply_ChannelCategoryType channelCategoryType in channelCategoryTypes) {
         _channelCategoryTypeModels.add(
           ChannelCategoryTypeModel( 
@@ -45,7 +42,6 @@ class ChannelViewModel with ChangeNotifier {
           )
         );
       }
-      
       notifyListeners();
     } on GrpcError catch (e) {
       logger.e(e);
@@ -54,6 +50,28 @@ class ChannelViewModel with ChangeNotifier {
     }
   }
 
+
+  final List<ChannelLabelModel> _channelLabelModels = [];
+  List<ChannelLabelModel> get channelLabelModels => _channelLabelModels;
+  bool channelLabelsLoading = false;
+  Future<void> fetchChannelLabelModels() async {
+    try {
+      channelLabelsLoading = true;
+      ChannelLabelsReply channelLabelReply = await ChannelService().channelClient.getShowChannelLabels(EmptyReq());
+      List<ChannelLabelsReply_ChannelLabel> channelLabels = channelLabelReply.channelLabels;
+      for (ChannelLabelsReply_ChannelLabel channelLabel in channelLabels) {
+        _channelLabelModels.add(
+          ChannelLabelModel(channelLabel.label,channelLabel.name,)
+        );
+      }
+      channelLabelsLoading = false;
+      notifyListeners();
+    } on GrpcError catch (e) {
+      logger.e(e);
+    } catch (e) {
+      logger.e(e);
+    }
+  }
 
 
 

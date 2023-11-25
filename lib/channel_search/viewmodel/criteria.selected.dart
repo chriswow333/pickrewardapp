@@ -31,6 +31,16 @@ class CriteriaViewModel with ChangeNotifier{
     return _channelLabelMap.containsKey(label);
   }
 
+  List<String> getChannelLabelNames(List<String> channelLabels) {
+     List<String> channelLabelNames = [];
+    for(String channeLabel in channelLabels) {
+      if(_channelLabelMap.containsKey(channeLabel)){
+        channelLabelNames.add(_channelLabelMap[channeLabel]!.name);
+      }
+    }    
+    return channelLabelNames;
+  }
+
 /// channel 
   final Map<String,ChannelItemModel> _channelMap = {};
   set channel(ChannelItemModel channelItemModel) {
@@ -52,6 +62,18 @@ class CriteriaViewModel with ChangeNotifier{
   }
 
   List<ChannelItemModel> get channelItemModels => _channelMap.values.toList();
+
+  List<String> getChannelNames(List<String> channelIDs) {
+
+    List<String> channelNames = [];
+    for(String channelID in channelIDs) {
+      if(_channelMap.containsKey(channelID)){
+        channelNames.add(_channelMap[channelID]!.name);
+      }
+    }    
+
+    return channelNames;
+  }
 
 
 /// reset channel progress
@@ -91,6 +113,18 @@ class CriteriaViewModel with ChangeNotifier{
 
   List<TaskLabelModel> get taskLabels => _taskLabelMap.values.toList();
 
+  List<String> getTaskLabelsName(List<String> labels) {
+    List<String> labelNames = [];
+    for(String label in labels) {
+       int? labelInt = int.tryParse(label);
+       if(labelInt != null && _taskLabelMap.containsKey(labelInt)) {
+        labelNames.add(_taskLabelMap[labelInt]!.name);
+       }
+    }
+    return labelNames;
+  }
+
+/// reward type
 
   RewardType _rewardType = RewardType.cash;
   set rewardType(RewardType rewardType) {
@@ -121,6 +155,7 @@ class CriteriaViewModel with ChangeNotifier{
     notifyListeners();
 
   }
+
 
 
 /// result page

@@ -17,6 +17,8 @@ service CardV1 {
   rpc EvaluateCards(EventReq) returns (EvaluateCardsReply){}
 
   rpc SearchCard(SearchCardReq) returns (SearchCardReply){}
+
+  rpc GetShowTaskLabels(EmptyReq) returns (TaskLabelsReply){}
 }
 
 
@@ -193,13 +195,9 @@ message EvaluateCardsReply {
   } 
 
 
-
-
   Reply reply = 1;
   repeated CardEventResultResp cardEventResults = 2;
 }
-
-
 
 
 
@@ -216,6 +214,10 @@ message EvaluationEventResultResp{
 
   string id = 1;
   FeedbackEventResultResp feedbackEventResultResp = 2;
+  repeated string cardRewardTaskLabelMatched = 3;
+  repeated string channelMatched = 4;
+  repeated string channelLabelMatched = 5;
+  repeated string payMatched = 6;
 }
 
 
@@ -246,6 +248,16 @@ message SearchCardReply{
 }
 
 
+
+message TaskLabelsReply {
+  message TaskLabel {
+    int32 label = 1;
+    string name = 2;
+  }
+
+  Reply reply = 1;
+  repeated TaskLabel taskLabels = 2;
+}
 
 message EmptyReq{}
 

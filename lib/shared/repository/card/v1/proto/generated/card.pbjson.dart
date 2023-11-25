@@ -362,6 +362,10 @@ const EvaluationEventResultResp$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     {'1': 'feedbackEventResultResp', '3': 2, '4': 1, '5': 11, '6': '.card_v1.EvaluationEventResultResp.FeedbackEventResultResp', '10': 'feedbackEventResultResp'},
+    {'1': 'cardRewardTaskLabelMatched', '3': 3, '4': 3, '5': 9, '10': 'cardRewardTaskLabelMatched'},
+    {'1': 'channelMatched', '3': 4, '4': 3, '5': 9, '10': 'channelMatched'},
+    {'1': 'channelLabelMatched', '3': 5, '4': 3, '5': 9, '10': 'channelLabelMatched'},
+    {'1': 'payMatched', '3': 6, '4': 3, '5': 9, '10': 'payMatched'},
   ],
   '3': [EvaluationEventResultResp_FeedbackEventResultResp$json],
 };
@@ -383,12 +387,15 @@ const EvaluationEventResultResp_FeedbackEventResultResp$json = {
 final $typed_data.Uint8List evaluationEventResultRespDescriptor = $convert.base64Decode(
     'ChlFdmFsdWF0aW9uRXZlbnRSZXN1bHRSZXNwEg4KAmlkGAEgASgJUgJpZBJ0ChdmZWVkYmFja0'
     'V2ZW50UmVzdWx0UmVzcBgCIAEoCzI6LmNhcmRfdjEuRXZhbHVhdGlvbkV2ZW50UmVzdWx0UmVz'
-    'cC5GZWVkYmFja0V2ZW50UmVzdWx0UmVzcFIXZmVlZGJhY2tFdmVudFJlc3VsdFJlc3Aa9QEKF0'
-    'ZlZWRiYWNrRXZlbnRSZXN1bHRSZXNwEh4KCnJld2FyZFR5cGUYASABKAVSCnJld2FyZFR5cGUS'
-    'JAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlwZRISCgRjb3N0GAMgASgFUgRjb3'
-    'N0EhwKCWdldFJldHVybhgEIAEoAVIJZ2V0UmV0dXJuEiQKDWdldFBlcmNlbnRhZ2UYBSABKAFS'
-    'DWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cxgGIAEoBVIZZmVlZG'
-    'JhY2tFdmVudFJlc3VsdFN0YXR1cw==');
+    'cC5GZWVkYmFja0V2ZW50UmVzdWx0UmVzcFIXZmVlZGJhY2tFdmVudFJlc3VsdFJlc3ASPgoaY2'
+    'FyZFJld2FyZFRhc2tMYWJlbE1hdGNoZWQYAyADKAlSGmNhcmRSZXdhcmRUYXNrTGFiZWxNYXRj'
+    'aGVkEiYKDmNoYW5uZWxNYXRjaGVkGAQgAygJUg5jaGFubmVsTWF0Y2hlZBIwChNjaGFubmVsTG'
+    'FiZWxNYXRjaGVkGAUgAygJUhNjaGFubmVsTGFiZWxNYXRjaGVkEh4KCnBheU1hdGNoZWQYBiAD'
+    'KAlSCnBheU1hdGNoZWQa9QEKF0ZlZWRiYWNrRXZlbnRSZXN1bHRSZXNwEh4KCnJld2FyZFR5cG'
+    'UYASABKAVSCnJld2FyZFR5cGUSJAoNY2FsY3VsYXRlVHlwZRgCIAEoBVINY2FsY3VsYXRlVHlw'
+    'ZRISCgRjb3N0GAMgASgFUgRjb3N0EhwKCWdldFJldHVybhgEIAEoAVIJZ2V0UmV0dXJuEiQKDW'
+    'dldFBlcmNlbnRhZ2UYBSABKAFSDWdldFBlcmNlbnRhZ2USPAoZZmVlZGJhY2tFdmVudFJlc3Vs'
+    'dFN0YXR1cxgGIAEoBVIZZmVlZGJhY2tFdmVudFJlc3VsdFN0YXR1cw==');
 
 @$core.Deprecated('Use searchCardReqDescriptor instead')
 const SearchCardReq$json = {
@@ -438,6 +445,32 @@ final $typed_data.Uint8List searchCardReplyDescriptor = $convert.base64Decode(
     'YXRlGAUgASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBiABKANSCnVwZGF0ZURhdGUSGA'
     'oHbGlua1VSTBgHIAEoCVIHbGlua1VSTBIWCgZiYW5rSUQYCCABKAlSBmJhbmtJRBIUCgVvcmRl'
     'chgJIAEoBVIFb3JkZXISHgoKY2FyZFN0YXR1cxgKIAEoBVIKY2FyZFN0YXR1cw==');
+
+@$core.Deprecated('Use taskLabelsReplyDescriptor instead')
+const TaskLabelsReply$json = {
+  '1': 'TaskLabelsReply',
+  '2': [
+    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.card_v1.Reply', '10': 'reply'},
+    {'1': 'taskLabels', '3': 2, '4': 3, '5': 11, '6': '.card_v1.TaskLabelsReply.TaskLabel', '10': 'taskLabels'},
+  ],
+  '3': [TaskLabelsReply_TaskLabel$json],
+};
+
+@$core.Deprecated('Use taskLabelsReplyDescriptor instead')
+const TaskLabelsReply_TaskLabel$json = {
+  '1': 'TaskLabel',
+  '2': [
+    {'1': 'label', '3': 1, '4': 1, '5': 5, '10': 'label'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `TaskLabelsReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List taskLabelsReplyDescriptor = $convert.base64Decode(
+    'Cg9UYXNrTGFiZWxzUmVwbHkSJAoFcmVwbHkYASABKAsyDi5jYXJkX3YxLlJlcGx5UgVyZXBseR'
+    'JCCgp0YXNrTGFiZWxzGAIgAygLMiIuY2FyZF92MS5UYXNrTGFiZWxzUmVwbHkuVGFza0xhYmVs'
+    'Ugp0YXNrTGFiZWxzGjUKCVRhc2tMYWJlbBIUCgVsYWJlbBgBIAEoBVIFbGFiZWwSEgoEbmFtZR'
+    'gCIAEoCVIEbmFtZQ==');
 
 @$core.Deprecated('Use emptyReqDescriptor instead')
 const EmptyReq$json = {

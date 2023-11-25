@@ -210,3 +210,29 @@ final $typed_data.Uint8List searchChannelReplyDescriptor = $convert.base64Decode
     'EgASgFUgxjYXRlZ29yeVR5cGUSEgoEbmFtZRgCIAEoCVIEbmFtZRIUCgVvcmRlchgDIAEoBVIF'
     'b3JkZXI=');
 
+@$core.Deprecated('Use channelLabelsReplyDescriptor instead')
+const ChannelLabelsReply$json = {
+  '1': 'ChannelLabelsReply',
+  '2': [
+    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.channel.Reply', '10': 'reply'},
+    {'1': 'channelLabels', '3': 2, '4': 3, '5': 11, '6': '.channel.ChannelLabelsReply.ChannelLabel', '10': 'channelLabels'},
+  ],
+  '3': [ChannelLabelsReply_ChannelLabel$json],
+};
+
+@$core.Deprecated('Use channelLabelsReplyDescriptor instead')
+const ChannelLabelsReply_ChannelLabel$json = {
+  '1': 'ChannelLabel',
+  '2': [
+    {'1': 'label', '3': 1, '4': 1, '5': 5, '10': 'label'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `ChannelLabelsReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List channelLabelsReplyDescriptor = $convert.base64Decode(
+    'ChJDaGFubmVsTGFiZWxzUmVwbHkSJAoFcmVwbHkYASABKAsyDi5jaGFubmVsLlJlcGx5UgVyZX'
+    'BseRJOCg1jaGFubmVsTGFiZWxzGAIgAygLMiguY2hhbm5lbC5DaGFubmVsTGFiZWxzUmVwbHku'
+    'Q2hhbm5lbExhYmVsUg1jaGFubmVsTGFiZWxzGjgKDENoYW5uZWxMYWJlbBIUCgVsYWJlbBgBIA'
+    'EoBVIFbGFiZWwSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
+

@@ -41,7 +41,7 @@ class EventResultProgress extends StatelessWidget {
             child:ReEvaluateItem(controller: controller,),
           )
         ]   
-      )
+      ) 
     );
   }
 }

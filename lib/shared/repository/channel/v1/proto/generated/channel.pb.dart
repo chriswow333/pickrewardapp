@@ -832,6 +832,106 @@ class SearchChannelReply extends $pb.GeneratedMessage {
   $core.List<SearchChannelReply_SearchChannel> get searchChannels => $_getList(1);
 }
 
+class ChannelLabelsReply_ChannelLabel extends $pb.GeneratedMessage {
+  factory ChannelLabelsReply_ChannelLabel() => create();
+  ChannelLabelsReply_ChannelLabel._() : super();
+  factory ChannelLabelsReply_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChannelLabelsReply_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ChannelLabelsReply_ChannelLabel clone() => ChannelLabelsReply_ChannelLabel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChannelLabelsReply_ChannelLabel copyWith(void Function(ChannelLabelsReply_ChannelLabel) updates) => super.copyWith((message) => updates(message as ChannelLabelsReply_ChannelLabel)) as ChannelLabelsReply_ChannelLabel;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ChannelLabelsReply_ChannelLabel create() => ChannelLabelsReply_ChannelLabel._();
+  ChannelLabelsReply_ChannelLabel createEmptyInstance() => create();
+  static $pb.PbList<ChannelLabelsReply_ChannelLabel> createRepeated() => $pb.PbList<ChannelLabelsReply_ChannelLabel>();
+  @$core.pragma('dart2js:noInline')
+  static ChannelLabelsReply_ChannelLabel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelLabelsReply_ChannelLabel>(create);
+  static ChannelLabelsReply_ChannelLabel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get label => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set label($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLabel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLabel() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class ChannelLabelsReply extends $pb.GeneratedMessage {
+  factory ChannelLabelsReply() => create();
+  ChannelLabelsReply._() : super();
+  factory ChannelLabelsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChannelLabelsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+    ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
+    ..pc<ChannelLabelsReply_ChannelLabel>(2, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.PM, protoName: 'channelLabels', subBuilder: ChannelLabelsReply_ChannelLabel.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ChannelLabelsReply clone() => ChannelLabelsReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChannelLabelsReply copyWith(void Function(ChannelLabelsReply) updates) => super.copyWith((message) => updates(message as ChannelLabelsReply)) as ChannelLabelsReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ChannelLabelsReply create() => ChannelLabelsReply._();
+  ChannelLabelsReply createEmptyInstance() => create();
+  static $pb.PbList<ChannelLabelsReply> createRepeated() => $pb.PbList<ChannelLabelsReply>();
+  @$core.pragma('dart2js:noInline')
+  static ChannelLabelsReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelLabelsReply>(create);
+  static ChannelLabelsReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Reply get reply => $_getN(0);
+  @$pb.TagNumber(1)
+  set reply(Reply v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReply() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReply() => clearField(1);
+  @$pb.TagNumber(1)
+  Reply ensureReply() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<ChannelLabelsReply_ChannelLabel> get channelLabels => $_getList(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

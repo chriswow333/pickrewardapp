@@ -1617,6 +1617,10 @@ class EvaluationEventResultResp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EvaluationEventResultResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOM<EvaluationEventResultResp_FeedbackEventResultResp>(2, _omitFieldNames ? '' : 'feedbackEventResultResp', protoName: 'feedbackEventResultResp', subBuilder: EvaluationEventResultResp_FeedbackEventResultResp.create)
+    ..pPS(3, _omitFieldNames ? '' : 'cardRewardTaskLabelMatched', protoName: 'cardRewardTaskLabelMatched')
+    ..pPS(4, _omitFieldNames ? '' : 'channelMatched', protoName: 'channelMatched')
+    ..pPS(5, _omitFieldNames ? '' : 'channelLabelMatched', protoName: 'channelLabelMatched')
+    ..pPS(6, _omitFieldNames ? '' : 'payMatched', protoName: 'payMatched')
     ..hasRequiredFields = false
   ;
 
@@ -1660,6 +1664,18 @@ class EvaluationEventResultResp extends $pb.GeneratedMessage {
   void clearFeedbackEventResultResp() => clearField(2);
   @$pb.TagNumber(2)
   EvaluationEventResultResp_FeedbackEventResultResp ensureFeedbackEventResultResp() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get cardRewardTaskLabelMatched => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get channelMatched => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.List<$core.String> get channelLabelMatched => $_getList(4);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.String> get payMatched => $_getList(5);
 }
 
 class SearchCardReq extends $pb.GeneratedMessage {
@@ -1876,6 +1892,106 @@ class SearchCardReply extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $core.List<SearchCardReply_Card> get cards => $_getList(1);
+}
+
+class TaskLabelsReply_TaskLabel extends $pb.GeneratedMessage {
+  factory TaskLabelsReply_TaskLabel() => create();
+  TaskLabelsReply_TaskLabel._() : super();
+  factory TaskLabelsReply_TaskLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TaskLabelsReply_TaskLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TaskLabelsReply.TaskLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TaskLabelsReply_TaskLabel clone() => TaskLabelsReply_TaskLabel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TaskLabelsReply_TaskLabel copyWith(void Function(TaskLabelsReply_TaskLabel) updates) => super.copyWith((message) => updates(message as TaskLabelsReply_TaskLabel)) as TaskLabelsReply_TaskLabel;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TaskLabelsReply_TaskLabel create() => TaskLabelsReply_TaskLabel._();
+  TaskLabelsReply_TaskLabel createEmptyInstance() => create();
+  static $pb.PbList<TaskLabelsReply_TaskLabel> createRepeated() => $pb.PbList<TaskLabelsReply_TaskLabel>();
+  @$core.pragma('dart2js:noInline')
+  static TaskLabelsReply_TaskLabel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TaskLabelsReply_TaskLabel>(create);
+  static TaskLabelsReply_TaskLabel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get label => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set label($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLabel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLabel() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class TaskLabelsReply extends $pb.GeneratedMessage {
+  factory TaskLabelsReply() => create();
+  TaskLabelsReply._() : super();
+  factory TaskLabelsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TaskLabelsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TaskLabelsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
+    ..pc<TaskLabelsReply_TaskLabel>(2, _omitFieldNames ? '' : 'taskLabels', $pb.PbFieldType.PM, protoName: 'taskLabels', subBuilder: TaskLabelsReply_TaskLabel.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TaskLabelsReply clone() => TaskLabelsReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TaskLabelsReply copyWith(void Function(TaskLabelsReply) updates) => super.copyWith((message) => updates(message as TaskLabelsReply)) as TaskLabelsReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TaskLabelsReply create() => TaskLabelsReply._();
+  TaskLabelsReply createEmptyInstance() => create();
+  static $pb.PbList<TaskLabelsReply> createRepeated() => $pb.PbList<TaskLabelsReply>();
+  @$core.pragma('dart2js:noInline')
+  static TaskLabelsReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TaskLabelsReply>(create);
+  static TaskLabelsReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Reply get reply => $_getN(0);
+  @$pb.TagNumber(1)
+  set reply(Reply v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReply() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReply() => clearField(1);
+  @$pb.TagNumber(1)
+  Reply ensureReply() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<TaskLabelsReply_TaskLabel> get taskLabels => $_getList(1);
 }
 
 class EmptyReq extends $pb.GeneratedMessage {
