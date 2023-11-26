@@ -24,7 +24,7 @@ class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
         children: [
           CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel,),
           const SizedBox(height: 10,),
-          CostName(),
+          CostName(cost:cardEventResultModel.cost),
           Expanded(
             child:SingleChildScrollView(
               // physics: AlwaysScrollableScrollPhysics(),
@@ -38,12 +38,13 @@ class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
 }
 
 class CostName extends StatelessWidget {
-  const CostName({super.key});
+  const CostName({super.key, required this.cost});
 
+  final int cost;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('以預估消費金額\$1000來計算')
+      child:Text('以預估消費金額\$$cost來計算')
     );
   }
 }

@@ -25,11 +25,14 @@ class CardEventResultModel {
   late String linkURL;
   late String bankID;
   late String bankName;
+  late int cost;
+
   List<CardRewardEventResultModel> cardRewardEventResultModels = [];
 
 
   CardEventResultModel.build(EvaluateCardsReply_CardEventResultResp resp, CriteriaViewModel criteriaViewModel){
-    
+
+    cost = criteriaViewModel.cost.value;
     cardID = resp.cardID;
     cardName = resp.cardName;
     cardImage = resp.cardImage;

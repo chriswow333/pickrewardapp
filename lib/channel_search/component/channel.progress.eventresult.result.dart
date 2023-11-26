@@ -17,8 +17,18 @@ class CardEventResults extends StatelessWidget {
   Widget build(BuildContext context) {
 
     CardEventResultsViewModel cardEventResultViewModel =Provider.of<CardEventResultsViewModel>(context);
+    
+    
+     CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,);
+    if (cardEventResultsViewModel.loading) {
+      return Container(
+        padding: EdgeInsets.only(top: 20),
+        alignment: Alignment.center,
+        child:CircularProgressIndicator(),
+      );
+    }
+    
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
-
     CardEventResultsModel cardEventResultsModel = CardEventResultsModel.build(cardEventResultViewModel.cardEventResults, criteriaViewModel);
     return Container(
       child:Column(
@@ -42,15 +52,8 @@ class CardEventResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,);
-    if (cardEventResultsViewModel.loading) {
-      return Container(
-        padding: EdgeInsets.only(top: 20),
-        alignment: Alignment.center,
-        child:CircularProgressIndicator(),
-      );
-    }
 
+   
     
     return Container(
       padding: EdgeInsets.only(bottom: 10),
