@@ -139,7 +139,6 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
                 AddMore(channelCategory: channelCategoryType,),
               ]
             )
-              
           ]
         ),
       )
@@ -156,24 +155,24 @@ class AddMore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChannelViewModel channelViewModel = Provider.of<ChannelViewModel>(context);
-
-    return Container(
-      padding: EdgeInsets.only(top:20),
+    
+    return InkWell(
+      onTap: (){
+        channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
+      },
       child:Container(
-        width: 70,
-        height: 30,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color:Palette.kToBlack[200]!,
-            width: 0.5,
+        padding: EdgeInsets.only(top:20),
+        child:Container(
+          width: 70,
+          height: 30,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color:Palette.kToBlack[200]!,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(20),
           ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        alignment: Alignment.center,
-        child:InkWell(
-          onTap: (){
-            channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
-          },
+          alignment: Alignment.center,
           child:Text("查看更多",
             style: TextStyle(
               fontSize: 12,

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_label.dart';
+import 'package:pickrewardapp/channel_search/model/cost.dart';
 import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
 import 'package:pickrewardapp/channel_search/model/reward_type.dart';
 import 'package:pickrewardapp/channel_search/model/task_label.dart';
@@ -75,15 +76,12 @@ class CriteriaViewModel with ChangeNotifier{
     return channelNames;
   }
 
-
 /// reset channel progress
   void resetChannelAndChannelLabels(){
     _channelMap.clear();
     _channelLabelMap.clear();
     notifyListeners();
   }
-
-
 
 /// cost date
   DateTime _date = DateTime.now();
@@ -161,12 +159,13 @@ class CriteriaViewModel with ChangeNotifier{
 /// result page
 
 /// cost 
-  int _cost = 1000;
-  set cost(int cost){
+  CostStatusEnum _cost = CostStatusEnum.less;
+  set cost(CostStatusEnum cost){
     _cost = cost;
     notifyListeners();
   }
-  int get cost => _cost;
+
+  CostStatusEnum get cost => _cost;
 
 }
 

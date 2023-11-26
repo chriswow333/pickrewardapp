@@ -16,18 +16,26 @@ class CardEventResultsViewModel with ChangeNotifier {
   }
 
 
-final List<EvaluateCardsReply_CardEventResultResp> _cardEventResults = [];
+  bool _loading = false;
+
+  bool get loading => _loading;
+
+  final List<EvaluateCardsReply_CardEventResultResp> _cardEventResults = [];
 
   List<EvaluateCardsReply_CardEventResultResp> get cardEventResults => _cardEventResults;
 
   Future<void> evaluateCardEventResult(CriteriaViewModel criteriaViewModel) async {
+    
+    _loading = true;
+    
+    await Future.delayed(const Duration(seconds: 1), () {});
 
-    try {
+    try { 
 
       EventReq eventReq = EventReq();
       eventReq.date = Int64(criteriaViewModel.date.millisecondsSinceEpoch ~/ 1000);
-      eventReq.cost = criteriaViewModel.cost;
-      
+      eventReq.cost = criteriaViewModel.cost.value;
+
       final channelEvent = EventReq_ChannelEvent();
 
       channelEvent.channelLabels.addAll(criteriaViewModel.channelLabels.map((e) => e.label).toList());
@@ -54,6 +62,7 @@ final List<EvaluateCardsReply_CardEventResultResp> _cardEventResults = [];
 
       _cardEventResults.clear();
       _cardEventResults.addAll(evaluateCardsReply.cardEventResults);
+      _loading = false;
       notifyListeners();
 
     } on GrpcError catch (e) {
@@ -61,5 +70,6 @@ final List<EvaluateCardsReply_CardEventResultResp> _cardEventResults = [];
     } catch (e) {
       print(e);
     }
+
   }
 }

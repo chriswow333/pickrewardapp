@@ -68,6 +68,7 @@ class CriteriaPageBar extends StatelessWidget {
             padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
             child:InkWell(
               onTap:(){
+                
                 cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
 
                 FocusScope.of(context).unfocus();

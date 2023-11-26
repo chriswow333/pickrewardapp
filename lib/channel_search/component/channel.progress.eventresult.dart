@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.cost.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.result.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
@@ -31,6 +32,8 @@ class EventResultProgress extends StatelessWidget {
           SizedBox(height:10),
           EventResultMessage(),
           SizedBox(height:20),
+          CriteriaCostWidget(),
+          SizedBox(height:10),
           Expanded(
             child:SingleChildScrollView(
               child:CardEventResults(),
@@ -45,6 +48,8 @@ class EventResultProgress extends StatelessWidget {
     );
   }
 }
+
+
 
 class EventResultProgressTitle extends StatelessWidget {
   
@@ -158,9 +163,7 @@ class EvaluationCriteriaSelected extends StatelessWidget {
                 children:[
                   CriteriaSelectedChannel(),
                   SizedBox(height:10),
-                  CriteriaSelectedCostAndDate(),
-                  CriteriaSelectedTaskLabels(),
-                  CardRewardSelectedPay(),
+                  CriteriaSelectedOthers(),
                 ]
               )
             )
@@ -196,76 +199,37 @@ class CriteriaSelectedChannel extends StatelessWidget {
   }
 }
 
-class CriteriaSelectedCostAndDate extends StatelessWidget {
-  const CriteriaSelectedCostAndDate({super.key});
+class CriteriaSelectedOthers extends StatelessWidget {
+  const CriteriaSelectedOthers({super.key});
 
   @override
   Widget build(BuildContext context) {
 
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     DateTime dateTime = criteriaViewModel.date;
-        int cost = criteriaViewModel.cost;
 
     String formattedDate = DateFormat('yyyy/MM/dd').format(dateTime);
 
+    String taskLabels = criteriaViewModel.taskLabels.map((e) => e.name).join(", ");
+
+    String rewardTypeName = criteriaViewModel.rewardType.name;
+
+    String payUsageName = "行動支付" + criteriaViewModel.payUsage.name;
+
+
+    if(taskLabels.isNotEmpty){
+      taskLabels = ", " + taskLabels;
+    }
+
+
+
     return Container(
-      child:Text('預計刷卡日期: $formattedDate, 預計刷卡: $cost元',
+      child:Text('預計刷卡日$formattedDate, $payUsageName, $rewardTypeName$taskLabels',
         style:TextStyle(
-          fontSize: 12,
+          fontSize: 13,
         )
       )
     );
-  }
-}
-
-class CriteriaSelectedTaskLabels extends StatelessWidget {
-  const CriteriaSelectedTaskLabels({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
-    String taskLabels = criteriaViewModel.taskLabels.map((e) => e.name).join(", ");
-
-    if(taskLabels.isNotEmpty) {
-      taskLabels = "接受$taskLabels等任務活動";
-      return Container(
-        child:Text(taskLabels,
-          style:TextStyle(
-            fontSize: 12,
-          )
-        )
-      );
-    }
-    
-    return Container();
-  }
-}
-
-
-
-class CardRewardSelectedPay extends StatelessWidget {
-  const CardRewardSelectedPay({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
-
-    PayUsageEnum payUsage = criteriaViewModel.payUsage;
-    String payUsageStr = "";
-    
-    if (payUsage != PayUsageEnum.whatever) {
-      payUsageStr = "${payUsage.name}行動支付";
-      return Container(
-        child:Text(payUsageStr,
-          style:TextStyle(
-            fontSize: 12,
-          )
-        )
-      );
-    }
-    return Container();
   }
 }
 

@@ -56,7 +56,7 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
+    
     String bestFeedback = "";
     if(cardEventResultModel.cardRewardEventResultModels.isNotEmpty) {
       final feedback = cardEventResultModel.cardRewardEventResultModels[0].evaluationEventResultModel;
@@ -163,9 +163,15 @@ class CardRewardEvaluationTitleBar extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Icon(
-            Icons.cancel_outlined,
+          InkWell(
+            onTap:(){
+              Navigator.pop(context);
+            },
+            child:Icon(
+              Icons.cancel_outlined,
+            )
           )
+          
         ]
       )
     );
