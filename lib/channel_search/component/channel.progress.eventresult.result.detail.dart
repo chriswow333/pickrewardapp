@@ -355,15 +355,26 @@ class FeedbackGetPercentage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String percentage = (evaluationEventResultModel.getPercentage * 100).toStringAsFixed(1);
+
+    String percentage = "";
+    
+    if(evaluationEventResultModel.calculateType == 0) {
+      // 趴數回饋
+      percentage = "${(evaluationEventResultModel.getPercentage * 100).toStringAsFixed(1)}%";
+    }else {
+      // 固定回饋
+      percentage = "折${evaluationEventResultModel.getReturn.toStringAsFixed(0)}";
+    }
+
     return Container(
+      width:60,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Palette.kToBlack[20],
         borderRadius: BorderRadius.circular(10)
       ),
-      child:SizedBox.square(
-        child:Text('$percentage%',
+      child:FittedBox(
+        child:Text('$percentage',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),

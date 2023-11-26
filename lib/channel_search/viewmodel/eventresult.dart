@@ -57,7 +57,7 @@ class CardEventResultsViewModel with ChangeNotifier {
       final payEvent = EventReq_PayEvent();
       payEvent.status = criteriaViewModel.payUsage.status;
       eventReq.payEvent = payEvent;
-    
+
       EvaluateCardsReply evaluateCardsReply = await CardService().cardClient.evaluateCards(eventReq);
 
       _cardEventResults.clear();
