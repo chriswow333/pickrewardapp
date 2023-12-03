@@ -1,7 +1,11 @@
 
 
 
+
 import 'package:flutter/material.dart';
+
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.result.detail.dart';
 import 'package:pickrewardapp/channel_search/model/event_result.dart';
@@ -16,11 +20,9 @@ class CardEventResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    CardEventResultsViewModel cardEventResultViewModel =Provider.of<CardEventResultsViewModel>(context);
-    
-    
-     CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,);
-    if (cardEventResultsViewModel.loading) {
+    CardEventResultsViewModel cardEventResultViewModel = Provider.of<CardEventResultsViewModel>(context);
+
+    if (cardEventResultViewModel.loading) {
       return Container(
         padding: EdgeInsets.only(top: 20),
         alignment: Alignment.center,
@@ -29,7 +31,9 @@ class CardEventResults extends StatelessWidget {
     }
     
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    
     CardEventResultsModel cardEventResultsModel = CardEventResultsModel.build(cardEventResultViewModel.cardEventResults, criteriaViewModel);
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,25 +56,35 @@ class CardEventResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-   
     
     return Container(
       padding: EdgeInsets.only(bottom: 10),
-      child:InkWell(
-        onTap: (){
-          showModalBottomSheet(
+      child:TextButton(
+        onPressed: (){
+
+          showCupertinoModalBottomSheet(
             context: context,
-            isScrollControlled:true,
-            isDismissible: true, 
-            // barrierColor:Colors.transparent,
-             shape: const RoundedRectangleBorder(
+            expand: true,
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
               ),
             builder: (context) {
               return CardRewardEvaluationDetailBottomUp(cardEventResultModel: cardEventResultModel,);
             },
           );
+
+          // showModalBottomSheet(
+          //   context: context,
+          //   isScrollControlled:true,
+          //   isDismissible: true, 
+          //   // barrierColor:Colors.transparent,
+          //    shape: const RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          //     ),
+          //   builder: (context) {
+          //     return CardRewardEvaluationDetailBottomUp(cardEventResultModel: cardEventResultModel,);
+          //   },
+          // );
         },
         child:Container(
           padding: EdgeInsets.fromLTRB(20,30,20,30),

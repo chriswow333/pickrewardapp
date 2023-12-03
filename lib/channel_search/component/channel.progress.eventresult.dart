@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.cost.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.result.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
-import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,7 @@ class EventResultProgress extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.only(left:5, right:5),
+      padding: const EdgeInsets.only(left:5, right:5),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[

@@ -1,4 +1,5 @@
-import 'package:flutter/gestures.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.criteria.dart';

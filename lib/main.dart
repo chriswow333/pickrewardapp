@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:pickrewardapp/card/card.dart';
 
+
+
+
+import 'package:pickrewardapp/card/card.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
@@ -32,7 +35,7 @@ class PickRewardApp extends StatelessWidget {
       supportedLocales: [
         Locale('zh')
       ],
-      home: HomeScreen(),
+      home:HomeScreen(),
     );
   }
 }
@@ -51,7 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
   static const Widget channelSearchPage = ChannelSearchPage();
   static const Widget cardSearchPage = CardSearchPage();
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
+
+    // CupertinoPageScaffold(
+    //   child:channelSearchPage,
+    // ),
     channelSearchPage,
     cardSearchPage,
   ];
@@ -63,11 +70,22 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
+      
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: 
+      
+      // CupertinoPageScaffold(
+      //   backgroundColor: Colors.transparent,
+      //   child:SizedBox.expand(
+      //     child:SafeArea(
+      //       child:channelSearchPage,
+      //     ),
+      //   ),
+      // ),
+      
+      SafeArea(
         // padding: GlobalPadding.global(),
         child: Center(
           child:LayoutBuilder(
@@ -91,8 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
             }),
-          )
-        )
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

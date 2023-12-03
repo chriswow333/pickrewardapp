@@ -19,7 +19,7 @@ class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      height:MediaQuery.of(context).size.height * 0.90,
+      // height:MediaQuery.of(context).size.height * 0.90,
       child:Column(
         children: [
           CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel,),
@@ -44,7 +44,14 @@ class CostName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('以預估消費金額\$$cost來計算')
+      child:Text('以預估消費金額\$$cost來計算',
+        style: TextStyle(
+          fontSize: 14,
+          decoration: TextDecoration.none,
+          color:Palette.kToBlack[500],
+          fontWeight: FontWeight.normal,
+        ),
+      )
     );
   }
 }
@@ -57,13 +64,6 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
-    String bestFeedback = "";
-    if(cardEventResultModel.cardRewardEventResultModels.isNotEmpty) {
-      final feedback = cardEventResultModel.cardRewardEventResultModels[0].evaluationEventResultModel;
-      String percentage = (feedback.getPercentage * 100).toStringAsFixed(1);
-      bestFeedback = "最高回饋" + percentage + "%  " + feedback.getReturn.toString() + "元";
-    }
     
     return Container(
       padding: EdgeInsets.all(20),
@@ -88,8 +88,8 @@ class CardRewardDetailBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:InkWell(
-        onTap:(){
+      child:TextButton(
+        onPressed:(){
 
         },
         child:Row(
@@ -98,6 +98,9 @@ class CardRewardDetailBtn extends StatelessWidget {
             Text('查看完整資訊',
               style: TextStyle(
                 fontSize:14,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.normal,
+                color: Palette.kToBlack[500]
               ),
             ),
             Icon(
@@ -120,9 +123,11 @@ class CardName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Text("${cardEventResultModel.bankName} ${cardEventResultModel.cardName}",
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 20,
-          fontWeight: FontWeight.bold
+          fontWeight: FontWeight.bold,
+          color:Palette.kToBlack[500],
+          decoration: TextDecoration.none,
         ),
       )
     );
@@ -162,10 +167,12 @@ class CardRewardEvaluationTitleBar extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              color:Palette.kToBlack[500],
+              decoration: TextDecoration.none,
             ),
           ),
-          InkWell(
-            onTap:(){
+          TextButton(
+            onPressed:(){
               Navigator.pop(context);
             },
             child:Icon(
@@ -188,11 +195,11 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
 
     List<CardRewardEvaluationResultDetail> detailWidgets = [];
+
     for(CardRewardEventResultModel cardRewardEventResultModel in cardEventResultModel.cardRewardEventResultModels){
-      
+
       for(String name in cardRewardEventResultModel.evaluationEventResultModel.channelLabelMatched){
         detailWidgets.add(
           CardRewardEvaluationResultDetail(
@@ -203,6 +210,8 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
       }
       
       for(String name in cardRewardEventResultModel.evaluationEventResultModel.channelMatched){
+
+        
         detailWidgets.add(
           CardRewardEvaluationResultDetail(
             matchedChannelOrChannelLabelName:name, 
@@ -236,6 +245,7 @@ class CardRewardEvaluationResultDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return Container(
       padding: EdgeInsets.all(10),
       child:Container(
@@ -249,10 +259,13 @@ class CardRewardEvaluationResultDetail extends StatelessWidget {
           children:[
             FeedbackGetPercentage(evaluationEventResultModel:cardRewardEventResultModel.evaluationEventResultModel),
             SizedBox(width:10),
-            CardRewardEvaluationContent(
-              cardRewardEventResultModel: cardRewardEventResultModel, 
-              matchedChannelOrChannelLabelName: matchedChannelOrChannelLabelName, 
-            ),
+            Expanded(
+              child:CardRewardEvaluationContent(
+                cardRewardEventResultModel: cardRewardEventResultModel, 
+                matchedChannelOrChannelLabelName: matchedChannelOrChannelLabelName, 
+              ),
+            )
+            
           ]
         )
       )
@@ -300,6 +313,8 @@ class CardRewardNameDetail extends StatelessWidget {
         style: TextStyle(
           fontSize: 14,
           color: Palette.kToBlack[200],
+          decoration: TextDecoration.none,
+          fontWeight: FontWeight.normal,
         ),
       ),
     );
@@ -321,6 +336,7 @@ class FeedbackGetReturn extends StatelessWidget {
           color:Palette.kToOrange[500],
           fontWeight: FontWeight.bold,
           fontSize: 14,
+          decoration: TextDecoration.none,
         ),
       )
     );
@@ -337,8 +353,11 @@ class MatchedChannelOrChannelLabelName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:Text(name,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
+          color: Palette.kToBlack[500],
+          decoration: TextDecoration.none,
+          
         ),
       )
     );
@@ -377,6 +396,8 @@ class FeedbackGetPercentage extends StatelessWidget {
         child:Text('$percentage',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            color: Palette.kToBlack[500],
+            decoration: TextDecoration.none,
           ),
         )
       )
@@ -397,12 +418,14 @@ class CardRewardDurationDate extends StatelessWidget {
     final endDateTimeFormat = DateFormat('yyyy/MM/dd').format(cardRewardEventResultModel.cardRewardEndDate);
     return Container(
       child:Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children:[
           Text('($endDateTimeFormat為止)',
             style: TextStyle(
               fontSize: 14,
               color: Palette.kToBlack[200],
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.normal,
             ),
           )
         ]
@@ -454,6 +477,7 @@ class CardRewardType extends StatelessWidget {
             style: TextStyle(
               color:Palette.kToBlack[0],
               fontSize: 14,
+              decoration: TextDecoration.none,
             ),
           )
         ),
@@ -479,10 +503,13 @@ class CardRewardLabel extends StatelessWidget {
           // ),
           borderRadius: BorderRadius.circular(20),
           color:Palette.kToYellow[600],
+
         ),
         child:Text(labelName,
           style: TextStyle(
             color:Palette.kToBlack[0],
+            fontSize: 14,
+            decoration: TextDecoration.none,
           ),
         )
       )

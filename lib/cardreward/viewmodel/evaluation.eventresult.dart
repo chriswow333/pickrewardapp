@@ -31,7 +31,6 @@ class EvaluationEventResultRespViewModel with ChangeNotifier {
     try {
 
       if(selectedViewModel.cardRewardModel == null){
-        print('not found cardRewardModel when evaluationCardRewardEvaluation');
         return;
       } 
 

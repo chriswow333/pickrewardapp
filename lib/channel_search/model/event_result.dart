@@ -88,6 +88,7 @@ class EvaluationEventResultModel {
   List<String> payMatched = [];
 
   EvaluationEventResultModel.build(EvaluationEventResultResp resp, CriteriaViewModel criteriaViewModel){
+
     id = resp.id;
     rewardType = resp.feedbackEventResultResp.rewardType;
     calculateType = resp.feedbackEventResultResp.calculateType;
@@ -98,7 +99,15 @@ class EvaluationEventResultModel {
 
     cardRewardTaskLabelMatched =  criteriaViewModel.getTaskLabelsName(resp.cardRewardTaskLabelMatched);
     channelMatched = criteriaViewModel.getChannelNames(resp.channelMatched);
-    channelLabelMatched = criteriaViewModel.getChannelLabelNames(resp.channelLabelMatched);
+    List<int> channelLabelMatchedInt = [];
+    for(String label in resp.channelLabelMatched) {
+      int? labelInt = int.tryParse(label);
+      if(labelInt != null){
+        channelLabelMatchedInt.add(labelInt);
+      }
+    }
+    channelLabelMatched = criteriaViewModel.getChannelLabelNames(channelLabelMatchedInt);
+    
     payMatched = resp.payMatched;
   }
 

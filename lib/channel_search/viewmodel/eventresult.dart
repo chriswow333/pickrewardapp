@@ -63,6 +63,7 @@ class CardEventResultsViewModel with ChangeNotifier {
       _cardEventResults.clear();
       _cardEventResults.addAll(evaluateCardsReply.cardEventResults);
       _loading = false;
+
       notifyListeners();
 
     } on GrpcError catch (e) {

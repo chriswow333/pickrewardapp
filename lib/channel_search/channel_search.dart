@@ -12,12 +12,14 @@ import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 
 
 
+
+
 class ChannelSearchPage extends StatelessWidget {
   const ChannelSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-   return  MultiProvider(
+   return MultiProvider(
       providers:[
         ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
         ChangeNotifierProvider<CriteriaViewModel>(create:(_)=>CriteriaViewModel()),

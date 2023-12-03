@@ -32,11 +32,11 @@ class CriteriaViewModel with ChangeNotifier{
     return _channelLabelMap.containsKey(label);
   }
 
-  List<String> getChannelLabelNames(List<String> channelLabels) {
-     List<String> channelLabelNames = [];
-    for(String channeLabel in channelLabels) {
-      if(_channelLabelMap.containsKey(channeLabel)){
-        channelLabelNames.add(_channelLabelMap[channeLabel]!.name);
+  List<String> getChannelLabelNames(List<int> channelLabels) {
+    List<String> channelLabelNames = [];
+    for(int channelLabel in channelLabels) {
+      if(_channelLabelMap.containsKey(channelLabel)){
+        channelLabelNames.add(_channelLabelMap[channelLabel]!.name);
       }
     }    
     return channelLabelNames;
