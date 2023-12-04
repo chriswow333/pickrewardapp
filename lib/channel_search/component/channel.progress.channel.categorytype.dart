@@ -19,7 +19,7 @@ class ChannelCategoryTypes extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection:Axis.horizontal,
       child:Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children:[
           Column(
             children:[

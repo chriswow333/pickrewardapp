@@ -88,6 +88,7 @@ class NormalChannelGroup extends StatelessWidget {
     return Container(
       
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           ChannelCategoryTypes(),
           SizedBox(height:20), 

@@ -3,7 +3,6 @@ import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_category.dart';
 import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
-import 'package:pickrewardapp/channel_search/model/channel_label.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
 
@@ -60,8 +59,9 @@ class ChannelViewModel with ChangeNotifier {
       ChannelLabelsReply channelLabelReply = await ChannelService().channelClient.getShowChannelLabels(EmptyReq());
       List<ChannelLabelsReply_ChannelLabel> channelLabels = channelLabelReply.channelLabels;
       for (ChannelLabelsReply_ChannelLabel channelLabel in channelLabels) {
+
         _channelLabelModels.add(
-          ChannelLabelModel(channelLabel.label,channelLabel.name,)
+          ChannelLabelModel(label:channelLabel.label,name:channelLabel.name,)
         );
       }
       channelLabelsLoading = false;
@@ -126,7 +126,8 @@ class ChannelViewModel with ChangeNotifier {
     );
 
 
-    _getChannelsByChannelCategoryTypeApi(channelCategoryType, initOffset, initLimit).then((value){
+    _getChannelsByChannelCategoryTypeApi(channelCategoryType, initOffset, initLimit)
+    .then((value){
       if (value.isEmpty) return;
 
       _channelModels[channelCategoryType] = value;
@@ -178,18 +179,28 @@ class ChannelViewModel with ChangeNotifier {
       List<ChannelItemModel> channelItemModels = [];
       
       for (ChannelReply_Channel channel in value.channels){
-        channelItemModels.add(ChannelItemModel(
-          id:channel.id,
-          name:channel.name,
-          image:channel.image,
-          linkURL: channel.linkURL,
-          descriptions: channel.descriptions,
-          channelCategoryType: channel.channelCategoryType,
-          createDate: channel.createDate.toInt(),
-          updateDate:channel.updateDate.toInt(),
-          labels:channel.labels,
-          channelStatus: channel.channelStatus,
-        ));
+
+        List<ChannelLabelModel> channelLabelModels = [];
+        for(ChannelReply_ChannelLabel label in channel.channelLabels) {
+          channelLabelModels.add(
+            ChannelLabelModel(label: label.label, name: label.name)
+          );
+        }
+        
+        channelItemModels.add(
+          ChannelItemModel(
+            id:channel.id,
+            name:channel.name,
+            image:channel.image,
+            linkURL: channel.linkURL,
+            descriptions: channel.descriptions,
+            channelCategoryType: channel.channelCategoryType,
+            createDate: channel.createDate.toInt(),
+            updateDate:channel.updateDate.toInt(),
+            channelLabels: channelLabelModels,
+            channelStatus: channel.channelStatus,
+          )
+        );
       }
 
       return channelItemModels;
@@ -208,7 +219,7 @@ class ChannelViewModel with ChangeNotifier {
       channelCategoryTypeRequest.categoryType = categoryType;
       channelCategoryTypeRequest.limit = limit;
       channelCategoryTypeRequest.offset = offset;
-      return await ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
+      return ChannelService().channelClient.getChannelsByChannelCategoryType(channelCategoryTypeRequest);
     } on GrpcError catch (e) {
       logger.e(e);
     } catch (e) {

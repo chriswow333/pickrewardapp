@@ -71,7 +71,15 @@ class SearchChannelViewModel with ChangeNotifier {
       List<ChannelItemModel> channelItemModels = [];
 
       for(SearchChannelReply_SearchChannel searchChannel in searchChannelReply.searchChannels){
+      
+
         for(SearchChannelReply_SearchChannel_Channel c in searchChannel.channels) {
+          List<ChannelLabelModel> channelLabelModels = [];
+          for(SearchChannelReply_SearchChannel_ChannelLabel label in c.channelLabels) {
+            channelLabelModels.add(
+              ChannelLabelModel(label: label.label, name: label.name)
+            );
+          }
           channelItemModels.add(
             ChannelItemModel(
               id: c.id, 
@@ -82,7 +90,7 @@ class SearchChannelViewModel with ChangeNotifier {
               channelCategoryType: c.channelCategoryType, 
               createDate: c.createDate.toInt(), 
               updateDate: c.updateDate.toInt(), 
-              labels: c.labels, 
+              channelLabels: channelLabelModels,
               channelStatus: c.channelStatus,
             )
           );

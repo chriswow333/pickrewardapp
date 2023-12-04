@@ -43,7 +43,7 @@ class CardEventResultsViewModel with ChangeNotifier {
       for(ChannelItemModel channelItemModel in  criteriaViewModel.channelItemModels) {
         final channelIDEvent = EventReq_ChannelIDEvent();
         channelIDEvent.channelID = channelItemModel.id;
-        channelIDEvent.channelLabels.addAll(channelItemModel.labels);
+        channelIDEvent.channelLabels.addAll(channelItemModel.channelLabels.map((e) => e.label).toList());
         channelEvent.channelIDEvent.add(channelIDEvent);
       }
       eventReq.channelEvent = channelEvent;

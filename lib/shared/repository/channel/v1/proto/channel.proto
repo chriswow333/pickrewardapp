@@ -16,6 +16,7 @@ service ChannelV1 {
 
   rpc GetShowChannelLabels(EmptyReq) returns (ChannelLabelsReply) {}
 
+  rpc GetChannels(ChannelIDsReq) returns(ChannelReply) {}
 }
 
 message EmptyReq{}
@@ -31,6 +32,10 @@ message Error {
   string errorMessage = 2;
 }
 
+
+message ChannelIDsReq{
+  repeated string channelIDs = 1;
+}
 
 message ChannelCategoryTypeReq {
   int32 categoryType = 1;
@@ -54,6 +59,12 @@ message ChannelCategoryTypeReply{
 
 message ChannelReply {
 
+  message ChannelLabel {
+    int32 label = 1;
+    string name = 2;
+    int32 show = 3;
+  }
+
   message Channel{
     string id = 1;
     string name = 2;
@@ -63,7 +74,7 @@ message ChannelReply {
     int32 channelCategoryType = 6;
     int64 createDate = 7;
     int64 updateDate = 8;
-    repeated int32 labels = 9;
+    repeated ChannelLabel channelLabels = 9;
     int32 order = 10;
     int32 channelStatus = 11;
   }
@@ -81,7 +92,15 @@ message SearchChannelReq{
 }
 
 message SearchChannelReply{
+
   message SearchChannel{
+
+    message ChannelLabel {
+      int32 label = 1;
+      string name = 2;
+      int32 show = 3;
+    }
+
     message Channel {
       string id = 1;
       string name = 2;
@@ -91,7 +110,7 @@ message SearchChannelReply{
       int32 channelCategoryType = 6;
       int64 createDate = 7;
       int64 updateDate = 8;
-      repeated int32 labels = 9;
+      repeated ChannelLabel channelLabels = 9;
       int32 order = 10;
       int32 channelStatus = 11;
     }

@@ -1,10 +1,10 @@
 
 
-class ChannelLabelModel {
-  final int label;
-  final String name;
-  ChannelLabelModel(this.label, this.name);
-}
+// class ChannelLabelModel {
+//   final int label;
+//   final String name;
+//   ChannelLabelModel(this.label, this.name);
+// }
 
 
 

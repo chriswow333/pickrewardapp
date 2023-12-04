@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/model/channel_category.dart';
 import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
-import 'package:pickrewardapp/channel_search/model/channel_label.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -213,7 +212,7 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
     
     return Container(
       key: channelViewModel.getChannelItemGlobalKeys(-1),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left:10, right:10, top:10, bottom: 10),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
@@ -235,14 +234,18 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
               ]
             ),
             const SizedBox(height: 20,),
-            Wrap(
-              spacing:10,
-              runSpacing: 10,
-              children:[
-                for(ChannelLabelModel l in channelViewModel.channelLabelModels)
-                  ChannelLabelItem(labelItemModel: l,),
-              ]
-            ),
+            Container(
+              width: double.infinity,
+              child:Wrap(
+                alignment: WrapAlignment.start,
+                spacing:15,
+                runSpacing: 10,
+                children:[
+                  for(ChannelLabelModel l in channelViewModel.channelLabelModels)
+                    ChannelLabelItem(labelItemModel: l,),
+                ]
+              ),
+            )
           ]
         ),
       )
@@ -304,6 +307,7 @@ class ChannelLabelItemName extends StatelessWidget {
           channelLabelModel.name,
           style:TextStyle(
             color: Palette.kToBlack[600],
+            fontSize: 14,
           ),
         )
       )

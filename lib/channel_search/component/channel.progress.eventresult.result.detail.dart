@@ -7,8 +7,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/channel_search/model/event_result.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/eventresult.channel.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/eventresult.channel.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-
+import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';
+import 'package:provider/provider.dart';
 
 class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
   const CardRewardEvaluationDetailBottomUp({super.key, required this.cardEventResultModel});
@@ -17,21 +21,24 @@ class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      // height:MediaQuery.of(context).size.height * 0.90,
-      child:Column(
-        children: [
-          CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel,),
-          const SizedBox(height: 10,),
-          CostName(cost:cardEventResultModel.cost),
-          Expanded(
-            child:SingleChildScrollView(
-              // physics: AlwaysScrollableScrollPhysics(),
-              child:CardRewardEvaluationResultDetails(cardEventResultModel: cardEventResultModel,),
+    
+    return MultiProvider(
+      providers:[
+        ChangeNotifierProvider<EventResultChannelViewModel>(create:(_)=>EventResultChannelViewModel()),
+      ],
+      child:Container(
+        child:Column(
+          children: [
+            CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel,),
+            const SizedBox(height: 10,),
+            CostName(cost:cardEventResultModel.cost),
+            Expanded(
+              child:SingleChildScrollView(
+                child:CardRewardEvaluationResultDetails(cardEventResultModel: cardEventResultModel,),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -196,10 +203,10 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<CardRewardEvaluationResultDetail> detailWidgets = [];
+    List<StatelessWidget> detailWidgets = [];
 
     for(CardRewardEventResultModel cardRewardEventResultModel in cardEventResultModel.cardRewardEventResultModels){
-
+      
       for(String name in cardRewardEventResultModel.evaluationEventResultModel.channelLabelMatched){
         detailWidgets.add(
           CardRewardEvaluationResultDetail(
@@ -208,10 +215,7 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
           )
         );
       }
-      
       for(String name in cardRewardEventResultModel.evaluationEventResultModel.channelMatched){
-
-        
         detailWidgets.add(
           CardRewardEvaluationResultDetail(
             matchedChannelOrChannelLabelName:name, 
@@ -219,12 +223,22 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
           )
        );
       }
+        
+       if(cardRewardEventResultModel.evaluationEventResultModel.channelMisMatched.isNotEmpty){
+        detailWidgets.add(
+          MismatchCardRewardEvaluationResultDetail(
+            cardRewardEventResultModel:cardRewardEventResultModel, 
+            mismatchChannelIDs: cardRewardEventResultModel.evaluationEventResultModel.channelMisMatched,
+          )
+        );
+       }
+     
     }
 
     return Container(
       child:Column(
         children:[
-          for(CardRewardEvaluationResultDetail widget in detailWidgets)
+          for(StatelessWidget widget in detailWidgets)
             widget
         ]
       )
@@ -232,6 +246,51 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
     
   }
 }
+
+
+
+class MismatchCardRewardEvaluationResultDetail extends StatelessWidget {
+  const MismatchCardRewardEvaluationResultDetail({super.key, required this.cardRewardEventResultModel, required this.mismatchChannelIDs});
+  
+  final CardRewardEventResultModel cardRewardEventResultModel;
+  final List<String> mismatchChannelIDs;
+
+  @override
+  Widget build(BuildContext context) {
+
+    EventResultChannelViewModel eventResultChannelViewModel = Provider.of<EventResultChannelViewModel>(context);
+
+    return FutureBuilder<List<ChannelReply_Channel>?>(
+      future:  eventResultChannelViewModel.fetchChannelModels(mismatchChannelIDs),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // While the future is still running, show a loading indicator
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          // If there was an error in the future, show an error message
+          // return Text('Error: ${snapshot.error}');
+          return Container();
+        } else {
+          if(snapshot.data != null) {
+            List<ChannelReply_Channel> channels = snapshot.data!;
+            return Column(
+              children:[
+                for(ChannelReply_Channel c in channels) 
+                  CardRewardEvaluationResultDetail(
+                    cardRewardEventResultModel: cardRewardEventResultModel, 
+                    matchedChannelOrChannelLabelName: c.name,
+
+                  )
+              ]
+            );
+          }
+          return Container();
+        }
+      },
+    );
+  }
+}
+
 
 class CardRewardEvaluationResultDetail extends StatelessWidget {
   const CardRewardEvaluationResultDetail({super.key, 

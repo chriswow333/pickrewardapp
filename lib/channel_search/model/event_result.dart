@@ -1,3 +1,4 @@
+import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
 
@@ -84,6 +85,8 @@ class EvaluationEventResultModel {
   late int feedbackEventResultStatus;
   List<String> cardRewardTaskLabelMatched = [];
   List<String> channelMatched = [];
+  List<String> channelMisMatched = [];
+
   List<String> channelLabelMatched = [];
   List<String> payMatched = [];
 
@@ -98,7 +101,33 @@ class EvaluationEventResultModel {
     feedbackEventResultStatus = resp.feedbackEventResultResp.feedbackEventResultStatus;
 
     cardRewardTaskLabelMatched =  criteriaViewModel.getTaskLabelsName(resp.cardRewardTaskLabelMatched);
-    channelMatched = criteriaViewModel.getChannelNames(resp.channelMatched);
+
+
+    Set<String> channelMatchedSet = criteriaViewModel.getChannelNames(resp.channelMatched).toSet();
+
+
+    
+    Set<String> criteriaChannelIDs = criteriaViewModel.channelItemModels.map((e) => e.id).toSet();
+    
+    for(String channel in resp.channelMatched) {
+      if(!criteriaChannelIDs.contains(channel)) {
+        channelMisMatched.add(channel);
+      }
+    }
+
+
+    for(ChannelItemModel channelItemModel in criteriaViewModel.channelItemModels){ 
+      Set<int> criteriaChannelLabelSet = channelItemModel.channelLabels.map((e) => e.label).toSet();
+      for(String matchedLabel in resp.channelLabelMatched) {
+        int? labelInt = int.tryParse(matchedLabel);
+        if(labelInt != null && criteriaChannelLabelSet.contains(labelInt)) {
+          channelMatchedSet.add(channelItemModel.name);
+        }
+      }
+    }
+    channelMatched = channelMatchedSet.toList();
+
+
     List<int> channelLabelMatchedInt = [];
     for(String label in resp.channelLabelMatched) {
       int? labelInt = int.tryParse(label);
@@ -107,7 +136,7 @@ class EvaluationEventResultModel {
       }
     }
     channelLabelMatched = criteriaViewModel.getChannelLabelNames(channelLabelMatchedInt);
-    
+
     payMatched = resp.payMatched;
   }
 

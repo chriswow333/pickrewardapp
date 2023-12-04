@@ -152,6 +152,42 @@ class Error extends $pb.GeneratedMessage {
   void clearErrorMessage() => clearField(2);
 }
 
+class ChannelIDsReq extends $pb.GeneratedMessage {
+  factory ChannelIDsReq() => create();
+  ChannelIDsReq._() : super();
+  factory ChannelIDsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChannelIDsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'channelIDs', protoName: 'channelIDs')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ChannelIDsReq clone() => ChannelIDsReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChannelIDsReq copyWith(void Function(ChannelIDsReq) updates) => super.copyWith((message) => updates(message as ChannelIDsReq)) as ChannelIDsReq;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ChannelIDsReq create() => ChannelIDsReq._();
+  ChannelIDsReq createEmptyInstance() => create();
+  static $pb.PbList<ChannelIDsReq> createRepeated() => $pb.PbList<ChannelIDsReq>();
+  @$core.pragma('dart2js:noInline')
+  static ChannelIDsReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelIDsReq>(create);
+  static ChannelIDsReq? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get channelIDs => $_getList(0);
+}
+
 class ChannelCategoryTypeReq extends $pb.GeneratedMessage {
   factory ChannelCategoryTypeReq() => create();
   ChannelCategoryTypeReq._() : super();
@@ -324,6 +360,68 @@ class ChannelCategoryTypeReply extends $pb.GeneratedMessage {
   $core.List<ChannelCategoryTypeReply_ChannelCategoryType> get channelCategoryTypes => $_getList(1);
 }
 
+class ChannelReply_ChannelLabel extends $pb.GeneratedMessage {
+  factory ChannelReply_ChannelLabel() => create();
+  ChannelReply_ChannelLabel._() : super();
+  factory ChannelReply_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChannelReply_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'show', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ChannelReply_ChannelLabel clone() => ChannelReply_ChannelLabel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChannelReply_ChannelLabel copyWith(void Function(ChannelReply_ChannelLabel) updates) => super.copyWith((message) => updates(message as ChannelReply_ChannelLabel)) as ChannelReply_ChannelLabel;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ChannelReply_ChannelLabel create() => ChannelReply_ChannelLabel._();
+  ChannelReply_ChannelLabel createEmptyInstance() => create();
+  static $pb.PbList<ChannelReply_ChannelLabel> createRepeated() => $pb.PbList<ChannelReply_ChannelLabel>();
+  @$core.pragma('dart2js:noInline')
+  static ChannelReply_ChannelLabel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelReply_ChannelLabel>(create);
+  static ChannelReply_ChannelLabel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get label => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set label($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLabel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLabel() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get show => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set show($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasShow() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearShow() => clearField(3);
+}
+
 class ChannelReply_Channel extends $pb.GeneratedMessage {
   factory ChannelReply_Channel() => create();
   ChannelReply_Channel._() : super();
@@ -339,7 +437,7 @@ class ChannelReply_Channel extends $pb.GeneratedMessage {
     ..a<$core.int>(6, _omitFieldNames ? '' : 'channelCategoryType', $pb.PbFieldType.O3, protoName: 'channelCategoryType')
     ..aInt64(7, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
     ..aInt64(8, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
-    ..p<$core.int>(9, _omitFieldNames ? '' : 'labels', $pb.PbFieldType.K3)
+    ..pc<ChannelReply_ChannelLabel>(9, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.PM, protoName: 'channelLabels', subBuilder: ChannelReply_ChannelLabel.create)
     ..a<$core.int>(10, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
     ..a<$core.int>(11, _omitFieldNames ? '' : 'channelStatus', $pb.PbFieldType.O3, protoName: 'channelStatus')
     ..hasRequiredFields = false
@@ -433,7 +531,7 @@ class ChannelReply_Channel extends $pb.GeneratedMessage {
   void clearUpdateDate() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.List<$core.int> get labels => $_getList(8);
+  $core.List<ChannelReply_ChannelLabel> get channelLabels => $_getList(8);
 
   @$pb.TagNumber(10)
   $core.int get order => $_getIZ(9);
@@ -544,6 +642,68 @@ class SearchChannelReq extends $pb.GeneratedMessage {
   void clearKeyword() => clearField(1);
 }
 
+class SearchChannelReply_SearchChannel_ChannelLabel extends $pb.GeneratedMessage {
+  factory SearchChannelReply_SearchChannel_ChannelLabel() => create();
+  SearchChannelReply_SearchChannel_ChannelLabel._() : super();
+  factory SearchChannelReply_SearchChannel_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchChannelReply_SearchChannel_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'show', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SearchChannelReply_SearchChannel_ChannelLabel clone() => SearchChannelReply_SearchChannel_ChannelLabel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SearchChannelReply_SearchChannel_ChannelLabel copyWith(void Function(SearchChannelReply_SearchChannel_ChannelLabel) updates) => super.copyWith((message) => updates(message as SearchChannelReply_SearchChannel_ChannelLabel)) as SearchChannelReply_SearchChannel_ChannelLabel;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SearchChannelReply_SearchChannel_ChannelLabel create() => SearchChannelReply_SearchChannel_ChannelLabel._();
+  SearchChannelReply_SearchChannel_ChannelLabel createEmptyInstance() => create();
+  static $pb.PbList<SearchChannelReply_SearchChannel_ChannelLabel> createRepeated() => $pb.PbList<SearchChannelReply_SearchChannel_ChannelLabel>();
+  @$core.pragma('dart2js:noInline')
+  static SearchChannelReply_SearchChannel_ChannelLabel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchChannelReply_SearchChannel_ChannelLabel>(create);
+  static SearchChannelReply_SearchChannel_ChannelLabel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get label => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set label($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLabel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLabel() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get show => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set show($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasShow() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearShow() => clearField(3);
+}
+
 class SearchChannelReply_SearchChannel_Channel extends $pb.GeneratedMessage {
   factory SearchChannelReply_SearchChannel_Channel() => create();
   SearchChannelReply_SearchChannel_Channel._() : super();
@@ -559,7 +719,7 @@ class SearchChannelReply_SearchChannel_Channel extends $pb.GeneratedMessage {
     ..a<$core.int>(6, _omitFieldNames ? '' : 'channelCategoryType', $pb.PbFieldType.O3, protoName: 'channelCategoryType')
     ..aInt64(7, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
     ..aInt64(8, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
-    ..p<$core.int>(9, _omitFieldNames ? '' : 'labels', $pb.PbFieldType.K3)
+    ..pc<SearchChannelReply_SearchChannel_ChannelLabel>(9, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.PM, protoName: 'channelLabels', subBuilder: SearchChannelReply_SearchChannel_ChannelLabel.create)
     ..a<$core.int>(10, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
     ..a<$core.int>(11, _omitFieldNames ? '' : 'channelStatus', $pb.PbFieldType.O3, protoName: 'channelStatus')
     ..hasRequiredFields = false
@@ -653,7 +813,7 @@ class SearchChannelReply_SearchChannel_Channel extends $pb.GeneratedMessage {
   void clearUpdateDate() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.List<$core.int> get labels => $_getList(8);
+  $core.List<SearchChannelReply_SearchChannel_ChannelLabel> get channelLabels => $_getList(8);
 
   @$pb.TagNumber(10)
   $core.int get order => $_getIZ(9);

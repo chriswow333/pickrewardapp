@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class ChannelItemModel {
 
   final String id;
@@ -8,8 +9,7 @@ class ChannelItemModel {
   final int channelCategoryType;
   final int createDate;
   final int updateDate;
-  final List<int> labels;
-  // final List<ChannelLabelModel> channelLabels;
+  final List<ChannelLabelModel> channelLabels;
   final int channelStatus;
 
   ChannelItemModel({
@@ -21,8 +21,23 @@ class ChannelItemModel {
     required this.channelCategoryType, 
     required this.createDate, 
     required this.updateDate, 
-    required this.labels, 
+    required this.channelLabels, 
     required this.channelStatus
   });
 
+
+
+}
+
+
+class ChannelLabelModel {
+  int label;
+  String name;
+  int? show;
+  
+  ChannelLabelModel({
+    required this.label,
+    required this.name,
+  });
+  
 }

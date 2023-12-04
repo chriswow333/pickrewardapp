@@ -73,18 +73,6 @@ class CardEventResult extends StatelessWidget {
             },
           );
 
-          // showModalBottomSheet(
-          //   context: context,
-          //   isScrollControlled:true,
-          //   isDismissible: true, 
-          //   // barrierColor:Colors.transparent,
-          //    shape: const RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-          //     ),
-          //   builder: (context) {
-          //     return CardRewardEvaluationDetailBottomUp(cardEventResultModel: cardEventResultModel,);
-          //   },
-          // );
         },
         child:Container(
           padding: EdgeInsets.fromLTRB(20,30,20,30),
