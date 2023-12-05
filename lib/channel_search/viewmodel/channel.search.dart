@@ -19,6 +19,17 @@ class SearchChannelViewModel with ChangeNotifier {
   bool _searchChannelFlag = false;
   
 
+  void onFocusSearch() {
+    _searchChannelFlag = true;
+    notifyListeners();
+  }
+
+  void cancel(){
+    _keyword = "";
+    _searchChannelFlag = false;
+    notifyListeners();
+  }
+
   void changeKeyword(String keyword){
     if(keyword == _keyword)return;
     _keyword = keyword;

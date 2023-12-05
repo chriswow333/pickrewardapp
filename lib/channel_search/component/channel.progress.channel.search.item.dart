@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.selectedbar.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
@@ -24,7 +23,6 @@ class SearchChannelItems extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
-              
               Container(
                 padding:EdgeInsets.only(top:10, bottom: 5),
                 child:Text('搜尋結果',
@@ -33,7 +31,6 @@ class SearchChannelItems extends StatelessWidget {
                   ),
                 ),
               ),
-              
               if(loading)
                 LoadingItem(),
 
@@ -41,14 +38,6 @@ class SearchChannelItems extends StatelessWidget {
                 SearchItems(),
             ],
           ),
-
-          Container(
-            alignment: Alignment.bottomCenter,
-            child:SelectedChannelResult(controller: controller,),
-          ),
-          
-
-
         ]
       )
       

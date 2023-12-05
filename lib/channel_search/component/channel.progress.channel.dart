@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.item.dart';
 import 'package:pickrewardapp/channel_search/component/channel.progress.channel.search.dart';
@@ -27,14 +28,16 @@ class ChannelProgress extends StatelessWidget {
           const SizedBox(height: 10),
           if(searchChannelViewModel.searchChannelFlag)
             SearchChannelItems(controller:controller),
+            
           if(!searchChannelViewModel.searchChannelFlag)
           Expanded(
             child:NormalChannelGroup(controller: controller,),
           ),
-            
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height:20
+          ),
           SizedBox(
-            child:SelectedChannelResult(controller: controller,),
+           child:SelectedChannelResult(controller: controller,),
           )
         ]
       )
@@ -48,6 +51,9 @@ class ChannelHeaderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
+
     return Container(
       child:Column(
         children:[
@@ -65,7 +71,7 @@ class ChannelHeaderTitle extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(top:5),
-                    child:const SearchChannelBar(),
+                    child:SearchChannelBar(searchChannelViewModel: searchCardViewModel,),
                   ),
                 ),
               ]
@@ -76,6 +82,7 @@ class ChannelHeaderTitle extends StatelessWidget {
     );
   }
 }
+
 
 
 
