@@ -14,6 +14,42 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class PayIDsReq extends $pb.GeneratedMessage {
+  factory PayIDsReq() => create();
+  PayIDsReq._() : super();
+  factory PayIDsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PayIDsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PayIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'payIDs', protoName: 'payIDs')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PayIDsReq clone() => PayIDsReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PayIDsReq copyWith(void Function(PayIDsReq) updates) => super.copyWith((message) => updates(message as PayIDsReq)) as PayIDsReq;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PayIDsReq create() => PayIDsReq._();
+  PayIDsReq createEmptyInstance() => create();
+  static $pb.PbList<PayIDsReq> createRepeated() => $pb.PbList<PayIDsReq>();
+  @$core.pragma('dart2js:noInline')
+  static PayIDsReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PayIDsReq>(create);
+  static PayIDsReq? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get payIDs => $_getList(0);
+}
+
 class Reply extends $pb.GeneratedMessage {
   factory Reply() => create();
   Reply._() : super();

@@ -13,6 +13,18 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use payIDsReqDescriptor instead')
+const PayIDsReq$json = {
+  '1': 'PayIDsReq',
+  '2': [
+    {'1': 'payIDs', '3': 1, '4': 3, '5': 9, '10': 'payIDs'},
+  ],
+};
+
+/// Descriptor for `PayIDsReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List payIDsReqDescriptor = $convert.base64Decode(
+    'CglQYXlJRHNSZXESFgoGcGF5SURzGAEgAygJUgZwYXlJRHM=');
+
 @$core.Deprecated('Use replyDescriptor instead')
 const Reply$json = {
   '1': 'Reply',

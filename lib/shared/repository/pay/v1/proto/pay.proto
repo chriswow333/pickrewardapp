@@ -11,8 +11,14 @@ package pay;
 // The greeting service definition.
 service PayV1 {
   rpc GetAllPays (AllPaysReq) returns (PaysReply){}
+  rpc GetPaysByIDs(PayIDsReq) returns (PaysReply) {}
 }
 
+
+
+message PayIDsReq{
+  repeated string payIDs = 1;
+}
 
 
 

@@ -69,7 +69,7 @@ class CardEventResult extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
               ),
             builder: (context) {
-              return CardRewardEvaluationDetailBottomUp(cardEventResultModel: cardEventResultModel,);
+              return CardRewardEvaluationDetailBottomUp(rank:rank, cardEventResultModel: cardEventResultModel,);
             },
           );
 
@@ -103,9 +103,7 @@ class CardEventResult extends StatelessWidget {
           )
         )
       ),
-      
     );
-    ;
   }
 }
 

@@ -1,15 +1,36 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/channel_search/model/pay.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-
-
 import 'package:pickrewardapp/shared/repository/pay/v1/pay.dart';
 import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pb.dart';
 
 
 
+class EventResultPayViewModel with ChangeNotifier {
+
+  EventResultPayViewModel() {
+    PayService().init();
+  }
+
+  Future<List<PaysReply_Pay>?> fetchPays(List<String> ids) async {
+
+    try{
+      PayIDsReq payIDsReq = PayIDsReq();
+      payIDsReq.payIDs.addAll(ids);
+      PaysReply paysReply = await PayService().payClient.getPaysByIDs(payIDsReq);
+      return paysReply.pays;
+    } on GrpcError catch (e) {
+      logger.e(e);
+    } catch (e) {
+      logger.e(e);
+    }
+
+    return null;
+
+  }
+
+}
 
 // class PayItemViewModel with ChangeNotifier {
 

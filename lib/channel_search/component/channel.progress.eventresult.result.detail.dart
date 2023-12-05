@@ -6,17 +6,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/channel_search/model/cost.dart';
 import 'package:pickrewardapp/channel_search/model/event_result.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/eventresult.channel.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/eventresult.channel.dart';
+import 'package:pickrewardapp/channel_search/viewmodel/eventresult.pay.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';
+import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pb.dart';
+import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pb.dart';
 import 'package:provider/provider.dart';
 
 class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
-  const CardRewardEvaluationDetailBottomUp({super.key, required this.cardEventResultModel});
-
+  const CardRewardEvaluationDetailBottomUp({super.key, required this.cardEventResultModel, required this.rank});
+  
+  final int rank;
   final CardEventResultModel cardEventResultModel;
 
   @override
@@ -25,11 +27,12 @@ class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
     return MultiProvider(
       providers:[
         ChangeNotifierProvider<EventResultChannelViewModel>(create:(_)=>EventResultChannelViewModel()),
+        ChangeNotifierProvider<EventResultPayViewModel>(create:(_)=>EventResultPayViewModel()),
       ],
       child:Container(
         child:Column(
           children: [
-            CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel,),
+            CardRewardEvaluationDetailTitle(cardEventResultModel: cardEventResultModel, rank: rank,),
             const SizedBox(height: 10,),
             CostName(cost:cardEventResultModel.cost),
             Expanded(
@@ -64,19 +67,21 @@ class CostName extends StatelessWidget {
 }
 
 class CardRewardEvaluationDetailTitle extends StatelessWidget {
-  const CardRewardEvaluationDetailTitle({super.key, required this.cardEventResultModel});
+  const CardRewardEvaluationDetailTitle({super.key, required this.cardEventResultModel, required this.rank});
   
   final CardEventResultModel cardEventResultModel;
+  final int rank;
 
   @override
   Widget build(BuildContext context) {
 
-    
+  
+
     return Container(
       padding: EdgeInsets.all(20),
       child:Column(
         children:[
-          CardRewardEvaluationTitleBar(),
+          CardRewardEvaluationTitleBar(rank: rank, cost:cardEventResultModel.cost),
           Divider(),
           CardImage(image:cardEventResultModel.cardImage),
           CardName(cardEventResultModel:cardEventResultModel),
@@ -162,15 +167,24 @@ class CardImage extends StatelessWidget {
 
 
 class CardRewardEvaluationTitleBar extends StatelessWidget {
-  const CardRewardEvaluationTitleBar({super.key});
+  const CardRewardEvaluationTitleBar({super.key, required this.rank, required this.cost});
+  
+  final int rank;
+  final int cost;
 
   @override
   Widget build(BuildContext context) {
+    List<CostStatusEnum> newCosts = CostStatusEnum.values.where((element) => element.value == cost).toList();
+    String costName = "";
+    if(newCosts.length == 1) {
+      costName = newCosts[0].name;
+    }
+
     return Container(
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('截制刷 Top1',
+          Text('${costName}Top${rank+1}',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -224,7 +238,7 @@ class CardRewardEvaluationResultDetails extends StatelessWidget {
        );
       }
         
-       if(cardRewardEventResultModel.evaluationEventResultModel.channelMisMatched.isNotEmpty){
+      if(cardRewardEventResultModel.evaluationEventResultModel.channelMisMatched.isNotEmpty){
         detailWidgets.add(
           MismatchCardRewardEvaluationResultDetail(
             cardRewardEventResultModel:cardRewardEventResultModel, 
@@ -279,11 +293,11 @@ class MismatchCardRewardEvaluationResultDetail extends StatelessWidget {
                   CardRewardEvaluationResultDetail(
                     cardRewardEventResultModel: cardRewardEventResultModel, 
                     matchedChannelOrChannelLabelName: c.name,
-
                   )
               ]
             );
           }
+
           return Container();
         }
       },
@@ -303,7 +317,6 @@ class CardRewardEvaluationResultDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
 
     return Container(
       padding: EdgeInsets.all(10),
@@ -353,11 +366,57 @@ class CardRewardEvaluationContent extends StatelessWidget {
           CardRewardNameDetail(cardRewardEventResultModel:cardRewardEventResultModel),
           SizedBox(height: 10,),
           CardRewardTag(cardRewardEventResultModel: cardRewardEventResultModel,),
+          SizedBox(height: 10,),
+          CardRewardPayTag(cardRewardEventResultModel: cardRewardEventResultModel,),
         ]
       )
     );
   }
 }
+
+class CardRewardPayTag extends StatelessWidget {
+  const CardRewardPayTag({super.key, required this.cardRewardEventResultModel});
+
+  final CardRewardEventResultModel cardRewardEventResultModel;
+  
+  @override
+  Widget build(BuildContext context) {
+
+    if(cardRewardEventResultModel.evaluationEventResultModel.payMatched.isEmpty)return Container();
+
+    EventResultPayViewModel eventResultPayViewModel = Provider.of<EventResultPayViewModel>(context);
+
+    return FutureBuilder<List<PaysReply_Pay>?>(
+      future:  eventResultPayViewModel.fetchPays(cardRewardEventResultModel.evaluationEventResultModel.payMatched),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // While the future is still running, show a loading indicator
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          // If there was an error in the future, show an error message
+          // return Text('Error: ${snapshot.error}');
+          return Container();
+        } else {
+          if(snapshot.data != null) {
+            
+            List<PaysReply_Pay> pays = snapshot.data!;
+            return Container(
+              child:Wrap(
+                runSpacing:10.0,
+                children:[
+                  for (PaysReply_Pay pay in pays)
+                    CardRewardLabel(labelName: pay.name,),
+                ]
+              )
+            );
+          }
+          return Container();
+        }
+      },
+    );
+  }
+}
+
 
 class CardRewardNameDetail extends StatelessWidget {
   const CardRewardNameDetail({super.key, required this.cardRewardEventResultModel});
@@ -433,7 +492,6 @@ class FeedbackGetPercentage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     String percentage = "";
     
     if(evaluationEventResultModel.calculateType == 0) {
@@ -504,7 +562,8 @@ class CardRewardTag extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      child:Row(
+      child:Wrap(
+        runSpacing:10.0,
         children:[
           CardRewardType(rewardTypeName: cardRewardEventResultModel.rewardTypeName,),
           for (String labelName in cardRewardEventResultModel.cardRewardTaskLabelNames)
@@ -557,9 +616,6 @@ class CardRewardLabel extends StatelessWidget {
       child:Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
-          // border: Border.all(
-          //   color:Palette.kToRed[600]!,
-          // ),
           borderRadius: BorderRadius.circular(20),
           color:Palette.kToYellow[600],
 

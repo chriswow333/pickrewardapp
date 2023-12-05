@@ -71,9 +71,7 @@ class CardRewardEventResultModel {
     cardRewardTaskLabelNames = resp.taskLabelNames;
     evaluationEventResultModel = EvaluationEventResultModel.build(resp.evaluationEventResultResp, criteriaViewModel);
   }
-
 }
-
 
 class EvaluationEventResultModel {
   late String id;
@@ -136,8 +134,8 @@ class EvaluationEventResultModel {
       }
     }
     channelLabelMatched = criteriaViewModel.getChannelLabelNames(channelLabelMatchedInt);
-
     payMatched = resp.payMatched;
+
   }
 
 }
