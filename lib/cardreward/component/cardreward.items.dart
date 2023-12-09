@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -17,21 +18,25 @@ class CardRewardItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
+
+    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
     
-    List<CardRewardModel> evaluationTypeCardRewardModels =  cardRewardViewModel.evaluationCardRewardModels;
+    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
+    List<CardRewardModel> cardRewardModels = [];
 
-    List<CardRewardModel> activityTypeCardRewardModels = cardRewardViewModel.activityCardRewardModels;
-
+    if(cardRewardTabViewModel.showAll) {
+      cardRewardModels.addAll(cardRewardViewModel.evaluationCardRewardModels);
+      cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
+    }else {
+      cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
+    }
 
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          for(CardRewardModel cardRewardModel in evaluationTypeCardRewardModels)
+          for(CardRewardModel cardRewardModel in cardRewardModels)
             CardRewardItem(cardRewardModel: cardRewardModel,),
-          for(CardRewardModel cardRewardModel in activityTypeCardRewardModels)
-            CardRewardItem(cardRewardModel: cardRewardModel,)
         ]
       )
     );

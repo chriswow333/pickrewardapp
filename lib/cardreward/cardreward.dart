@@ -189,6 +189,8 @@ class CardRewardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
 
     return Container(
       padding: EdgeInsets.only(left:20, right:20),
@@ -198,8 +200,15 @@ class CardRewardTab extends StatelessWidget {
             child:Row(
               children:[  
                 TextButton(
-                  onPressed: (){},
-                  child:Text('主要回饋',),
+                  onPressed: (){
+                    cardRewardTabViewModel.showAll = true;
+                  },
+                  child:Text('主要回饋',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color:Palette.kToBlack[400],
+                    ),
+                  ),
                   style:ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
                     shape:MaterialStatePropertyAll(
@@ -215,8 +224,15 @@ class CardRewardTab extends StatelessWidget {
                 ),
                 const SizedBox(width:10),
                 TextButton(
-                  onPressed: (){},
-                  child:Text('其他優惠'),
+                  onPressed: (){
+                    cardRewardTabViewModel.showAll = false;
+                  },
+                  child:Text('其他優惠',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color:Palette.kToBlack[400],
+                    ),
+                  ),
                   style:ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
                     shape:MaterialStatePropertyAll(

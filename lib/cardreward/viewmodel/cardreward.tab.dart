@@ -2,20 +2,18 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
 
 
 
 class CardRewardTabViewModel with ChangeNotifier{
   
-  CardRewardTypeEnum _selectedCardRewardType = CardRewardTypeEnum.evaluation;
+  bool _showAll = true;
 
-  set changeCardRewardType(CardRewardTypeEnum cardRewardType){
-    if(_selectedCardRewardType == cardRewardType) return;
-    _selectedCardRewardType = cardRewardType;
+  set showAll(bool value){
+    _showAll = value;
     notifyListeners();
   }
 
-  get cardRewardType  => _selectedCardRewardType;
+  bool get showAll  => _showAll;
 
 }
