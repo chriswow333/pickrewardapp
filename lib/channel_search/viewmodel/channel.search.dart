@@ -17,57 +17,73 @@ class SearchChannelViewModel with ChangeNotifier {
 
   String _keyword = "";
   bool _searchChannelFlag = false;
-  
+  List<String> _searchKeywordHistory = [];
+  List<ChannelItemModel> _searchItemModels = [];
 
+
+
+  List<String> get searchKeywordHistory  => _searchKeywordHistory;
+  
   void onFocusSearch() {
     _searchChannelFlag = true;
     notifyListeners();
   }
 
-  void cancel(){
+  void cancel() {
     _keyword = "";
     _searchChannelFlag = false;
+    _searchItemModels.clear();
     notifyListeners();
   }
 
-  void changeKeyword(String keyword){
+  void changeKeyword(String keyword) {
+
     if(keyword == _keyword)return;
     _keyword = keyword;
-    
-     if(keyword.isNotEmpty) {
+
+    if(keyword.isNotEmpty) {
       _searchChannelFlag = true;
     }else {
-      _searchChannelFlag = false;
-      _loading = false;
+      _searchItemModels.clear();
     }
+
     notifyListeners();
   }
+
+  
   
   bool _searched = false;
+  bool _loading = false;
+
   get searched => _searched;
+  get loading => _loading;
 
   searchChannel() {
     if(_keyword.isNotEmpty) {
+
+      _loading = true;
       _searched = true;
       _fetchSearchChannels();
-    }    
+      _searchKeywordHistory.insert(0, _keyword);
+      if(_searchKeywordHistory.length == 10) {
+        _searchKeywordHistory.removeLast();
+      }
+
+    }
+
   }
 
-  bool _loading = false;
-  get loading => _loading;
-  setLoading(){
+
+  searchChannelFromHistory(String historyKeyword) {
     _loading = true;
+    _keyword = historyKeyword;
+    _fetchSearchChannels();
     notifyListeners();
   }
 
 
-
   get keyword => _keyword;
-
   get searchChannelFlag => _searchChannelFlag;
-
-  List<ChannelItemModel> _searchItemModels = [];
-
   get searchItemModels => _searchItemModels;
 
 

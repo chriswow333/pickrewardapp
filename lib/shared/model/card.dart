@@ -8,6 +8,7 @@ class CardItemModel {
   int updateDate;
   String linkURL;
   String bankID;
+  String bankName;
   int order;
   int cardStatus;
 
@@ -20,6 +21,7 @@ class CardItemModel {
     required this.updateDate,
     required this.linkURL,
     required this.bankID,
+    required this.bankName,
     required this.order,
     required this.cardStatus,
   });

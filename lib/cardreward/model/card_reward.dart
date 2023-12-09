@@ -35,16 +35,13 @@ class CardRewardModel {
 
 class TaskModel{
   final String name;
-  final String shortName;
   final int order;
-  final List<DescriptionModel> descriptions;
-
+  final int show;
 
   TaskModel({
     required this.name,
-    required this.shortName,
     required this.order,
-    required this.descriptions,
+    required this.show,
   });
 
 }

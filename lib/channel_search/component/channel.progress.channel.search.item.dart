@@ -11,37 +11,125 @@ import 'package:provider/provider.dart';
 
 class SearchChannelItems extends StatelessWidget {
   const SearchChannelItems({super.key, required this.controller});
+  
   final PageController controller;
 
   @override
   Widget build(BuildContext context) {
+    
     SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
     bool loading = searchCardViewModel.loading;
-    return Expanded(
-      child:Stack(
-        children:[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:[
-              Container(
-                padding:EdgeInsets.only(top:10, bottom: 5),
-                child:Text('搜尋結果',
-                  style: TextStyle(
-                    color:Palette.kToBlack[600],
-                  ),
-                ),
-              ),
-              if(loading)
-                LoadingItem(),
+    
+    String keyword = searchCardViewModel.keyword;
 
-              if(!loading)
-                SearchItems(),
-            ],
-          ),
-        ]
+    if(keyword.isNotEmpty) {
+       return Expanded(
+          child:Stack(
+            children:[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+
+                  Container(
+                    padding:EdgeInsets.only(top:10, bottom: 5),
+                    child:Text('搜尋結果',
+                      style: TextStyle(
+                        color:Palette.kToBlack[600],
+                      ),
+                    ),
+                  ),
+                  if(loading)
+                    LoadingItem(),
+
+                  if(!loading)
+                    SearchItems(),
+                ],
+              ),
+            ]
+          )
+        );
+    }else {
+      return Expanded(
+        child:SearchChannelKeywordHistory(),
+      );
+    }
+  }
+}
+
+class SearchChannelKeywordHistory extends StatelessWidget {
+  const SearchChannelKeywordHistory({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
+    List<String> keywordHistory = searchCardViewModel.searchKeywordHistory;
+  
+    if(keywordHistory.isEmpty) {
+
+      return Container(
+        child:Text('無歷史搜尋紀錄')
+      );
+    }
+
+
+    return Container(
+      child:SingleChildScrollView(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Container(
+              child:Text('最近搜尋',
+                style:TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )
+              )
+            ),
+            SizedBox(height:20),
+            for(String keyword in keywordHistory)
+              KeywordHistory(keyword: keyword,),
+          ]
+        )
       )
-      
-      
+    );
+  }
+} 
+
+
+class KeywordHistory extends StatelessWidget {
+  const KeywordHistory({super.key, required this.keyword});
+
+  final String keyword;
+
+  @override
+  Widget build(BuildContext context) {
+
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: (){
+        searchChannelViewModel.searchChannelFromHistory(keyword);
+      },
+      child:Container(
+        padding: EdgeInsets.all(20),
+        child:Wrap(
+          alignment:WrapAlignment.end,
+          children:[
+            Icon(
+              Icons.search,
+              size:30,
+            ),
+            SizedBox(width:10),
+            Text(keyword,
+              style:TextStyle(
+                fontSize: 20,
+              )
+            )
+          ]
+        )
+      )
     );
   }
 }
@@ -79,7 +167,7 @@ class SearchItems extends StatelessWidget {
 
     SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
     List<ChannelItemModel> searchChannelItemModels = searchChannelViewModel.searchItemModels;
-
+    
     return Expanded(
       child:SingleChildScrollView(
         child:Wrap(
@@ -126,28 +214,35 @@ class ChannelItem extends StatelessWidget {
     
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
 
-    return TextButton(
-      onPressed: (){
-          criteriaViewModel.channel = channelItemModel;
+    return Container(
+      child: GestureDetector(
+      onTap: (){
+        criteriaViewModel.channel = channelItemModel;
       },
       child:Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+        ),
         child:Row(
           children:[
-            SelectedIcon(id:channelItemModel.id),
-            SizedBox(width:10),
             ChannelItemIcon(image:channelItemModel.image),
             SizedBox(width:20),
             ChannelItemName(name:channelItemModel.name),
+            SizedBox(width:10),
+            SelectedIcon(id:channelItemModel.id),
           ]
         )
       )
+    )
     );
   }
 }
 
 class SelectedIcon extends StatelessWidget {
+
   const SelectedIcon({super.key, required this.id});
   final String id;
+
   @override
   Widget build(BuildContext context) {
 
@@ -155,11 +250,9 @@ class SelectedIcon extends StatelessWidget {
     bool selected = criteriaViewModel.existChannel(id);
 
     if(selected) {
-      return Container(
-        child:Image.asset(
-          'images/logo.png',
-          width: 25,
-          height:25,
+      return ClipOval(
+        child:Icon(Icons.check_circle_sharp,
+          color:Palette.kToOrange[500],
         )
       );
     }else {
@@ -197,13 +290,13 @@ class ChannelItemIcon extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipOval(
       child:Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 
         // fit:BoxFit.cover,
-        width:60,
-        height:50,
+        width:40,
+        height:40,
       ),
     );
   }

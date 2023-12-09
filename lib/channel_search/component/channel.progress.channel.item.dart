@@ -263,6 +263,7 @@ class ChannelLabelItem extends StatelessWidget {
   Widget build(BuildContext context) {
     
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    
     return Container(
       child:TextButton(
         style:const ButtonStyle(

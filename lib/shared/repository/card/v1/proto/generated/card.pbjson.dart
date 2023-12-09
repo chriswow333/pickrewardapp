@@ -121,20 +121,22 @@ const CardsReply_Card$json = {
     {'1': 'updateDate', '3': 6, '4': 1, '5': 3, '10': 'updateDate'},
     {'1': 'linkURL', '3': 7, '4': 1, '5': 9, '10': 'linkURL'},
     {'1': 'bankID', '3': 8, '4': 1, '5': 9, '10': 'bankID'},
-    {'1': 'order', '3': 9, '4': 1, '5': 5, '10': 'order'},
-    {'1': 'cardStatus', '3': 10, '4': 1, '5': 5, '10': 'cardStatus'},
+    {'1': 'bankName', '3': 9, '4': 1, '5': 9, '10': 'bankName'},
+    {'1': 'order', '3': 10, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'cardStatus', '3': 11, '4': 1, '5': 5, '10': 'cardStatus'},
   ],
 };
 
 /// Descriptor for `CardsReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardsReplyDescriptor = $convert.base64Decode(
     'CgpDYXJkc1JlcGx5EiQKBXJlcGx5GAEgASgLMg4uY2FyZF92MS5SZXBseVIFcmVwbHkSLgoFY2'
-    'FyZHMYAiADKAsyGC5jYXJkX3YxLkNhcmRzUmVwbHkuQ2FyZFIFY2FyZHMajAIKBENhcmQSDgoC'
+    'FyZHMYAiADKAsyGC5jYXJkX3YxLkNhcmRzUmVwbHkuQ2FyZFIFY2FyZHMaqAIKBENhcmQSDgoC'
     'aWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIgoMZGVzY3JpcHRpb25zGAMgAygJUg'
     'xkZXNjcmlwdGlvbnMSFAoFaW1hZ2UYBCABKAlSBWltYWdlEh4KCmNyZWF0ZURhdGUYBSABKANS'
     'CmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgGIAEoA1IKdXBkYXRlRGF0ZRIYCgdsaW5rVVJMGA'
-    'cgASgJUgdsaW5rVVJMEhYKBmJhbmtJRBgIIAEoCVIGYmFua0lEEhQKBW9yZGVyGAkgASgFUgVv'
-    'cmRlchIeCgpjYXJkU3RhdHVzGAogASgFUgpjYXJkU3RhdHVz');
+    'cgASgJUgdsaW5rVVJMEhYKBmJhbmtJRBgIIAEoCVIGYmFua0lEEhoKCGJhbmtOYW1lGAkgASgJ'
+    'UghiYW5rTmFtZRIUCgVvcmRlchgKIAEoBVIFb3JkZXISHgoKY2FyZFN0YXR1cxgLIAEoBVIKY2'
+    'FyZFN0YXR1cw==');
 
 @$core.Deprecated('Use cardRewardsByCardIDReqDescriptor instead')
 const CardRewardsByCardIDReq$json = {
@@ -158,7 +160,7 @@ const CardRewardsReply$json = {
     {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.card_v1.Reply', '10': 'reply'},
     {'1': 'cardRewards', '3': 2, '4': 3, '5': 11, '6': '.card_v1.CardRewardsReply.CardReward', '10': 'cardRewards'},
   ],
-  '3': [CardRewardsReply_Reward$json, CardRewardsReply_Description$json, CardRewardsReply_Task$json, CardRewardsReply_CardReward$json],
+  '3': [CardRewardsReply_Reward$json, CardRewardsReply_Description$json, CardRewardsReply_TaskLabel$json, CardRewardsReply_Task$json, CardRewardsReply_CardReward$json],
 };
 
 @$core.Deprecated('Use cardRewardsReplyDescriptor instead')
@@ -184,13 +186,21 @@ const CardRewardsReply_Description$json = {
 };
 
 @$core.Deprecated('Use cardRewardsReplyDescriptor instead')
+const CardRewardsReply_TaskLabel$json = {
+  '1': 'TaskLabel',
+  '2': [
+    {'1': 'label', '3': 1, '4': 1, '5': 5, '10': 'label'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'show', '3': 3, '4': 1, '5': 5, '10': 'show'},
+  ],
+};
+
+@$core.Deprecated('Use cardRewardsReplyDescriptor instead')
 const CardRewardsReply_Task$json = {
   '1': 'Task',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'shortName', '3': 2, '4': 1, '5': 9, '10': 'shortName'},
-    {'1': 'order', '3': 3, '4': 1, '5': 5, '10': 'order'},
-    {'1': 'descriptions', '3': 4, '4': 3, '5': 11, '6': '.card_v1.CardRewardsReply.Description', '10': 'descriptions'},
+    {'1': 'order', '3': 1, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'taskLabel', '3': 2, '4': 1, '5': 11, '6': '.card_v1.CardRewardsReply.TaskLabel', '10': 'taskLabel'},
   ],
 };
 
@@ -221,18 +231,18 @@ final $typed_data.Uint8List cardRewardsReplyDescriptor = $convert.base64Decode(
     'EoCVIEbmFtZRIeCgpyZXdhcmRUeXBlGAMgASgFUgpyZXdhcmRUeXBlEh4KCmNyZWF0ZURhdGUY'
     'BCABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgFIAEoA1IKdXBkYXRlRGF0ZRpLCgtEZX'
     'NjcmlwdGlvbhISCgRuYW1lGAEgASgJUgRuYW1lEhQKBW9yZGVyGAIgASgFUgVvcmRlchISCgRk'
-    'ZXNjGAMgAygJUgRkZXNjGpkBCgRUYXNrEhIKBG5hbWUYASABKAlSBG5hbWUSHAoJc2hvcnROYW'
-    '1lGAIgASgJUglzaG9ydE5hbWUSFAoFb3JkZXIYAyABKAVSBW9yZGVyEkkKDGRlc2NyaXB0aW9u'
-    'cxgEIAMoCzIlLmNhcmRfdjEuQ2FyZFJld2FyZHNSZXBseS5EZXNjcmlwdGlvblIMZGVzY3JpcH'
-    'Rpb25zGrkDCgpDYXJkUmV3YXJkEg4KAmlkGAEgASgJUgJpZBIWCgZjYXJkSUQYAiABKAlSBmNh'
-    'cmRJRBISCgRuYW1lGAMgASgJUgRuYW1lEkkKDGRlc2NyaXB0aW9ucxgEIAMoCzIlLmNhcmRfdj'
-    'EuQ2FyZFJld2FyZHNSZXBseS5EZXNjcmlwdGlvblIMZGVzY3JpcHRpb25zEh4KCmNyZWF0ZURh'
-    'dGUYBSABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgGIAEoA1IKdXBkYXRlRGF0ZRIcCg'
-    'lzdGFydERhdGUYByABKANSCXN0YXJ0RGF0ZRIYCgdlbmREYXRlGAggASgDUgdlbmREYXRlEiYK'
-    'DmNhcmRSZXdhcmRUeXBlGAkgASgFUg5jYXJkUmV3YXJkVHlwZRI4CgZyZXdhcmQYCiABKAsyIC'
-    '5jYXJkX3YxLkNhcmRSZXdhcmRzUmVwbHkuUmV3YXJkUgZyZXdhcmQSFAoFb3JkZXIYCyABKAVS'
-    'BW9yZGVyEjQKBXRhc2tzGAwgAygLMh4uY2FyZF92MS5DYXJkUmV3YXJkc1JlcGx5LlRhc2tSBX'
-    'Rhc2tz');
+    'ZXNjGAMgAygJUgRkZXNjGkkKCVRhc2tMYWJlbBIUCgVsYWJlbBgBIAEoBVIFbGFiZWwSEgoEbm'
+    'FtZRgCIAEoCVIEbmFtZRISCgRzaG93GAMgASgFUgRzaG93Gl8KBFRhc2sSFAoFb3JkZXIYASAB'
+    'KAVSBW9yZGVyEkEKCXRhc2tMYWJlbBgCIAEoCzIjLmNhcmRfdjEuQ2FyZFJld2FyZHNSZXBseS'
+    '5UYXNrTGFiZWxSCXRhc2tMYWJlbBq5AwoKQ2FyZFJld2FyZBIOCgJpZBgBIAEoCVICaWQSFgoG'
+    'Y2FyZElEGAIgASgJUgZjYXJkSUQSEgoEbmFtZRgDIAEoCVIEbmFtZRJJCgxkZXNjcmlwdGlvbn'
+    'MYBCADKAsyJS5jYXJkX3YxLkNhcmRSZXdhcmRzUmVwbHkuRGVzY3JpcHRpb25SDGRlc2NyaXB0'
+    'aW9ucxIeCgpjcmVhdGVEYXRlGAUgASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBiABKA'
+    'NSCnVwZGF0ZURhdGUSHAoJc3RhcnREYXRlGAcgASgDUglzdGFydERhdGUSGAoHZW5kRGF0ZRgI'
+    'IAEoA1IHZW5kRGF0ZRImCg5jYXJkUmV3YXJkVHlwZRgJIAEoBVIOY2FyZFJld2FyZFR5cGUSOA'
+    'oGcmV3YXJkGAogASgLMiAuY2FyZF92MS5DYXJkUmV3YXJkc1JlcGx5LlJld2FyZFIGcmV3YXJk'
+    'EhQKBW9yZGVyGAsgASgFUgVvcmRlchI0CgV0YXNrcxgMIAMoCzIeLmNhcmRfdjEuQ2FyZFJld2'
+    'FyZHNSZXBseS5UYXNrUgV0YXNrcw==');
 
 @$core.Deprecated('Use eventReqDescriptor instead')
 const EventReq$json = {
@@ -431,20 +441,22 @@ const SearchCardReply_Card$json = {
     {'1': 'updateDate', '3': 6, '4': 1, '5': 3, '10': 'updateDate'},
     {'1': 'linkURL', '3': 7, '4': 1, '5': 9, '10': 'linkURL'},
     {'1': 'bankID', '3': 8, '4': 1, '5': 9, '10': 'bankID'},
-    {'1': 'order', '3': 9, '4': 1, '5': 5, '10': 'order'},
-    {'1': 'cardStatus', '3': 10, '4': 1, '5': 5, '10': 'cardStatus'},
+    {'1': 'bankName', '3': 9, '4': 1, '5': 9, '10': 'bankName'},
+    {'1': 'order', '3': 10, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'cardStatus', '3': 11, '4': 1, '5': 5, '10': 'cardStatus'},
   ],
 };
 
 /// Descriptor for `SearchCardReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchCardReplyDescriptor = $convert.base64Decode(
     'Cg9TZWFyY2hDYXJkUmVwbHkSJAoFcmVwbHkYASABKAsyDi5jYXJkX3YxLlJlcGx5UgVyZXBseR'
-    'IzCgVjYXJkcxgCIAMoCzIdLmNhcmRfdjEuU2VhcmNoQ2FyZFJlcGx5LkNhcmRSBWNhcmRzGowC'
+    'IzCgVjYXJkcxgCIAMoCzIdLmNhcmRfdjEuU2VhcmNoQ2FyZFJlcGx5LkNhcmRSBWNhcmRzGqgC'
     'CgRDYXJkEg4KAmlkGAEgASgJUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiIKDGRlc2NyaXB0aW'
     '9ucxgDIAMoCVIMZGVzY3JpcHRpb25zEhQKBWltYWdlGAQgASgJUgVpbWFnZRIeCgpjcmVhdGVE'
     'YXRlGAUgASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYBiABKANSCnVwZGF0ZURhdGUSGA'
-    'oHbGlua1VSTBgHIAEoCVIHbGlua1VSTBIWCgZiYW5rSUQYCCABKAlSBmJhbmtJRBIUCgVvcmRl'
-    'chgJIAEoBVIFb3JkZXISHgoKY2FyZFN0YXR1cxgKIAEoBVIKY2FyZFN0YXR1cw==');
+    'oHbGlua1VSTBgHIAEoCVIHbGlua1VSTBIWCgZiYW5rSUQYCCABKAlSBmJhbmtJRBIaCghiYW5r'
+    'TmFtZRgJIAEoCVIIYmFua05hbWUSFAoFb3JkZXIYCiABKAVSBW9yZGVyEh4KCmNhcmRTdGF0dX'
+    'MYCyABKAVSCmNhcmRTdGF0dXM=');
 
 @$core.Deprecated('Use taskLabelsReplyDescriptor instead')
 const TaskLabelsReply$json = {

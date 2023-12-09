@@ -2,6 +2,8 @@
 
 
 import 'dart:convert';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
@@ -108,6 +110,7 @@ class _CardItemsByBankIDState extends State<CardItemsByBankID> {
     List<CardItemModel> cardItemModels = widget.cardItemViewModel.getCardsByBankID(widget.cardItemViewModel.bankID);
 
     return Container(
+      
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -144,8 +147,9 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
-      padding: EdgeInsets.only(top:10, bottom: 10),
+      padding: EdgeInsets.all(10),
       child:Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -153,49 +157,69 @@ class CardItem extends StatelessWidget {
             color:Colors.white,
           ),
           borderRadius: const BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(20),
           ),
           color:Palette.kToBlack[0],
         ),
         child:TextButton(
           onPressed: (){
+
             FocusScope.of(context).unfocus();
+
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,
+              bankName: cardItemModel.bankName,
               descriptions:cardItemModel.descriptions,
               image:cardItemModel.image,
               updateDate: cardItemModel.updateDate,
-              lintUrl: cardItemModel.linkURL,
+              linkUrl: cardItemModel.linkURL,
             );
-            
-            Navigator.of(context, rootNavigator: true).push(
-              MaterialPageRoute(
-                builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)
-              ),
+
+
+            showCupertinoModalBottomSheet(
+              context: context,
+              expand: true,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+                ),
+              builder: (context) {
+                return CardContentScreen(cardHeaderItemModel:cardHeaderItemModel);
+              },
             );
+
+
+            // Navigator.of(context, rootNavigator: true).push(
+            //   MaterialPageRoute(
+            //     builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)
+            //   ),
+            // );
+
+
           },
           style:const ButtonStyle(
             splashFactory:NoSplash.splashFactory,
           ),
           child:Container(
-            child:Column(
+            padding: EdgeInsets.all(10),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                CardName(cardName: cardItemModel.name,),
-                SizedBox(height:5),
-                Row(
-                  children:[
-                    Expanded(
-                      child: CardDescs(descs:cardItemModel.descriptions),
-                    ),
-                    const SizedBox(width: 10,),
-                    CardIcon(image:cardItemModel.image),
-                  ]
-                ),
+                CardIcon(image:cardItemModel.image),
+                SizedBox(width:24),
+                Expanded(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      CardName(cardName: cardItemModel.name,),
+                      CardDescs(descs:cardItemModel.descriptions),
+                    ]
+                  )
+                )
               ]
-            ),
-          ),
+            )
+          )
         ),
       )
     );
@@ -211,19 +235,39 @@ class CardDescs extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: EdgeInsets.only(top:5),
+      padding: EdgeInsets.only(top:5,),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for(String desc in descs) 
             Container(
               padding: EdgeInsets.only(bottom: 5),
-              child:Text(desc,
-                style:TextStyle(
-                  color:Palette.kToBlack[900],
-                ),
-                maxLines: null,
-              ),
+              child:Row(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Container(
+                    width: 5,
+                    height:5,
+                    decoration: BoxDecoration(
+                      shape:BoxShape.circle,
+                      color:Palette.kToBlack[300],
+                    ),
+                  ),
+                  SizedBox(width:10),
+                  Expanded(
+                    child:Text("$desc",
+                      style:TextStyle(
+                        color:Palette.kToBlack[900],
+                        fontSize: 12,
+                      ),
+                      maxLines: null,
+                    ),    
+                  )
+                  
+                ]
+              )
+              
             ),
         ]
       )
@@ -241,8 +285,8 @@ class CardIcon extends StatelessWidget {
     return Image.memory(
       gaplessPlayback: true,
       base64Decode(image), 
-      width:70,
-      height:50,
+      width:80,
+      height:70,
     );
   }
 }
@@ -260,7 +304,7 @@ class CardName extends StatelessWidget {
     return Container(
       child:Text(cardName,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 14,
         color:Palette.kToBlack[600],
         fontWeight: FontWeight.bold,
       ),

@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
-import 'package:pickrewardapp/cardreward/viewmodel/evaluation.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 

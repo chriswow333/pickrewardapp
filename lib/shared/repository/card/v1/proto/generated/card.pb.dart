@@ -379,8 +379,9 @@ class CardsReply_Card extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..aOS(7, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
     ..aOS(8, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
+    ..aOS(9, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
     ..hasRequiredFields = false
   ;
 
@@ -472,22 +473,31 @@ class CardsReply_Card extends $pb.GeneratedMessage {
   void clearBankID() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.int get order => $_getIZ(8);
+  $core.String get bankName => $_getSZ(8);
   @$pb.TagNumber(9)
-  set order($core.int v) { $_setSignedInt32(8, v); }
+  set bankName($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasOrder() => $_has(8);
+  $core.bool hasBankName() => $_has(8);
   @$pb.TagNumber(9)
-  void clearOrder() => clearField(9);
+  void clearBankName() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.int get cardStatus => $_getIZ(9);
+  $core.int get order => $_getIZ(9);
   @$pb.TagNumber(10)
-  set cardStatus($core.int v) { $_setSignedInt32(9, v); }
+  set order($core.int v) { $_setSignedInt32(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasCardStatus() => $_has(9);
+  $core.bool hasOrder() => $_has(9);
   @$pb.TagNumber(10)
-  void clearCardStatus() => clearField(10);
+  void clearOrder() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.int get cardStatus => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set cardStatus($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasCardStatus() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearCardStatus() => clearField(11);
 }
 
 class CardsReply extends $pb.GeneratedMessage {
@@ -738,6 +748,68 @@ class CardRewardsReply_Description extends $pb.GeneratedMessage {
   $core.List<$core.String> get desc => $_getList(2);
 }
 
+class CardRewardsReply_TaskLabel extends $pb.GeneratedMessage {
+  factory CardRewardsReply_TaskLabel() => create();
+  CardRewardsReply_TaskLabel._() : super();
+  factory CardRewardsReply_TaskLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CardRewardsReply_TaskLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.TaskLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'show', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CardRewardsReply_TaskLabel clone() => CardRewardsReply_TaskLabel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CardRewardsReply_TaskLabel copyWith(void Function(CardRewardsReply_TaskLabel) updates) => super.copyWith((message) => updates(message as CardRewardsReply_TaskLabel)) as CardRewardsReply_TaskLabel;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CardRewardsReply_TaskLabel create() => CardRewardsReply_TaskLabel._();
+  CardRewardsReply_TaskLabel createEmptyInstance() => create();
+  static $pb.PbList<CardRewardsReply_TaskLabel> createRepeated() => $pb.PbList<CardRewardsReply_TaskLabel>();
+  @$core.pragma('dart2js:noInline')
+  static CardRewardsReply_TaskLabel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CardRewardsReply_TaskLabel>(create);
+  static CardRewardsReply_TaskLabel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get label => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set label($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLabel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLabel() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get show => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set show($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasShow() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearShow() => clearField(3);
+}
+
 class CardRewardsReply_Task extends $pb.GeneratedMessage {
   factory CardRewardsReply_Task() => create();
   CardRewardsReply_Task._() : super();
@@ -745,10 +817,8 @@ class CardRewardsReply_Task extends $pb.GeneratedMessage {
   factory CardRewardsReply_Task.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CardRewardsReply.Task', package: const $pb.PackageName(_omitMessageNames ? '' : 'card_v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOS(2, _omitFieldNames ? '' : 'shortName', protoName: 'shortName')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
-    ..pc<CardRewardsReply_Description>(4, _omitFieldNames ? '' : 'descriptions', $pb.PbFieldType.PM, subBuilder: CardRewardsReply_Description.create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..aOM<CardRewardsReply_TaskLabel>(2, _omitFieldNames ? '' : 'taskLabel', protoName: 'taskLabel', subBuilder: CardRewardsReply_TaskLabel.create)
     ..hasRequiredFields = false
   ;
 
@@ -774,34 +844,24 @@ class CardRewardsReply_Task extends $pb.GeneratedMessage {
   static CardRewardsReply_Task? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $core.int get order => $_getIZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set order($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasOrder() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearOrder() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get shortName => $_getSZ(1);
+  CardRewardsReply_TaskLabel get taskLabel => $_getN(1);
   @$pb.TagNumber(2)
-  set shortName($core.String v) { $_setString(1, v); }
+  set taskLabel(CardRewardsReply_TaskLabel v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasShortName() => $_has(1);
+  $core.bool hasTaskLabel() => $_has(1);
   @$pb.TagNumber(2)
-  void clearShortName() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.int get order => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set order($core.int v) { $_setSignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasOrder() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearOrder() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.List<CardRewardsReply_Description> get descriptions => $_getList(3);
+  void clearTaskLabel() => clearField(2);
+  @$pb.TagNumber(2)
+  CardRewardsReply_TaskLabel ensureTaskLabel() => $_ensure(1);
 }
 
 class CardRewardsReply_CardReward extends $pb.GeneratedMessage {
@@ -1735,8 +1795,9 @@ class SearchCardReply_Card extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..aOS(7, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
     ..aOS(8, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
+    ..aOS(9, _omitFieldNames ? '' : 'bankName', protoName: 'bankName')
+    ..a<$core.int>(10, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
     ..hasRequiredFields = false
   ;
 
@@ -1828,22 +1889,31 @@ class SearchCardReply_Card extends $pb.GeneratedMessage {
   void clearBankID() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.int get order => $_getIZ(8);
+  $core.String get bankName => $_getSZ(8);
   @$pb.TagNumber(9)
-  set order($core.int v) { $_setSignedInt32(8, v); }
+  set bankName($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasOrder() => $_has(8);
+  $core.bool hasBankName() => $_has(8);
   @$pb.TagNumber(9)
-  void clearOrder() => clearField(9);
+  void clearBankName() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.int get cardStatus => $_getIZ(9);
+  $core.int get order => $_getIZ(9);
   @$pb.TagNumber(10)
-  set cardStatus($core.int v) { $_setSignedInt32(9, v); }
+  set order($core.int v) { $_setSignedInt32(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasCardStatus() => $_has(9);
+  $core.bool hasOrder() => $_has(9);
   @$pb.TagNumber(10)
-  void clearCardStatus() => clearField(10);
+  void clearOrder() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.int get cardStatus => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set cardStatus($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasCardStatus() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearCardStatus() => clearField(11);
 }
 
 class SearchCardReply extends $pb.GeneratedMessage {

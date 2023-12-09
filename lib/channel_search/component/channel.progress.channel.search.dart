@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/channel.search.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 class SearchChannelBar extends StatefulWidget {
-  const SearchChannelBar({ Key? key, required this.searchChannelViewModel }) : super(key: key);
-  final SearchChannelViewModel searchChannelViewModel;
+
+  const SearchChannelBar({ Key? key, }) : super(key: key);
 
   @override
   _SearchChannelBarState createState() => _SearchChannelBarState();
@@ -17,26 +18,29 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
 
   @override
   Widget build(BuildContext context) {
-    bool searchedFlag = widget.searchChannelViewModel.searchChannelFlag;
+
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
+    
+    bool searchedFlag = searchChannelViewModel.searchChannelFlag;
+
     return Container(
       height:40,
       child:Row(
         children:[
-          SizedBox(width:10),
+          const SizedBox(width:10),
           Expanded(
             child:TextField(
               controller:_searchController,
               textAlign: TextAlign.start,
               textAlignVertical:TextAlignVertical.bottom,
               onChanged: (String value){
-                widget.searchChannelViewModel.changeKeyword(value);
+                searchChannelViewModel.changeKeyword(value);
               },
-              onEditingComplete: (){
-                widget.searchChannelViewModel.searchChannel();
-                widget.searchChannelViewModel.setLoading();
+              onEditingComplete:(){
+                searchChannelViewModel.searchChannel();
               },
-              onTap: (){
-                widget.searchChannelViewModel.onFocusSearch();
+              onTap:(){
+                searchChannelViewModel.onFocusSearch();
               },
               decoration: InputDecoration(
                 hintText: '搜尋通路',
@@ -55,10 +59,15 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
               onPressed: (){
                 _searchController.clear();
                 FocusScope.of(context).unfocus();
-                widget.searchChannelViewModel.cancel();
+                searchChannelViewModel.cancel();
               },
-              child:Text('取消')
-            )
+              child:Text('取消',
+                style: TextStyle(
+                  color:Palette.kToYellow[400],
+                  fontSize: 17,
+                ),
+              ),
+            ),
         ]
       )
     );

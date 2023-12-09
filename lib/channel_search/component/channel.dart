@@ -9,7 +9,6 @@ import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
 import 'package:provider/provider.dart';
 
 
-
 class ChannelComponent extends StatefulWidget {
   const ChannelComponent({super.key});
 
@@ -37,6 +36,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
   Widget build(BuildContext context) {
 
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context, listen:false);
+    
     return Container(
       padding: const EdgeInsets.all(10),
       child:Column(
@@ -44,7 +44,7 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
           const SizedBox(height: 10),
           Expanded(
             child:PageView(
-              physics: const NeverScrollableScrollPhysics(), //ClampingScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller:_controller,
               onPageChanged:(int page){
                 channelProgressSelectedPage.changePage(page);
@@ -54,9 +54,8 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
                 CriteriaProgress(controller:_controller),
                 EventResultProgress(controller:_controller),
               ]
-            )
+            ),
           ),
-         
         ]
       ),
     );

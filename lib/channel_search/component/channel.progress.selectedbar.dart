@@ -58,7 +58,6 @@ class CriteriaPageBar extends StatelessWidget {
               Text('清除已選條件')
             ]
           ),
-            
           SizedBox(width:10),
           Container(
             decoration: BoxDecoration(

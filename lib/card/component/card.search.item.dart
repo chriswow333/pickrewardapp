@@ -3,6 +3,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -127,40 +129,32 @@ class CardItem extends StatelessWidget {
             Radius.circular(10),
           ),
           color:Palette.kToBlue[50],
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Palette.kToBlack[200]!,
-          //     offset: const Offset(
-          //       1.0,
-          //       1.0,
-          //     ),
-          //     blurRadius: 1.0,
-          //     // spreadRadius: 0.5,
-          //   ), //BoxShadow
-          //   BoxShadow(
-          //     color: Colors.white,
-          //     offset: const Offset(0.0, 0.0),
-          //     blurRadius: 0.0,
-          //     spreadRadius: 0.0,
-          //   ), //BoxShadow
-          // ],
         ),
         child:TextButton(
           onPressed: (){
+
             FocusScope.of(context).unfocus();
+            
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,
+              bankName: cardItemModel.bankName,
               descriptions:cardItemModel.descriptions,
               image:cardItemModel.image,
               updateDate: cardItemModel.updateDate,
-              lintUrl: cardItemModel.linkURL,
+              linkUrl: cardItemModel.linkURL,
+
             );
             
-            Navigator.of(context, rootNavigator: true).push(
-              MaterialPageRoute(
-                builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)
-              ),
+            showCupertinoModalBottomSheet(
+              context: context,
+              expand: true,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+                ),
+              builder: (context) {
+                return CardContentScreen(cardHeaderItemModel:cardHeaderItemModel);
+              },
             );
           },
           style:const ButtonStyle(

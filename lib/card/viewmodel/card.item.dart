@@ -20,8 +20,8 @@ class CardItemViewModel with ChangeNotifier {
   }
 
   String _bankID = "";
-
   get bankID => _bankID;
+
 
   List<CardItemModel> _latestItemModels = [];
 
@@ -49,6 +49,7 @@ class CardItemViewModel with ChangeNotifier {
           updateDate: cardReply.updateDate.toInt(),
           linkURL: cardReply.linkURL,
           bankID: cardReply.bankID,
+          bankName: cardReply.bankName,
           order: cardReply.order,
           cardStatus: cardReply.cardStatus,
         ));
@@ -85,6 +86,7 @@ class CardItemViewModel with ChangeNotifier {
   Future<void> fetchCardsByBankIDWhenPressBank(String bankID) async{ 
     
     if (bankID == _bankID) return;
+
 
     if(_cardItemModels.containsKey(bankID)){
       _bankID = bankID;
@@ -124,6 +126,7 @@ class CardItemViewModel with ChangeNotifier {
           updateDate:card.updateDate.toInt(),
           linkURL: card.linkURL,
           bankID: card.bankID,
+          bankName: card.bankName,
           order: card.order,
           cardStatus: card.cardStatus,
         ));

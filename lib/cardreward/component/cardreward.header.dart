@@ -4,7 +4,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/model/card_header.dart';
@@ -20,93 +19,47 @@ class CardHeader extends StatelessWidget {
     CardHeaderItemModel cardHeaderItemModel = cardHeaderViewModel.cardHeaderItemModel;
     
     return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(left:20, right:20,top:20,bottom:10),
+      decoration: BoxDecoration(
+        color: Palette.kToBlack[0],
+      ),
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children:[
-              BackToCardListBtn(),
-              Flexible(
-                flex: 5,
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:[
-                    CardName(cardName: cardHeaderItemModel.name,),
-                    CardUpdateDate(updateDateInt: cardHeaderItemModel.updateDate,),    
-                  ]
+              Text('${cardHeaderItemModel.bankName}',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(width:10),
-              Flexible(
-                child:CardIcon(image:cardHeaderItemModel.image),             
+              Text(' | '),
+              Text('${cardHeaderItemModel.name}',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ]
           ),
-          SizedBox(height:5),
-          Container(
-            padding: EdgeInsets.only(left:20),
-            child:CardDescriptions(descriptions: cardHeaderItemModel.descriptions,),
+          GestureDetector(
+            onTap:(){
+              Navigator.pop(context);
+            },
+            child:Icon(Icons.cancel_outlined)
           ),
         ]
-      )
-    );
-    ;
-  }
-}
-
-
-
-class BackToCardListBtn extends StatelessWidget {
-  const BackToCardListBtn({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:TextButton(
-      style: ButtonStyle(
-        iconColor: MaterialStatePropertyAll(Palette.kToBlack[600]),
-        minimumSize:MaterialStatePropertyAll(Size.zero),
-        side:MaterialStatePropertyAll(BorderSide.none),
-      ),
-      onPressed: (){
-        Navigator.of(context).pop();
-      }, 
-      child: Container(
-        child:Icon(
-          Icons.arrow_back_ios_new_outlined,
-        ),
-      ),
-    )
-    )
-    ;
-  }
-}
-
-
-
-
-class CardUpdateDate extends StatelessWidget {
-  const CardUpdateDate({super.key, required this.updateDateInt});
-
-  final int updateDateInt;
-  @override
-  Widget build(BuildContext context) {
-    
-    final updateDateTime = DateTime.fromMillisecondsSinceEpoch(updateDateInt*1000);
-    DateFormat formatter = DateFormat('yyyy/MM/dd');
-
-    final updateDate = formatter.format(updateDateTime);
-    
-    return Text('更新日期:${updateDate}',
-      style: TextStyle(
-        fontSize: 10,
-        color: Palette.kToBlack[400],
       ),
     );
   }
 }
+
+
+
+
+
+
 
 class CardDescriptions extends StatelessWidget {
   const CardDescriptions({super.key, required this.descriptions});

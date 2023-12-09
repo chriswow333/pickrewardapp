@@ -20,8 +20,6 @@ class CardRewardViewModel with ChangeNotifier {
   List<CardRewardModel> get evaluationCardRewardModels => _evaluationCardRewardModels;
 
 
-
-
   CardRewardViewModel(String cardID) {
     CardService().init();
     _fetchCardRewards(cardID);
@@ -49,15 +47,12 @@ class CardRewardViewModel with ChangeNotifier {
 
         List<TaskModel> taskModels = [];
         for(CardRewardsReply_Task t in c.tasks) {
+          
           taskModels.add(
             TaskModel(
-              name: t.name,
-              shortName: t.shortName,
+              name: t.taskLabel.name,
               order: t.order,
-              descriptions: t.descriptions.map((e) => DescriptionModel(
-                name: e.name, 
-                order: e.order, 
-                desc: e.desc)).toList(),
+              show:t.taskLabel.show,
             )
           );
         }

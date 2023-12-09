@@ -30,9 +30,9 @@ class ChannelProgress extends StatelessWidget {
             SearchChannelItems(controller:controller),
             
           if(!searchChannelViewModel.searchChannelFlag)
-          Expanded(
-            child:NormalChannelGroup(controller: controller,),
-          ),
+            Expanded(
+              child:NormalChannelGroup(controller: controller,),
+            ),
           const SizedBox(
             height:20
           ),
@@ -42,7 +42,6 @@ class ChannelProgress extends StatelessWidget {
         ]
       )
     );
-    ;
   }
 }
 
@@ -52,7 +51,7 @@ class ChannelHeaderTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
 
     return Container(
       child:Column(
@@ -61,17 +60,20 @@ class ChannelHeaderTitle extends StatelessWidget {
             child:Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                SizedBox(
-                  height: 50,
-                  child:Image.asset(
-                    'images/logo.png',
+                if(!searchChannelViewModel.searchChannelFlag)
+                  SizedBox(
+                    height: 50,
+                    child:Container(
+                      padding: EdgeInsets.only(right:20),
+                      child:Image.asset(
+                        'images/logo.png',
+                      ),
+                    )
                   ),
-                ),
-                const SizedBox(width:20),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(top:5),
-                    child:SearchChannelBar(searchChannelViewModel: searchCardViewModel,),
+                    child:SearchChannelBar(),
                   ),
                 ),
               ]
@@ -82,8 +84,6 @@ class ChannelHeaderTitle extends StatelessWidget {
     );
   }
 }
-
-
 
 
 class NormalChannelGroup extends StatelessWidget {

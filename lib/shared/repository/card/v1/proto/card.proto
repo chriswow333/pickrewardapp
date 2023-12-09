@@ -72,8 +72,9 @@ message CardsReply{
     int64 updateDate = 6;
     string linkURL = 7;
     string bankID = 8;
-    int32 order = 9;
-    int32 cardStatus = 10;
+    string bankName = 9;
+    int32 order = 10;
+    int32 cardStatus = 11;
   }
   
 
@@ -107,12 +108,16 @@ message CardRewardsReply {
     int32 order = 2;
     repeated string desc = 3;
   }
+  
+  message TaskLabel {
+    int32 label  = 1;
+    string name = 2;
+    int32 show = 3;
+  }
 
   message Task{
-    string name = 1;
-    string shortName = 2;
-    int32 order = 3;
-    repeated Description descriptions = 4;
+    int32 order = 1;
+    TaskLabel taskLabel = 2;
   }
 
   message CardReward {
@@ -165,8 +170,6 @@ message EventReq {
   CardEvent cardEvent = 5;
 
 }
-
-
 
 
 message EvaluateCardsReply {
@@ -239,8 +242,9 @@ message SearchCardReply{
     int64 updateDate = 6;
     string linkURL = 7;
     string bankID = 8;
-    int32 order = 9;
-    int32 cardStatus = 10;
+    string bankName = 9;
+    int32 order = 10;
+    int32 cardStatus = 11;
   }
   
   Reply reply = 1;
