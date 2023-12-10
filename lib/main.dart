@@ -116,11 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.manage_search_sharp),
-            label: '通路搜尋',
+            label: '挑選信用卡',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.credit_card),
-            label: '信用卡搜尋',
+            label: '信用卡總覽',
           ),
         ],
         currentIndex: _selectedIndex,

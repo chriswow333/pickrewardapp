@@ -102,26 +102,26 @@ class ReEvaluateItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('不滿意以上信用卡?',
+          const Text('不滿意以上信用卡?',
             style: TextStyle(
               fontSize: 14,
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Palette.kToBlack[600],
-              borderRadius:BorderRadius.all(Radius.circular(12.0)),
-            ),
-            padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
-            child:InkWell(
-              onTap: (){
-                controller.animateToPage(ChannelProgressPage.channel, 
-                  duration: const Duration(milliseconds: 200), 
-                  curve: Curves.linear
-                );
-              },
+          GestureDetector(
+            onTap: (){
+              controller.animateToPage(ChannelProgressPage.channel, 
+                duration: const Duration(milliseconds: 200), 
+                curve: Curves.linear
+              );
+            },
+            child:Container(
+              decoration: BoxDecoration(
+                color: Palette.kToBlack[600],
+                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+              ),
+              padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Container(
-                padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
                 child:Text('我要重新找卡',
                   style: TextStyle(
                     color: Palette.kToBlack[0],
@@ -134,7 +134,6 @@ class ReEvaluateItem extends StatelessWidget {
         ]
       )
     );
-    ;
   }
 }
 

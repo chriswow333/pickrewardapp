@@ -19,7 +19,9 @@ class SearchChannelViewModel with ChangeNotifier {
   bool _searchChannelFlag = false;
   final List<String> _searchKeywordHistory = [];
   List<ChannelItemModel> _searchItemModels = [];
+  bool _resultEmpty = false;
 
+  bool get resultEmpty => _resultEmpty;
 
 
   List<String> get searchKeywordHistory  => _searchKeywordHistory;
@@ -37,7 +39,9 @@ class SearchChannelViewModel with ChangeNotifier {
   }
 
   void changeKeyword(String keyword) {
-
+    
+    _resultEmpty = false;
+    
     if(keyword == _keyword)return;
     _keyword = keyword;
 
@@ -126,6 +130,8 @@ class SearchChannelViewModel with ChangeNotifier {
 
       _searchItemModels = channelItemModels;
       _loading = false;
+
+      _resultEmpty = channelItemModels.isEmpty;
 
       notifyListeners();
     } on GrpcError catch (e) {

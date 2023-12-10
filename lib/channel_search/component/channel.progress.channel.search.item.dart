@@ -24,29 +24,26 @@ class SearchChannelItems extends StatelessWidget {
 
     if(keyword.isNotEmpty) {
        return Expanded(
-          child:Stack(
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children:[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
 
-                  Container(
-                    padding:EdgeInsets.only(top:10, bottom: 5),
-                    child:Text('搜尋結果',
-                      style: TextStyle(
-                        color:Palette.kToBlack[600],
-                      ),
-                    ),
+              Container(
+                padding:EdgeInsets.only(top:20,left:10),
+                child:Text('搜尋結果',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                  if(loading)
-                    LoadingItem(),
-
-                  if(!loading)
-                    SearchItems(),
-                ],
+                ),
               ),
-            ]
-          )
+              if(loading)
+                LoadingItem(),
+
+              if(!loading)
+                SearchItems(),
+            ],
+          ),
         );
     }else {
       return Expanded(
@@ -66,6 +63,7 @@ class SearchChannelKeywordHistory extends StatelessWidget {
     List<String> keywordHistory = searchChannelViewModel.searchKeywordHistory;
 
     return Container(
+      padding: EdgeInsets.only(top:20,left:10),
       child:SingleChildScrollView(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,19 +71,20 @@ class SearchChannelKeywordHistory extends StatelessWidget {
             Container(
               child:Text('最近搜尋',
                 style:TextStyle(
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 )
               )
             ),
-            SizedBox(height:20),
             if(keywordHistory.isEmpty) 
-              Text('尚無資料',
+            Container(
+              padding: EdgeInsets.only(top:10),
+              child:Text('尚無資料',
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
-
+            ),
             for(String keyword in keywordHistory)
               KeywordHistory(keyword: keyword,),
           ]
@@ -112,7 +111,7 @@ class KeywordHistory extends StatelessWidget {
         searchChannelViewModel.searchChannelFromHistory(keyword);
       },
       child:Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(top:10,bottom: 10),
         child:Wrap(
           alignment:WrapAlignment.end,
           children:[
@@ -170,10 +169,9 @@ class SearchItems extends StatelessWidget {
     return Expanded(
       child:SingleChildScrollView(
         child:Wrap(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           runSpacing: 20,
           children:[
-            if(searchChannelViewModel.searched && searchChannelItemModels.isEmpty) 
+            if(searchChannelViewModel.resultEmpty) 
               EmptyItem(),
 
             for(ChannelItemModel c in searchChannelItemModels)
@@ -192,8 +190,9 @@ class EmptyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left:10, top:10,),
       child:Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children:[
           Text('查無資料'),
         ]

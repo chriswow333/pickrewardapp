@@ -135,7 +135,10 @@ class CardImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 180,
+      ),
       child:Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 

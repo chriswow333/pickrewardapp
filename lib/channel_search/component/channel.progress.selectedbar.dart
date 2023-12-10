@@ -63,14 +63,9 @@ class CriteriaPageBar extends StatelessWidget {
             ]
           ),
           SizedBox(width:10),
-          Container(
-            decoration: BoxDecoration(
-              color: Palette.kToBlack[600],
-              borderRadius:BorderRadius.all(Radius.circular(12.0)),
-            ),
-            padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
-            child:GestureDetector(
-              onTap:(){
+
+          GestureDetector(
+            onTap:(){
                 cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(
@@ -79,6 +74,12 @@ class CriteriaPageBar extends StatelessWidget {
                   curve: Curves.linear
                 );
               },
+            child:Container(
+              decoration: BoxDecoration(
+                color: Palette.kToBlack[600],
+                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+              ),
+              padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Text('下一步',
                 style: TextStyle(
                   color:Palette.kToBlack[0],
@@ -114,7 +115,7 @@ class ChannelPageBar extends StatelessWidget {
           if(!channelSelected)
             Expanded(
               child:Container(
-                child:Text('請選擇至少一個通路',
+                child:Text('請選擇您常消費通路',
                   style: TextStyle(
                     fontSize: 16,
                     color:Palette.kToBlack[500],
@@ -169,24 +170,24 @@ class ChannelPageBar extends StatelessWidget {
                 )
               ),
             ),
-            
-          Container(
-            decoration: BoxDecoration(
-              color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
-              borderRadius:BorderRadius.all(Radius.circular(12.0)),
-            ),
-            padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
-            child:GestureDetector(
-              onTap:(){
-                if(channelSelected){
-                  FocusScope.of(context).unfocus();
-                  controller.animateToPage(
-                    ChannelProgressPage.criteria, 
-                    duration: Duration(milliseconds: 150), 
-                    curve: Curves.linear
-                  );
-                }
-              },
+          
+          GestureDetector(
+            onTap:(){
+              if(channelSelected){
+                FocusScope.of(context).unfocus();
+                controller.animateToPage(
+                  ChannelProgressPage.criteria, 
+                  duration: Duration(milliseconds: 150), 
+                  curve: Curves.linear
+                );
+              }
+            },
+            child:Container(
+              decoration: BoxDecoration(
+                color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
+                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+              ),
+              padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Text('下一步',
                 style: TextStyle(
                   color:Palette.kToBlack[0],
@@ -194,7 +195,7 @@ class ChannelPageBar extends StatelessWidget {
                 ),
               )
             ),
-          ),
+          )
         ]
       )
     );
@@ -420,7 +421,7 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
                   color: Palette.kToBlack[400],
                   borderRadius:BorderRadius.circular(20),
                 ),
-                child:Text('未選取',
+                child:Text('選取',
                   style: TextStyle(
                     color:Palette.kToBlack[0],
                   ),
@@ -505,7 +506,7 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
                   color: Palette.kToBlack[400],
                   borderRadius:BorderRadius.circular(20),
                 ),
-                child:Text('未選取',
+                child:Text('選取',
                   style: TextStyle(
                     color:Palette.kToBlack[0],
                   ),
@@ -545,7 +546,9 @@ class SelectedChannelHeader extends StatelessWidget {
           ),
 
           GestureDetector(
-            onTap:(){},
+            onTap:(){
+              Navigator.pop(context);
+            },
             child:Icon(
               Icons.cancel_outlined,
               color:Palette.kToBlack[500],
