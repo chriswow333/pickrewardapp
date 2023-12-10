@@ -17,7 +17,7 @@ class SearchChannelViewModel with ChangeNotifier {
 
   String _keyword = "";
   bool _searchChannelFlag = false;
-  List<String> _searchKeywordHistory = [];
+  final List<String> _searchKeywordHistory = [];
   List<ChannelItemModel> _searchItemModels = [];
 
 

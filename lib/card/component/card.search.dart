@@ -23,17 +23,13 @@ class _SearchCardBarState extends State<SearchCardBar> {
   Widget build(BuildContext context) {
 
     SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context, listen:false);
+    bool searchedFlag = searchCardViewModel.searchCardFlag;
+
 
     return SizedBox(
       height:40,
       child:Row(
         children:[
-          Container(
-            child:Image.asset(
-              'images/logo.png'
-            ),
-            height: 40,
-          ),
           SizedBox(width:10),
           Expanded(
             child:TextField(
@@ -44,13 +40,14 @@ class _SearchCardBarState extends State<SearchCardBar> {
                 searchCardViewModel.changeKeyword(value);
               },
               onEditingComplete: (){
-                searchCardViewModel.setLoading();
                 searchCardViewModel.searchCard();
               },
+              onTap:(){
+                searchCardViewModel.onFocusSearch();
+              },
               decoration: InputDecoration(
-                hintText: '信用卡',
+                hintText: '搜尋',
                 prefixIcon:const Icon(Icons.search),
-                
                 border:OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 )
@@ -61,24 +58,19 @@ class _SearchCardBarState extends State<SearchCardBar> {
             ),
           ),
           
-          if(searchCardViewModel.searchCardFlag) 
+          if(searchedFlag) 
             Container(
               child:TextButton(
                 onPressed: (){ 
-                  FocusScope.of(context).unfocus();
                   _searchController.clear();
-                  searchCardViewModel.changeKeyword(_searchController.text);
+                  FocusScope.of(context).unfocus();
+                  searchCardViewModel.cancel();
                 },
                 child:Text('取消')
               )
             )
-            
-
-
         ]
       )
-      
-      
     );
   }
 }

@@ -19,48 +19,72 @@ class SearchCardViewModel with ChangeNotifier {
   
   String _keyword = "";
   bool _searchCardFlag = false;
+  final List<String> _searchKeywordHistory = [];
+  List<CardItemModel> _searchItemModels = [];
   
-  void changeKeyword(String keyword){
-    if(keyword == _keyword)return;
-    _keyword = keyword;
 
-     if(keyword.isNotEmpty) {
-      _searchCardFlag = true;
-    }else {
-      _searchCardFlag = false;
-      _loading = false;
-    }
+  List<String> get searchKeywordHistory  => _searchKeywordHistory;
+
+
+  void onFocusSearch() {
+    _searchCardFlag = true;
+    notifyListeners();
+  }
+
+  void cancel() {
+    _keyword = "";
+    _searchCardFlag = false;
+    _searchItemModels.clear();
     notifyListeners();
   }
 
 
+
+  void changeKeyword(String keyword) {
+
+    if(keyword == _keyword)return;
+    _keyword = keyword;
+
+    if(keyword.isNotEmpty) {
+      _searchCardFlag = true;
+    }else {
+      _searchItemModels.clear();
+    }
+
+    notifyListeners();
+  }
+
+
+
+
   bool _searched = false;
+  bool _loading = false;
+
   get searched => _searched;
+  get loading => _loading;
 
 
   searchCard() {
     if(_keyword.isNotEmpty) {
+      _loading = true;
       _searched = true;
       _fetchSearchCards();
+      _searchKeywordHistory.insert(0, _keyword);
+      if(_searchKeywordHistory.length == 10) {
+        _searchKeywordHistory.removeLast();
+      }
     }    
   }
 
-
-  bool _loading = false;
-  get loading => _loading;
-  setLoading(){
+  searchCardFromHistory(String historyKeyword) {
     _loading = true;
+    _keyword = historyKeyword;
+    _fetchSearchCards();
     notifyListeners();
   }
 
-
   get keyword => _keyword;
-
   get searchCardFlag => _searchCardFlag;
-
-
-  List<CardItemModel> _searchItemModels = [];
-
   get searchItemModels => _searchItemModels;
 
 

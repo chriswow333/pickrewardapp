@@ -22,6 +22,15 @@ class CardComponent extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
+          Container(
+            child:Text('信用卡',
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ),
+          SizedBox(height:10,),
           SearchCardBar(),
           SizedBox(height:20,),
           if(searchCardViewModel.searchCardFlag)

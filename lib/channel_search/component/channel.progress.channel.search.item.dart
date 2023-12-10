@@ -17,10 +17,10 @@ class SearchChannelItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
-    bool loading = searchCardViewModel.loading;
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
+    bool loading = searchChannelViewModel.loading;
     
-    String keyword = searchCardViewModel.keyword;
+    String keyword = searchChannelViewModel.keyword;
 
     if(keyword.isNotEmpty) {
        return Expanded(
@@ -62,16 +62,8 @@ class SearchChannelKeywordHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    SearchChannelViewModel searchCardViewModel = Provider.of<SearchChannelViewModel>(context);
-    List<String> keywordHistory = searchCardViewModel.searchKeywordHistory;
-  
-    if(keywordHistory.isEmpty) {
-
-      return Container(
-        child:Text('無歷史搜尋紀錄')
-      );
-    }
-
+    SearchChannelViewModel searchChannelViewModel = Provider.of<SearchChannelViewModel>(context);
+    List<String> keywordHistory = searchChannelViewModel.searchKeywordHistory;
 
     return Container(
       child:SingleChildScrollView(
@@ -87,6 +79,13 @@ class SearchChannelKeywordHistory extends StatelessWidget {
               )
             ),
             SizedBox(height:20),
+            if(keywordHistory.isEmpty) 
+              Text('尚無資料',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+
             for(String keyword in keywordHistory)
               KeywordHistory(keyword: keyword,),
           ]

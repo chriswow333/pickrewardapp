@@ -20,21 +20,108 @@ class CardSearchItems extends StatelessWidget {
 
     SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
     bool loading = searchCardViewModel.loading;
-    return Expanded(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          Text('搜尋結果',
-            style: TextStyle(
-              color:Palette.kToBlack[600],
-            ),
-          ),
-          if(loading)
-            LoadingItem(),
+    String keyword = searchCardViewModel.keyword;
 
-          if(!loading)
-            SearchItems(),
-        ],
+    if(keyword.isNotEmpty) {
+      return Expanded(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Text('搜尋結果',
+              style: TextStyle(
+                color:Palette.kToBlack[600],
+              ),
+            ),
+            if(loading)
+              LoadingItem(),
+
+            if(!loading)
+              SearchItems(),
+          ],
+        )
+      );
+    }else {
+      return Expanded(
+        child:SearchCardKeywordHistory(),
+      );
+    }
+    
+  }
+}
+
+
+class SearchCardKeywordHistory extends StatelessWidget {
+  const SearchCardKeywordHistory({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
+    List<String> keywordHistory = searchCardViewModel.searchKeywordHistory;
+
+    return Container(
+      child:SingleChildScrollView(
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Container(
+              child:Text('最近搜尋',
+                style:TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )
+              )
+            ),
+            SizedBox(height:20),
+            if(keywordHistory.isEmpty) 
+              Text('尚無資料',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+
+            for(String keyword in keywordHistory)
+              KeywordHistory(keyword: keyword,),
+          ]
+        )
+      )
+    );
+  }
+} 
+
+
+class KeywordHistory extends StatelessWidget {
+  const KeywordHistory({super.key, required this.keyword});
+
+  final String keyword;
+
+  @override
+  Widget build(BuildContext context) {
+
+    SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: (){
+        searchCardViewModel.searchCardFromHistory(keyword);
+      },
+      child:Container(
+        padding: EdgeInsets.all(20),
+        child:Wrap(
+          alignment:WrapAlignment.end,
+          children:[
+            Icon(
+              Icons.search,
+              size:30,
+            ),
+            SizedBox(width:10),
+            Text(keyword,
+              style:TextStyle(
+                fontSize: 20,
+              )
+            )
+          ]
+        )
       )
     );
   }
@@ -103,8 +190,6 @@ class EmptyItem extends StatelessWidget {
           Text('查無資料'),
         ]
       )
-      
-      
     );
   }
 }

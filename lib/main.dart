@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
 
 
 
@@ -36,9 +38,24 @@ class PickRewardApp extends StatelessWidget {
         Locale('zh')
       ],
       home:HomeScreen(),
+      // onGenerateRoute: (RouteSettings settings) {
+      //   return MaterialWithModalsPageRoute(
+      //     builder:(context)=>Scaffold(
+      //       body:Builder(
+      //         builder: (context)=>CupertinoPageScaffold(
+      //           child:SafeArea(
+      //             child:CardSearchPage()
+      //           ),
+      //         ),
+      //       )
+      //     )
+      //   );
+      // },
     );
   }
 }
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,10 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
   static const Widget cardSearchPage = CardSearchPage();
 
   static List<Widget> _widgetOptions = <Widget>[
-
-    // CupertinoPageScaffold(
-    //   child:channelSearchPage,
-    // ),
     channelSearchPage,
     cardSearchPage,
   ];
@@ -74,25 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: 
-      
-      // CupertinoPageScaffold(
-      //   backgroundColor: Colors.transparent,
-      //   child:SizedBox.expand(
-      //     child:SafeArea(
-      //       child:channelSearchPage,
-      //     ),
-      //   ),
-      // ),
-      
-      SafeArea(
-        // padding: GlobalPadding.global(),
+      body: SafeArea(
         child: Center(
           child:LayoutBuilder(
             builder:((context, constraints) {
               double screenWidth = MediaQuery.of(context).size.width;
               double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
-
               if (screenWidth > tabletWidthThreshold) {
                 return Container(
                   width: tabletWidthThreshold,

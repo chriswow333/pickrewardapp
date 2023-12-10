@@ -1,7 +1,11 @@
 
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel_search/model/channel.dart';
+
+
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/eventresult.dart';
@@ -46,8 +50,8 @@ class CriteriaPageBar extends StatelessWidget {
         children:[
           Row(
             children:[
-              InkWell(
-                onTap:(){
+              GestureDetector(
+                onTap: () {  
                   criteriaViewModel.resetCriteriaPage();
                 },
                 child:Icon(
@@ -65,18 +69,15 @@ class CriteriaPageBar extends StatelessWidget {
               borderRadius:BorderRadius.all(Radius.circular(12.0)),
             ),
             padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
-            child:InkWell(
+            child:GestureDetector(
               onTap:(){
-                
                 cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
-
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(
                   ChannelProgressPage.result, 
                   duration: Duration(milliseconds: 150), 
                   curve: Curves.linear
                 );
-                
               },
               child:Text('下一步',
                 style: TextStyle(
@@ -127,7 +128,7 @@ class ChannelPageBar extends StatelessWidget {
               child:Container(
                 child:Row(
                   children:[
-                    InkWell(
+                    GestureDetector(
                       onTap:(){
                         criteriaViewModel.resetChannelAndChannelLabels();
                       },
@@ -136,7 +137,34 @@ class ChannelPageBar extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width:5),
-                    Text('已選${channelIDLength + labelLength}個通路')
+                    Text('已選${channelIDLength + labelLength}個通路。'),
+                    SizedBox(width:5),
+                    GestureDetector(
+                      onTap:(){
+                        showModalBottomSheet(
+                          context: context,
+                          useSafeArea:true,
+                          scrollControlDisabledMaxHeightRatio:0.75,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+                            ),
+                          builder: (_) {
+                            return ListenableProvider.value(
+                              value:criteriaViewModel,
+                              child:SafeArea(
+                                child:SelectedChannelContent(criteriaViewModel:criteriaViewModel)
+                              ),
+                            );
+                          },
+                        );                      
+                      },
+                      child:Text('查看全部',
+                        style: TextStyle(
+                          color: Palette.kToYellow[400],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ),
                   ]
                 )
               ),
@@ -148,7 +176,7 @@ class ChannelPageBar extends StatelessWidget {
               borderRadius:BorderRadius.all(Radius.circular(12.0)),
             ),
             padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
-            child:InkWell(
+            child:GestureDetector(
               onTap:(){
                 if(channelSelected){
                   FocusScope.of(context).unfocus();
@@ -174,62 +202,357 @@ class ChannelPageBar extends StatelessWidget {
 }
 
 
-// class SelectedLabelItem extends StatelessWidget {
-//   const SelectedLabelItem({super.key, required this.labelID});
-//   final int labelID;
-
-//   @override
-//   Widget build(BuildContext context) {
-
-//     String labelName = LabelItemModel.getLabelName(labelID);
-    
-//     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
-
-//     return Container(
-//       child:InkWell(
-//         onTap: (){
-//           rewardSelectedViewModel.labelIDs = labelID;
-//         },
-//         child:Text(labelName,
-//           style: TextStyle(
-//             color:Palette.kToBlack[600],
-//             fontSize: 10,
-//           ),
-//         )
-//       )
-//     );
-//   }
-// }
-
-
-// class SelectedChannelItem extends StatelessWidget {
-//   const SelectedChannelItem({super.key, required this.channelItemModel});
-
-//   final ChannelItemModel channelItemModel;
+class SelectedChannelContent extends StatefulWidget {
+  const SelectedChannelContent({super.key, required this.criteriaViewModel});
   
-//   @override
-//   Widget build(BuildContext context) {
+  final CriteriaViewModel criteriaViewModel;
 
-//     RewardSelectedViewModel rewardSelectedViewModel = Provider.of<RewardSelectedViewModel>(context);
+  @override
+  State<SelectedChannelContent> createState() => _SelectedChannelContentState();
+}
 
-//     return Container(
-//       padding:EdgeInsets.only(right:2,),
-//       child:Center(
-//         child:ClipOval(
-//           child:InkWell(
-//             onTap:(){
-//               rewardSelectedViewModel.channelID = channelItemModel;
-//             },
-//             child:Image.memory(
-//               gaplessPlayback: true,
-//               base64Decode(channelItemModel.image), 
-//               width:30,
-//               height:30,
-//               fit: BoxFit.contain,
-//             ),
-//           )
-//         )
-//       )
-//     );
-//   }
-// }
+class _SelectedChannelContentState extends State<SelectedChannelContent> {
+
+  Set<String> tryDeleteChannel = {};
+  Set<int> tryDeleteChannelLabel = {};
+
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  bool toggleChannelLabel(int label) {
+    setState(() {
+      if(tryDeleteChannelLabel.contains(label)){
+        tryDeleteChannelLabel.remove(label);
+      }else {
+        tryDeleteChannelLabel.add(label);
+      }
+    });
+    return !tryDeleteChannelLabel.contains(label);
+  }
+
+  bool toggleChannel(String channelID) {
+    setState(() {
+      if(tryDeleteChannel.contains(channelID)){
+        tryDeleteChannel.remove(channelID);
+      }else {
+        tryDeleteChannel.add(channelID);
+      }
+    });
+    return !tryDeleteChannel.contains(channelID);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    int total = widget.criteriaViewModel.channelLabels.length + widget.criteriaViewModel.channelItemModels.length;
+    total = total - tryDeleteChannelLabel.length - tryDeleteChannel.length;
+
+    return Container(
+      padding: EdgeInsets.all(20),
+      child:Column(
+        children:[
+          SelectedChannelHeader(total:total, tryDeleteChannel: tryDeleteChannel, tryDeleteChannelLabel: tryDeleteChannelLabel,),
+          SizedBox(height: 10,),
+          Expanded(
+            child:SelectedChannelItems(
+              criteriaViewModel: widget.criteriaViewModel,
+              toggleSelectedChannel: toggleChannel, 
+              toggleSelectedChannelLabel:toggleChannelLabel,
+            ),
+          ),
+          SelectedChannelBtn(
+            criteriaViewModel: widget.criteriaViewModel,
+            tryDeleteChannel: tryDeleteChannel, 
+            tryDeleteChannelLabel: tryDeleteChannelLabel,
+          ),
+          
+        ]
+      )
+    );
+  }
+}
+
+
+class SelectedChannelBtn extends StatelessWidget {
+  const SelectedChannelBtn({
+    super.key, 
+    required this.criteriaViewModel, 
+    required this.tryDeleteChannel, 
+    required this.tryDeleteChannelLabel
+  });
+  
+  final CriteriaViewModel criteriaViewModel;
+  final Set<String> tryDeleteChannel;
+  final Set<int> tryDeleteChannelLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(top:30, left:20, right:20),
+      
+      child:GestureDetector(
+        onTap: (){
+          criteriaViewModel.removeChannels(tryDeleteChannel.toList());
+          criteriaViewModel.removeChannelLabels(tryDeleteChannelLabel.toList());
+          Navigator.pop(context);
+        },
+        child:Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color:Palette.kToYellow[500],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child:Text('儲存',
+            style: TextStyle(
+              color:Palette.kToBlack[0],
+              fontSize: 20,
+            ),
+          )
+        )
+      )
+    );
+  }
+}
+
+class SelectedChannelItems extends StatelessWidget {
+  const SelectedChannelItems({
+    super.key, required this.criteriaViewModel, 
+    required this.toggleSelectedChannel, 
+    required this.toggleSelectedChannelLabel
+});
+
+  final CriteriaViewModel criteriaViewModel;
+  final bool Function(String selectedChannel) toggleSelectedChannel;
+  final bool Function(int selectedLabel) toggleSelectedChannelLabel;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      child:SingleChildScrollView(
+        child:Column(
+          children:[
+            for(ChannelLabelModel channelLabelModel in criteriaViewModel.channelLabels)
+              SelectedChannelLabelItem(channelLabelModel: channelLabelModel, toggleSelectedChannelLabel:toggleSelectedChannelLabel),
+            for(ChannelItemModel channelItemModel in criteriaViewModel.channelItemModels)
+              SelectedChannelItem(channelItemModel: channelItemModel, toggleSelectedChannel:toggleSelectedChannel),
+          ]
+        )
+      ),
+      
+    );
+  }
+}
+
+
+class SelectedChannelItem extends StatefulWidget {
+  const SelectedChannelItem({super.key, required this.channelItemModel, required this.toggleSelectedChannel});
+  final ChannelItemModel channelItemModel;
+  final bool Function(String channelID) toggleSelectedChannel;
+
+  @override
+  State<SelectedChannelItem> createState() => _SelectedChannelItemState();
+}
+
+class _SelectedChannelItemState extends State<SelectedChannelItem> {
+
+  bool selected = true;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      padding: EdgeInsets.all(5),
+      child:Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Palette.kToBlack[0]
+        ),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children:[
+            Text('${widget.channelItemModel.name}',
+              style: TextStyle(
+                fontSize: 14,
+                color: Palette.kToBlack[600]                
+              ),
+            ),
+
+            GestureDetector(
+              behavior:HitTestBehavior.opaque,
+              onTap:(){
+                selected = widget.toggleSelectedChannel(widget.channelItemModel.id);
+              },
+
+              child:selected ? Container(
+                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                decoration: BoxDecoration(
+                  color: Palette.kToYellow[500],
+                  borderRadius:BorderRadius.circular(20),
+                ),
+                child:Row(
+                  children:[
+                    Icon(
+                      Icons.check_circle_sharp,
+                      color:Palette.kToBlack[0],
+                      size: 15,
+                    ),
+                    SizedBox(width: 2,),
+                    Text('已選取',
+                      style: TextStyle(
+                        color:Palette.kToBlack[0],
+                      ),
+                    ),
+                  ],
+                ),
+              ):
+              Container(
+                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                width: 80,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Palette.kToBlack[400],
+                  borderRadius:BorderRadius.circular(20),
+                ),
+                child:Text('未選取',
+                  style: TextStyle(
+                    color:Palette.kToBlack[0],
+                  ),
+                ),
+              ),
+            ),
+          ]
+        )
+      )
+    );
+  }
+}
+
+
+
+class SelectedChannelLabelItem extends StatefulWidget {
+  const SelectedChannelLabelItem({super.key, required this.channelLabelModel, required this.toggleSelectedChannelLabel});
+  final ChannelLabelModel channelLabelModel;
+  final bool Function(int selectedLabel) toggleSelectedChannelLabel;
+  @override
+  State<SelectedChannelLabelItem> createState() => _SelectedChannelLabelItemState();
+}
+
+class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
+
+  bool selected = true;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      padding: EdgeInsets.all(5),
+      child:Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Palette.kToBlack[0]
+        ),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children:[
+            Text('${widget.channelLabelModel.name}',
+              style: TextStyle(
+                fontSize: 14,
+                color: Palette.kToBlack[600]                
+              ),
+            ),
+
+            GestureDetector(
+              behavior:HitTestBehavior.opaque,
+              onTap:(){
+                selected = widget.toggleSelectedChannelLabel(widget.channelLabelModel.label);
+              },
+
+              child:selected ? Container(
+                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                decoration: BoxDecoration(
+                  color: Palette.kToYellow[500],
+                  borderRadius:BorderRadius.circular(20),
+                ),
+                child:Row(
+                  children:[
+                    Icon(
+                      Icons.check_circle_sharp,
+                      color:Palette.kToBlack[0],
+                      size: 15,
+                    ),
+                    SizedBox(width: 2,),
+                    Text('已選取',
+                      style: TextStyle(
+                        color:Palette.kToBlack[0],
+                      ),
+                    ),
+                  ],
+                ),
+              ):
+              Container(
+                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                width: 80,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Palette.kToBlack[400],
+                  borderRadius:BorderRadius.circular(20),
+                ),
+                child:Text('未選取',
+                  style: TextStyle(
+                    color:Palette.kToBlack[0],
+                  ),
+                ),
+              ),
+            ),
+          ]
+        )
+      )
+    );
+  }
+}
+
+
+
+class SelectedChannelHeader extends StatelessWidget {
+  const SelectedChannelHeader({super.key, required this.tryDeleteChannel, required this.tryDeleteChannelLabel, required this.total});
+
+  final int total;
+  final Set<String> tryDeleteChannel;
+  final Set<int> tryDeleteChannelLabel;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      padding: EdgeInsets.all(10),
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children:[
+          Text('已選 ${total} 個通路',
+            style:TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color:Palette.kToBlack[500],
+            )
+          ),
+
+          GestureDetector(
+            onTap:(){},
+            child:Icon(
+              Icons.cancel_outlined,
+              color:Palette.kToBlack[500],
+            )
+          )
+        ]
+      )
+    );
+  }
+}

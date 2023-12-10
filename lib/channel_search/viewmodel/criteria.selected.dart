@@ -54,6 +54,20 @@ class CriteriaViewModel with ChangeNotifier{
     notifyListeners();
   }
 
+  void removeChannels(List<String> channelIDs) {
+    for(String channelID in channelIDs) {
+      _channelMap.remove(channelID);
+    }
+    notifyListeners();
+  }
+
+  void removeChannelLabels(List<int> channelLabels) {
+    for(int label in channelLabels) {
+      _channelLabelMap.remove(label);
+    }
+    notifyListeners();
+  }
+
   bool existChannel(String channelID) {
     return _channelMap.containsKey(channelID);
   }
