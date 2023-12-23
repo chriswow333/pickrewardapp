@@ -194,7 +194,8 @@ class CardRewardTab extends StatelessWidget {
   Widget build(BuildContext context) {
     
     CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
-
+    CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
+    bool activityEmpty = cardRewardViewModel.activityCardRewardModels.isEmpty;
     return Container(
       padding: EdgeInsets.only(left:20, right:20),
       child:Row(
@@ -226,29 +227,30 @@ class CardRewardTab extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width:10),
-                TextButton(
-                  onPressed: (){
-                    cardRewardTabViewModel.showAll = false;
-                  },
-                  child:Text('其他優惠',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color:Palette.kToBlack[400],
+                if(!activityEmpty)
+                  TextButton(
+                    onPressed: (){
+                      cardRewardTabViewModel.showAll = false;
+                    },
+                    child:Text('其他優惠',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color:Palette.kToBlack[400],
+                      ),
                     ),
-                  ),
-                  style:ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
-                    shape:MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        side:BorderSide(
-                          width:1.0,
-                          color:Palette.kToBlack[100]!,
+                    style:ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
+                      shape:MaterialStatePropertyAll(
+                        RoundedRectangleBorder(
+                          side:BorderSide(
+                            width:1.0,
+                            color:Palette.kToBlack[100]!,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                ),
               ]
             ),
           ),

@@ -13,7 +13,9 @@ class BankItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     BankViewModel bankViewModel = Provider.of<BankViewModel>(context);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child:Row(
@@ -45,6 +47,9 @@ class BankItem extends StatelessWidget {
         FocusScope.of(context).unfocus();
         cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
       },
+      style:ButtonStyle(
+        splashFactory: NoSplash.splashFactory,
+      ),
       child:SizedBox(
         width:70,
         child:Column(
@@ -79,17 +84,22 @@ class BottomSpot extends StatelessWidget {
 
 class BankIcon extends StatelessWidget {
   const BankIcon({super.key, required this.image});
+
   final String image;
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
+
+
+    return CircleAvatar(
+      backgroundColor: Palette.kToBlack[0],
       child:Image.memory(
         base64Decode(image), 
         width:30,
         height:30,
-        gaplessPlayback:true,
-      ),
+        gaplessPlayback:false,
+      )
     );
+
   }
 }
 

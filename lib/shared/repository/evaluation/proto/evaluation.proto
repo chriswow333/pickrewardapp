@@ -6,14 +6,12 @@ option go_package = "pickrewardapi/api/evaluation/proto";
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
-package evaluation;
+package evaluation_v1;
 
 // The greeting service definition.
 service Evaluation {
-  rpc EvaluateRespByOwnerID(EventReq) returns (EvaluationEventResultRespReply){}
-
-  rpc GetEvaluationRespByOwnerID(OwnerIDReq) returns (EvaluationRespReply){}
-  
+  // rpc EvaluateRespByOwnerID(EventReq) returns (EvaluationEventResultRespReply){}
+  // rpc GetEvaluationRespByOwnerID(OwnerIDReq) returns (EvaluationRespReply){}
 }
 
 
@@ -29,17 +27,39 @@ message Error {
   string errorMessage = 2;
 }
 
+
 message EventReq {
+
+  message ChannelWithLabelEvent{
+    string channelID = 1;
+    repeated int32 channelLabels = 2;
+  }
+
+  message ChannelEvent {
+    repeated ChannelWithLabelEvent channelsWithLabelEvents = 1;
+    repeated int32 channelLabels = 2;
+  }
+
+  message CardEvent {
+    int32 rewardType = 1;
+    bool cardRewardTaskLabelPass = 2;
+    repeated int32 cardRewardTaskLabels = 3;
+  }
+
+  message PayEvent {
+    bool pass = 1;
+    repeated string payIDs = 2;
+  }
+
   string ownerID = 1;
-  repeated string channelIDs = 2;
-  repeated string taskIDs = 3;
-  repeated string payIDs = 4;
-  repeated int32 labels = 5;
-  
-  int64 eventDate = 6;
-  int32 cost = 7;
-  int32 rewardType = 8;
+  int64 eventDate = 2;
+  int32 cost = 3;
+  ChannelEvent channelEvent = 4;
+  PayEvent payEvent = 5;
+  CardEvent cardEvent = 6;
+
 }
+
 
 
 message EvaluationEventResultRespReply {
@@ -186,235 +206,4 @@ message LabelEvaluationResp {
   repeated Label matches = 1;
   repeated Label misMatches = 2;
 }
-
-
-
-
-
-// message EvaluationEventResultReply {
-//   Reply reply = 1;
-//   EvaluationEventResultProto evaluationEventResult = 2;
-// }
-
-
-// message EvaluationEventResultProto{
-//   string id = 1;
-//   int32 evaluationEventStatus = 2;
-//   PayloadEventResultProto payloadEventResult = 3;
-// }
-
-// message PayloadEventResultProto {
-//   string id = 1;
-//   bool pass = 2;
-//   FeedbackEventResultProto feedbackEventResult = 3;
-//   repeated PayloadEventResultProto payloadEventResults = 4;
-//   ContainerEventResultProto containerEventResult = 5;
-// }
-
-// message ContainerEventResultProto {
-//   string id = 1;
-//   bool pass = 2;
-//   repeated string matches = 3;
-//   repeated string misMatches = 4;
-//   repeated ContainerEventResultProto containerEventResults = 5;
-//   // ConstraintEventResultProto constraintEventResult = 6;
-// }
-
-
-// // message ConstraintEventResultProto {
-// //   bool pass = 1;
-// //   int32 constraintType = 2;
-// //   repeated string matches = 3;
-// //   repeated string misMatches = 4;
-// // }
-
-
-
-
-
-// message EvaluationsReply{
-//   Reply reply = 1;
-//   repeated EvaluationProto evaluation = 2;
-// }
-
-
-// message EvaluationReply{
-//   Reply reply = 1;
-//   EvaluationProto evaluation = 2;
-// }
-
-
-
-// message EvaluationProto {
-//   string id = 1;
-//   int64 createDate = 2;
-//   int64 updateDate = 3;
-//   int64 startDate = 4;
-//   int64 endDate = 5;
-//   RewardProto reward = 6;
-//   string ownerID = 7;
-//   PayloadProto payload = 8;
-// }
-
-
-// message RewardProto {
-//   string id = 1;
-//   string name = 2;
-//   int32 rewardType = 3;
-//   int64 createDate = 4;
-//   int64 updateDate = 5;
-// }
-
-// message PayloadProto {
-//   string id = 1;
-//   int32 payloadOperator = 2;
-//   int32 payloadType = 3;
-//   FeedbackProto feedback = 4;
-//   repeated PayloadProto payloads = 5;
-//   ContainerProto container = 6;
-// }
-
-
-// message FeedbackProto {
-//   int32 rewardType = 1;
-//   int32 calculateType = 2;
-//   int32 minCost = 3;
-//   int32 fixed = 4;
-//   float percentage = 5;
-//   float returnMax = 6;
-// }
-
-// message ContainerProto {
-//   string id = 1;
-//   int32 containerOperator = 2;
-//   int32 containerType = 3;
-//   repeated ConstraintProto constraints = 4;
-//   repeated ContainerProto containers = 5;
-//   repeated string taskIDs = 6;
-//   repeated string channelIDs = 7;
-//   repeated string payIDs = 8;
-//   repeated int32 labels = 9;
-// }
-
-
-// message ConstraintProto {
-//   int32 constraintType = 1;
-//   string constraintName = 2;
-//   repeated int32 weekDays = 3;
-// }
-
-// message EvaluationIDProto {
-//   string id = 1;
-// }
-
-// message EmptyRequest{}
-
-
-
-// message EvaluationRespReply {
-//   Reply reply = 1;
-//   EvaluationRespProto evaluationResp = 2;
-// }
-
-
-// message EvaluationRespProto {
-//   string id = 1;
-//   repeated ChannelCategoryTypeProto channelCategoryTypes = 2;
-//   repeated ChannelEvaluationRespProto channelEvaluationResps = 3;
-//   PayEvaluationRespProto payEvaluationResp = 4;
-//   TaskEvaluationRespProto taskEvaluationResp = 5;
-//   ConstraintsEvaluationRespProto constraintsEvaluationResp = 6;
-//   LabelEvaluationRespProto labelEvaluationResp = 7;
-// }
-
-// message ChannelCategoryTypeProto {
-//   int32 id = 1;
-//   string name = 2;
-//   int32 order = 3;
-// }
-
-
-// message ChannelEvaluationRespProto {
-//   int32 channelCategoryType = 1;
-//   repeated ChannelProto matches = 2;
-//   repeated ChannelProto misMatches = 3;
-// }
-
-// message ChannelProto {
-//   string id = 1;
-//   string name = 2;
-//   string image = 3;
-//   string linkURL = 4;
-//   repeated string descriptions = 5;
-//   int32 channelCategoryType = 6;
-//   int64 createDate = 7;
-//   int64 updateDate = 8;
-//   repeated ChannelLabelProto channelLabels = 9;
-//   int32 order = 10;
-//   int32  channelStatus = 11;
-// }
-
-// message ChannelLabelProto {
-//   int32 labelType = 1;
-//   string labelName = 2;
-//   int32 order = 3;
-// }
-
-// message PayEvaluationRespProto {
-//   repeated PayProto matches = 1; 
-//   repeated PayProto misMatches = 2;
-// }
-
-
-// message PayProto {
-//   string id = 1;
-//   string name = 2;
-//   string image = 3;
-//   repeated string descriptions = 4;
-//   string linkURL = 5;
-//   int64 createDate = 6;
-//   int64 updateDate = 7;
-//   int32 order = 8;
-//   int32 payStatus = 9;
-// }
-
-// message TaskEvaluationRespProto {
-//   repeated TaskProto matches = 1;
-//   repeated TaskProto misMatches = 2;
-// }
-
-// message TaskProto {
-//   string id = 1;
-//   string name =2;
-//   repeated TaskDescriptionProto descriptions = 3;
-//   int32 taskOwner = 4;
-//   string taskOwnerID = 5;
-//   int64 createDate = 6;
-//   int64 updateDate = 7;
-// }
-
-// message TaskDescriptionProto {
-//   string name = 1;
-//   repeated string desc = 2;
-//   int32 order = 3;
-// }
-
-
-// message ConstraintsEvaluationRespProto {
-//   repeated ConstraintProto matches = 1;
-//   repeated ConstraintProto misMatches = 2;
-
-// }
-
-
-// message LabelEvaluationRespProto {
-//   repeated LabelProto matches = 1;
-//   repeated LabelProto misMatches = 2;
-// }
-
-// message LabelProto {
-//   int32 labelType = 1;
-//   string labelName = 2;
-// }
-
 

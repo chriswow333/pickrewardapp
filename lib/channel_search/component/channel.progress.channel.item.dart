@@ -366,6 +366,18 @@ class ChannelItemIcon extends StatelessWidget {
     return Stack(
       alignment:Alignment.center,
       children:[
+        CircleAvatar(
+          backgroundColor:Palette.kToBlack[0],
+          child:channelItemModel.image.isEmpty?
+          Container()
+          :
+          Image.memory(
+            gaplessPlayback: true,
+            base64Decode(channelItemModel.image), 
+            width:35,
+            height:35,
+          ),
+        ),
         Container(
           decoration: selected?BoxDecoration(
             border: Border.all(
@@ -374,17 +386,9 @@ class ChannelItemIcon extends StatelessWidget {
             ),
             shape: BoxShape.circle,
           ):null,
-          width: 45,
-          height: 45,
+          width: 50,
+          height: 50,
         ),
-        ClipOval(
-          child:Image.memory(
-            gaplessPlayback: true,
-            base64Decode(channelItemModel.image), 
-            width:40,
-            height:40,
-          ),
-        )
       ]
     );
   }

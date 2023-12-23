@@ -22,7 +22,7 @@ class PayService {
   static PayService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late PayV1Client _payClient;
+  late PayClient _payClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -31,7 +31,7 @@ class PayService {
   }
 
   ///provide public access to the HelloClient instance
-  PayV1Client get payClient {
+  PayClient get payClient {
     return _payClient;
   }
 
@@ -89,7 +89,7 @@ class PayService {
         ),
       );
     }
-    _payClient = PayV1Client(channel);
+    _payClient = PayClient(channel);
   }
 
 }

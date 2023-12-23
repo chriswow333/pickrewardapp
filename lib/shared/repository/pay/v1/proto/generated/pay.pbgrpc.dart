@@ -18,18 +18,18 @@ import 'pay.pb.dart' as $0;
 
 export 'pay.pb.dart';
 
-// @$pb.GrpcServiceName('pay.PayV1')
-class PayV1Client extends $grpc.Client {
+// @$pb.GrpcServiceName('pay_v1.Pay')
+class PayClient extends $grpc.Client {
   static final _$getAllPays = $grpc.ClientMethod<$0.AllPaysReq, $0.PaysReply>(
-      '/pay.PayV1/GetAllPays',
+      '/pay_v1.Pay/GetAllPays',
       ($0.AllPaysReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.PaysReply.fromBuffer(value));
   static final _$getPaysByIDs = $grpc.ClientMethod<$0.PayIDsReq, $0.PaysReply>(
-      '/pay.PayV1/GetPaysByIDs',
+      '/pay_v1.Pay/GetPaysByIDs',
       ($0.PayIDsReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.PaysReply.fromBuffer(value));
 
-  PayV1Client($grpc.ClientChannel channel,
+  PayClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
@@ -44,11 +44,11 @@ class PayV1Client extends $grpc.Client {
   }
 }
 
-// @$pb.GrpcServiceName('pay.PayV1')
-abstract class PayV1ServiceBase extends $grpc.Service {
-  $core.String get $name => 'pay.PayV1';
+// @$pb.GrpcServiceName('pay_v1.Pay')
+abstract class PayServiceBase extends $grpc.Service {
+  $core.String get $name => 'pay_v1.Pay';
 
-  PayV1ServiceBase() {
+  PayServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.AllPaysReq, $0.PaysReply>(
         'GetAllPays',
         getAllPays_Pre,

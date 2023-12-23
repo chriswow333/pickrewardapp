@@ -18,30 +18,30 @@ import 'channel.pb.dart' as $0;
 
 export 'channel.pb.dart';
 
-// @$pb.GrpcServiceName('channel.ChannelV1')
-class ChannelV1Client extends $grpc.Client {
+// @$pb.GrpcServiceName('channel_v1.Channel')
+class ChannelClient extends $grpc.Client {
   static final _$getChannelCategoryTypes = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
-      '/channel.ChannelV1/GetChannelCategoryTypes',
+      '/channel_v1.Channel/GetChannelCategoryTypes',
       ($0.EmptyReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelCategoryTypeReply.fromBuffer(value));
   static final _$getChannelsByChannelCategoryType = $grpc.ClientMethod<$0.ChannelCategoryTypeReq, $0.ChannelReply>(
-      '/channel.ChannelV1/GetChannelsByChannelCategoryType',
+      '/channel_v1.Channel/GetChannelsByChannelCategoryType',
       ($0.ChannelCategoryTypeReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
   static final _$searchChannel = $grpc.ClientMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
-      '/channel.ChannelV1/SearchChannel',
+      '/channel_v1.Channel/SearchChannel',
       ($0.SearchChannelReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SearchChannelReply.fromBuffer(value));
   static final _$getShowChannelLabels = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelLabelsReply>(
-      '/channel.ChannelV1/GetShowChannelLabels',
+      '/channel_v1.Channel/GetShowChannelLabels',
       ($0.EmptyReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelLabelsReply.fromBuffer(value));
   static final _$getChannels = $grpc.ClientMethod<$0.ChannelIDsReq, $0.ChannelReply>(
-      '/channel.ChannelV1/GetChannels',
+      '/channel_v1.Channel/GetChannels',
       ($0.ChannelIDsReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
 
-  ChannelV1Client($grpc.ClientChannel channel,
+  ChannelClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
@@ -68,11 +68,11 @@ class ChannelV1Client extends $grpc.Client {
   }
 }
 
-// @$pb.GrpcServiceName('channel.ChannelV1')
-abstract class ChannelV1ServiceBase extends $grpc.Service {
-  $core.String get $name => 'channel.ChannelV1';
+// @$pb.GrpcServiceName('channel_v1.Channel')
+abstract class ChannelServiceBase extends $grpc.Service {
+  $core.String get $name => 'channel_v1.Channel';
 
-  ChannelV1ServiceBase() {
+  ChannelServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
         'GetChannelCategoryTypes',
         getChannelCategoryTypes_Pre,

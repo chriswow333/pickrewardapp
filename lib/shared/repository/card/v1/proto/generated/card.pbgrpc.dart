@@ -18,38 +18,38 @@ import 'card.pb.dart' as $0;
 
 export 'card.pb.dart';
 
-// @$pb.GrpcServiceName('card_v1.CardV1')
-class CardV1Client extends $grpc.Client {
+// @$pb.GrpcServiceName('card_v1.Card')
+class CardClient extends $grpc.Client {
   static final _$getAllBanks = $grpc.ClientMethod<$0.AllBanksReq, $0.BanksReply>(
-      '/card_v1.CardV1/GetAllBanks',
+      '/card_v1.Card/GetAllBanks',
       ($0.AllBanksReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.BanksReply.fromBuffer(value));
   static final _$getLatestCards = $grpc.ClientMethod<$0.EmptyReq, $0.CardsReply>(
-      '/card_v1.CardV1/GetLatestCards',
+      '/card_v1.Card/GetLatestCards',
       ($0.EmptyReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CardsReply.fromBuffer(value));
   static final _$getCardsByBankID = $grpc.ClientMethod<$0.CardsByBankIDReq, $0.CardsReply>(
-      '/card_v1.CardV1/GetCardsByBankID',
+      '/card_v1.Card/GetCardsByBankID',
       ($0.CardsByBankIDReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CardsReply.fromBuffer(value));
   static final _$getCardRewardsByCardID = $grpc.ClientMethod<$0.CardRewardsByCardIDReq, $0.CardRewardsReply>(
-      '/card_v1.CardV1/GetCardRewardsByCardID',
+      '/card_v1.Card/GetCardRewardsByCardID',
       ($0.CardRewardsByCardIDReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CardRewardsReply.fromBuffer(value));
   static final _$evaluateCards = $grpc.ClientMethod<$0.EventReq, $0.EvaluateCardsReply>(
-      '/card_v1.CardV1/EvaluateCards',
+      '/card_v1.Card/EvaluateCards',
       ($0.EventReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.EvaluateCardsReply.fromBuffer(value));
   static final _$searchCard = $grpc.ClientMethod<$0.SearchCardReq, $0.SearchCardReply>(
-      '/card_v1.CardV1/SearchCard',
+      '/card_v1.Card/SearchCard',
       ($0.SearchCardReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.SearchCardReply.fromBuffer(value));
   static final _$getShowTaskLabels = $grpc.ClientMethod<$0.EmptyReq, $0.TaskLabelsReply>(
-      '/card_v1.CardV1/GetShowTaskLabels',
+      '/card_v1.Card/GetShowTaskLabels',
       ($0.EmptyReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.TaskLabelsReply.fromBuffer(value));
 
-  CardV1Client($grpc.ClientChannel channel,
+  CardClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
@@ -84,11 +84,11 @@ class CardV1Client extends $grpc.Client {
   }
 }
 
-// @$pb.GrpcServiceName('card_v1.CardV1')
-abstract class CardV1ServiceBase extends $grpc.Service {
-  $core.String get $name => 'card_v1.CardV1';
+// @$pb.GrpcServiceName('card_v1.Card')
+abstract class CardServiceBase extends $grpc.Service {
+  $core.String get $name => 'card_v1.Card';
 
-  CardV1ServiceBase() {
+  CardServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.AllBanksReq, $0.BanksReply>(
         'GetAllBanks',
         getAllBanks_Pre,

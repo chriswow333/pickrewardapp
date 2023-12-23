@@ -6,10 +6,10 @@ option go_package = "pickrewardapi/api/channel/proto";
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
-package channel;
+package channel_v1;
 
 // The greeting service definition.
-service ChannelV1 {
+service Channel {
   rpc GetChannelCategoryTypes (EmptyReq) returns (ChannelCategoryTypeReply){}
   rpc GetChannelsByChannelCategoryType (ChannelCategoryTypeReq) returns (ChannelReply){}
   rpc SearchChannel(SearchChannelReq) returns (SearchChannelReply) {}

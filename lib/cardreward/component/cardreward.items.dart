@@ -227,8 +227,6 @@ class CardRewardDescriptionMore extends StatelessWidget {
         ]
       )
     );
-
-
   }
 }
 
@@ -278,8 +276,9 @@ class CardRewardLabels extends StatelessWidget {
     }
 
     List<TaskModel> tasks = cardRewardModel.tasks;
+    List<String> taskLabelNames = [];
     for(TaskModel taskModel in tasks) {
-      labelNames.add(taskModel.name);
+      taskLabelNames.add(taskModel.name);
     }
 
    return Wrap(
@@ -291,7 +290,7 @@ class CardRewardLabels extends StatelessWidget {
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Palette.kToOrange[700]!,
+              color: Palette.kToYellow[400]!,
             ),
             child:Container(
               padding: EdgeInsets.only(left:2,right:2),
@@ -303,8 +302,32 @@ class CardRewardLabels extends StatelessWidget {
                 ),
               )
             ),
-          )
-        )
+          ),
+        ),
+      for(String labelName in taskLabelNames)
+        Container(
+          padding: EdgeInsets.only(right:5, ),
+          child:Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Palette.kToRed[100]!,
+            ),
+            child:Container(
+              padding: EdgeInsets.only(left:2,right:2),
+              child:Text('$labelName',
+                style: TextStyle(
+                  color:Palette.kToBlack[0],
+                  fontSize: 14,
+                  decoration: TextDecoration.none,
+                ),
+              )
+            ),
+          ),
+        ),
+
+        
+
       ]
    );
    

@@ -288,7 +288,8 @@ class ChannelItemIcon extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
+    return CircleAvatar(
+      backgroundColor: Palette.kToBlack[0],
       child:Image.memory(
         gaplessPlayback: true,
         base64Decode(image), 

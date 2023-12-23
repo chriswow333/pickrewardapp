@@ -20,7 +20,7 @@ class EmptyReq extends $pb.GeneratedMessage {
   factory EmptyReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EmptyReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmptyReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmptyReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -52,7 +52,7 @@ class Reply extends $pb.GeneratedMessage {
   factory Reply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Reply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.O3)
     ..aOM<Error>(2, _omitFieldNames ? '' : 'error', subBuilder: Error.create)
     ..hasRequiredFields = false
@@ -106,7 +106,7 @@ class Error extends $pb.GeneratedMessage {
   factory Error.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Error.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'errorCode', $pb.PbFieldType.O3, protoName: 'errorCode')
     ..aOS(2, _omitFieldNames ? '' : 'errorMessage', protoName: 'errorMessage')
     ..hasRequiredFields = false
@@ -158,7 +158,7 @@ class ChannelIDsReq extends $pb.GeneratedMessage {
   factory ChannelIDsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelIDsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'channelIDs', protoName: 'channelIDs')
     ..hasRequiredFields = false
   ;
@@ -194,7 +194,7 @@ class ChannelCategoryTypeReq extends $pb.GeneratedMessage {
   factory ChannelCategoryTypeReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelCategoryTypeReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'categoryType', $pb.PbFieldType.O3, protoName: 'categoryType')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
@@ -256,7 +256,7 @@ class ChannelCategoryTypeReply_ChannelCategoryType extends $pb.GeneratedMessage 
   factory ChannelCategoryTypeReply_ChannelCategoryType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelCategoryTypeReply_ChannelCategoryType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReply.ChannelCategoryType', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReply.ChannelCategoryType', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'categoryType', $pb.PbFieldType.O3, protoName: 'categoryType')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
@@ -318,7 +318,7 @@ class ChannelCategoryTypeReply extends $pb.GeneratedMessage {
   factory ChannelCategoryTypeReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelCategoryTypeReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelCategoryTypeReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<ChannelCategoryTypeReply_ChannelCategoryType>(2, _omitFieldNames ? '' : 'channelCategoryTypes', $pb.PbFieldType.PM, protoName: 'channelCategoryTypes', subBuilder: ChannelCategoryTypeReply_ChannelCategoryType.create)
     ..hasRequiredFields = false
@@ -366,7 +366,7 @@ class ChannelReply_ChannelLabel extends $pb.GeneratedMessage {
   factory ChannelReply_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelReply_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'show', $pb.PbFieldType.O3)
@@ -428,7 +428,7 @@ class ChannelReply_Channel extends $pb.GeneratedMessage {
   factory ChannelReply_Channel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelReply_Channel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply.Channel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply.Channel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'image')
@@ -558,7 +558,7 @@ class ChannelReply extends $pb.GeneratedMessage {
   factory ChannelReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<ChannelReply_Channel>(2, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM, subBuilder: ChannelReply_Channel.create)
     ..hasRequiredFields = false
@@ -606,7 +606,7 @@ class SearchChannelReq extends $pb.GeneratedMessage {
   factory SearchChannelReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'keyword')
     ..hasRequiredFields = false
   ;
@@ -648,7 +648,7 @@ class SearchChannelReply_SearchChannel_ChannelLabel extends $pb.GeneratedMessage
   factory SearchChannelReply_SearchChannel_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReply_SearchChannel_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'show', $pb.PbFieldType.O3)
@@ -710,7 +710,7 @@ class SearchChannelReply_SearchChannel_Channel extends $pb.GeneratedMessage {
   factory SearchChannelReply_SearchChannel_Channel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReply_SearchChannel_Channel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.Channel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.Channel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'image')
@@ -840,7 +840,7 @@ class SearchChannelReply_SearchChannel_ChannelCategoryType extends $pb.Generated
   factory SearchChannelReply_SearchChannel_ChannelCategoryType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReply_SearchChannel_ChannelCategoryType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.ChannelCategoryType', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel.ChannelCategoryType', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'categoryType', $pb.PbFieldType.O3, protoName: 'categoryType')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
@@ -902,7 +902,7 @@ class SearchChannelReply_SearchChannel extends $pb.GeneratedMessage {
   factory SearchChannelReply_SearchChannel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReply_SearchChannel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply.SearchChannel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOM<SearchChannelReply_SearchChannel_ChannelCategoryType>(1, _omitFieldNames ? '' : 'channelCategoryType', protoName: 'channelCategoryType', subBuilder: SearchChannelReply_SearchChannel_ChannelCategoryType.create)
     ..pc<SearchChannelReply_SearchChannel_Channel>(2, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM, subBuilder: SearchChannelReply_SearchChannel_Channel.create)
     ..hasRequiredFields = false
@@ -950,7 +950,7 @@ class SearchChannelReply extends $pb.GeneratedMessage {
   factory SearchChannelReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SearchChannelReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchChannelReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<SearchChannelReply_SearchChannel>(2, _omitFieldNames ? '' : 'searchChannels', $pb.PbFieldType.PM, protoName: 'searchChannels', subBuilder: SearchChannelReply_SearchChannel.create)
     ..hasRequiredFields = false
@@ -998,7 +998,7 @@ class ChannelLabelsReply_ChannelLabel extends $pb.GeneratedMessage {
   factory ChannelLabelsReply_ChannelLabel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelLabelsReply_ChannelLabel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply.ChannelLabel', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'label', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
@@ -1050,7 +1050,7 @@ class ChannelLabelsReply extends $pb.GeneratedMessage {
   factory ChannelLabelsReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ChannelLabelsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelLabelsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'channel_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<ChannelLabelsReply_ChannelLabel>(2, _omitFieldNames ? '' : 'channelLabels', $pb.PbFieldType.PM, protoName: 'channelLabels', subBuilder: ChannelLabelsReply_ChannelLabel.create)
     ..hasRequiredFields = false

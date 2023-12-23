@@ -8,7 +8,7 @@ option go_package = "pickrewardapi/api/card/proto";
 
 package card_v1;
 
-service CardV1 {
+service Card {
   rpc GetAllBanks (AllBanksReq) returns (BanksReply) {}
   rpc GetLatestCards (EmptyReq) returns (CardsReply) {}
   rpc GetCardsByBankID (CardsByBankIDReq) returns (CardsReply) {}

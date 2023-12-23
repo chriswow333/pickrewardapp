@@ -19,7 +19,7 @@ class CardService {
   static CardService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late CardV1Client _cardClient;
+  late CardClient _cardClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -28,7 +28,7 @@ class CardService {
   }
 
   ///provide public access to the HelloClient instance
-  CardV1Client get cardClient {
+  CardClient get cardClient {
     return _cardClient;
   }
 
@@ -87,6 +87,6 @@ class CardService {
       );
     }
 
-    _cardClient = CardV1Client(channel);
+    _cardClient = CardClient(channel);
   }
 }

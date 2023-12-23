@@ -20,7 +20,7 @@ class PayIDsReq extends $pb.GeneratedMessage {
   factory PayIDsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PayIDsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PayIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PayIDsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'payIDs', protoName: 'payIDs')
     ..hasRequiredFields = false
   ;
@@ -56,7 +56,7 @@ class Reply extends $pb.GeneratedMessage {
   factory Reply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Reply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Reply', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.O3)
     ..aOM<Error>(2, _omitFieldNames ? '' : 'error', subBuilder: Error.create)
     ..hasRequiredFields = false
@@ -110,7 +110,7 @@ class Error extends $pb.GeneratedMessage {
   factory Error.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory Error.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Error', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'errorCode', $pb.PbFieldType.O3, protoName: 'errorCode')
     ..aOS(2, _omitFieldNames ? '' : 'errorMessage', protoName: 'errorMessage')
     ..hasRequiredFields = false
@@ -162,7 +162,7 @@ class AllPaysReq extends $pb.GeneratedMessage {
   factory AllPaysReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AllPaysReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllPaysReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AllPaysReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'offset', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -214,7 +214,7 @@ class PaysReply_Pay extends $pb.GeneratedMessage {
   factory PaysReply_Pay.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PaysReply_Pay.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PaysReply.Pay', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PaysReply.Pay', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'image')
@@ -330,7 +330,7 @@ class PaysReply extends $pb.GeneratedMessage {
   factory PaysReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PaysReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PaysReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PaysReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'pay_v1'), createEmptyInstance: create)
     ..aOM<Reply>(1, _omitFieldNames ? '' : 'reply', subBuilder: Reply.create)
     ..pc<PaysReply_Pay>(2, _omitFieldNames ? '' : 'pays', $pb.PbFieldType.PM, subBuilder: PaysReply_Pay.create)
     ..hasRequiredFields = false

@@ -30,14 +30,14 @@ const Reply$json = {
   '1': 'Reply',
   '2': [
     {'1': 'status', '3': 1, '4': 1, '5': 5, '10': 'status'},
-    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.pay.Error', '10': 'error'},
+    {'1': 'error', '3': 2, '4': 1, '5': 11, '6': '.pay_v1.Error', '10': 'error'},
   ],
 };
 
 /// Descriptor for `Reply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List replyDescriptor = $convert.base64Decode(
-    'CgVSZXBseRIWCgZzdGF0dXMYASABKAVSBnN0YXR1cxIgCgVlcnJvchgCIAEoCzIKLnBheS5Fcn'
-    'JvclIFZXJyb3I=');
+    'CgVSZXBseRIWCgZzdGF0dXMYASABKAVSBnN0YXR1cxIjCgVlcnJvchgCIAEoCzINLnBheV92MS'
+    '5FcnJvclIFZXJyb3I=');
 
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = {
@@ -71,8 +71,8 @@ final $typed_data.Uint8List allPaysReqDescriptor = $convert.base64Decode(
 const PaysReply$json = {
   '1': 'PaysReply',
   '2': [
-    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.pay.Reply', '10': 'reply'},
-    {'1': 'pays', '3': 2, '4': 3, '5': 11, '6': '.pay.PaysReply.Pay', '10': 'pays'},
+    {'1': 'reply', '3': 1, '4': 1, '5': 11, '6': '.pay_v1.Reply', '10': 'reply'},
+    {'1': 'pays', '3': 2, '4': 3, '5': 11, '6': '.pay_v1.PaysReply.Pay', '10': 'pays'},
   ],
   '3': [PaysReply_Pay$json],
 };
@@ -95,10 +95,11 @@ const PaysReply_Pay$json = {
 
 /// Descriptor for `PaysReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List paysReplyDescriptor = $convert.base64Decode(
-    'CglQYXlzUmVwbHkSIAoFcmVwbHkYASABKAsyCi5wYXkuUmVwbHlSBXJlcGx5EiYKBHBheXMYAi'
-    'ADKAsyEi5wYXkuUGF5c1JlcGx5LlBheVIEcGF5cxrxAQoDUGF5Eg4KAmlkGAEgASgJUgJpZBIS'
-    'CgRuYW1lGAIgASgJUgRuYW1lEhQKBWltYWdlGAMgASgJUgVpbWFnZRIYCgdsaW5rVVJMGAQgAS'
-    'gJUgdsaW5rVVJMEiIKDGRlc2NyaXB0aW9ucxgFIAMoCVIMZGVzY3JpcHRpb25zEh4KCmNyZWF0'
-    'ZURhdGUYBiABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgHIAEoA1IKdXBkYXRlRGF0ZR'
-    'IUCgVvcmRlchgIIAEoBVIFb3JkZXISHAoJcGF5U3RhdHVzGAkgASgFUglwYXlTdGF0dXM=');
+    'CglQYXlzUmVwbHkSIwoFcmVwbHkYASABKAsyDS5wYXlfdjEuUmVwbHlSBXJlcGx5EikKBHBheX'
+    'MYAiADKAsyFS5wYXlfdjEuUGF5c1JlcGx5LlBheVIEcGF5cxrxAQoDUGF5Eg4KAmlkGAEgASgJ'
+    'UgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhQKBWltYWdlGAMgASgJUgVpbWFnZRIYCgdsaW5rVV'
+    'JMGAQgASgJUgdsaW5rVVJMEiIKDGRlc2NyaXB0aW9ucxgFIAMoCVIMZGVzY3JpcHRpb25zEh4K'
+    'CmNyZWF0ZURhdGUYBiABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgHIAEoA1IKdXBkYX'
+    'RlRGF0ZRIUCgVvcmRlchgIIAEoBVIFb3JkZXISHAoJcGF5U3RhdHVzGAkgASgFUglwYXlTdGF0'
+    'dXM=');
 

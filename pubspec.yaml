@@ -48,7 +48,7 @@ dependencies:
   freezed: ^2.4.5
   json_annotation: ^4.4.0
   localstorage: ^4.0.0+1
-  syncfusion_flutter_datepicker: ^23.2.7
+  syncfusion_flutter_datepicker: ^24.1.41
   flutter_form_builder: ^9.1.0
   flutter_localizations:
     sdk: flutter  

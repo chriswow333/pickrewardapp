@@ -19,7 +19,7 @@ class ChannelService {
   static ChannelService get instance => _instance;
    ///HelloClient is the  class that was generated for us when we ran the generation command
   ///We will pass a channel to it to intialize it
-  late ChannelV1Client _channelClient;
+  late ChannelClient _channelClient;
 
   ///this will be used to create a channel once we create this class.
   ///Call HelloService().init() before making any call.
@@ -28,7 +28,7 @@ class ChannelService {
   }
 
   ///provide public access to the HelloClient instance
-  ChannelV1Client get channelClient {
+  ChannelClient get channelClient {
     return _channelClient;
   }
 
@@ -86,7 +86,7 @@ class ChannelService {
       );
     }
     
-    _channelClient = ChannelV1Client(channel);
+    _channelClient = ChannelClient(channel);
   }
 
 }
