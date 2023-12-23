@@ -182,18 +182,30 @@ class CardRewardFeedback extends StatelessWidget {
     if(cardEventResultModel.cardRewardEventResultModels.isEmpty)return Container();
 
 
-    final feedback = cardEventResultModel
-    .cardRewardEventResultModels[0].evaluationEventResultModel;
+    final feedback = cardEventResultModel.cardRewardEventResultModels[0].evaluationEventResultModel;
 
     String percentage = (feedback.getPercentage * 100).toStringAsFixed(1);
-
-
-    return Container(
-      child:Text('回饋$percentage%, 獲得${feedback.getReturn}元',
-        style:TextStyle(
-          fontSize: 12,
+    
+    if(feedback.calculateType == 0) {
+      // 趴數回饋
+      return Container(
+        child:Text('回饋$percentage%, 獲得${feedback.getReturn}元',
+          style:TextStyle(
+            fontSize: 12,
+          )
         )
-      )
-    );
+      );
+    }else {
+      // 固定回饋
+      return Container(
+        child:Text('折抵${feedback.getReturn}元',
+          style:TextStyle(
+            fontSize: 12,
+          )
+        )
+      );
+    }
+
+    
   }
 }

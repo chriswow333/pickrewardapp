@@ -13,6 +13,7 @@ import 'package:pickrewardapp/channel_search/viewmodel/eventresult.pay.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pb.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardRewardEvaluationDetailBottomUp extends StatelessWidget {
   const CardRewardEvaluationDetailBottomUp({super.key, required this.cardEventResultModel, required this.rank});
@@ -85,7 +86,7 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
           CardImage(image:cardEventResultModel.cardImage),
           CardName(cardEventResultModel:cardEventResultModel),
           SizedBox(height:5),
-          CardRewardDetailBtn(),
+          CardRewardDetailBtn(url:cardEventResultModel.linkURL),
 
         ]
       ),
@@ -94,14 +95,16 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
 }
 
 class CardRewardDetailBtn extends StatelessWidget {
-  const CardRewardDetailBtn({super.key});
-
+  const CardRewardDetailBtn({super.key, required this.url});
+  final String url;
   @override
   Widget build(BuildContext context) {
     return Container(
       child:TextButton(
-        onPressed:(){
-
+        onPressed:()async{
+          if (!await launchUrl(Uri.parse(url))) {
+            throw Exception('Could not launch $url');
+          }
         },
         child:Row(
           mainAxisAlignment:MainAxisAlignment.center,
@@ -545,7 +548,7 @@ class CardRewardPayLabel extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Palette.kToBlue[700]!,
+          color: Palette.kToRed[100]!,
         ),
         child:Container(
           padding: EdgeInsets.only(left:2,right:2),
@@ -576,7 +579,7 @@ class CardRewardType extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Palette.kToBlue[700]!,
+          color: Palette.kToYellow[400]!,
         ),
         child:Container(
           padding: EdgeInsets.only(left:2,right:2),
@@ -608,7 +611,7 @@ class CardRewardLabel extends StatelessWidget {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color:Palette.kToYellow[600],
+          color:Palette.kToRed[100],
 
         ),
         child:Text(labelName,

@@ -10,7 +10,6 @@ import 'package:pickrewardapp/channel_search/model/task_label.dart';
 
 class CriteriaViewModel with ChangeNotifier{
 
-
 /// Channel Progress
 
 /// channel label
@@ -107,7 +106,23 @@ class CriteriaViewModel with ChangeNotifier{
 
 
 /// task label
+
+  Set<int> _initTaskLabels = {};
+  set setInitTaskLabels(TaskLabelModel t){
+    _taskLabelMap[t.label] = t;
+    _initTaskLabels.add(t.label);
+  }
+  bool existInitTaskLabels(int label) {
+    return _initTaskLabels.contains(label);
+  }
+  
   final Map<int, TaskLabelModel> _taskLabelMap = {};
+  set allTaskLabel(List<TaskLabelModel> taskLabel) {
+    for(TaskLabelModel t in taskLabel) {
+      _taskLabelMap[t.label] = t;
+    }
+    notifyListeners();
+  }
   set taskLabel(TaskLabelModel taskLabel) {
     
     if(_taskLabelMap.containsKey(taskLabel.label)) {

@@ -238,7 +238,7 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
               width: double.infinity,
               child:Wrap(
                 alignment: WrapAlignment.start,
-                spacing:15,
+                spacing:10,
                 runSpacing: 10,
                 children:[
                   for(ChannelLabelModel l in channelViewModel.channelLabelModels)

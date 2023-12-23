@@ -14,8 +14,6 @@ class EventResultChannelViewModel with ChangeNotifier {
   }
 
 
-
-
   List<ChannelReply_Channel> _channels = [];
 
   List<ChannelReply_Channel> get channels => _channels;

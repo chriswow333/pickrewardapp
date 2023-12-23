@@ -181,9 +181,8 @@ class TaskLabelItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-   TaskLabelViewModel taskLabelViewModel = Provider.of<TaskLabelViewModel>(context);
-
+    TaskLabelViewModel taskLabelViewModel = Provider.of<TaskLabelViewModel>(context);
+    
     return Container(
       child:Wrap(
         spacing:10,
@@ -205,10 +204,15 @@ class TaskLabelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+    
+    bool exist = criteriaViewModel.existInitTaskLabels(taskLabelModel.label);
 
+    if(!exist){
+      criteriaViewModel.setInitTaskLabels = taskLabelModel;
+    }
+    
     return Container(
       child:TextButton(
         onPressed: (){
@@ -219,7 +223,7 @@ class TaskLabelItem extends StatelessWidget {
           side: MaterialStatePropertyAll(
             BorderSide(
               width:1.5,
-              color: criteriaViewModel.existTaskLabel(taskLabelModel.label)?
+              color: !exist || criteriaViewModel.existTaskLabel(taskLabelModel.label)?
                 Palette.kToYellow[400]!:Palette.kToBlack[400]!,
             )
           ),

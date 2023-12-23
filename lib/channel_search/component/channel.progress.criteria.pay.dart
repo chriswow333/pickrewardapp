@@ -47,9 +47,8 @@ class PayUsageWidget extends StatelessWidget {
       spacing: 10,
       runSpacing: 10,
       children:[
-        PayUse(),
-        PayNoUse(),
         PayWhatever(),
+        PayNoUse(),
       ]
     );
   }
@@ -137,48 +136,6 @@ class PayNoUse extends StatelessWidget {
     );
   }
 }
-class PayUse extends StatelessWidget {
-  const PayUse({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    
-    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
-
-
-    return Container(
-      child:TextButton(
-        onPressed: (){
-          criteriaViewModel.payUsage = PayUsageEnum.use;
-        },
-        style:ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]),
-          side: MaterialStatePropertyAll(
-            BorderSide(
-              width:1.5,
-              color: criteriaViewModel.payUsage.compareTo(PayUsageEnum.use) == 0?
-                Palette.kToYellow[400]!:Palette.kToBlack[400]!,
-            )
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-          ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-          animationDuration:Duration(microseconds: 0),
-        ),
-        child:Text(PayUsageEnum.use.name,
-          style:TextStyle(
-            fontSize: 14,
-            color:Palette.kToBlack[500],
-          )
-        )
-      )
-    );
-  }
-}
-
 class PayName extends StatelessWidget {
   const PayName({super.key});
 

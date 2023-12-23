@@ -28,10 +28,10 @@ class CardEventResultsViewModel with ChangeNotifier {
     
     _loading = true;
     
-    await Future.delayed(const Duration(milliseconds: 500), () {});
+    await Future.delayed(const Duration(milliseconds: 200), () {});
 
     try { 
-
+        
       EventReq eventReq = EventReq();
       eventReq.date = Int64(criteriaViewModel.date.millisecondsSinceEpoch ~/ 1000);
       eventReq.cost = criteriaViewModel.cost.value;
@@ -57,7 +57,6 @@ class CardEventResultsViewModel with ChangeNotifier {
       final payEvent = EventReq_PayEvent();
       payEvent.status = criteriaViewModel.payUsage.status;
       eventReq.payEvent = payEvent;
-
       EvaluateCardsReply evaluateCardsReply = await CardService().cardClient.evaluateCards(eventReq);
 
       _cardEventResults.clear();
