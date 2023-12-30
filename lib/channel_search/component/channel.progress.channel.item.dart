@@ -234,18 +234,20 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
               ]
             ),
             const SizedBox(height: 20,),
-            Container(
-              width: double.infinity,
-              child:Wrap(
-                alignment: WrapAlignment.start,
-                spacing:10,
-                runSpacing: 10,
-                children:[
-                  for(ChannelLabelModel l in channelViewModel.channelLabelModels)
-                    ChannelLabelItem(labelItemModel: l,),
-                ]
+            GridView.builder(
+              shrinkWrap:true,
+              physics:NeverScrollableScrollPhysics(),
+              itemCount: channelViewModel.channelLabelModels.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 10,
+                // childAspectRatio: 0.7,
               ),
-            )
+              itemBuilder: (context, index){
+                return ChannelLabelItem(labelItemModel:channelViewModel.channelLabelModels[index]);
+              }
+            ),
           ]
         ),
       )
@@ -367,6 +369,7 @@ class ChannelItemIcon extends StatelessWidget {
       alignment:Alignment.center,
       children:[
         CircleAvatar(
+          radius:14,
           backgroundColor:Palette.kToBlack[0],
           child:channelItemModel.image.isEmpty?
           Container()
@@ -402,15 +405,19 @@ class ChannelItemName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return FittedBox(
-      fit: BoxFit.fitWidth, 
-      child:Text(
-        name,
-        style:TextStyle(
-          color: Palette.kToBlack[600],
-        ),
+    return SizedBox(
+      height:20,
+      child:FittedBox(
+        fit: BoxFit.fitWidth, 
+        child:Text(
+          name,
+          style:TextStyle(
+            color: Palette.kToBlack[600],
+          ),
+        )
       )
     );
+    ;
   }
 }
 

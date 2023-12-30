@@ -44,7 +44,8 @@ class _ChannelComponentState extends State<ChannelComponent> with SingleTickerPr
           const SizedBox(height: 10),
           Expanded(
             child:PageView(
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
+              physics: ClampingScrollPhysics(),
               controller:_controller,
               onPageChanged:(int page){
                 channelProgressSelectedPage.changePage(page);

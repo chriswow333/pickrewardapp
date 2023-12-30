@@ -44,6 +44,12 @@ class CriteriaPageBar extends StatelessWidget {
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,listen:false);
 
+
+    int channelIDLength = criteriaViewModel.getChannelIDs().length;
+    int labelLength = criteriaViewModel.channelLabels.length;
+    
+    bool channelSelected = channelIDLength + labelLength > 0;
+
     return Container(
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,6 +72,8 @@ class CriteriaPageBar extends StatelessWidget {
 
           GestureDetector(
             onTap:(){
+
+              if(channelSelected){
                 cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(
@@ -73,10 +81,12 @@ class CriteriaPageBar extends StatelessWidget {
                   duration: Duration(milliseconds: 150), 
                   curve: Curves.linear
                 );
+              }
+                
               },
             child:Container(
               decoration: BoxDecoration(
-                color: Palette.kToBlack[600],
+                color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
                 borderRadius:BorderRadius.all(Radius.circular(12.0)),
               ),
               padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/cupertino.dart';
 
 
 
@@ -13,15 +13,29 @@ import 'package:pickrewardapp/shared/config/palette.dart';
 
 void main()async {
 
-   await dotenv.load(fileName: ".env.dev"); 
+  //  await dotenv.load(fileName: ".env.dev"); 
   // await dotenv.load(fileName: ".env.test");
-  // await dotenv.load(fileName: ".env.prod");
-  
+  await dotenv.load(fileName: ".env.prod");
+
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // FlutterNativeSplash.remove();
+
   runApp(const PickRewardApp());
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.white, 
+    statusBarBrightness:
+        Brightness.light 
+    ));
+
+  // FlutterNativeSplash.remove();
+
 }
 
 class PickRewardApp extends StatelessWidget {
   const PickRewardApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +44,11 @@ class PickRewardApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
         // colorScheme: ColorScheme.fromSeed(
-          // seedColor:Palette.kToBlack,
-          // background: Colors.white,
-          // surface: Colors.white,
+        //   seedColor:Palette.kToBlack,
+        //   background: Colors.white,
+        //   surface: Colors.white,
         // ),
         primarySwatch:Palette.kToBlack,
-        
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -46,19 +59,6 @@ class PickRewardApp extends StatelessWidget {
         Locale('zh')
       ],
       home:HomeScreen(),
-      // onGenerateRoute: (RouteSettings settings) {
-      //   return MaterialWithModalsPageRoute(
-      //     builder:(context)=>Scaffold(
-      //       body:Builder(
-      //         builder: (context)=>CupertinoPageScaffold(
-      //           child:SafeArea(
-      //             child:CardSearchPage()
-      //           ),
-      //         ),
-      //       )
-      //     )
-      //   );
-      // },
     );
   }
 }
@@ -90,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
   }
-
       
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       body: SafeArea(
         child: Center(

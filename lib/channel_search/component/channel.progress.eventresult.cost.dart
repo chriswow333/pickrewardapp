@@ -29,6 +29,10 @@ class _CriteriaCostWidgetState extends State<CriteriaCostWidget> {
     
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     CardEventResultsViewModel cardEventResultsViewModel = Provider.of<CardEventResultsViewModel>(context,listen:false);
+    int channelIDLength = criteriaViewModel.getChannelIDs().length;
+    int labelLength = criteriaViewModel.channelLabels.length;
+    
+    bool channelSelected = channelIDLength + labelLength > 0;
     return Container(
       child:Column(
         children:[
@@ -47,7 +51,9 @@ class _CriteriaCostWidgetState extends State<CriteriaCostWidget> {
                     List<CostStatusEnum> newCosts = CostStatusEnum.values.where((element) => element.status == newValue).toList();
                     if(newCosts.length == 1 && !cardEventResultsViewModel.loading) {
                       criteriaViewModel.cost = newCosts[0];
-                      cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
+                      if(channelSelected){
+                        cardEventResultsViewModel.evaluateCardEventResult(criteriaViewModel);
+                      }
                       _sliding = newValue??0;
                     }
                   });
