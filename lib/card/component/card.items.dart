@@ -121,7 +121,7 @@ class _CardItemsByBankIDState extends State<CardItemsByBankID> {
           ),
           Expanded(
             child:SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               controller:_controller,
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +149,7 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child:Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -201,13 +201,13 @@ class CardItem extends StatelessWidget {
             splashFactory:NoSplash.splashFactory,
           ),
           child:Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child:Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                 CardIcon(image:cardItemModel.image),
-                SizedBox(width:24),
+                const SizedBox(width:24),
                 Expanded(
                   child:Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,13 +235,13 @@ class CardDescs extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: EdgeInsets.only(top:5,),
+      padding: const EdgeInsets.only(top:5,),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for(String desc in descs) 
             Container(
-              padding: EdgeInsets.only(bottom: 5),
+              padding: const EdgeInsets.only(bottom: 5),
               child:Row(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,9 +254,9 @@ class CardDescs extends StatelessWidget {
                       color:Palette.kToBlack[300],
                     ),
                   ),
-                  SizedBox(width:10),
+                  const SizedBox(width:10),
                   Expanded(
-                    child:Text("$desc",
+                    child:Text(desc,
                       style:TextStyle(
                         color:Palette.kToBlack[900],
                         fontSize: 12,

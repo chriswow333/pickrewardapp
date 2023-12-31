@@ -33,15 +33,15 @@ class CardSearchItems extends StatelessWidget {
               ),
             ),
             if(loading)
-              LoadingItem(),
+              const LoadingItem(),
 
             if(!loading)
-              SearchItems(),
+              const SearchItems(),
           ],
         )
       );
     }else {
-      return Expanded(
+      return const Expanded(
         child:SearchCardKeywordHistory(),
       );
     }
@@ -65,16 +65,16 @@ class SearchCardKeywordHistory extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Container(
-              child:Text('最近搜尋',
+              child:const Text('最近搜尋',
                 style:TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 )
               )
             ),
-            SizedBox(height:20),
+            const SizedBox(height:20),
             if(keywordHistory.isEmpty) 
-              Text('尚無資料',
+              const Text('尚無資料',
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -106,17 +106,17 @@ class KeywordHistory extends StatelessWidget {
         searchCardViewModel.searchCardFromHistory(keyword);
       },
       child:Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child:Wrap(
           alignment:WrapAlignment.end,
           children:[
-            Icon(
+            const Icon(
               Icons.search,
               size:30,
             ),
-            SizedBox(width:10),
+            const SizedBox(width:10),
             Text(keyword,
-              style:TextStyle(
+              style:const TextStyle(
                 fontSize: 20,
               )
             )
@@ -167,7 +167,7 @@ class SearchItems extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             if(searchCardViewModel.searched && cardItemModels.isEmpty) 
-              EmptyItem(),
+              const EmptyItem(),
 
             for(CardItemModel c in cardItemModels)
               CardItem(cardItemModel: c,)
@@ -184,7 +184,7 @@ class EmptyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Row(
+      child:const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           Text('查無資料'),
@@ -203,7 +203,7 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:10, bottom: 10),
+      padding: const EdgeInsets.only(top:10, bottom: 10),
       child:Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -253,7 +253,7 @@ class CardItem extends StatelessWidget {
                 Row(
                   children:[
                     CardIcon(image:cardItemModel.image),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     Expanded(
                       child: CardDescs(descs:cardItemModel.descriptions),
                     )
@@ -277,13 +277,13 @@ class CardDescs extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: EdgeInsets.only(top:5),
+      padding: const EdgeInsets.only(top:5),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for(String desc in descs) 
             Container(
-              padding: EdgeInsets.only(bottom: 3),
+              padding: const EdgeInsets.only(bottom: 3),
               child:Text(desc,
                 style:TextStyle(
                   color:Palette.kToBlack[900],

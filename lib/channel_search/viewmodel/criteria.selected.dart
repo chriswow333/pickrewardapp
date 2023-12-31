@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
-import 'package:pickrewardapp/channel_search/model/channel_label.dart';
 import 'package:pickrewardapp/channel_search/model/cost.dart';
 import 'package:pickrewardapp/channel_search/model/pay_usage.dart';
 import 'package:pickrewardapp/channel_search/model/reward_type.dart';
@@ -107,7 +106,7 @@ class CriteriaViewModel with ChangeNotifier{
 
 /// task label
 
-  Set<int> _initTaskLabels = {};
+  final Set<int> _initTaskLabels = {};
   set setInitTaskLabels(TaskLabelModel t){
     _taskLabelMap[t.label] = t;
     _initTaskLabels.add(t.label);

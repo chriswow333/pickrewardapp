@@ -1,9 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
-import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
-import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:provider/provider.dart';
 
 
 // class ChannelProgressBar extends StatelessWidget {

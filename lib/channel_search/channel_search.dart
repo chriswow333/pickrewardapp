@@ -28,7 +28,7 @@ class ChannelSearchPage extends StatelessWidget {
         ChangeNotifierProvider<ChannelProgressSelectedPage>(create:(_)=>ChannelProgressSelectedPage()),
         ChangeNotifierProvider<SearchChannelViewModel>(create:(_)=>SearchChannelViewModel()),
       ],
-      child:ChannelComponent(),
+      child:const ChannelComponent(),
     );
   }
 }

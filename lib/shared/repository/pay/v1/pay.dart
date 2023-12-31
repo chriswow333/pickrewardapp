@@ -3,7 +3,6 @@
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart';
 import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pbgrpc.dart';
 
 class PayService {
@@ -51,7 +50,7 @@ class PayService {
     String baseUrl = dotenv.env['BASE_URL'] ?? "localhost";
     String port = dotenv.env['BASE_PORT'] ?? "50055";
     int portInt = int.parse(port);  
-    late final channel;
+    late final ClientChannel channel;
 
     if (useTlsBool) {
       channel = ClientChannel(

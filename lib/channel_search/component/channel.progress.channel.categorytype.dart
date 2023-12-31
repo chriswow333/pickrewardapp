@@ -23,9 +23,9 @@ class ChannelCategoryTypes extends StatelessWidget {
         children:[
           Column(
             children:[
-              LabelType(),
+              const LabelType(),
               if(channelViewModel.channelCategoryType == -1)
-                BottomLine(),
+                const BottomLine(),
             ]
           ),
 
@@ -34,7 +34,7 @@ class ChannelCategoryTypes extends StatelessWidget {
               children:[
                 ChannelCategoryType(channelCategoryTypeModel: channelCategoryTypeModel,),
                 if(channelViewModel.channelCategoryType == channelCategoryTypeModel.categoryType)
-                  BottomLine(),
+                  const BottomLine(),
               ]                
             ),
             
@@ -77,10 +77,10 @@ class LabelType extends StatelessWidget {
         onPressed: (){
           channelViewModel.channelCategoryType = -1;
           Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(-1).currentContext!,
-            duration:Duration(milliseconds: 300),
+            duration:const Duration(milliseconds: 300),
           );
         },
-        child:Column(
+        child:const Column(
           children:[
             LabelIcon(),
             LabelName(),
@@ -138,7 +138,7 @@ class ChannelCategoryType extends StatelessWidget {
         onPressed: (){
           channelViewModel.channelCategoryType = channelCategoryTypeModel.categoryType;
           Scrollable.ensureVisible(channelViewModel.getChannelItemGlobalKeys(channelCategoryTypeModel.categoryType).currentContext!,
-            duration:Duration(milliseconds: 300),
+            duration:const Duration(milliseconds: 300),
           );
         },
         child:Column(

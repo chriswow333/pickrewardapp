@@ -29,8 +29,8 @@ class SearchChannelItems extends StatelessWidget {
             children:[
 
               Container(
-                padding:EdgeInsets.only(top:20,left:10),
-                child:Text('搜尋結果',
+                padding:const EdgeInsets.only(top:20,left:10),
+                child:const Text('搜尋結果',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -38,15 +38,15 @@ class SearchChannelItems extends StatelessWidget {
                 ),
               ),
               if(loading)
-                LoadingItem(),
+                const LoadingItem(),
 
               if(!loading)
-                SearchItems(),
+                const SearchItems(),
             ],
           ),
         );
     }else {
-      return Expanded(
+      return const Expanded(
         child:SearchChannelKeywordHistory(),
       );
     }
@@ -63,13 +63,13 @@ class SearchChannelKeywordHistory extends StatelessWidget {
     List<String> keywordHistory = searchChannelViewModel.searchKeywordHistory;
 
     return Container(
-      padding: EdgeInsets.only(top:20,left:10),
+      padding: const EdgeInsets.only(top:20,left:10),
       child:SingleChildScrollView(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Container(
-              child:Text('最近搜尋',
+              child:const Text('最近搜尋',
                 style:TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -78,8 +78,8 @@ class SearchChannelKeywordHistory extends StatelessWidget {
             ),
             if(keywordHistory.isEmpty) 
             Container(
-              padding: EdgeInsets.only(top:10),
-              child:Text('尚無資料',
+              padding: const EdgeInsets.only(top:10),
+              child:const Text('尚無資料',
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -111,17 +111,17 @@ class KeywordHistory extends StatelessWidget {
         searchChannelViewModel.searchChannelFromHistory(keyword);
       },
       child:Container(
-        padding: EdgeInsets.only(top:10,bottom: 10),
+        padding: const EdgeInsets.only(top:10,bottom: 10),
         child:Wrap(
           alignment:WrapAlignment.end,
           children:[
-            Icon(
+            const Icon(
               Icons.search,
               size:30,
             ),
-            SizedBox(width:10),
+            const SizedBox(width:10),
             Text(keyword,
-              style:TextStyle(
+              style:const TextStyle(
                 fontSize: 20,
               )
             )
@@ -172,7 +172,7 @@ class SearchItems extends StatelessWidget {
           runSpacing: 20,
           children:[
             if(searchChannelViewModel.resultEmpty) 
-              EmptyItem(),
+              const EmptyItem(),
 
             for(ChannelItemModel c in searchChannelItemModels)
               ChannelItem(channelItemModel: c,)
@@ -190,8 +190,8 @@ class EmptyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:10, top:10,),
-      child:Row(
+      padding: const EdgeInsets.only(left:10, top:10,),
+      child:const Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children:[
           Text('查無資料'),
@@ -218,15 +218,15 @@ class ChannelItem extends StatelessWidget {
         criteriaViewModel.channel = channelItemModel;
       },
       child:Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
         ),
         child:Row(
           children:[
             ChannelItemIcon(image:channelItemModel.image),
-            SizedBox(width:20),
+            const SizedBox(width:20),
             ChannelItemName(name:channelItemModel.name),
-            SizedBox(width:10),
+            const SizedBox(width:10),
             SelectedIcon(id:channelItemModel.id),
           ]
         )
@@ -254,7 +254,7 @@ class SelectedIcon extends StatelessWidget {
         )
       );
     }else {
-      return SizedBox(width:25);
+      return const SizedBox(width:25);
     }
     
   }

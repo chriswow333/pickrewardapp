@@ -64,7 +64,7 @@ class ChannelHeaderTitle extends StatelessWidget {
                   SizedBox(
                     height: 50,
                     child:Container(
-                      padding: EdgeInsets.only(right:20),
+                      padding: const EdgeInsets.only(right:20),
                       child:Image.asset(
                         'images/logo.png',
                       ),
@@ -73,7 +73,7 @@ class ChannelHeaderTitle extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(top:5),
-                    child:SearchChannelBar(),
+                    child:const SearchChannelBar(),
                   ),
                 ),
               ]
@@ -97,13 +97,13 @@ class NormalChannelGroup extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          ChannelCategoryTypes(),
-          SizedBox(height:20), 
+          const ChannelCategoryTypes(),
+          const SizedBox(height:20), 
           Expanded(
             child:Stack(
               children:[
                 Container(
-                  child:ChannelItemGroups(),
+                  child:const ChannelItemGroups(),
                 )
               ]
             )

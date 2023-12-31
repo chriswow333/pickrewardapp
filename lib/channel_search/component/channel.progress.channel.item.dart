@@ -45,7 +45,7 @@ class _ChannelItemGroupsState extends State<ChannelItemGroups> {
               if(notification.metrics.pixels < totalItemHeight) {
                 channelViewModel.channelCategoryType = k.id;
                 Scrollable.ensureVisible(channelViewModel.getChannelCategoryGlobalKeys(k.id).currentContext!,
-                  duration:Duration(milliseconds: 300),
+                  duration:const Duration(milliseconds: 300),
                 );
                 break;
               }
@@ -116,10 +116,10 @@ class _ChannelItemGroupState extends State<ChannelItemGroup> {
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             GridView.builder(
               shrinkWrap:true,
-              physics:NeverScrollableScrollPhysics(),
+              physics:const NeverScrollableScrollPhysics(),
               itemCount: channelItemModels.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
@@ -160,7 +160,7 @@ class AddMore extends StatelessWidget {
         channelViewModel.addMoreChannelsByChannelCategoryType(channelCategory);
       },
       child:Container(
-        padding: EdgeInsets.only(top:20),
+        padding: const EdgeInsets.only(top:20),
         child:Container(
           width: 70,
           height: 30,
@@ -236,7 +236,7 @@ class _ChannelLabelItemGroupState extends State<ChannelLabelItemGroup> {
             const SizedBox(height: 20,),
             GridView.builder(
               shrinkWrap:true,
-              physics:NeverScrollableScrollPhysics(),
+              physics:const NeverScrollableScrollPhysics(),
               itemCount: channelViewModel.channelLabelModels.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
@@ -339,7 +339,7 @@ class ChannelItem extends StatelessWidget {
       },
       child:Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.only(left:2, right:2),
+        padding: const EdgeInsets.only(left:2, right:2),
         child:Column(
           children:[
             Expanded(
@@ -417,7 +417,6 @@ class ChannelItemName extends StatelessWidget {
         )
       )
     );
-    ;
   }
 }
 

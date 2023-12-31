@@ -14,7 +14,7 @@ class DateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
@@ -97,7 +97,7 @@ class DateValue extends StatelessWidget {
                 color:Palette.kToBlack[400],
               ),
             ),
-            content:Container(
+            content:SizedBox(
                 height: 350,
                 width:100,
                 child:SfDateRangePicker(
@@ -130,8 +130,8 @@ class DateValue extends StatelessWidget {
                 color:Palette.kToBlack[600],
               ),
             ),
-            SizedBox(width:5),
-            Icon(Icons.calendar_today)
+            const SizedBox(width:5),
+            const Icon(Icons.calendar_today)
           ]
         ),
         

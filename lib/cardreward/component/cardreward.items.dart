@@ -52,10 +52,10 @@ class CardRewardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child:Container(
         width: double.infinity,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Palette.kToBlack[0],
           borderRadius:BorderRadius.circular(10),
@@ -64,11 +64,11 @@ class CardRewardItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             CardRewardItemTitle(title: cardRewardModel.name),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             CardRewardItemDuration(startDate: cardRewardModel.startDate,endDate: cardRewardModel.endDate,),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             CardRewardLabels(cardRewardModel: cardRewardModel,),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             CardRewardDescriptionItem(cardRewardModel: cardRewardModel,),
           ]
         )
@@ -117,7 +117,7 @@ class _CardRewardDescriptionItemState extends State<CardRewardDescriptionItem>
     if (_animation.status != AnimationStatus.completed) {
       _controller.forward();
     } else {
-      _controller.animateBack(0, duration: Duration(milliseconds: 500));
+      _controller.animateBack(0, duration: const Duration(milliseconds: 500));
     }
   }
 
@@ -204,7 +204,7 @@ class ShowBtn extends StatelessWidget {
               ),
             ),
           ),
-        child:Text('$name')
+        child:Text(name)
       )
     );
   }
@@ -243,14 +243,14 @@ class CardRewardDescription extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text('${description.name}',
+          Text(description.name,
             style: TextStyle(
               fontSize: 13,
               color: Palette.kToBlack[300],
             ),
           ),
           for(String desc in description.desc) 
-            Text('$desc',
+            Text(desc,
               style: TextStyle(
                 fontSize: 13,
                 color: Palette.kToBlack[300],
@@ -272,7 +272,7 @@ class CardRewardLabels extends StatelessWidget {
     cardRewardModel.cardRewardType;
     List<String> labelNames = [];
     if(cardRewardModel.cardRewardType ==  CardRewardTypeEnum.evaluation.index){
-      labelNames.add(cardRewardModel.reward.name+"回饋");
+      labelNames.add("${cardRewardModel.reward.name}回饋");
     }
 
     List<TaskModel> tasks = cardRewardModel.tasks;
@@ -285,16 +285,16 @@ class CardRewardLabels extends StatelessWidget {
     children:[
       for(String labelName in labelNames)
         Container(
-          padding: EdgeInsets.only(right:5, ),
+          padding: const EdgeInsets.only(right:5, ),
           child:Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Palette.kToYellow[400]!,
             ),
             child:Container(
-              padding: EdgeInsets.only(left:2,right:2),
-              child:Text('$labelName',
+              padding: const EdgeInsets.only(left:2,right:2),
+              child:Text(labelName,
                 style: TextStyle(
                   color:Palette.kToBlack[0],
                   fontSize: 14,
@@ -306,16 +306,16 @@ class CardRewardLabels extends StatelessWidget {
         ),
       for(String labelName in taskLabelNames)
         Container(
-          padding: EdgeInsets.only(right:5, ),
+          padding: const EdgeInsets.only(right:5, ),
           child:Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Palette.kToRed[100]!,
             ),
             child:Container(
-              padding: EdgeInsets.only(left:2,right:2),
-              child:Text('$labelName',
+              padding: const EdgeInsets.only(left:2,right:2),
+              child:Text(labelName,
                 style: TextStyle(
                   color:Palette.kToBlack[0],
                   fontSize: 14,
@@ -362,8 +362,8 @@ class CardRewardItemTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('$title',
-        style: TextStyle(
+      child:Text(title,
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 15,
         ),

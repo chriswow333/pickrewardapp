@@ -78,14 +78,14 @@ class CardRewardEvaluationDetailTitle extends StatelessWidget {
   
 
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child:Column(
         children:[
           CardRewardEvaluationTitleBar(rank: rank, cost:cardEventResultModel.cost),
-          Divider(),
+          const Divider(),
           CardImage(image:cardEventResultModel.cardImage),
           CardName(cardEventResultModel:cardEventResultModel),
-          SizedBox(height:5),
+          const SizedBox(height:5),
           CardRewardDetailBtn(url:cardEventResultModel.linkURL),
 
         ]
@@ -117,7 +117,7 @@ class CardRewardDetailBtn extends StatelessWidget {
                 color: Palette.kToBlack[500]
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_rounded,
               size:16,
             )
@@ -154,7 +154,7 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth:150,
       ),
       child:Image.memory(
@@ -198,7 +198,7 @@ class CardRewardEvaluationTitleBar extends StatelessWidget {
             onPressed:(){
               Navigator.pop(context);
             },
-            child:Icon(
+            child:const Icon(
               Icons.cancel_outlined,
             )
           )
@@ -281,7 +281,7 @@ class MismatchCardRewardEvaluationResultDetail extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // While the future is still running, show a loading indicator
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           // If there was an error in the future, show an error message
           // return Text('Error: ${snapshot.error}');
@@ -321,9 +321,9 @@ class CardRewardEvaluationResultDetail extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child:Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Palette.kToBlack[0],
             borderRadius: BorderRadius.circular(20),
@@ -332,7 +332,7 @@ class CardRewardEvaluationResultDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             FeedbackGetPercentage(evaluationEventResultModel:cardRewardEventResultModel.evaluationEventResultModel),
-            SizedBox(width:10),
+            const SizedBox(width:10),
             Expanded(
               child:CardRewardEvaluationContent(
                 cardRewardEventResultModel: cardRewardEventResultModel, 
@@ -361,12 +361,12 @@ class CardRewardEvaluationContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           MatchedChannelOrChannelLabelName(name:matchedChannelOrChannelLabelName),
-          SizedBox(height: 5,),
+          const SizedBox(height: 5,),
           FeedbackGetReturn(cardRewardEventResultModel: cardRewardEventResultModel,),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           CardRewardDurationDate(cardRewardEventResultModel:cardRewardEventResultModel),
           CardRewardNameDetail(cardRewardEventResultModel:cardRewardEventResultModel),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           CardRewardTag(cardRewardEventResultModel: cardRewardEventResultModel,),
         ]
       )
@@ -462,13 +462,13 @@ class FeedbackGetPercentage extends StatelessWidget {
 
     return Container(
       width:60,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Palette.kToBlack[20],
         borderRadius: BorderRadius.circular(10)
       ),
       child:FittedBox(
-        child:Text('$percentage',
+        child:Text(percentage,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Palette.kToBlack[500],
@@ -543,15 +543,15 @@ class CardRewardPayLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: EdgeInsets.only(right:5, ),
+      padding: const EdgeInsets.only(right:5, ),
       child:Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Palette.kToRed[100]!,
         ),
         child:Container(
-          padding: EdgeInsets.only(left:2,right:2),
+          padding: const EdgeInsets.only(left:2,right:2),
           child:Text('限用行動支付',
             style: TextStyle(
               color:Palette.kToBlack[0],
@@ -574,15 +574,15 @@ class CardRewardType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right:5, ),
+      padding: const EdgeInsets.only(right:5, ),
       child:Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Palette.kToYellow[400]!,
         ),
         child:Container(
-          padding: EdgeInsets.only(left:2,right:2),
+          padding: const EdgeInsets.only(left:2,right:2),
           child:Text(rewardTypeName,
             style: TextStyle(
               color:Palette.kToBlack[0],
@@ -606,9 +606,9 @@ class CardRewardLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right:5, ),
+      padding: const EdgeInsets.only(right:5, ),
       child:Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color:Palette.kToRed[100],

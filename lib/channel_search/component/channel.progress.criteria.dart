@@ -18,7 +18,7 @@ class CriteriaProgress extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.only(left:5,right:5),
+      padding: const EdgeInsets.only(left:5,right:5),
       child:Column(
         children:[
           CriteriaProgressTitle(controller: controller,),
@@ -108,7 +108,7 @@ class ChannelSelectedItems extends StatelessWidget {
 
 
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color:Palette.kToBlack[0],
         borderRadius: BorderRadius.circular(20),
@@ -146,7 +146,7 @@ class CriteriaMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:20),
+      padding: const EdgeInsets.only(left:20),
       child:Text('還差一步! 請確認搜尋條件',
         style: TextStyle(
           fontSize: 22,

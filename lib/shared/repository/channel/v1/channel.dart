@@ -48,7 +48,7 @@ class ChannelService {
     String baseUrl = dotenv.env['BASE_URL'] ?? "localhost";
     String port = dotenv.env['BASE_PORT'] ?? "50055";
     int portInt = int.parse(port);  
-    late final channel;
+    late final ClientChannel channel;
     if (useTlsBool) {
       channel = ClientChannel(
         baseUrl,

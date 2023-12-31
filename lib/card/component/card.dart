@@ -23,20 +23,20 @@ class CardComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           Container(
-            child:Text('信用卡',
+            child:const Text('信用卡',
               style: TextStyle(
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
               ),
             )
           ),
-          SizedBox(height:10,),
-          SearchCardBar(),
-          SizedBox(height:20,),
+          const SizedBox(height:10,),
+          const SearchCardBar(),
+          const SizedBox(height:20,),
           if(searchCardViewModel.searchCardFlag)
-            CardSearchItems(),
+            const CardSearchItems(),
           if(!searchCardViewModel.searchCardFlag)
-            BankCardItems(),
+            const BankCardItems(),
         ]
           
       )
@@ -52,7 +52,7 @@ class BankCardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[

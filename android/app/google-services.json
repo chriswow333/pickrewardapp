@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "528452120632",
+    "project_id": "tsincoco",
+    "storage_bucket": "tsincoco.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528452120632:android:e887491a06061ad264b6cd",
+        "android_client_info": {
+          "package_name": "com.tsincoco"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5bGmnKRxiTCM-9yDIKykxSTYeBK8AStA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

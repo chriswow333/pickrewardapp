@@ -26,19 +26,19 @@ class EventResultProgress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           EventResultProgressTitle(controller:controller),
-          SizedBox(height:10),
-          EvaluationCriteriaSelected(),
-          SizedBox(height:10),
-          EventResultMessage(),
-          SizedBox(height:20),
-          CriteriaCostWidget(),
-          SizedBox(height:10),
-          Expanded(
+          const SizedBox(height:10),
+          const EvaluationCriteriaSelected(),
+          const SizedBox(height:10),
+          const EventResultMessage(),
+          const SizedBox(height:20),
+          const CriteriaCostWidget(),
+          const SizedBox(height:10),
+          const Expanded(
             child:SingleChildScrollView(
               child:CardEventResults(),
             )
           ),
-          SizedBox(height:20),
+          const SizedBox(height:20),
           Container(
             child:ReEvaluateItem(controller: controller,),
           )
@@ -117,11 +117,11 @@ class ReEvaluateItem extends StatelessWidget {
             child:Container(
               decoration: BoxDecoration(
                 color: Palette.kToBlack[600],
-                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+                borderRadius:const BorderRadius.all(Radius.circular(12.0)),
               ),
               padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Container(
-                padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
                 child:Text('我要重新找卡',
                   style: TextStyle(
                     color: Palette.kToBlack[0],
@@ -146,9 +146,9 @@ class EvaluationCriteriaSelected extends StatelessWidget {
       children:[
         Expanded(
           child:Container(
-            padding:EdgeInsets.fromLTRB(5, 10, 5, 10),
+            padding:const EdgeInsets.fromLTRB(5, 10, 5, 10),
             child:Container(
-              padding:EdgeInsets.fromLTRB(15, 20, 15, 20),
+              padding:const EdgeInsets.fromLTRB(15, 20, 15, 20),
                 decoration: BoxDecoration(
                 color:Palette.kToBlack[0],
                 border: Border.all(
@@ -156,7 +156,7 @@ class EvaluationCriteriaSelected extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child:Column(
+              child:const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   CriteriaSelectedChannel(),
@@ -188,7 +188,7 @@ class CriteriaSelectedChannel extends StatelessWidget {
 
     return Container( 
       child:Text(names,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
@@ -212,18 +212,18 @@ class CriteriaSelectedOthers extends StatelessWidget {
 
     String rewardTypeName = criteriaViewModel.rewardType.name;
 
-    String payUsageName = "行動支付" + criteriaViewModel.payUsage.name;
+    String payUsageName = "行動支付${criteriaViewModel.payUsage.name}";
 
 
     if(taskLabels.isNotEmpty){
-      taskLabels = ", " + taskLabels;
+      taskLabels = ", $taskLabels";
     }
 
 
 
     return Container(
       child:Text('預計刷卡日$formattedDate, $payUsageName, $rewardTypeName$taskLabels',
-        style:TextStyle(
+        style:const TextStyle(
           fontSize: 13,
         )
       )
@@ -255,7 +255,7 @@ class EventResultMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      child:Text('推薦你使用',
+      child:const Text('推薦你使用',
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,

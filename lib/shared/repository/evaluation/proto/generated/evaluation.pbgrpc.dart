@@ -30,7 +30,6 @@ class EvaluationClient extends $grpc.Client {
 abstract class EvaluationServiceBase extends $grpc.Service {
   $core.String get $name => 'evaluation_v1.Evaluation';
 
-  EvaluationServiceBase() {
-  }
+  EvaluationServiceBase();
 
 }
