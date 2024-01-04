@@ -63,6 +63,8 @@ dependencies:
   cloud_firestore: ^4.13.6
   firebase_auth: ^4.15.3
   google_sign_in: ^6.2.1
+  carousel_slider: ^4.2.1
+  percent_indicator: ^4.2.3
   
 
 
@@ -102,6 +104,7 @@ flutter:
     - .env.test
     - .env.prod
     - images/logo.png
+    - images/logo_light.png
   #   - images/a_dot_ham.jpeg
 
 flutter_launcher_icons:

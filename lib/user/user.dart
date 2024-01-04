@@ -5,21 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pickrewardapp/main.dart';
 import 'package:pickrewardapp/main.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/user/component/summary.dart';
 
 
 
 class UserPage extends StatelessWidget {
   UserPage({super.key});
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // return AuthExampleApp();
-    return GoogleSignInScreen();
+    return Container(
+      padding: EdgeInsets.all(10),
+      child:Column(
+        children:[
+          Flexible(
+            // flex: 1,
+            child: UserEventSummary(),
+          ),
+          Container(
+            child:Text('okok')
+          ),
+          Flexible(
+            // flex: 3,
+            child:Container(
+              child:Text('hello')
+            ),
+          ), 
+        ]
+      )
+    );
   }
 }
 
