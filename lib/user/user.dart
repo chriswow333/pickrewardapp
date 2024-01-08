@@ -3,36 +3,64 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pickrewardapp/main.dart';
-import 'package:pickrewardapp/main.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/user/component/record.detail.dart';
 import 'package:pickrewardapp/user/component/summary.dart';
+import 'package:pickrewardapp/user/component/user.info.dart';
 
 
 
 class UserPage extends StatelessWidget {
-  UserPage({super.key});
-
+  const UserPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       padding: EdgeInsets.all(10),
       child:Column(
         children:[
-          Flexible(
-            // flex: 1,
-            child: UserEventSummary(),
+          UserInfoTitle(),
+          UserEventSummary(),
+          Expanded(
+            child:UserEventDetail(),
           ),
-          Container(
-            child:Text('okok')
+        ]
+      )
+    );
+  }
+}
+
+
+
+
+class UserInfoTitle extends StatelessWidget {
+  const UserInfoTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top:10, bottom: 10),
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children:[
+          Text('Hi,',
+            style:TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )
           ),
-          Flexible(
-            // flex: 3,
-            child:Container(
-              child:Text('hello')
+          GestureDetector(
+            onTap:(){
+               Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const UserInfoPage())
+            );
+            },
+            child:Icon(Icons.person_rounded,
+              size:40,
+              color: Palette.kToBlack[900],
             ),
-          ), 
+          ),
         ]
       )
     );
@@ -44,7 +72,6 @@ class UserPage extends StatelessWidget {
 
 
 
-// 528452120632-fmpc97ar5tp56tpmg93t3n6ou2fub0s0.apps.googleusercontent.com
 
 class GoogleSignInScreen extends StatefulWidget {
   const GoogleSignInScreen({Key? key}) : super(key: key);
@@ -151,3 +178,4 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   }
   
 }
+

@@ -7,6 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 
 
@@ -38,20 +41,20 @@ void main()async {
   // await dotenv.load(fileName: ".env.test");
   // await dotenv.load(fileName: ".env.prod");
 
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // FlutterNativeSplash.remove();
 
 
   runApp(const PickRewardApp());
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.white, 
-    statusBarBrightness:
-        Brightness.light 
-    ));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.white, 
+  //   statusBarBrightness:
+  //       Brightness.light 
+  //   ));
 
-  // FlutterNativeSplash.remove();
+  FlutterNativeSplash.remove();
 
 }
 
@@ -117,51 +120,59 @@ class _HomeScreenState extends State<HomeScreen> {
       
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child:LayoutBuilder(
-            builder:((context, constraints) {
-              double screenWidth = MediaQuery.of(context).size.width;
-              double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
-              if (screenWidth > tabletWidthThreshold) {
-                return SizedBox(
-                  width: tabletWidthThreshold,
-                  child: IndexedStack(
+    return CupertinoScaffold(
+      overlayStyle:SystemUiOverlayStyle(
+        statusBarColor: Colors.white, 
+        statusBarBrightness:
+            Brightness.light 
+      ),
+      body: Scaffold(
+        // backgroundColor:Palette.kToBlack[20],
+        body: SafeArea(
+          child:Center(
+            child:LayoutBuilder(
+              builder:((context, constraints) {
+                double screenWidth = MediaQuery.of(context).size.width;
+                double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
+                if (screenWidth > tabletWidthThreshold) {
+                  return SizedBox(
+                    width: tabletWidthThreshold,
+                    child: IndexedStack(
+                      index: _selectedIndex,
+                      children: _widgetOptions,
+                    ),
+                  );
+                } else {
+                  // 屏幕较小，不限制应用宽度
+                  return IndexedStack(
                     index: _selectedIndex,
                     children: _widgetOptions,
-                  ),
-                );
-              } else {
-                // 屏幕较小，不限制应用宽度
-                return IndexedStack(
-                  index: _selectedIndex,
-                  children: _widgetOptions,
-                );
-              }
-            }),
+                  );
+                }
+              }),
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.manage_search_sharp),
-            label: '挑選信用卡',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.credit_card),
-            label: '信用卡總覽',
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '我的',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Palette.kToYellow[400],
-        onTap: _onItemTapped,
-      ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.manage_search_sharp),
+              label: '挑選信用卡',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.credit_card),
+              label: '信用卡總覽',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '我的',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Palette.kToYellow[400],
+          onTap: _onItemTapped,
+        ),
+      )
     );
   }
 }

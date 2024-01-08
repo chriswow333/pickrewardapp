@@ -62,12 +62,12 @@ class CardEventResult extends StatelessWidget {
       child:TextButton(
         onPressed: (){
 
-          showCupertinoModalBottomSheet(
+          CupertinoScaffold.showCupertinoModalBottomSheet(
             context: context,
             expand: true,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-              ),
+            // shape: const RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+            //   ),
             builder: (context) {
               return CardRewardEvaluationDetailBottomUp(rank:rank, cardEventResultModel: cardEventResultModel,);
             },

@@ -4,11 +4,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/user/component/saving.month.dart';
 
-class UserCardSummary extends StatelessWidget {
-  const UserCardSummary({super.key});
+class UserCardSavingSummary extends StatelessWidget {
+  const UserCardSavingSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class UserCardSummary extends StatelessWidget {
         ]
       ),
     );
+    
   }
 }
 
@@ -67,9 +71,8 @@ class SummaryCardItem extends StatelessWidget {
           ),
           Expanded(
             child:LinearPercentIndicator(
-              width:MediaQuery.of(context).size.width - 200,
               lineHeight: 12.0,
-              percent: 1.0,
+              percent: 0.6,
               // animation:true,
               barRadius:Radius.circular(10),
               backgroundColor: Palette.kToBlack[900],
@@ -103,14 +106,24 @@ class UserCardDetailBtn extends StatelessWidget {
             color: Palette.kToYellow[300],
           ),
         ),
-        Text('全部資訊>',
-          style: TextStyle(
-            color: Palette.kToBlack[0],
+        GestureDetector(
+          onTap:(){
+
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SavingMonthPage())
+            );
+          },
+          child:Text('全部資訊 >',
+            style: TextStyle(
+              color: Palette.kToBlack[0],
+            ),
           ),
         ),
+        
       ],
     );
   }
 }
+
 
 
