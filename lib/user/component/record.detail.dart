@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/user/component/record.edit.dart';
 
 class UserEventDetail extends StatelessWidget {
   const UserEventDetail({super.key});
@@ -137,13 +138,19 @@ class UserEventDetailTitle extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          Text('+',
-            style: TextStyle(
-              color: Palette.kToYellow[300],
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap:(){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => RecordEditPage()));
+            },
+            child:Text('+',
+              style: TextStyle(
+                color: Palette.kToYellow[300],
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
+          ),
+          
         ]
       )
     );
