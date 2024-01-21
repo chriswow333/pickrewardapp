@@ -12,7 +12,7 @@ class SavingMonthItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Column(
+      child:const Column(
         children:[
           SavingMonthByYear(), 
           SizedBox(height:20),
@@ -35,7 +35,7 @@ class SavingMonthsByCard extends StatelessWidget {
           color:Palette.kToBlack[700],
           borderRadius: BorderRadius.circular(20)
         ),
-        child:SingleChildScrollView(
+        child:const SingleChildScrollView(
           child:Column(
             children:[
               SavingCardItem(),
@@ -72,7 +72,7 @@ class SavingCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child:Row(
         children:[
           Container(
@@ -87,7 +87,7 @@ class SavingCardItem extends StatelessWidget {
             child:LinearPercentIndicator(
               lineHeight: 8.0,
               percent: 0.5,
-              barRadius:Radius.circular(10),
+              barRadius:const Radius.circular(10),
               backgroundColor: Palette.kToYellow[100],
               progressColor:Palette.kToYellow[300],
             ),
@@ -127,14 +127,14 @@ class SavingMonthByYear extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width:double.infinity,
       child:Column(
         children:[
           Container(
-            child:Text('2023年')
+            child:const Text('2023年')
           ),
-          Padding(padding: EdgeInsets.only(top:10)),
+          const Padding(padding: EdgeInsets.only(top:10)),
           SingleChildScrollView(
             scrollDirection:Axis.horizontal,
             child:Wrap(
@@ -144,8 +144,8 @@ class SavingMonthByYear extends StatelessWidget {
                 Container(
                   child:Column(
                     children:[
-                      Text('Sep'),
-                      Text('9'),
+                      const Text('Sep'),
+                      const Text('9'),
                       Container(
                         width: 25,
                         height:2,
@@ -159,8 +159,8 @@ class SavingMonthByYear extends StatelessWidget {
                 Container(
                   child:Column(
                     children:[
-                      Text('Sep'),
-                      Text('9'),
+                      const Text('Sep'),
+                      const Text('9'),
                       Container(
                         width: 25,
                         height:2,

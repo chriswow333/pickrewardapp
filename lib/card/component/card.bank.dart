@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/card/model/bank.dart';
+import 'package:pickrewardapp/shared/bank/model/bank.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';

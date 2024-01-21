@@ -20,13 +20,13 @@ class UserEventSummary extends StatelessWidget {
       decoration: BoxDecoration(
         color:Palette.kToBlack[0],
       ),
-      padding: EdgeInsets.only(bottom:20),
+      padding: const EdgeInsets.only(bottom:20),
       width:double.infinity,
       child:Column(
         children:[
           CarouselSlider(
             carouselController: _controller,
-            items: [
+            items: const [
               UserSavingSummary(),
               UserCardSavingSummary(),
               UserMonthSavingSummary(),
@@ -50,8 +50,8 @@ class UserEventSummary extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
             )
           ),
-          SizedBox(height:10,),
-          Container(
+          const SizedBox(height:10,),
+          SizedBox(
             width:80,
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

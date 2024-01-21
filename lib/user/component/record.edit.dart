@@ -2,22 +2,23 @@
 
 
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/user/component/record.edit.cashmemo.dart';
 import 'package:pickrewardapp/user/component/record.edit.datechannel.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:pickrewardapp/user/viewmodel/user_record.dart';
+import 'package:provider/provider.dart';
 
 class RecordEditPage extends StatelessWidget {
   const RecordEditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+ 
     return CupertinoScaffold(
-      overlayStyle:SystemUiOverlayStyle(
+      overlayStyle:const SystemUiOverlayStyle(
         statusBarColor: Colors.white, 
         statusBarBrightness:
             Brightness.light 
@@ -32,11 +33,11 @@ class RecordEditPage extends StatelessWidget {
                 if (screenWidth > tabletWidthThreshold) {
                   return SizedBox(
                     width: tabletWidthThreshold,
-                    child: RecordEditComponent(),
+                    child: const RecordEditComponent(),
                   );
                 } else {
                   // 屏幕较小，不限制应用宽度
-                  return RecordEditComponent();
+                  return const RecordEditComponent();
                 }
               }),
             ),
@@ -46,29 +47,36 @@ class RecordEditPage extends StatelessWidget {
     );
   }
 }
-
-
+ 
+ 
 class RecordEditComponent extends StatelessWidget {
   const RecordEditComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child:Column(
-        children:[
-          RecordEditTitle(),
-          SizedBox(height:20),
-          RecordEditItem(),
-          Expanded(
-            child:Container(
-              decoration: BoxDecoration(),
-            )
-          ),
-          RecordEditDoneBtn(),
-        ],
-      ),
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserRecordViewModel>(create:(_)=>UserRecordViewModel()),
+      ],
+      child:Container(
+        padding: const EdgeInsets.all(10),
+        child:Column(
+          children:[
+            const RecordEditTitle(),
+            const SizedBox(height:20),
+            const RecordEditItem(),
+            Expanded(
+              child:Container(
+                decoration: const BoxDecoration(),
+              )
+            ),
+            const RecordEditDoneBtn(),
+          ],
+        ),
+      )
     );
+
   }
 }
 
@@ -79,7 +87,7 @@ class RecordEditItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Column(
+      child:const Column(
         children:[
           RecordEditCashMemo(),
           SizedBox(height:20),
@@ -104,8 +112,8 @@ class RecordEditCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child:Container(
-        padding: EdgeInsets.all(10),
-        child:Column(
+        padding: const EdgeInsets.all(10),
+        child:const Column(
           children:[
             RecordEditCardTitle(),
              SizedBox(
@@ -123,19 +131,28 @@ class RecordEditCard extends StatelessWidget {
 
 
 class RecordEditDoneBtn extends StatelessWidget {
-  const RecordEditDoneBtn({super.key});
+  const RecordEditDoneBtn({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
+
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+
+
     return GestureDetector(
-      onTap:(){},
+      onTap:(){
+        userRecordViewModel.setUserRecord();
+        userRecordViewModel.clearUserRecordData();
+        Navigator.pop(context);
+      },
       child:Container(
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
           color:Palette.kToYellow[400],
           borderRadius: BorderRadius.circular(10)
         ),
-        padding: EdgeInsets.only(top:10, bottom: 10),
+        padding: const EdgeInsets.only(top:10, bottom: 10),
         child:Text('完成',
           style:TextStyle(
             color:Palette.kToBlack[0]  
@@ -156,7 +173,7 @@ class RecordEditCardTitle extends StatelessWidget {
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('刷哪張信用卡?',
+          const Text('刷哪張信用卡?',
             style:TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -187,7 +204,7 @@ class CardItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:SingleChildScrollView(
+      child:const SingleChildScrollView(
         scrollDirection:Axis.horizontal,
         child:Row(
           children:[
@@ -210,7 +227,7 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:5, right:5),
+      padding: const EdgeInsets.only(left:5, right:5),
       child:Image.asset('images/logo.png',),
     );
   }
@@ -223,17 +240,17 @@ class RecordEditTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child:Stack(
         children:[
           Container(
             alignment: Alignment.center,
-            child:RecordEditTitleName(),
+            child:const RecordEditTitleName(),
           ),
           Container(
             alignment: Alignment.centerRight,
-            child:CancelPage(),
+            child:const CancelPage(),
           ),
         ]
       )
@@ -264,10 +281,14 @@ class CancelPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+
     return Container(
-      padding: EdgeInsets.only(left:10,),
+      padding: const EdgeInsets.only(left:10,),
       child:GestureDetector(
         onTap:(){
+          userRecordViewModel.clearUserRecordData();
           Navigator.pop(context);
         },
         child:Icon(Icons.cancel,

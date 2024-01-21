@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/user/component/record.edit.dart';
+import 'package:pickrewardapp/user/model/user_record.dart';
+import 'package:pickrewardapp/user/viewmodel/user_record.dart';
+import 'package:provider/provider.dart';
 
 class UserEventDetail extends StatelessWidget {
   const UserEventDetail({super.key});
@@ -10,9 +13,9 @@ class UserEventDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:10, right:10,),
+      padding: const EdgeInsets.only(left:10, right:10,),
       width:double.infinity,
-      child:Column(
+      child:const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           UserEventDetailTitle(),
@@ -34,14 +37,17 @@ class UserEvents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+    Map<DateTime, List<UserRecord>> userRecordMapper = userRecordViewModel.getUserRecords();
+    print(userRecordMapper);
+
     return Container(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          UserEventGroupByDate(),
-          UserEventGroupByDate(),
-          UserEventGroupByDate(),
-          
+          for(DateTime dateTime in  userRecordMapper.keys)
+            UserEventGroupByDate(dateTime: dateTime, userRecords: userRecordMapper[dateTime] ?? [],),
         ]
       )
     );
@@ -50,21 +56,24 @@ class UserEvents extends StatelessWidget {
 
 
 class UserEventGroupByDate extends StatelessWidget {
-  const UserEventGroupByDate({super.key});
+  const UserEventGroupByDate({super.key, required this.userRecords, required this.dateTime});
+
+  final DateTime dateTime;
+  final List<UserRecord> userRecords;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:20),
+      padding: const EdgeInsets.only(top:20),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           Container(
-            child:Text('12月2日')
+            child:Text('${dateTime.month}月${dateTime.day}日')
           ),
-          UserEventItem(),
-          UserEventItem(),
-          UserEventItem(),
+
+          for (UserRecord userRecord in userRecords)
+            UserEventItem(userRecord: userRecord,),
 
         ] 
       )
@@ -75,43 +84,39 @@ class UserEventGroupByDate extends StatelessWidget {
 
 
 class UserEventItem extends StatelessWidget {
-  const UserEventItem({super.key});
+  const UserEventItem({super.key, required this.userRecord});
+
+  final UserRecord userRecord;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:5, bottom: 5),
+      padding: const EdgeInsets.only(top:5, bottom: 5),
       child:Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Palette.kToBlack[0],
         ),
         child:Container(
-          padding: EdgeInsets.only(top:20,bottom: 20, left:10, right:10),
+          padding: const EdgeInsets.only(top:20,bottom: 20, left:10, right:10),
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
-                  Text('遠東SOGO'),
-                  Text('NT\$1000'),
+                  Text('${userRecord.channelName}'),
+                  Text('NT\$${userRecord.cost}'),
                 ],
               ),
-
+              const SizedBox(height:3,),
               Container(
-                child:Text('2023/12/02 CUBE卡')
+                child:Text('${userRecord.recordTime!.year}/${userRecord.recordTime!.month}/${userRecord.recordTime!.day} ${userRecord.cardName}')
               ),
+              const SizedBox(height:3,),
               Container(
-                child:Row(
-                  children:[
-                    Text('回饋3%'),
-                    Text('|'),
-                    Text('省下'),
-                    Text('NT\$66'),
-                  ]
-                )
-              )
+                child:Text('回饋${userRecord.getPercentage}% | 省下NT\$${userRecord.getReturn}')
+              ),
             ]
           )
         )
@@ -128,7 +133,7 @@ class UserEventDetailTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:10),
+      padding: const EdgeInsets.only(top:10),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
@@ -140,7 +145,7 @@ class UserEventDetailTitle extends StatelessWidget {
           ),
           GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => RecordEditPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const RecordEditPage()));
             },
             child:Text('+',
               style: TextStyle(

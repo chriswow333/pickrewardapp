@@ -11,7 +11,7 @@ import 'package:pickrewardapp/channel_search/model/event_result.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/eventresult.channel.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/eventresult.pay.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pb.dart';
+import 'package:pickrewardapp/shared/channel/repo/v1/proto/generated/channel.pb.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

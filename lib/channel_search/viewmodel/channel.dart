@@ -6,8 +6,8 @@ import 'package:pickrewardapp/channel_search/model/channel_global_key.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
 
-import 'package:pickrewardapp/shared/repository/channel/v1/channel.dart';
-import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';
+import 'package:pickrewardapp/shared/channel/repo/v1/channel.dart';
+import 'package:pickrewardapp/shared/channel/repo/v1/proto/generated/channel.pbgrpc.dart';
 
 class ChannelViewModel with ChangeNotifier {
 

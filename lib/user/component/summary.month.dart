@@ -10,13 +10,13 @@ class UserMonthSavingSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:10, right:10, top:10, bottom: 10),
+      padding: const EdgeInsets.only(left:10, right:10, top:10, bottom: 10),
       decoration: BoxDecoration(
         border: Border.all(),
         borderRadius: BorderRadius.circular(10), 
         color: Palette.kToBlack[900]
       ),
-      child:Column(
+      child:const Column(
         children:[
           UserMonthDetailBtn(),
           Expanded(child:SizedBox()),
@@ -63,8 +63,8 @@ class MonthSavingItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:20, right:20),
-      child:Row(
+      padding: const EdgeInsets.only(left:20, right:20),
+      child:const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:[
           MonthSavingItem(),
@@ -101,7 +101,7 @@ class MonthSavingItem extends StatelessWidget {
               width:80,
               lineHeight: 8.0,
               percent: 0.5,
-              barRadius:Radius.circular(10),
+              barRadius:const Radius.circular(10),
               backgroundColor: Palette.kToYellow[100],
               progressColor:Palette.kToYellow[300],
             ),

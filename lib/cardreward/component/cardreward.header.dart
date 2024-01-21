@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
+import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
 class CardHeader extends StatelessWidget {

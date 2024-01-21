@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward.dart';
 import 'package:pickrewardapp/cardreward/model/card_reward_type.dart';
+import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
-import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
-import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/card.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/proto/generated/card.pbgrpc.dart';
 
 class CardRewardViewModel with ChangeNotifier {
 

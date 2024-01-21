@@ -7,9 +7,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/shared/card/model/card.dart';
+import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/model/card.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
 import 'package:provider/provider.dart';
 
 class CardSearchItems extends StatelessWidget {

@@ -6,11 +6,11 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
+import 'package:pickrewardapp/shared/card/model/card.dart';
+import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 import 'package:pickrewardapp/cardreward/cardreward.dart';
-import 'package:pickrewardapp/shared/model/card.dart';
 import 'package:provider/provider.dart';
 
 

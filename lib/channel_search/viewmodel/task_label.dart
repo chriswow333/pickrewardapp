@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc_connection_interface.dart';
 import 'package:pickrewardapp/channel_search/model/task_label.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
-import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pb.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/card.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/proto/generated/card.pb.dart';
 
 
 class TaskLabelViewModel with ChangeNotifier {

@@ -3,6 +3,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -61,10 +62,17 @@ class CardEventResult extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child:TextButton(
         onPressed: (){
+          
+          
 
           CupertinoScaffold.showCupertinoModalBottomSheet(
+            // overlayStyle:SystemUiOverlayStyle(
+            //   // statusBarColor: Colors.white, 
+            //   statusBarBrightness: Brightness.dark,
+            // ),
+            barrierColor: Colors.black,
             context: context,
-            expand: true,
+            // expand: true,
             // shape: const RoundedRectangleBorder(
             //     borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
             //   ),

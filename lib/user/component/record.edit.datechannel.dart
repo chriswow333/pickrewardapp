@@ -1,12 +1,13 @@
 
 
 
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/user/component/record.edit.datechannel.channelitem.dart';
+import 'package:pickrewardapp/user/viewmodel/user_record.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
@@ -16,14 +17,15 @@ class RecordEditDateChannel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: BoxDecoration(
         color: Palette.kToBlack[0],
         borderRadius: BorderRadius.circular(10),
       ),
       child:Container(
-        padding: EdgeInsets.all(10),
-        child:Column(
+        padding: const EdgeInsets.all(10),
+        child:const Column(
           children:[
             DateField(),
             Divider(),
@@ -36,31 +38,28 @@ class RecordEditDateChannel extends StatelessWidget {
 }
 
 
-
 class ChannelField extends StatelessWidget {
   const ChannelField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+
+    return SizedBox(
       height:40,
       child:GestureDetector(
         onTap: (){
           CupertinoScaffold.showCupertinoModalBottomSheet(
             context: context,
             expand: true,
-            // shape: const RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-            //   ),
             builder: (context) {
-              return ChannelItemsPage();
+              return ChannelItemsPage(userRecordViewModel: userRecordViewModel,);
             },
           );
         },
         child:Container(
-          // alignment: Alignment.centerRight,
           child:Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
               Text("消費通路",
                 style:TextStyle(
@@ -73,8 +72,8 @@ class ChannelField extends StatelessWidget {
                   decoration: const BoxDecoration(),
                 ),
               ),
-              Text('MOMO',
-                style:TextStyle(
+              Text(userRecordViewModel.channelName,
+                style:TextStyle( 
                   fontSize: 14,
                   color:Palette.kToBlack[600],
                 ),
@@ -88,216 +87,23 @@ class ChannelField extends StatelessWidget {
 }
 
 
-class ChannelItemsPage extends StatelessWidget {
-  const ChannelItemsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoScaffold(
-      overlayStyle:SystemUiOverlayStyle(
-        statusBarColor: Colors.white, 
-        statusBarBrightness:
-            Brightness.light 
-      ),
-      body: Scaffold(
-        body: SafeArea(
-          child:Container(
-            padding: EdgeInsets.all(10),
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                ChannelItemsTitle(),
-                SizedBox(
-                  height:20,
-                ),
-                Expanded(
-                  child:ChannelItemGroup(),
-                ),
-              ]
-            )
-          )
-        )
-      )
-    );
-  }
-}
-
-class ChannelItemGroup extends StatelessWidget {
-  const ChannelItemGroup({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        children:[
-          SelfFillInChannel(),
-          SizedBox(height:10),
-          Expanded(
-            child:ChannelItemsByCategory(),
-          ),
-        ]
-      )
-    );
-  }
-}
-
-class ChannelItemsByCategory extends StatelessWidget {
-  const ChannelItemsByCategory({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:SingleChildScrollView(
-        child:Column(
-          children:[
-            ChannelItems(),
-            ChannelItems(),
-          ]
-        )
-      )
-    );
-  }
-}
-
-class ChannelItems extends StatelessWidget {
-  const ChannelItems({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top:10, bottom: 10),
-      child:Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color:Palette.kToBlack[0],
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            Container(
-              padding: EdgeInsets.only(bottom: 20),
-              child:Text('網購',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              )
-            ),
-            GridView.builder(
-              shrinkWrap:true,
-              physics:const NeverScrollableScrollPhysics(),
-              itemCount: 20,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 10,
-                // childAspectRatio: 0.7,
-              ),
-              itemBuilder: (context, index){
-                return ChannelItem();
-              }
-            ),
-          ]
-        ),
-        
-        
-      )
-    );
-  }
-}
-
-
-class ChannelItem extends StatelessWidget {
-  const ChannelItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:Column(
-        children:[
-          CircleAvatar(
-            child:Text('Ava'),
-          ),
-          Text('hello'),
-        ]
-      )
-    );
-  }
-}
-
-
-
-
-
-class SelfFillInChannel extends StatelessWidget {
-  const SelfFillInChannel({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color:Palette.kToBlack[0],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      height:40,
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.all(10),
-      child:TextField(
-        // controller:_searchController,
-        // textAlign: TextAlign.start,
-        textAlignVertical: TextAlignVertical.center,
-        // textAlignVertical:TextAlignVertical.bottom,
-        onChanged: (String value){
-          // searchCardViewModel.changeKeyword(value);
-        },
-        onEditingComplete: (){
-          // searchCardViewModel.searchCard();
-        },
-        onTap:(){
-          // searchCardViewModel.onFocusSearch();
-        },
-        decoration: InputDecoration.collapsed(
-          hintText: '自行輸入',
-          // prefixIcon:const Icon(Icons.search),
-          // border:OutlineInputBorder(
-            // borderRadius: BorderRadius.circular(20.0),
-          // )
-        ),
-        style:const TextStyle(
-          fontSize:14,
-        ),
-      )
-    );
-  }
-}
-
-class ChannelItemsTitle extends StatelessWidget {
-  const ChannelItemsTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child:Text('選擇一個消費通路',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color:Palette.kToBlack[600],
-        ),
-      )
-    );
-  }
-}
-
-
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
-
-class DateField extends StatelessWidget {
+class DateField extends StatefulWidget {
   const DateField({super.key});
+  
+  @override
+  State<DateField> createState() => _DateFieldState();
+}
+
+class _DateFieldState extends State<DateField> {
+
+  DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+    return SizedBox(
       height:40,
       child:GestureDetector(
         onTap: (){
@@ -332,7 +138,10 @@ class DateField extends StatelessWidget {
             }
           );
           future.then((data){
-            // criteriaViewModel.date = data as DateTime;
+            userRecordViewModel.recordTime = data as DateTime;
+            setState(() {
+              dateTime = data;
+            });
           });
         },
         child:Container(
@@ -348,10 +157,10 @@ class DateField extends StatelessWidget {
               ),
               Expanded(
                 child:Container(
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                 ),
               ),
-              Text(formatter.format(DateTime.now()),
+              Text(formatter.format(dateTime),
                 style:TextStyle(
                   fontSize: 14,
                   color:Palette.kToBlack[600],
@@ -364,6 +173,4 @@ class DateField extends StatelessWidget {
     );
   }
 }
-
-
 

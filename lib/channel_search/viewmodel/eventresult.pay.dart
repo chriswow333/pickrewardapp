@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/shared/repository/pay/v1/pay.dart';
-import 'package:pickrewardapp/shared/repository/pay/v1/proto/generated/pay.pb.dart';
+import 'package:pickrewardapp/shared/pay/repo/v1/pay.dart';
+import 'package:pickrewardapp/shared/pay/repo/v1/proto/generated/pay.pb.dart';
 
 
 

@@ -30,7 +30,7 @@ class UserSavingSummary extends StatelessWidget {
               color:Palette.kToBlack[50]
             ),
           ),
-          Column(
+          const Column(
             children:[
               SummaryStartFrom(),
               Expanded(child: SizedBox()),
@@ -101,7 +101,7 @@ class SummaryStartFrom extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                  decoration: BoxDecoration(
                   color: Palette.kToBlack[900]
                 ),
@@ -115,7 +115,7 @@ class SummaryStartFrom extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                     ),
-                    SizedBox(width:2,),
+                    const SizedBox(width:2,),
                     Container(
                       width: 5.0,
                       height: 5.0,
@@ -124,7 +124,7 @@ class SummaryStartFrom extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                     ),
-                    SizedBox(width:2,),
+                    const SizedBox(width:2,),
                     Container(
                       width: 5.0,
                       height: 5.0,
@@ -248,7 +248,7 @@ class TotalSaving extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height:5),
+          const SizedBox(height:5),
           Row(
             children:[
               Text('NT\$',

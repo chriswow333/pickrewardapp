@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:pickrewardapp/shared/card/model/card.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/shared/model/card.dart';
 
-import 'package:pickrewardapp/shared/repository/card/v1/card.dart';
-import 'package:pickrewardapp/shared/repository/card/v1/proto/generated/card.pbgrpc.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/card.dart';
+import 'package:pickrewardapp/shared/card/repo/v1/proto/generated/card.pbgrpc.dart';
 
 
 class CardItemViewModel with ChangeNotifier {
@@ -65,9 +65,6 @@ class CardItemViewModel with ChangeNotifier {
       logger.e(e);
     }
   }
-
-
-
   
 
   bool loading = false;
@@ -86,7 +83,6 @@ class CardItemViewModel with ChangeNotifier {
   Future<void> fetchCardsByBankIDWhenPressBank(String bankID) async{ 
     
     if (bankID == _bankID) return;
-
 
     if(_cardItemModels.containsKey(bankID)){
       _bankID = bankID;

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:intl/intl.dart';
+import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,7 +16,6 @@ import 'package:pickrewardapp/cardreward/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/cardreward/viewmodel/cardreward.tab.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/shared/model/card_header.dart';
 
 class CardContentScreen extends StatelessWidget {
   const CardContentScreen({super.key, required this.cardHeaderItemModel});

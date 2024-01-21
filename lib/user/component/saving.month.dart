@@ -16,7 +16,7 @@ class SavingMonthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoScaffold(
-      overlayStyle:SystemUiOverlayStyle(
+      overlayStyle:const SystemUiOverlayStyle(
         statusBarColor: Colors.white, 
         statusBarBrightness:
             Brightness.light 
@@ -31,11 +31,11 @@ class SavingMonthPage extends StatelessWidget {
                 if (screenWidth > tabletWidthThreshold) {
                   return SizedBox(
                     width: tabletWidthThreshold,
-                    child: SavingMonthComponent()
+                    child: const SavingMonthComponent()
                   );
                 } else {
                   // 屏幕较小，不限制应用宽度
-                  return SavingMonthComponent();
+                  return const SavingMonthComponent();
                 }
               }),
             ),
@@ -54,8 +54,8 @@ class SavingMonthComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding:EdgeInsets.only(left:10, top:10, bottom: 10, right:10),
-      child:Column(
+      padding:const EdgeInsets.only(left:10, top:10, bottom: 10, right:10),
+      child:const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           GobackPage(),
@@ -78,7 +78,7 @@ class SavingMonthTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('當月省下的摳摳',
+      child:const Text('當月省下的摳摳',
         style: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class SavingMonthFunctionToggle extends StatelessWidget {
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('根據消費總金額顯示佔比',
+          const Text('根據消費總金額顯示佔比',
             style: TextStyle(
               fontSize: 12,
             ),

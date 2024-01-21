@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc_connection_interface.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/shared/repository/channel/v1/channel.dart';
-import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';
+import 'package:pickrewardapp/shared/channel/repo/v1/channel.dart';
+import 'package:pickrewardapp/shared/channel/repo/v1/proto/generated/channel.pbgrpc.dart';
 
 class EventResultChannelViewModel with ChangeNotifier {
   EventResultChannelViewModel(){

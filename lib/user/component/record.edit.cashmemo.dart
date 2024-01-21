@@ -1,27 +1,25 @@
 
 
 
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:pickrewardapp/user/viewmodel/user_record.dart';
+import 'package:provider/provider.dart';
 
 class RecordEditCashMemo extends StatelessWidget {
   const RecordEditCashMemo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: BoxDecoration(
         color: Palette.kToBlack[0],
         borderRadius: BorderRadius.circular(10),
       ),
       child:Container(
-        padding: EdgeInsets.all(10),
-        child:Column(
+        padding: const EdgeInsets.all(10),
+        child:const Column(
           children:[
             CashField(),
             Divider(),
@@ -40,6 +38,9 @@ class MemoField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+
     return Container(
       height:40,
       alignment: Alignment.center,
@@ -49,7 +50,7 @@ class MemoField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.center,
         // textAlignVertical:TextAlignVertical.bottom,
         onChanged: (String value){
-          // searchCardViewModel.changeKeyword(value);
+          userRecordViewModel.memo = value;
         },
         onEditingComplete: (){
           // searchCardViewModel.searchCard();
@@ -57,7 +58,7 @@ class MemoField extends StatelessWidget {
         onTap:(){
           // searchCardViewModel.onFocusSearch();
         },
-        decoration: InputDecoration.collapsed(
+        decoration: const InputDecoration.collapsed(
           hintText: '備註',
           // prefixIcon:const Icon(Icons.search),
           // border:OutlineInputBorder(
@@ -78,6 +79,9 @@ class CashField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    UserRecordViewModel userRecordViewModel = Provider.of<UserRecordViewModel>(context);
+
     return Container(
       height:40,
       alignment: Alignment.center,
@@ -85,16 +89,16 @@ class CashField extends StatelessWidget {
         // controller:_searchController,
         textAlign: TextAlign.start,
         // textAlignVertical:TextAlignVertical.center,
+        keyboardType:TextInputType.number,
         onChanged: (String value){
-          // searchCardViewModel.changeKeyword(value);
+          userRecordViewModel.cost = int.parse(value);
         },
         onEditingComplete: (){
-          // searchCardViewModel.searchCard();
         },
         onTap:(){
           // searchCardViewModel.onFocusSearch();
         },
-        decoration: InputDecoration.collapsed(
+        decoration: const InputDecoration.collapsed(
           hintText: '刷卡金額',
           // prefixIcon:const Icon(Icons.search),
           // border:OutlineInputBorder(

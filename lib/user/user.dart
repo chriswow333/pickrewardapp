@@ -6,7 +6,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/user/component/record.detail.dart';
 import 'package:pickrewardapp/user/component/summary.dart';
-import 'package:pickrewardapp/user/component/user.info.dart';
+import 'package:pickrewardapp/user/viewmodel/user_record.dart';
+import 'package:pickrewardapp/user/viewmodel/user_summary.dart';
+import 'package:pickrewardapp/user_info/user_info.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -16,22 +19,26 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return Container(
-      padding: EdgeInsets.all(10),
-      child:Column(
-        children:[
-          UserInfoTitle(),
-          UserEventSummary(),
-          Expanded(
-            child:UserEventDetail(),
-          ),
-        ]
-      )
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserRecordViewModel>(create:(_)=>UserRecordViewModel()),
+        ChangeNotifierProvider<UserRecordSummaryViewModel>(create:(_)=>UserRecordSummaryViewModel()),
+      ],
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child:Column(
+          children:[
+            const UserInfoTitle(),
+            UserEventSummary(),
+            const Expanded(
+              child:UserEventDetail(),
+            ),
+          ]
+        )
+      ),
     );
   }
 }
-
-
 
 
 class UserInfoTitle extends StatelessWidget {
@@ -40,11 +47,11 @@ class UserInfoTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:10, bottom: 10),
+      padding: const EdgeInsets.only(top:10, bottom: 10),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('Hi,',
+          const Text('Hi,',
             style:TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -74,7 +81,7 @@ class UserInfoTitle extends StatelessWidget {
 
 
 class GoogleSignInScreen extends StatefulWidget {
-  const GoogleSignInScreen({Key? key}) : super(key: key);
+  const GoogleSignInScreen({super.key});
 
   @override
   State<GoogleSignInScreen> createState() => _GoogleSignInScreenState();
@@ -104,8 +111,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                           ),
                           onPressed: () async {
                             userCredential.value = await signInWithGoogle();
-                            if (userCredential.value != null)
+                            if (userCredential.value != null) {
                               print(userCredential.value.user!.email);
+                            }
                           },
                         ),
                       ),
