@@ -10,7 +10,7 @@ import 'package:pickrewardapp/shared/card/model/card.dart';
 import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
-import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/card/screen/cardreward.dart';
 import 'package:provider/provider.dart';
 
 
@@ -187,14 +187,6 @@ class CardItem extends StatelessWidget {
                 return CardContentScreen(cardHeaderItemModel:cardHeaderItemModel);
               },
             );
-
-
-            // Navigator.of(context, rootNavigator: true).push(
-            //   MaterialPageRoute(
-            //     builder: (context) =>  CardContentScreen(cardHeaderItemModel:cardHeaderItemModel)
-            //   ),
-            // );
-
 
           },
           style:const ButtonStyle(

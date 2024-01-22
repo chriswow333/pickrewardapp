@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
-import 'package:pickrewardapp/cardreward/cardreward.dart';
+import 'package:pickrewardapp/card/screen/cardreward.dart';
 import 'package:pickrewardapp/shared/card/model/card.dart';
 import 'package:pickrewardapp/shared/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -49,7 +49,6 @@ class CardSearchItems extends StatelessWidget {
   }
 }
 
-
 class SearchCardKeywordHistory extends StatelessWidget {
   const SearchCardKeywordHistory({super.key});
 
@@ -60,16 +59,16 @@ class SearchCardKeywordHistory extends StatelessWidget {
     List<String> keywordHistory = searchCardViewModel.searchKeywordHistory;
 
     return Container(
+      alignment: Alignment.topLeft,
       child:SingleChildScrollView(
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Container(
-              child:const Text('最近搜尋',
-                style:TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                )
+              child:Text('最近搜尋',
+                style: TextStyle(
+                  color:Palette.kToBlack[600],
+                ),
               )
             ),
             const SizedBox(height:20),

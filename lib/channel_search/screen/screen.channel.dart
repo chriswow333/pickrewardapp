@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/progress.channel.dart';
 import 'package:pickrewardapp/channel_search/component/progress.criteria.dart';
-import 'package:pickrewardapp/channel_search/component/channel.progress.eventresult.dart';
+import 'package:pickrewardapp/channel_search/component/progress.eventresult.dart';
 import 'package:pickrewardapp/channel_search/component/progress.channel.search.dart';
 import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/progress.dart';
@@ -26,36 +26,35 @@ class ChannelSearchScreen extends StatelessWidget {
 
     ChannelProgressSelectedPage channelProgressSelectedPage = Provider.of<ChannelProgressSelectedPage>(context);
 
-    return Scaffold(
-      body:CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          border:null,
-          transitionBetweenRoutes: false,
-          leading:(channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarLeading():OthersNavBarLeading(controller: _controller),
-          middle: (channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarMiddle():OthersNavBarMiddle(),
-        ),
-        child: SizedBox.expand(
-          child:SafeArea(
-            child:Center(
-              child:LayoutBuilder(
-                builder:((context, constraints) {
-                  double screenWidth = MediaQuery.of(context).size.width;
-                  double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
-                  if (screenWidth > tabletWidthThreshold) {
-                    return SizedBox(
-                      width: tabletWidthThreshold,
-                      child: ChannelProgressComponent(controller: _controller,),
-                    );
-                  } else {
-                    // 屏幕较小，不限制应用宽度
-                    return ChannelProgressComponent(controller: _controller);
-                  }
-                }),
-              ),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        border:null,
+        transitionBetweenRoutes: false,
+        leading:(channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarLeading():OthersNavBarLeading(controller: _controller),
+        middle: (channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarMiddle():OthersNavBarMiddle(),
+      ),
+      child: SizedBox.expand(
+        child:SafeArea(
+          child:Center(
+            child:LayoutBuilder(
+              builder:((context, constraints) {
+                double screenWidth = MediaQuery.of(context).size.width;
+                double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
+                if (screenWidth > tabletWidthThreshold) {
+                  return SizedBox(
+                    width: tabletWidthThreshold,
+                    child: ChannelProgressComponent(controller: _controller,),
+                  );
+                } else {
+                  // 屏幕较小，不限制应用宽度
+                  return ChannelProgressComponent(controller: _controller);
+                }
+              }),
             ),
           ),
-        )
-      ),
+        ),
+      )
+
     );
   }
 }

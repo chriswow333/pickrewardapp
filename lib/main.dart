@@ -5,20 +5,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pickrewardapp/accounting/accounting.dart';
+import 'package:pickrewardapp/accounting/model/user_record.dart';
 
 
 import 'package:pickrewardapp/card/card.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
-import 'package:pickrewardapp/user/model/user_record.dart';
-import 'package:pickrewardapp/user/user.dart';
-import 'package:pickrewardapp/user_info/model/user_card.dart';
+import 'package:pickrewardapp/user/model/user_card.dart';
 
 
 void main() async {
@@ -39,25 +38,27 @@ void main() async {
   // await dotenv.load(fileName: ".env.test");
   // await dotenv.load(fileName: ".env.prod");
 
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
 
-  // initialHive();
+  await initialHive();
   runApp(MyApp());
 
 
-  // FlutterNativeSplash.remove();
+  FlutterNativeSplash.remove();
 }
 
 initialHive() async {
 
-
+ 
   // hive initialization
   final document = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(document.path);
   Hive.registerAdapter(UserRecordAdapter());
   Hive.registerAdapter(UserCardModelAdapter());
+  await Hive.openBox('pickrewardapp');
+
 
 
   // // Get the chosen sub-directory for Hive files 
@@ -79,7 +80,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Palette.kToBlack[10]!,
           primary: Palette.kToBlack,
-          secondary: Palette.kToBlack,
+          // secondary: Palette.kToBlack,
+          // surface:Palette.kToBlack[10],
+          surfaceTint: Palette.kToBlack[10],
           // brightness:Brightness.light, 
         )
       ),
@@ -88,7 +91,7 @@ class MyApp extends StatelessWidget {
         switch (settings.name) {
           case '/':
             return MaterialWithModalsPageRoute(
-                builder: (_) => ChannelSearchPage(),
+                builder: (_) =>  MyHomePage2(),
                 settings: settings);
         }
       },
@@ -96,6 +99,64 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+class MyHomePage2 extends StatefulWidget {
+  const MyHomePage2({super.key});
+
+  @override
+  State<MyHomePage2> createState() => _MyHomePage2State();
+}
+
+class _MyHomePage2State extends State<MyHomePage2> {
+
+
+  int _selectedIndex = 0;
+
+  // static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
+  static const Widget channelSearchPage = ChannelSearchPage();
+  static const Widget cardSearchPage = CardSearchPage();
+  static Widget accountingPage = const AccountingPage();
+
+  static final List<Widget> _widgetOptions = <Widget>[
+    channelSearchPage,
+    cardSearchPage,
+    accountingPage,
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body:_widgetOptions[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.manage_search_sharp),
+              label: '挑選信用卡',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.credit_card),
+              label: '信用卡總覽',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '我的',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Palette.kToYellow[400],
+          onTap: _onItemTapped,
+        ),
+    );
+  }
+}
+
 
 
 class Home2 extends StatelessWidget {
@@ -184,12 +245,12 @@ class _HomeScreenState extends State<HomeScreen> {
   // static const Widget homePage = HomePage(key: PageStorageKey<String>('Screen-A'));
   static const Widget channelSearchPage = ChannelSearchPage();
   static const Widget cardSearchPage = CardSearchPage();
-  static Widget userPage = const UserPage();
+  static Widget accountingPage = const AccountingPage();
 
   static final List<Widget> _widgetOptions = <Widget>[
     channelSearchPage,
     cardSearchPage,
-    userPage,
+    accountingPage,
   ];
 
 

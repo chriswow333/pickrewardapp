@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/card/component/card.bank.dart';
 import 'package:pickrewardapp/card/component/card.items.dart';
-import 'package:pickrewardapp/card/component/card.search.dart';
 import 'package:pickrewardapp/card/component/card.search.item.dart';
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:provider/provider.dart';
@@ -22,29 +21,15 @@ class CardComponent extends StatelessWidget {
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Container(
-            child:const Text('信用卡',
-              style: TextStyle(
-                fontSize: 34,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ),
-          const SizedBox(height:10,),
-          const SearchCardBar(),
-          const SizedBox(height:20,),
           if(searchCardViewModel.searchCardFlag)
             const CardSearchItems(),
           if(!searchCardViewModel.searchCardFlag)
             const BankCardItems(),
         ]
-          
       )
     );
   }
 }
-
-
 
 
 class BankCardItems extends StatelessWidget {

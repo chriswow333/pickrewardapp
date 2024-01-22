@@ -19,15 +19,15 @@ class ChannelSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers:[
-        ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
-        ChangeNotifierProvider<CriteriaViewModel>(create:(_)=>CriteriaViewModel()),
-        ChangeNotifierProvider<TaskLabelViewModel>(create:(_)=>TaskLabelViewModel()),
-        ChangeNotifierProvider<CardEventResultsViewModel>(create:(_)=>CardEventResultsViewModel()),
-        ChangeNotifierProvider<ChannelProgressSelectedPage>(create:(_)=>ChannelProgressSelectedPage()),
-        ChangeNotifierProvider<SearchChannelViewModel>(create:(_)=>SearchChannelViewModel()),
-      ],
-      child:ChannelSearchScreen()
+        providers:[
+          ChangeNotifierProvider<ChannelViewModel>(create:(_)=>ChannelViewModel()),
+          ChangeNotifierProvider<CriteriaViewModel>(create:(_)=>CriteriaViewModel()),
+          ChangeNotifierProvider<TaskLabelViewModel>(create:(_)=>TaskLabelViewModel()),
+          ChangeNotifierProvider<CardEventResultsViewModel>(create:(_)=>CardEventResultsViewModel()),
+          ChangeNotifierProvider<ChannelProgressSelectedPage>(create:(_)=>ChannelProgressSelectedPage()),
+          ChangeNotifierProvider<SearchChannelViewModel>(create:(_)=>SearchChannelViewModel()),
+        ],
+        child:ChannelSearchScreen()
     );
   }
 }

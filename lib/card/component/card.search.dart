@@ -25,7 +25,6 @@ class _SearchCardBarState extends State<SearchCardBar> {
     SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context, listen:false);
     bool searchedFlag = searchCardViewModel.searchCardFlag;
 
-
     return SizedBox(
       height:40,
       child:Row(
