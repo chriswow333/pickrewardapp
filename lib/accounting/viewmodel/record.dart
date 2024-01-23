@@ -15,13 +15,29 @@ class RecordViewModel with ChangeNotifier {
   String channelID = "";
   DateTime recordTime = DateTime.now();
   int cost = 0;
-  String cardName = "";
-  String cardID = "";
+  
+  String _cardName = "";
+  set cardName (String cardName){
+    _cardName = cardName;
+    notifyListeners();
+  }
+  String get cardName => _cardName;
+  
+  String _cardID = "";
+  set cardID(String cardID) {
+    _cardID = cardID;
+    notifyListeners();
+  }
+  String get cardID => _cardID;
+
+
   String cardRewardID = "";
   String cardRewardName = "";
   double getPercentage = 0.0;
   double getReturn = 0;
   String memo = "";
+
+  
   
 
   Map<DateTime, List<UserRecord>> getUserRecords() {
@@ -94,8 +110,8 @@ class RecordViewModel with ChangeNotifier {
     channelID = "";
     recordTime = DateTime.now();
     cost = 0;
-    cardName = "";
-    cardID = "";
+    _cardName = "";
+    _cardID = "";
     cardRewardID = "";
     cardRewardName = "";
     getPercentage = 0.0;

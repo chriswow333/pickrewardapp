@@ -9,8 +9,8 @@ import 'package:pickrewardapp/accounting/component/summary.month.dart';
 import 'package:pickrewardapp/accounting/component/summary.total.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
-class UserEventSummary extends StatelessWidget {
-  UserEventSummary({super.key});
+class AccountingEventSummary extends StatelessWidget {
+  AccountingEventSummary({super.key});
 
   final CarouselController _controller = CarouselController();
   
@@ -27,9 +27,9 @@ class UserEventSummary extends StatelessWidget {
           CarouselSlider(
             carouselController: _controller,
             items: const [
-              UserSavingSummary(),
-              UserCardSavingSummary(),
-              UserMonthSavingSummary(),
+              AccountingTotalSummary(),
+              AccountingSummaryGroupByCard(),
+              AccountingSummaryGroupByMonth(),
             ],
             options: CarouselOptions(
                 // height: 400,

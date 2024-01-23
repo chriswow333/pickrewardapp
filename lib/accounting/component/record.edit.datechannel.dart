@@ -1,10 +1,11 @@
 
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/accounting/component/record.edit.datechannel.channelitem.dart';
+import 'package:pickrewardapp/accounting/screen/record.edit.channel.dart';
 import 'package:pickrewardapp/accounting/viewmodel/record.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
@@ -43,18 +44,17 @@ class ChannelField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    
     RecordViewModel userRecordViewModel = Provider.of<RecordViewModel>(context);
 
     return SizedBox(
       height:40,
       child:GestureDetector(
         onTap: (){
-          CupertinoScaffold.showCupertinoModalBottomSheet(
+          showCupertinoModalBottomSheet(
             context: context,
-            expand: true,
             builder: (context) {
-              return ChannelItemsPage(userRecordViewModel: userRecordViewModel,);
+              return RecordChannelScreen(userRecordViewModel: userRecordViewModel,);
             },
           );
         },

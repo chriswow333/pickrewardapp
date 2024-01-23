@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
-class UserMonthSavingSummary extends StatelessWidget {
-  const UserMonthSavingSummary({super.key});
+class AccountingSummaryGroupByMonth extends StatelessWidget {
+  const AccountingSummaryGroupByMonth({super.key});
 
   @override
   Widget build(BuildContext context) {

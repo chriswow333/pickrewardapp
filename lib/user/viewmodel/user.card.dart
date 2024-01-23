@@ -25,8 +25,7 @@ class UserCardViewModel extends ChangeNotifier {
     if(userCards == null) {
       return;
     }
-    _userCardModels = userCards;
-    print(userCards);
+    _userCardModels = (userCards as List).map((e) => e as UserCardModel).toList();
     notifyListeners();
   }
 

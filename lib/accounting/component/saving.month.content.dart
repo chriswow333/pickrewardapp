@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -41,13 +37,6 @@ class SavingMonthsByCard extends StatelessWidget {
               SavingCardItem(),
               SavingCardItem(),
               SavingCardItem(),
-              SavingCardItem(),
-              SavingCardItem(),
-              SavingCardItem(),
-              SavingCardItem(),
-              SavingCardItem(),
-              SavingCardItem(),
-               SavingCardItem(),
               SavingCardItem(),
               SavingCardItem(),
               SavingCardItem(),

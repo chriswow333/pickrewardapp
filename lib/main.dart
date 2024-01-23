@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pickrewardapp/accounting/accounting.dart';
 import 'package:pickrewardapp/accounting/model/user_record.dart';
+import 'package:pickrewardapp/accounting/screen/record.edit.dart';
 
 
 import 'package:pickrewardapp/card/card.dart';
@@ -21,6 +20,7 @@ import 'package:pickrewardapp/user/model/user_card.dart';
 
 
 void main() async {
+
 
 
   // WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +37,8 @@ void main() async {
    await dotenv.load(fileName: ".env.dev"); 
   // await dotenv.load(fileName: ".env.test");
   // await dotenv.load(fileName: ".env.prod");
+
+  
 
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -93,6 +95,12 @@ class MyApp extends StatelessWidget {
             return MaterialWithModalsPageRoute(
                 builder: (_) =>  MyHomePage2(),
                 settings: settings);
+          case '/record/edit':
+            return MaterialWithModalsPageRoute(
+                builder: (_) =>  RecordEditScreen(),
+                settings: settings);
+          
+          
         }
       },
       debugShowCheckedModeBanner: false,

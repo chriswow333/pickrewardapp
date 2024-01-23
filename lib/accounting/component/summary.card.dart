@@ -8,8 +8,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:pickrewardapp/accounting/component/saving.month.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 
-class UserCardSavingSummary extends StatelessWidget {
-  const UserCardSavingSummary({super.key});
+class AccountingSummaryGroupByCard extends StatelessWidget {
+  const AccountingSummaryGroupByCard({super.key});
 
   @override
   Widget build(BuildContext context) {

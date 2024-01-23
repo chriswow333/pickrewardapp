@@ -1,14 +1,13 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pickrewardapp/accounting/component/record.edit.dart';
 import 'package:pickrewardapp/accounting/model/user_record.dart';
 import 'package:pickrewardapp/accounting/viewmodel/record.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
-class AccountingEventDetail extends StatelessWidget {
-  const AccountingEventDetail({super.key});
+class AccountingRecordDetail extends StatelessWidget {
+  const AccountingRecordDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +17,10 @@ class AccountingEventDetail extends StatelessWidget {
       child:const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          AccountingEventDetailTitle(),
+          AccountingRecordDetailTitle(),
           Expanded(
             child:SingleChildScrollView(
-              child:AccountingEvents(),
+              child:AccountingRecords(),
             ),
           )
         ],
@@ -32,8 +31,8 @@ class AccountingEventDetail extends StatelessWidget {
 
 
 
-class AccountingEvents extends StatelessWidget {
-  const AccountingEvents({super.key});
+class AccountingRecords extends StatelessWidget {
+  const AccountingRecords({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class AccountingEvents extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           for(DateTime dateTime in  userRecordMapper.keys)
-            AccountingEventGroupByDate(dateTime: dateTime, userRecords: userRecordMapper[dateTime] ?? [],),
+            AccountingRecordGroupByDate(dateTime: dateTime, userRecords: userRecordMapper[dateTime] ?? [],),
         ]
       )
     );
@@ -54,8 +53,8 @@ class AccountingEvents extends StatelessWidget {
 }
 
 
-class AccountingEventGroupByDate extends StatelessWidget {
-  const AccountingEventGroupByDate({super.key, required this.userRecords, required this.dateTime});
+class AccountingRecordGroupByDate extends StatelessWidget {
+  const AccountingRecordGroupByDate({super.key, required this.userRecords, required this.dateTime});
 
   final DateTime dateTime;
   final List<UserRecord> userRecords;
@@ -126,8 +125,8 @@ class AccountingEventItem extends StatelessWidget {
 }
 
 
-class AccountingEventDetailTitle extends StatelessWidget {
-  const AccountingEventDetailTitle({super.key});
+class AccountingRecordDetailTitle extends StatelessWidget {
+  const AccountingRecordDetailTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +143,7 @@ class AccountingEventDetailTitle extends StatelessWidget {
           ),
           GestureDetector(
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const RecordEditPage()));
+              Navigator.pushNamed(context, '/record/edit');
             },
             child:Text('+',
               style: TextStyle(

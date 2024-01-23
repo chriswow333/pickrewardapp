@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class UserSavingSummary extends StatelessWidget {
-  const UserSavingSummary({super.key});
+class AccountingTotalSummary extends StatelessWidget {
+  const AccountingTotalSummary({super.key});
 
   @override
   Widget build(BuildContext context) {

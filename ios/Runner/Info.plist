@@ -51,8 +51,8 @@
 						</array>
 				</dict> -->
 		</array>
-		<key>FLTEnableImpeller</key>
-		<false/>
+		<!-- <key>FLTEnableImpeller</key>
+		<false/> -->
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>

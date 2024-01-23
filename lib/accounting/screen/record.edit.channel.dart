@@ -2,44 +2,56 @@
 
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/accounting/viewmodel/recrod.channel.dart';
 import 'package:pickrewardapp/accounting/viewmodel/record.dart';
-import 'package:pickrewardapp/accounting/viewmodel/summary.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
-
-class ChannelItemsPage extends StatelessWidget {
-  const ChannelItemsPage({super.key, required this.userRecordViewModel});
+class RecordChannelScreen extends StatelessWidget {
+  const RecordChannelScreen({super.key, required this.userRecordViewModel});
 
   final RecordViewModel userRecordViewModel;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoScaffold(
-      overlayStyle:const SystemUiOverlayStyle(
-        statusBarColor: Colors.white, 
-        statusBarBrightness:
-            Brightness.light 
-      ),
-      body: Scaffold(
-        body: SafeArea(
-          child:Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                const ChannelItemsTitle(),
-                const SizedBox(
-                  height:20,
-                ),
-                Expanded(
-                  child:ChannelItemGroup(userRecordViewModel: userRecordViewModel,),
-                ),
-              ]
+     
+    return Scaffold(
+      body:MultiProvider(
+        providers:[
+          ChangeNotifierProvider(create: (context)=>RecordChannelViewModel()),
+        ],
+        child:CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+              border:null,
+              transitionBetweenRoutes: false,
+              // leading: Container(),
+              middle: Container(
+                child:Text('選擇一個消費通路',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color:Palette.kToBlack[600],
+                  ),
+                )
+              ),
+            ),
+          child:SizedBox.expand(
+            child: SafeArea(
+              child:Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Expanded(
+                      child:ChannelItemGroup(userRecordViewModel: userRecordViewModel,),
+                    ),
+                  ]
+                )
+              )
             )
           )
         )
@@ -47,7 +59,6 @@ class ChannelItemsPage extends StatelessWidget {
     );
   }
 }
-
 
 class ChannelItemGroup extends StatelessWidget {
   const ChannelItemGroup({super.key, required this.userRecordViewModel});
@@ -57,20 +68,15 @@ class ChannelItemGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<UserRecordSummaryViewModel>(create:(_)=>UserRecordSummaryViewModel()),
-      ],
-      child:Container(
-        child:Column(
-          children:[
-            SelfFillInChannel(userRecordViewModel: userRecordViewModel,),
-            const SizedBox(height:10),
-            Expanded(
-              child:ChannelItemsByCategory(userRecordViewModel: userRecordViewModel,),
-            ),
-          ]
-        )
+    return Container(
+      child:Column(
+        children:[
+          SelfFillInChannel(userRecordViewModel: userRecordViewModel,),
+          const SizedBox(height:10),
+          Expanded(
+            child:ChannelItemsByCategory(userRecordViewModel: userRecordViewModel,),
+          ),
+        ]
       )
     );
   }
@@ -83,11 +89,13 @@ class ChannelItemsByCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Container(
       child:SingleChildScrollView(
         child:Column(
           children:[
-            ChannelItems(userRecordViewModel: userRecordViewModel,),
+              ChannelItems(userRecordViewModel: userRecordViewModel,),
           ]
         )
       )
@@ -96,7 +104,7 @@ class ChannelItemsByCategory extends StatelessWidget {
 }
 
 class ChannelItems extends StatelessWidget {
-  const ChannelItems({super.key, required this.userRecordViewModel});
+  const ChannelItems({super.key, required this.userRecordViewModel,});
   
   final RecordViewModel userRecordViewModel;
 
@@ -116,7 +124,7 @@ class ChannelItems extends StatelessWidget {
           children:[
             Container(
               padding: const EdgeInsets.only(bottom: 20),
-              child:const Text('網購',
+              child:const Text('搜尋結果',
                 style: TextStyle(
                   fontSize: 18,
                 ),
@@ -124,10 +132,10 @@ class ChannelItems extends StatelessWidget {
             ),
             GridView.builder(
               shrinkWrap:true,
-              physics:const NeverScrollableScrollPhysics(),
-              itemCount: 20,
+              physics:const NeverScrollableScrollPhysics(), 
+              itemCount: 1,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
+                crossAxisCount: 4,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
                 // childAspectRatio: 0.7,
@@ -136,10 +144,8 @@ class ChannelItems extends StatelessWidget {
                 return ChannelItem(userRecordViewModel:userRecordViewModel);
               }
             ),
-          ]
+          ],
         ),
-        
-        
       )
     );
   }
@@ -215,24 +221,6 @@ class SelfFillInChannel extends StatelessWidget {
         ),
         style:const TextStyle(
           fontSize:14,
-        ),
-      )
-    );
-  }
-}
-
-class ChannelItemsTitle extends StatelessWidget {
-  const ChannelItemsTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child:Text('選擇一個消費通路',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color:Palette.kToBlack[600],
         ),
       )
     );

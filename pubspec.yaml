@@ -60,9 +60,9 @@ dependencies:
   flutter_native_splash: "^2.3.9"
   firebase_crashlytics: ^3.4.8
   firebase_core: ^2.24.2
-  cloud_firestore: ^4.13.6
-  firebase_auth: ^4.15.3
-  google_sign_in: ^6.2.1
+  # cloud_firestore: ^4.13.6
+  # firebase_auth: ^4.15.3
+  # google_sign_in: ^6.2.1
   carousel_slider: ^4.2.1
   percent_indicator: ^4.2.3
   hive: ^2.2.3
