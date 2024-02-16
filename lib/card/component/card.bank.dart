@@ -47,7 +47,7 @@ class BankItem extends StatelessWidget {
         FocusScope.of(context).unfocus();
         cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
       },
-      style:ButtonStyle(
+      style:const ButtonStyle(
         splashFactory: NoSplash.splashFactory,
       ),
       child:SizedBox(
@@ -56,9 +56,9 @@ class BankItem extends StatelessWidget {
           children:[
             BankIcon(image:bankModel.image),
             BankName(id:bankModel.id,name:bankModel.name),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             if (cardItemViewModel.bankID == bankModel.id)
-              BottomSpot(),
+              const BottomSpot(),
           ]
         ),
       )

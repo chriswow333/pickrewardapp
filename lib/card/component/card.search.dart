@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 
 class SearchCardBar extends StatefulWidget {
-  const SearchCardBar({ Key? key }) : super(key: key);
+  const SearchCardBar({ super.key });
 
   @override
   _SearchCardBarState createState() => _SearchCardBarState();
@@ -30,7 +30,7 @@ class _SearchCardBarState extends State<SearchCardBar> {
       height:40,
       child:Row(
         children:[
-          SizedBox(width:10),
+          const SizedBox(width:10),
           Expanded(
             child:TextField(
               controller:_searchController,
@@ -66,7 +66,7 @@ class _SearchCardBarState extends State<SearchCardBar> {
                   FocusScope.of(context).unfocus();
                   searchCardViewModel.cancel();
                 },
-                child:Text('取消')
+                child:const Text('取消')
               )
             )
         ]

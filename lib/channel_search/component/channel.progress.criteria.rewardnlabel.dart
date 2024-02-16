@@ -20,9 +20,9 @@ class RewardTypeAndTaskLabelWidget extends StatelessWidget {
         ),
         color:Palette.kToBlack[0],
       ),
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
 
-      child:Column(
+      child:const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           SizedBox(height:10),
@@ -63,7 +63,7 @@ class CardRewardTypeItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children:[
         CashType(),
         SizedBox(width:20),
@@ -101,8 +101,8 @@ class CashType extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-        animationDuration:Duration(microseconds: 0),
+        padding:const MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+        animationDuration:const Duration(microseconds: 0),
       ),
       child:Container(
         child:Text(RewardType.cash.name,
@@ -145,8 +145,8 @@ class PointType extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-        animationDuration:Duration(microseconds: 0),
+        padding:const MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+        animationDuration:const Duration(microseconds: 0),
       ),
       child:Text(RewardType.point.name,
         style:TextStyle(
@@ -232,8 +232,8 @@ class TaskLabelItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-          animationDuration:Duration(microseconds: 0),
+          padding:const MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+          animationDuration:const Duration(microseconds: 0),
         ),
         child:Text(taskLabelModel.name,
           style:TextStyle(

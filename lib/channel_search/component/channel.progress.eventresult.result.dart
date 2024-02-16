@@ -24,9 +24,9 @@ class CardEventResults extends StatelessWidget {
 
     if (cardEventResultViewModel.loading) {
       return Container(
-        padding: EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 20),
         alignment: Alignment.center,
-        child:CircularProgressIndicator(),
+        child:const CircularProgressIndicator(),
       );
     }
     
@@ -58,7 +58,7 @@ class CardEventResult extends StatelessWidget {
 
     
     return Container(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child:TextButton(
         onPressed: (){
 
@@ -75,10 +75,10 @@ class CardEventResult extends StatelessWidget {
 
         },
         child:Container(
-          padding: EdgeInsets.fromLTRB(20,30,20,30),
+          padding: const EdgeInsets.fromLTRB(20,30,20,30),
           decoration: BoxDecoration(
             color:Palette.kToBlack[0],
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child:Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,8 +139,8 @@ class CardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('${name}',
-        style: TextStyle(
+      child:Text(name,
+        style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
@@ -160,8 +160,8 @@ class CardRewardRank extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Text('Top ${rank}',
-        style: TextStyle(
+      child:Text('Top $rank',
+        style: const TextStyle(
           fontSize: 14,
         ),
       )
@@ -190,7 +190,7 @@ class CardRewardFeedback extends StatelessWidget {
       // 趴數回饋
       return Container(
         child:Text('回饋$percentage%, 獲得${feedback.getReturn}元',
-          style:TextStyle(
+          style:const TextStyle(
             fontSize: 12,
           )
         )
@@ -199,7 +199,7 @@ class CardRewardFeedback extends StatelessWidget {
       // 固定回饋
       return Container(
         child:Text('折抵${feedback.getReturn}元',
-          style:TextStyle(
+          style:const TextStyle(
             fontSize: 12,
           )
         )

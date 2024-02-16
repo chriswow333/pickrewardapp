@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc_connection_interface.dart';
-import 'package:pickrewardapp/channel_search/model/channel.dart';
-import 'package:pickrewardapp/channel_search/model/event_result.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 import 'package:pickrewardapp/shared/repository/channel/v1/channel.dart';
 import 'package:pickrewardapp/shared/repository/channel/v1/proto/generated/channel.pbgrpc.dart';

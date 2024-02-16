@@ -41,7 +41,7 @@ Future<void> main(List<String> args) async {
     final response = await stub.getChannelCategoryTypes(EmptyReq());
       // options: CallOptions(compression: const GzipCodec()),
     
-    print('Greeter client received: ${response}');
+    print('Greeter client received: $response');
   } catch (e) {
     print('Caught error: $e');
   }

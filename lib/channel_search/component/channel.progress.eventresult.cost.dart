@@ -62,8 +62,8 @@ class _CriteriaCostWidgetState extends State<CriteriaCostWidget> {
             ]
           ),
           
-          SizedBox(height:10),
-          CostMessage(),
+          const SizedBox(height:10),
+          const CostMessage(),
         ]
       )
     );
@@ -80,7 +80,7 @@ class CostMessage extends StatelessWidget {
     CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
     return Container(
       child:Text('刷卡金額大約在\$${criteriaViewModel.cost.value}左右, 以下的信用卡最適合你唷!',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
         ),
       )

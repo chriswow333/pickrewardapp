@@ -81,8 +81,8 @@ class PayWhatever extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-          animationDuration:Duration(microseconds: 0),
+          padding:const MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+          animationDuration:const Duration(microseconds: 0),
         ),
         child:Text(PayUsageEnum.whatever.name,
           style:TextStyle(
@@ -123,8 +123,8 @@ class PayNoUse extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          padding:MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
-          animationDuration:Duration(microseconds: 0),
+          padding:const MaterialStatePropertyAll(EdgeInsets.only(left:16, right:16, top:8, bottom: 8)),
+          animationDuration:const Duration(microseconds: 0),
         ),
         child:Text(PayUsageEnum.no.name,
           style:TextStyle(

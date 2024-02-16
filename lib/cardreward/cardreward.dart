@@ -33,7 +33,7 @@ class CardContentScreen extends StatelessWidget {
               double screenWidth = MediaQuery.of(context).size.width;
               double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
               if (screenWidth > tabletWidthThreshold) {
-                return Container(
+                return SizedBox(
                   width: tabletWidthThreshold,
                   child: CardContentPage(cardHeaderItemModel:cardHeaderItemModel),
                 );
@@ -66,7 +66,7 @@ class CardContentPage extends StatelessWidget {
           child:Container(
             child:Column(
               children:[
-                CardHeader(),
+                const CardHeader(),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -76,7 +76,7 @@ class CardContentPage extends StatelessWidget {
                   ),
                 ),
                 CardContent(cardHeaderItemModel: cardHeaderItemModel,),
-                Expanded(
+                const Expanded(
                   child:CardRewardComponent(),
                 ),
               ]
@@ -96,13 +96,13 @@ class CardContent extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.only(top:40),
+      padding: const EdgeInsets.only(top:40),
       child:Column(
         children:[
           CardImage(image: cardHeaderItemModel.image,),
           CardName(name:cardHeaderItemModel.name),
           CardRewardDetailBtn(url: cardHeaderItemModel.linkUrl,),
-          SizedBox(height:40),
+          const SizedBox(height:40),
           CardRewardTab(cardHeaderItemModel: cardHeaderItemModel,),
         ]
       )
@@ -118,9 +118,9 @@ class CardName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top:20,),
-      child:Text('$name',
-        style: TextStyle(
+      padding: const EdgeInsets.only(top:20,),
+      child:Text(name,
+        style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.bold,
         ),
@@ -136,7 +136,7 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: 180,
       ),
       child:Image.memory(
@@ -173,7 +173,7 @@ class CardRewardDetailBtn extends StatelessWidget {
                 color: Palette.kToBlack[500]
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_rounded,
               size:16,
             )
@@ -197,7 +197,7 @@ class CardRewardTab extends StatelessWidget {
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
     bool activityEmpty = cardRewardViewModel.activityCardRewardModels.isEmpty;
     return Container(
-      padding: EdgeInsets.only(left:20, right:20),
+      padding: const EdgeInsets.only(left:20, right:20),
       child:Row(
         children:[
           Expanded(
@@ -207,12 +207,6 @@ class CardRewardTab extends StatelessWidget {
                   onPressed: (){
                     cardRewardTabViewModel.showAll = true;
                   },
-                  child:Text('主要回饋',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color:Palette.kToBlack[400],
-                    ),
-                  ),
                   style:ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
                     shape:MaterialStatePropertyAll(
@@ -225,6 +219,12 @@ class CardRewardTab extends StatelessWidget {
                       ),
                     ),
                   ),
+                  child:Text('主要回饋',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color:Palette.kToBlack[400],
+                    ),
+                  ),
                 ),
                 const SizedBox(width:10),
                 if(!activityEmpty)
@@ -232,12 +232,6 @@ class CardRewardTab extends StatelessWidget {
                     onPressed: (){
                       cardRewardTabViewModel.showAll = false;
                     },
-                    child:Text('其他優惠',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color:Palette.kToBlack[400],
-                      ),
-                    ),
                     style:ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
                       shape:MaterialStatePropertyAll(
@@ -248,6 +242,12 @@ class CardRewardTab extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
+                      ),
+                    ),
+                    child:Text('其他優惠',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color:Palette.kToBlack[400],
                       ),
                     ),
                   ),
@@ -273,7 +273,7 @@ class CardUpdateDate extends StatelessWidget {
 
     final updateDate = formatter.format(updateDateTime);
     
-    return Text('更新日期 : ${updateDate}',
+    return Text('更新日期 : $updateDate',
       style: TextStyle(
         fontSize: 12,
         color: Palette.kToBlack[400],
@@ -288,7 +288,7 @@ class CardRewardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: CardRewardItems(),
     );
   }

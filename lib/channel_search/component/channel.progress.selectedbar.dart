@@ -1,7 +1,6 @@
 
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/model/channel.dart';
 
@@ -60,15 +59,15 @@ class CriteriaPageBar extends StatelessWidget {
                 onTap: () {  
                   criteriaViewModel.resetCriteriaPage();
                 },
-                child:Icon(
+                child:const Icon(
                   Icons.cancel_outlined,
                 ),
               ),
-              SizedBox(width:5),
-              Text('清除已選條件')
+              const SizedBox(width:5),
+              const Text('清除已選條件')
             ]
           ),
-          SizedBox(width:10),
+          const SizedBox(width:10),
 
           GestureDetector(
             onTap:(){
@@ -78,7 +77,7 @@ class CriteriaPageBar extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(
                   ChannelProgressPage.result, 
-                  duration: Duration(milliseconds: 150), 
+                  duration: const Duration(milliseconds: 150), 
                   curve: Curves.linear
                 );
               }
@@ -87,7 +86,7 @@ class CriteriaPageBar extends StatelessWidget {
             child:Container(
               decoration: BoxDecoration(
                 color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
-                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+                borderRadius:const BorderRadius.all(Radius.circular(12.0)),
               ),
               padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Text('下一步',
@@ -147,9 +146,9 @@ class ChannelPageBar extends StatelessWidget {
                         Icons.cancel_outlined,
                       ),
                     ),
-                    SizedBox(width:5),
+                    const SizedBox(width:5),
                     Text('已選${channelIDLength + labelLength}個通路。'),
-                    SizedBox(width:5),
+                    const SizedBox(width:5),
                     GestureDetector(
                       onTap:(){
                         showModalBottomSheet(
@@ -187,7 +186,7 @@ class ChannelPageBar extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 controller.animateToPage(
                   ChannelProgressPage.criteria, 
-                  duration: Duration(milliseconds: 150), 
+                  duration: const Duration(milliseconds: 150), 
                   curve: Curves.linear
                 );
               }
@@ -195,7 +194,7 @@ class ChannelPageBar extends StatelessWidget {
             child:Container(
               decoration: BoxDecoration(
                 color: channelSelected?Palette.kToBlack[600]:Palette.kToBlack[50],
-                borderRadius:BorderRadius.all(Radius.circular(12.0)),
+                borderRadius:const BorderRadius.all(Radius.circular(12.0)),
               ),
               padding: const EdgeInsets.only(left:24, right:24, top:8, bottom: 8),
               child:Text('下一步',
@@ -262,11 +261,11 @@ class _SelectedChannelContentState extends State<SelectedChannelContent> {
     total = total - tryDeleteChannelLabel.length - tryDeleteChannel.length;
 
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child:Column(
         children:[
           SelectedChannelHeader(total:total, tryDeleteChannel: tryDeleteChannel, tryDeleteChannelLabel: tryDeleteChannelLabel,),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Expanded(
             child:SelectedChannelItems(
               criteriaViewModel: widget.criteriaViewModel,
@@ -303,7 +302,7 @@ class SelectedChannelBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top:30, left:20, right:20),
+      padding: const EdgeInsets.only(top:30, left:20, right:20),
       
       child:GestureDetector(
         onTap: (){
@@ -313,7 +312,7 @@ class SelectedChannelBtn extends StatelessWidget {
         },
         child:Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color:Palette.kToYellow[500],
             borderRadius: BorderRadius.circular(15),
@@ -378,9 +377,9 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child:Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Palette.kToBlack[0]
@@ -388,7 +387,7 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
         child:Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children:[
-            Text('${widget.channelItemModel.name}',
+            Text(widget.channelItemModel.name,
               style: TextStyle(
                 fontSize: 14,
                 color: Palette.kToBlack[600]                
@@ -402,7 +401,7 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
               },
 
               child:selected ? Container(
-                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                padding: const EdgeInsets.only(top:5,bottom:5, left:10, right:10),
                 decoration: BoxDecoration(
                   color: Palette.kToYellow[500],
                   borderRadius:BorderRadius.circular(20),
@@ -414,7 +413,7 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
                       color:Palette.kToBlack[0],
                       size: 15,
                     ),
-                    SizedBox(width: 2,),
+                    const SizedBox(width: 2,),
                     Text('已選取',
                       style: TextStyle(
                         color:Palette.kToBlack[0],
@@ -424,7 +423,7 @@ class _SelectedChannelItemState extends State<SelectedChannelItem> {
                 ),
               ):
               Container(
-                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                padding: const EdgeInsets.only(top:5,bottom:5, left:10, right:10),
                 width: 80,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -463,9 +462,9 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child:Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Palette.kToBlack[0]
@@ -473,7 +472,7 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
         child:Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children:[
-            Text('${widget.channelLabelModel.name}',
+            Text(widget.channelLabelModel.name,
               style: TextStyle(
                 fontSize: 14,
                 color: Palette.kToBlack[600]                
@@ -487,7 +486,7 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
               },
 
               child:selected ? Container(
-                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                padding: const EdgeInsets.only(top:5,bottom:5, left:10, right:10),
                 decoration: BoxDecoration(
                   color: Palette.kToYellow[500],
                   borderRadius:BorderRadius.circular(20),
@@ -499,7 +498,7 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
                       color:Palette.kToBlack[0],
                       size: 15,
                     ),
-                    SizedBox(width: 2,),
+                    const SizedBox(width: 2,),
                     Text('已選取',
                       style: TextStyle(
                         color:Palette.kToBlack[0],
@@ -509,7 +508,7 @@ class _SelectedChannelLabelItemState extends State<SelectedChannelLabelItem> {
                 ),
               ):
               Container(
-                padding: EdgeInsets.only(top:5,bottom:5, left:10, right:10),
+                padding: const EdgeInsets.only(top:5,bottom:5, left:10, right:10),
                 width: 80,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -543,11 +542,11 @@ class SelectedChannelHeader extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:[
-          Text('已選 ${total} 個通路',
+          Text('已選 $total 個通路',
             style:TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

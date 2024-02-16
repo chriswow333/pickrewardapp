@@ -50,15 +50,15 @@ class PickRewardApp extends StatelessWidget {
         // ),
         primarySwatch:Palette.kToBlack,
       ),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('zh')
       ],
-      home:HomeScreen(),
+      home:const HomeScreen(),
     );
   }
 }
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const Widget channelSearchPage = ChannelSearchPage();
   static const Widget cardSearchPage = CardSearchPage();
 
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     channelSearchPage,
     cardSearchPage,
   ];
@@ -102,18 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
               double screenWidth = MediaQuery.of(context).size.width;
               double tabletWidthThreshold = GlobalSize.MAX_WIDTH;
               if (screenWidth > tabletWidthThreshold) {
-                return Container(
+                return SizedBox(
                   width: tabletWidthThreshold,
                   child: IndexedStack(
-                    children: _widgetOptions,
                     index: _selectedIndex,
+                    children: _widgetOptions,
                   ),
                 );
               } else {
                 // 屏幕较小，不限制应用宽度
                 return IndexedStack(
-                  children: _widgetOptions,
                   index: _selectedIndex,
+                  children: _widgetOptions,
                 );
               }
             }),

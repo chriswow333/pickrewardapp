@@ -23,7 +23,7 @@ class CardSearchPage extends StatelessWidget {
         ChangeNotifierProvider<SearchCardViewModel>(create:(_)=>SearchCardViewModel()),
         
       ],
-      child:CardComponent(),
+      child:const CardComponent(),
     );
   }
 }

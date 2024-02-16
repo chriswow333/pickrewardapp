@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class SearchChannelBar extends StatefulWidget {
 
-  const SearchChannelBar({ Key? key, }) : super(key: key);
+  const SearchChannelBar({ super.key, });
 
   @override
   _SearchChannelBarState createState() => _SearchChannelBarState();
@@ -23,7 +23,7 @@ class _SearchChannelBarState extends State<SearchChannelBar> {
     
     bool searchedFlag = searchChannelViewModel.searchChannelFlag;
 
-    return Container(
+    return SizedBox(
       height:40,
       child:Row(
         children:[

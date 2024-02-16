@@ -26,15 +26,15 @@ class CardHeader extends StatelessWidget {
         children:[
           Row(
             children:[
-              Text('${cardHeaderItemModel.bankName}',
-                style: TextStyle(
+              Text(cardHeaderItemModel.bankName,
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(' | '),
-              Text('${cardHeaderItemModel.name}',
-                style: TextStyle(
+              const Text(' | '),
+              Text(cardHeaderItemModel.name,
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,7 +45,7 @@ class CardHeader extends StatelessWidget {
             onTap:(){
               Navigator.pop(context);
             },
-            child:Icon(Icons.cancel_outlined)
+            child:const Icon(Icons.cancel_outlined)
           ),
         ]
       ),

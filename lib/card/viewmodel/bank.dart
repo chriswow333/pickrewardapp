@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/card/model/bank.dart';
-import 'package:logger/logger.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
 
