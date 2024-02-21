@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,13 +14,11 @@ import 'package:pickrewardapp/accounting/screen/record.edit.dart';
 import 'package:pickrewardapp/card/card.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
-import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:pickrewardapp/shared/config/palette.dart'; 
 import 'package:pickrewardapp/user/model/user_card.dart';
 
 
 void main() async {
-
-
 
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -45,7 +42,7 @@ void main() async {
 
 
   await initialHive();
-  runApp(MyApp());
+  runApp(const MyApp());
 
 
   FlutterNativeSplash.remove();
@@ -70,6 +67,8 @@ initialHive() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,15 +92,16 @@ class MyApp extends StatelessWidget {
         switch (settings.name) {
           case '/':
             return MaterialWithModalsPageRoute(
-                builder: (_) =>  MyHomePage2(),
+                builder: (_) =>  const MyHomePage2(),
                 settings: settings);
           case '/record/edit':
             return MaterialWithModalsPageRoute(
-                builder: (_) =>  RecordEditScreen(),
+                builder: (_) =>  const RecordEditScreen(),
                 settings: settings);
           
           
         }
+        return null;
       },
       debugShowCheckedModeBanner: false,
     );
@@ -176,7 +176,7 @@ class Home2 extends StatelessWidget {
     return Material(
       child:Scaffold(
         body: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
+          navigationBar: const CupertinoNavigationBar(
             // transitionBetweenRoutes: false,
             // middle: Text('iOS13 Modal Presentation'),
             // trailing: GestureDetector(
@@ -225,7 +225,7 @@ class Home2 extends StatelessWidget {
                           //   },
                           // );
                         },
-                        child:Text('   hello')
+                        child:const Text('   hello')
                       );
                     }
                   )
@@ -272,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+        navigationBar: const CupertinoNavigationBar(
           border:null,
             // middle: Text('iOS13 Modal Presentation'),
             // trailing: GestureDetector(
@@ -340,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, }) : super(key: key);
+  const MyHomePage({super.key, });
 
 
   @override
@@ -355,9 +355,9 @@ class _MyHomePageState extends State<MyHomePage> {
         body: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
             transitionBetweenRoutes: false,
-            middle: Text('iOS13 Modal Presentation'),
+            middle: const Text('iOS13 Modal Presentation'),
             trailing: GestureDetector(
-              child: Icon(Icons.arrow_forward),
+              child: const Icon(Icons.arrow_forward),
               onTap: () => Navigator.of(context).pushNamed('ss'),
             ),
           ),
@@ -371,13 +371,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                        title: Text('Cupertino Photo Share Example'),
+                        title: const Text('Cupertino Photo Share Example'),
                         onTap: () => Navigator.of(context).push(
                             MaterialWithModalsPageRoute(
                                 builder: (context) => Container()))),
                     section('STYLES'),
                     ListTile(
-                      title: Text('Material fit'),
+                      title: const Text('Material fit'),
                       onTap: () => showMaterialModalBottomSheet(
                         expand: false,
                         context: context,
@@ -386,7 +386,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Bar Modal'),
+                      title: const Text('Bar Modal'),
                       onTap: () => showBarModalBottomSheet(
                         expand: true,
                         context: context,
@@ -411,7 +411,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     //   ),
                     // ),
                     ListTile(
-                      title: Text('Cupertino Modal fit'),
+                      title: const Text('Cupertino Modal fit'),
                       onTap: () => showCupertinoModalBottomSheet(
                         expand: false,
                         context: context,
@@ -421,7 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     section('COMPLEX CASES'),
                     ListTile(
-                        title: Text('Cupertino Small Modal forced to expand'),
+                        title: const Text('Cupertino Small Modal forced to expand'),
                         onTap: () => showCupertinoModalBottomSheet(
                               expand: true,
                               context: context,
@@ -429,7 +429,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) => Container(),
                             )),
                     ListTile(
-                      title: Text('Reverse list'),
+                      title: const Text('Reverse list'),
                       onTap: () => showBarModalBottomSheet(
                         expand: true,
                         context: context,
@@ -438,7 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Cupertino Modal inside modal'),
+                      title: const Text('Cupertino Modal inside modal'),
                       onTap: () => showCupertinoModalBottomSheet(
                         expand: true,
                         context: context,
@@ -447,7 +447,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                        title: Text('Cupertino Modal with inside navigation'),
+                        title: const Text('Cupertino Modal with inside navigation'),
                         onTap: () => showCupertinoModalBottomSheet(
                               expand: true,
                               context: context,
@@ -456,7 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             )),
                     ListTile(
                       title:
-                          Text('Cupertino Navigator + Scroll + WillPopScope'),
+                          const Text('Cupertino Navigator + Scroll + WillPopScope'),
                       onTap: () => showCupertinoModalBottomSheet(
                         expand: true,
                         context: context,
@@ -465,7 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Modal with WillPopScope'),
+                      title: const Text('Modal with WillPopScope'),
                       onTap: () => showCupertinoModalBottomSheet(
                         expand: true,
                         context: context,
@@ -474,7 +474,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Modal with Nested Scroll'),
+                      title: const Text('Modal with Nested Scroll'),
                       onTap: () => showCupertinoModalBottomSheet(
                         expand: true,
                         context: context,
@@ -482,14 +482,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     ListTile(
-                      title: Text('Modal with PageView'),
+                      title: const Text('Modal with PageView'),
                       onTap: () => showBarModalBottomSheet(
                         expand: true,
                         context: context,
                         builder: (context) => Container(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 60,
                     )
                   ],
@@ -504,7 +504,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget section(String title) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
       child: Text(
         title,
         style: Theme.of(context).textTheme.bodySmall,

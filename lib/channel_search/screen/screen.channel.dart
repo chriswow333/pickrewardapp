@@ -30,8 +30,8 @@ class ChannelSearchScreen extends StatelessWidget {
       navigationBar: CupertinoNavigationBar(
         border:null,
         transitionBetweenRoutes: false,
-        leading:(channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarLeading():OthersNavBarLeading(controller: _controller),
-        middle: (channelProgressSelectedPage.page == 0) ? ChannelSearchNavBarMiddle():OthersNavBarMiddle(),
+        leading:(channelProgressSelectedPage.page == 0) ? const ChannelSearchNavBarLeading():OthersNavBarLeading(controller: _controller),
+        middle: (channelProgressSelectedPage.page == 0) ? const ChannelSearchNavBarMiddle():const OthersNavBarMiddle(),
       ),
       child: SizedBox.expand(
         child:SafeArea(
@@ -121,7 +121,7 @@ class ChannelSearchNavBarMiddle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SearchChannelBar();
+    return const SearchChannelBar();
   }
 }
 
@@ -138,7 +138,7 @@ class OthersNavBarLeading extends StatelessWidget {
           curve: Curves.linear
         );
       },
-      child:Icon(
+      child:const Icon(
         Icons.arrow_back_ios_new
       ),
     );

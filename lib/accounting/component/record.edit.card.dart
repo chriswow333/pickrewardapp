@@ -3,7 +3,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/accounting/viewmodel/record.dart';
 import 'package:pickrewardapp/accounting/viewmodel/user.card.dart';
@@ -15,7 +14,7 @@ import 'package:provider/provider.dart';
 class RecordEditCard extends StatelessWidget {
   const RecordEditCard({super.key});
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -25,12 +24,11 @@ class RecordEditCard extends StatelessWidget {
       child:Container(
         padding: const EdgeInsets.all(10),
         child:Column(
-          children:[
+          children:[ 
             RecordEditCardTitle(),
-             SizedBox(
-              height:20, 
-            ), 
-              CardItems(),
+            RecordCardReward(),
+             SizedBox(height:20), 
+            CardItems(),
           ]
         ) 
       )
@@ -38,7 +36,51 @@ class RecordEditCard extends StatelessWidget {
   }
 }
 
+ 
+class RecordCardReward extends StatelessWidget {
+  const RecordCardReward({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+
+    RecordViewModel recordViewModel = Provider.of<RecordViewModel>(context);
+
+    return Column(
+      children:[
+        Container(
+          height:40,
+          alignment: Alignment.center,
+          child:TextField(
+            // controller:_searchController,
+            textAlign: TextAlign.start,
+            // textAlignVertical:TextAlignVertical.center,
+            keyboardType:TextInputType.number,
+            onChanged: (String value){
+              recordViewModel.getReturn = double.parse(value);
+            },
+            onEditingComplete: (){
+            },
+            onTap:(){
+              // searchCardViewModel.onFocusSearch();
+            },
+            decoration: const InputDecoration.collapsed(
+              hintText: '信用卡回饋金額',
+              // prefixIcon:const Icon(Icons.search),
+              // border:OutlineInputBorder(
+                // borderRadius: BorderRadius.circular(20.0),
+              // )
+            ),
+            style:const TextStyle(
+              fontSize:14,
+            ),
+          )
+        ),
+        Divider(),
+      ]
+    )
+    ;
+  }
+}
 
 
 class RecordEditCardTitle extends StatelessWidget {
@@ -46,6 +88,7 @@ class RecordEditCardTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       
       child:Row(
@@ -74,10 +117,10 @@ class RecordEditCardTitle extends StatelessWidget {
 }
 
 
+
 class CardItems extends StatelessWidget {
   const CardItems({super.key,});
 
-  
   @override
   Widget build(BuildContext context) {
 

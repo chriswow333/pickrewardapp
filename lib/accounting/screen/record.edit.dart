@@ -2,7 +2,6 @@
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/accounting/component/record.edit.card.dart';
 import 'package:pickrewardapp/accounting/component/record.edit.cashmemo.dart';
@@ -68,7 +67,6 @@ class RecordEditComponent extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<RecordViewModel>(create:(_)=>RecordViewModel()),
         ChangeNotifierProvider<UserCardViewModel>(create:(_)=>UserCardViewModel()),
-        
       ],
       child:Container(
         padding: const EdgeInsets.all(10),
@@ -118,7 +116,6 @@ class RecordEditDoneBtn extends StatelessWidget {
   Widget build(BuildContext context) {
 
     RecordViewModel userRecordViewModel = Provider.of<RecordViewModel>(context);
-
 
     return GestureDetector(
       onTap:(){

@@ -19,7 +19,7 @@ class AccountingPage extends StatelessWidget {
         ChangeNotifierProvider<RecordViewModel>(create:(_)=>RecordViewModel()),
         ChangeNotifierProvider<UserRecordSummaryViewModel>(create:(_)=>UserRecordSummaryViewModel()),
       ],
-      child: AccountingScreen()
+      child: const AccountingScreen()
     );
   }
 }

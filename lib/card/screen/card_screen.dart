@@ -1,7 +1,5 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' hide Banner;
-import 'package:pickrewardapp/card/component/card.search.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 
 import 'package:pickrewardapp/card/component/card.dart';
@@ -35,11 +33,11 @@ class CardScreen extends StatelessWidget {
                   if (screenWidth > tabletWidthThreshold) {
                     return SizedBox(
                       width: tabletWidthThreshold,
-                      child: CardComponent(),
+                      child: const CardComponent(),
                     );
                   } else {
                     // 屏幕较小，不限制应用宽度
-                    return  CardComponent();
+                    return  const CardComponent();
                   }
                 }),
               ),

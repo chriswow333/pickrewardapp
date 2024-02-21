@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/channel_search/component/selectedbar.dart';
-import 'package:pickrewardapp/channel_search/model/channel_progress.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/criteria.selected.dart';
 import 'package:pickrewardapp/channel_search/component/progress.criteria.date.dart';
 import 'package:pickrewardapp/channel_search/component/progress.criteria.pay.dart';

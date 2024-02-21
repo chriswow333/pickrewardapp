@@ -1,7 +1,6 @@
 
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +37,6 @@ class RecordEditDateChannel extends StatelessWidget {
   }
 }
 
-
 class ChannelField extends StatelessWidget {
   const ChannelField({super.key});
 
@@ -46,47 +44,54 @@ class ChannelField extends StatelessWidget {
   Widget build(BuildContext context) {
     
     RecordViewModel userRecordViewModel = Provider.of<RecordViewModel>(context);
+    bool selected  = userRecordViewModel.channelName != "";
 
     return SizedBox(
       height:40,
-      child:GestureDetector(
-        onTap: (){
-          showCupertinoModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return RecordChannelScreen(userRecordViewModel: userRecordViewModel,);
+      child:Row(
+        children:[
+          Text("消費通路",
+            style:TextStyle(
+              fontSize: 14,
+              color:Palette.kToBlack[300],
+            )
+          ),
+          Expanded(
+            child:Container(
+              decoration: const BoxDecoration(),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              showCupertinoModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return RecordChannelScreen(userRecordViewModel: userRecordViewModel,);
+                },
+              );
             },
-          );
-        },
-        child:Container(
-          child:Row(
-            children:[
-              Text("消費通路",
-                style:TextStyle(
-                  fontSize: 14,
-                  color:Palette.kToBlack[300],
+            child:Container(
+              child:selected ? 
+                Text(userRecordViewModel.channelName,
+                  style:TextStyle( 
+                    fontSize: 14,
+                    color:Palette.kToBlack[600],
+                  ),
                 )
-              ),
-              Expanded(
-                child:Container(
-                  decoration: const BoxDecoration(),
-                ),
-              ),
-              Text(userRecordViewModel.channelName,
-                style:TextStyle( 
-                  fontSize: 14,
-                  color:Palette.kToBlack[600],
-                ),
-              ),
-            ]
+              :Text('選擇',
+                style:TextStyle(
+                  color: Palette.kToYellow[400],
+                )
+              )
+            ),
           )
-        ),
+        ]
       )
     );
   }
 }
 
-
+ 
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 class DateField extends StatefulWidget {
   const DateField({super.key});

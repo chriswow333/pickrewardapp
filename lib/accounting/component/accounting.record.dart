@@ -145,15 +145,10 @@ class AccountingRecordDetailTitle extends StatelessWidget {
             onTap:(){
               Navigator.pushNamed(context, '/record/edit');
             },
-            child:Text('+',
-              style: TextStyle(
-                color: Palette.kToYellow[300],
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child:const Icon(
+              Icons.add_circle_outline_rounded,
+            )
           ),
-          
         ]
       )
     );

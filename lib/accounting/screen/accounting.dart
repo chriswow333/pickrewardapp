@@ -31,15 +31,13 @@ class AccountingScreen extends StatelessWidget {
         ),
         trailing: GestureDetector(
           onTap:(){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const UserInfoPage())
-          );
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const UserInfoPage()));
           },
           child:Icon(Icons.person_rounded,
             size:40,
             color: Palette.kToBlack[900],
           ),
         ),
-        // middle: SearchCardBar(),
       ),
       child:SizedBox.expand(
         child:SafeArea(
@@ -51,11 +49,11 @@ class AccountingScreen extends StatelessWidget {
                 if (screenWidth > tabletWidthThreshold) {
                   return SizedBox(
                     width: tabletWidthThreshold,
-                    child: AccountingComponent(),
+                    child: const AccountingComponent(),
                   );
                 } else {
                   // 屏幕较小，不限制应用宽度
-                  return  AccountingComponent();
+                  return  const AccountingComponent();
                 }
               }),
             ),

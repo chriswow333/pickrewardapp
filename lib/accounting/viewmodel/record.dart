@@ -5,22 +5,35 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pickrewardapp/accounting/model/user_record.dart';
+import 'package:pickrewardapp/shared/config/pickreward_hivebox.dart';
 
 class RecordViewModel with ChangeNotifier {
 
-  final String hiveKey = "pickrewardapp";
-  final String userRecordsKey = "userRecords";
+
+  RecordViewModel.forChannel(RecordViewModel recordViewModel){
+    this.channelID =  recordViewModel.channelID;
+    this.channelName = recordViewModel.channelName;
+  }
+
+  RecordViewModel(){}
 
   String channelName = "";
   String channelID = "";
   DateTime recordTime = DateTime.now();
   int cost = 0;
+
+  toggleChannel(String id, String name) {
+    channelID = id;
+    channelName = name;
+    notifyListeners();
+  }
   
   String _cardName = "";
   set cardName (String cardName){
     _cardName = cardName;
     notifyListeners();
   }
+
   String get cardName => _cardName;
   
   String _cardID = "";
@@ -37,18 +50,15 @@ class RecordViewModel with ChangeNotifier {
   double getReturn = 0;
   String memo = "";
 
-  
-  
 
   Map<DateTime, List<UserRecord>> getUserRecords() {
 
-    var box = Hive.box(hiveKey);
+    var box = Hive.box(PickRewardHiveBox.hiveKey);
     
     try {
 
         Map<DateTime, List<UserRecord>> userRecordMapper = {};
-        final userRecords = box.get(userRecordsKey);
-        print(userRecords);
+        final userRecords = box.get(PickRewardHiveBox.userRecordKey);
         if (userRecords == null) {
           return {};
         }
@@ -75,7 +85,6 @@ class RecordViewModel with ChangeNotifier {
 
 
   void setUserRecord() {
-    
 
     UserRecord userRecord = UserRecord();
     userRecord.channelID = channelID;
@@ -90,14 +99,13 @@ class RecordViewModel with ChangeNotifier {
     userRecord.getReturn = getReturn;
     userRecord.memo = memo;
 
-    var box = Hive.box(hiveKey);
-    
+    var box = Hive.box(PickRewardHiveBox.hiveKey);
+     
     try {
-      List<UserRecord>? userRecords = box.get(userRecordsKey);
+      List<dynamic>? userRecords = (box.get(PickRewardHiveBox.userRecordKey)) as List;
       print(userRecords);
-      userRecords ??= [];
       userRecords.add(userRecord);
-      box.put(userRecordsKey, userRecords);
+      box.put(PickRewardHiveBox.userRecordKey, userRecords);
     }catch(e) {
       print(e);
     }finally {
@@ -118,7 +126,5 @@ class RecordViewModel with ChangeNotifier {
     getReturn = 0;
     memo = "";
   }
-
-
 
 }

@@ -1,14 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Banner;
-import 'package:pickrewardapp/card/component/card.search.dart';
 import 'package:pickrewardapp/card/screen/card_screen.dart';
 import 'package:pickrewardapp/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/channel_search/viewmodel/eventresult.dart';
-import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pickrewardapp/card/component/card.dart';
 import 'package:pickrewardapp/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/card/viewmodel/card.item.dart';
 
@@ -27,7 +24,7 @@ class CardSearchPage extends StatelessWidget {
         ChangeNotifierProvider<SearchCardViewModel>(create:(_)=>SearchCardViewModel()),
         
       ],
-      child: CardScreen(),
+      child: const CardScreen(),
     );
   }
 }
