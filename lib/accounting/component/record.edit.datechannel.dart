@@ -44,7 +44,7 @@ class ChannelField extends StatelessWidget {
   Widget build(BuildContext context) {
     
     RecordViewModel userRecordViewModel = Provider.of<RecordViewModel>(context);
-    bool selected  = userRecordViewModel.channelName != "";
+    bool selected = (userRecordViewModel.record.channelName ?? "") != "";
 
     return SizedBox(
       height:40,
@@ -72,7 +72,7 @@ class ChannelField extends StatelessWidget {
             },
             child:Container(
               child:selected ? 
-                Text(userRecordViewModel.channelName,
+                Text(userRecordViewModel.record.channelName ?? "",
                   style:TextStyle( 
                     fontSize: 14,
                     color:Palette.kToBlack[600],
@@ -142,17 +142,18 @@ class _DateFieldState extends State<DateField> {
               );
             }
           );
+
           future.then((data){
-            userRecordViewModel.recordTime = data as DateTime;
+            final record = userRecordViewModel.record;
+            record.recordTime = data!.millisecondsSinceEpoch;
             setState(() {
               dateTime = data;
             });
           });
+
         },
         child:Container(
-          // alignment: Alignment.centerRight,
           child:Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
               Text("消費日期",
                 style:TextStyle(

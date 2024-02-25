@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pickrewardapp/accounting/accounting.dart';
@@ -13,6 +12,7 @@ import 'package:pickrewardapp/accounting/screen/record.edit.dart';
 
 import 'package:pickrewardapp/card/card.dart';
 import 'package:pickrewardapp/channel_search/channel_search.dart';
+import 'package:pickrewardapp/accounting/database/record.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart'; 
 import 'package:pickrewardapp/user/model/user_card.dart';
@@ -41,30 +41,33 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
 
-  await initialHive();
+  // await initialHive();
+
+
   runApp(const MyApp());
 
 
   FlutterNativeSplash.remove();
 }
 
-initialHive() async {
 
+
+// initialHive() async {
  
-  // hive initialization
-  final document = await getApplicationDocumentsDirectory();
-  await Hive.initFlutter(document.path);
-  Hive.registerAdapter(UserRecordAdapter());
-  Hive.registerAdapter(UserCardModelAdapter());
-  await Hive.openBox('pickrewardapp');
+//   // hive initialization
+//   final document = await getApplicationDocumentsDirectory();
+//   await Hive.initFlutter(document.path);
+//   Hive.registerAdapter(UserRecordAdapter());
+//   Hive.registerAdapter(UserCardModelAdapter());
+//   await Hive.openBox('pickrewardapp');
 
 
 
-  // // Get the chosen sub-directory for Hive files 
-  // Delete the Hive directory and all its files
-  // var hiveDb = Directory(document.path);
-  // hiveDb.delete(recursive: true);
-}
+//   // // Get the chosen sub-directory for Hive files 
+//   // Delete the Hive directory and all its files
+//   // var hiveDb = Directory(document.path);
+//   // hiveDb.delete(recursive: true);
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

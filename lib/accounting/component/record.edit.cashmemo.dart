@@ -50,7 +50,7 @@ class MemoField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.center,
         // textAlignVertical:TextAlignVertical.bottom,
         onChanged: (String value){
-          recordViewModel.memo = value;
+          recordViewModel.record.memo = value;
         },
         onEditingComplete: (){
           // searchCardViewModel.searchCard();
@@ -91,7 +91,7 @@ class CashField extends StatelessWidget {
         // textAlignVertical:TextAlignVertical.center,
         keyboardType:TextInputType.number,
         onChanged: (String value){
-          recordViewModel.cost = int.parse(value);
+          recordViewModel.record.cost = int.parse(value);
         },
         onEditingComplete: (){
         },

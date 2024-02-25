@@ -1,6 +1,5 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:hive/hive.dart';
 import 'package:pickrewardapp/user/model/user_card.dart';
 
 class UserCardViewModel extends ChangeNotifier {
@@ -19,8 +18,8 @@ class UserCardViewModel extends ChangeNotifier {
 
   fetchUserCardModels() {
 
-    var box = Hive.box(hiveKey);
-    final userCards = box.get(userCardsKey);
+    // var box = Hive.box(hiveKey);
+    final userCards = null; //box.get(userCardsKey);
     if(userCards == null) {
       return;
     }

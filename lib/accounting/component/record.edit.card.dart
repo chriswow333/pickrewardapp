@@ -56,7 +56,7 @@ class RecordCardReward extends StatelessWidget {
             // textAlignVertical:TextAlignVertical.center,
             keyboardType:TextInputType.number,
             onChanged: (String value){
-              recordViewModel.getReturn = double.parse(value);
+              // recordViewModel.getReturn = double.parse(value);
             },
             onEditingComplete: (){
             },
@@ -152,7 +152,7 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
       
     RecordViewModel recordViewModel = Provider.of<RecordViewModel>(context);
-    bool chosen = recordViewModel.cardID == userCardModel.cardID;
+    // bool chosen = recordViewModel.cardID == userCardModel.cardID;
 
     if(userCardModel.cardImage == null){
       return Container();
@@ -160,8 +160,8 @@ class CardItem extends StatelessWidget {
     
     return GestureDetector(
       onTap:(){
-        recordViewModel.cardID = userCardModel.cardID ?? "";
-        recordViewModel.cardName = userCardModel.cardName ?? "";
+        // recordViewModel.cardID = userCardModel.cardID ?? "";
+        // recordViewModel.cardName = userCardModel.cardName ?? "";
       },
       child:
       Container(
@@ -169,7 +169,7 @@ class CardItem extends StatelessWidget {
         child:Container(
           padding: const EdgeInsets.only(left:5, right:5),
           decoration: BoxDecoration(
-            border: chosen ?  Border.all(
+            border: true ?  Border.all(
               color:Palette.kToYellow[400]!,
               width: 2
             ):null,

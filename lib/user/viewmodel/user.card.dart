@@ -2,7 +2,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:pickrewardapp/shared/card/model/card.dart';
 import 'package:pickrewardapp/user/model/user_card.dart';
 
@@ -20,8 +19,8 @@ class UserCardViewModel extends ChangeNotifier {
 
   fetchUserCardModels() {
 
-    var box = Hive.box(hiveKey);
-    final userCards = box.get(userCardsKey);
+    // var box = Hive.box(hiveKey);
+    final userCards = null; //;box.get(userCardsKey);
     if(userCards == null) {
       return;
     }
@@ -57,8 +56,8 @@ class UserCardViewModel extends ChangeNotifier {
 
     try {
 
-      var box = Hive.box(hiveKey);
-      box.put(userCardsKey, _userCardModels); 
+      // var box = Hive.box(hiveKey);
+      // box.put(userCardsKey, _userCardModels); 
       notifyListeners(); 
     }catch(e) {
       print(e);

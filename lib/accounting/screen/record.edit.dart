@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:pickrewardapp/accounting/component/record.edit.card.dart';
 import 'package:pickrewardapp/accounting/component/record.edit.cashmemo.dart';
 import 'package:pickrewardapp/accounting/component/record.edit.datechannel.dart';
+import 'package:pickrewardapp/accounting/database/record.dart';
 import 'package:pickrewardapp/accounting/viewmodel/record.dart';
 import 'package:pickrewardapp/accounting/viewmodel/user.card.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
@@ -18,6 +19,8 @@ class RecordEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return  Scaffold(
       body:CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -111,7 +114,6 @@ class RecordEditItem extends StatelessWidget {
 class RecordEditDoneBtn extends StatelessWidget {
   const RecordEditDoneBtn({super.key,});
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -119,8 +121,8 @@ class RecordEditDoneBtn extends StatelessWidget {
 
     return GestureDetector(
       onTap:(){
-        userRecordViewModel.setUserRecord();
-        userRecordViewModel.clearUserRecordData();
+        userRecordViewModel.saveUserRecord();
+        userRecordViewModel.resetUserRecordData();
         Navigator.pop(context);
       },
       child:Container(
@@ -154,7 +156,7 @@ class CancelIcon extends StatelessWidget {
       padding: const EdgeInsets.only(left:10,),
       child:GestureDetector(
         onTap:(){
-          userRecordViewModel.clearUserRecordData();
+          // userRecordViewModel.clearUserRecordData();
           Navigator.pop(context);
         },
         child:Icon(Icons.cancel,

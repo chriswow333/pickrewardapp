@@ -11,6 +11,7 @@ class AccountingRecordDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.only(left:10, right:10,),
       width:double.infinity,
@@ -29,8 +30,7 @@ class AccountingRecordDetail extends StatelessWidget {
   }
 }
 
-
-
+ 
 class AccountingRecords extends StatelessWidget {
   const AccountingRecords({super.key});
 
@@ -38,16 +38,34 @@ class AccountingRecords extends StatelessWidget {
   Widget build(BuildContext context) {
     
     RecordViewModel recordViewModel = Provider.of<RecordViewModel>(context);
-    Map<DateTime, List<UserRecord>> userRecordMapper = recordViewModel.getUserRecords();
+    
+    return FutureBuilder(
+      future: recordViewModel.fetchUserRecords(), // Call fetchUserRecords() here
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator(); // Show loading indicator while fetching data
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          
+          Map<DateTime, List<UserRecord>> userRecords = snapshot.data as Map<DateTime, List<UserRecord>>;
 
-    return Container(
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          for(DateTime dateTime in  userRecordMapper.keys)
-            AccountingRecordGroupByDate(dateTime: dateTime, userRecords: userRecordMapper[dateTime] ?? [],),
-        ]
-      )
+          if (userRecords.isEmpty) return Container();
+          
+          return Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (DateTime dateTime in userRecords.keys)
+                  AccountingRecordGroupByDate(
+                    dateTime: dateTime,
+                    userRecords: userRecords[dateTime] ?? [],
+                  ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }
@@ -69,7 +87,6 @@ class AccountingRecordGroupByDate extends StatelessWidget {
           Container(
             child:Text('${dateTime.month}月${dateTime.day}日')
           ),
-
           for (UserRecord userRecord in userRecords)
             AccountingEventItem(userRecord: userRecord,),
 
@@ -88,6 +105,8 @@ class AccountingEventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var date = DateTime.fromMillisecondsSinceEpoch(userRecord.recordTime!);
+
     return Container(
       padding: const EdgeInsets.only(top:5, bottom: 5),
       child:Container(
@@ -109,7 +128,7 @@ class AccountingEventItem extends StatelessWidget {
               ),
               const SizedBox(height:3,),
               Container(
-                child:Text('${userRecord.recordTime!.year}/${userRecord.recordTime!.month}/${userRecord.recordTime!.day} ${userRecord.cardName}')
+                child:Text('${date.year}/${date.month}/${date!.day} ${userRecord.cardName}')
               ),
               const SizedBox(height:3,),
               Container(

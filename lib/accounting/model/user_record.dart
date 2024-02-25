@@ -1,48 +1,44 @@
 
-
-
-import 'package:hive/hive.dart';
-
-part 'user_record.g.dart';
-
-@HiveType(typeId: 0)
-class UserRecord extends HiveObject {
+class UserRecord  {
   
-  @HiveField(0)
-  String? channelName;
-  
-  @HiveField(1)
-  String? channelID;
+  String id;
 
-  @HiveField(2)
+  int recordTime;
+  int? cost; 
+
   String? selfFillChannel;
 
-  @HiveField(3)
-  DateTime? recordTime;
+  String? channelName;
+  String? channelID; 
   
-  @HiveField(4)
-  int? cost;
-  
-  @HiveField(5)
-  String? cardName;
-  
-  @HiveField(6)
   String? cardID;
-  
-  @HiveField(7)
+  String? cardName;
   String? cardRewardID;
-  
-  @HiveField(8)
   String? cardRewardName;
-  
-  @HiveField(9) 
+
   double? getPercentage;
-  
-  @HiveField(10)
   double? getReturn;
 
-  @HiveField(11)
   String? memo;
 
+  UserRecord({required this.id, required this.recordTime});
+  
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'record_time': recordTime,
+      'cost':cost,
+      'self_fill_channel':selfFillChannel,
+      'channel_id': channelID,
+      'channel_name': channelName,
+      'card_id':cardID,
+      'card_name':cardName,
+      'card_reward_id':cardRewardID,
+      'card_reward_name':cardRewardName,
+      'get_percentage':getPercentage,
+      'get_return':getReturn,
+      'memo':memo,
+    };
+  }
 }
 

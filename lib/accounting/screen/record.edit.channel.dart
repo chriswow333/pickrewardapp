@@ -17,7 +17,6 @@ class RecordChannelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     
     return Scaffold(
       body:MultiProvider(
         providers:[
@@ -28,7 +27,6 @@ class RecordChannelScreen extends StatelessWidget {
           navigationBar: CupertinoNavigationBar(
               border:null,
               transitionBetweenRoutes: false,
-              // leading: Container(),
               middle: Container(
                 child:Text('選擇一個消費通路',
                   style: TextStyle(
@@ -153,7 +151,7 @@ class ChannelItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     RecordViewModel channelRecordViewModel = Provider.of<RecordViewModel>(context);
-    bool selected = channelRecordViewModel.channelID == channelItemModel.id;
+    bool selected = userRecordViewModel.record.channelID == channelItemModel.id;
 
     return GestureDetector(
       onTap:(){
@@ -207,8 +205,6 @@ class ChannelItem extends StatelessWidget {
 
 
 
-
-
 class SelfFillInChannel extends StatelessWidget {
   const SelfFillInChannel({super.key, required this.userRecordViewModel});
 
@@ -231,12 +227,11 @@ class SelfFillInChannel extends StatelessWidget {
         // textAlignVertical:TextAlignVertical.bottom,
         onChanged: (String value){
           // searchCardViewModel.changeKeyword(value);
-          userRecordViewModel.channelName = value;
-          userRecordViewModel.channelID = "";
+          userRecordViewModel.record.channelName = value;
+          userRecordViewModel.record.channelID = "";
 
         },
         onEditingComplete: (){
-          // searchCardViewModel.searchCard();
         },
         onTap:(){
           // searchCardViewModel.onFocusSearch();
