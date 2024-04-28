@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+
+option go_package = "pickrewardapi/internal/application/cards/proto";
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.helloworld";
+// option java_outer_classname = "HelloWorldProto";
+
+package card.reward.v1;
+
+service CardRewardV1 {
+  rpc GetCardRewardsByCardID (CardRewardIDReq) returns (CardRewardsReply) {}
+}
+
+
+message Reply {
+  int32 status = 1;
+  Error error = 2;
+}
+
+
+message Error {
+  int32 errorCode = 1;
+  string errorMessage = 2;
+}
+
+message CardRewardIDReq {
+  string id = 1;
+}
+
+
+
+message CardRewardsReply {
+
+  message Description {
+    string name = 1;
+    int32 order = 2;
+    repeated string desc = 3;
+  }
+
+  message FeedbackType {
+    string id = 1;
+    string name = 2;
+    int32 feedbackType = 3;
+    int64 createDate = 4;
+    int64 updateDate = 5;
+  }
+
+  message TaskLabel {
+    string Label = 1;
+    string name = 2; 
+    int32 show = 3;
+    int32 order = 4;
+  }
+
+  message CardReward {
+    string id = 1;
+    string cardID = 2;
+    string name = 3;
+    repeated Description descriptions = 4;
+    int64 startDate = 5;
+    int64 endDate = 6;
+    int32 cardRewardType = 7;
+    FeedbackType feedbackType = 8;
+    repeated TaskLabel taskLabels = 9;
+    int32 order = 10;
+    int32 cardRewardStatus = 11;
+    int64 createDate = 12;
+    int64 updateDate = 13;
+  }
+  
+  Reply reply = 1;
+  repeated CardReward cardRewards = 2;
+
+}
+
