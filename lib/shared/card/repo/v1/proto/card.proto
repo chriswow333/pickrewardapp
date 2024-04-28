@@ -1,24 +1,18 @@
 syntax = "proto3";
 
 
-option go_package = "pickrewardapi/api/card/proto";
+option go_package = "pickrewardapi/internal/application/card/proto";
 // option java_multiple_files = true;
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
-package card_v1;
+package card.v1;
 
-service Card {
-  rpc GetAllBanks (AllBanksReq) returns (BanksReply) {}
-  rpc GetLatestCards (EmptyReq) returns (CardsReply) {}
+service CardV1 {
   rpc GetCardsByBankID (CardsByBankIDReq) returns (CardsReply) {}
-  rpc GetCardRewardsByCardID(CardRewardsByCardIDReq) returns (CardRewardsReply){}
-
-  rpc EvaluateCards(EventReq) returns (EvaluateCardsReply){}
-
-  rpc SearchCard(SearchCardReq) returns (SearchCardReply){}
-
-  rpc GetShowTaskLabels(EmptyReq) returns (TaskLabelsReply){}
+  rpc GetLatestCards (EmptyReq) returns (CardsReply) {}
+  rpc GetCardByID (CardIDReq) returns (CardReply) {}
+  rpc SearchCard(SearchCardReq) returns (CardsReply){}
 }
 
 
@@ -33,33 +27,13 @@ message Error {
   string errorMessage = 2;
 }
 
-
-message AllBanksReq {
-  int32 limit = 1;
-  int32 offset = 2;
-}
-
-message BanksReply {
-
-  message Bank {
-    string id = 1;
-    string name = 2;
-    string image = 3;
-    int32 order = 4;
-    int32 bankStatus = 5;
-  }
-
-  Reply reply = 1;
-  repeated Bank banks = 2;
-}
-
-
 message CardsByBankIDReq{
   string id = 1;
-  int32 limit = 2;
-  int32 offset = 3;
 }
 
+message CardIDReq{
+  string id = 1;
+}
 
 
 message CardsReply{
@@ -67,160 +41,34 @@ message CardsReply{
     string id = 1;
     string name = 2;
     repeated string descriptions = 3;
-    string image = 4;
-    int64 createDate = 5;
-    int64 updateDate = 6;
-    string linkURL = 7;
-    string bankID = 8;
-    string bankName = 9;
-    int32 order = 10;
-    int32 cardStatus = 11;
+    string linkURL = 4;
+    string bankID = 5;
+    int32 order = 6;
+    int32 cardStatus = 7;
+    int64 createDate = 8;
+    int64 updateDate = 9;
   }
   
-
-
   Reply reply = 1;
   repeated Card cards = 2;
 }
 
 
-
-message CardRewardsByCardIDReq {
-  string cardID = 1;
-  int32 limit = 2; 
-  int32 offset = 3;
-}
-
-
-
-message CardRewardsReply {
-
-  message Reward {
+message CardReply{
+  message Card {
     string id = 1;
     string name = 2;
-    int32 rewardType = 3;
-    int64 createDate = 4;
-    int64 updateDate = 5;
-  }
-
-  message Description{
-    string name = 1;
-    int32 order = 2;
-    repeated string desc = 3;
+    repeated string descriptions = 3;
+    string linkURL = 4;
+    string bankID = 5;
+    int32 order = 6;
+    int32 cardStatus = 7;
+    int64 createDate = 8;
+    int64 updateDate = 9;
   }
   
-  message TaskLabel {
-    int32 label  = 1;
-    string name = 2;
-    int32 show = 3;
-  }
-
-  message Task{
-    int32 order = 1;
-    TaskLabel taskLabel = 2;
-  }
-
-  message CardReward {
-    string id = 1;
-    string cardID = 2;
-    string name = 3;
-    repeated Description descriptions = 4;
-    int64 createDate = 5;
-    int64 updateDate = 6;
-    int64 startDate = 7;
-    int64 endDate = 8;
-    int32 cardRewardType = 9;
-    Reward reward = 10;
-    int32 order = 11;
-    repeated Task tasks = 12;
-  }
-
-
   Reply reply = 1;
-  repeated CardReward cardRewards = 2;
-}
-
-
-message EventReq {
-
-  message ChannelIDEvent{
-    string channelID = 1;
-    repeated int32 channelLabels = 2;
-  }
-
-  message ChannelEvent {
-    repeated ChannelIDEvent channelIDEvent = 1;
-    repeated int32 channelLabels = 2;
-  }
-
-  message CardEvent {
-    int32 rewardType = 1;
-    repeated int32 taskLabels = 2;
-  }
-
-  message PayEvent {
-    int32 status = 1;
-    repeated string payIDs = 2;
-  }
-
-  int64 date = 1;
-  int32 cost = 2;
-  ChannelEvent channelEvent = 3;
-  PayEvent payEvent = 4;
-  CardEvent cardEvent = 5;
-
-}
-
-
-message EvaluateCardsReply {
-
-
-  message CardRewardEventResultResp {
-    string id = 1;
-    string cardRewardName = 2;
-    int64 cardRewardStartDate = 3;
-    int64 cardRewardEndDate = 4;
-    repeated string taskLabelNames = 5;
-    string rewardTypeName = 6;
-    EvaluationEventResultResp evaluationEventResultResp = 7; 
-  }
-
-  message CardEventResultResp {
-    string cardID = 1;
-    string cardName = 2;
-    string cardImage = 3;
-    repeated string cardDesc = 4;
-    int64 updateDate = 5;
-    string linkURL = 6;
-    string bankID = 7;
-    string bankName = 8;
-    repeated CardRewardEventResultResp cardRewardEventResultResps = 9;
-  } 
-
-
-  Reply reply = 1;
-  repeated CardEventResultResp cardEventResults = 2;
-}
-
-
-
-message EvaluationEventResultResp{
-
-  message FeedbackEventResultResp {
-    int32 rewardType = 1;
-    int32 calculateType = 2;
-    int32 cost = 3;
-    double getReturn = 4;
-    double getPercentage = 5;
-    int32 feedbackEventResultStatus = 6; 
-  }
-
-  string id = 1;
-  FeedbackEventResultResp feedbackEventResultResp = 2;
-  repeated string cardRewardTaskLabelMatched = 3;
-  repeated string channelMatched = 4;
-  repeated string channelLabelMatched = 5;
-  repeated string payMatched = 6;
+  Card card = 2;
 }
 
 
@@ -232,36 +80,9 @@ message SearchCardReq{
 }
 
 
-message SearchCardReply{
-  message Card {
-    string id = 1;
-    string name = 2;
-    repeated string descriptions = 3;
-    string image = 4;
-    int64 createDate = 5;
-    int64 updateDate = 6;
-    string linkURL = 7;
-    string bankID = 8;
-    string bankName = 9;
-    int32 order = 10;
-    int32 cardStatus = 11;
-  }
-  
-  Reply reply = 1;
-  repeated Card cards = 2;
-}
 
 
 
-message TaskLabelsReply {
-  message TaskLabel {
-    int32 label = 1;
-    string name = 2;
-  }
-
-  Reply reply = 1;
-  repeated TaskLabel taskLabels = 2;
-}
 
 message EmptyReq{}
 

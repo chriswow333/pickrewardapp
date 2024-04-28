@@ -16,12 +16,12 @@ class SearchCardViewModel with ChangeNotifier {
   SearchCardViewModel() {
     CardService().init();
   }
-  
+
   String _keyword = "";
   bool _searchCardFlag = false;
   final List<String> _searchKeywordHistory = [];
   List<CardItemModel> _searchItemModels = [];
-  
+
 
   List<String> get searchKeywordHistory  => _searchKeywordHistory;
 
@@ -55,8 +55,6 @@ class SearchCardViewModel with ChangeNotifier {
   }
 
 
-
-
   bool _searched = false;
   bool _loading = false;
 
@@ -83,9 +81,9 @@ class SearchCardViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  get keyword => _keyword;
-  get searchCardFlag => _searchCardFlag;
-  get searchItemModels => _searchItemModels;
+  String get keyword => _keyword;
+  bool get searchCardFlag => _searchCardFlag;
+  List<CardItemModel> get searchItemModels => _searchItemModels;
 
 
   Future<void> _fetchSearchCards() async {
@@ -93,27 +91,28 @@ class SearchCardViewModel with ChangeNotifier {
 
       SearchCardReq searchCardReq = SearchCardReq();
       searchCardReq.keyword = _keyword;
-      SearchCardReply searchCardReply = await CardService().cardClient.searchCard(searchCardReq);
+      CardsReply cardsReply = await CardService().cardClient.searchCard(searchCardReq);
       
       List<CardItemModel> cardItemModels = [];
 
-      for(SearchCardReply_Card cardReply in searchCardReply.cards){
+      for(CardsReply_Card cardReply in cardsReply.cards) {
+        
         cardItemModels.add(CardItemModel(
           id:cardReply.id,
           name:cardReply.name,
           descriptions:cardReply.descriptions,
-          image:cardReply.image,
-          createDate: cardReply.createDate.toInt(),
-          updateDate: cardReply.updateDate.toInt(),
           linkURL: cardReply.linkURL,
           bankID: cardReply.bankID,
-          bankName: cardReply.bankName,
           order: cardReply.order,
           cardStatus: cardReply.cardStatus,
+          createDate: cardReply.createDate.toInt(),
+          updateDate: cardReply.updateDate.toInt(),
         ));
-      }     
+      } 
+
       _searchItemModels = cardItemModels;
       _loading = false;
+
       notifyListeners();
     } on GrpcError catch (e) {
       logger.e(e);

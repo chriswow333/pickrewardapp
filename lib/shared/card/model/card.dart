@@ -3,26 +3,22 @@ class CardItemModel {
   final String id;
   final String name;
   final List<String> descriptions;
-  final String image;
-  int createDate;
-  int updateDate;
-  String linkURL;
-  String bankID;
-  String bankName;
-  int order;
-  int cardStatus;
+  final String linkURL;
+  final String bankID;
+  final int order;
+  final int cardStatus;
+  final int createDate;
+  final int updateDate;
 
   CardItemModel({
     required this.id,
     required this.name,
     required this.descriptions,
-    required this.image,
-    required this.createDate,
-    required this.updateDate,
     required this.linkURL,
     required this.bankID,
-    required this.bankName,
     required this.order,
     required this.cardStatus,
+    required this.createDate,
+    required this.updateDate,
   });
 }

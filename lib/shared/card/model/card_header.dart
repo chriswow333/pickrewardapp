@@ -4,7 +4,7 @@ class CardHeaderItemModel {
   final String name;
   final String bankName;
   final List<String> descriptions;
-  final String image;
+  final int createDate;
   final int updateDate;
   final String linkUrl;
  
@@ -14,7 +14,7 @@ class CardHeaderItemModel {
     required this.name,
     required this.bankName,
     required this.descriptions,
-    required this.image,
+    required this.createDate,
     required this.updateDate,
     required this.linkUrl,
   });

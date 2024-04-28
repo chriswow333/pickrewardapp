@@ -18,121 +18,101 @@ import 'channel.pb.dart' as $0;
 
 export 'channel.pb.dart';
 
-// @$pb.GrpcServiceName('channel_v1.Channel')
-class ChannelClient extends $grpc.Client {
-  static final _$getChannelCategoryTypes = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
-      '/channel_v1.Channel/GetChannelCategoryTypes',
+// @$pb.GrpcServiceName('channel.v1.ChannelV1')
+class ChannelV1Client extends $grpc.Client {
+  static final _$getShowLabels = $grpc.ClientMethod<$0.EmptyReq, $0.ShowLabelsReply>(
+      '/channel.v1.ChannelV1/GetShowLabels',
       ($0.EmptyReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.ChannelCategoryTypeReply.fromBuffer(value));
-  static final _$getChannelsByChannelCategoryType = $grpc.ClientMethod<$0.ChannelCategoryTypeReq, $0.ChannelReply>(
-      '/channel_v1.Channel/GetChannelsByChannelCategoryType',
-      ($0.ChannelCategoryTypeReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
-  static final _$searchChannel = $grpc.ClientMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
-      '/channel_v1.Channel/SearchChannel',
-      ($0.SearchChannelReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.SearchChannelReply.fromBuffer(value));
-  static final _$getShowChannelLabels = $grpc.ClientMethod<$0.EmptyReq, $0.ChannelLabelsReply>(
-      '/channel_v1.Channel/GetShowChannelLabels',
-      ($0.EmptyReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.ChannelLabelsReply.fromBuffer(value));
-  static final _$getChannels = $grpc.ClientMethod<$0.ChannelIDsReq, $0.ChannelReply>(
-      '/channel_v1.Channel/GetChannels',
+      ($core.List<$core.int> value) => $0.ShowLabelsReply.fromBuffer(value));
+  static final _$getChannelsByShowLabel = $grpc.ClientMethod<$0.ShowLabelReq, $0.ChannelsReply>(
+      '/channel.v1.ChannelV1/GetChannelsByShowLabel',
+      ($0.ShowLabelReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.ChannelsReply.fromBuffer(value));
+  static final _$getsByChannelIDs = $grpc.ClientMethod<$0.ChannelIDsReq, $0.ChannelsReply>(
+      '/channel.v1.ChannelV1/GetsByChannelIDs',
       ($0.ChannelIDsReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.ChannelReply.fromBuffer(value));
+      ($core.List<$core.int> value) => $0.ChannelsReply.fromBuffer(value));
+  static final _$searchChannel = $grpc.ClientMethod<$0.SearchChannelReq, $0.SearchChannelsReply>(
+      '/channel.v1.ChannelV1/SearchChannel',
+      ($0.SearchChannelReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.SearchChannelsReply.fromBuffer(value));
 
-  ChannelClient($grpc.ClientChannel channel,
+  ChannelV1Client($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$0.ChannelCategoryTypeReply> getChannelCategoryTypes($0.EmptyReq request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getChannelCategoryTypes, request, options: options);
+  $grpc.ResponseFuture<$0.ShowLabelsReply> getShowLabels($0.EmptyReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getShowLabels, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.ChannelReply> getChannelsByChannelCategoryType($0.ChannelCategoryTypeReq request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getChannelsByChannelCategoryType, request, options: options);
+  $grpc.ResponseFuture<$0.ChannelsReply> getChannelsByShowLabel($0.ShowLabelReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getChannelsByShowLabel, request, options: options);
   }
 
-  $grpc.ResponseFuture<$0.SearchChannelReply> searchChannel($0.SearchChannelReq request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$0.ChannelsReply> getsByChannelIDs($0.ChannelIDsReq request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getsByChannelIDs, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SearchChannelsReply> searchChannel($0.SearchChannelReq request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchChannel, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.ChannelLabelsReply> getShowChannelLabels($0.EmptyReq request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getShowChannelLabels, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.ChannelReply> getChannels($0.ChannelIDsReq request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getChannels, request, options: options);
   }
 }
 
-// @$pb.GrpcServiceName('channel_v1.Channel')
-abstract class ChannelServiceBase extends $grpc.Service {
-  $core.String get $name => 'channel_v1.Channel';
+// @$pb.GrpcServiceName('channel.v1.ChannelV1')
+abstract class ChannelV1ServiceBase extends $grpc.Service {
+  $core.String get $name => 'channel.v1.ChannelV1';
 
-  ChannelServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ChannelCategoryTypeReply>(
-        'GetChannelCategoryTypes',
-        getChannelCategoryTypes_Pre,
+  ChannelV1ServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ShowLabelsReply>(
+        'GetShowLabels',
+        getShowLabels_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.EmptyReq.fromBuffer(value),
-        ($0.ChannelCategoryTypeReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ChannelCategoryTypeReq, $0.ChannelReply>(
-        'GetChannelsByChannelCategoryType',
-        getChannelsByChannelCategoryType_Pre,
+        ($0.ShowLabelsReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ShowLabelReq, $0.ChannelsReply>(
+        'GetChannelsByShowLabel',
+        getChannelsByShowLabel_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ChannelCategoryTypeReq.fromBuffer(value),
-        ($0.ChannelReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.SearchChannelReq, $0.SearchChannelReply>(
+        ($core.List<$core.int> value) => $0.ShowLabelReq.fromBuffer(value),
+        ($0.ChannelsReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ChannelIDsReq, $0.ChannelsReply>(
+        'GetsByChannelIDs',
+        getsByChannelIDs_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ChannelIDsReq.fromBuffer(value),
+        ($0.ChannelsReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SearchChannelReq, $0.SearchChannelsReply>(
         'SearchChannel',
         searchChannel_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.SearchChannelReq.fromBuffer(value),
-        ($0.SearchChannelReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.EmptyReq, $0.ChannelLabelsReply>(
-        'GetShowChannelLabels',
-        getShowChannelLabels_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.EmptyReq.fromBuffer(value),
-        ($0.ChannelLabelsReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ChannelIDsReq, $0.ChannelReply>(
-        'GetChannels',
-        getChannels_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.ChannelIDsReq.fromBuffer(value),
-        ($0.ChannelReply value) => value.writeToBuffer()));
+        ($0.SearchChannelsReply value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
-    return getChannelCategoryTypes(call, await request);
+  $async.Future<$0.ShowLabelsReply> getShowLabels_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
+    return getShowLabels(call, await request);
   }
 
-  $async.Future<$0.ChannelReply> getChannelsByChannelCategoryType_Pre($grpc.ServiceCall call, $async.Future<$0.ChannelCategoryTypeReq> request) async {
-    return getChannelsByChannelCategoryType(call, await request);
+  $async.Future<$0.ChannelsReply> getChannelsByShowLabel_Pre($grpc.ServiceCall call, $async.Future<$0.ShowLabelReq> request) async {
+    return getChannelsByShowLabel(call, await request);
   }
 
-  $async.Future<$0.SearchChannelReply> searchChannel_Pre($grpc.ServiceCall call, $async.Future<$0.SearchChannelReq> request) async {
+  $async.Future<$0.ChannelsReply> getsByChannelIDs_Pre($grpc.ServiceCall call, $async.Future<$0.ChannelIDsReq> request) async {
+    return getsByChannelIDs(call, await request);
+  }
+
+  $async.Future<$0.SearchChannelsReply> searchChannel_Pre($grpc.ServiceCall call, $async.Future<$0.SearchChannelReq> request) async {
     return searchChannel(call, await request);
   }
 
-  $async.Future<$0.ChannelLabelsReply> getShowChannelLabels_Pre($grpc.ServiceCall call, $async.Future<$0.EmptyReq> request) async {
-    return getShowChannelLabels(call, await request);
-  }
-
-  $async.Future<$0.ChannelReply> getChannels_Pre($grpc.ServiceCall call, $async.Future<$0.ChannelIDsReq> request) async {
-    return getChannels(call, await request);
-  }
-
-  $async.Future<$0.ChannelCategoryTypeReply> getChannelCategoryTypes($grpc.ServiceCall call, $0.EmptyReq request);
-  $async.Future<$0.ChannelReply> getChannelsByChannelCategoryType($grpc.ServiceCall call, $0.ChannelCategoryTypeReq request);
-  $async.Future<$0.SearchChannelReply> searchChannel($grpc.ServiceCall call, $0.SearchChannelReq request);
-  $async.Future<$0.ChannelLabelsReply> getShowChannelLabels($grpc.ServiceCall call, $0.EmptyReq request);
-  $async.Future<$0.ChannelReply> getChannels($grpc.ServiceCall call, $0.ChannelIDsReq request);
+  $async.Future<$0.ShowLabelsReply> getShowLabels($grpc.ServiceCall call, $0.EmptyReq request);
+  $async.Future<$0.ChannelsReply> getChannelsByShowLabel($grpc.ServiceCall call, $0.ShowLabelReq request);
+  $async.Future<$0.ChannelsReply> getsByChannelIDs($grpc.ServiceCall call, $0.ChannelIDsReq request);
+  $async.Future<$0.SearchChannelsReply> searchChannel($grpc.ServiceCall call, $0.SearchChannelReq request);
 }

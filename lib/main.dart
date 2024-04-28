@@ -11,7 +11,7 @@ import 'package:pickrewardapp/accounting/screen/record.edit.dart';
 
 
 import 'package:pickrewardapp/card/card.dart';
-import 'package:pickrewardapp/channel_search/channel_search.dart';
+import 'package:pickrewardapp/channel/channel_search.dart';
 import 'package:pickrewardapp/accounting/database/record.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 import 'package:pickrewardapp/shared/config/palette.dart'; 
@@ -35,17 +35,12 @@ void main() async {
   // await dotenv.load(fileName: ".env.test");
   // await dotenv.load(fileName: ".env.prod");
 
-  
-
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-
   // await initialHive();
 
-
   runApp(const MyApp());
-
 
   FlutterNativeSplash.remove();
 }

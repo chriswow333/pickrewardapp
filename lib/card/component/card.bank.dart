@@ -44,8 +44,10 @@ class BankItem extends StatelessWidget {
 
     return TextButton(
       onPressed: (){
+
         FocusScope.of(context).unfocus();
         cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
+        
       },
       style:const ButtonStyle(
         splashFactory: NoSplash.splashFactory,
@@ -54,7 +56,7 @@ class BankItem extends StatelessWidget {
         width:70,
         child:Column(
           children:[
-            BankIcon(image:bankModel.image),
+            BankIcon(),
             BankName(id:bankModel.id,name:bankModel.name),
             const SizedBox(height: 5,),
             if (cardItemViewModel.bankID == bankModel.id)
@@ -83,21 +85,24 @@ class BottomSpot extends StatelessWidget {
 }
 
 class BankIcon extends StatelessWidget {
-  const BankIcon({super.key, required this.image});
+  const BankIcon({super.key,});
 
-  final String image;
   @override
   Widget build(BuildContext context) {
 
 
     return CircleAvatar(
       backgroundColor: Palette.kToBlack[0],
-      child:Image.memory(
-        base64Decode(image), 
-        width:30,
-        height:30,
-        gaplessPlayback:false,
-      )
+      child:Container(
+        child:Text(
+          'bank icon')
+        )
+      // Image.memory(
+      //   base64Decode(image), 
+      //   width:30,
+      //   height:30,
+      //   gaplessPlayback:false,
+      // )
     );
 
   }

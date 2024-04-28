@@ -6,17 +6,15 @@ option go_package = "pickrewardapi/api/channel/proto";
 // option java_package = "io.grpc.examples.helloworld";
 // option java_outer_classname = "HelloWorldProto";
 
-package channel_v1;
+package channel.v1;
 
 // The greeting service definition.
-service Channel {
-  rpc GetChannelCategoryTypes (EmptyReq) returns (ChannelCategoryTypeReply){}
-  rpc GetChannelsByChannelCategoryType (ChannelCategoryTypeReq) returns (ChannelReply){}
-  rpc SearchChannel(SearchChannelReq) returns (SearchChannelReply) {}
+service ChannelV1 {
 
-  rpc GetShowChannelLabels(EmptyReq) returns (ChannelLabelsReply) {}
-
-  rpc GetChannels(ChannelIDsReq) returns(ChannelReply) {}
+  rpc GetShowLabels (EmptyReq) returns (ShowLabelsReply){}
+  rpc GetChannelsByShowLabel (ShowLabelReq) returns (ChannelsReply){}
+  rpc GetsByChannelIDs(ChannelIDsReq) returns(ChannelsReply) {}
+  rpc SearchChannel(SearchChannelReq) returns (SearchChannelsReply) {}
 }
 
 message EmptyReq{}
@@ -37,46 +35,39 @@ message ChannelIDsReq{
   repeated string channelIDs = 1;
 }
 
-message ChannelCategoryTypeReq {
-  int32 categoryType = 1;
+message ShowLabelReq {
+  string label = 1;
   int32 limit = 2;
   int32 offset = 3;
 }
 
-message ChannelCategoryTypeReply{
+message ShowLabelsReply{
 
-  message ChannelCategoryType {
-    int32 categoryType = 1;
+  message ChannelLabel {
+    string label = 1;
     string name = 2;
     int32 order = 3;
   }
   
   Reply reply = 1;
-  repeated ChannelCategoryType channelCategoryTypes = 2;
+  repeated ChannelLabel channelLabels = 2;
 
 }
 
 
-message ChannelReply {
+message ChannelsReply {
 
-  message ChannelLabel {
-    int32 label = 1;
-    string name = 2;
-    int32 show = 3;
-  }
 
   message Channel{
     string id = 1;
     string name = 2;
-    string image = 3;
-    string linkURL = 4;
-    repeated string descriptions = 5;
-    int32 channelCategoryType = 6;
-    int64 createDate = 7;
-    int64 updateDate = 8;
-    repeated ChannelLabel channelLabels = 9;
-    int32 order = 10;
-    int32 channelStatus = 11;
+    int64 createDate = 3;
+    int64 updateDate = 4;
+    repeated string channelLabels = 5;
+    string showLabel = 6;
+    int32 order = 7;
+    int32 channelStatus = 8;
+    string imageName = 9;
   }
 
 
@@ -91,53 +82,23 @@ message SearchChannelReq{
   string keyword = 1;
 }
 
-message SearchChannelReply{
+message SearchChannelsReply{
 
-  message SearchChannel{
-
-    message ChannelLabel {
-      int32 label = 1;
-      string name = 2;
-      int32 show = 3;
-    }
-
-    message Channel {
-      string id = 1;
-      string name = 2;
-      string image = 3;
-      string linkURL = 4;
-      repeated string descriptions = 5;
-      int32 channelCategoryType = 6;
-      int64 createDate = 7;
-      int64 updateDate = 8;
-      repeated ChannelLabel channelLabels = 9;
-      int32 order = 10;
-      int32 channelStatus = 11;
-    }
-  
-    message ChannelCategoryType {
-      int32 categoryType = 1;
-      string name = 2;
-      int32 order = 3;
-    }
-
-    ChannelCategoryType channelCategoryType = 1;
-    repeated Channel channels = 2;
-  }
-
-  Reply reply = 1;
-  repeated SearchChannel searchChannels = 2;
-}
-
-
-
-
-message ChannelLabelsReply{
-  message ChannelLabel {
-    int32 label = 1;
+ 
+  message Channel{
+    string id = 1;
     string name = 2;
+    int64 createDate = 3;
+    int64 updateDate = 4;
+    repeated string channelLabels = 5;
+    string showLabel = 6;
+    int32 order = 7;
+    int32 channelStatus = 8;
+    string imageName = 9;
   }
 
   Reply reply = 1;
-  repeated ChannelLabel channelLabels = 2;
+  repeated Channel channels = 2;
 }
+
+

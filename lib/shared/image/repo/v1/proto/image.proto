@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+
+option go_package = "pickrewardapi/api/image/proto";
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.helloworld";
+// option java_outer_classname = "HelloWorldProto";
+
+package image.v1;
+
+// The greeting service definition.
+service ImageV1 {
+  rpc DownloadImage (ImageReq) returns (ImageReply){}
+}
+
+message ImageReq{
+  string type = 1;
+  string id = 2;
+}
+
+message Reply {
+  int32 status = 1;
+  Error error = 2;
+}
+
+message Error {
+  int32 errorCode = 1;
+  string errorMessage = 2;
+}
+
+
+message ImageReply {
+  message Image {
+    bytes data = 1;
+  }
+
+  Reply reply = 1;
+  Image image = 2;
+}

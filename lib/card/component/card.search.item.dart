@@ -220,11 +220,12 @@ class CardItem extends StatelessWidget {
             FocusScope.of(context).unfocus();
             
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
+             
               id:cardItemModel.id,
               name:cardItemModel.name,
-              bankName: cardItemModel.bankName,
+              bankName: 'bank name',
               descriptions:cardItemModel.descriptions,
-              image:cardItemModel.image,
+              createDate: cardItemModel.createDate,
               updateDate: cardItemModel.updateDate,
               linkUrl: cardItemModel.linkURL,
 
@@ -251,7 +252,7 @@ class CardItem extends StatelessWidget {
                 CardName(cardName: cardItemModel.name,),
                 Row(
                   children:[
-                    CardIcon(image:cardItemModel.image),
+                    CardIcon(image:'hello'),
                     const SizedBox(width: 10,),
                     Expanded(
                       child: CardDescs(descs:cardItemModel.descriptions),
@@ -303,7 +304,10 @@ class CardIcon extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Image.memory(
+    return Container(
+      child:Text('card icon')
+    );
+    Image.memory(
       gaplessPlayback: true,
       base64Decode(image), 
       width:90,

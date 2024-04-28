@@ -169,11 +169,13 @@ class CardItem extends StatelessWidget {
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,
-              bankName: cardItemModel.bankName,
+              bankName: 'bank name',
               descriptions:cardItemModel.descriptions,
-              image:cardItemModel.image,
+
+              createDate: cardItemModel.createDate,
               updateDate: cardItemModel.updateDate,
               linkUrl: cardItemModel.linkURL,
+
             );
 
 
@@ -198,7 +200,7 @@ class CardItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                CardIcon(image:cardItemModel.image),
+                CardIcon(image:''),
                 const SizedBox(width:24),
                 Expanded(
                   child:Column(
@@ -274,12 +276,15 @@ class CardIcon extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Image.memory(
-      gaplessPlayback: true,
-      base64Decode(image), 
-      width:80,
-      height:70,
+    return Container(
+      child:Text('card icon')
     );
+    // Image.memory(
+    //   gaplessPlayback: true,
+    //   base64Decode(image), 
+    //   width:80,
+    //   height:70,
+    // );
   }
 }
 

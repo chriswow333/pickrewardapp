@@ -44,10 +44,10 @@ class UserCardViewModel extends ChangeNotifier {
     if (idx == _userCardModels.length) {
       UserCardModel userCardModel = UserCardModel();
       userCardModel.bankID = cardItemModel.bankID;
-      userCardModel.bankName =  cardItemModel.bankName;
+      // userCardModel.bankName =  cardItemModel.bankName;
       userCardModel.cardID = cardItemModel.id;
       userCardModel.cardName = cardItemModel.name;
-      userCardModel.cardImage = cardItemModel.image;
+      // userCardModel.cardImage = cardItemModel.image;
       userCardModel.enable = true;
       _userCardModels.add(userCardModel);
     }else{

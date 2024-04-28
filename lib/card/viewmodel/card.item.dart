@@ -19,15 +19,16 @@ class CardItemViewModel with ChangeNotifier {
     return _cardItemModels[bankID] ?? [];
   }
 
-  String _bankID = "";
-  get bankID => _bankID;
+  String _selectBankID = "";
+  String get bankID => _selectBankID;
+
 
 
   List<CardItemModel> _latestItemModels = [];
-
   List<CardItemModel> getLatestCards(){
     return _latestItemModels;
   }
+
 
   Future<void> fetchLatestCards() async {
 
@@ -37,21 +38,19 @@ class CardItemViewModel with ChangeNotifier {
       
       if (cardsReply.cards.isEmpty) return;
 
-      List<CardItemModel> cardItemModels = [];
 
-      for(CardsReply_Card cardReply in cardsReply.cards){
+      List<CardItemModel> cardItemModels = [];
+      for(CardsReply_Card cardReply in cardsReply.cards) {
         cardItemModels.add(CardItemModel(
           id:cardReply.id,
           name:cardReply.name,
           descriptions:cardReply.descriptions,
-          image:cardReply.image,
-          createDate: cardReply.createDate.toInt(),
-          updateDate: cardReply.updateDate.toInt(),
           linkURL: cardReply.linkURL,
           bankID: cardReply.bankID,
-          bankName: cardReply.bankName,
           order: cardReply.order,
           cardStatus: cardReply.cardStatus,
+          createDate: cardReply.createDate.toInt(),
+          updateDate: cardReply.updateDate.toInt(),
         ));
       }     
       
@@ -69,23 +68,27 @@ class CardItemViewModel with ChangeNotifier {
 
   bool loading = false;
   Future<void> fetchCardsByBankIDOnScroll() async{ 
+
     if(loading)return;
     
-    List<CardItemModel>? cardItemModels =  _cardItemModels[_bankID]?? [];
+    List<CardItemModel>? cardItemModels =  _cardItemModels[_selectBankID]?? [];
     int offset = cardItemModels.length;
     loading = true;
-    await _fetchCardsByBankID(_bankID, offset);
+
+    await _fetchCardsByBankID(_selectBankID, offset);
     loading = false;
+
   }
 
 
-  static int initOffset = 0; 
+  static int initOffset = 0;
+
   Future<void> fetchCardsByBankIDWhenPressBank(String bankID) async{ 
     
-    if (bankID == _bankID) return;
+    if (bankID == _selectBankID) return;
 
     if(_cardItemModels.containsKey(bankID)){
-      _bankID = bankID;
+      _selectBankID = bankID;
       notifyListeners();
       return;
     }
@@ -95,36 +98,27 @@ class CardItemViewModel with ChangeNotifier {
 
   static int initLimit = 5;
   Future<void> _fetchCardsByBankID(String bankID, int offset) async{ 
+
     try {
 
       CardsByBankIDReq cardsByBankIDReq = CardsByBankIDReq();
-
-      cardsByBankIDReq.id = bankID;
-      cardsByBankIDReq.limit = initLimit;
-      if(_cardItemModels.containsKey(bankID)){
-        cardsByBankIDReq.offset = _cardItemModels[bankID]!.length;
-      }else {
-        cardsByBankIDReq.offset = offset;
-      }
       
+      cardsByBankIDReq.id = bankID;
 
       CardsReply cardsReply = await CardService().cardClient.getCardsByBankID(cardsByBankIDReq);
-      
-      List<CardItemModel> cardItemModels = [];
 
+      List<CardItemModel> cardItemModels = [];
       for(CardsReply_Card card in cardsReply.cards)  {
         cardItemModels.add(CardItemModel(
           id:card.id,
           name:card.name,
           descriptions:card.descriptions,
-          image:card.image,
-          createDate: card.createDate.toInt(),
-          updateDate:card.updateDate.toInt(),
           linkURL: card.linkURL,
           bankID: card.bankID,
-          bankName: card.bankName,
           order: card.order,
           cardStatus: card.cardStatus,
+          createDate: card.createDate.toInt(),
+          updateDate:card.updateDate.toInt(),
         ));
       }
 
@@ -134,7 +128,7 @@ class CardItemViewModel with ChangeNotifier {
         _cardItemModels[bankID] = cardItemModels;
       }
       
-      _bankID = bankID;
+      _selectBankID = bankID;
       notifyListeners();
 
     } on GrpcError catch (e) {

@@ -1,25 +1,14 @@
 syntax = "proto3";
 
 
-option go_package = "pickrewardapi/api/pay/proto";
-// option java_multiple_files = true;
-// option java_package = "io.grpc.examples.helloworld";
-// option java_outer_classname = "HelloWorldProto";
+option go_package = "pickrewardapi/internal/application/pay/proto";
 
-package pay_v1;
+package pay.v1;
 
-// The greeting service definition.
-service Pay {
-  rpc GetAllPays (AllPaysReq) returns (PaysReply){}
-  rpc GetPaysByIDs(PayIDsReq) returns (PaysReply) {}
+service PayV1 {
+  rpc GetPayByID (PayIDReq) returns (PayReply) {}
+  rpc GetAllPays(EmptyReq) returns (PaysReply){}
 }
-
-
-
-message PayIDsReq{
-  repeated string payIDs = 1;
-}
-
 
 
 message Reply {
@@ -34,32 +23,42 @@ message Error {
 }
 
 
-
-message AllPaysReq{
-  int32 limit = 1;
-  int32 offset = 2;
+message PayIDReq{
+  string id = 1;
 }
 
 
-message PaysReply {
-  message Pay{
+message PaysReply{
+  message Pay {
     string id = 1;
     string name = 2;
-    string image = 3;
-    string linkURL = 4;
-    repeated string descriptions = 5;
-    int64 createDate = 6;
-    int64 updateDate = 7;
-    int32 order = 8;
-    int32 payStatus = 9;
+    int32 order = 3;
+    int32 payStatus = 4;
+    int64 createDate = 5;
+    int64 updateDate = 6;
   }
-
+  
   Reply reply = 1;
   repeated Pay pays = 2;
 }
 
 
+message PayReply{
+  message Pay {
+    string id = 1;
+    string name = 2;
+    int32 order = 3;
+    int32 payStatus = 4;
+    int64 createDate = 5;
+    int64 updateDate = 6;
+  }
+  
+  Reply reply = 1;
+  Pay pay = 2;
+}
 
+
+message EmptyReq{}
 
 
 

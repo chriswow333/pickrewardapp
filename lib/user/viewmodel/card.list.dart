@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/shared/bank/model/bank.dart';
+import 'package:pickrewardapp/shared/bank/repo/v1/bank.dart';
+import 'package:pickrewardapp/shared/bank/repo/v1/proto/generated/bank.pb.dart';
 import 'package:pickrewardapp/shared/card/model/card.dart';
 import 'package:pickrewardapp/shared/card/repo/v1/card.dart';
 import 'package:pickrewardapp/shared/card/repo/v1/proto/generated/card.pb.dart';
@@ -31,12 +33,10 @@ class UserCardListViewModel extends ChangeNotifier {
     try {
       
       AllBanksReq allBanksReq = AllBanksReq();
-      allBanksReq.limit = initLimit;
-      allBanksReq.offset = 0;
 
-      BanksReply banksReply = await CardService().cardClient.getAllBanks(allBanksReq);
+      BanksReply banksReply = await BankService().bankClient.getAllBanks(allBanksReq);
       for (final b in banksReply.banks){
-        _bankModels.add(BankModel(b.name, b.id, b.image));
+        _bankModels.add(BankModel(b.name, b.id, b.order, b.bankStatus));
       }
       
       notifyListeners();
@@ -62,8 +62,6 @@ class UserCardListViewModel extends ChangeNotifier {
     try {
       CardsByBankIDReq cardsByBankIDReq = CardsByBankIDReq();
       cardsByBankIDReq.id = bankID;
-      cardsByBankIDReq.limit = initLimit;
-      cardsByBankIDReq.offset = 0;
       
       CardsReply cardsReply = await CardService().cardClient.getCardsByBankID(cardsByBankIDReq);
       List<CardItemModel> cardItemModels = [];
@@ -73,12 +71,10 @@ class UserCardListViewModel extends ChangeNotifier {
           id:card.id,
           name:card.name,
           descriptions:card.descriptions,
-          image:card.image,
           createDate: card.createDate.toInt(),
           updateDate:card.updateDate.toInt(),
           linkURL: card.linkURL,
           bankID: card.bankID,
-          bankName: card.bankName,
           order: card.order,
           cardStatus: card.cardStatus,
         ));

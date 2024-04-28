@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import 'package:pickrewardapp/channel/widgets/selected.bar.dart';
+import 'package:pickrewardapp/channel/viewmodel/criteria.selected.dart';
+import 'package:pickrewardapp/channel/component/criteria.date.dart';
+import 'package:pickrewardapp/channel/component/criteria.pay.dart';
+import 'package:pickrewardapp/channel/component/criteria.rewardnlabel.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
+import 'package:provider/provider.dart';
+
+
+class CriteriaProgress extends StatelessWidget {
+  const CriteriaProgress({super.key, required this.controller});
+
+  final PageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      padding: const EdgeInsets.only(left:5,right:5),
+      child:Column(
+        children:[
+          const ChannelSelectedItems(),
+          const SizedBox(height:20),
+          const Expanded(
+            child:SingleChildScrollView(
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  CriteriaMessage(),
+                  SizedBox(height:20),
+                  DateWidget(),
+                  SizedBox(height:20),
+                  PayWidget(),
+                  SizedBox(height:20),
+                  RewardTypeAndTaskLabelWidget(),
+                ],
+              )
+            ),
+          ),
+          const SizedBox(height: 20,),
+          SizedBox(
+            child:SelectedChannelResult(controller: controller,),
+          )
+        ]
+      )
+    );
+  }
+}
+
+
+class ChannelSelectedItems extends StatelessWidget {
+  const ChannelSelectedItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    CriteriaViewModel criteriaViewModel = Provider.of<CriteriaViewModel>(context);
+
+    List<String> channelNames = criteriaViewModel.channelItemModels.map((e) => e.name).toList();
+    List<String> selectedNames = criteriaViewModel.channelLabels.map((e) => e.name).toList();
+
+    selectedNames.addAll(channelNames);
+    String names = selectedNames.join(", ");
+
+
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color:Palette.kToBlack[0],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child:Row(
+        children:[
+          Container(
+            padding: const EdgeInsets.only(right:20),
+            child:const Text('已選通路',
+              style:TextStyle(
+                fontSize: 14,
+              )
+            ),
+          ),
+          Expanded(
+            child:Container(
+              alignment: Alignment.centerRight,
+              child:Text(names,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+        ]
+      )
+    );
+  }
+}
+
+
+class CriteriaMessage extends StatelessWidget {
+  const CriteriaMessage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left:20),
+      child:Text('還差一步! 請確認搜尋條件',
+        style: TextStyle(
+          fontSize: 22,
+          color:Palette.kToBlack[500],
+          fontWeight: FontWeight.bold
+        ),
+      )
+    );
+  }
+}
+
+

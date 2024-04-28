@@ -1,6 +1,5 @@
 
 
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Banner;
@@ -24,7 +23,6 @@ class CardContentScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body:CupertinoPageScaffold(
         child: SafeArea(
@@ -99,7 +97,7 @@ class CardContent extends StatelessWidget {
       padding: const EdgeInsets.only(top:40),
       child:Column(
         children:[
-          CardImage(image: cardHeaderItemModel.image,),
+          CardImage(image: 'image',),
           CardName(name:cardHeaderItemModel.name),
           CardRewardDetailBtn(url: cardHeaderItemModel.linkUrl,),
           const SizedBox(height:40),
@@ -139,11 +137,15 @@ class CardImage extends StatelessWidget {
       constraints: const BoxConstraints(
         maxWidth: 180,
       ),
-      child:Image.memory(
-        gaplessPlayback: true,
-        base64Decode(image), 
-        scale:1.5
+      child:Container(
+        child:Text('hello')
       )
+      
+      // Image.memory(
+      //   gaplessPlayback: true,
+      //   base64Decode(image), 
+      //   scale:1.5
+      // )
     );
   }
 }

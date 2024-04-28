@@ -282,12 +282,14 @@ class CardItem extends StatelessWidget {
       padding: const EdgeInsets.only(top:10, bottom: 10),
       child:Row(
         children:[
-          Image.memory(
-            gaplessPlayback: true,
-            base64Decode(cardItemModel.image), 
-            width:80,
-            height:70,
-          ),
+
+          // Image.memory(
+          //   gaplessPlayback: true,
+          //   base64Decode(cardItemModel.image), 
+          //   width:80,
+          //   height:70,
+          // ),
+
           Container(
             child:Text(cardItemModel.name)
           ),

@@ -2,27 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/shared/bank/model/bank.dart';
+import 'package:pickrewardapp/shared/bank/repo/v1/bank.dart';
+import 'package:pickrewardapp/shared/bank/repo/v1/proto/generated/bank.pb.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
 
-
-import 'package:pickrewardapp/shared/card/repo/v1/card.dart';
-import 'package:pickrewardapp/shared/card/repo/v1/proto/generated/card.pb.dart';
 
 
 class BankViewModel with ChangeNotifier{
 
   BankViewModel(){
-    CardService().init();
+    BankService().init();
     _fetchBanks(); 
   }
  
   final List<BankModel> _bankModels = [];
 
   List<BankModel >get banks => _bankModels;
-
-
-  static int initLimit = 1000;
-  static int initOffset = 0;
 
   Future<void> _fetchBanks() async{ 
     
@@ -31,12 +26,10 @@ class BankViewModel with ChangeNotifier{
     try {
       
       AllBanksReq allBanksReq = AllBanksReq();
-      allBanksReq.limit = initLimit;
-      allBanksReq.offset = initOffset;
 
-      BanksReply banksReply = await CardService().cardClient.getAllBanks(allBanksReq);
+      BanksReply banksReply = await BankService().bankClient.getAllBanks(allBanksReq);
       for (final b in banksReply.banks){
-        _bankModels.add(BankModel(b.name, b.id, b.image));
+        _bankModels.add(BankModel(b.name, b.id, b.order, b.bankStatus));
       }
       
       notifyListeners();
