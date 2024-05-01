@@ -5,6 +5,7 @@ class CardItemModel {
   final List<String> descriptions;
   final String linkURL;
   final String bankID;
+  final String imageName;
   final int order;
   final int cardStatus;
   final int createDate;
@@ -16,6 +17,7 @@ class CardItemModel {
     required this.descriptions,
     required this.linkURL,
     required this.bankID,
+    required this.imageName,
     required this.order,
     required this.cardStatus,
     required this.createDate,

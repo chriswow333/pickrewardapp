@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Banner;
-import 'package:pickrewardapp/pages/card/screen/card_screen.dart';
+import 'package:pickrewardapp/pages/card/screen/card.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/pages/channelsearch/viewmodel/eventresult.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +19,8 @@ class CardSearchPage extends StatelessWidget {
       providers:[
         ChangeNotifierProvider<BankViewModel>(create:(_)=>BankViewModel()),
         ChangeNotifierProvider<CardItemViewModel>(create:(_)=>CardItemViewModel()),
-        // ChangeNotifierProvider<PayItemViewModel>(create:(_)=>PayItemViewModel()),
         ChangeNotifierProvider<CardEventResultsViewModel>(create:(_)=>CardEventResultsViewModel()),
         ChangeNotifierProvider<SearchCardViewModel>(create:(_)=>SearchCardViewModel()),
-        
       ],
       child: const CardScreen(),
     );

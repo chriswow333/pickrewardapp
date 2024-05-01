@@ -75,6 +75,7 @@ class UserCardListViewModel extends ChangeNotifier {
           updateDate:card.updateDate.toInt(),
           linkURL: card.linkURL,
           bankID: card.bankID,
+          imageName: card.imageName,
           order: card.order,
           cardStatus: card.cardStatus,
         ));

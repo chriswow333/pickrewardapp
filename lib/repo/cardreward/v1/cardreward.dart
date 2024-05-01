@@ -1,20 +1,17 @@
 
 
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'package:grpc/grpc.dart';
 import 'package:pickrewardapp/repo/cardreward/v1/proto/generated/cardreward.pbgrpc.dart';
 
 class CardRewardRepo {
-
+  
   CardRewardRepo._internal();
+
   static final CardRewardRepo _instance = CardRewardRepo._internal();
   factory CardRewardRepo() => _instance;
   static CardRewardRepo get instance => _instance;
-
   late CardRewardV1Client _cardRewardClient;
-
 
   Future<void> init() async {
     _createChannel();
@@ -79,4 +76,6 @@ class CardRewardRepo {
 
     _cardRewardClient = CardRewardV1Client(channel);
   }
+
+
 }

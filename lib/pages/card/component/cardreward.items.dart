@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pickrewardapp/pages/card/model/card_reward.dart';
-import 'package:pickrewardapp/pages/card/model/card_reward_type.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/cardreward.tab.dart';
+import 'package:pickrewardapp/repo/cardreward/model/cardreward.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -272,12 +271,12 @@ class CardRewardLabels extends StatelessWidget {
     cardRewardModel.cardRewardType;
     List<String> labelNames = [];
     if(cardRewardModel.cardRewardType ==  CardRewardTypeEnum.evaluation.index){
-      labelNames.add("${cardRewardModel.reward.name}回饋");
+      labelNames.add("${cardRewardModel.feedbackType.name}回饋");
     }
 
-    List<TaskModel> tasks = cardRewardModel.tasks;
+    List<TaskLabelModel> tasks = cardRewardModel.taskLabels;
     List<String> taskLabelNames = [];
-    for(TaskModel taskModel in tasks) {
+    for(TaskLabelModel taskModel in tasks) {
       taskLabelNames.add(taskModel.name);
     }
 

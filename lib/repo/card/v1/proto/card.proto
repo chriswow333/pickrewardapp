@@ -43,10 +43,11 @@ message CardsReply{
     repeated string descriptions = 3;
     string linkURL = 4;
     string bankID = 5;
-    int32 order = 6;
-    int32 cardStatus = 7;
-    int64 createDate = 8;
-    int64 updateDate = 9;
+    string imageName = 6;
+    int32 order = 7;
+    int32 cardStatus = 8;
+    int64 createDate = 9;
+    int64 updateDate = 10;
   }
   
   Reply reply = 1;
@@ -61,10 +62,11 @@ message CardReply{
     repeated string descriptions = 3;
     string linkURL = 4;
     string bankID = 5;
-    int32 order = 6;
-    int32 cardStatus = 7;
-    int64 createDate = 8;
-    int64 updateDate = 9;
+    string imageName = 6;
+    int32 order = 7;
+    int32 cardStatus = 8;
+    int64 createDate = 9;
+    int64 updateDate = 10;
   }
   
   Reply reply = 1;

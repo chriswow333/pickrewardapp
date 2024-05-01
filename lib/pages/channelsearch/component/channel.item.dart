@@ -221,16 +221,16 @@ class ChannelItemIcon extends StatelessWidget {
 
     if(ImageService().hasImage("channel",channelItemModel.imageName)){
       return Stack(
-      alignment:Alignment.center,
-      children:[
-        CircleAvatar(
-          radius:14,
-          backgroundColor:Palette.kToBlack[0],
-          child:Image.memory(ImageService().getImage("channel",channelItemModel.imageName))
-        ),
-        ChannelItemIconSelected(channelItemModel: channelItemModel,),
-      ]
-    );
+        alignment:Alignment.center,
+        children:[
+          CircleAvatar(
+            radius:14,
+            backgroundColor:Palette.kToBlack[0],
+            child:Image.memory(ImageService().getImage("channel",channelItemModel.imageName))
+          ),
+          ChannelItemIconSelected(channelItemModel: channelItemModel,),
+        ]
+      );
     }
 
     Future<Uint8List?> data = ImageService().downloadImage("channel", channelItemModel.imageName);

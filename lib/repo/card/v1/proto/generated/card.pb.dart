@@ -216,10 +216,11 @@ class CardsReply_Card extends $pb.GeneratedMessage {
     ..pPS(3, _omitFieldNames ? '' : 'descriptions')
     ..aOS(4, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
     ..aOS(5, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
-    ..aInt64(8, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
-    ..aInt64(9, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
+    ..aOS(6, _omitFieldNames ? '' : 'imageName', protoName: 'imageName')
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
+    ..aInt64(9, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
+    ..aInt64(10, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..hasRequiredFields = false
   ;
 
@@ -284,40 +285,49 @@ class CardsReply_Card extends $pb.GeneratedMessage {
   void clearBankID() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get order => $_getIZ(5);
+  $core.String get imageName => $_getSZ(5);
   @$pb.TagNumber(6)
-  set order($core.int v) { $_setSignedInt32(5, v); }
+  set imageName($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasOrder() => $_has(5);
+  $core.bool hasImageName() => $_has(5);
   @$pb.TagNumber(6)
-  void clearOrder() => clearField(6);
+  void clearImageName() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.int get cardStatus => $_getIZ(6);
+  $core.int get order => $_getIZ(6);
   @$pb.TagNumber(7)
-  set cardStatus($core.int v) { $_setSignedInt32(6, v); }
+  set order($core.int v) { $_setSignedInt32(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCardStatus() => $_has(6);
+  $core.bool hasOrder() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCardStatus() => clearField(7);
+  void clearOrder() => clearField(7);
 
   @$pb.TagNumber(8)
-  $fixnum.Int64 get createDate => $_getI64(7);
+  $core.int get cardStatus => $_getIZ(7);
   @$pb.TagNumber(8)
-  set createDate($fixnum.Int64 v) { $_setInt64(7, v); }
+  set cardStatus($core.int v) { $_setSignedInt32(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasCreateDate() => $_has(7);
+  $core.bool hasCardStatus() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCreateDate() => clearField(8);
+  void clearCardStatus() => clearField(8);
 
   @$pb.TagNumber(9)
-  $fixnum.Int64 get updateDate => $_getI64(8);
+  $fixnum.Int64 get createDate => $_getI64(8);
   @$pb.TagNumber(9)
-  set updateDate($fixnum.Int64 v) { $_setInt64(8, v); }
+  set createDate($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasUpdateDate() => $_has(8);
+  $core.bool hasCreateDate() => $_has(8);
   @$pb.TagNumber(9)
-  void clearUpdateDate() => clearField(9);
+  void clearCreateDate() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get updateDate => $_getI64(9);
+  @$pb.TagNumber(10)
+  set updateDate($fixnum.Int64 v) { $_setInt64(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasUpdateDate() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearUpdateDate() => clearField(10);
 }
 
 class CardsReply extends $pb.GeneratedMessage {
@@ -380,10 +390,11 @@ class CardReply_Card extends $pb.GeneratedMessage {
     ..pPS(3, _omitFieldNames ? '' : 'descriptions')
     ..aOS(4, _omitFieldNames ? '' : 'linkURL', protoName: 'linkURL')
     ..aOS(5, _omitFieldNames ? '' : 'bankID', protoName: 'bankID')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
-    ..aInt64(8, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
-    ..aInt64(9, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
+    ..aOS(6, _omitFieldNames ? '' : 'imageName', protoName: 'imageName')
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'order', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'cardStatus', $pb.PbFieldType.O3, protoName: 'cardStatus')
+    ..aInt64(9, _omitFieldNames ? '' : 'createDate', protoName: 'createDate')
+    ..aInt64(10, _omitFieldNames ? '' : 'updateDate', protoName: 'updateDate')
     ..hasRequiredFields = false
   ;
 
@@ -448,40 +459,49 @@ class CardReply_Card extends $pb.GeneratedMessage {
   void clearBankID() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get order => $_getIZ(5);
+  $core.String get imageName => $_getSZ(5);
   @$pb.TagNumber(6)
-  set order($core.int v) { $_setSignedInt32(5, v); }
+  set imageName($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasOrder() => $_has(5);
+  $core.bool hasImageName() => $_has(5);
   @$pb.TagNumber(6)
-  void clearOrder() => clearField(6);
+  void clearImageName() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.int get cardStatus => $_getIZ(6);
+  $core.int get order => $_getIZ(6);
   @$pb.TagNumber(7)
-  set cardStatus($core.int v) { $_setSignedInt32(6, v); }
+  set order($core.int v) { $_setSignedInt32(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCardStatus() => $_has(6);
+  $core.bool hasOrder() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCardStatus() => clearField(7);
+  void clearOrder() => clearField(7);
 
   @$pb.TagNumber(8)
-  $fixnum.Int64 get createDate => $_getI64(7);
+  $core.int get cardStatus => $_getIZ(7);
   @$pb.TagNumber(8)
-  set createDate($fixnum.Int64 v) { $_setInt64(7, v); }
+  set cardStatus($core.int v) { $_setSignedInt32(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasCreateDate() => $_has(7);
+  $core.bool hasCardStatus() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCreateDate() => clearField(8);
+  void clearCardStatus() => clearField(8);
 
   @$pb.TagNumber(9)
-  $fixnum.Int64 get updateDate => $_getI64(8);
+  $fixnum.Int64 get createDate => $_getI64(8);
   @$pb.TagNumber(9)
-  set updateDate($fixnum.Int64 v) { $_setInt64(8, v); }
+  set createDate($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasUpdateDate() => $_has(8);
+  $core.bool hasCreateDate() => $_has(8);
   @$pb.TagNumber(9)
-  void clearUpdateDate() => clearField(9);
+  void clearCreateDate() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get updateDate => $_getI64(9);
+  @$pb.TagNumber(10)
+  set updateDate($fixnum.Int64 v) { $_setInt64(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasUpdateDate() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearUpdateDate() => clearField(10);
 }
 
 class CardReply extends $pb.GeneratedMessage {

@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/pages/card/component/card.bank.dart';
 import 'package:pickrewardapp/pages/card/component/card.items.dart';
+import 'package:pickrewardapp/pages/card/component/card.search.dart';
 import 'package:pickrewardapp/pages/card/component/card.search.item.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/card.search.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:provider/provider.dart';
 
 
@@ -17,7 +19,6 @@ class CardComponent extends StatelessWidget {
     SearchCardViewModel searchCardViewModel = Provider.of<SearchCardViewModel>(context);
 
     return Container(
-      padding: const EdgeInsets.all(10),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -37,12 +38,23 @@ class BankCardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
+    return Expanded(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          BankItems(),
-          Divider(),
+          Container(
+            color: Palette.kToBlack[0],
+            padding: EdgeInsets.only(top:12, left:12, right:12),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                SearchCardBar(),
+                SizedBox(height:18),
+                BankItems(),
+              ]
+            )
+          ),
+          
           Expanded(
             child:CardItems(),
           ),

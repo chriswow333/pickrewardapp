@@ -2,93 +2,85 @@
 
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:pickrewardapp/pages/card/model/card_reward.dart';
 import 'package:pickrewardapp/repo/card/model/card_header.dart';
+import 'package:pickrewardapp/repo/cardreward/model/cardreward.dart';
+import 'package:pickrewardapp/repo/cardreward/v1/cardreward.dart';
+import 'package:pickrewardapp/repo/cardreward/v1/proto/generated/cardreward.pb.dart';
 import 'package:pickrewardapp/shared/config/logger.dart';
-import 'package:pickrewardapp/repo/card/v1/card.dart';
 
 
 class CardRewardViewModel with ChangeNotifier {
 
   final List<CardRewardModel> _activityCardRewardModels = [];
-
   List<CardRewardModel> get activityCardRewardModels => _activityCardRewardModels;
-  
+
   final List<CardRewardModel> _evaluationCardRewardModels = [];
   List<CardRewardModel> get evaluationCardRewardModels => _evaluationCardRewardModels;
 
   CardRewardViewModel(String cardID) {
-    CardRepo().init();
-
+    CardRewardRepo().init();
     _fetchCardRewards(cardID);
 
   }
 
-  bool fetchedCardRewards = false;
-  static int initLimit = 1000;
-  static int initOffset = 0;
   Future<void> _fetchCardRewards(String cardID) async { 
-    
-    if (fetchedCardRewards) return;
-    fetchedCardRewards = true;
 
     try {
-      
-      // CardRewardsByCardIDReq cardRewardsByCardIDReq = CardRewardsByCardIDReq();
-      // cardRewardsByCardIDReq.cardID = cardID;
-      // cardRewardsByCardIDReq.limit = initLimit;
-      // cardRewardsByCardIDReq.offset = initOffset;
 
-      // CardRewardsReply cardRewardsReply = await CardRepo().cardClient.getCardRewardsByCardID(cardRewardsByCardIDReq);
+      CardRewardIDReq cardRewardIDReq = CardRewardIDReq();
+      cardRewardIDReq.id = cardID;
 
-      // for(final c in cardRewardsReply.cardRewards) {
-
-      //   List<TaskModel> taskModels = [];
-      //   for(CardRewardsReply_Task t in c.tasks) {
-          
-      //     taskModels.add(
-      //       TaskModel(
-      //         name: t.taskLabel.name,
-      //         order: t.order,
-      //         show:t.taskLabel.show,
-      //       )
-      //     );
-      //   }
+      CardRewardsReply cardRewardsReply = await CardRewardRepo().cardRewardClient.getCardRewardsByCardID(cardRewardIDReq);
+      if (cardRewardsReply.reply.status != 0) {
+        logger.e("reply error");
+        return;
+      }
 
 
-      //   CardRewardModel cardRewardModel = CardRewardModel(
-      //     id: c.id,
-      //     cardID: c.cardID,
-      //     name:c.name,
-      //     descriptions:c.descriptions
-      //       .map((d) => DescriptionModel(
-      //         name:d.name,
-      //         order:d.order,
-      //         desc: d.desc,
-      //       )).toList(),
-      //     createDate: DateTime.fromMillisecondsSinceEpoch(c.createDate.toInt()*1000),
-      //     updateDate: DateTime.fromMillisecondsSinceEpoch(c.updateDate.toInt()*1000),
-      //     startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()*1000),
-      //     endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()*1000), 
-      //     cardRewardType: c.cardRewardType,
-      //     reward: RewardModel(
-      //       id:c.reward.id,
-      //       name:c.reward.name,
-      //       rewardType: c.reward.rewardType,
-      //       createDate: c.reward.createDate.toInt(),
-      //       updateDate:c.reward.updateDate.toInt(),
-      //     ),
-      //     order: c.order,
-      //     tasks: taskModels,
-      //   );
 
 
-      //   if(cardRewardModel.cardRewardType == CardRewardTypeEnum.activity.cardRewardType) {
-      //     _activityCardRewardModels.add(cardRewardModel);
-      //   }else if(cardRewardModel.cardRewardType == CardRewardTypeEnum.evaluation.cardRewardType) {
-      //     _evaluationCardRewardModels.add(cardRewardModel);
-      //   }
-      // }
+      for(CardRewardsReply_CardReward c in cardRewardsReply.cardRewards){
+        
+        CardRewardModel cardRewardModel = CardRewardModel(
+          id: c.id,
+          cardID: c.cardID,
+          name:c.name,
+          descriptions:c.descriptions
+            .map((d) => DescriptionModel(
+              name:d.name,
+              order:d.order,
+              desc: d.desc,
+            )).toList(),
+          startDate:DateTime.fromMillisecondsSinceEpoch(c.startDate.toInt()*1000),
+          endDate:DateTime.fromMillisecondsSinceEpoch(c.endDate.toInt()*1000), 
+          cardRewardType: c.cardRewardType,
+          feedbackType: FeedbackType(
+            id:c.feedbackType.id,
+            name:c.feedbackType.name,
+            feedbackType:c.feedbackType.feedbackType,
+            createDate: DateTime.fromMillisecondsSinceEpoch(c.feedbackType.createDate.toInt()*1000),
+            updateDate: DateTime.fromMillisecondsSinceEpoch(c.feedbackType.createDate.toInt()*1000),
+          ),
+          taskLabels: c.taskLabels
+          .map((d)=>TaskLabelModel(
+            label: d.label, 
+            name: d.name, 
+            order: d.order,
+            show: d.show,
+          )).toList(),
+          order: c.order,
+          cardRewardStatus: c.cardRewardStatus,
+          createDate: DateTime.fromMillisecondsSinceEpoch(c.createDate.toInt()*1000),
+          updateDate: DateTime.fromMillisecondsSinceEpoch(c.updateDate.toInt()*1000),
+        );
+
+
+        if(c.cardRewardType == CardRewardTypeEnum.activity.cardRewardType) {
+          _activityCardRewardModels.add(cardRewardModel);
+        }else if(c.cardRewardType == CardRewardTypeEnum.evaluation.cardRewardType){
+          _evaluationCardRewardModels.add(cardRewardModel);
+        }
+      }
 
       notifyListeners();
 

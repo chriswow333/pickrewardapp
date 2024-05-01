@@ -1,8 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:pickrewardapp/pages/card/component/card.search.dart';
 import 'package:pickrewardapp/shared/config/global_size.dart';
 
 import 'package:pickrewardapp/pages/card/component/card.dart';
+import 'package:pickrewardapp/shared/config/palette.dart';
 
 class CardScreen extends StatelessWidget {
   const CardScreen({super.key});
@@ -11,17 +13,23 @@ class CardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          border:null,
+          backgroundColor:Palette.kToBlack[0],
           transitionBetweenRoutes: false,
+          border:Border(
+            bottom: BorderSide(
+            color: Palette.kToBlack[0]!,
+            width: 0.0, // 0.0 means one physical pixel
+            ),
+          ),
           leading:Container(
+            padding: EdgeInsets.only(left:12,),
             child:const Text('信用卡',
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             )
           ),
-          // middle: SearchCardBar(),
         ),
         child:SizedBox.expand(
           child:SafeArea(

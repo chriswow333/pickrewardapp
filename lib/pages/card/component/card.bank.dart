@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/pages/card/model/bank.color.dart';
 import 'package:pickrewardapp/repo/bank/model/bank.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -16,20 +17,23 @@ class BankItems extends StatelessWidget {
 
     BankViewModel bankViewModel = Provider.of<BankViewModel>(context);
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child:Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
-          for(BankModel bankModel in bankViewModel.banks)
-            BankItem(bankModel:bankModel),
-        ]
+    return Container(
+      padding: const EdgeInsets.only(left:4,right:4),
+      child:SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children:[
+            for(BankModel bankModel in bankViewModel.banks)
+              BankItem(bankModel:bankModel),
+          ]
+        )
       )
     );
+    ;
   }
 }
-
 
 class BankItem extends StatelessWidget {
   
@@ -41,25 +45,19 @@ class BankItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
-
-    return TextButton(
-      onPressed: (){
-        FocusScope.of(context).unfocus();
+    return GestureDetector(
+      onTap: (){
         cardItemViewModel.fetchCardsByBankIDWhenPressBank(bankModel.id);
-        
       },
-      style:const ButtonStyle(
-        splashFactory: NoSplash.splashFactory,
-      ),
-      child:SizedBox(
-        width:70,
+      child:Container(
+        padding: EdgeInsets.only(left:10, right:10),
         child:Column(
           children:[
-            BankIcon(),
+            BankIcon(id:bankModel.id),
+            const SizedBox(height:4),
             BankName(id:bankModel.id,name:bankModel.name),
-            const SizedBox(height: 5,),
-            if (cardItemViewModel.bankID == bankModel.id)
-              const BottomSpot(),
+            const SizedBox(height:20),
+            BottomLine(id:bankModel.id,),
           ]
         ),
       )
@@ -67,45 +65,35 @@ class BankItem extends StatelessWidget {
   }
 }
 
-class BottomSpot extends StatelessWidget {
-  const BottomSpot({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 7,
-      height: 7,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color:Palette.kToYellow[400],
-      ),  
-    );
-  }
-}
 
 class BankIcon extends StatelessWidget {
-  const BankIcon({super.key,});
-
+  const BankIcon({super.key, required this.id,});
+  final String id;
   @override
   Widget build(BuildContext context) {
 
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+    String selectedBankID = cardItemViewModel.bankID;
 
-    return CircleAvatar(
-      backgroundColor: Palette.kToBlack[0],
-      child:Container(
-        child:Text(
-          'bank icon')
-        )
-      // Image.memory(
-      //   base64Decode(image), 
-      //   width:30,
-      //   height:30,
-      //   gaplessPlayback:false,
-      // )
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color:Palette.kToBlack[0],
+        border:Border.all(
+          width: 2,
+          color: selectedBankID == id ? Palette.kToBlack[700]!:Palette.kToBlack[20]!,
+        ),
+      ),
+      padding: const EdgeInsets.all(5),
+      child:  CircleAvatar(
+        radius:15,
+        backgroundColor: BankColorExtension.getColor(id),
+      )
     );
-
   }
 }
+
 
 class BankName extends StatelessWidget {
   const BankName({super.key, required this.id, required this.name});
@@ -115,14 +103,30 @@ class BankName extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit:BoxFit.fill,
+    return SizedBox(
       child:Text(name,
         style: TextStyle(
-          color: Palette.kToBlack[400],
+          color: Palette.kToBlack[700],
+          fontSize: 12
         ),  
       )
     );
   }
 }
 
+class BottomLine extends StatelessWidget {
+  const BottomLine({super.key, required this.id,});
+  final String id;
+  @override
+  Widget build(BuildContext context) {
+    
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+    String selectedBankID = cardItemViewModel.bankID;
+
+    return Container(
+      width:32,
+      height:3,
+      color:selectedBankID == id ? Palette.kToBlack[700]:null
+    );
+  }
+}

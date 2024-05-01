@@ -103,6 +103,7 @@ class SearchCardViewModel with ChangeNotifier {
           descriptions:cardReply.descriptions,
           linkURL: cardReply.linkURL,
           bankID: cardReply.bankID,
+          imageName: cardReply.imageName,
           order: cardReply.order,
           cardStatus: cardReply.cardStatus,
           createDate: cardReply.createDate.toInt(),

@@ -1,13 +1,15 @@
 
 
 
-import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 
 import 'package:flutter/material.dart';
 import 'package:pickrewardapp/repo/card/model/card.dart';
 import 'package:pickrewardapp/repo/card/model/card_header.dart';
+import 'package:pickrewardapp/repo/image/viewmodel/image.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/card.item.dart';
 import 'package:pickrewardapp/pages/card/screen/cardreward.dart';
@@ -26,108 +28,77 @@ class CardItems extends StatelessWidget {
     
     final bankID = cardItemViewModel.bankID;
 
-    if(bankID == "") {
-      List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
-      if(cardItemModels.isEmpty) {
-        cardItemViewModel.fetchLatestCards();
-      }
+    // if(bankID == "") {
+    //   List<CardItemModel> cardItemModels = cardItemViewModel.getLatestCards();
+    //   if(cardItemModels.isEmpty) {
+    //     cardItemViewModel.fetchLatestCards();
+    //   }
       
-      return LatestCardItems(cardItemModels: cardItemModels,);
-    }
+    //   return LatestCardItems(cardItemModels: cardItemModels,);
+    // }
 
-    return CardItemsByBankID(cardItemViewModel: cardItemViewModel,);
+    return CardItemsByBankID();
       
   }
 }
 
 
 
-class LatestCardItems extends StatelessWidget {
-  const LatestCardItems({super.key, required this.cardItemModels});
-  final List<CardItemModel> cardItemModels;
+// class LatestCardItems extends StatelessWidget {
+//   const LatestCardItems({super.key, required this.cardItemModels});
+//   final List<CardItemModel> cardItemModels;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         child:Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children:[
+//             Text('近期更新',
+//               style: TextStyle(
+//                 color:Palette.kToBlack[600],
+//               ),
+//             ),
+//             Expanded(
+//               child:SingleChildScrollView(
+//                 child:Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children:[
+//                     for(CardItemModel cardItemModel in cardItemModels)
+//                       CardItem(cardItemModel:cardItemModel),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ]
+//         )
+//       );
+//   }
+// }
+
+
+class CardItemsByBankID extends StatelessWidget {
+  const CardItemsByBankID({super.key});
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-            Text('近期更新',
-              style: TextStyle(
-                color:Palette.kToBlack[600],
-              ),
-            ),
-            Expanded(
-              child:SingleChildScrollView(
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    for(CardItemModel cardItemModel in cardItemModels)
-                      CardItem(cardItemModel:cardItemModel),
-                  ],
-                ),
-              ),
-            ),
-          ]
-        )
-      );
-  }
-}
-
-
-
-class CardItemsByBankID extends StatefulWidget {
-  const CardItemsByBankID({super.key, required this.cardItemViewModel});
-
-  final CardItemViewModel cardItemViewModel;
-  
-  @override
-  State<CardItemsByBankID> createState() => _CardItemsByBankIDState();
-}
-
-class _CardItemsByBankIDState extends State<CardItemsByBankID> {
-
-  late ScrollController _controller;
-
-  @override
-  void initState(){
-    _controller = ScrollController();
-    _controller.addListener(scrollToEnd);
-    super.initState();
-  }
-
-  void scrollToEnd(){
     
-    var scrollPosition = _controller.position;
-    if(scrollPosition.pixels == scrollPosition.maxScrollExtent) {
-      widget.cardItemViewModel.fetchCardsByBankIDOnScroll();
-    }
-  }
-
-  
-  @override
-  Widget build(BuildContext context) {
-  
-    List<CardItemModel> cardItemModels = widget.cardItemViewModel.getCardsByBankID(widget.cardItemViewModel.bankID);
-
+    CardItemViewModel cardItemViewModel = Provider.of<CardItemViewModel>(context);
+    List<CardItemModel> cardItemModels = cardItemViewModel.getCardsByBankID(cardItemViewModel.bankID);
     return Container(
-      
+      padding: EdgeInsets.all(8),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text('卡片列表',
-            style: TextStyle(
-              color:Palette.kToBlack[600],
-            ),
-          ),
+         
           Expanded(
             child:SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              controller:_controller,
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   for(CardItemModel cardItemModel in cardItemModels)
                     CardItem(cardItemModel:cardItemModel),
+                    
                 ],
               ),
             ),
@@ -137,6 +108,7 @@ class _CardItemsByBankIDState extends State<CardItemsByBankID> {
     );
   }
 }
+
 
 
 class CardItem extends StatelessWidget {
@@ -149,7 +121,7 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       child:Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -200,7 +172,7 @@ class CardItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                CardIcon(image:''),
+                CardIcon(imageName: cardItemModel.imageName,),
                 const SizedBox(width:24),
                 Expanded(
                   child:Column(
@@ -271,20 +243,44 @@ class CardDescs extends StatelessWidget {
 
 
 class CardIcon extends StatelessWidget {
-  const CardIcon({super.key, required this.image});
+  const CardIcon({super.key, required this.imageName});
 
-  final String image;
+  final String imageName;
   @override
   Widget build(BuildContext context) {
+
+
+    if(ImageService().hasImage("card",imageName)){
+      return Container(
+        width:80,
+        height:59,
+        child:Image.memory(
+          ImageService().getImage("card", imageName),
+        )
+      );
+
+    }
+
+    Future<Uint8List?> data = ImageService().downloadImage("card", imageName);
     return Container(
-      child:Text('card icon')
+      width:80,
+      height:59,
+      child:FutureBuilder(
+        future: data,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // While waiting for the future to complete, show a placeholder
+              return Text('');
+            } else if (snapshot.hasError) {
+              // If an error occurs, display an error message
+              return Text('');
+            } else {
+              // If the future has completed successfully, display the image
+              return Image.memory(snapshot.data!);
+            }
+          },
+      ),
     );
-    // Image.memory(
-    //   gaplessPlayback: true,
-    //   base64Decode(image), 
-    //   width:80,
-    //   height:70,
-    // );
   }
 }
 

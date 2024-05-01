@@ -84,22 +84,23 @@ const CardsReply_Card$json = {
     {'1': 'descriptions', '3': 3, '4': 3, '5': 9, '10': 'descriptions'},
     {'1': 'linkURL', '3': 4, '4': 1, '5': 9, '10': 'linkURL'},
     {'1': 'bankID', '3': 5, '4': 1, '5': 9, '10': 'bankID'},
-    {'1': 'order', '3': 6, '4': 1, '5': 5, '10': 'order'},
-    {'1': 'cardStatus', '3': 7, '4': 1, '5': 5, '10': 'cardStatus'},
-    {'1': 'createDate', '3': 8, '4': 1, '5': 3, '10': 'createDate'},
-    {'1': 'updateDate', '3': 9, '4': 1, '5': 3, '10': 'updateDate'},
+    {'1': 'imageName', '3': 6, '4': 1, '5': 9, '10': 'imageName'},
+    {'1': 'order', '3': 7, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'cardStatus', '3': 8, '4': 1, '5': 5, '10': 'cardStatus'},
+    {'1': 'createDate', '3': 9, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 10, '4': 1, '5': 3, '10': 'updateDate'},
   ],
 };
 
 /// Descriptor for `CardsReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardsReplyDescriptor = $convert.base64Decode(
     'CgpDYXJkc1JlcGx5EiQKBXJlcGx5GAEgASgLMg4uY2FyZC52MS5SZXBseVIFcmVwbHkSLgoFY2'
-    'FyZHMYAiADKAsyGC5jYXJkLnYxLkNhcmRzUmVwbHkuQ2FyZFIFY2FyZHMa9gEKBENhcmQSDgoC'
+    'FyZHMYAiADKAsyGC5jYXJkLnYxLkNhcmRzUmVwbHkuQ2FyZFIFY2FyZHMalAIKBENhcmQSDgoC'
     'aWQYASABKAlSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSIgoMZGVzY3JpcHRpb25zGAMgAygJUg'
     'xkZXNjcmlwdGlvbnMSGAoHbGlua1VSTBgEIAEoCVIHbGlua1VSTBIWCgZiYW5rSUQYBSABKAlS'
-    'BmJhbmtJRBIUCgVvcmRlchgGIAEoBVIFb3JkZXISHgoKY2FyZFN0YXR1cxgHIAEoBVIKY2FyZF'
-    'N0YXR1cxIeCgpjcmVhdGVEYXRlGAggASgDUgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYCSAB'
-    'KANSCnVwZGF0ZURhdGU=');
+    'BmJhbmtJRBIcCglpbWFnZU5hbWUYBiABKAlSCWltYWdlTmFtZRIUCgVvcmRlchgHIAEoBVIFb3'
+    'JkZXISHgoKY2FyZFN0YXR1cxgIIAEoBVIKY2FyZFN0YXR1cxIeCgpjcmVhdGVEYXRlGAkgASgD'
+    'UgpjcmVhdGVEYXRlEh4KCnVwZGF0ZURhdGUYCiABKANSCnVwZGF0ZURhdGU=');
 
 @$core.Deprecated('Use cardReplyDescriptor instead')
 const CardReply$json = {
@@ -120,22 +121,23 @@ const CardReply_Card$json = {
     {'1': 'descriptions', '3': 3, '4': 3, '5': 9, '10': 'descriptions'},
     {'1': 'linkURL', '3': 4, '4': 1, '5': 9, '10': 'linkURL'},
     {'1': 'bankID', '3': 5, '4': 1, '5': 9, '10': 'bankID'},
-    {'1': 'order', '3': 6, '4': 1, '5': 5, '10': 'order'},
-    {'1': 'cardStatus', '3': 7, '4': 1, '5': 5, '10': 'cardStatus'},
-    {'1': 'createDate', '3': 8, '4': 1, '5': 3, '10': 'createDate'},
-    {'1': 'updateDate', '3': 9, '4': 1, '5': 3, '10': 'updateDate'},
+    {'1': 'imageName', '3': 6, '4': 1, '5': 9, '10': 'imageName'},
+    {'1': 'order', '3': 7, '4': 1, '5': 5, '10': 'order'},
+    {'1': 'cardStatus', '3': 8, '4': 1, '5': 5, '10': 'cardStatus'},
+    {'1': 'createDate', '3': 9, '4': 1, '5': 3, '10': 'createDate'},
+    {'1': 'updateDate', '3': 10, '4': 1, '5': 3, '10': 'updateDate'},
   ],
 };
 
 /// Descriptor for `CardReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cardReplyDescriptor = $convert.base64Decode(
     'CglDYXJkUmVwbHkSJAoFcmVwbHkYASABKAsyDi5jYXJkLnYxLlJlcGx5UgVyZXBseRIrCgRjYX'
-    'JkGAIgASgLMhcuY2FyZC52MS5DYXJkUmVwbHkuQ2FyZFIEY2FyZBr2AQoEQ2FyZBIOCgJpZBgB'
+    'JkGAIgASgLMhcuY2FyZC52MS5DYXJkUmVwbHkuQ2FyZFIEY2FyZBqUAgoEQ2FyZBIOCgJpZBgB'
     'IAEoCVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZRIiCgxkZXNjcmlwdGlvbnMYAyADKAlSDGRlc2'
     'NyaXB0aW9ucxIYCgdsaW5rVVJMGAQgASgJUgdsaW5rVVJMEhYKBmJhbmtJRBgFIAEoCVIGYmFu'
-    'a0lEEhQKBW9yZGVyGAYgASgFUgVvcmRlchIeCgpjYXJkU3RhdHVzGAcgASgFUgpjYXJkU3RhdH'
-    'VzEh4KCmNyZWF0ZURhdGUYCCABKANSCmNyZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgJIAEoA1IK'
-    'dXBkYXRlRGF0ZQ==');
+    'a0lEEhwKCWltYWdlTmFtZRgGIAEoCVIJaW1hZ2VOYW1lEhQKBW9yZGVyGAcgASgFUgVvcmRlch'
+    'IeCgpjYXJkU3RhdHVzGAggASgFUgpjYXJkU3RhdHVzEh4KCmNyZWF0ZURhdGUYCSABKANSCmNy'
+    'ZWF0ZURhdGUSHgoKdXBkYXRlRGF0ZRgKIAEoA1IKdXBkYXRlRGF0ZQ==');
 
 @$core.Deprecated('Use searchCardReqDescriptor instead')
 const SearchCardReq$json = {

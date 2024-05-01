@@ -30,55 +30,56 @@ class CardItemViewModel with ChangeNotifier {
   }
 
 
-  Future<void> fetchLatestCards() async {
+  // Future<void> fetchLatestCards() async {
 
-    try {
+  //   try {
 
-      CardsReply cardsReply = await CardRepo().cardClient.getLatestCards(EmptyReq());
+  //     CardsReply cardsReply = await CardRepo().cardClient.getLatestCards(EmptyReq());
       
-      if (cardsReply.cards.isEmpty) return;
+  //     if (cardsReply.cards.isEmpty) return;
 
 
-      List<CardItemModel> cardItemModels = [];
-      for(CardsReply_Card cardReply in cardsReply.cards) {
-        cardItemModels.add(CardItemModel(
-          id:cardReply.id,
-          name:cardReply.name,
-          descriptions:cardReply.descriptions,
-          linkURL: cardReply.linkURL,
-          bankID: cardReply.bankID,
-          order: cardReply.order,
-          cardStatus: cardReply.cardStatus,
-          createDate: cardReply.createDate.toInt(),
-          updateDate: cardReply.updateDate.toInt(),
-        ));
-      }     
+  //     List<CardItemModel> cardItemModels = [];
+  //     for(CardsReply_Card cardReply in cardsReply.cards) {
+  //       cardItemModels.add(CardItemModel(
+  //         id:cardReply.id,
+  //         name:cardReply.name,
+  //         descriptions:cardReply.descriptions,
+  //         linkURL: cardReply.linkURL,
+  //         bankID: cardReply.bankID,
+  //         imageName: cardReply.imageName,
+  //         order: cardReply.order,
+  //         cardStatus: cardReply.cardStatus,
+  //         createDate: cardReply.createDate.toInt(),
+  //         updateDate: cardReply.updateDate.toInt(),
+  //       ));
+  //     }     
       
-      _latestItemModels = cardItemModels;
+  //     _latestItemModels = cardItemModels;
       
-      notifyListeners();
+  //     notifyListeners();
 
-    } on GrpcError catch (e) {
-      logger.e(e);
-    } catch (e) {
-      logger.e(e);
-    }
-  }
+  //   } on GrpcError catch (e) {
+  //     logger.e(e);
+  //   } catch (e) {
+  //     logger.e(e);
+  //   }
+  // }
   
 
-  bool loading = false;
-  Future<void> fetchCardsByBankIDOnScroll() async{ 
+  // bool loading = false;
+  // Future<void> fetchCardsByBankIDOnScroll() async{ 
 
-    if(loading)return;
+  //   if(loading)return;
     
-    List<CardItemModel>? cardItemModels =  _cardItemModels[_selectBankID]?? [];
-    int offset = cardItemModels.length;
-    loading = true;
+  //   List<CardItemModel>? cardItemModels =  _cardItemModels[_selectBankID]?? [];
+  //   int offset = cardItemModels.length;
+  //   loading = true;
 
-    await _fetchCardsByBankID(_selectBankID, offset);
-    loading = false;
+  //   await _fetchCardsByBankID(_selectBankID, offset);
+  //   loading = false;
 
-  }
+  // }
 
 
   static int initOffset = 0;
@@ -115,6 +116,7 @@ class CardItemViewModel with ChangeNotifier {
           descriptions:card.descriptions,
           linkURL: card.linkURL,
           bankID: card.bankID,
+          imageName: card.imageName,
           order: card.order,
           cardStatus: card.cardStatus,
           createDate: card.createDate.toInt(),
