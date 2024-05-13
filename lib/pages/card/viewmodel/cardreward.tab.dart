@@ -5,15 +5,21 @@ import 'package:flutter/material.dart';
 
 
 
+enum ShowStatus {
+  all,
+  evaluation,
+  others,
+}
+
 class CardRewardTabViewModel with ChangeNotifier{
   
-  bool _showAll = true;
+  ShowStatus _showStatus = ShowStatus.all;
 
-  set showAll(bool value){
-    _showAll = value;
+  set showAll(ShowStatus status){
+    _showStatus = status;
     notifyListeners();
   }
 
-  bool get showAll  => _showAll;
+  ShowStatus get showStatus  => _showStatus;
 
 }

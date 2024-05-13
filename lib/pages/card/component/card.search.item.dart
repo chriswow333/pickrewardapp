@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pickrewardapp/pages/card/viewmodel/bank.dart';
 
 import 'package:pickrewardapp/pages/card/viewmodel/card.search.dart';
 import 'package:pickrewardapp/pages/card/screen/cardreward.dart';
@@ -201,6 +202,10 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    BankViewModel bankViewModel = Provider.of<BankViewModel>(context, listen:false);
+    String bankName = bankViewModel.getBankName(cardItemModel.bankID);
+
     return Container(
       padding: const EdgeInsets.only(top:10, bottom: 10),
       child:Container(
@@ -220,15 +225,14 @@ class CardItem extends StatelessWidget {
             FocusScope.of(context).unfocus();
             
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
-             
               id:cardItemModel.id,
               name:cardItemModel.name,
-              bankName: 'bank name',
+              bankName: bankName,
+              imageName: cardItemModel.imageName,
               descriptions:cardItemModel.descriptions,
               createDate: cardItemModel.createDate,
               updateDate: cardItemModel.updateDate,
               linkUrl: cardItemModel.linkURL,
-
             );
             
             showCupertinoModalBottomSheet(
@@ -252,7 +256,7 @@ class CardItem extends StatelessWidget {
                 CardName(cardName: cardItemModel.name,),
                 Row(
                   children:[
-                    CardIcon(image:'hello'),
+                    CardIcon(image:cardItemModel.imageName),
                     const SizedBox(width: 10,),
                     Expanded(
                       child: CardDescs(descs:cardItemModel.descriptions),

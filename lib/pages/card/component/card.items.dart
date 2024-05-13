@@ -7,6 +7,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/pages/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/repo/card/model/card.dart';
 import 'package:pickrewardapp/repo/card/model/card_header.dart';
 import 'package:pickrewardapp/repo/image/viewmodel/image.dart';
@@ -119,6 +120,9 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    BankViewModel bankViewModel = Provider.of<BankViewModel>(context, listen:false);
+    String bankName= bankViewModel.getBankName(cardItemModel.bankID);
     
     return Container(
       padding: const EdgeInsets.all(8),
@@ -141,7 +145,8 @@ class CardItem extends StatelessWidget {
             CardHeaderItemModel cardHeaderItemModel = CardHeaderItemModel(
               id:cardItemModel.id,
               name:cardItemModel.name,
-              bankName: 'bank name',
+              bankName: bankName,
+              imageName: cardItemModel.imageName,
               descriptions:cardItemModel.descriptions,
 
               createDate: cardItemModel.createDate,

@@ -23,11 +23,20 @@ class CardRewardItems extends StatelessWidget {
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
     List<CardRewardModel> cardRewardModels = [];
 
-    if(cardRewardTabViewModel.showAll) {
-      cardRewardModels.addAll(cardRewardViewModel.evaluationCardRewardModels);
-      cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
-    }else {
-      cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
+    switch (cardRewardTabViewModel.showStatus) {
+      case ShowStatus.all:
+        cardRewardModels.addAll(cardRewardViewModel.evaluationCardRewardModels);
+        cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
+        break;
+      case ShowStatus.evaluation:
+        cardRewardModels.addAll(cardRewardViewModel.evaluationCardRewardModels);
+        break;
+      case ShowStatus.others:
+        cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
+        break;
+      default:
+        cardRewardModels.addAll(cardRewardViewModel.evaluationCardRewardModels);
+        cardRewardModels.addAll(cardRewardViewModel.activityCardRewardModels);
     }
 
     return Container(

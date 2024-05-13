@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pickrewardapp/pages/card/viewmodel/bank.dart';
 import 'package:pickrewardapp/pages/card/viewmodel/cardreward.dart';
 import 'package:pickrewardapp/repo/card/model/card_header.dart';
 import 'package:pickrewardapp/shared/config/palette.dart';
@@ -15,7 +16,8 @@ class CardHeader extends StatelessWidget {
     
     CardHeaderViewModel cardHeaderViewModel = Provider.of<CardHeaderViewModel>(context, listen:false);
     CardHeaderItemModel cardHeaderItemModel = cardHeaderViewModel.cardHeaderItemModel;
-    
+
+
     return Container(
       padding: const EdgeInsets.only(left:20, right:20,top:20,bottom:10),
       decoration: BoxDecoration(

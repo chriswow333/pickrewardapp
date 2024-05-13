@@ -18,6 +18,15 @@ class BankViewModel with ChangeNotifier{
  
   List<BankModel >get banks => _bankModels;
 
+  String getBankName(String bankID){
+    for(BankModel bankModel in banks){
+      if (bankModel.id == bankID){
+        return bankModel.name;
+      }
+    }
+    return "";
+  }
+
   Future<void> _fetchBanks() async{ 
     
     if (_bankModels.isNotEmpty) return;

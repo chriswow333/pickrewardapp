@@ -1,12 +1,15 @@
 
 
 
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Banner;
 import 'package:intl/intl.dart';
 import 'package:pickrewardapp/pages/card/component/cardreward.header.dart';
 import 'package:pickrewardapp/pages/card/component/cardreward.items.dart';
 import 'package:pickrewardapp/repo/card/model/card_header.dart';
+import 'package:pickrewardapp/repo/image/viewmodel/image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -97,7 +100,7 @@ class CardContent extends StatelessWidget {
       padding: const EdgeInsets.only(top:40),
       child:Column(
         children:[
-          CardImage(image: 'image',),
+          CardImage(imageName: cardHeaderItemModel.imageName,),
           CardName(name:cardHeaderItemModel.name),
           CardRewardDetailBtn(url: cardHeaderItemModel.linkUrl,),
           const SizedBox(height:40),
@@ -127,26 +130,47 @@ class CardName extends StatelessWidget {
   }
 }
 class CardImage extends StatelessWidget {
-  const CardImage({super.key, required this.image});
+  const CardImage({super.key, required this.imageName});
 
-  final String image;
+  final String imageName;
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 180,
+
+
+    if(ImageService().hasImage("card",imageName)){
+      return Container(
+        width:150,
+        height:102,
+        child:Image.memory(
+          ImageService().getImage("card", imageName),
+        )
+      );
+
+    }
+
+
+    Future<Uint8List?> data = ImageService().downloadImage("card", imageName);
+    return Container(
+      width:80,
+      height:59,
+      child:FutureBuilder(
+        future: data,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // While waiting for the future to complete, show a placeholder
+              return Text('');
+            } else if (snapshot.hasError) {
+              // If an error occurs, display an error message
+              return Text('');
+            } else {
+              // If the future has completed successfully, display the image
+              return Image.memory(snapshot.data!);
+            }
+          },
       ),
-      child:Container(
-        child:Text('hello')
-      )
-      
-      // Image.memory(
-      //   gaplessPlayback: true,
-      //   base64Decode(image), 
-      //   scale:1.5
-      // )
     );
+
   }
 }
 
@@ -198,59 +222,93 @@ class CardRewardTab extends StatelessWidget {
     CardRewardTabViewModel cardRewardTabViewModel = Provider.of<CardRewardTabViewModel>(context);
     CardRewardViewModel cardRewardViewModel = Provider.of<CardRewardViewModel>(context);
     bool activityEmpty = cardRewardViewModel.activityCardRewardModels.isEmpty;
+
+    ShowStatus showStatus = cardRewardTabViewModel.showStatus;
+    
+
     return Container(
       padding: const EdgeInsets.only(left:20, right:20),
       child:Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children:[
           Expanded(
             child:Row(
               children:[  
                 TextButton(
                   onPressed: (){
-                    cardRewardTabViewModel.showAll = true;
+                    cardRewardTabViewModel.showAll = ShowStatus.evaluation;
                   },
                   style:ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
+                    backgroundColor: MaterialStatePropertyAll(
+                      ShowStatus.evaluation == showStatus ? Palette.kToBlack[900]!:Palette.kToBlack[0]!,
+                    ),
                     shape:MaterialStatePropertyAll(
                       RoundedRectangleBorder(
                         side:BorderSide(
                           width:1.0,
-                          color:Palette.kToBlack[100]!,
+                          color:ShowStatus.evaluation == showStatus ? Palette.kToBlack[900]!:Palette.kToBlack[100]!,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  child:Text('主要回饋',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color:Palette.kToBlack[400],
-                    ),
+                  child:Row(
+                    children:[
+                      ShowStatus.evaluation == showStatus?
+                        Padding(
+                          padding: EdgeInsets.only(right:5),
+                          child:Icon(Icons.check,
+                            color: Palette.kToBlack[0],
+                            size:20,
+                          ),
+                        ):Container(),
+                      Text('主要回饋',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color:ShowStatus.evaluation == showStatus ? Palette.kToBlack[0]:Palette.kToBlack[900],
+                        ),
+                      ),
+                    ]
                   ),
+                  
                 ),
                 const SizedBox(width:10),
                 if(!activityEmpty)
                   TextButton(
                     onPressed: (){
-                      cardRewardTabViewModel.showAll = false;
+                      cardRewardTabViewModel.showAll = ShowStatus.others;
                     },
                     style:ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Palette.kToBlack[0]!,),
+                      backgroundColor: MaterialStatePropertyAll(
+                        ShowStatus.others == showStatus ? Palette.kToBlack[900]!:Palette.kToBlack[0]!
+                      ),
                       shape:MaterialStatePropertyAll(
                         RoundedRectangleBorder(
                           side:BorderSide(
                             width:1.0,
-                            color:Palette.kToBlack[100]!,
+                            color:ShowStatus.others == showStatus ? Palette.kToBlack[900]!:Palette.kToBlack[100]!
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
-                    child:Text('其他優惠',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color:Palette.kToBlack[400],
-                      ),
+                    child:Row(
+                      children:[
+                        ShowStatus.others == showStatus?
+                          Padding(
+                            padding: EdgeInsets.only(right:5),
+                            child:Icon(Icons.check,
+                              color: Palette.kToBlack[0],
+                              size:20,
+                            ),
+                          ):Container(),
+                        Text('其他優惠',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color:ShowStatus.others == showStatus ? Palette.kToBlack[0]!:Palette.kToBlack[900]!
+                          ),
+                        ),
+                      ]
                     ),
                   ),
               ]
@@ -278,7 +336,7 @@ class CardUpdateDate extends StatelessWidget {
     return Text('更新日期 : $updateDate',
       style: TextStyle(
         fontSize: 12,
-        color: Palette.kToBlack[400],
+        color: Palette.kToBlack[900],
       ),
     );
   }
